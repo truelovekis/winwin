@@ -10,5 +10,4 @@ import org.springframework.stereotype.Component;
 public class GradeDto {
     private int gradeNumber;
     private String gradeName;
-    private Long userNumber;
 }
