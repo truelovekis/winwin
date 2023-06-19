@@ -20,4 +20,5 @@ public class UserDto {
     private String userNickName;
     private int userStatus;
     private Long userWing;
+    private int userGrade;
 }
