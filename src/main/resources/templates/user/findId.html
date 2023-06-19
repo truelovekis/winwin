@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FindId</title>
+    <link rel="stylesheet" href="/winwin/css/user/findId.css" />
+    <link rel="stylesheet" href="/winwin/css/modalCss.css" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+    <style>
+      body {
+        font-family: "NanumSquareLight";
+        font-family: "NanumSquare";
+        font-family: "NanumSquareBold";
+        font-family: "NanumSquareExtraBold";
+        font-family: "NanumSquareAcb";
+        font-family: "NanumSquareAceb";
+        font-family: "NanumSquareAcl";
+        font-family: "NanumSquareAcr";
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="find-id-container">
+        <div class="find-id-wrap">
+          <div class="find-id-box">
+            <h3>아이디 찾기</h3>
+            <span>이름</span>
+            <input type="text" class="find-id-input" placeholder="이름 입력" />
+            <span>휴대전화 인증</span>
+            <input type="text" class="find-id-input certified-input" placeholder="휴대전화 번호 입력" />
+            <button class="find-id-certified">인증 요청</button>
+            <input type="text" class="find-id-input find-id-certified-input" placeholder="인증 번호 입력" />
+            <button class="find-id-certified">확인</button>
+          </div>
+          <button class="find-id-next"><a href="/winwin/html/user/message.html" rel="modal:open">다음</a></button>
+        </div>
+      </div>
+    </main>
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.js"
+      integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <script src="/winwin/js/main.js"></script>
+  </body>
+</html>

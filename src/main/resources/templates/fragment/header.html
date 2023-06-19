@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+  <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
+</head>
+<body>
+<header class="header" th:fragment="header">
+  <div class="hwrap">
+    <div class="hcontainer">
+      <div class="header-nav-l">
+        <a href="" class="logo"><img src="/winwin/img/winwin-logo.png" alt="" /></a>
+      </div>
+      <div class="hcenter">
+        <ul class="hctg-list">
+          <li>
+            <a href="" class="h-font">멘토 : 멘티</a>
+            <div class="sub-ctg-1 sub none">
+              <a href="">업계</a>
+              <a href="">입시</a>
+            </div>
+          </li>
+          <li>
+            <a href="" class="h-font">커뮤니티</a>
+            <div class="sub-ctg-2 sub none">
+              <a href="">직장인 게시판</a>
+              <a href="">취준생 게시판</a>
+              <a href="">대학생 게시판</a>
+              <a href="">고등학생 게시판</a>
+            </div>
+          </li>
+          <li>
+            <a href="" class="h-font">프로젝트/스터디</a>
+            <div class="sub-ctg-3 sub none">
+              <a href="">홈</a>
+              <a href="">프로젝트</a>
+              <a href="">모임/스터디</a>
+            </div>
+          </li>
+          <li>
+            <a href="" class="h-font">나눔</a>
+          </li>
+          <li>
+            <a href="" class="h-font">Q&A</a>
+          </li>
+          <li>
+            <a href="" class="h-font">문의사항</a>
+          </li>
+        </ul>
+      </div>
+      <div class="header-nav-r">
+        <!-- 로그인 안했을 때 -->
+        <button class="login-join">
+          <span>가입/로그인</span>
+        </button>
+        <img src="/winwin/img/profile-basic.png" alt="" class="basic-img" />
+        <!-- 로그인 했을 때 -->
+        <!-- <div class="h-profile">
+          <span class="wing-point"
+            ><img src="../springProject/img/wing-icon.png" alt="" class="wing-icon" />&nbsp;3290 윙
+          </span>
+          <span>|&nbsp;&nbsp;</span>
+          <a href="" class="h-user-name">정소이 님<img src="" alt="" /></a>
+          <a href=""><img src="/winwin/img/profile-basic.png" alt="" class="profile-img" /></a>
+        </div> -->
+        <!-- 여기까지 -->
+      </div>
+    </div>
+  </div>
+  <hr />
+</header>
+
+</body>
+</html>

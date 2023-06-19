@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume</title>
+    <link rel="stylesheet" href="/winwin/css/mypage/resume.css" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+    <style>
+      body {
+        font-family: "NanumSquareLight";
+        font-family: "NanumSquare";
+        font-family: "NanumSquareBold";
+        font-family: "NanumSquareExtraBold";
+        font-family: "NanumSquareAcb";
+        font-family: "NanumSquareAceb";
+        font-family: "NanumSquareAcl";
+        font-family: "NanumSquareAcr";
+      }
+    </style>
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <div class="wrap">
+        <div class="container">
+          <div class="side-container">
+            <!-- 본인 프로필 -->
+            <div class="profile">
+              <div class="profile-wrap">
+                <label for="profile-img-upload"> 
+                  <div class="profile-icon">
+                    <img class="pfp-icon-image" src="https://cdn.comento.kr/images/illust/illust-photo-upload.svg"></img>
+                  </div>
+                </label>
+                <input type="file" id="profile-img-upload" name="profile-upload" />
+                <div class="user-info">
+                  <span class="user-name">정소이</span>
+                  <span class="user-email">aaa@naver.com <img src="../springProject/img/kakao-2.png" alt="" /></span>
+                </div>
+              </div>
+            </div>
+            <!-- 사이드 바 -->
+            <div class="side-bar">
+              <div class="list">
+                <a href="">내 멘토 : 멘티</a>
+                <a href="">내 기록</a>
+                <hr/>
+                <a href="" id="list-plus">활동 내역</a>
+                <a href="">진로 정보</a>
+                <a href="" class="point-list">이력 관리</a>
+                <a href="">회원 정보 수정</a>
+              </div>
+            </div>
+          </div>
+          <!-- 마이페이지 메인 -->
+          <div class="mypage-main">
+            <div class="title"><h2>이력 관리</h2></div>
+            <div class="category">
+              <div class="category-contain">
+                <h4 id="point-page">이력서</h4>
+              </div>
+              <div class="category-contain">
+                <h4>자기소개서</h4>
+              </div>
+            </div>
+            <div class="my-mentor-content">
+              <div class="resume-box">
+                <div class="text-box">
+                  <h3>최선을 다하겠습니다!</h3>
+                  <span class="university">단국대학교 시각디자인과 졸업</span>
+                  <span class="certificate">ITQ 파워포인트 취득 <br/> GTQ 포토샵 취득</span>
+                </div>
+                <div class="img-box">
+                  <img src="../springProject/img/me.jpg" alt="">
+                </div>
+              </div>
+              <div class="resume-plus">
+                <svg xmlns="http://www.w3.org/2000/svg" color="#c5c5c5" width="30" height="30" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer></footer>
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.js"
+      integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+      crossorigin="anonymous"
+    ></script>
+    <script src="../springProject/myMentor.js"></script>
+  </body>
+</html>

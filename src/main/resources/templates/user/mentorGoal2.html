@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MentorGoal2</title>
+    <link rel="stylesheet" href="/winwin/css/user/mentorGoal2.css" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+    <style>
+      body {
+        font-family: "NanumSquareLight";
+        font-family: "NanumSquare";
+        font-family: "NanumSquareBold";
+        font-family: "NanumSquareExtraBold";
+        font-family: "NanumSquareAcb";
+        font-family: "NanumSquareAceb";
+        font-family: "NanumSquareAcl";
+        font-family: "NanumSquareAcr";
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="mentor-goal-2-container">
+        <div class="mentor-goal-2-wrap">
+          <div class="mentor-goal-2-box">
+            <h3>대학생 인증서류 확인</h3>
+            <h6>학력을 증명해 주세요!</h6>
+            <hr class="mentor-goal-2-hr" />
+            <input
+              type="file"
+              id="mentor-goal-2-file"
+              accept=".jpg, .jpeg, .png, .bmp, .pdf, .ppt, .hwp, .xlsx, .txt"
+              multiple
+            />
+            <label for="mentor-goal-2-file" id="mentor-goal-2-label">┾ 파일 첨부하기 (최대 2개)</label>
+            <hr class="mentor-goal-2-hr" />
+            <div class="mentor-goal-2-name-box">
+              <span class="mentor-goal-2-file-name mentor-goal-2-none mentor-goal-2-name1"
+                ><span class="mentor-goal-2-file-name1">파일명</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="mentor-goal-2-bi bi-trash3"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"
+                  /></svg
+              ></span>
+            </div>
+            <div class="mentor-goal-2-name-box">
+              <span class="mentor-goal-2-file-name mentor-goal-2-none mentor-goal-2-name1"
+                ><span class="mentor-goal-2-file-name1">파일명</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="mentor-goal-2-bi bi-trash3"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"
+                  /></svg
+              ></span>
+            </div>
+            <div class="mentor-goal-2-preview"></div>
+            <div class="mentor-goal-2-text">
+              <span id="mentor-goal-2-file-span">재학 증명 서류를 첨부해 주세요.</span>
+              <span id="mentor-goal-2-file-delete">첨부해주신 서류는 인증 완료 후 자동 파기됩니다.</span>
+            </div>
+            <div class="mentor-goal-2-info">
+              <span id="mentor-goal-2-icon">📌</span>
+              <span>'신분증(사본)+학생증' 또는 '재학증명서'만 가능해요! *주민등록번호는 가려주세요.</span>
+            </div>
+          </div>
+          <button class="mentor-goal-2-next"><span>다음</span></button>
+        </div>
+      </div>
+    </main>
+  </body>
+  <script
+    src="https://code.jquery.com/jquery-3.6.3.js"
+    integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+    crossorigin="anonymous"
+  ></script>
+  <script src="/winwin/js/user/mentorGoal2.js"></script>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" th:href="@{/css/modal.css}">
+  <link rel="stylesheet" th:href="@{/css/agreement.css}">
+  <link rel="stylesheet" th:href="@{/css/findId.css}">
+  <link rel="stylesheet" th:href="@{/css/findPassword.css}">
+  <link rel="stylesheet" th:href="@{/css/goal.css}">
+  <link rel="stylesheet" th:href="@{/css/identity.css}">
+  <link rel="stylesheet" th:href="@{/css/login.css}">
+  <link rel="stylesheet" th:href="@{/css/join.css}">
+  <link rel="stylesheet" th:href="@{/css/message.css}">
+  <link rel="stylesheet" th:href="@{/css/selfCheck.css}">
+  <link th:href="@{https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css}" rel="stylesheet" />
+  <style>
+    body {
+      font-family: "NanumSquareLight";
+      font-family: "NanumSquare";
+      font-family: "NanumSquareBold";
+      font-family: "NanumSquareExtraBold";
+      font-family: "NanumSquareAcb";
+      font-family: "NanumSquareAceb";
+      font-family: "NanumSquareAcl";
+      font-family: "NanumSquareAcr";
+    }
+  </style>
+</head>
+<body>
+<div class="agreement-container">
+  <div class="agreement-wrap">
+    <div th:replace="fragments/login :: login"></div>
+    <div th:replace="fragments/findId :: findId"></div>
+    <div th:replace="fragments/findPassword :: findPassword"></div>
+    <div th:replace="fragments/join :: join"></div>
+    <div th:replace="fragments/agreement :: agreement"></div>
+    <div th:replace="fragments/goal :: goal"></div>
+    <div th:replace="fragments/identity :: identity"></div>
+    <div th:replace="fragments/mentorGoal :: mentorGoal"></div>
+    <div th:replace="fragments/mentorGoal2 :: mentorGoal2"></div>
+    <div th:replace="fragments/message :: message"></div>
+    <div th:replace="fragments/selfCheck :: selfCheck"></div>
+    <div th:replace="fragments/signUp :: signUp"></div>
+    <button class="agreement-next"><span>다음</span></button>
+  </div>
+</div>
+<script
+        th:src="@{https://code.jquery.com/jquery-3.6.3.js}"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+        crossorigin="anonymous"
+></script>
+<script th:src="@{/js/agreement.js}"></script>
+<script th:src="@{/js/modal.js}"></script>
+<script th:src="@{/js/join.js}"></script>
+<script th:src="@{/js/mentorGoal.js}"></script>
+<script th:src="@{/js/mentorGoal2.js}"></script>
+</body>
+</html>

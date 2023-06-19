@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>resumePrWrite</title>
+    <link rel="stylesheet" href="/winwin/css/mypage/resumePrWrite.css" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+    <style>
+      body {
+        font-family: "NanumSquareLight";
+        font-family: "NanumSquare";
+        font-family: "NanumSquareBold";
+        font-family: "NanumSquareExtraBold";
+        font-family: "NanumSquareAcb";
+        font-family: "NanumSquareAceb";
+        font-family: "NanumSquareAcl";
+        font-family: "NanumSquareAcr";
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="wrap">
+        <div class="container">
+          <h3>제목</h3>
+          <input type="text" id="title" placeholder="제목을 입력하세요." />
+          <h3>소제목</h3>
+          <input type="text" id="title-s" placeholder="소제목을 입력하세요." />
+          <h3>성장과정</h3>
+          <textarea
+            name="growth"
+            id="growth"
+            cols="80"
+            rows="10"
+            maxlenth="300"
+            placeholder="성장과정을 입력해주세요. (400자 이내)"
+          ></textarea>
+          <div class="text-box">
+            <span class="growth-count">0 </span>
+            <span class="text-total">/300 자</span>
+          </div>
+          <h3>성격의 장단점</h3>
+          <textarea
+            name="personality"
+            id="personality"
+            cols="80"
+            rows="10"
+            maxlenth="300"
+            placeholder="성격의 장단점을 입력해주세요. (400자 이내)"
+          ></textarea>
+          <div class="text-box">
+            <span class="personality-count">0 </span>
+            <span class="text-total"> /300 자 </span>
+          </div>
+          <h3>주요경험의 성공 및 실패 사례</h3>
+          <textarea
+            name="case"
+            id="case"
+            cols="80"
+            rows="10"
+            maxlenth="300"
+            placeholder="성공 및 실패 사례를 입력해주세요. (400자 이내)"
+          ></textarea>
+          <div class="text-box">
+            <span class="case-count">0 </span>
+            <span class="text-total"> /300 자 </span>
+          </div>
+          <!-- <h3>지원동기 및 입사 후 포부</h3>
+          <textarea
+            name="motive"
+            id="motive"
+            cols="80"
+            rows="10"
+            maxlenth="300"
+            placeholder="지원동기 및 입사 후 포부를 입력해주세요. (400자 이내)"
+          ></textarea>
+          <div class="text-box">
+            <span class="motive-count">0 </span>
+            <span class="text-total"> /400 자 </span>
+          </div> -->
+          <div class="btn">
+            <button id="delete">등록취소</button>
+            <button>등록하기</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.js"
+      integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+      crossorigin="anonymous"
+    ></script>
+    <script src="/winwin/js/mypage/resumePrWrite.js"></script>
+  </body>
+</html>

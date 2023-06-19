@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ResumeWrite</title>
+    <link rel="stylesheet" href="../springProject/resumeWrite.css" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+    <style>
+      body {
+        font-family: "NanumSquareLight";
+        font-family: "NanumSquare";
+        font-family: "NanumSquareBold";
+        font-family: "NanumSquareExtraBold";
+        font-family: "NanumSquareAcb";
+        font-family: "NanumSquareAceb";
+        font-family: "NanumSquareAcl";
+        font-family: "NanumSquareAcr";
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="wrap">
+        <div class="container">
+          <div class="img-wrap">
+            <div class="img-box upload">
+              <label for="img-upload">
+                <img src="../springProject/img/camera.png" alt="" />
+                이미지 <br />
+                업로드
+              </label>
+              <input type="file" id="img-upload" />
+            </div>
+            <div class="img-box preview"></div>
+          </div>
+          <h3>제목</h3>
+          <input type="text" class="last-input" placeholder="제목을 입력하세요." />
+          <h3>인적사항</h3>
+          <input type="text" placeholder="이름을 입력하세요." />
+          <input type="text" placeholder="주소를 입력하세요." />
+          <input type="text" placeholder="이메일을 입력하세요." />
+          <input type="text" class="last-input" placeholder="포트폴리오 홈페이지 주소를 입력하세요. (선택)" />
+          <h3>학력사항</h3>
+          <div class="school-input-box">
+            <input type="text" class="school" placeholder="학교를 입력하세요." />
+            <select name="graduation" id="graduation">
+              <option value="1">졸업</option>
+              <option value="2">재학</option>
+            </select>
+          </div>
+          <div class="school-date-box">
+            <input type="date" class="school-date" />
+            <input type="date" class="school-date last-input" />
+          </div>
+
+          <h3>경력사항</h3>
+          <div class="school-input-box">
+            <input type="text" class="school" placeholder="직장명을 입력하세요." />
+          </div>
+          <div class="school-date-box">
+            <input type="date" class="school-date" />
+            <input type="date" class="school-date last-input" />
+          </div>
+          <h3>자격사항</h3>
+          <div class="certificate">
+            <input type="text" class="certificate-input" placeholder="자격증 이름을 입력하세요." />
+            <input type="text" class="certificate-input" placeholder="자격증 등급을 입력하세요." />
+          </div>
+          <input type="text" placeholder="증빙 기관을 입력하세요." />
+          <div class="btn">
+            <button id="delete">등록취소</button>
+            <button>등록하기</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="../springProject/resumeWrite.js"></script>
+  </body>
+</html>
