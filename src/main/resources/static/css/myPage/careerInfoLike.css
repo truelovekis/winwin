@@ -1,0 +1,318 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+.wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 1050px;
+  display: flex;
+}
+
+.side-container {
+  width: 220px;
+  padding: 20px;
+}
+
+.profile-icon {
+  cursor: pointer;
+}
+
+.pfp-icon-image {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+#profile-img-upload {
+  display: none;
+}
+
+.profile-img > label {
+  cursor: pointer;
+}
+
+.profile-wrap {
+  display: flex;
+  margin: 5px;
+}
+
+.user-name {
+  display: block;
+  padding-top: 8px;
+  margin-left: 10px;
+  font-weight: 700;
+  color: black;
+}
+
+.user-email {
+  display: block;
+  margin-left: 10px;
+  margin-top: 3px;
+  color: rgb(118, 125, 130);
+  font-size: 14px;
+}
+
+.user-email > img {
+  width: 15px;
+  border-radius: 50%;
+}
+
+/* 사이드 바 */
+.list {
+  margin-top: 50px;
+  margin-left: 25px;
+}
+
+.list > a {
+  text-decoration: none;
+  color: #000;
+  font-size: 16px;
+  display: block;
+  margin-bottom: 25px;
+}
+
+#point-list {
+  font-weight: 700;
+}
+
+.list > a:hover {
+  font-weight: 700;
+}
+
+#list-plus {
+  margin-top: 20px;
+}
+
+hr {
+  width: 90%;
+  border: 1px solid #ddd;
+}
+
+.sub-category {
+  margin: 15px;
+  margin-left: 88px;
+}
+
+.sub-category > span {
+  cursor: pointer;
+  margin-right: 15px;
+  font-size: 14px;
+  color: #000;
+}
+
+#sub-point {
+  font-weight: 700;
+}
+
+/* =========================================================== */
+.mypage-main {
+  width: 700px;
+  height: 1000px;
+  padding: 30px 0px;
+}
+
+.category {
+  margin-top: 30px;
+  display: flex;
+}
+
+.category-contain {
+  height: 39px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.category-contain > h4 {
+  color: #9e9e9e;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 10px;
+}
+
+#point-page {
+  border-bottom: 3px solid #000;
+  color: #000;
+}
+
+.category-contain:hover {
+  color: #000;
+  background-color: rgba(198, 198, 198, 0.251);
+  border-radius: 5px;
+}
+
+.category-contain > h4:hover {
+  margin-top: 1px;
+}
+
+.page-move {
+  cursor: pointer;
+  display: block;
+  text-decoration: none;
+  color: #000;
+}
+
+/* =============================== */
+/* 내 프로젝트 글들 */
+
+/* =============================== */
+/* 작성 글이 없을 때 */
+.community-main-box {
+  margin-top: 100px;
+  width: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+}
+
+.community-main-box > span {
+  line-height: 28px;
+  text-align: center;
+  color: #8f8f8f;
+}
+
+.page-move-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+button {
+  padding: 10px;
+  height: 35px;
+  border-radius: 5px;
+  border: none;
+  background-color: #d4e5f9;
+  color: #2a7de1;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #c4dcf6;
+}
+
+/* 내 글 ====================================================== */
+.hide{
+  display: none;
+}
+
+.card-box{
+  display: flex;
+}
+
+.inner-card-box {
+  width: 285px;
+  border: 1px solid #ccc;
+  padding: 25px;
+  margin: 34px 5px;;
+  display: inline-block;
+  border-radius: 20px;
+}
+
+.title{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 11px;
+  margin-bottom: 10px;
+}
+
+  .msg{
+  line-height: 25px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profile-like-wrap{
+  display: flex;
+  width: 100%;
+  margin-top: 130px;
+} 
+
+
+.profile{
+  display: flex;
+  width: 100%;
+}
+
+.img{
+  width: 50px;
+  height: 50px;
+  border-radius: 70%;
+}
+
+  .text-box{
+  margin-left: 10px;
+  width: 200px;
+}
+
+ .user-bottom{
+  display: block;
+  font-size: 12px;
+  color: #9e9e9e;
+  margin: -9px 9px;
+}
+  .user-name{
+  font-size: 17px;
+  font-weight: 700;
+}
+.content{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  margin-top: 25px;
+  margin-left: -40px;
+}
+
+.sec1{
+  display: flex;
+  width: 40px;
+  height: 25px;
+}
+
+.sec2{
+  display: flex;
+  width: 50px;
+  height: 25px;
+}
+
+ .number1{
+  margin-left: -3px;
+  color: rgb(142, 142, 142);
+}
+
+.number2{
+  margin-left: 5px;
+  color: rgb(142, 142, 142);
+}
+
+.bi-heart-fill {
+  display: none;
+}
+
+.my-info-like{
+  cursor: pointer;
+}
+
+.my-info-cnt {
+  display: flex;
+  margin-top: -2px;
+  cursor: pointer;
+}
+
+
+/* 내 글 끝! */
+/* ========================================================================= */

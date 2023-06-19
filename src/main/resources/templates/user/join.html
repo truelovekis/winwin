@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join</title>
+    <link rel="stylesheet" href="/winwin/css/user/join.css" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+    <style>
+      body {
+        font-family: "NanumSquareLight";
+        font-family: "NanumSquare";
+        font-family: "NanumSquareBold";
+        font-family: "NanumSquareExtraBold";
+        font-family: "NanumSquareAcb";
+        font-family: "NanumSquareAceb";
+        font-family: "NanumSquareAcl";
+        font-family: "NanumSquareAcr";
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <!-- <div class="join-container"> -->
+      <div class="join-wrap">
+        <div class="join-box">
+          <h3>회원가입</h3>
+          <span class="join-title" id="join-first">아이디</span>
+          <input type="text" class="join-input" placeholder="아이디 입력" />
+          <span class="join-check-msg" id="join-check-id-msg"></span>
+          <span class="join-title">비밀번호</span>
+          <input
+            type="text"
+            class="join-input"
+            id="join-pw-input"
+            placeholder="대문자/특수문자 포함 8자리 이상 입력해주세요."
+          />
+          <span class="join-check-msg" id="join-check-pw-msg"></span>
+          <span class="join-title">비밀번호 확인</span>
+          <input type="text" class="join-input" id="join-pw-input2" placeholder="비밀번호 확인" />
+          <span class="join-check-msg" id="join-check-pw-msg2"></span>
+          <span class="join-title">이메일</span>
+          <input type="text" class="join-input" placeholder="이메일 입력" />
+        </div>
+        <button class="join-next"><span>다음</span></button>
+      </div>
+      <!-- </div> -->
+    </main>
+  </body>
+  <script
+    src="https://code.jquery.com/jquery-3.6.3.js"
+    integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+    crossorigin="anonymous"
+  ></script>
+  <script src="/winwin/js/user/join.js"></script>
+</html>

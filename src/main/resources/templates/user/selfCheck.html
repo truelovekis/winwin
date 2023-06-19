@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SelfCheck</title>
+    <link rel="stylesheet" href="/winwin/css/user/selfCheck.css" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+    <style>
+      body {
+        font-family: "NanumSquareLight";
+        font-family: "NanumSquare";
+        font-family: "NanumSquareBold";
+        font-family: "NanumSquareExtraBold";
+        font-family: "NanumSquareAcb";
+        font-family: "NanumSquareAceb";
+        font-family: "NanumSquareAcl";
+        font-family: "NanumSquareAcr";
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="self-container">
+        <div class="self-wrap">
+          <div class="self-box">
+            <h3>본인 인증</h3>
+            <h6>본인인증을 위해 필요한 정보를 입력해 주세요.</h6>
+            <span id="self-first">이름</span>
+            <input type="text" class="self-input" placeholder="이름 입력" />
+            <span>주민등록번호</span>
+            <input type="text" class="self-input" id="self-number" placeholder="주민번호 앞 6자리" />
+            - <input type="text" id="self-gender" /><span id="self-char">●●●●●●</span>
+            <span>휴대전화 인증</span>
+            <input type="text" class="self-input self-certified-input" placeholder="휴대전화 번호 입력" />
+            <button class="self-certified">인증 요청</button>
+            <input type="text" class="self-input self-certified-input" placeholder="인증 번호 입력" />
+            <button class="self-certified">확인</button>
+          </div>
+          <button class="self-next"><span>다음</span></button>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

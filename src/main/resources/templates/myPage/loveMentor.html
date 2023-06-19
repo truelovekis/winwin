@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>loveMentor</title>
+    <link rel="stylesheet" href="/winwin/css/mypage/loveMentor.css" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+    <style>
+      body {
+        font-family: "NanumSquareLight";
+        font-family: "NanumSquare";
+        font-family: "NanumSquareBold";
+        font-family: "NanumSquareExtraBold";
+        font-family: "NanumSquareAcb";
+        font-family: "NanumSquareAceb";
+        font-family: "NanumSquareAcl";
+        font-family: "NanumSquareAcr";
+      }
+    </style>
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <div class="wrap">
+        <div class="container">
+          <div class="side-container">
+            <!-- 본인 프로필 -->
+            <div class="profile">
+              <div class="profile-wrap">
+                <label for="profile-img-upload"> 
+                  <div class="profile-icon">
+                    <img class="pfp-icon-image" src="https://cdn.comento.kr/images/illust/illust-photo-upload.svg"></img>
+                  </div>
+                </label>
+                <input type="file" id="profile-img-upload" name="profile-upload" />
+                <div class="user-info">
+                  <span class="user-name">정소이</span>
+                  <span class="user-email">aaa@naver.com <img src="../springProject/img/kakao-2.png" alt="" /></span>
+                </div>
+              </div>
+            </div>
+            <!-- 사이드 바 -->
+            <div class="side-bar">
+              <div class="list">
+                <a href="" id="point-list">내 멘토 : 멘티</a>
+                <a href="">내 기록</a>
+                <a href="" >활동 내역</a>
+                <hr/>
+                <a href="" id="list-plus">이력 관리</a>
+                <a href="">회원 정보 수정</a>
+                <a href="">진로 정보</a>
+              </div>
+            </div>
+          </div>
+          <!-- 마이페이지 메인 -->
+          <div class="mypage-main">
+            <div class="title"><h2>내 멘토 : 멘티</h2></div>
+            <div class="category">
+              <div class="category-contain">
+                <h4>내 멘토</h4>
+              </div>
+              <div class="category-contain">
+                <h4 id="">내 멘티</h4>
+              </div>
+              <div class="category-contain">
+                <h4 id="point-page">관심 멘토</h4>
+              </div>
+            </div>
+            <div class="my-mentor-content">
+              <!-- 멘토 프로필 -->
+              <article class="item">
+                <section class="mento-profile">
+                  <div class="item__box">
+                    <a href="" class="page-move">
+                      <div class="flex">
+                        <div class="mento-profile-photo-box">
+                          <img
+                            src="https://www.thelec.kr/news/photo/202210/18518_16299_646.jpg"
+                            width="100"
+                            class="mento-profile-photo"
+                          />
+                        </div>
+        
+                        <div class="flex text-wrap">
+                          <div class="mento-name">이재용</div>
+                          <div class="mento-career">백엔드 개발자&nbsp; · &nbsp;2년차</div>
+                        </div>
+                      </div>
+                    </a>
+                    
+                    <div>
+                      <button class="message-button">신청하기</button>
+                    </div>
+                  </div>
+                  <div class="skill-tags">
+                    <!--            스킬 나열 -->
+                    <div class="skill">Java</div>
+                    <div class="skill">커뮤니케이션</div>
+                    <div class="skill">글쓰기</div>
+                    <!--            /스킬 나열 -->
+                  </div>
+      
+                  <!-- 경력 -->
+                  <div class="career">
+                    <div class="career-icon">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-buildings"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022ZM6 8.694 1 10.36V15h5V8.694ZM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15Z"
+                        />
+                        <path
+                          d="M2 11h1v1H2v-1Zm2 0h1v1H4v-1Zm-2 2h1v1H2v-1Zm2 0h1v1H4v-1Zm4-4h1v1H8V9Zm2 0h1v1h-1V9Zm-2 2h1v1H8v-1Zm2 0h1v1h-1v-1Zm2-2h1v1h-1V9Zm0 2h1v1h-1v-1ZM8 7h1v1H8V7Zm2 0h1v1h-1V7Zm2 0h1v1h-1V7ZM8 5h1v1H8V5Zm2 0h1v1h-1V5Zm2 0h1v1h-1V5Zm0-2h1v1h-1V3Z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <span class="point">백엔드 개발</span>
+                      <span class="date">─ 2021.02 ~ 2023.02</span>
+                      <span class="date">&nbsp; · &nbsp;2년차</span>
+                      <span class="content">어떤 업무를 했는지 어쩌구...</span>
+                    </div>
+                  </div>
+                  <!-- /경력 -->
+                  <div class="career">
+                    <div class="career-icon">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-buildings"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022ZM6 8.694 1 10.36V15h5V8.694ZM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15Z"
+                        />
+                        <path
+                          d="M2 11h1v1H2v-1Zm2 0h1v1H4v-1Zm-2 2h1v1H2v-1Zm2 0h1v1H4v-1Zm4-4h1v1H8V9Zm2 0h1v1h-1V9Zm-2 2h1v1H8v-1Zm2 0h1v1h-1v-1Zm2-2h1v1h-1V9Zm0 2h1v1h-1v-1ZM8 7h1v1H8V7Zm2 0h1v1h-1V7Zm2 0h1v1h-1V7ZM8 5h1v1H8V5Zm2 0h1v1h-1V5Zm2 0h1v1h-1V5Zm0-2h1v1h-1V3Z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <span class="point">기업경영</span>
+                      <span class="date">─ 2021.02 ~ 2023.02</span>
+                      <span class="date">&nbsp; · &nbsp;2년차</span>
+                      <span class="content">어떤 업무를 했는지 어쩌구...</span>
+                    </div>
+                  </div>
+                </section>
+                <div class="mento-more-info-box">
+                  <div class="mento-more-info">
+                    더보기
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-chevron-down"
+                      viewBox="0 -2 16 16"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="mento-more-info none">
+                    닫기
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-chevron-up"
+                      viewBox="0 -2 16 16"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer></footer>
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.js"
+      integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+      crossorigin="anonymous"
+    ></script>
+    <script src="../springProject/myMentor.js"></script>
+  </body>
+</html>

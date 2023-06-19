@@ -1,0 +1,114 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+.self-container {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.self-box {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: white;
+  padding: 30px;
+  padding-left: 35px;
+  width: 250px;
+  /* height: 300px; */
+}
+
+.self-box > h3 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.self-input {
+  border: none;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+  padding-left: 3px;
+  width: 230px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  padding-top: 5px;
+  outline: none;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.self-box > span {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+#self-first {
+  margin-top: 20px;
+}
+
+#self-number {
+  width: 100px;
+  display: inline;
+}
+
+#self-gender {
+  width: 20px;
+  height: 25px;
+  border: 1px solid #ddd;
+}
+
+#self-char {
+  display: inline;
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+.self-input::placeholder {
+  font-weight: 500;
+  font-size: 12px;
+  color: #9d9d9d;
+}
+
+#self-id {
+  margin-top: 15px;
+}
+
+/* 인증 버튼 */
+.self-certified {
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  background-color: white;
+  padding: 3px;
+  width: 65px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.self-certified-input {
+  width: 170px;
+  display: inline;
+}
+
+.self-next {
+  width: 315px;
+  height: 55px;
+  background-color: #1b5192;
+  border-end-end-radius: 10px;
+  border-end-start-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.self-next > span {
+  font-size: 15px;
+  font-weight: 900;
+  color: #fff;
+}

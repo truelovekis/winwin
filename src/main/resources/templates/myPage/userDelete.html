@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UserDelete</title>
+    <link rel="stylesheet" href="../springProject/userDelete.css" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+    <style>
+      body {
+        font-family: "NanumSquareLight";
+        font-family: "NanumSquare";
+        font-family: "NanumSquareBold";
+        font-family: "NanumSquareExtraBold";
+        font-family: "NanumSquareAcb";
+        font-family: "NanumSquareAceb";
+        font-family: "NanumSquareAcl";
+        font-family: "NanumSquareAcr";
+      }
+    </style>
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <div class="wrap">
+        <div class="container">
+          <div class="side-container">
+            <!-- 본인 프로필 -->
+            <div class="profile">
+              <div class="profile-wrap">
+                <label for="profile-img-upload"> 
+                  <div class="profile-icon">
+                    <img class="pfp-icon-image" src="https://cdn.comento.kr/images/illust/illust-photo-upload.svg"></img>
+                  </div>
+                </label>
+                <input type="file" id="profile-img-upload" name="profile-upload" />
+                <div class="user-info">
+                  <span class="user-name">정소이</span>
+                  <span class="user-email">aaa@naver.com <img src="../springProject/img/kakao-2.png" alt="" /></span>
+                </div>
+              </div>
+            </div>
+            <!-- 사이드 바 -->
+            <div class="side-bar">
+              <div class="list">
+                <a href="">내 멘토 : 멘티</a>
+                <a href="">내 기록</a>
+                <hr/>
+                <a href="" id="list-plus">활동 내역</a>
+                <a href="">진로 정보</a>
+                <a href="" >이력 관리</a>
+                <a href="" id="point-list">회원 정보 수정</a>
+              </div>
+            </div>
+          </div>
+          <!-- 마이페이지 메인 카테고리 -->
+          <div class="mypage-main">
+            <div class="title"><h2>회원 정보 수정</h2></div>
+            <div class="category">
+              <div class="category-contain">
+                <h4>프로필</h4>
+              </div>
+              <div class="category-contain">
+                <h4 id="point-page">회원 탈퇴</h4>
+              </div>
+            </div>
+            <!-- 내용 메인페이지 -->
+            <div class="modify-content">
+              <p><strong>정말 탈퇴하시겠어요?</strong><br/>
+              보유하신 포인트는 모두 소멸됩니다.<br/>
+              모든 이용내역은 삭제되며 복원이 불가능합니다.<br/>
+              3개월간 동일한 정보로 가입이 불가능합니다.<br/>
+              작성하신 글들은 모두 삭제됩니다.</p>
+              <div class="delete-btn">
+                <button>회원 탈퇴하기</button>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer></footer>
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.js"
+      integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+      crossorigin="anonymous"
+    ></script>
+    <script src="../springProject/myMentor.js"></script>
+  </body>
+</html>
