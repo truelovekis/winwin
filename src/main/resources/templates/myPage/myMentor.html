@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>myMentor</title>
-    <link rel="stylesheet" href="/winwin/css/mypage/myMentor.css" />
+    <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
+    <link rel="stylesheet" th:href="@{/css/myPage/myMentor.css}" />
+    <link rel="stylesheet" th:href="@{/css/fragment/myPageSide.css}"/>
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
     <style>
       body {
@@ -21,39 +24,11 @@
     </style>
   </head>
   <body>
-    <header></header>
+    <header class="header"  th:replace="fragment/header :: header"></header>
     <main>
       <div class="wrap">
         <div class="container">
-          <div class="side-container">
-            <!-- 본인 프로필 -->
-            <div class="profile">
-              <div class="profile-wrap">
-                <label for="profile-img-upload"> 
-                  <div class="profile-icon">
-                    <img class="pfp-icon-image" src="https://cdn.comento.kr/images/illust/illust-photo-upload.svg"></img>
-                  </div>
-                </label>
-                <input type="file" id="profile-img-upload" name="profile-upload" />
-                <div class="user-info">
-                  <span class="user-name">정소이</span>
-                  <span class="user-email">aaa@naver.com <img src="../springProject/img/kakao-2.png" alt="" /></span>
-                </div>
-              </div>
-            </div>
-            <!-- 사이드 바 -->
-            <div class="side-bar">
-              <div class="list">
-                <a href="" id="point-list">내 멘토 : 멘티</a>
-                <a href="">내 기록</a>
-                <hr/>
-                <a href="" id="list-plus">활동 내역</a>
-                <a href="">이력 관리</a>
-                <a href="">진로 정보</a>
-                <a href="">회원 정보 수정</a>
-              </div>
-            </div>
-          </div>
+          <div th:replace="fragment/myPageSide :: myPageSide"></div>
           <!-- 마이페이지 메인 -->
           <div class="mypage-main">
             <div class="title"><h2>내 멘토 : 멘티</h2></div>
@@ -192,25 +167,26 @@
               </article>
               <!-- 멘토 프로필 끝 -->
               <!-- 내 멘토 없을 때 띄울 창 -->
-              <div class="not-found">
-                <span>앗! 아직 나의 멘토님이 없습니다. <br/>
-                  여러 분야의 멘토들에게 조언을 구하세요!</span>
-              </div>
+<!--              <div class="not-found">-->
+<!--                <span>앗! 아직 나의 멘토님이 없습니다. <br/>-->
+<!--                  여러 분야의 멘토들에게 조언을 구하세요!</span>-->
+<!--              </div>-->
               <!-- 해당 페이지 이동 -->
-              <div class="page-move-btn">
-              <button>프로젝트 입장하기</button>
-              </div>
+<!--              <div class="page-move-btn">-->
+<!--              <button>프로젝트 입장하기</button>-->
+<!--              </div>-->
             </div>
           </div>
         </div>
       </div>
     </main>
-    <footer></footer>
+    <footer class="footer"  th:replace="fragment/footer :: footer"></footer>
     <script
       src="https://code.jquery.com/jquery-3.6.3.js"
       integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
       crossorigin="anonymous"
     ></script>
-    <script src="../springProject/myMentor.js"></script>
+    <script th:src="@{/js/fragment/header.js}" ></script>
+    <script th:src="@{/js/myPage/myMentor.js}" ></script>
   </body>
 </html>
