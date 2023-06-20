@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -24,7 +24,7 @@
     <main>
       <div class="goal-container">
         <div class="goal-wrap">
-          <div class="goal-box">
+          <div class="goal-box" th:fragment="goal">
             <h3>어떤 목적으로 오셨나요?</h3>
             <h6>멘토 가입 시 추가 인증이 필요합니다.</h6>
             <button class="goal-mm-btn" id="goal-mentor">MENTOR</button>

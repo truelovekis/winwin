@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -24,7 +24,7 @@
     <main>
       <div class="self-container">
         <div class="self-wrap">
-          <div class="self-box">
+          <div class="self-box" th:fragment="selfCheck">
             <h3>본인 인증</h3>
             <h6>본인인증을 위해 필요한 정보를 입력해 주세요.</h6>
             <span id="self-first">이름</span>

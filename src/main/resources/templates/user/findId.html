@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -25,7 +25,7 @@
     <main>
       <div class="find-id-container">
         <div class="find-id-wrap">
-          <div class="find-id-box">
+          <div class="find-id-box" th:fragment="findId">
             <h3>아이디 찾기</h3>
             <span>이름</span>
             <input type="text" class="find-id-input" placeholder="이름 입력" />

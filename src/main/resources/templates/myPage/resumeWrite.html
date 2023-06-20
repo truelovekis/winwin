@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ResumeWrite</title>
-    <link rel="stylesheet" href="../springProject/resumeWrite.css" />
+    <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
+    <link rel="stylesheet" th:href="@{/css/myPage/resumeWrite.css}" />
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
     <style>
       body {
@@ -21,13 +23,14 @@
     </style>
   </head>
   <body>
+  <header class="header"  th:replace="fragment/header :: header"></header>
     <main>
       <div class="wrap">
         <div class="container">
           <div class="img-wrap">
             <div class="img-box upload">
               <label for="img-upload">
-                <img src="../springProject/img/camera.png" alt="" />
+                <img th:src="@{/img/camera.png}" alt="" />
                 이미지 <br />
                 업로드
               </label>
@@ -76,6 +79,7 @@
         </div>
       </div>
     </main>
-    <script src="../springProject/resumeWrite.js"></script>
+    <script th:src="@{/js/fragment/header.js}" ></script>
+    <script th:src="@{/js/myPage/resumeWrite.js}" ></script>
   </body>
 </html>
