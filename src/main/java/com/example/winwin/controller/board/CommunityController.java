@@ -1,12 +1,17 @@
 package com.example.winwin.controller.board;
 
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+
+
 @Controller
 @RequestMapping("/community/*")
+@RequiredArgsConstructor
 public class CommunityController {
 
     @GetMapping("/main")
@@ -44,4 +49,8 @@ public class CommunityController {
         return "mentormentee/mentorProfile";
     }
 
+    @GetMapping("/read")
+    public String board (){
+        return "/community/communityRead";
+    }
 }

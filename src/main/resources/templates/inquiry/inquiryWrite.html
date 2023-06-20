@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/inquiry/inquiryWrite.css}" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
+
+    <style>
+        body {
+            font-family: "NanumSquareLight";
+            font-family: "NanumSquare";
+            font-family: "NanumSquareBold";
+            font-family: "NanumSquareExtraBold";
+            font-family: "NanumSquareAcb";
+            font-family: "NanumSquareAceb";
+            font-family: "NanumSquareAcl";
+            font-family: "NanumSquareAcr";
+        }
+    </style>
+    <title>문의사항</title>
+</head>
+
+<body>
+<header class="header" th:replace="fragment/header :: header"></header>
+<form action="#" id="community-write">
+    <div class="write-main">
+        <div class="main-title">
+            <div class="sub1">
+                <h2>문의 사항</h2>
+                <img src="../img/k.png" class="k">
+            </div>
+            <span class="sub-title">궁금한 점을 물어보세요 :)</span>
+        </div>
+        <div class="write-main-box">
+            <div class="write-category">
+
+            </div>
+            <div class="write-title content-a">
+                <input type="text" placeholder="제목을 입력하세요" style="font-family:NanumSquareLight;">
+            </div>
+            <div class="write-content content-a">
+                <textarea name="communityContent" id="communityContent" cols="30" rows="10" placeholder="궁금한 점을 작성해주세요." style="font-family:NanumSquareLight;"></textarea>
+            </div>
+
+            <div>
+                <span class="text-cnt content-a">글자수 : <span class="cnt">0</span>/500</span>
+            </div>
+            <div class="file-main-img">
+                <div class="file-img">
+                    <!-- <label for="file" class="input-file-btn">
+                      <img src="../img/camera.png">
+                      이미지<br>
+                      업로드<br>
+                      (<span class="file-cnt">0</span>/4)
+                    </label>
+                    <input type="file" id="file" multiple /> -->
+                </div>
+                <!-- 파일 리스트 -->
+                <ul class="file-list">
+
+                </ul>
+                <!-- 파일 리스트 끝 -->
+            </div>
+
+
+        </div>
+        <button type="button" class="write-btn">작성하기</button>
+    </div>
+</form>
+
+<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="module" th:src="@{/js/inquiry/inquiryWrite.js}"></script>
+<script th:src="@{/js/fragment/header.js}" ></script>
+</body>
+
+</html>
