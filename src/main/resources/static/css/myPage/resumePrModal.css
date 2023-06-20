@@ -10,9 +10,17 @@
   height: 100%;
   display: flex;
   justify-content: center;
-  /* align-items: center; */
+   align-items: center;
   padding: 30px 0px;
 }
+
+.container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 650px;
+}
+
 
 /* 모달창 */
 .modal-box {
@@ -98,6 +106,7 @@
 .download-btn {
   display: flex;
   justify-content: flex-end;
+  margin-top: 10px;
 }
 
 .save-btn {

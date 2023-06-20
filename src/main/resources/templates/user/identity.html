@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -24,7 +24,7 @@
     <main>
       <div class="identity-container">
         <div class="identity-belong-wrap">
-          <div class="identity-belong-box">
+          <div class="identity-belong-box" th:fragment="identity">
             <h3>어디에 소속되어 있나요?</h3>
             <h6>당신의 재능으로</h6>
             <h6>멘티들의 고민을 해결해 주세요!</h6>

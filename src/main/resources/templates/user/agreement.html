@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -24,7 +24,7 @@
     <main>
       <div class="agreement-container">
         <div class="agreement-wrap">
-          <div class="agreement-box">
+          <div class="agreement-box" th:fragment="agreement">
             <img src="/winwin/img/winwin-logo.png" alt="" />
             <h4>고객님</h4>
             <h4>환영합니다!</h4>

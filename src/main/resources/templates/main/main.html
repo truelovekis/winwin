@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Main</title>
     <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
     <link rel="stylesheet" th:href="@{/css/main/main.css}" />
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
     <style>
@@ -22,12 +23,11 @@
     </style>
   </head>
   <body>
-  <header class="header"  th:replace="fragment/header :: header"></header>
-<!--    <header>-->
+    <header class="header"  th:replace="fragment/header :: header">
 <!--      <div class="hwrap">-->
 <!--        <div class="hcontainer">-->
 <!--          <div class="header-nav-l">-->
-<!--            <a href="" class="logo"><img src="/winwin/img/winwin-logo.png" alt="" /></a>-->
+<!--            <a href="" class="logo"><img th:src="@{/img/winwin-logo.png}" alt="" /></a>-->
 <!--          </div>-->
 <!--          <div class="hcenter">-->
 <!--            <ul class="hctg-list">-->
@@ -86,7 +86,7 @@
 <!--        </div>-->
 <!--      </div>-->
 <!--      <hr />-->
-<!--    </header>-->
+    </header>
 
     <main>
       <div class="container">
@@ -100,7 +100,7 @@
               <h4>✔️오프라인으로 배울 수 없을 때</h4>
               <h4>✔️실무에 관한 현실적인 조언을 듣고 싶을 때</h4>
               <div class="img-box">
-                <img src="/winwin/img/main-box.png" alt="" />
+                <img th:src="@{/img/main-box.png}" alt="" />
               </div>
             </div>
             <div class="ctg-right">
@@ -403,48 +403,48 @@
         <button><span>멘토 만나러 가기</span></button>
       </div>
     </main>
-    <footer>
-      <div class="f-container">
-        <div class="f-cs">
-          <h5>고객센터</h5>
-          <span
-            >운영시간 : 평일 10시 ~ 18시 30분 (주말, 공휴일 제외) <br />
-            점심시간 : 12시 30분 ~
-            <br /><br />
-            관리자 이메일 : aaa@naver.com</span
-          >
-          <div class="q-a-btn">
-            <a href="">Q&A 바로가기</a>
-          </div>
-        </div>
-        <div class="f-service">
-          <h5>서비스</h5>
-          <br />
-          <div class="box">
-            <a href="">멘토 : 멘티 </a>
-            <a href="">커뮤니티</a>
-            <a href="">프로젝트</a>
-            <a href="">자격증</a>
-          </div>
-          <h5>계정</h5>
-          <br />
-          <div class="box-2">
-            <a href="">로그인 </a>
-            <a href="">회원가입</a>
-          </div>
-        </div>
-        <div class="f-right">
-          <span
-            >(주)윈윈 | 대표이사 정소이 <br />06236 서울 강남구 테헤란로 146 3,4층 <br />사업자 등록번호 : 324-45-00192
-            | 통신판매업신고번호 제 2018-서울중구-1245호 <br />직업정보제공사업신고 서울청 제
-            2018-18호ㅣ원격평생교육시설신고 제 원격-376호 <br />유료직업소개사업 등록번호 제
-            2022-3010165-14-5-00021호</span
-          >
-          <br /><br /><br /><span>이용약관 | <strong>개인정보 처리 방침</strong></span> <br /><span
-            >Copyright by (주)윈윈. All right reserved.</span
-          >
-        </div>
-      </div>
+    <footer class="footer"  th:replace="fragment/footer :: footer">
+<!--      <div class="f-container">-->
+<!--        <div class="f-cs">-->
+<!--          <h5>고객센터</h5>-->
+<!--          <span-->
+<!--            >운영시간 : 평일 10시 ~ 18시 30분 (주말, 공휴일 제외) <br />-->
+<!--            점심시간 : 12시 30분 ~-->
+<!--            <br /><br />-->
+<!--            관리자 이메일 : aaa@naver.com</span-->
+<!--          >-->
+<!--          <div class="q-a-btn">-->
+<!--            <a href="">Q&A 바로가기</a>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="f-service">-->
+<!--          <h5>서비스</h5>-->
+<!--          <br />-->
+<!--          <div class="box">-->
+<!--            <a href="">멘토 : 멘티 </a>-->
+<!--            <a href="">커뮤니티</a>-->
+<!--            <a href="">프로젝트</a>-->
+<!--            <a href="">자격증</a>-->
+<!--          </div>-->
+<!--          <h5>계정</h5>-->
+<!--          <br />-->
+<!--          <div class="box-2">-->
+<!--            <a href="">로그인 </a>-->
+<!--            <a href="">회원가입</a>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="f-right">-->
+<!--          <span-->
+<!--            >(주)윈윈 | 대표이사 정소이 <br />06236 서울 강남구 테헤란로 146 3,4층 <br />사업자 등록번호 : 324-45-00192-->
+<!--            | 통신판매업신고번호 제 2018-서울중구-1245호 <br />직업정보제공사업신고 서울청 제-->
+<!--            2018-18호ㅣ원격평생교육시설신고 제 원격-376호 <br />유료직업소개사업 등록번호 제-->
+<!--            2022-3010165-14-5-00021호</span-->
+<!--          >-->
+<!--          <br /><br /><br /><span>이용약관 | <strong>개인정보 처리 방침</strong></span> <br /><span-->
+<!--            >Copyright by (주)윈윈. All right reserved.</span-->
+<!--          >-->
+<!--        </div>-->
+<!--      </div>-->
     </footer>
   </body>
   <script
@@ -452,5 +452,6 @@
     integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
     crossorigin="anonymous"
   ></script>
-  <script th:src="@{/js/main/main.js}" ></script>
+  <script th:src="@{/js/fragment/header.js}" ></script>
+  <script th:src="@{/js/fragment/footer.js}" ></script>
 </html>

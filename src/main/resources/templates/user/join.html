@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -24,7 +24,7 @@
     <main>
       <!-- <div class="join-container"> -->
       <div class="join-wrap">
-        <div class="join-box">
+        <div class="join-box" th:fragment="join">
           <h3>회원가입</h3>
           <span class="join-title" id="join-first">아이디</span>
           <input type="text" class="join-input" placeholder="아이디 입력" />
