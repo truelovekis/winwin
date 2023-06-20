@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>관리자 페이지 - 신고 내역</title>
+    <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fragment/adminSideBar.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin/adminreport.css}" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: "NanumSquareLight";
+            font-family: "NanumSquare";
+            font-family: "NanumSquareBold";
+            font-family: "NanumSquareExtraBold";
+            font-family: "NanumSquareAcb";
+            font-family: "NanumSquareAceb";
+            font-family: "NanumSquareAcl";
+            font-family: "NanumSquareAcr";
+        }
+    </style>
+</head>
+<body>
+<header class="header" th:replace="fragment/header :: header"></header>
+<div class="admin-main">
+    <div class="admin-app">
+        <!-- 관리자 사이드 메뉴 -->
+        <div class="admin-container" th:replace="fragment/adminSideBar :: adminSideBar"></div>
+        <!-- 관리자 사이드 메뉴 끝 -->
+
+        <!-- 관리자 카테고리  -->
+        <div class="admin-category">
+            <div class="category">
+                <div class="big-category">
+                    <h2>신고 관리</h2>
+
+                    <div class="small-category">
+                        <a href="#" class="small-category-a">
+                            <h4>신고 내역</h4>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!--  -->
+
+            <!-- 회원 정보 검색 및 테이블 -->
+            <div class="search">
+                <span>이름 : </span>
+                <input type="text" placeholder="이름" class="search-text">
+                <span>게시판 :  </span>
+                <select name="identity" id="identity" class="search-text2">
+                    <option value="1">직장인</option>
+                    <option value="2">대학생</option>
+                </select>
+                <span>신고사유 : </span>
+                <select name="reason" id="reason">
+                    <option value="1">욕설</option>
+                    <option value="2">허위PR</option>
+                    <option value="3">허위광고</option>
+                    <option value="4">음란물</option>
+                </select>
+                <span>상태 : </span>
+                <select name="mandm" id="result" class="search-text2">
+                    <option value="1">7일 정지</option>
+                    <option value="2">14일 정지</option>
+                    <option value="3">30일 정지</option>
+                    <option value="4">영구 정지</option>
+                </select>
+                <button type="button" class="search-btn">검색</button>
+            </div>
+            <div class="border-box">
+                <table class="user-table" border="1px" width="100%" height="300">
+                    <thead>
+                    <tr class="user-table-category">
+                        <td class="checkbox">
+                            <input type="checkbox" name="" id="checkAll" >
+                        </td>
+                        <td class="user-name" align="center">이름</td>
+                        <td class="user-id" align="center">아이디</td>
+                        <td class="user-board" align="center">게시글</td>
+                        <td class="user-report-date" align="center">신고 일자</td>
+                        <td class="report-reason" align="center">신고 사유</td>
+                        <td class="user-report-status" align="center">신고 상태</td>
+                        <td class="status" align="center">상태</td>
+                    </tr>
+                    </thead>
+
+
+                    <tbody>
+                    <tr class="user-table-category">
+                        <td class="checkbox">
+                            <input type="checkbox" name="" class="check" id="checking" >
+                        </td>
+                        <td class="user-name" align="center">홍길동</td>
+                        <td class="user-id" align="center">aaa</td>
+                        <td class="user-board" align="center">개발글 아니지롱~</td>
+                        <td class="user-report-date" align="center">2023-06-01</td>
+                        <td class="report-reason" align="center">욕설</td>
+                        <td class="board-public-secret" align="center">
+                            <select name="user-report-select" class="user-report-select">
+                                <option value="1">7일 정지</option>
+                                <option value="2">14일 정지</option>
+                                <option value="3">30일 정지</option>
+                                <option value="4">영구 정지</option>
+                            </select>
+                        </td>
+                        <td class="report-resulting-success" align="center">
+                            <div class="blind-button">7일 정지</div>
+                        </td>
+                    </tr>
+
+                    <tr class="user-table-category">
+                        <td class="checkbox">
+                            <input type="checkbox" name="" class="check" id="checking">
+                        </td>
+                        <td class="user-name" align="center">김철수</td>
+                        <td class="user-id" align="center">bbb</td>
+                        <td class="user-board" align="center">컴공과 질문있습니다.</td>
+                        <td class="user-report-date" align="center">2023-06-01</td>
+                        <td class="report-reason" align="center">음란물</td>
+                        <td class="board-public-secret" align="center">
+                            <select name="user-report-select" class="user-report-select">
+                                <option value="1">7일 정지</option>
+                                <option value="2">14일 정지</option>
+                                <option value="3">30일 정지</option>
+                                <option value="4">영구 정지</option>
+                            </select>
+                        </td>
+                        <td class="report-resulting-success" align="center">
+                            <div class="success-button">영구 정지</div>
+                        </td>
+                    </tr>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--  -->
+        </div>
+        <div class="remove-delete-button">
+            <button class="remove-button-btn">변경</button>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<footer class="header" th:replace="fragment/footer :: footer"></footer>
+<script
+        src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+        crossorigin="anonymous"
+></script>
+<script th:src="@{/js/admin/adminUser.js}"></script>
+<script th:src="@{/js/admin/adminReport.js}"></script>
+<script th:src="@{/js/fragment/header.js}" ></script>
+</body>
+</html>
