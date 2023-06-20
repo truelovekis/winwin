@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ResumePrModal</title>
-    <link rel="stylesheet" href="/winwin/css/mypage/resumePrModal.css" />
+    <link rel="stylesheet" th:href="@{/css/myPage/resumePrModal.css}" />
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
     <style>
       body {
@@ -23,63 +23,79 @@
   <body>
     <article>
       <div class="modal-wrap">
-        <div class="modal-box">
-          <div class="pr-header">
-            <span class="title">피할 수 없으면 즐겨라 ! :</span>
-            <span class="title-s">실패는 나의 경험치</span>
-          </div>
-          <div class="pr-main">
-            <div class="line-box">
-              <div class="left-box">
-                <hr class="left-line" />
-              </div>
-              <div class="right-box">
-                <hr class="right-line" />
-              </div>
+        <div class="container">
+          <div class="modal-box">
+            <div class="pr-header">
+              <span class="title">피할 수 없으면 즐겨라 ! :</span>
+              <span class="title-s">실패는 나의 경험치</span>
             </div>
-            <div class="text-box">
-              <span class="ctg-title">성장 과정</span>
-              <span class="ctg-content">
+            <div class="pr-main">
+              <div class="line-box">
+                <div class="left-box">
+                  <hr class="left-line" />
+                </div>
+                <div class="right-box">
+                  <hr class="right-line" />
+                </div>
+              </div>
+              <div class="text-box">
+                <span class="ctg-title">성장 과정</span>
+                <span class="ctg-content">
                 개발자로서 역량을 더욱 갖추기 위해 백엔드 교육과정을 수료했습니다. 실제 현업에서 사용하는 기술을
                 학습하며 Spring Boot를 사용하여 MVC 패턴을 적용한 커머스 웹 개발 프로젝트를 진행했으며 RESTful Api
                 기반으로 백엔드를 구성하여 CRUD 기능을 처리했습니다. 많은 거래가 이루어지는 커머스 사이트에서 실시간으로
                 매출을 집계할 경우 조회 시간이 오래 걸리며 서버에 과부하가 발생하는 문제점이 나타났습니다.
               </span>
-            </div>
-            <div class="text-box">
-              <span class="ctg-title">성격의 장단점</span>
-              <span class="ctg-content">
+              </div>
+              <div class="text-box">
+                <span class="ctg-title">성격의 장단점</span>
+                <span class="ctg-content">
                 저의 장점은 다양한 생각에 포용적입니다. 사람들과 소통하면서 의견을 주고받는 것을 좋아합니다. 제가 이런
                 장점을 가질 수 있었던 이유는 교내에서 다양한 프로젝트를 진행하며 다양한 가치관을 가진 친구들과 회의하며
                 의견을 맞춰간 경험이 있기 때문입니다. 이러한 경험은 입사 후 팀원들과 프로젝트를 진행할 때 협업하며 잘
                 융화되어 시너지 효과를 낼 수 있을 것입니다. 저의 단점은 목표나 성취해야 할 일이 없으면 느슨해지는
                 것입니다.
               </span>
-            </div>
-            <div class="text-box">
-              <span class="ctg-title">주요경험의<br />실패 및 성공 사례</span>
-              <span class="ctg-content">
+              </div>
+              <div class="text-box">
+                <span class="ctg-title">주요경험의<br />실패 및 성공 사례</span>
+                <span class="ctg-content">
                 저의 장점은 다양한 생각에 포용적입니다. 사람들과 소통하면서 의견을 주고받는 것을 좋아합니다. 제가 이런
                 장점을 가질 수 있었던 이유는 교내에서 다양한 프로젝트를 진행하며 다양한 가치관을 가진 친구들과 회의하며
                 의견을 맞춰간 경험이 있기 때문입니다. 이러한 경험은 입사 후 팀원들과 프로젝트를 진행할 때 협업하며 잘
                 융화되어 시너지 효과를 낼 수 있을 것입니다. 저의 단점은 목표나 성취해야 할 일이 없으면 느슨해지는
                 것입니다.
               </span>
-            </div>
-            <div class="line-box">
-              <div class="left-box">
-                <hr class="left-line" />
               </div>
-              <div class="right-box">
-                <hr class="right-line" />
+              <div class="line-box">
+                <div class="left-box">
+                  <hr class="left-line" />
+                </div>
+                <div class="right-box">
+                  <hr class="right-line" />
+                </div>
               </div>
             </div>
           </div>
-          <div class="download-btn">
-            <button type="button" class="save-btn">다운로드</button>
-          </div>
+            <div class="download-btn">
+              <button type="button" class="save-btn">다운로드</button>
+            </div>
         </div>
+
       </div>
-    </article>
+      </article>
+      <script
+              src="https://code.jquery.com/jquery-3.6.3.js"
+              integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+              crossorigin="anonymous"
+      ></script>
+      <script th:src="@{/lib/jspdf.min.js}"></script>
+      <script
+              src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+              integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+              crossorigin="anonymous"
+              referrerpolicy="no-referrer"
+      ></script>
+      <script th:src="@{/js/myPage/resumePrModal.js}"></script>
   </body>
 </html>

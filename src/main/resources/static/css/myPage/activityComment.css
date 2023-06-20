@@ -12,7 +12,8 @@
     width: 1050px;
     display: flex;
   }
-  
+
+  /*전체 사이드바*/
   .side-container {
     width: 220px;
     padding: 20px;
@@ -76,7 +77,7 @@
     margin-bottom: 25px;
   }
   
-  #point-list {
+  #point-list-3 {
     font-weight: 700;
   }
   

@@ -1,0 +1,98 @@
+
+.myPageSide{
+    margin-right: 50px;
+}
+
+.side-container {
+    width: 220px;
+    padding: 20px;
+}
+
+.profile-icon {
+    cursor: pointer;
+}
+
+.pfp-icon-image {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+
+#profile-img-upload {
+    display: none;
+}
+
+.profile-img > label {
+    cursor: pointer;
+}
+
+.profile-wrap {
+    display: flex;
+    margin: 5px;
+}
+
+.user-name {
+    display: block;
+    padding-top: 8px;
+    margin-left: 10px;
+    font-weight: 700;
+    color: black;
+}
+
+.user-email {
+    display: block;
+    margin-left: 10px;
+    margin-top: 3px;
+    color: rgb(118, 125, 130);
+    font-size: 14px;
+}
+
+.user-email > img {
+    width: 15px;
+    border-radius: 50%;
+}
+
+.list {
+    margin-top: 50px;
+    margin-left: 25px;
+}
+
+.list > a {
+    text-decoration: none;
+    color: #000;
+    font-size: 16px;
+    display: block;
+    margin-bottom: 25px;
+}
+
+/*#point-list {*/
+/*    font-weight: 700;*/
+/*}*/
+
+.list > a:hover {
+    font-weight: 700;
+}
+
+.list-plus {
+    margin-top: 20px;
+}
+
+hr {
+    width: 90%;
+    border: 1px solid #ddd;
+}
+
+.sub-category {
+    margin: 15px;
+}
+
+.sub-category > span {
+    cursor: pointer;
+    margin-right: 15px;
+    font-size: 14px;
+    color: #000;
+}
+
+#sub-point {
+    font-weight: 700;
+}

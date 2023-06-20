@@ -1,0 +1,351 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.wrap {
+  display: flex;
+  justify-content: end;
+  width: 1050px;
+  margin: auto;
+}
+
+/* 회원 프로필&질문하기 버튼 */
+/* 로그인 했을 때 */
+.community-pfp {
+  position: fixed;
+  left: 250px;
+  /* display: none; */
+}
+
+.community-user {
+  display: flex;
+  align-items: center;
+  width: 250px;
+  height: 80px;
+}
+
+.community-pfp-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 70%;
+  overflow: hidden;
+  cursor: pointer;
+  margin-right: 10px;
+  position: relative;
+}
+
+.community-pfp-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.community-user-name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+
+.community-pfp-belong,
+.community-pfp-department {
+  font-size: 12px;
+  color: gray;
+  margin-top: 2px;
+}
+
+.community-pfp-main-btn {
+  display: flex;
+  height: 45px;
+  align-items: center;
+}
+
+.pfp-main-btn {
+  border-radius: 7px;
+  background-color: #1b5192;
+  color: white;
+  text-decoration: none;
+  padding: 9px 97px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: lighter;
+}
+
+.pfp-main-btn:hover {
+  background-color: #153f71;
+  color: white;
+}
+
+.community-pfp-sub-btn {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 245px;
+  height: 100px;
+  justify-content: space-around;
+}
+
+.pfp-sub-btn {
+  width: 115px;
+  height: 45px;
+  border: 1px solid #e5e5e5;
+  border-radius: 7px;
+  background-color: #ffffff;
+  color: gray;
+  margin-right: 3px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.pfp-sub-btn:hover {
+  border: 1px solid #e5e5e5;
+  background-color: #f2f2f2;
+}
+
+/* 로그인 안했을 때 */
+.community-pfp2 {
+  position: fixed;
+  left: 250px;
+}
+
+.not-login > a {
+  text-decoration: none;
+  color: rgb(66, 66, 66);
+  display: block;
+  margin-bottom: 7px;
+}
+
+.not-login span {
+  color: rgb(66, 66, 66);
+  font-weight: bold;
+  padding-bottom: 1px;
+  border-bottom: 2px solid rgb(66, 66, 66);
+}
+
+.not-login-comment {
+  color: gray;
+  font-size: 13px;
+  padding: 0px 5px;
+}
+/* 회원 프로필&질문하기 버튼 끝 */
+
+/* 이미지 버튼 눌렀을 때 */
+.community-pfp-img img {
+  cursor: pointer;
+}
+
+#file {
+  display: none;
+}
+
+.plusimg {
+  display: none;
+  position: absolute;
+}
+
+.community-pfp-img:hover .plusimg {
+  display: inline;
+  filter: opacity(0.5) drop-shadow(0 0 0 white);
+}
+/* 이미지 버튼 눌렀을 때 끝! */
+
+/* 메인 div */
+.community {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 50px; /* 마진 없애도 됨 */
+}
+/* 메인 div 끝 */
+
+/* 직장인/대학생/고등학생 고민 */
+.community-main-box {
+  padding: 10px 0 10px 0;
+}
+
+.community-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 700px;
+  height: 170px;
+  border: 1px solid#ddd;
+  border-radius: 5px;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.user-identity {
+  border: 0.5px solid rgba(128, 128, 128, 0);
+  border-radius: 3px;
+  font-size: 10px;
+  background-color: rgb(234, 234, 234);
+  margin: 10px 0px 5px 0px;
+  padding: 2px 1px 2px 1px;
+  text-align: center;
+}
+
+.hsc {
+  width: 45px;
+}
+
+.cs {
+  width: 35px;
+}
+
+.ow {
+  width: 35px;
+}
+
+.community-title {
+  font-size: 17px;
+  font-weight: bold;
+  margin: 15px 0px;
+}
+
+.community-sub-content {
+  margin-top: 5px;
+}
+
+.community-content {
+  font-size: 13px;
+  font-weight: lighter;
+  color: gray;
+  margin: 20px 0px;
+  line-height: 20px;
+}
+
+.community-sub-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.community-btn {
+  display: flex;
+  align-items: center;
+}
+
+.community-cnt > img {
+  width: 17px;
+}
+
+.community-like > img {
+  width: 13px;
+}
+
+.community-comment > img {
+  width: 15px;
+}
+
+.community-like,
+.community-comment,
+.community-cnt {
+  display: flex;
+  align-items: center;
+  margin: 5px 4px;
+}
+
+span {
+  padding: 0 5px;
+  font-size: 13px;
+  color: gray;
+}
+
+.community-time {
+  font-size: 13px;
+  color: gray;
+}
+/* 직장인/대학생/고등학생 고민 끝 */
+
+/* 친목&나눔 */
+.share-main-box {
+  padding: 10px 0 10px 0;
+}
+
+.share-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 700px;
+  height: 150px;
+  border: 1px solid#ddd;
+  border-radius: 5px;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.share-sub-content {
+  display: flex;
+  height: 150px;
+  flex-direction: column;
+}
+
+.share-sub-title {
+  width: 500px;
+  height: 130px;
+}
+
+.share-title {
+  font-size: 17px;
+  font-weight: bold;
+  margin: 15px 0px;
+}
+
+.share-content {
+  height: 40px;
+  font-size: 13px;
+  font-weight: lighter;
+  color: gray;
+  margin: 5px 0px 5px 0px;
+  line-height: 20px;
+}
+
+.share-sub-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.share-btn {
+  display: flex;
+}
+
+.share-sub-box img {
+  width: 15px;
+}
+
+.share-like > img {
+  width: 20px;
+}
+
+.share-comment > img {
+  width: 15px;
+}
+
+.share-like,
+.share-comment {
+  display: flex;
+  align-items: center;
+  margin: 5px 5px 5px 0;
+}
+
+span {
+  padding: 0 5px;
+  color: gray;
+}
+
+.share-img {
+  border-radius: 3px;
+}
+
+.share-img > img {
+  width: 150px;
+  height: 150px;
+  border-radius: 5px;
+}
+/* 친목&나눔 끝 */
+
+.bi-hand-thumbs-up-fill{
+ display: none;
+}

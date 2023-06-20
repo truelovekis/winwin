@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -24,7 +24,7 @@
     <main>
       <div class="mentor-goal-container">
         <div class="mentor-goal-wrap">
-          <div class="mentor-goal-box">
+          <div class="mentor-goal-box" th:fragment="mentorGoal">
             <h3>직장인 인증서류 확인</h3>
             <h6>경력을 증명해 주세요!</h6>
             <hr class="mentor-goal-hr" />

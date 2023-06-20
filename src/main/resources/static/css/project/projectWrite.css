@@ -1,0 +1,290 @@
+
+.big-box{
+    width: 1050px;
+    display: flex;
+    margin: auto;
+    margin-top: 62px;
+}
+
+.middle-box{
+    width: 700px;
+}
+
+.small-box{
+    width: 350px;
+}
+
+.Title{
+    margin: -61px 0;
+}
+
+.sideTitle{
+    margin: 25px 35px;
+    padding: 2px 0;
+    background-color: #efeeee;
+    font-size: 11px;
+    color: gray;
+    border-radius: 3.5px;
+    width: 90px;
+    text-align: center;
+    height: 20px;
+    font-weight: bold;
+}
+
+.sideTitle p {
+    margin: 2.5px;
+    padding: 1px 0 2px 0;
+}
+
+.contentTitle{
+    margin: -20px 27px;
+    height: 80px;
+}
+
+.title{
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    width: 603px;
+    font-size: 19px;
+    font-weight: bold;
+    padding: 8px;
+}
+
+h3{
+    margin: 30px 30px;
+}
+
+.summary-h3{
+    margin-top: 87px;
+}
+
+.openChat-box-h3{
+    margin-top: 26px;
+}
+
+.project-box-h3{
+    margin-top: 51px;
+}
+
+.radioButton-h3{
+    margin-top: 47px;
+}
+
+.timeRadio-h3{
+    margin-top: 18px;
+}
+
+.recruitment-h3{
+    margin-top: 40px;
+}
+
+.summary{
+    margin: -10px 27px;
+    height: 150px;
+}
+
+.summaryTitle{
+    margin-bottom: 10px;
+}
+
+.title2{
+    height: 25px;
+    border-radius: 7px;
+    border: 1px solid #ddd;
+    width: 605px;
+    font-size: 12px;
+    color: gray;
+    padding: 8px;
+    font-family: 'abc';
+}
+
+.content{
+    height: 65px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    width: 605px;
+    font-size: 12px;
+    resize: none;
+    padding: 8px;
+    color: gray;
+    font-family: 'abc';
+}
+
+.project-box{
+    margin-bottom: 40px;
+    margin-left: 25px;
+    margin-top: -10px;
+}
+
+.openChat-box{
+    margin: 0px 25px;
+}
+
+.recruitment{
+    margin: -15px 27px;
+    height: 80px;
+}
+
+.recruitmentTitle{
+    height: 35px;
+    border-radius: 7px;
+    border: 1px solid #ddd;
+    width: 609px;
+    font-size: 12px;
+    color: gray;
+    padding: 5px;
+}
+
+.openChat-link{
+    height: 35px;
+    border-radius: 7px;
+    border: 1px solid #ddd;
+    width: 609px;
+    font-size: 12px;
+    color: gray;
+    padding: 5px;
+    margin-top: -17px;
+}
+
+.radioButton{
+    margin: -10px 26px;
+    height: 60px;
+    cursor: pointer;
+}
+
+.timeRadio{
+    margin: -10px 26px;
+    height: 60px;
+    cursor: pointer;
+}
+
+.Profil{
+    margin: -10px 27px;
+    margin-top: -20px;
+}
+
+.projectProfil{
+    height: 200px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    width: 605px;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 8px;
+    font-family: 'abc';
+    resize: none;
+}
+
+.five{
+    border: 2px solid gray;
+    display: flex;
+    border-radius: 10px;
+    height: 70px;
+    margin: 53px 35px;
+    background-color: #eff3f8;
+    width: 300px;
+    border-color: #ddd;
+}
+
+.five p{
+    font-size: 12px;
+    padding: 10px;
+    margin-left: -20px;
+    line-height: 15px;
+    margin-top: 9px;
+}
+
+.tw-fill-slate-500{
+    margin: 19px 20px;
+}
+
+.tw-fill-slate-5000{
+    margin: 17px 20px;
+}
+
+.oneFive{
+    border: 2px solid gray;
+    display: flex;
+    border-radius: 10px;
+    height: 70px;
+    margin: 103px 35px;
+    background-color: #eff3f8;
+    width: 300px;
+    border-color: #ddd;
+}
+
+.oneFive p{
+    font-size: 12px;
+    padding: 10px;
+    margin-left: -20px;
+    line-height: 15px;
+    margin-top: 10px;
+}
+
+.because{
+    font-weight: bold;
+}
+
+.profilContent{
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    background-color: #eff3f8;
+    margin: 500px 35px;
+    width: 300px;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 0px;
+}
+
+.listTitle>p{
+    margin-top: -15px;
+    margin-left: -15px;
+    line-height: 15px;
+}
+
+.other{
+    margin-left: 10px;
+}
+
+.tww-fill-slate-500{
+    margin: -14px -25px;
+}
+
+ul>li{
+    margin-bottom: 13px;
+}
+
+.profilContent p{
+    padding: 10px;
+}
+
+.button{
+    margin-top: -450px;
+    margin-left: 200px;
+}
+
+.writeOk{
+    background-color: #1b5192;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    font-weight: bold;
+    height: 40px;
+    width: 100px;
+    font-family: 'abc';
+    font-size: 15.5px;
+    cursor: pointer;
+}
+
+footer{
+    height: 100px;
+}
+
+
+
+
+
+

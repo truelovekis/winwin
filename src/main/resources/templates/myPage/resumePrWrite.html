@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>resumePrWrite</title>
-    <link rel="stylesheet" href="/winwin/css/mypage/resumePrWrite.css" />
+    <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
+    <link rel="stylesheet" th:href="@{/css/myPage/resumePrWrite.css}" />
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
     <style>
       body {
@@ -21,6 +23,7 @@
     </style>
   </head>
   <body>
+  <header class="header"  th:replace="fragment/header :: header"></header>
     <main>
       <div class="wrap">
         <div class="container">
@@ -92,6 +95,7 @@
       integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
       crossorigin="anonymous"
     ></script>
-    <script src="/winwin/js/mypage/resumePrWrite.js"></script>
+    <script th:src="@{/js/fragment/header.js}" ></script>
+    <script th:src="@{/js/myPage/resumePrWrite.js}" ></script>
   </body>
 </html>
