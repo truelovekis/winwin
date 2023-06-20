@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Header</title>
+  <link rel="stylesheet" th:href="@{/css/fragment/adminSideBar.css}" />
+</head>
+<body>
+  <div class="admin-container" th:fragment="adminSideBar">
+    <aside class="admin-aside-menu">
+      <!-- 관리자 프로필 -->
+      <div class="admin-pfp">
+        <!-- 관리자 프로필사진 업로드 -->
+        <div class="pfp-image-upload">
+          <label for="adminImageUpload">
+            <div class="pfp-icon">
+              <img class="pfp-icon-image" src="https://cdn.comento.kr/images/illust/illust-photo-upload.svg"></img>
+            </div>
+          </label>
+          <input type="file" id="adminImageUpload" name="adminImageUpload" />
+        </div>
+        <!-- 관리자 닉네임, 카톡ID -->
+        <div class="admin-nickname-email">
+          <div class="admin-nickname">길동쓰</div>
+          <div class="admin-email-box">
+            <div class="admin-email">aaa@naver.com</div>
+            <div class="social-icon">
+              <img src="https://cdn.comento.kr/icon/icon-kakao-medium.svg" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="admin-side-menu">
+        <a href="#" class="side-menu">
+          <div class="admin-managementname user-management">
+            회원 관리
+          </div>
+        </a>
+        <a href="#" class="side-menu">
+          <div class="admin-managementname board-management">
+            게시판 관리
+          </div>
+        </a>
+        <a href="#" class="side-menu">
+          <div class="admin-managementname point-management">
+            포인트 관리
+          </div>
+        </a>
+        <a href="#" class="side-menu">
+          <div class="admin-managementname report-management">
+            신고 관리
+          </div>
+        </a>
+      </div>
+    </aside>
+  </div>
+  <!-- 관리자 사이드 메뉴 끝 -->
+
+</body>
+</html>

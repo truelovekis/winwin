@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>관리자 페이지 - 회원 관리</title>
+  <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
+  <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
+  <link rel="stylesheet" th:href="@{/css/fragment/adminSideBar.css}" />
+  <link rel="stylesheet" th:href="@{/css/admin/adminUser.css}" />
+  <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+  <style>
+    body {
+      font-family: "NanumSquareLight";
+      font-family: "NanumSquare";
+      font-family: "NanumSquareBold";
+      font-family: "NanumSquareExtraBold";
+      font-family: "NanumSquareAcb";
+      font-family: "NanumSquareAceb";
+      font-family: "NanumSquareAcl";
+      font-family: "NanumSquareAcr";
+    }
+  </style>
+</head>
+<body>
+<header class="header" th:replace="fragment/header :: header"></header>
+<div class="admin-main">
+  <div class="admin-app">
+  <!-- 관리자 사이드바 메뉴 -->
+    <div class="admin-container" th:replace="fragment/adminSideBar :: adminSideBar"></div>
+    <!-- 관리자 사이드 메뉴 끝 -->
+
+    <!-- 관리자 카테고리  -->
+    <div class="admin-category">
+      <div class="category">
+        <div class="big-category">
+          <h2>회원 관리</h2>
+
+          <div class="small-category">
+            <a href="#" class="small-category-a">
+              <h4>회원 정보</h4>
+            </a>
+          </div>
+        </div>
+      </div>
+      <!--  -->
+
+      <!-- 회원 정보 검색 및 테이블 -->
+      <form action="#">
+        <div class="search">
+          <span>이름 : </span>
+          <input type="text" placeholder="이름" class="search-text">
+          <span>신원 :  </span>
+          <select name="identity" id="identity" class="search-text2">
+            <option value="1">직장인</option>
+            <option value="2">대학생</option>
+          </select>
+          <span>부서/학과 : </span>
+          <select name="dep" id="department">
+            <option value="1">it개발</option>
+            <option value="2">디자인</option>
+            <option value="3">컴퓨터공학과</option>
+          </select>
+          <span>멘토/멘티 : </span>
+          <select name="mandm" id="mandm" class="search-text2">
+            <option value="mentor">멘토</option>
+            <option value="mentee">멘티</option>
+          </select>
+          <button type="button" class="search-btn">검색</button>
+        </div>
+      </form>
+
+      <div class="border-box">
+        <table class="user-table" border="1px" width="100%" height="300">
+          <thead>
+          <tr class="user-table-category">
+            <td class="checkbox">
+              <input type="checkbox" name="" id="checkAll">
+            </td>
+            <td class="user-name" align="center">이름</td>
+            <td class="user-id" align="center">아이디</td>
+            <td class="user-dep" align="center">부서/학과</td>
+            <td class="user-register-date" align="center">가입일</td>
+            <td class="user-phonenumber" align="center">전화번호</td>
+            <td class="user-mento-menti" align="center">멘토/멘티</td>
+            <td class="user-email" align="center">이메일</td>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr class="user-table-category">
+            <td class="checkbox">
+              <input type="checkbox" name="" class="check" id="checking">
+            </td>
+            <td class="user-id" align="center">aaa</td>
+            <td class="user-job" align="center">백엔드 개발자</td>
+            <td class="user-dep" align="center">개발</td>
+            <td class="user-register-date" align="center">2023-06-01</td>
+            <td class="user-phonenumber" align="center">010-1111-1111</td>
+            <td class="user-mento-menti" align="center">
+              <button type="button" class="mento-button">멘토</button>
+            </td>
+            <td class="user-email" align="center">aaa@gmail.com</td>
+          </tr>
+          </form>
+
+          <tr class="user-table-category">
+            <td class="checkbox">
+              <input type="checkbox" name="" class="check" id="checking">
+            </td>
+            <td class="user-id" align="center">bbb</td>
+            <td class="user-job" align="center">대학생</td>
+            <td class="user-dep" align="center">컴공과</td>
+            <td class="user-register-date" align="center">2023-06-01</td>
+            <td class="user-phonenumber" align="center">010-2222-2222</td>
+            <td class="user-mento-menti" align="center">
+              <button type="button" class="menti-button">멘티</button>
+            </td>
+            <td class="user-email" align="center">bbb@gmail.com</td>
+          </tr>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <!--  -->
+    </div>
+    <div class="delete-button">
+      <button class="delete-button-btn">삭제</button>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<footer class="header" th:replace="fragment/footer :: footer"></footer>
+<script
+        src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+        crossorigin="anonymous"
+></script>
+<script th:src="@{/js/fragment/footer.js}" ></script>
+<script th:src="@{/js/fragment/header.js}" ></script>
+</body>
+</html>
