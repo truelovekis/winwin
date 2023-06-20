@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ActivityComment</title>
-    <link rel="stylesheet" href="/winwin/css/mypage/activityComment.css" />
+    <link rel="stylesheet" th:href="@{/css/myPage/activityComment.css}" />
+    <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fragment/myPageSide.css}"/>
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
     <style>
       body {
@@ -21,39 +24,11 @@
     </style>
   </head>
   <body>
-    <header></header>
+    <header class="header"  th:replace="fragment/header :: header"></header>
     <main>
       <div class="wrap">
         <div class="container">
-          <div class="side-container">
-            <!-- 본인 프로필 -->
-            <div class="profile">
-              <div class="profile-wrap">
-                <label for="profile-img-upload"> 
-                  <div class="profile-icon">
-                    <img class="pfp-icon-image" src="https://cdn.comento.kr/images/illust/illust-photo-upload.svg"></img>
-                  </div>
-                </label>
-                <input type="file" id="profile-img-upload" name="profile-upload" />
-                <div class="user-info">
-                  <span class="user-name">정소이</span>
-                  <span class="user-email">aaa@naver.com <img src="../springProject/img/kakao-2.png" alt="" /></span>
-                </div>
-              </div>
-            </div>
-            <!-- 사이드 바 -->
-            <div class="side-bar">
-              <div class="list">
-                <a href="">내 멘토 : 멘티</a>
-                <a href="">내 기록</a>
-                <hr/>
-                <a href="" id="point-list" class="list-plus">활동 내역</a>
-                <a href="">진로 정보</a>
-                <a href="" >이력 관리</a>
-                <a href="">회원 정보 수정</a>
-              </div>
-            </div>
-          </div> 
+          <div th:replace="fragment/myPageSide :: myPageSide"></div>
           <!-- 마이페이지 메인 카테고리 -->
           <div class="mypage-main">
             <div class="title"><h2>활동 내역</h2></div>
@@ -142,13 +117,16 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
     </main>
-    <footer></footer>
+    <footer class="footer"  th:replace="fragment/footer :: footer"></footer>
     <script
       src="https://code.jquery.com/jquery-3.6.3.js"
       integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
       crossorigin="anonymous"
     ></script>
-    <script src="../springProject/myMentor.js"></script>
+    <script th:src="@{/js/myPage/activityComment.js}"></script>
+    <script th:src="@{/js/fragment/header.js}" ></script>
   </body>
 </html>

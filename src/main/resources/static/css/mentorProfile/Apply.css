@@ -1,0 +1,117 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+svg {
+    width: 16px;
+    height: 16px;
+    stroke-width: 0;
+}
+.img1 {
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+}
+.mypro {
+    width: 25%;
+    border-radius: 0.25rem;
+    font-weight: bold;
+    border: none;
+    padding: 8px 32px;
+}
+.white {
+    color: #ffffff;
+}
+.prosave {
+    width: 25%;
+    background-color: #ed6653;
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    border-radius: 0.25rem;
+    padding: 8px 32px;
+    font-weight: bold;
+    border: none;
+}
+
+.drow {
+    font-weight: 700;
+}
+.intr {
+    font-size: 0.875rem;
+    color: #64748b;
+}
+.TT {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.rr {
+    display: flex;
+    flex: 1 1 0%;
+    align-items: center;
+    border: 1px solid#ddd;
+    width: 50%;
+    height: 70px;
+}
+
+.add {
+    display: flex;
+    justify-content: center;
+    flex: 1 1 0%;
+    align-items: center;
+    border: 1px solid#ddd;
+    width: 35%;
+    color: #94a3b8;
+    background-color: #f1f5f9;
+}
+
+.skill {
+    display: flex;
+    justify-content: center;
+    flex: 1 1 0%;
+    align-items: center;
+    width: 20%;
+    gap: 0.5rem;
+}
+.skill1 {
+    border: 1px solid#ddd;
+    justify-content: center;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    display: inline-block;
+    border-radius: 0.25rem;
+    --tw-bg-opacity: 1;
+    background-color: rgb(241 245 249 / var(--tw-bg-opacity));
+    font-weight: 700;
+    --tw-text-opacity: 1;
+    color: rgb(148 163 184 / var(--tw-text-opacity));
+}
+.apply {
+    margin-left: 67%;
+    width: 80px;
+    background-color: #1b5192;
+    height: 30px;
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    border-radius: 0.25rem;
+    border: none;
+    margin-top: 25px;
+    cursor: pointer;
+    margin-bottom: 5%;
+}
+
+.pp {
+    --tw-text-opacity: 1;
+    color: rgb(203 213 225 / var(--tw-text-opacity));
+}
+
+.tw-cursor-pointer {
+    cursor: pointer;
+}

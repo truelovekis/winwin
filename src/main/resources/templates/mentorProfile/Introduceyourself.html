@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>basic</title>
+</head>
+<link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
+<link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
+<link rel="stylesheet" th:href="@{/css/mentorProfile/Introduceyourself.css}" />
+<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+<style>
+  body {
+    font-family: "NanumSquareLight";
+    font-family: "NanumSquare";
+    font-family: "NanumSquareBold";
+    font-family: "NanumSquareExtraBold";
+    font-family: "NanumSquareAcb";
+    font-family: "NanumSquareAceb";
+    font-family: "NanumSquareAcl";
+    font-family: "NanumSquareAcr";
+  }
+</style>
+<body>
+<header class="header" th:replace="fragment/header :: header"></header>
+<nav class="tw-fixed">
+  <button type="button" class="back-button">
+    <svg
+            width="24"
+            height="24"
+            stroke-width="0"
+            viewBox="0 0 24 24"
+            fill="current"
+            xmlns="http://www.w3.org/2000/svg"
+            class="tw-fill-slate-900"
+    >
+      <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M10.7071 4.2929C11.0976 4.68342 11.0976 5.31659 10.7071 5.70711L5.41423 10.9999H21C21.5523 10.9999 22 11.4477 22 11.9999C22 12.5522 21.5523 12.9999 21 12.9999H5.4142L10.7071 18.2929C11.0976 18.6834 11.0976 19.3166 10.7071 19.7071C10.3166 20.0976 9.68341 20.0976 9.29289 19.7071L2.29289 12.7071C2.10535 12.5195 2 12.2652 2 11.9999C2 11.7347 2.10536 11.4804 2.2929 11.2928L9.2929 4.29289C9.68342 3.90237 10.3166 3.90237 10.7071 4.2929Z"
+              fill="inherit"
+      ></path>
+    </svg>
+  </button>
+  <p class="tw-text-lg">자기소개</p>
+  <button type="button" class="success-btn">완료</button>
+</nav>
+<div class="update-main">
+  <div class="update-sub">
+    <div class="main-mf8">
+      <div class="th-relative">
+        <label for="profile_image" class="proimage">
+          <!-- 프로필 사진 수정 -->
+          <input type="file" name="pp" id="profile_image" class="none" />
+          <!-- /프로필 사진 수정 -->
+          <div class="round">
+                <span class="photo">
+                  <img src="./img/img.png" alt="" class="photo-in" />
+                </span>
+          </div>
+          <div class="tw-rounded-full tw-bg-white tw-absolute tw-bottom-2 tw-right-0">
+            <svg
+                    width="24"
+                    height="24"
+                    stroke-width="0"
+                    viewBox="0 0 24 24"
+                    fill="current"
+                    xmlns="http://www.w3.org/2000/svg"
+                    type="solid"
+                    class="icn-slate-400"
+            >
+              <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M4.92893 4.92893C6.8043 3.05357 9.34784 2 12 2C14.6522 2 17.1957 3.05357 19.0711 4.92893C20.9464 6.8043 22 9.34784 22 12C22 13.3132 21.7413 14.6136 21.2388 15.8268C20.7362 17.0401 19.9997 18.1425 19.0711 19.0711C18.1425 19.9997 17.0401 20.7362 15.8268 21.2388C14.6136 21.7413 13.3132 22 12 22C10.6868 22 9.38642 21.7413 8.17317 21.2388C6.95991 20.7362 5.85752 19.9997 4.92893 19.0711C4.00035 18.1425 3.26375 17.0401 2.7612 15.8268C2.25866 14.6136 2 13.3132 2 12C2 9.34784 3.05357 6.8043 4.92893 4.92893ZM6.75757 12C6.75757 11.4477 7.20528 11 7.75757 11H11.0002V7.75732C11.0002 7.20504 11.4479 6.75732 12.0002 6.75732C12.5525 6.75732 13.0002 7.20504 13.0002 7.75732V11H16.2429C16.7951 11 17.2429 11.4477 17.2428 12C17.2429 12.5522 16.7951 13 16.2429 13H13.0002V16.2426C13.0002 16.7949 12.5525 17.2426 12.0002 17.2426C11.4479 17.2426 11.0002 16.7949 11.0002 16.2426V13H7.75757C7.20528 13 6.75757 12.5522 6.75757 12Z"
+                      fill="inherit"
+              ></path>
+            </svg>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div class="main-mp8">
+      <div class="name-var">
+        <label for="name"
+        >이름
+          <span class="name-ins">*</span>
+        </label>
+        <p class="writer-cnt">2<!-- -->/<!-- -->20</p>
+      </div>
+      <input type="text" class="name-box" placeholder="이름을 입력해주세요." name="name" maxlength="20" />
+    </div>
+    <div class="main-mp4">
+      <div class="job">
+        <label for="name"
+        >대표 직함
+          <span class="name-ins">*</span>
+        </label>
+        <p class="writer-cnt">17<!-- -->/<!-- -->40</p>
+      </div>
+      <input
+              type="text"
+              class="title-box"
+              placeholder="본인을 대표하는 직함을 알려주세요."
+              name="title"
+              maxlength="40"
+      />
+    </div>
+
+    <div class="main-mp5">
+      <div class="myinfo">
+        <label for="name"
+        >자기소개
+          <span class="name-ins">*</span>
+        </label>
+        <p class="writer-cnt">0<!-- -->/<!-- -->150</p>
+      </div>
+      <input
+              type="text"
+              class="short-box"
+              placeholder="나를 소개해주세요."
+              name="shortDescription"
+              maxlength="150"
+      />
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+  <footer class="header" th:replace="fragment/footer :: footer"></footer>
+</body>
+<script th:src="@{/js/fragment/header.js}" ></script>
+</html>

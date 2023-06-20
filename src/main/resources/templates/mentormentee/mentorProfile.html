@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/mentormentee/mentorProfile.css}" />
+    <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
+    <link
+      href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "NanumSquareLight";
+        font-family: "NanumSquare";
+        font-family: "NanumSquareBold";
+        font-family: "NanumSquareExtraBold";
+        font-family: "NanumSquareAcb";
+        font-family: "NanumSquareAceb";
+        font-family: "NanumSquareAcl";
+        font-family: "NanumSquareAcr";
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 모달창 -->
+    <article class="modal-wrap none">
+      <div class="select-box">
+        <div class="profile-box">
+          <div class="mento-profile-photo-box">
+            <img
+              src="https://www.thelec.kr/news/photo/202210/18518_16299_646.jpg"
+              width="100"
+              class="mento-profile-photo"
+            />
+          </div>
+          <span class="mentor-name">[ 이재용 ] 멘토님</span>
+        </div>
+        <hr />
+        <div class="wing">
+          <span class="wing-span">필요한 윙 : 100개</span>
+          <br />
+          <span class="wing-span">보유한 윙 : 50개</span>
+        </div>
+        <hr />
+        <span class="wing-span" id="result-wing">결제 후 윙 : 50개</span>
+        <span id="agree">위 내용을 확인하였으며, 결제에 동의합니다.</span>
+        <button>다음</button>
+      </div>
+    </article>
+    <!-- /모달창 -->
+    <section class="body-wrap">
+      <!-- 왼쪽 사이드 -->
+      <aside class="aside">
+        <div class="">
+          <div class="">
+            <div class="">
+              <div class="suggest-message">
+                지금 구직 중이라면,
+                <br />
+                <b>멘토 오픈 프로필</b>에
+                <br />
+                나를 추가해보세요.
+              </div>
+            </div>
+            <p class="guide-message">
+              메시지로 다양한 제안을 받아볼 수 있어요.
+            </p>
+          </div>
+          <div class="">
+            <div>
+              <button type="button" class="mento-button profile-button">
+                내 프로필 등록하기
+              </button>
+            </div>
+            <button type="button" class="mento-button share-button">
+              <svg
+                width="16"
+                height="16"
+                stroke-width="0"
+                viewBox="0 -2 24 24"
+                fill="#64748b"
+                xmlns="http://www.w3.org/2000/svg"
+                class="icn-slate-500"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M16.2093 2.42247C17.1582 1.94792 18.2568 1.86976 19.2633 2.20519C20.2699 2.54062 21.1019 3.26216 21.5765 4.21108C21.8115 4.68093 21.9516 5.19247 21.9889 5.71648C22.0262 6.24049 21.9599 6.76671 21.7938 7.2651C21.6277 7.76349 21.3651 8.22428 21.0209 8.62117C20.6767 9.01807 20.2577 9.34328 19.7879 9.57825C19.318 9.81323 18.8065 9.95335 18.2825 9.99063C17.7585 10.0279 17.2322 9.96161 16.7339 9.79552C16.2355 9.62944 15.7747 9.36681 15.3778 9.02264C15.2363 8.89996 15.104 8.76778 14.9815 8.62718L9.91092 11.1625C9.96868 11.4331 9.9991 11.7135 9.9991 12.0004C9.9991 12.2873 9.96868 12.5677 9.91092 12.8382L14.9815 15.3735C15.4468 14.8389 16.0501 14.4328 16.7339 14.2049C17.2324 14.0387 17.7586 13.9724 18.2827 14.0096C18.8068 14.0469 19.3184 14.187 19.7883 14.4219C20.7374 14.8965 21.4591 15.7286 21.7946 16.7352C22.1301 17.7418 22.0521 18.8405 21.5775 19.7896C21.103 20.7386 20.2709 21.4603 19.2643 21.7959C18.2576 22.1314 17.1589 22.0533 16.2099 21.5788C15.2608 21.1043 14.5391 20.2722 14.2036 19.2655C13.9757 18.5817 13.9386 17.8554 14.087 17.1624L9.01662 14.6272C8.65272 15.045 8.20349 15.3856 7.69493 15.6235C6.87879 16.0053 5.95764 16.1004 5.08073 15.8933C4.20381 15.6862 3.4225 15.1891 2.86335 14.4826C2.30421 13.776 2 12.9014 2 12.0004C2 11.0993 2.30421 10.2247 2.86335 9.51813C3.4225 8.81158 4.20381 8.3145 5.08073 8.10743C5.95764 7.90035 6.87879 7.99541 7.69493 8.37721C8.20349 8.61512 8.65272 8.95568 9.01662 9.37357L14.087 6.83838C13.9386 6.14549 13.9756 5.41933 14.2034 4.73562C14.5389 3.72908 15.2604 2.89701 16.2093 2.42247ZM7.78873 12.895C7.92307 12.6263 7.9991 12.3231 7.9991 12.0004C7.9991 11.6776 7.92307 11.3744 7.78873 11.1057M7.78867 12.8951C7.58714 13.298 7.2555 13.6211 6.84746 13.8119C6.43939 14.0028 5.97882 14.0504 5.54036 13.9468C5.10191 13.8433 4.71125 13.5948 4.43168 13.2415C4.15211 12.8882 4 12.4509 4 12.0004C4 11.5498 4.15211 11.1125 4.43168 10.7592C4.71125 10.406 5.10191 10.1574 5.54036 10.0539C5.97882 9.95036 6.43939 9.99789 6.84746 10.1888C7.2555 10.3797 7.58714 10.7027 7.78867 11.1056M18.631 4.10261C18.1277 3.93488 17.5784 3.97396 17.1039 4.21125C16.6294 4.44855 16.2686 4.86462 16.1009 5.36793C15.9331 5.87125 15.9722 6.42058 16.2095 6.89508C16.327 7.13003 16.4896 7.33953 16.6881 7.51163C16.8865 7.68373 17.117 7.81506 17.3662 7.89811C17.6154 7.98116 17.8785 8.01431 18.1406 7.99567C18.4026 7.97703 18.6584 7.90696 18.8933 7.78947C19.1283 7.67197 19.3378 7.50935 19.5099 7.31088C19.682 7.11242 19.8133 6.882 19.8964 6.63279C19.9794 6.38357 20.0126 6.12044 19.9939 5.85841C19.9753 5.59638 19.9052 5.34059 19.7877 5.10564C19.5504 4.63114 19.1343 4.27034 18.631 4.10261ZM18.1409 16.0046C17.8788 15.986 17.6157 16.0191 17.3664 16.1022C16.863 16.27 16.4468 16.6309 16.2095 17.1056C15.9722 17.5802 15.9332 18.1297 16.101 18.6331C16.2688 19.1365 16.6297 19.5526 17.1043 19.7899C17.5789 20.0272 18.1284 20.0663 18.6318 19.8985C19.1352 19.7307 19.5514 19.3698 19.7887 18.8951C20.026 18.4205 20.065 17.8711 19.8972 17.3677C19.7294 16.8642 19.3685 16.4481 18.8939 16.2108C18.6589 16.0933 18.403 16.0232 18.1409 16.0046Z"
+                  fill="inherit"
+                ></path>
+              </svg>
+              친구에게 공유하기
+            </button>
+          </div>
+        </div>
+      </aside>
+      <!-- /왼쪽 사이드 -->
+      <main class="main">
+        <section class="mento-myProfile-on">
+          <div class="">내 프로필 올려두기</div>
+          <div class="toggle-switch">
+            <p class="toggle-ment">내림&nbsp</p>
+            <p class="toggle-ment none">올림&nbsp</p>
+            <label for="suggest-profile" class="switch">
+              <input id="suggest-profile" type="checkbox" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </section>
+
+        <!-- 태그 필터 -->
+        <main class="main1">
+          <div class="tag-wrap">
+            <div class="select-tag">
+              <span class="tag">@계열1</span>
+              <span class="tag">@계열2</span>
+              <span class="tag">@계열3</span>
+              <span class="tag">@계열4</span>
+              <span class="tag">@계열5</span>
+              <span class="tag">@계열6</span>
+              <span class="tag">@계열7</span>
+              <span class="tag">@계열8</span>
+              <span class="tag">@계열9</span>
+              <span class="tag">@계열10</span>
+            </div>
+          </div>
+
+          <div class="select-wrap">
+            <div class="select">
+              <div class="selected">
+                <div class="selected-value">업계/학과</div>
+                <div class="arrow">
+                  <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          height="1em"
+                          viewBox="0 0 448 512"
+                  >
+                    <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                    <path
+                            d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <ul>
+                <li class="option">업계</li>
+                <li class="option">학과</li>
+              </ul>
+            </div>
+            <!-- select 1 -->
+            <div class="select">
+              <div class="selected">
+                <div class="selected-value">1차 카테고리(선택)</div>
+                <div class="arrow">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="1em"
+                    viewBox="0 0 448 512"
+                  >
+                    <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                    <path
+                      d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <ul>
+                <li class="option">계열1</li>
+                <li class="option">계열2</li>
+                <li class="option">계열3</li>
+                <li class="option">계열4</li>
+                <li class="option">계열5</li>
+                <li class="option">계열6</li>
+                <li class="option">계열7</li>
+                <li class="option">계열8</li>
+                <li class="option">계열9</li>
+                <li class="option">계열10</li>
+              </ul>
+            </div>
+            <!-- select 2 -->
+            <div class="select">
+              <div class="selected">
+                <div class="selected-value">2차 카테고리(선택)</div>
+                <div class="arrow">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="1em"
+                    viewBox="0 0 448 512"
+                  >
+                    <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                    <path
+                      d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <ul class="middle-option-box">
+                <li class="option middle-option">계열1</li>
+                <li class="option middle-option">계열2</li>
+                <li class="option middle-option">계열3</li>
+                <li class="option middle-option">계열4</li>
+                <li class="option middle-option">계열5</li>
+                <li class="option middle-option">계열6</li>
+                <li class="option middle-option">계열7</li>
+                <li class="option middle-option">계열8</li>
+                <li class="option middle-option">계열9</li>
+                <li class="option middle-option">계열10</li>
+              </ul>
+            </div>
+          </div>
+        </main>
+        <!-- /태그 필터 -->
+        <!-- 내 프로필 -->
+        <div class="myProfile-box">
+          <article class="item myProfile">
+            <section class="mento-profile">
+              <div class="item__box">
+                <a href="" class="page-move">
+                  <div class="flex">
+                    <div class="mento-profile-photo-box">
+                      <img
+                        src="data:image/jpeg;base64,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"
+                        width="100"
+                        class="mento-profile-photo"
+                      />
+                    </div>
+                    <div class="flex text-wrap">
+                      <div class="mento-name">내 이름</div>
+                      <div class="mento-career">
+                        내 경력&nbsp; · &nbsp;n년차
+                      </div>
+                    </div>
+                  </div>
+                </a>
+
+                <div class="mento-button-box">
+                  <button class="message-button">쪽지함</button>
+                </div>
+              </div>
+              <div class="skill-tags">
+                <!--            스킬 나열 -->
+                <div class="skill">Java</div>
+                <div class="skill">커뮤니케이션</div>
+                <div class="skill">글쓰기</div>
+                <!--            /스킬 나열 -->
+              </div>
+
+              <!-- 경력 -->
+              <div class="career">
+                <div class="career-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-buildings"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022ZM6 8.694 1 10.36V15h5V8.694ZM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15Z"
+                    />
+                    <path
+                      d="M2 11h1v1H2v-1Zm2 0h1v1H4v-1Zm-2 2h1v1H2v-1Zm2 0h1v1H4v-1Zm4-4h1v1H8V9Zm2 0h1v1h-1V9Zm-2 2h1v1H8v-1Zm2 0h1v1h-1v-1Zm2-2h1v1h-1V9Zm0 2h1v1h-1v-1ZM8 7h1v1H8V7Zm2 0h1v1h-1V7Zm2 0h1v1h-1V7ZM8 5h1v1H8V5Zm2 0h1v1h-1V5Zm2 0h1v1h-1V5Zm0-2h1v1h-1V3Z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <span class="point">백엔드 개발</span>
+                  <span class="date">─ 2021.02 ~ 2023.02</span>
+                  <span class="date">&nbsp; · &nbsp;2년차</span>
+                  <span class="content">어떤 업무를 했는지 어쩌구...</span>
+                </div>
+              </div>
+              <!-- /경력 -->
+              <div class="career">
+                <div class="career-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-buildings"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022ZM6 8.694 1 10.36V15h5V8.694ZM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15Z"
+                    />
+                    <path
+                      d="M2 11h1v1H2v-1Zm2 0h1v1H4v-1Zm-2 2h1v1H2v-1Zm2 0h1v1H4v-1Zm4-4h1v1H8V9Zm2 0h1v1h-1V9Zm-2 2h1v1H8v-1Zm2 0h1v1h-1v-1Zm2-2h1v1h-1V9Zm0 2h1v1h-1v-1ZM8 7h1v1H8V7Zm2 0h1v1h-1V7Zm2 0h1v1h-1V7ZM8 5h1v1H8V5Zm2 0h1v1h-1V5Zm2 0h1v1h-1V5Zm0-2h1v1h-1V3Z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <span class="point">기업경영</span>
+                  <span class="date">─ 2021.02 ~ 2023.02</span>
+                  <span class="date">&nbsp; · &nbsp;2년차</span>
+                  <span class="content">어떤 업무를 했는지 어쩌구...</span>
+                </div>
+              </div>
+            </section>
+            <div class="mento-more-info-box">
+              <div class="mento-more-info">
+                더보기
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-chevron-down"
+                  viewBox="0 -2 16 16"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+                  />
+                </svg>
+              </div>
+              <div class="mento-more-info none">
+                닫기
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-chevron-up"
+                  viewBox="0 -2 16 16"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </article>
+        </div>
+        <!-- /내 프로필 -->
+
+        <!-- 멘토 프로필 -->
+        <article class="item">
+          <section class="mento-profile">
+            <div class="item__box">
+              <a href="" class="page-move">
+                <div class="flex">
+                  <div class="mento-profile-photo-box">
+                    <img
+                      src="https://www.thelec.kr/news/photo/202210/18518_16299_646.jpg"
+                      width="100"
+                      class="mento-profile-photo"
+                    />
+                  </div>
+                  <div class="flex text-wrap">
+                    <div class="mento-name">이재용</div>
+                    <div class="mento-career">
+                      백엔드 개발자&nbsp; · &nbsp;2년차
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <div class="mento-button-box">
+                <button class="like-button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-heart like"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
+                    />
+                  </svg>
+
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-heart-fill like none"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                    />
+                  </svg>
+                </button>
+                <button class="message-button">메시지</button>
+              </div>
+            </div>
+            <div class="skill-tags">
+              <!--            스킬 나열 -->
+              <div class="skill">Java</div>
+              <div class="skill">커뮤니케이션</div>
+              <div class="skill">글쓰기</div>
+              <!--            /스킬 나열 -->
+            </div>
+
+            <!-- 경력 -->
+            <div class="career">
+              <div class="career-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-buildings"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022ZM6 8.694 1 10.36V15h5V8.694ZM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15Z"
+                  />
+                  <path
+                    d="M2 11h1v1H2v-1Zm2 0h1v1H4v-1Zm-2 2h1v1H2v-1Zm2 0h1v1H4v-1Zm4-4h1v1H8V9Zm2 0h1v1h-1V9Zm-2 2h1v1H8v-1Zm2 0h1v1h-1v-1Zm2-2h1v1h-1V9Zm0 2h1v1h-1v-1ZM8 7h1v1H8V7Zm2 0h1v1h-1V7Zm2 0h1v1h-1V7ZM8 5h1v1H8V5Zm2 0h1v1h-1V5Zm2 0h1v1h-1V5Zm0-2h1v1h-1V3Z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <span class="point">백엔드 개발</span>
+                <span class="date">─ 2021.02 ~ 2023.02</span>
+                <span class="date">&nbsp; · &nbsp;2년차</span>
+                <span class="content">어떤 업무를 했는지 어쩌구...</span>
+              </div>
+            </div>
+            <!-- /경력 -->
+            <div class="career">
+              <div class="career-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-buildings"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022ZM6 8.694 1 10.36V15h5V8.694ZM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15Z"
+                  />
+                  <path
+                    d="M2 11h1v1H2v-1Zm2 0h1v1H4v-1Zm-2 2h1v1H2v-1Zm2 0h1v1H4v-1Zm4-4h1v1H8V9Zm2 0h1v1h-1V9Zm-2 2h1v1H8v-1Zm2 0h1v1h-1v-1Zm2-2h1v1h-1V9Zm0 2h1v1h-1v-1ZM8 7h1v1H8V7Zm2 0h1v1h-1V7Zm2 0h1v1h-1V7ZM8 5h1v1H8V5Zm2 0h1v1h-1V5Zm2 0h1v1h-1V5Zm0-2h1v1h-1V3Z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <span class="point">기업경영</span>
+                <span class="date">─ 2021.02 ~ 2023.02</span>
+                <span class="date">&nbsp; · &nbsp;2년차</span>
+                <span class="content">어떤 업무를 했는지 어쩌구...</span>
+              </div>
+            </div>
+          </section>
+          <div class="mento-more-info-box">
+            <div class="mento-more-info">
+              더보기
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-chevron-down"
+                viewBox="0 -2 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+                />
+              </svg>
+            </div>
+            <div class="mento-more-info none">
+              닫기
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-chevron-up"
+                viewBox="0 -2 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"
+                />
+              </svg>
+            </div>
+          </div>
+        </article>
+        <!-- /멘토 프로필 -->
+
+        <!-- 간격 보려고 만듦 -->
+        <article class="item">
+          <section class="mento-profile">
+            <div class="item__box">
+              <a href="" class="page-move">
+                <div class="flex">
+                  <div class="mento-profile-photo-box">
+                    <img
+                      src="https://www.thelec.kr/news/photo/202210/18518_16299_646.jpg"
+                      width="100"
+                      class="mento-profile-photo"
+                    />
+                  </div>
+                  <div class="flex text-wrap">
+                    <div class="mento-name">간격 보려고 만듦</div>
+                    <div class="mento-career">
+                      백엔드 개발자&nbsp; · &nbsp;2년차
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <div class="mento-button-box">
+                <button class="like-button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-heart like"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
+                    />
+                  </svg>
+
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-heart-fill like none"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                    />
+                  </svg>
+                </button>
+                <button class="message-button">메시지</button>
+              </div>
+            </div>
+            <div class="skill-tags">
+              <!--            스킬 나열 -->
+              <div class="skill">Java</div>
+              <div class="skill">커뮤니케이션</div>
+              <div class="skill">글쓰기</div>
+              <!--            /스킬 나열 -->
+            </div>
+
+            <!-- 경력 -->
+            <div class="career">
+              <div class="career-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-buildings"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022ZM6 8.694 1 10.36V15h5V8.694ZM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15Z"
+                  />
+                  <path
+                    d="M2 11h1v1H2v-1Zm2 0h1v1H4v-1Zm-2 2h1v1H2v-1Zm2 0h1v1H4v-1Zm4-4h1v1H8V9Zm2 0h1v1h-1V9Zm-2 2h1v1H8v-1Zm2 0h1v1h-1v-1Zm2-2h1v1h-1V9Zm0 2h1v1h-1v-1ZM8 7h1v1H8V7Zm2 0h1v1h-1V7Zm2 0h1v1h-1V7ZM8 5h1v1H8V5Zm2 0h1v1h-1V5Zm2 0h1v1h-1V5Zm0-2h1v1h-1V3Z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <span class="point">백엔드 개발</span>
+                <span class="date">─ 2021.02 ~ 2023.02</span>
+                <span class="date">&nbsp; · &nbsp;2년차</span>
+                <span class="content">어떤 업무를 했는지 어쩌구...</span>
+              </div>
+            </div>
+            <!-- /경력 -->
+            <div class="career">
+              <div class="career-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-buildings"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022ZM6 8.694 1 10.36V15h5V8.694ZM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15Z"
+                  />
+                  <path
+                    d="M2 11h1v1H2v-1Zm2 0h1v1H4v-1Zm-2 2h1v1H2v-1Zm2 0h1v1H4v-1Zm4-4h1v1H8V9Zm2 0h1v1h-1V9Zm-2 2h1v1H8v-1Zm2 0h1v1h-1v-1Zm2-2h1v1h-1V9Zm0 2h1v1h-1v-1ZM8 7h1v1H8V7Zm2 0h1v1h-1V7Zm2 0h1v1h-1V7ZM8 5h1v1H8V5Zm2 0h1v1h-1V5Zm2 0h1v1h-1V5Zm0-2h1v1h-1V3Z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <span class="point">기업경영</span>
+                <span class="date">─ 2021.02 ~ 2023.02</span>
+                <span class="date">&nbsp; · &nbsp;2년차</span>
+                <span class="content">어떤 업무를 했는지 어쩌구...</span>
+              </div>
+            </div>
+          </section>
+          <div class="mento-more-info-box">
+            <div class="mento-more-info">
+              더보기
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-chevron-down"
+                viewBox="0 -2 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+                />
+              </svg>
+            </div>
+            <div class="mento-more-info none">
+              닫기
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-chevron-up"
+                viewBox="0 -2 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"
+                />
+              </svg>
+            </div>
+          </div>
+        </article>
+      </main>
+    </section>
+    <!-- /간격 보려고 만듦 -->
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.js"
+      integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+      crossorigin="anonymous"
+    ></script>
+    <script th:src="@{/js/mentormentee/mentorProfile.js}"></script>
+    <script th:src="@{/js/fragment/header.js}" ></script>
+  </body>
+</html>
