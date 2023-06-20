@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>게시판</title>
+  <link rel="stylesheet" th:href="@{/css/meeting/grademodal.css}" />
+  <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+  <style>
+    body {
+      font-family: "NanumSquareLight";
+      font-family: "NanumSquare";
+      font-family: "NanumSquareBold";
+      font-family: "NanumSquareExtraBold";
+      font-family: "NanumSquareAcb";
+      font-family: "NanumSquareAceb";
+      font-family: "NanumSquareAcl";
+      font-family: "NanumSquareAcr";
+    }
+  </style>
+</head>
+<body>
+<header class="header" th:replace="fragment/header :: header"></header>
+<!--  모집글 작성하기 모달창 영역  -->
+<article class="modal-wrap">
+  <div class="grade-box">
+    <div class="grade-box-content1">
+      <h3>🧚‍♀ 나의 등급 🧚‍♂</h3>
+    </div>
+    <div class="grade-box-content2">
+      <div class="now-level">Lv.0 깃털</div>
+      <div class="next-level">다음 등급까지 80% 남음</div>
+    </div>
+    <div class="grade-box-content3">
+      <progress class="experience-bar" value="20" max="100"></progress>
+    </div>
+    <div class="grade-box-content4">
+      <table class="level-table">
+        <thead>
+          <tr>
+            <th>Level</th>
+            <th>등급</th>
+            <th>기준</th>
+            <th>혜택</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Lv.1</td>
+            <td>깃털</td>
+            <td>1,000 Wing</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>Lv.2</td>
+            <td>날개</td>
+            <td>2,000 Wing</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>Lv.3</td>
+            <td>천사날개</td>
+            <td>3,000 Wing</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>Lv.4</td>
+            <td>수호천사</td>
+            <td>4,000 Wing</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>Lv.5</td>
+            <td>대천사</td>
+            <td>5,000 Wing</td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div class="grade-box-content5">
+      <div class="confirm-btn">확인</div>
+    </div>
+  </div>
+</article>
+<footer class="footer" th:replace="fragment/footer :: footer"></footer>
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+<script th:src="@{/js/meeting/grademodal.js}"></script>
+</body>
+</html>
