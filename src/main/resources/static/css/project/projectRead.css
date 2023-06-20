@@ -1,0 +1,413 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flex-wrap {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.big-box{
+    margin: auto;
+    margin-top: 10px;
+}
+
+.head{
+    width: 600px;
+}
+
+.smallTitle{
+    margin: 25px 35px;
+    padding: 2px 0;
+    background-color: #efeeee;
+    font-size: 11px;
+    color: gray;
+    border-radius: 3.5px;
+    width: 90px;
+    text-align: center;
+    height: 20px;
+    font-weight: bold;
+}
+
+.smallTitle p {
+    margin: 2.5px;
+    padding: 1px 0 2px 0;
+}
+
+.Title{
+    margin: 0 35px;
+}
+
+.blueTitle{
+    height: 50px;
+}
+
+.blueTitle>h3{
+    color: #1b5192;
+}
+
+h3>span{
+    color: black;
+}
+
+.justTitle{
+    display: flex;
+    font-size: 10px;
+}
+
+.cnt{
+    margin: 0 4.5px;
+    display: flex;
+}
+
+.cnt span{
+    margin: 8px 5px;
+}
+
+.cnt p{
+    margin-top: 2px;
+}
+
+.chatting{
+    display: flex;
+}
+
+.chatting span{
+    margin: 7px 5px;
+}
+
+.chatting p{
+    margin-top: 2px;
+}
+
+p>span{
+    font-weight: bold;
+}
+
+.date p{
+    margin-top: 3px;
+}
+
+.bi-eye{
+    margin-top: -23px;
+}
+
+.bi-chat-dots{
+    margin-top: -21px;
+}
+
+.first-box{
+    margin: 30px 35px;
+    height: 100px;
+}
+
+.icon{
+    font-size: 16px;
+}
+
+.comment{
+    font-size: 14px;
+    line-height: 23px;
+}
+
+.second-box{
+    margin: 30px 35px;
+    height: 100px;
+}
+
+.recruitment{
+    font-size: 14px;
+}
+
+.recruitment p{
+    margin-top: 4px;
+}
+
+.third-box{
+    margin: 30px 35px;
+    height: 100px;
+}
+
+.fourth-box{
+    margin: 30px 35px;
+    height: 100px;
+}
+
+.radioButton{
+    display: flex;
+    margin-top: 13px;
+}
+
+.radioButton p{
+    font-size: 11px;
+    margin: 0.5px 15px;
+}
+
+.time{
+    display: flex;
+    margin-top: 13px;
+}
+
+.time p{
+    font-size: 11px;
+    margin: 2px 15px;
+}
+
+.fifth-box{
+    margin: 0 35px;
+}
+
+.content{
+    white-space: pre-wrap;
+    margin: -25px -54px;
+}
+
+.content p{
+    margin-left: -31px;
+    margin-top: -25px;
+    font-size: 14px;
+    line-height: 23px;
+}
+
+.last-box{
+    border-radius: 3.5px;
+    background-color: #eff3f8;
+    width: 1000px;
+    margin: 0 25px;
+}
+
+.lastTitle{
+    display: flex;
+    margin-left: 11px;
+    justify-content: space-between;
+}
+
+.lastTitle h3{
+    font-size: 17px;
+    margin-top: 15px;
+}
+
+.next{
+    display: flex;
+    margin-right: 10px;
+}
+
+.next p{
+    font-size: 11px;
+    margin: 16.5px 0;
+    cursor: pointer;
+}
+
+.next-button{
+    border: none;
+    cursor: pointer;
+    background-color: #eff3f8;
+}
+
+.prev{
+    cursor: pointer;
+    border: none;
+    background-color: #eff3f8;
+}
+
+.next2{
+    cursor: pointer;
+    border: none;
+    background-color: #eff3f8;
+}
+
+.icon2{
+    display: flex;
+    margin: 17px 25px -15px 34px;
+}
+
+.empty-box{
+    width: 10px;
+}
+
+.otherProject{
+    display: flex;
+}
+
+.front{
+    background-color: #fff;
+    margin: 30px 35px;
+    border-radius: 3.5px;
+}
+
+.study{
+    margin: 15px 15px;
+    padding: 2px 0;
+    background-color: #efeeee;
+    font-size: 11px;
+    color: gray;
+    border-radius: 3.5px;
+    width: 90px;
+    text-align: center;
+    height: 20px;
+    font-weight: bold;
+}
+
+.study p {
+    margin: 2.5px;
+    padding: 1px 0 2px 0;
+}
+
+.bigTitle h3{
+    margin: 15px 15px;
+    font-size: 17px;
+}
+
+.lastContent p{
+    font-size: 13px;
+    margin: 20px 15px;
+}
+
+.sentence{
+    font-size: 13px;
+    margin: 25px 15px;
+}
+
+.icon3{
+    display: flex;
+}
+
+.icon3 p{
+    margin-top: 0px;
+    margin-left: 10px;
+}
+
+.profil{
+    width: 400px;
+    position: sticky;
+    top: 6rem;
+    padding-bottom: 15px;
+}
+
+.profil-box{
+    background-color: #f0f0f0;
+    width: 250px;
+    margin: auto;
+    border-radius: 3px;
+    height: 150px;
+}
+
+.profil-box img{
+    border-radius: 70%;
+    margin: 20px 95px;
+}
+
+.name{
+    font-weight: bold;
+    margin: -10px 100px;
+}
+
+.department{
+    font-size: 11px;
+    margin: 13px 102px;
+}
+
+.profil-box2{
+    margin: 0 75px;
+}
+
+.box1{
+    display: flex;
+}
+
+.chat-box{
+    width: 250px;
+    margin: 10px 0;
+    text-align: center;
+    height: 40px;
+    cursor: pointer;
+    background-color: #1b5192;
+    color: white;
+    border-radius: 3px;
+    border: none;
+    font-size: 11px;
+}
+
+.Like{
+    width: 250px;
+    height: 40px;
+    cursor: pointer;
+    background-color: white;
+    font-family: 'abc';
+    border-radius: 3px;
+    font-size: 11px;
+    border: 1px solid #1b5192;
+}
+
+.Like span{
+    font-weight: bold;
+    margin-left: -5px;
+}
+
+.bi-heart{
+    margin: -2px 2px;
+    color: black;
+}
+
+.hide{
+    display: none;
+    margin: -2px 2px;
+    color: black;
+}
+
+.bi-heart-fill{
+    margin: -4px 6px;
+    color: black;
+}
+
+.dropdown{
+    position: absolute;
+    display: inline-block;
+    margin-left: 570px;
+    margin-top: -7px;
+}
+
+.dropbtn{
+    border: none;
+    background-color: white;
+    font-weight: 400;
+    color : rgb(37, 37, 37);
+    padding : 5px;
+    text-align: left;
+    cursor : pointer;
+    font-size : 12px;
+}
+.dropdown-content{
+    display : none;
+    position : absolute;
+    z-index : 1; /*다른 요소들보다 앞에 배치*/
+    font-weight: 400;
+    background-color: #f9f9f9;
+    min-width : 100px;
+    font-weight: bold;
+    border-radius: 3.5px;
+    border-bottom: 1px solid #ddd;
+}
+
+.dropdown-content a{
+    display : block;
+    text-decoration : none;
+    color : rgb(37, 37, 37);
+    font-size: 12px;
+    padding : 10px 20px;
+}
+
+.dropdown-content a:hover{
+    background-color : #ececec
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}

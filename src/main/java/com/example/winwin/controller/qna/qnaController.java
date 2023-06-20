@@ -1,20 +1,21 @@
-package com.example.winwin.controller.board;
+package com.example.winwin.controller.qna;
 
-import com.example.winwin.dto.board.CommunityDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
-
 @Controller
-@RequestMapping("/board/*")
+@RequestMapping("/qna/*")
 @RequiredArgsConstructor
-public class CommunityController {
-
+public class qnaController {
     @GetMapping("/read")
-    public String board (){
-        return "/community/communityRead";
+    public String qnaRead(){
+        return "/qna/qnaRead";
+    }
+
+    @GetMapping("/write")
+    public String qnaWrite(){
+        return "/qna/qnaWrite";
     }
 }

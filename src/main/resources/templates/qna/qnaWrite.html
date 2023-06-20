@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
+  <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
+  <link rel="stylesheet" th:href="@{/css/qna/qnaWrite.css}" />
+  <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+  <style>
+    body {
+      font-family: "NanumSquareLight";
+      font-family: "NanumSquare";
+      font-family: "NanumSquareBold";
+      font-family: "NanumSquareExtraBold";
+      font-family: "NanumSquareAcb";
+      font-family: "NanumSquareAceb";
+      font-family: "NanumSquareAcl";
+      font-family: "NanumSquareAcr";
+    }
+  </style>
+</head>
+<body>
+<header class="header" th:replace="fragment/header :: header"></header>
+<section>
+  <div class="big-box">
+    <div class="first">
+      <div class="profil-box">
+        <img src="../img/corgi-g5894d3ae3_1920.jpg" width="25px" height="25px">
+        <div class="nickName"><h3>truluvkis</h3></div>
+      </div>
+      <div class="contentTitle">
+        <div class="title">
+          <input type="text" class="inputTitle" id="count_memo" minlength = "10" maxlength="100" placeholder="제목을 입력해주세요." style="font-family:NanumSquareLight;"/>
+          <div class="count"><span id="cnt">0 / 50</span></div>
+        </div>
+        <div class="content">
+                    <textarea name="" id="" cols="30" rows="10" class="textarea" placeholder="궁금한 내용을 적어주세요.
+질문 내용이 구제척일수록 정확한 답변을 받을 수 있어요." style="font-family:NanumSquareLight;"></textarea>
+        </div>
+      </div>
+    </div> <!-- div.first -->
+    <div class="second">
+      <div class="one">
+        <ul class="first-title"><p>제목은 궁금한 것을 구체적으로 담아 질문 형태로 작성하세요. 💡</p>
+          <li class="first-title-sub sub1">좋은 제목 예시: 국비 교육 수료하신 분들은 보통 어떤 경로로 취업하시나요?
+          </li>
+          <li class="first-title-sub sub2">나쁜 제목 예시: 현재 개발을 공부하는 취준생입니다.</li>
+        </ul>
+      </div>
+      <div class="one">
+        <ul class="first-title"><p>질문 내용에 구체적인 문제 상황이 포함될수록 좋아요. 💡</p>
+          <li class="first-title-sub sub1">현재 상황에 대한 정보를 자세하게 적어주면 더 좋은 답변을 받을 수 있어요.</li>
+        </ul>
+      </div>
+      <div class="two">
+        <ul class="first-title"><p>🔔 질문에 답변이 달리면 이멜로 알려드려요.</p>
+          <li class="first-title-sub sub1">이메일 estherk773@gmail.com</li>
+        </ul>
+      </div>
+      <div class="button">
+        <button type="button" class="writeOk">등록하기</button>
+      </div>
+    </div> <!-- div.second -->
+  </div> <!-- div.big-box -->
+</section>
+<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+<script type="module" th:src="@{/js/qna/qnaWrite.js}"></script>
+<!--<script th:src="@{/js/fragment/header.js}" ></script>-->
+</body>
+</html>

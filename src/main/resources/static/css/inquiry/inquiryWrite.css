@@ -1,0 +1,285 @@
+body {
+    width: 1050px;
+    margin: auto;
+}
+
+header{
+    height: 100px;
+}
+
+/* 커뮤니티 서브 헤더 */
+.community-sub-header > hr {
+    width: 80%;
+    color: gray;
+    margin: 3px;
+}
+
+.nav{
+    display: flex;
+    list-style: none;
+    width: 100%;
+    height: 30px;
+}
+
+.nav > li {
+    padding: 5px 10px 5px 10px;
+    text-align: center;
+}
+
+.nav .link {
+    text-decoration: none;
+    color : gray;
+    font-weight: bold;
+}
+
+.nav .link:hover {
+    color : #1b5192;
+}
+
+.link > hr {
+    display: none;
+}
+
+.link:hover > .link-hr {
+    width: 100%;
+    display: block;
+    border: 1px solid #1b5192;
+    text-align: center;
+    margin: 6px 0;
+}
+/* 커뮤니티 서브 헤더 끝 */
+
+.write-main {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+/* 글쓰기 기본 제목 */
+.main-title {
+    margin: 0 0 15px 5px;
+}
+
+.sub1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 620px;
+}
+
+h2{
+    padding: 0;
+    margin: 0 0 5px 0;
+}
+
+.k {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    filter: opacity(0.5) drop-shadow(0 0 0 gray);
+}
+
+.sub-title {
+    color : gray;
+    font-size: 15px;
+}
+
+.sub-title2 {
+    font-weight: bold;
+}
+/* 글쓰기 기본 제목 끝 */
+
+/* 사용자에게 입력 받는 텍스트 */
+.write-main-box{
+    padding: 0 0 50px 0;
+}
+
+#community-category{
+    width: 250px;
+    border: 1px solid#ddd;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px 0 2px 5px;
+}
+
+.write-title{
+    margin: 7px 5px;
+}
+
+.write-title > input {
+    width: 600px;
+    height: 20px;
+    border: 1px solid#ddd;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.write-content {
+    margin: 7px 0 0 5px;
+}
+
+.write-content > textarea {
+    width: 600px;
+    height: 300px;
+    border: 1px solid#ddd;
+    border-radius: 5px;
+    resize: none;
+    padding: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    white-space: pre-line;
+}
+/* 사용자에게 입력 받는 텍스트 */
+
+/* 글자수 */
+.text-cnt {
+    color: gray;
+    font-size: 13px;
+    margin: 2px 0 0 5px;
+}
+/* 글자수 끝 */
+
+/* 작성 완료&취소 버튼 */
+.btn-click {
+    display: flex;
+    justify-content: space-around;
+    width: 600px;
+}
+
+.write-btn {
+    width: 630px;
+    height: 40px;
+    border: 1px solid #1b5192;
+    border-radius: 5px;
+    background-color: #1b5192;
+    color : white;
+    padding: 5px 10px;
+}
+
+.write-btn:hover {
+    background-color: #153f71;
+}
+.write-cancle-btn {
+    width: 110px;
+    height: 40px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #ddd;
+    color : white;
+    padding: 5px 10px;
+    /* margin-right: 50px; */
+}
+
+.write-cancle-btn:hover {
+    background-color: #153f71;
+}
+/* 작성 완료&취소 버튼 끝 */
+
+/* 파일 선택 */
+.file-main-img {
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.file-img {
+    display: flex;
+    align-items: center;
+}
+
+.img-text{
+    font-size: 10px;
+}
+
+.input-file-btn {
+    border: 1px solid#ddd;
+    border-radius: 7px;
+    width: 110px;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 10px;
+    color: gray;
+    padding: 20px 20px;
+    cursor: pointer;
+    filter: opacity(0.5) drop-shadow(0 0 0 gray);
+}
+
+.input-file-btn > img {
+    width: 30px;
+    height: 30px;
+}
+
+#file{
+    display: none;
+}
+
+/* 파일 리스트 */
+.file-list {
+    padding: 0;
+    display: flex;
+}
+
+.file-list li {
+    list-style: none;
+}
+
+/* 파일 첨부시 보이는 이미지 크기 */
+.img-box {
+    border: 1px solid#ddd;
+    border-radius: 7px;
+    width: 150px;
+    height: 170px;
+    overflow: hidden;
+    margin: 0 0 0 10px;
+}
+
+.img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.img-box-cancle {
+    display: none;
+}
+
+.img-box:hover .img-box-cancle {
+    display: block;
+    position: absolute;
+    margin-left: 130px;
+    cursor: pointer;
+}
+/* 파일 선택 끝 */
+
+.project-sub-text1 {
+    background-color: rgb(241, 245, 249);
+    border-radius: 4px;
+    font-size: 11px;
+    padding: 3px 5px;
+    color: rgb(148, 163, 184);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+}
+
+.write-category{
+    margin-left: 3px;
+    display: flex;
+}
+
+.x-button{
+    border: none;
+    background-color: rgb(241, 245, 249);
+    margin-left: 1px;
+    cursor: pointer;
+}
+
+.btn-primary{
+    background: none;
+    border: none;
+
+}
