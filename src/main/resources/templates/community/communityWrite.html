@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{/css/community/communityWrite.css}">
+  <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
+  <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
+  <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+    <style>
+      body {
+        font-family: "NanumSquareLight";
+        font-family: "NanumSquare";
+        font-family: "NanumSquareBold";
+        font-family: "NanumSquareExtraBold";
+        font-family: "NanumSquareAcb";
+        font-family: "NanumSquareAceb";
+        font-family: "NanumSquareAcl";
+        font-family: "NanumSquareAcr";
+      }
+    </style>
+  <title>커뮤니티</title>
+</head>
+
+<body>
+<header class="header" th:replace="fragment/header :: header"></header>
+  <form action="#" id="community-write">
+  <div class="write-main">
+    <div class="main-title">
+      <div class="sub1">
+        <h2>게시글 작성하기</h2>
+        <img src="../../img/k.png" class="k">
+      </div>
+      <span class="sub-title"></span>
+    </div>
+    <div class="write-main-box">
+      <div class="write-category">
+        <select name="community-category" id="community-category" class="content-a">
+          <option value="null">카테고리</option>
+          <option value="1">직장인</option>
+          <option value="2">대학생</option>
+          <option value="3">고등학생</option>
+        </select>
+      </div>
+      <div class="write-title content-a">
+        <input type="text" placeholder="제목을 입력하세요" style="font-family: NanumSquareAcr;">
+      </div>
+      <div class="write-content content-a">
+        <textarea name="communityContent" id="communityContent" cols="30" rows="10" placeholder="나에게 맞는 카테고리를 선택하여 게시글을 작성해보세요." style="font-family: NanumSquareAcr;"></textarea>
+      </div>
+
+      <div>
+        <span class="text-cnt content-a">글자수 : <span class="cnt">0</span>/500</span>
+      </div>
+      <div class="file-main-img">
+      <div class="file-img">
+        <label for="file" class="input-file-btn">
+          <img src="../../img/camera.png">
+          <div class="img-text">
+          이미지<br>
+          업로드<br>
+          (<span class="file-cnt">0</span>/3)
+          </div>
+        </label>
+        <input type="file" id="file" multiple/>
+      </div>
+      <!-- 파일 리스트 -->
+      <ul class="file-list">
+      </ul>
+      <!-- 파일 리스트 끝 -->
+    </div>
+
+
+    </div>
+      <button type="button" class="write-btn" style="font-family: NanumSquareAcr;">작성하기</button>
+  </div>
+</form>
+<!--<footer class="footer" th:replace="fragment/footer :: footer"></footer>-->
+
+<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:src="@{/js/community/communityWrite.js}"></script>
+</body>
+
+</html>

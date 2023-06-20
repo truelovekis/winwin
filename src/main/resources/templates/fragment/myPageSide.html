@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+  <div class="myPageSide" th:fragment="myPageSide">
+    <!-- 본인 프로필 -->
+    <div class="profile">
+      <div class="profile-wrap">
+        <label for="profile-img-upload">
+          <div class="profile-icon">
+            <img class="pfp-icon-image" src="https://cdn.comento.kr/images/illust/illust-photo-upload.svg"></img>
+          </div>
+        </label>
+        <input type="file" id="profile-img-upload" name="profile-upload" />
+        <div class="user-info">
+          <span class="user-name">정소이</span>
+          <span class="user-email">aaa@naver.com <img src="../springProject/img/kakao-2.png" alt="" /></span>
+        </div>
+      </div>
+    </div>
+    <!-- 사이드 바 -->
+    <div class="side-bar">
+      <div class="list">
+        <a href="" id="point-list-1">내 멘토 : 멘티</a>
+        <a href="" id="point-list-2">내 기록</a>
+        <hr/>
+        <a href="" id="point-list-3" class="list-plus">활동 내역</a>
+        <a href="" id="point-list-4">진로 정보</a>
+        <a href="" id="point-list-5">이력 관리</a>
+        <a href="" id="point-list-6">회원 정보 수정</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
