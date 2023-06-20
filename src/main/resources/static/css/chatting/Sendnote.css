@@ -1,0 +1,178 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.note-write {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.send-window {
+    background-color: white;
+    padding-left: 35px;
+    border-radius: 10px;
+}
+.note-write {
+    font-size: 12px;
+    width: 1050px;
+}
+.send-window {
+    padding: 0;
+}
+.today-sent {
+    border-bottom: 1px solid rgb(233, 234, 236);
+    position: relative;
+    zoom: 1;
+    margin-right: 392px;
+    align-items: center;
+}
+.default {
+    font-size: 12px;
+    color: #666;
+    font-weight: bold;
+}
+.replyMode {
+    display: none;
+}
+.reply-tit {
+    float: left;
+    line-height: 22px;
+    padding-right: 4px;
+}
+.reply-cont {
+    overflow: hidden;
+    display: block;
+    min-height: 22px;
+}
+.normalMode {
+    display: block;
+    display: flex;
+    margin-left: 2%;
+}
+.normal-tit {
+    float: left;
+    line-height: 22px;
+    padding-right: 4px;
+}
+.normal-cont .recipient {
+    padding-right: 5px;
+    font-weight: bold;
+    font-size: 12px;
+}
+.recipient {
+    font-weight: bold;
+    padding-right: 5px;
+}
+.send_window .normal-tit input {
+    width: 13px;
+    height: 13px;
+    vertical-align: middle;
+    top: -1px;
+    position: relative;
+    *position: static;
+}
+.send_window .tf_tit label {
+    font-size: 11px;
+}
+.send_window .normal-cont {
+    overflow: hidden;
+    display: block;
+    min-height: 22px;
+}
+.send_window .normal_cont {
+    padding-right: 19px;
+}
+.tx {
+    overflow: hidden;
+    display: block;
+    width: 300px;
+    height: 20px;
+}
+a,
+a:link {
+    text-decoration: none;
+    background-color: transparent;
+}
+
+#chk_tome {
+    width: 13px;
+    height: 13px;
+    vertical-align: middle;
+    top: -1px;
+    position: relative;
+}
+
+.write-area {
+    clear: both;
+    height: 200px;
+    position: relative;
+    padding: 5px 8px;
+    background-color: #fff;
+    width: 500px;
+    height: 200px;
+}
+#writeNote {
+    border: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    resize: none;
+    overflow: auto;
+    border: 1px solid#ddd;
+}
+.write-option {
+    padding: 11px 0 3px;
+    position: relative;
+    zoom: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 2%;
+}
+.area-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.character {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    color: #666;
+}
+.write-option .character {
+    color: #666;
+}
+.ico-send {
+    display: inline-block;
+    width: 8px;
+    height: 9px;
+    background-position: -105px -25px;
+    margin-right: 2px;
+    vertical-align: middle;
+    background-image: url(https://ssl.pstatic.net/static/pwe/note/2013/sp_note_130719.png);
+}
+.send-btn {
+    display: inline-block;
+    padding: 0 4px;
+    height: 25px;
+    line-height: 26px;
+    border-radius: 3.1px;
+    vertical-align: middle;
+    border: 1px solid#ddd;
+    font-size: 12px;
+    letter-spacing: 0;
+    color: #fff;
+    font-weight: bold;
+    background-color: #1b5192 !important;
+}
+.buttonSet {
+    padding-left: 88%;
+}
