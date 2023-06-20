@@ -1,0 +1,204 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.tw-text-lg {
+    height: 27px;
+}
+.tw-mb-0 {
+    margin-bottom: 0;
+}
+
+button {
+    border: 0;
+    background: none;
+}
+.back-button {
+    padding: 0;
+    cursor: pointer;
+}
+.tw-fill-slate-900 {
+    padding-left: 10px;
+}
+
+.tw-fixed {
+    width: 100%;
+    height: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #cbd5e1;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+.tw-pt-5 {
+    width: 528px;
+    height: 512px;
+    margin-top: 5%;
+    margin-left: 25%;
+}
+.tw-flex {
+    flex-direction: column;
+    display: flex;
+    min-height: 30rem;
+    gap: 1.5rem;
+    height: 480px;
+    width: 496px;
+    padding-left: 15px;
+    margin-top: 15px;
+    margin-left: 50%;
+}
+.success-btn {
+    cursor: pointer;
+    color: #fff;
+    background-color: #1b5192;
+    border-color: #334155;
+    border: 1px solid transparent;
+    padding: 0.4375rem 0.9375rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+    height: 36.6px;
+}
+.ins-btn {
+    cursor: pointer;
+    color: #fff;
+    background-color: #1b5192;
+    border-color: #334155;
+    border: 1px solid transparent;
+    padding: 0.4375rem 0.9375rem;
+    font-size: 0.875rem;
+    border-radius: 0.25rem;
+    width: 14%;
+}
+.tw-flex2 {
+    display: flex;
+    flex-direction: column;
+    width: 496px;
+}
+.tw-items {
+    padding-right: 0.5rem;
+    --tw-border-opacity: 1;
+    border-color: rgb(203 213 225 / var(--tw-border-opacity));
+    border-width: 1px;
+    border-radius: 0.25rem;
+    align-items: center;
+    display: flex;
+    margin-top: 7%;
+}
+.form-control {
+    height: calc(1.5em + 1.375rem + 2px);
+    padding: 0.6875rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.3rem;
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 0.875rem + 2px);
+    padding: 0.4375rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #0f172a;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    width: 496px;
+}
+.form-control::placeholder {
+    color: #94a3b8;
+    font-weight: 530;
+    padding-left: 10px;
+}
+
+.tw-fill-slate-800 {
+    transform: translate(-32px, 2px);
+}
+.skillboard {
+    width: 496px;
+    height: 172.33px;
+}
+.tw-text-sm {
+    font-weight: 700;
+    font-size: 0.875rem;
+    margin-top: 1rem;
+    height: 21px;
+    margin-bottom: 0.75rem;
+}
+.tw-flexr {
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    display: flex;
+    width: 496px;
+    height: 123.33px;
+}
+.tw-flexr2 {
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    display: flex;
+    width: 496px;
+}
+.tw-boarder {
+    cursor: pointer;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    --tw-border-opacity: 1;
+    border-color: rgb(226 232 240 / var(--tw-border-opacity));
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 9999px;
+    background: none;
+    height: 35px;
+}
+.tw-boarder2 {
+    cursor: pointer;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    --tw-border-opacity: 1;
+    background-color: #334155;
+    border-color: #334155;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 9999px;
+    height: 35px;
+    display: flex;
+}
+.tw-font-bold {
+    line-height: 1;
+    font-weight: 700;
+    font-size: 0.875rem;
+    --tw-text-opacity: 1;
+    color: rgb(15 23 42 / var(--tw-text-opacity));
+}
+.tw-font-bold2 {
+    line-height: 1;
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: #fff;
+}
+
+.presentation {
+    padding: 0;
+    border-width: 0;
+    display: block;
+}
+
+.icn-white {
+    fill: #fff;
+    stroke: #fff;
+    overflow: hidden;
+}

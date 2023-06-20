@@ -7,10 +7,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/user/*")
+@RequestMapping("/MentorProfile/*")
 public class MentorController {
-
     @GetMapping("/login")
     public void login(){};
 
+    @GetMapping("/Apply")
+    public String Apply (){
+        return "mentorProfile/Apply";
+    }
+
+    @GetMapping("/DefaultProfile")
+    public String Default (){
+        return "mentorProfile/DefaultProfile";
+    }
+
+    @GetMapping("/Introduceyourself")
+    public String intro (){
+        return "mentorProfile/Introduceyourself";
+    }
+
+    @GetMapping("/skillUpdate")
+    public String skill (){
+        return "mentorProfile/skillUpdate";
+    }
+
+    @GetMapping("/specUpdate")
+    public String spec (){
+        return "mentorProfile/specUpdate";
+    }
 }
