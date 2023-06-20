@@ -1,5 +1,6 @@
 package com.example.winwin.controller.board;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +37,11 @@ public class CommunityController {
     @GetMapping("/myDiary")
     public String mypage(){
         return "/mypage/mypageDiary";
+    }
+
+    @GetMapping("/mentorProfile")
+    public String mentorProfile(){
+        return "mentormentee/mentorProfile";
     }
 
 }
