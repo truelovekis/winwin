@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -25,7 +25,7 @@
     <main>
       <div class="login-container">
         <div class="login-wrap">
-          <div class="login-box">
+          <div class="login-box" th:fragment="login">
             <img src="/winwin/img/winwin-logo.png" alt="" />
             <h4>안녕하세요.</h4>
             <h4>WinWin입니다.</h4>
