@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>게시판</title>
+  <link rel="stylesheet" th:href="@{/css/user/loginModal.css}" />
   <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
   <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
   <link rel="stylesheet" th:href="@{/css/meeting/projecthome.css}" />
@@ -24,72 +25,54 @@
 <body>
 <header class="header" th:replace="fragment/header :: header"></header>
 <!--  모집글 작성하기 모달창 영역  -->
-<article class="modal-wrap">
-  <div class="select-box">
-    <div class="select-box-content">
-      <h1>👀</h1>
-      <h1>프로젝트 유형을 골라주세요.</h1>
+
+<main class="container">
+  <!--    멤버 구인 영역    -->
+  <section class="search">
+    <div class="search-imgbox">
+      <img class="img" th:src="@{/img/search.PNG}" alt="search-img"/>
     </div>
-    <div class="page-move-wrap">
-      <div class="page-move1">
-        <div class="sub-content">
-          <span class="page-text">사이드 프로젝트</span><span><svg width="24" height="24" stroke-width="0" viewBox="0 0 24 24" fill="#cbd5e1" xmlns="http://www.w3.org/2000/svg" class="tw-fill-slate-500 hover:tw-fill-slate-900 modal-right-arrow"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.2929 19.7071C12.9024 19.3166 12.9024 18.6834 13.2929 18.2929L18.5858 13L3 13C2.44772 13 2 12.5523 2 12C2 11.4478 2.44772 11 3 11L18.5858 11.0001L13.2929 5.7071C12.9024 5.31658 12.9024 4.68341 13.2929 4.29289C13.6834 3.90237 14.3166 3.90237 14.7071 4.29289L21.7071 11.2929C21.8946 11.4805 22 11.7348 22 12.0001C22 12.2653 21.8946 12.5196 21.7071 12.7072L14.7071 19.7071C14.3166 20.0976 13.6834 20.0976 13.2929 19.7071Z" fill="inherit"></path></svg></span>
-        </div>
-      </div>
-      <div class="page-move2">
-        <div class="sub-content">
-          <span class="page-text">스터디/모임</span><svg width="24" height="24" stroke-width="0" viewBox="0 0 24 24" fill="#cbd5e1" xmlns="http://www.w3.org/2000/svg" class="tw-fill-slate-500 hover:tw-fill-slate-900 modal-right-arrow"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.2929 19.7071C12.9024 19.3166 12.9024 18.6834 13.2929 18.2929L18.5858 13L3 13C2.44772 13 2 12.5523 2 12C2 11.4478 2.44772 11 3 11L18.5858 11.0001L13.2929 5.7071C12.9024 5.31658 12.9024 4.68341 13.2929 4.29289C13.6834 3.90237 14.3166 3.90237 14.7071 4.29289L21.7071 11.2929C21.8946 11.4805 22 11.7348 22 12.0001C22 12.2653 21.8946 12.5196 21.7071 12.7072L14.7071 19.7071C14.3166 20.0976 13.6834 20.0976 13.2929 19.7071Z" fill="inherit"></path></svg>
-        </div>
-      </div>
+    <div class="search-textbox">
+      <br/>
+      <br/>
+      <br/>
+      <h1>WinWin에서 프로젝트 멤버를 구해보세요!</h1>
+      <br/>
+      <br/>
+      <h5>사이드 프로젝트 멤버를 찾거나 다양한 목적의 스터디/모임 모집글을 올릴 수 있어요!</h5>
     </div>
-  </div>
-</article>
-  <main class="container">
-    <!--    멤버 구인 영역    -->
-    <section class="search">
-      <div class="search-imgbox">
-        <img class="img" th:src="@{/img/search.PNG}" alt="search-img"/>
-      </div>
-      <div class="search-textbox">
-        <br/>
-        <br/>
-        <br/>
-        <h1>WinWin에서 프로젝트 멤버를 구해보세요!</h1>
-        <br/>
-        <br/>
-        <h5>사이드 프로젝트 멤버를 찾거나 다양한 목적의 스터디/모임 모집글을 올릴 수 있어요!</h5>
-      </div>
-      <div class="search-btnbox">
-        <div class="search-button">모집글 작성하기</div>
-      </div>
-    </section>
-    <!--    인기프로젝트 TOP 10 영역    -->
-    <section class="topten-head">
-      <div class="topten-text">
-        <h2>인기 프로젝트 TOP 10 🔥</h2>
-        <br/>
-        <h4>가장 인기 있는 프로젝트를 확인해보세요!</h4>
-        <br/>
-        <br/>
-        <svg width="24" height="24" stroke-width="0" viewBox="0 0 24 24" fill="#cbd5e1" xmlns="http://www.w3.org/2000/svg" class="tw-fill-slate-500 tw-opacity-40 topten-left-arrow"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.7071 4.2929C11.0976 4.68342 11.0976 5.31659 10.7071 5.70711L5.41423 10.9999H21C21.5523 10.9999 22 11.4477 22 11.9999C22 12.5522 21.5523 12.9999 21 12.9999H5.4142L10.7071 18.2929C11.0976 18.6834 11.0976 19.3166 10.7071 19.7071C10.3166 20.0976 9.68341 20.0976 9.29289 19.7071L2.29289 12.7071C2.10535 12.5195 2 12.2652 2 11.9999C2 11.7347 2.10536 11.4804 2.2929 11.2928L9.2929 4.29289C9.68342 3.90237 10.3166 3.90237 10.7071 4.2929Z" fill="inherit"></path></svg>
-        <svg width="24" height="24" stroke-width="0" viewBox="0 0 24 24" fill="#cbd5e1" xmlns="http://www.w3.org/2000/svg" class="tw-fill-slate-500 hover:tw-fill-slate-900 topten-right-arrow"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.2929 19.7071C12.9024 19.3166 12.9024 18.6834 13.2929 18.2929L18.5858 13L3 13C2.44772 13 2 12.5523 2 12C2 11.4478 2.44772 11 3 11L18.5858 11.0001L13.2929 5.7071C12.9024 5.31658 12.9024 4.68341 13.2929 4.29289C13.6834 3.90237 14.3166 3.90237 14.7071 4.29289L21.7071 11.2929C21.8946 11.4805 22 11.7348 22 12.0001C22 12.2653 21.8946 12.5196 21.7071 12.7072L14.7071 19.7071C14.3166 20.0976 13.6834 20.0976 13.2929 19.7071Z" fill="inherit"></path></svg>
-      </div>
-      <div class="topten-banner">
-        <h4>모두 보기 ></h4>
-      </div>
-    </section>
-    <div style="width: 1050px; overflow: hidden; ">
-      <section class="topten-body">
-        <div class="topten-area">
-        <div class="topten-cardbox">
+    <div class="search-btnbox">
+      <div class="search-button">모집글 작성하기</div>
+    </div>
+  </section>
+  <!--    인기프로젝트 TOP 10 영역    -->
+  <section class="topten-head">
+    <div class="topten-text">
+      <h2>인기 프로젝트 TOP 10 🔥</h2>
+      <br/>
+      <h4>가장 인기 있는 프로젝트를 확인해보세요!</h4>
+      <br/>
+      <br/>
+      <svg width="24" height="24" stroke-width="0" viewBox="0 0 24 24" fill="#cbd5e1" xmlns="http://www.w3.org/2000/svg" class="tw-fill-slate-500 tw-opacity-40 topten-left-arrow"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.7071 4.2929C11.0976 4.68342 11.0976 5.31659 10.7071 5.70711L5.41423 10.9999H21C21.5523 10.9999 22 11.4477 22 11.9999C22 12.5522 21.5523 12.9999 21 12.9999H5.4142L10.7071 18.2929C11.0976 18.6834 11.0976 19.3166 10.7071 19.7071C10.3166 20.0976 9.68341 20.0976 9.29289 19.7071L2.29289 12.7071C2.10535 12.5195 2 12.2652 2 11.9999C2 11.7347 2.10536 11.4804 2.2929 11.2928L9.2929 4.29289C9.68342 3.90237 10.3166 3.90237 10.7071 4.2929Z" fill="inherit"></path></svg>
+      <svg width="24" height="24" stroke-width="0" viewBox="0 0 24 24" fill="#cbd5e1" xmlns="http://www.w3.org/2000/svg" class="tw-fill-slate-500 hover:tw-fill-slate-900 topten-right-arrow"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.2929 19.7071C12.9024 19.3166 12.9024 18.6834 13.2929 18.2929L18.5858 13L3 13C2.44772 13 2 12.5523 2 12C2 11.4478 2.44772 11 3 11L18.5858 11.0001L13.2929 5.7071C12.9024 5.31658 12.9024 4.68341 13.2929 4.29289C13.6834 3.90237 14.3166 3.90237 14.7071 4.29289L21.7071 11.2929C21.8946 11.4805 22 11.7348 22 12.0001C22 12.2653 21.8946 12.5196 21.7071 12.7072L14.7071 19.7071C14.3166 20.0976 13.6834 20.0976 13.2929 19.7071Z" fill="inherit"></path></svg>
+    </div>
+    <div class="topten-banner">
+      <h4>모두 보기 ></h4>
+    </div>
+  </section>
+  <div style="width: 1050px; overflow: hidden; ">
+    <section class="topten-body">
+      <div class="topten-area">
+        <!--          ========================== -->
+        <div class="topten-cardbox" th:each="project : ${projectList}">
           <div class="topten-content1">
             <span class="topten-sub-text1">사이드 프로젝트</span>
             <br/>
             <br/>
             <div class="topten-title-wrap">
-              <div class="topten-sub-text2">Outfit of the Baby 풀스텍입니다가나다라마바사</div><div class="new-text">&nbsp;NEW</div>
+              <div class="topten-sub-text2" th:text="${project.studyTitle}">Outfit of the Baby 풀스텍입니다가나다라마바사</div><div class="new-text">&nbsp;NEW</div>
             </div>
-            </div>
+          </div>
           <br/>
           <div class="topten-content2">
             <span class="topten-sub-text3">안녕하세요! 이메일 기반 업무생산성 향상 툴 개발 사이드프로젝트를 진행하실 백엔드, 프론트엔드 개발자 팀원 각각 한분을 모시고 있습니다.
@@ -103,248 +86,252 @@
             <br/>
             <p class="topten-sub-text5">좋아요
               <span class="topten-sub-text6">24</span>
-              •
-              채팅
-              <span class="topten-sub-text7">6</span>
             </p>
           </div>
         </div>
-          <div class="topten-cardbox">
-            <div class="topten-content1">
-              <span class="topten-sub-text1">사이드 프로젝트</span>
-              <br/>
-              <br/>
-              <div class="topten-title-wrap">
-                <div class="topten-sub-text2">Outfit of the Baby 풀스텍입니다가나다라마바사아자차카타파하.</div><div class="new-text">&nbsp;NEW</div>
-              </div>
-            </div>
-            <br/>
-            <div class="topten-content2">
-            <span class="topten-sub-text3">안녕하세요! 이메일 기반 업무생산성 향상 툴 개발 사이드프로젝트를 진행하실 백엔드, 프론트엔드 개발자 팀원 각각 한분을 모시고 있습니다.
-            현재 저희는 pc앱 형식의 이메일 클라이언트(업무생산성 향상툴)를 개발하는 것을 목표로 사이드프로젝트를 진행하고 있습니다! 진행하고 있습니다! 진행하고 있습니다! 진행하고 있다.
-            </span>
-            </div>
-            <br/>
-            <div class="topten-content3">
-              <span class="topten-sub-text4">💰 창업/수익 창출</span>
-              <br/>
-              <br/>
-              <p class="topten-sub-text5">좋아요
-                <span class="topten-sub-text6">24</span>
-                •
-                채팅
-                <span class="topten-sub-text7">6</span>
-              </p>
-            </div>
-          </div>
-          <div class="topten-cardbox">
-            <div class="topten-content1">
-              <span class="topten-sub-text1">사이드 프로젝트</span>
-              <br/>
-              <br/>
-              <div class="topten-title-wrap">
-                <div class="topten-sub-text2">Outfit of the Baby 풀스텍입니다가나다라마바사아자차카타파하.</div><div class="new-text">&nbsp;NEW</div>
-              </div>
-            </div>
-            <br/>
-            <div class="topten-content2">
-            <span class="topten-sub-text3">안녕하세요! 이메일 기반 업무생산성 향상 툴 개발 사이드프로젝트를 진행하실 백엔드, 프론트엔드 개발자 팀원 각각 한분을 모시고 있습니다.
-            현재 저희는 pc앱 형식의 이메일 클라이언트(업무생산성 향상툴)를 개발하는 것을 목표로 사이드프로젝트를 진행하고 있습니다!
-            </span>
-            </div>
-            <br/>
-            <div class="topten-content3">
-              <span class="topten-sub-text4">💰 창업/수익 창출</span>
-              <br/>
-              <br/>
-              <p class="topten-sub-text5">좋아요
-                <span class="topten-sub-text6">24</span>
-                •
-                채팅
-                <span class="topten-sub-text7">6</span>
-              </p>
-            </div>
-          </div>
-          <div class="topten-cardbox">
-            <div class="topten-content1">
-              <span class="topten-sub-text1">사이드 프로젝트</span>
-              <br/>
-              <br/>
-              <div class="topten-title-wrap">
-                <div class="topten-sub-text2">Outfit of the Baby 풀스텍입니다가나다라마바사아자차카타파하.</div><div class="new-text">&nbsp;NEW</div>
-              </div>
-            </div>
-            <br/>
-            <div class="topten-content2">
-            <span class="topten-sub-text3">안녕하세요! 이메일 기반 업무생산성 향상 툴 개발 사이드프로젝트를 진행하실 백엔드, 프론트엔드 개발자 팀원 각각 한분을 모시고 있습니다.
-            현재 저희는 pc앱 형식의 이메일 클라이언트(업무생산성 향상툴)를 개발하는 것을 목표로 사이드프로젝트를 진행하고 있습니다!
-            </span>
-            </div>
-            <br/>
-            <div class="topten-content3">
-              <span class="topten-sub-text4">💰 창업/수익 창출</span>
-              <br/>
-              <br/>
-              <p class="topten-sub-text5">좋아요
-                <span class="topten-sub-text6">24</span>
-                •
-                채팅
-                <span class="topten-sub-text7">6</span>
-              </p>
-            </div>
-          </div>
-      </section>
-    </div>
-<!--    스터디 영역    -->
-    <section class="study-head">
-      <div class="study-text">
-        <h2>스터디/모임 🌈</h2>
-        <br/>
-        <h4>여럿이서 함께하면 더 즐거워요!</h4>
-        <br/>
-        <br/>
-        <svg width="24" height="24" stroke-width="0" viewBox="0 0 24 24" fill="#cbd5e1" xmlns="http://www.w3.org/2000/svg" class="tw-fill-slate-500 tw-opacity-40 study-left-arrow"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.7071 4.2929C11.0976 4.68342 11.0976 5.31659 10.7071 5.70711L5.41423 10.9999H21C21.5523 10.9999 22 11.4477 22 11.9999C22 12.5522 21.5523 12.9999 21 12.9999H5.4142L10.7071 18.2929C11.0976 18.6834 11.0976 19.3166 10.7071 19.7071C10.3166 20.0976 9.68341 20.0976 9.29289 19.7071L2.29289 12.7071C2.10535 12.5195 2 12.2652 2 11.9999C2 11.7347 2.10536 11.4804 2.2929 11.2928L9.2929 4.29289C9.68342 3.90237 10.3166 3.90237 10.7071 4.2929Z" fill="inherit"></path></svg>
-        <svg width="24" height="24" stroke-width="0" viewBox="0 0 24 24" fill="#cbd5e1" xmlns="http://www.w3.org/2000/svg" class="tw-fill-slate-500 hover:tw-fill-slate-900 study-right-arrow"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.2929 19.7071C12.9024 19.3166 12.9024 18.6834 13.2929 18.2929L18.5858 13L3 13C2.44772 13 2 12.5523 2 12C2 11.4478 2.44772 11 3 11L18.5858 11.0001L13.2929 5.7071C12.9024 5.31658 12.9024 4.68341 13.2929 4.29289C13.6834 3.90237 14.3166 3.90237 14.7071 4.29289L21.7071 11.2929C21.8946 11.4805 22 11.7348 22 12.0001C22 12.2653 21.8946 12.5196 21.7071 12.7072L14.7071 19.7071C14.3166 20.0976 13.6834 20.0976 13.2929 19.7071Z" fill="inherit"></path></svg>
-      </div>
-      <div class="study-banner">
-        <h4>모두 보기 ></h4>
+        <!--          ====================================== -->
+        <!--          <div class="topten-cardbox">-->
+        <!--            <div class="topten-content1">-->
+        <!--              <span class="topten-sub-text1">사이드 프로젝트</span>-->
+        <!--              <br/>-->
+        <!--              <br/>-->
+        <!--              <div class="topten-title-wrap">-->
+        <!--                <div class="topten-sub-text2">Outfit of the Baby 풀스텍입니다가나다라마바사아자차카타파하.</div><div class="new-text">&nbsp;NEW</div>-->
+        <!--              </div>-->
+        <!--            </div>-->
+        <!--            <br/>-->
+        <!--            <div class="topten-content2">-->
+        <!--            <span class="topten-sub-text3">안녕하세요! 이메일 기반 업무생산성 향상 툴 개발 사이드프로젝트를 진행하실 백엔드, 프론트엔드 개발자 팀원 각각 한분을 모시고 있습니다.-->
+        <!--            현재 저희는 pc앱 형식의 이메일 클라이언트(업무생산성 향상툴)를 개발하는 것을 목표로 사이드프로젝트를 진행하고 있습니다! 진행하고 있습니다! 진행하고 있습니다! 진행하고 있다.-->
+        <!--            </span>-->
+        <!--            </div>-->
+        <!--            <br/>-->
+        <!--            <div class="topten-content3">-->
+        <!--              <span class="topten-sub-text4">💰 창업/수익 창출</span>-->
+        <!--              <br/>-->
+        <!--              <br/>-->
+        <!--              <p class="topten-sub-text5">좋아요-->
+        <!--                <span class="topten-sub-text6">24</span>-->
+        <!--              </p>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--          <div class="topten-cardbox">-->
+        <!--            <div class="topten-content1">-->
+        <!--              <span class="topten-sub-text1">사이드 프로젝트</span>-->
+        <!--              <br/>-->
+        <!--              <br/>-->
+        <!--              <div class="topten-title-wrap">-->
+        <!--                <div class="topten-sub-text2">Outfit of the Baby 풀스텍입니다가나다라마바사아자차카타파하.</div><div class="new-text">&nbsp;NEW</div>-->
+        <!--              </div>-->
+        <!--            </div>-->
+        <!--            <br/>-->
+        <!--            <div class="topten-content2">-->
+        <!--            <span class="topten-sub-text3">안녕하세요! 이메일 기반 업무생산성 향상 툴 개발 사이드프로젝트를 진행하실 백엔드, 프론트엔드 개발자 팀원 각각 한분을 모시고 있습니다.-->
+        <!--            현재 저희는 pc앱 형식의 이메일 클라이언트(업무생산성 향상툴)를 개발하는 것을 목표로 사이드프로젝트를 진행하고 있습니다!-->
+        <!--            </span>-->
+        <!--            </div>-->
+        <!--            <br/>-->
+        <!--            <div class="topten-content3">-->
+        <!--              <span class="topten-sub-text4">💰 창업/수익 창출</span>-->
+        <!--              <br/>-->
+        <!--              <br/>-->
+        <!--              <p class="topten-sub-text5">좋아요-->
+        <!--                <span class="topten-sub-text6">24</span>-->
+        <!--              </p>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--          <div class="topten-cardbox">-->
+        <!--            <div class="topten-content1">-->
+        <!--              <span class="topten-sub-text1">사이드 프로젝트</span>-->
+        <!--              <br/>-->
+        <!--              <br/>-->
+        <!--              <div class="topten-title-wrap">-->
+        <!--                <div class="topten-sub-text2">Outfit of the Baby 풀스텍입니다가나다라마바사아자차카타파하.</div><div class="new-text">&nbsp;NEW</div>-->
+        <!--              </div>-->
+        <!--            </div>-->
+        <!--            <br/>-->
+        <!--            <div class="topten-content2">-->
+        <!--            <span class="topten-sub-text3">안녕하세요! 이메일 기반 업무생산성 향상 툴 개발 사이드프로젝트를 진행하실 백엔드, 프론트엔드 개발자 팀원 각각 한분을 모시고 있습니다.-->
+        <!--            현재 저희는 pc앱 형식의 이메일 클라이언트(업무생산성 향상툴)를 개발하는 것을 목표로 사이드프로젝트를 진행하고 있습니다!-->
+        <!--            </span>-->
+        <!--            </div>-->
+        <!--            <br/>-->
+        <!--            <div class="topten-content3">-->
+        <!--              <span class="topten-sub-text4">💰 창업/수익 창출</span>-->
+        <!--              <br/>-->
+        <!--              <br/>-->
+        <!--              <p class="topten-sub-text5">좋아요-->
+        <!--                <span class="topten-sub-text6">24</span>-->
+        <!--              </p>-->
+        <!--            </div>-->
+        <!--          </div>-->
       </div>
     </section>
-    <div style="width: 1050px; overflow: hidden; ">
-      <section class="study-body">
-        <div class="study-area">
-          <div class="study-cardbox">
-            <div class="study-content1">
-              <span class="study-sub-text1">사이드 프로젝트</span>
-              <br/>
-              <br/>
-              <div class="study-title-wrap">
-                <div class="study-sub-text2">Outfit of the Baby 풀스텍입니다가나다라마바사아자차카타파하.</div><div class="new-text">&nbsp;NEW</div>
-              </div>
-            </div>
-            <br/>
-            <div class="study-content2">
-            <span class="study-sub-text3">안녕하세요! 이메일 기반 업무생산성 향상 툴 개발 사이드프로젝트를 진행하실 백엔드, 프론트엔드 개발자 팀원 각각 한분을 모시고 있습니다.
-            현재 저희는 pc앱 형식의 이메일 클라이언트(업무생산성 향상툴)를 개발하는 것을 목표로 사이드프로젝트를 진행하고 있습니다!
-            </span>
-            </div>
-            <br/>
-            <div class="study-content3">
-              <span class="study-sub-text4">💰 창업/수익 창출</span>
-              <br/>
-              <br/>
-              <p class="study-sub-text5">좋아요
-                <span class="study-sub-text6">24</span>
-                •
-                채팅
-                <span class="study-sub-text7">6</span>
-              </p>
-            </div>
-          </div>
-          <div class="study-cardbox">
-            <div class="study-content1">
-              <span class="study-sub-text1">사이드 프로젝트</span>
-              <br/>
-              <br/>
-              <div class="study-title-wrap">
-                <div class="study-sub-text2">Outfit of the Baby 풀스텍입니다가나다라마바사아자차카타파하.</div><div class="new-text">&nbsp;NEW</div>
-              </div>
-            </div>
-            <br/>
-            <div class="study-content2">
-            <span class="study-sub-text3">안녕하세요! 이메일 기반 업무생산성 향상 툴 개발 사이드프로젝트를 진행하실 백엔드, 프론트엔드 개발자 팀원 각각 한분을 모시고 있습니다.
-            현재 저희는 pc앱 형식의 이메일 클라이언트(업무생산성 향상툴)를 개발하는 것을 목표로 사이드프로젝트를 진행하고 있습니다!
-            </span>
-            </div>
-            <br/>
-            <div class="study-content3">
-              <span class="study-sub-text4">💰 창업/수익 창출</span>
-              <br/>
-              <br/>
-              <p class="study-sub-text5">좋아요
-                <span class="study-sub-text6">24</span>
-                •
-                채팅
-                <span class="study-sub-text7">6</span>
-              </p>
-            </div>
-          </div>
-          <div class="study-cardbox">
-            <div class="study-content1">
-              <span class="study-sub-text1">사이드 프로젝트</span>
-              <br/>
-              <br/>
-              <div class="study-title-wrap">
-                <div class="study-sub-text2">Outfit of the Baby 풀스텍입니다가나다라마바사아자차카타파하.</div><div class="new-text">&nbsp;NEW</div>
-              </div>
-            </div>
-            <br/>
-            <div class="study-content2">
-            <span class="study-sub-text3">안녕하세요! 이메일 기반 업무생산성 향상 툴 개발 사이드프로젝트를 진행하실 백엔드, 프론트엔드 개발자 팀원 각각 한분을 모시고 있습니다.
-            현재 저희는 pc앱 형식의 이메일 클라이언트(업무생산성 향상툴)를 개발하는 것을 목표로 사이드프로젝트를 진행하고 있습니다!
-            </span>
-            </div>
-            <br/>
-            <div class="study-content3">
-              <span class="study-sub-text4">💰 창업/수익 창출</span>
-              <br/>
-              <br/>
-              <p class="study-sub-text5">좋아요
-                <span class="study-sub-text6">24</span>
-                •
-                채팅
-                <span class="study-sub-text7">6</span>
-              </p>
-            </div>
-          </div>
-          <div class="study-cardbox">
-            <div class="study-content1">
-              <span class="study-sub-text1">사이드 프로젝트</span>
-              <br/>
-              <br/>
-              <div class="study-title-wrap">
-                <div class="study-sub-text2">Outfit of the Baby 풀스텍입니다가나다라마바사아자차카타파하.</div><div class="new-text">&nbsp;NEW</div>
-              </div>
-            </div>
-            <br/>
-            <div class="study-content2">
-            <span class="study-sub-text3">안녕하세요! 이메일 기반 업무생산성 향상 툴 개발 사이드프로젝트를 진행하실 백엔드, 프론트엔드 개발자 팀원 각각 한분을 모시고 있습니다.
-            현재 저희는 pc앱 형식의 이메일 클라이언트(업무생산성 향상툴)를 개발하는 것을 목표로 사이드프로젝트를 진행하고 있습니다!
-            </span>
-            </div>
-            <br/>
-            <div class="study-content3">
-              <span class="study-sub-text4">💰 창업/수익 창출</span>
-              <br/>
-              <br/>
-              <p class="study-sub-text5">좋아요
-                <span class="study-sub-text6">24</span>
-                •
-                채팅
-                <span class="study-sub-text7">6</span>
-              </p>
-            </div>
-          </div>
-      </section>
+  </div>
+  <!--    스터디 영역    -->
+  <section class="study-head">
+    <div class="study-text">
+      <h2>스터디/모임 🌈</h2>
+      <br/>
+      <h4>여럿이서 함께하면 더 즐거워요!</h4>
+      <br/>
+      <br/>
+      <svg width="24" height="24" stroke-width="0" viewBox="0 0 24 24" fill="#cbd5e1" xmlns="http://www.w3.org/2000/svg" class="tw-fill-slate-500 tw-opacity-40 study-left-arrow"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.7071 4.2929C11.0976 4.68342 11.0976 5.31659 10.7071 5.70711L5.41423 10.9999H21C21.5523 10.9999 22 11.4477 22 11.9999C22 12.5522 21.5523 12.9999 21 12.9999H5.4142L10.7071 18.2929C11.0976 18.6834 11.0976 19.3166 10.7071 19.7071C10.3166 20.0976 9.68341 20.0976 9.29289 19.7071L2.29289 12.7071C2.10535 12.5195 2 12.2652 2 11.9999C2 11.7347 2.10536 11.4804 2.2929 11.2928L9.2929 4.29289C9.68342 3.90237 10.3166 3.90237 10.7071 4.2929Z" fill="inherit"></path></svg>
+      <svg width="24" height="24" stroke-width="0" viewBox="0 0 24 24" fill="#cbd5e1" xmlns="http://www.w3.org/2000/svg" class="tw-fill-slate-500 hover:tw-fill-slate-900 study-right-arrow"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.2929 19.7071C12.9024 19.3166 12.9024 18.6834 13.2929 18.2929L18.5858 13L3 13C2.44772 13 2 12.5523 2 12C2 11.4478 2.44772 11 3 11L18.5858 11.0001L13.2929 5.7071C12.9024 5.31658 12.9024 4.68341 13.2929 4.29289C13.6834 3.90237 14.3166 3.90237 14.7071 4.29289L21.7071 11.2929C21.8946 11.4805 22 11.7348 22 12.0001C22 12.2653 21.8946 12.5196 21.7071 12.7072L14.7071 19.7071C14.3166 20.0976 13.6834 20.0976 13.2929 19.7071Z" fill="inherit"></path></svg>
     </div>
-<!--    qna 영역    -->
-    <section class="qna">
-      <div class="qna-wrap">
-        <div class="qna-sub-wrap1">
-          <span class="qna-text">프로젝트하다 막힐 때, 개발자 Q&A가 도와드려요!</span>
+    <div class="study-banner">
+      <h4>모두 보기 ></h4>
+    </div>
+  </section>
+  <div style="width: 1050px; overflow: hidden; ">
+    <section class="study-body">
+      <div class="study-area">
+        <div class="study-cardbox">
+          <div class="study-content1">
+            <span class="study-sub-text1">사이드 프로젝트</span>
+            <br/>
+            <br/>
+            <div class="study-title-wrap">
+              <div class="study-sub-text2">Outfit of the Baby 풀스텍입니다가나다라마바사아자차카타파하.</div><div class="new-text">&nbsp;NEW</div>
+            </div>
+          </div>
           <br/>
+          <div class="study-content2">
+            <span class="study-sub-text3">안녕하세요! 이메일 기반 업무생산성 향상 툴 개발 사이드프로젝트를 진행하실 백엔드, 프론트엔드 개발자 팀원 각각 한분을 모시고 있습니다.
+            현재 저희는 pc앱 형식의 이메일 클라이언트(업무생산성 향상툴)를 개발하는 것을 목표로 사이드프로젝트를 진행하고 있습니다!
+            </span>
+          </div>
           <br/>
-          <div class="qna-btn">질문 보러 가기</div>
+          <div class="study-content3">
+            <span class="study-sub-text4">💰 창업/수익 창출</span>
+            <br/>
+            <br/>
+            <p class="study-sub-text5">좋아요
+              <span class="study-sub-text6">24</span>
+            </p>
+          </div>
         </div>
-        <div class="qna-sub-wrap2">
-          <img class="qna-img" th:src="@{/img/qna.PNG}" alt="qna-img">
+        <div class="study-cardbox">
+          <div class="study-content1">
+            <span class="study-sub-text1">사이드 프로젝트</span>
+            <br/>
+            <br/>
+            <div class="study-title-wrap">
+              <div class="study-sub-text2">Outfit of the Baby 풀스텍입니다가나다라마바사아자차카타파하.</div><div class="new-text">&nbsp;NEW</div>
+            </div>
+          </div>
+          <br/>
+          <div class="study-content2">
+            <span class="study-sub-text3">안녕하세요! 이메일 기반 업무생산성 향상 툴 개발 사이드프로젝트를 진행하실 백엔드, 프론트엔드 개발자 팀원 각각 한분을 모시고 있습니다.
+            현재 저희는 pc앱 형식의 이메일 클라이언트(업무생산성 향상툴)를 개발하는 것을 목표로 사이드프로젝트를 진행하고 있습니다!
+            </span>
+          </div>
+          <br/>
+          <div class="study-content3">
+            <span class="study-sub-text4">💰 창업/수익 창출</span>
+            <br/>
+            <br/>
+            <p class="study-sub-text5">좋아요
+              <span class="study-sub-text6">24</span>
+            </p>
+          </div>
+        </div>
+        <div class="study-cardbox">
+          <div class="study-content1">
+            <span class="study-sub-text1">사이드 프로젝트</span>
+            <br/>
+            <br/>
+            <div class="study-title-wrap">
+              <div class="study-sub-text2">Outfit of the Baby 풀스텍입니다가나다라마바사아자차카타파하.</div><div class="new-text">&nbsp;NEW</div>
+            </div>
+          </div>
+          <br/>
+          <div class="study-content2">
+            <span class="study-sub-text3">안녕하세요! 이메일 기반 업무생산성 향상 툴 개발 사이드프로젝트를 진행하실 백엔드, 프론트엔드 개발자 팀원 각각 한분을 모시고 있습니다.
+            현재 저희는 pc앱 형식의 이메일 클라이언트(업무생산성 향상툴)를 개발하는 것을 목표로 사이드프로젝트를 진행하고 있습니다!
+            </span>
+          </div>
+          <br/>
+          <div class="study-content3">
+            <span class="study-sub-text4">💰 창업/수익 창출</span>
+            <br/>
+            <br/>
+            <p class="study-sub-text5">좋아요
+              <span class="study-sub-text6">24</span>
+            </p>
+          </div>
+        </div>
+        <div class="study-cardbox">
+          <div class="study-content1">
+            <span class="study-sub-text1">사이드 프로젝트</span>
+            <br/>
+            <br/>
+            <div class="study-title-wrap">
+              <div class="study-sub-text2">Outfit of the Baby 풀스텍입니다가나다라마바사아자차카타파하.</div><div class="new-text">&nbsp;NEW</div>
+            </div>
+          </div>
+          <br/>
+          <div class="study-content2">
+            <span class="study-sub-text3">안녕하세요! 이메일 기반 업무생산성 향상 툴 개발 사이드프로젝트를 진행하실 백엔드, 프론트엔드 개발자 팀원 각각 한분을 모시고 있습니다.
+            현재 저희는 pc앱 형식의 이메일 클라이언트(업무생산성 향상툴)를 개발하는 것을 목표로 사이드프로젝트를 진행하고 있습니다!
+            </span>
+          </div>
+          <br/>
+          <div class="study-content3">
+            <span class="study-sub-text4">💰 창업/수익 창출</span>
+            <br/>
+            <br/>
+            <p class="study-sub-text5">좋아요
+              <span class="study-sub-text6">24</span>
+            </p>
+          </div>
         </div>
       </div>
     </section>
-  </main>
+  </div>
+  <!--    qna 영역    -->
+  <section class="qna">
+    <div class="qna-wrap">
+      <div class="qna-sub-wrap1">
+        <span class="qna-text">프로젝트하다 막힐 때, 개발자 Q&A가 도와드려요!</span>
+        <br/>
+        <br/>
+        <div class="qna-btn">질문 보러 가기</div>
+      </div>
+      <div class="qna-sub-wrap2">
+        <img class="qna-img" th:src="@{/img/qna.PNG}" alt="qna-img">
+      </div>
+    </div>
+  </section>
+</main>
 <footer class="footer" th:replace="fragment/footer :: footer"></footer>
+<article class="modal-wrap">
+  <div class="select-box">
+    <div class="select-box-content">
+      <h1>👀</h1>
+      <h1>프로젝트 유형을 골라주세요.</h1>
+    </div>
+    <div class="page-move-wrap">
+      <a th:href="@{/project/write}">
+        <div class="page-move1">
+          <div class="sub-content">
+            <span class="page-text">사이드 프로젝트</span><span><svg width="24" height="24" stroke-width="0" viewBox="0 0 24 24" fill="#cbd5e1" xmlns="http://www.w3.org/2000/svg" class="tw-fill-slate-500 hover:tw-fill-slate-900 modal-right-arrow"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.2929 19.7071C12.9024 19.3166 12.9024 18.6834 13.2929 18.2929L18.5858 13L3 13C2.44772 13 2 12.5523 2 12C2 11.4478 2.44772 11 3 11L18.5858 11.0001L13.2929 5.7071C12.9024 5.31658 12.9024 4.68341 13.2929 4.29289C13.6834 3.90237 14.3166 3.90237 14.7071 4.29289L21.7071 11.2929C21.8946 11.4805 22 11.7348 22 12.0001C22 12.2653 21.8946 12.5196 21.7071 12.7072L14.7071 19.7071C14.3166 20.0976 13.6834 20.0976 13.2929 19.7071Z" fill="inherit"></path></svg></span>
+          </div>
+        </div>
+      </a>
+      <a th:href="@{/project/write}">
+        <div class="page-move2">
+          <div class="sub-content">
+
+            <span class="page-text">스터디/모임</span><svg width="24" height="24" stroke-width="0" viewBox="0 0 24 24" fill="#cbd5e1" xmlns="http://www.w3.org/2000/svg" class="tw-fill-slate-500 hover:tw-fill-slate-900 modal-right-arrow"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.2929 19.7071C12.9024 19.3166 12.9024 18.6834 13.2929 18.2929L18.5858 13L3 13C2.44772 13 2 12.5523 2 12C2 11.4478 2.44772 11 3 11L18.5858 11.0001L13.2929 5.7071C12.9024 5.31658 12.9024 4.68341 13.2929 4.29289C13.6834 3.90237 14.3166 3.90237 14.7071 4.29289L21.7071 11.2929C21.8946 11.4805 22 11.7348 22 12.0001C22 12.2653 21.8946 12.5196 21.7071 12.7072L14.7071 19.7071C14.3166 20.0976 13.6834 20.0976 13.2929 19.7071Z" fill="inherit"></path></svg>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</article>
 <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 <script th:src="@{/js/fragment/header.js}" ></script>
-script th:src="@{/js/meeting/projecthome.js}"></script>
+<script th:src="@{/js/meeting/projecthome.js}"></script>
 </body>
 </html>

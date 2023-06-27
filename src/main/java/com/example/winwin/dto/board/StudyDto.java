@@ -18,7 +18,9 @@ public class StudyDto {
     private String studyOpenlink;
     private String studyDate;
     private Long userNumber;
+    private String userNickname;
     private Long categoryNumber;
     private Long purposeNumber;
     private Long timeNumber;
+    private Long studyReadCnt;
 }

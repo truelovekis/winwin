@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>projectWrite</title>
+    <link rel="stylesheet" th:href="@{/css/user/loginModal.css}" />
     <link rel="stylesheet" th:href="@{/css/project/projectWrite.css}" />
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
     <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
@@ -25,7 +26,7 @@
 <body>
 <header class="header" th:replace="fragment/header :: header"></header>
 <section>
-    <div class="big-box">
+    <div class="container-box">
         <div class="middle-box">
             <div class="Title">
                 <div class="sideTitle"><p>사이드 프로젝트</p></div>
@@ -59,10 +60,16 @@
                 <input class="openChat-link" id="" cols="30" rows="10"><p></p></input>
             </div>
 
+            <h3 class="project-box-h3">상태 처리</h3>
+            <div class="project-box">
+                <input type="radio" value="" name="project" checked/> 모집 중
+                <input type="radio" value="" name="project"/> 모집 완료
+            </div>
+
             <h3 class="project-box-h3">카테고리</h3>
             <div class="project-box">
-                <input type="radio" value="" name="project"/> 프로젝트
-                <input type="radio" value="" name="project"/> 모임
+                <input type="radio" value="1" name="project" /> 프로젝트
+                <input type="radio" value="2" name="project"/> 모임
             </div>
 
 
