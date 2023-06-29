@@ -21,18 +21,18 @@
     </style>
   </head>
   <body>
-    <article>
+    <article th:fragment="resumeModal" class="resumeModal none">
       <div class="modal-wrap">
-        <div class="container">
+        <div class="resumeModal-container">
           <div class="modal-box">
             <div class="header-box">
-            <span class="title"
+            <span class="resumeModal-title"
             ><strong>이력서 : </strong><br />
               최선을 다하겠습니다!</span
             >
-              <img src="/winwin/img/me.jpg" alt="" />
+              <img  class="modal-img" src="/winwin/img/me.jpg" alt="" />
             </div>
-            <hr />
+            <hr class="hr-dif" />
             <div class="personal-info">
               <div class="side-l"><span>인적사항</span></div>
               <div class="center">
@@ -92,7 +92,7 @@
                 <span>한국생산성본부</span>
               </div>
             </div>
-            <hr />
+            <hr class="hr1"/>
           </div>
         <div class="download-btn">
           <button type="button" class="save-btn">다운로드</button>

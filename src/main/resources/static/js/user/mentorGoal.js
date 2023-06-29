@@ -20,6 +20,8 @@ $(".bi-trash3").on("click", function () {
   let targetName = $(this).closest(".mentor-goal-name-box").find(".mentor-goal-file-name1").text();
   $(this).closest(".mentor-goal-name-box").find(".mentor-goal-file-name1").text("");
   $(this).closest(".mentor-goal-name-box").find(".mentor-goal-name1").addClass("mentor-goal-none");
+  $(this).closest(".mentor-goal-name-box").find(".mentor-goal-file-name2").text("");
+  $(this).closest(".mentor-goal-name-box").find(".mentor-goal-name2").addClass("mentor-goal-none");
 
   let $input = $("#mentor-goal-file");
   let oldFiles = $input[0].files;

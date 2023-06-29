@@ -37,7 +37,7 @@ $(".message-button").on("click", function () {
   });
 });
 
-$(".modal-wrap").on("click", function (e) {
+$('.modal-wrap').on("click", function (e) {
   if ($(e.target).hasClass("modal-wrap")) {
     $(".modal-wrap").addClass("none");
   }
