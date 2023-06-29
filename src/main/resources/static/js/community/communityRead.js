@@ -1,4 +1,3 @@
-
 // const dislikeBtn = document.querySelector('.bi-hand-thumbs-up');
 // const likeBtn = document.querySelector('.bi-hand-thumbs-up-fill');
 

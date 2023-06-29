@@ -13,4 +13,5 @@ public class PoliceBoardDto {
     private Long boardNumber;
     private Long policeCategory;
     private Long userNumber;
+    private String policeDate;
 }

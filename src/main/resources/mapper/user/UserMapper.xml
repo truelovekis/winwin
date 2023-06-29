@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.user.UserMapper">
+
     <!--회원가입-->
     <insert id="join">
         <selectKey keyProperty="userNumber" order="BEFORE" resultType="Long">
@@ -70,5 +71,4 @@
         INSERT INTO MENTOR (MENTOR_NUMBER, MENTOR_STATUS, USER_NUMBER, SUB_NUMBER)
         VALUES ();
     </insert>
-
 </mapper>

@@ -3,8 +3,17 @@
 
 <configuration>
     <typeAliases>
-<<<<<<< HEAD
-<!--        <typeAlias type="com.example.app.dto.UserDto" alias="userDto"/>-->
+        <!-- 나눔, 나눔 파일 Dto, Vo -->
+        <typeAlias type="com.example.winwin.dto.share.ShareDto" alias="shareDto"/>
+        <typeAlias type="com.example.winwin.vo.share.ShareVo" alias="shareVo"/>
+        <typeAlias type="com.example.winwin.dto.file.ShareFileDto" alias="shareFileDto"/>
+        <!--        -->
+
+        <!-- 신고 Dto -->
+        <typeAlias type="com.example.winwin.dto.police.PoliceBoardDto" alias="policeBoardDto"/>
+        <!--        -->
+
+        <!--        <typeAlias type="com.example.app.dto.UserDto" alias="userDto"/>-->
 
         <!-- mentor-->
         <typeAlias type="com.example.winwin.dto.mentor.MentorVo" alias="mentorVo"/>
@@ -13,7 +22,7 @@
         <typeAlias type="com.example.winwin.dto.mentor.CareerInfoVo" alias="careerInfoVo"/>
         <typeAlias type="com.example.winwin.dto.mentor.ReviewVo" alias="reviewVo"/>
         <typeAlias type="com.example.winwin.dto.mentor.CategoryVo" alias="categoryVo"/>
-    <typeAlias type="com.example.winwin.vo.board.CommunityVo" alias="communityVo"/>
+        <typeAlias type="com.example.winwin.vo.board.CommunityVo" alias="communityVo"/>
         <typeAlias type="com.example.winwin.vo.board.CommunityCommentVo" alias="communityCommentVo"/>
         <typeAlias type="com.example.winwin.dto.board.CommunityDto" alias="communityDto"/>
         <typeAlias type="com.example.winwin.dto.board.CommunityCommentDto" alias="communityCommentDto"/>
