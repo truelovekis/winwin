@@ -4,5 +4,13 @@
 <configuration>
     <typeAliases>
 <!--        <typeAlias type="com.example.app.dto.UserDto" alias="userDto"/>-->
+
+        <!-- mentor-->
+        <typeAlias type="com.example.winwin.dto.mentor.MentorVo" alias="mentorVo"/>
+        <typeAlias type="com.example.winwin.dto.mentor.CareerVo" alias="careerVo"/>
+        <typeAlias type="com.example.winwin.dto.mentor.SkillVo" alias="skillVo"/>
+        <typeAlias type="com.example.winwin.dto.mentor.CareerInfoVo" alias="careerInfoVo"/>
+        <typeAlias type="com.example.winwin.dto.mentor.ReviewVo" alias="reviewVo"/>
+        <typeAlias type="com.example.winwin.dto.mentor.CategoryVo" alias="categoryVo"/>
     </typeAliases>
 </configuration>

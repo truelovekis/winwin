@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>skill</title>
+</head>
+<link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
+<link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
+<link rel="stylesheet" th:href="@{/css/mentorProfile/skillUpdate.css}" />
+<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+<style>
+    body {
+        font-family: "NanumSquareLight";
+        font-family: "NanumSquare";
+        font-family: "NanumSquareBold";
+        font-family: "NanumSquareExtraBold";
+        font-family: "NanumSquareAcb";
+        font-family: "NanumSquareAceb";
+        font-family: "NanumSquareAcl";
+        font-family: "NanumSquareAcr";
+    }
+</style>
+<body>
+<header class="header" th:replace="fragment/header :: header"></header>
+<form th:action="@{/mentor/skill}" method="post" class="skill-box">
+<nav class="tw-fixed">
+    <button type="button" class="back-button">
+        <svg
+                width="24"
+                height="24"
+                stroke-width="0"
+                viewBox="0 0 24 24"
+                fill="current"
+                xmlns="http://www.w3.org/2000/svg"
+                class="tw-fill-slate-900"
+        >
+            <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M10.7071 4.2929C11.0976 4.68342 11.0976 5.31659 10.7071 5.70711L5.41423 10.9999H21C21.5523 10.9999 22 11.4477 22 11.9999C22 12.5522 21.5523 12.9999 21 12.9999H5.4142L10.7071 18.2929C11.0976 18.6834 11.0976 19.3166 10.7071 19.7071C10.3166 20.0976 9.68341 20.0976 9.29289 19.7071L2.29289 12.7071C2.10535 12.5195 2 12.2652 2 11.9999C2 11.7347 2.10536 11.4804 2.2929 11.2928L9.2929 4.29289C9.68342 3.90237 10.3166 3.90237 10.7071 4.2929Z"
+                    fill="inherit"
+            ></path>
+        </svg>
+    </button>
+    <p class="tw-text-lg">스킬</p>
+    <button type="submit" class="success-btn">완료</button>
+</nav>
+<div class="tw-pt-5">
+    <div class="tw-flex">
+        <h4 class="tw-mb-0">내 스킬을 선택해 주세요.</h4>
+        <div class="tw-flex2" >
+            <div class="tw-flexr2">
+                <div th:each="skill : ${skill}">
+                <button type="button" class="tw-boarder2">
+                    <h3 th:text="${skill.skillName}" class="tw-font-bold2"/>
+                    <input type="hidden" th:value="${skill.skillName}" name="skillName">
+                <div class="presentation">
+                    <svg
+                            width="16"
+                            height="16"
+                            stroke-width="0"
+                            viewBox="0 0 24 24"
+                            fill="current"
+                            xmlns="http://www.w3.org/2000/svg"
+                            type="solid"
+                            class="icn-white"
+                    >
+                        <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M5.29289 5.29289C5.68342 4.90237 6.31658 4.90237 6.70711 5.29289L12 10.5858L17.2929 5.29289C17.6834 4.90237 18.3166 4.90237 18.7071 5.29289C19.0976 5.68342 19.0976 6.31658 18.7071 6.70711L13.4142 12L18.7071 17.2929C19.0976 17.6834 19.0976 18.3166 18.7071 18.7071C18.3166 19.0976 17.6834 19.0976 17.2929 18.7071L12 13.4142L6.70711 18.7071C6.31658 19.0976 5.68342 19.0976 5.29289 18.7071C4.90237 18.3166 4.90237 17.6834 5.29289 17.2929L10.5858 12L5.29289 6.70711C4.90237 6.31658 4.90237 5.68342 5.29289 5.29289Z"
+                                fill="inherit"
+                        ></path>
+                    </svg>
+                </div>
+                </button>
+                </div>
+            </div>
+            <div class="tw-items">
+                <input type="text" class="form-control" placeholder="가지고 있는 스킬을 입력하세요." />
+                <svg
+                        width="20"
+                        height="20"
+                        stroke-width="0"
+                        viewBox="0 0 24 24"
+                        fill="current"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="tw-fill-slate-800"
+                >
+                    <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M15.4551 9.84879C15.4551 12.9451 12.9451 15.4551 9.84879 15.4551C6.75253 15.4551 4.24251 12.9451 4.24251 9.84879C4.24251 6.75253 6.75253 4.24251 9.84879 4.24251C12.9451 4.24251 15.4551 6.75253 15.4551 9.84879ZM16.0841 14.6165C17.0962 13.2948 17.6976 11.642 17.6976 9.84879C17.6976 5.51402 14.1836 2 9.84879 2C5.51402 2 2 5.51402 2 9.84879C2 14.1836 5.51402 17.6976 9.84879 17.6976C11.6421 17.6976 13.295 17.0961 14.6167 16.0839C14.6435 16.119 14.6729 16.1527 14.705 16.1848L20.2269 21.7067C20.6175 22.0972 21.2506 22.0972 21.6412 21.7067L21.7069 21.641C22.0975 21.2504 22.0975 20.6173 21.7069 20.2267L16.185 14.7048C16.1529 14.6727 16.1192 14.6433 16.0841 14.6165Z"
+                            fill="inherit"
+                    ></path>
+                </svg>
+                <button type="button" class="ins-btn">등록</button>
+            </div>
+        </div>
+        <div class="skillboard">
+            <p class="tw-text-sm">인기 스킬</p>
+            <div class="tw-flexr">
+                <button type="button" class="tw-boarder">
+                    <h3 class="tw-font-bold">Java</h3>
+                </button>
+                <button type="button" class="tw-boarder">
+                    <h3 class="tw-font-bold">SpringBoot</h3>
+                </button>
+                <button type="button" class="tw-boarder">
+                    <h3 class="tw-font-bold">MySQL</h3>
+                </button>
+                <button type="button" class="tw-boarder">
+                    <h3 class="tw-font-bold">javascript</h3>
+                </button>
+                <button type="button" class="tw-boarder">
+                    <h3 class="tw-font-bold">AWS</h3>
+                </button>
+                <button type="button" class="tw-boarder">
+                    <h3 class="tw-font-bold">Docker</h3>
+                </button>
+                <button type="button" class="tw-boarder">
+                    <h3 class="tw-font-bold">React</h3>
+                </button>
+                <button type="button" class="tw-boarder">
+                    <h3 class="tw-font-bold">phython</h3>
+                </button>
+                <button type="button" class="tw-boarder">
+                    <h3 class="tw-font-bold">커뮤니케이션</h3></button
+                ><button type="button" class="tw-boarder">
+                <h3 class="tw-font-bold">typescript</h3></button
+            ><button type="button" class="tw-boarder">
+                <h3 class="tw-font-bold">Github</h3>
+            </button>
+                <button type="button" class="tw-boarder">
+                    <h3 class="tw-font-bold">Spring</h3>
+                </button>
+                <button type="button" class="tw-boarder">
+                    <h3 class="tw-font-bold">git</h3>
+                </button>
+                <button type="button" class="tw-boarder">
+                    <h3 class="tw-font-bold">SQL</h3>
+                </button>
+                <button type="button" class="tw-boarder">
+                    <h3 class="tw-font-bold">데이터 분석</h3>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+<footer class="header" th:replace="fragment/footer :: footer"></footer>
+</body>
+<script
+        src="https://code.jquery.com/jquery-3.7.0.js"
+        integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+        crossorigin="anonymous"
+></script>
+<script th:src="@{/js/mentor/skillUpdate.js}"></script>
+<script th:src="@{/js/fragment/header.js}" ></script>
+</html>
