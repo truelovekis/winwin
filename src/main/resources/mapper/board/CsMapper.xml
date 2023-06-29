@@ -1,5 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.board.CsMapper">
+    <insert id="insert">
+        <selectKey keyProperty="csNumber" order="BEFORE" resultType="long">
+            select SEQ_CS.nextval from dual
+        </selectKey>
+        INSERT INTO CS(CS_NUMBER, CS_TITLE, CS_CONTENT, USER_NUMBER)
+        VALUES (#{csNumber}, #{csTitle}, #{csContent}, #{userNumber})
+    </insert>
+
+    <select id="select" resultType="csVo">
+        SELECT CS_NUMBER, CS_CONTENT, CS_TITLE, CS_DATE, C.USER_NUMBER, U.USER_ID,
+            U.USER_NICKNAME, U.USER_BELONG
+        FROM CS C JOIN WW_USER U
+        ON  C.USER_NUMBER = U.USER_NUMBER
+        WHERE C.CS_NUMBER = #{csNumber}
+    </select>
+
+    <select id="selectAll" resultType="csVo">
+        SELECT CS_NUMBER, CS_CONTENT, CS_TITLE, CS_DATE, C.USER_NUMBER, U.USER_ID
+        FROM CS C JOIN WW_USER U
+        ON  C.USER_NUMBER = U.USER_NUMBER
+        ORDER BY C.CS_NUMBER DESC
+    </select>
+
+
+
+    <update id="update">
+        UPDATE CS
+        SET CS_TITLE = #{csTitle}, CS_CONTENT = #{csContent}
+        WHERE CS_NUMBER = #{csNumber}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM CS
+        WHERE CS_NUMBER = #{csNumber}
+    </delete>
 
 </mapper>

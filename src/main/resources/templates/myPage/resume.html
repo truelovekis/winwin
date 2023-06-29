@@ -9,6 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
     <link rel="stylesheet" th:href="@{/css/myPage/resume.css}" />
     <link rel="stylesheet" th:href="@{/css/fragment/myPageSide.css}"/>
+    <link rel="stylesheet" th:href="@{/css/myPage/resumeModal.css}" />
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
     <style>
       body {
@@ -25,6 +26,7 @@
   </head>
   <body>
     <header class="header"  th:replace="fragment/header :: header"></header>
+    <article th:replace="myPage/resumeModal::resumeModal"></article>
     <main>
       <div class="wrap">
         <div class="container">
@@ -37,7 +39,7 @@
                 <h4 id="point-page">이력서</h4>
               </div>
               <div class="category-contain">
-                <h4>자기소개서</h4>
+                <h4><a class="no-point-page" th:href="@{/myPage/resumePr}">자기소개서</a></h4>
               </div>
             </div>
             <div class="my-mentor-content">
@@ -51,11 +53,13 @@
                   <img th:src="@{/img/search.PNG}" alt="">
                 </div>
               </div>
-              <div class="resume-plus">
-                <svg xmlns="http://www.w3.org/2000/svg" color="#c5c5c5" width="30" height="30" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                </svg>
-              </div>
+              <a th:href="@{/myPage/resumeWrite}">
+                <div class="resume-plus">
+                  <svg xmlns="http://www.w3.org/2000/svg" color="#c5c5c5" width="30" height="30" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                  </svg>
+                </div>
+              </a>
             </div>
           </div>
         </div>
@@ -67,6 +71,14 @@
       integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
       crossorigin="anonymous"
     ></script>
+    <script th:src="@{/lib/jspdf.min.js}"></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+            integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+    ></script>
     <script th:src="@{/js/fragment/header.js}" ></script>
+    <script th:src="@{/js/myPage/resumeModal.js}"></script>
   </body>
 </html>

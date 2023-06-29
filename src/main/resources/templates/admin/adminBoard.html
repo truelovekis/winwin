@@ -45,8 +45,13 @@
               </a>
             </div>
             <div class="small-category2">
-              <a href="#" class="small-category-a">
+              <a th:href="@{/admin/jobBoard}" class="small-category-a">
                 <h4>진로 정보</h4>
+              </a>
+            </div>
+            <div class="small-category3">
+              <a th:href="@{/admin/share}" class="small-category-a">
+                <h4>나눔</h4>
               </a>
             </div>
           </div>
@@ -55,23 +60,27 @@
       <!--  -->
 
       <!-- 회원 정보 검색 및 테이블 -->
-      <form action="#">
+      <form action="/admin/searchBoard" method="get">
+<!--        <form class="new-post-form" th:action="@{/admin/board}" method="post" enctype="multipart/form-data">-->
         <div class="search">
           <span>작성자 : </span>
-          <input type="text" placeholder="작성자" class="search-text">
+          <input name="name" type="text" placeholder="작성자" class="search-text" style="font-family: NanumSquareAcr;">
           <span>게시판 :  </span>
-          <select name="identity" id="identity" class="search-text2">
-            <option value="1">직장인</option>
-            <option value="2">대학생</option>
+          <select name="categoryCode" id="identity" class="search-text2" style="font-family: NanumSquareAcr;">
+            <option value="">선택</option>
+            <option value="30">직장인</option>
+            <option value="20">대학생</option>
+            <option value="10">고등학생</option>
           </select>
           <span>작성일 : </span>
-          <input class="datepicker">
+          <input name="communityDate" class="datepicker" style="font-family: NanumSquareAcr;">
           <span>공개/비공개 : </span>
-          <select name="public-secret" id="public-secret" class="search-text2">
-            <option value="public">공개</option>
-            <option value="secret">비공개</option>
+          <select name="status" id="public-secret" class="search-text2" style="font-family: NanumSquareAcr;">
+            <option value="" style="font-family: NanumSquareAcr;">선택</option>
+            <option value="1" style="font-family: NanumSquareAcr;">공개</option>
+            <option value="0" style="font-family: NanumSquareAcr;">비공개</option>
           </select>
-          <button type="button" class="search-btn">검색</button>
+          <button type="text"  class="search-btn" style="font-family: NanumSquareAcr;">검색</button>
         </div>
       </form>
 
@@ -80,7 +89,7 @@
           <thead>
           <tr class="user-table-category">
             <td class="checkbox">
-              <input type="checkbox" name="" id="checkAll">
+              <input type="checkbox" name="" id="checkAll" style="font-family: NanumSquareAcr;">
             </td>
             <td class="board-category" align="center">게시판</td>
             <td class="board-name" align="center">글 제목</td>
@@ -93,41 +102,23 @@
 
 
           <tbody>
-          <tr class="user-table-category">
+          <tr class="user-table-category" th:each="admin : ${adminList}">
             <td class="checkbox">
-              <input type="checkbox" name="" class="check" id="checking">
+              <input type="checkbox" name="" class="check check-box" id="checking" th:data-number="${admin.communityNumber}">
             </td>
-            <td class="board-category" align="center">직장인</td>
-            <td class="board-name" align="center">개발자</td>
-            <td class="board-writer" align="center">aaa</td>
-            <td class="board-writer-date" align="center">2023-06-01</td>
+            <td class="board-category" align="center" style="font-family: NanumSquareAcr;" th:text="${admin.categoryName}"></td>
+            <td class="board-name" align="center" style="font-family: NanumSquareAcr;" th:text="${admin.communityTitle}"></td>
+            <td class="board-writer" align="center" style="font-family: NanumSquareAcr;" th:text="${admin.userName}"></td>
+            <td class="board-writer-date" align="center" style="font-family: NanumSquareAcr;" th:text="${#strings.substring(admin.communityDate, 0, 10)}"></td>
             <td class="board-public-secret">
-              <select name="public-secret-select" class="public-secret-select">
+              <select name="public-secret-select" class="public-secret-select" style="font-family: NanumSquareAcr;">
                 <option value="1">공개</option>
-                <option value="2">비공개</option>
+                <option value="0">비공개</option>
               </select>
             </td>
             <td class="board-status" align="center">
-              <div class="public-button public-secret-button">공개</div>
-            </td>
-          </tr>
-
-          <tr class="user-table-category">
-            <td class="checkbox">
-              <input type="checkbox" name="" class="check" id="checking">
-            </td>
-            <td class="board-category" align="center">대학생</td>
-            <td class="board-name" align="center">직업에 대한 고민이 있습니다..</td>
-            <td class="board-writer" align="center">bbb</td>
-            <td class="board-writer-date" align="center">2023-06-01</td>
-            <td class="board-public-secret">
-              <select name="public-secret-select" class="public-secret-select">
-                <option value="1">공개</option>
-                <option value="2">비공개</option>
-              </select>
-            </td>
-            <td class="board-status" align="center">
-              <div class="secret-button public-secret-button">비공개</div>
+              <div th:if="${admin.communityStatus == '1'}" class="public-button public-secret-button Y" th:text="공개"></div>
+              <div th:if="${admin.communityStatus == '0'}" class="public-button public-secret-button N" th:text="비공개"></div>
             </td>
           </tr>
           </tbody>
@@ -138,7 +129,7 @@
 
     <!-- 게시글 공개/비공개 설정 시 변경 버튼 -->
     <div class="remove-delete-button">
-      <button class="remove-button-btn">변경</button>
+      <button type="button" class="remove-button-btn" id="changeStatusBtn" style="font-family: NanumSquareAcr;">변경</button>
     </div>
     <!--  -->
   </div>
@@ -174,7 +165,8 @@
   })
 </script>
 <script th:src="@{/js/admin/adminUser.js}"></script>
-<script th:src="@{/js/admin/adminJobBoard.js}"></script>
+<script th:src="@{/js/admin/adminBoard.js}"></script>
+<script th:src="@{/js/admin/status.js}"></script>
 <script th:src="@{/js/fragment/header.js}" ></script>
 <!--  -->
 </body>

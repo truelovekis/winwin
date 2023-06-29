@@ -7,10 +7,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/careerpath/*")
+@RequestMapping("/career/*")
 public class careerpath {
-    @GetMapping
+
+    @GetMapping("/list")
     public String careerpathForm(){
         return "careerpath/careerpath";
+    }
+
+    @GetMapping("detail")
+    public String careerDetail(){
+        return "careerpath/careerpathdetail";
     }
 }

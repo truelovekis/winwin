@@ -216,7 +216,7 @@ tr:last-child td {
     cursor: pointer;
 }
 
-.mento-button {
+.Y{
     background-color: #eaf4ff;
     color: #007aff;
     border: none;
@@ -227,9 +227,9 @@ tr:last-child td {
     width: 60px;
 }
 
-.menti-button {
-    background-color: rgb(255, 237, 237);
-    color: red;
+.N{
+    background-color: rgb(220 255 226);
+    color: #587c60;
     border: none;
     border-radius: 5px;
     padding: 7px 5px;

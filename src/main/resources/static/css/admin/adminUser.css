@@ -180,7 +180,7 @@
     padding: 5px 5px;
     color: gray;
     font-size: 12px;
-    height: 150px;
+    height: 112px;
     border: none;
 }
 
@@ -211,25 +211,35 @@ tr:last-child td {
     cursor: pointer;
 }
 
-.mento-button {
+.Y {
     background-color: #eaf4ff;
     color: #007aff;
     border: none;
     border-radius: 5px;
-    padding: 2px 6px;
+    padding: 6px 11px;
     font-weight: bold;
     cursor: pointer;
 }
 
-.menti-button {
-    background-color: rgb(255, 237, 237);
-    color: red;
+.N {
+    background-color: rgb(220 255 226);
+    color: #587c60;
     border: none;
     border-radius: 5px;
-    padding: 2px 6px;
+    padding: 6px 11px;
     font-weight: bold;
     cursor: pointer;
 }
+
+/*.menti-button {*/
+/*    background-color: rgb(255, 237, 237);*/
+/*    color: red;*/
+/*    border: none;*/
+/*    border-radius: 5px;*/
+/*    padding: 6px 11px;*/
+/*    font-weight: bold;*/
+/*    cursor: pointer;*/
+/*}*/
 
 /* tbody {
   height: 20px;
@@ -273,7 +283,7 @@ tr:last-child td {
 }
 
 .search-text2 {
-    width: 80px;
+    width: 95px;
     height: 25px;
     padding: 0px 5px;
     border-radius: 5px;
@@ -289,7 +299,7 @@ tr:last-child td {
 }
 
 .delete-button {
-    margin-left: 985px;
+    margin-left: 974px;
     margin-top: 10px;
 }
 
@@ -298,7 +308,7 @@ tr:last-child td {
     color: #007aff;
     border: none;
     border-radius: 5px;
-    padding: 8px 8px;
+    padding: 8px 16px;
     font-weight: bold;
     cursor: pointer;
 }
@@ -306,4 +316,8 @@ tr:last-child td {
 /*input font 적용 css */
 input {
     font-family: "NanumSquare";
+}
+
+.hide{
+    display: none;
 }

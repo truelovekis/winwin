@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>관리자 페이지 - 게시글 관리 - 진로 정보</title>
+  <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
+  <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
+  <link rel="stylesheet" th:href="@{/css/fragment/adminSideBar.css}" />
+  <link rel="stylesheet" th:href="@{/css/admin/adminShare.css}" />
+  <link rel="stylesheet" th:href="@{/css/admin/datepicker.css}">
+  <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+  <style>
+    body {
+      font-family: "NanumSquareLight";
+      font-family: "NanumSquare";
+      font-family: "NanumSquareBold";
+      font-family: "NanumSquareExtraBold";
+      font-family: "NanumSquareAcb";
+      font-family: "NanumSquareAceb";
+      font-family: "NanumSquareAcl";
+      font-family: "NanumSquareAcr";
+    }
+  </style>
+</head>
+
+<body>
+<header class="header" th:replace="fragment/header :: header"></header>
+<div class="admin-main">
+  <div class="admin-app">
+    <!-- 관리자 사이드 메뉴 -->
+    <div class="admin-container" th:replace="fragment/adminSideBar :: adminSideBar"></div>
+    <!-- 관리자 사이드 메뉴 끝 -->
+
+    <!-- 관리자 카테고리  -->
+    <div class="admin-category">
+      <div class="category">
+        <div class="big-category">
+          <h2>게시글 관리</h2>
+
+          <div class="small-category-kind">
+            <div class="small-category1">
+              <a th:href="@{/admin/board}" class="small-category-a">
+                <h4>커뮤니티 정보</h4>
+              </a>
+            </div>
+            <div class="small-category2">
+              <a th:href="@{/admin/jobBoard}" class="small-category-a">
+                <h4>진로 정보</h4>
+              </a>
+            </div>
+            <div class="small-category3">
+              <a th:href="@{/admin/share}" class="small-category-a">
+                <h4>나눔</h4>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--  -->
+
+      <!-- 회원 정보 검색 및 테이블 -->
+      <form action="/admin/searchShare" method="get">
+        <div class="search">
+          <span>작성자 : </span>
+          <input name="name" type="text" placeholder="작성자" class="search-text" style="font-family: NanumSquareAcr;">
+          <span>제목 : </span>
+          <input name="title" type="text" placeholder="제목" class="search-text" style="font-family: NanumSquareAcr;">
+
+
+          <span>작성일 : </span>
+          <input name="shareDate" class="datepicker" style="font-family: NanumSquareAcr;">
+
+          <span>공개/비공개 : </span>
+          <select name="status" id="public-secret" class="search-text2" style="font-family: NanumSquareAcr;">
+            <option value="" style="font-family: NanumSquareAcr;">선택</option>
+            <option value="1" style="font-family: NanumSquareAcr;">공개</option>
+            <option value="0" style="font-family: NanumSquareAcr;">비공개</option>
+          </select>
+          <button type="text" class="search-btn" style="font-family: NanumSquareAcr;">검색</button>
+        </div>
+      </form>
+
+
+      <div class="border-box">
+        <table class="user-table" border="1px" width="100%" height="300">
+          <thead>
+          <tr class="user-table-category">
+            <td class="checkbox">
+              <input type="checkbox" name="" id="checkAll">
+            </td>
+            <td class="board-category" align="center">작성자</td>
+            <td class="board-name" align="center">글 제목</td>
+            <td class="board-writer" align="center">글 내용</td>
+            <td class="board-writer-date" align="center">작성일</td>
+            <td class="board-public-secret" align="center">공개/비공개</td>
+            <td class="board-status" align="center">상태</td>
+          </tr>
+          </thead>
+
+
+          <tbody>
+          <tr class="user-table-category" th:each="admin : ${adminShareList}">
+            <td class="checkbox">
+              <input type="checkbox" name="" class="check check-box" id="checking" th:data-number="${admin.shareNumber}">
+            </td>
+            <td class="board-category" align="center" th:text="${admin.userName}"></td>
+            <td class="board-name" align="center" th:text="${admin.shareTitle}"></td>
+            <td class="board-writer" align="center" th:text="${admin.shareContent}"></td>
+            <td class="board-writer-date" align="center" th:text="${#strings.substring(admin.shareDate, 0, 10)}"></td>
+            <td class="board-public-secret" align="center">
+              <select name="public-secret-select" class="public-secret-select">
+                <option value="1">공개</option>
+                <option value="0">비공개</option>
+              </select>
+            </td>
+            <td class="board-status" align="center">
+              <div th:if="${admin.shareStatus} == 1" class="public-button public-secret-button Y" th:text="공개"></div>
+              <div th:if="${admin.shareStatus} == 0" class="public-button public-secret-button N" th:text="비공개"></div>
+
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <!--  -->
+    </div>
+
+    <!-- 버튼 어떻게 바꿀지 구상중... -->
+    <div class="remove-delete-button">
+      <button type="button" class="remove-button-btn" id="changeStatusBtn" style="font-family: NanumSquareAcr;">변경</button>
+    </div>
+    <!--  -->
+  </div>
+</div>
+</div>
+
+
+<footer class="header" th:replace="fragment/footer :: footer"></footer>
+<script
+        src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+        crossorigin="anonymous"
+></script>
+<script th:src="@{/js/admin/adminUser.js}"></script>
+<script th:src="@{/js/admin/adminJobBoard.js}"></script>
+<script th:src="@{/js/admin/shareStatus.js}"></script>
+<script th:src="@{/js/fragment/header.js}" ></script>
+
+<!-- 작성일 jquery-ui -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+  $(function(){
+    $.datepicker.setDefaults({
+      dateFormat: "yy-mm-dd",
+      prevText: "이전 달",
+      nextText: "다음 달",
+      monthNames: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+      monthNamesShort: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+      dayNames: ["일", "월", "화", "수", "목", "금", "토"],
+      dayNamesShort: ["일", "월", "화", "수", "목", "금", "토"],
+      dayNamesMin: ["일", "월", "화", "수", "목", "금", "토"],
+      showMonthAfterYear: true,
+      yearSuffix: "년",
+    });
+
+    $('.datepicker').datepicker();
+  })
+</script>
+<!--  -->
+</body>
+</html>

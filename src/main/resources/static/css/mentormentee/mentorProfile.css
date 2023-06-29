@@ -11,6 +11,7 @@ section {
   display: flex;
   align-items: center;
   margin: 15px;
+  justify-content: space-between;
 }
 
 .mento-profile-photo-box {
@@ -292,7 +293,7 @@ input:checked + .slider:before {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
-  z-index: 1;
+  z-index: 10;
 }
 
 .select-box {
@@ -553,7 +554,7 @@ input:checked + .slider:before {
 ul {
   list-style-type: none;
   padding-left: 0px;
-  overflow-y: scroll;
+  /*overflow-y: scroll;*/
 }
 
 .tag {
@@ -636,3 +637,13 @@ ul {
   transition: all ease 0.5s;
 }
 /* /태그 필터 */
+
+.point2 {
+  font-size: 13px;
+  color: #6c6c6c;
+}
+
+.profile-btn {
+  display: flex;
+  align-items: center;
+}

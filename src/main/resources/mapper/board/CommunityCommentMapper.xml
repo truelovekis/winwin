@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.board.CommunityCommentMapper">
-    
+
+    <insert id="insert">
+        <selectKey keyProperty="commentNumber" order="BEFORE" resultType="long">
+            select SEQ_COMMUNITY_COMMENT.nextval from dual
+        </selectKey>
+        INSERT INTO COMMUNITY_COMMENT (COMMENT_NUMBER, COMMENT_CONTENT, COMMUNITY_NUMBER, USER_NUMBER)
+        VALUES (#{commentNumber}, #{commentContent}, #{communityNumber}, #{userNumber})
+    </insert>
+
+    <select id="selectList" resultType="communityCommentVo">
+        SELECT COMMENT_NUMBER, COMMENT_CONTENT, COMMENT_DATE, COMMUNITY_NUMBER, R.USER_NUMBER,
+               USER_ID
+        FROM WW_USER U JOIN COMMUNITY_COMMENT R
+                             ON COMMUNITY_NUMBER = #{communityNumber} AND U.USER_NUMBER = R.USER_NUMBER
+        ORDER BY COMMENT_NUMBER DESC
+    </select>
+
+    <select id="select" resultType="communityCommentVo">
+        SELECT COMMENT_NUMBER, COMMENT_CONTENT, COMMENT_DATE, COMMUNITY_NUMBER, R.USER_NUMBER,
+               USER_ID
+        FROM WW_USER U JOIN COMMUNITY_COMMENT R
+                             ON COMMENT_NUMBER = #{commentNumber} AND U.USER_NUMBER = R.USER_NUMBER
+    </select>
+
+    <update id="update">
+        UPDATE COMMUNITY_COMMENT
+        SET COMMENT_CONTENT = #{commentContent}, COMMENT_DATE = SYSDATE
+        WHERE COMMENT_NUMBER = #{commentNumber}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM COMMUNITY_COMMENT
+        WHERE COMMENT_NUMBER = #{commentNumber}
+    </delete>
+
 </mapper>
