@@ -7,8 +7,8 @@
         <selectKey keyProperty="studyNumber" order="BEFORE" resultType="long">
             SELECT SEQ_STUDY.NEXTVAL FROM DUAL
         </selectKey>
-        insert into STUDY (STUDY_NUMBER, STUDY_TITLE, STUDY_CONTENT, STUDY_SUMMARY_TITLE, STUDY_SUMMARY_CONTENT, STUDY_ROLE, STUDY_STATUS, STUDY_OPENLINK, USER_NUMBER, CATEGORY_NUMBER, PURPOSE_NUMBER, TIME_NUMBER)
-        values (#{studyNumber}, #{studyTitle}, #{studyContent}, #{studySummaryTitle}, #{studySummaryContent}, #{studyRole}, #{studyStatus}, #{studyOpenlink}, #{userNumber}, #{categoryNumber}, #{purposeNumber}, #{timeNumber})
+        insert into STUDY (STUDY_NUMBER, STUDY_TITLE, STUDY_CONTENT, STUDY_SUMMARY_TITLE, STUDY_SUMMARY_CONTENT, STUDY_ROLE, STUDY_OPENLINK, USER_NUMBER, CATEGORY_NUMBER, PURPOSE_NUMBER, TIME_NUMBER)
+        values (#{studyNumber}, #{studyTitle}, #{studyContent}, #{studySummaryTitle}, #{studySummaryContent}, #{studyRole}, #{studyOpenlink}, #{userNumber}, #{categoryNumber}, #{purposeNumber}, #{timeNumber})
     </insert>
 
     <!--프로젝트,모임 게시글 수정-->
@@ -24,7 +24,7 @@
         WHERE STUDY_NUMBER = #{studyNumber}
     </delete>
 
-    <!--프로젝트,모임 게시물 안 조회-->
+    <!--프로젝트,모임 게시물 READ 조회-->
     <select id="studySelect" resultType="studyDto">
         SELECT STUDY_NUMBER, STUDY_TITLE, STUDY_CONTENT, STUDY_SUMMARY_TITLE, STUDY_SUMMARY_CONTENT, STUDY_ROLE, STUDY_STATUS, STUDY_OPENLINK, STUDY_DATE,
                S.USER_NUMBER, U.USER_NICKNAME
@@ -34,13 +34,14 @@
     </select>
 
     <!--프로젝트, 모임 메인페이지 슬라이드 -->
-    <select id="mainSelect" resultType="studyDto">
+    <select id="mainSelect" resultType="studyVo">
         SELECT S.STUDY_NUMBER, STUDY_TITLE, STUDY_SUMMARY_CONTENT,
                STUDY_STATUS, USER_NUMBER, CATEGORY_NUMBER, S.PURPOSE_NUMBER,
                P.PURPOSE_NAME,
-               L.LIKE_CNT
+               L.LIKE_CNT,
+               DECODE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'), TO_CHAR(S.STUDY_DATE, 'YYYY-MM-DD'), 'T', 'F') AS IS_NEW
         FROM STUDY S JOIN STUDY_PURPOSE_CATEGORY P
-                          ON S.STUDY_STATUS = '1' AND S.PURPOSE_NUMBER = P.PURPOSE_NUMBER
+                          ON S.STUDY_STATUS = '1' AND S.CATEGORY_NUMBER = #{cateNumber} AND S.PURPOSE_NUMBER = P.PURPOSE_NUMBER
                      LEFT JOIN (
             SELECT STUDY_NUMBER, COUNT(user_number) AS LIKE_CNT FROM STUDY_LIKE
             GROUP BY study_number

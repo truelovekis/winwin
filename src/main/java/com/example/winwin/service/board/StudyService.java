@@ -2,6 +2,7 @@ package com.example.winwin.service.board;
 
 import com.example.winwin.dto.board.StudyDto;
 import com.example.winwin.mapper.board.StudyMapper;
+import com.example.winwin.vo.board.StudyVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,8 +52,8 @@ public class StudyService {
     }
 
     @Transactional(readOnly = true)
-    public List<StudyDto> findMainList(){
-        return studyMapper.mainSelect();
+    public List<StudyVo> findMainList(int cateNumber){
+        return studyMapper.mainSelect(cateNumber);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.example.winwin.mapper.board;
 
 import com.example.winwin.dto.board.StudyDto;
+import com.example.winwin.vo.board.StudyVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public interface StudyMapper {
     public void studyUpdate(StudyDto studyDto);
 
     //    프로젝트,모임 메인페이지
-    public List<StudyDto> mainSelect();
+    public List<StudyVo> mainSelect(int cateNumber);
 
     //    글 상세보기
     public StudyDto studySelect(Long studyNumber);

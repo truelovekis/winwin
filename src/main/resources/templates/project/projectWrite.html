@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,103 +19,104 @@
             font-family: "NanumSquareAcb";
             font-family: "NanumSquareAceb";
             font-family: "NanumSquareAcl";
-            font-family: "NanumSquareAcr";
+            font-family: "NanumSquareAcr"
         }
     </style>
 </head>
 <body>
 <header class="header" th:replace="fragment/header :: header"></header>
 <section>
-    <div class="container-box">
-        <div class="middle-box">
-            <div class="Title">
-                <div class="sideTitle"><p>사이드 프로젝트</p></div>
-                <div class="contentTitle">
-                    <input class="title" name="" id="" cols="30" rows="10" placeholder="제목을 입력하세요." style="font-family:NanumSquareLight;"></input>
+    <form action="/project/write" method="post" >
+        <div class="container-box">
+            <div class="middle-box">
+                <div class="Title">
+                    <div class="sideTitle"><p>프로젝트 / 모임</p></div>
+                    <div class="contentTitle">
+                        <input class="title" name="studyTitle" cols="30" rows="10" placeholder="제목을 입력하세요." style="font-family:NanumSquareLight;"></input>
+                    </div>
+                </div> <!-- div.Title -->
+
+
+                <h3 class="summary-h3">요약</h3>
+                <div class="summary">
+                    <div class="summaryTitle">
+                        <input class="title2" name="studySummaryTitle" placeholder="프로젝트 요약을 입력하세요." style="font-family:NanumSquareLight;">
+                    </div>
+                    <div class="summaryContent">
+                        <textarea class="content" name="studySummaryContent" cols="30" rows="10" style="font-family:NanumSquareLight; line-height: 20px; " placeholder="예시 - 온/오프라인으로 달리기 모임을 만들고 찾을 수 있는 앱을 기획 중입니다. 현재 기획자 1명, 백엔드 개발자 1명이 있고, 함께하실 디자이너와 프론트 개발자를 찾고 있어요!"></textarea>
+                    </div>
+                </div> <!-- div.summary -->
+
+
+
+                <h3 class="recruitment-h3">모집 역할</h3>
+                <div class="recruitment">
+                    <input class="recruitmentTitle" name="studyRole" cols="30" rows="10"><p></p></input>
                 </div>
-            </div> <!-- div.Title -->
 
 
-            <h3 class="summary-h3">요약</h3>
-            <div class="summary">
-                <div class="summaryTitle">
-                    <input class="title2" placeholder="프로젝트 요약을 입력하세요." style="font-family:NanumSquareLight;">
+
+                <h3 class="openChat-box-h3">오픈 채팅방 링크</h3>
+                <div class="openChat-box">
+                    <input class="openChat-link" name="studyOpenlink" cols="30" rows="10"><p></p></input>
                 </div>
-                <div class="summaryContent">
-                    <textarea class="content" id="" cols="30" rows="10" style="font-family:NanumSquareLight; line-height: 20px; " placeholder="예시 - 온/오프라인으로 달리기 모임을 만들고 찾을 수 있는 앱을 기획 중입니다. 현재 기획자 1명, 백엔드 개발자 1명이 있고, 함께하실 디자이너와 프론트 개발자를 찾고 있어요!"></textarea>
+
+                <h3 class="project-box-h3">상태 처리</h3>
+                <div class="recruit">
+                    <input type="radio" value="" name="recruit" checked/> 모집 중
+                    <input type="radio" value="" name="recruit"/> 모집 완료
                 </div>
-            </div> <!-- div.summary -->
+
+                <h3 class="project-box-h3">카테고리</h3>
+                <div class="project-box">
+                    <input type="radio" value="1" name="categoryNumber" /> 프로젝트
+                    <input type="radio" value="2" name="categoryNumber"/> 모임
+                </div>
+
+
+                <h3 class="radioButton-h3">목적</h3>
+                <div class="radioButton">
+                    <input type="radio" value="1" name="purposeNumber"/> 포트폴리오/직무 역량 강화
+                    <input type="radio" value="2" name="purposeNumber"/> 창업/수익 창출
+                    <input type="radio" value="3" name="purposeNumber"/> 재미/네트워킹
+                </div>
 
 
 
-            <h3 class="recruitment-h3">모집 역할</h3>
-            <div class="recruitment">
-                <input class="recruitmentTitle" id="" cols="30" rows="10"><p></p></input>
-            </div>
+                <h3 class="timeRadio-h3">참여 시간</h3>
+                <div class="timeRadio">
+                    <input type="radio" value="1" name="timeNumber"/> 매주 4시간 이하
+                    <input type="radio" value="2" name="timeNumber"/> 매주 4-10시간
+                    <input type="radio" value="3" name="timeNumber"/> 매주 10시간 이상
+                </div>
 
 
-
-            <h3 class="openChat-box-h3">오픈 채팅방 링크</h3>
-            <div class="openChat-box">
-                <input class="openChat-link" id="" cols="30" rows="10"><p></p></input>
-            </div>
-
-            <h3 class="project-box-h3">상태 처리</h3>
-            <div class="project-box">
-                <input type="radio" value="" name="project" checked/> 모집 중
-                <input type="radio" value="" name="project"/> 모집 완료
-            </div>
-
-            <h3 class="project-box-h3">카테고리</h3>
-            <div class="project-box">
-                <input type="radio" value="1" name="project" /> 프로젝트
-                <input type="radio" value="2" name="project"/> 모임
-            </div>
+                <h3 class="profil-h3">소개</h3>
+                <div class="Profil">
+                    <textarea class="projectProfil" name="studyContent" cols="30" rows="10" placeholder="프로젝트 소개를 입력하세요." style="font-family:NanumSquareLight;"></textarea>
+                </div>
 
 
-            <h3 class="radioButton-h3">목적</h3>
-            <div class="radioButton">
-                <input type="radio" value="" name="purpose"/> 포트폴리오/직무 역량 강화
-                <input type="radio" value="" name="purpose"/> 창업/수익 창출
-                <input type="radio" value="" name="purpose"/> 재미/네트워킹
-            </div>
-
-
-
-            <h3 class="timeRadio-h3">참여 시간 (선택)</h3>
-            <div class="timeRadio">
-                <input type="radio" value="" name="time"/> 매주 4시간 이하
-                <input type="radio" value="" name="time"/> 매주 4-10시간
-                <input type="radio" value="" name="time"/> 매주 10시간 이상
-                <input type="radio" value="" name="time"/> 선택 안함
-            </div>
-
-
-            <h3 class="profil-h3">소개</h3>
-            <div class="Profil">
-                <textarea class="projectProfil" id="" cols="30" rows="10" placeholder="프로젝트 소개를 입력하세요." style="font-family:NanumSquareLight;"></textarea>
-            </div>
-
-
-        </div> <!-- div.middle-box -->
-        <div class="small-box">
-            <div class="five"><svg width="22" height="23" stroke-width="0" viewBox="0 0 24 24" fill="current" xmlns="http://www.w3.org/2000/svg" type="solid" class="tw-fill-slate-500 tw-w-4 tw-h-4 tw-flex-none"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.92893 4.92893C6.8043 3.05357 9.34784 2 12 2C14.6522 2 17.1957 3.05357 19.0711 4.92893C20.9464 6.8043 22 9.34784 22 12C22 13.3132 21.7413 14.6136 21.2388 15.8268C20.7362 17.0401 19.9997 18.1425 19.0711 19.0711C18.1425 19.9997 17.0401 20.7362 15.8268 21.2388C14.6136 21.7413 13.3132 22 12 22C10.6868 22 9.38642 21.7413 8.17317 21.2388C6.95991 20.7362 5.85752 19.9997 4.92893 19.0711C4.00035 18.1425 3.26375 17.0401 2.7612 15.8268C2.25866 14.6136 2 13.3132 2 12C2 9.34784 3.05357 6.8043 4.92893 4.92893ZM16.2433 10.169C16.6128 9.75846 16.5795 9.12617 16.169 8.75671C15.7585 8.38726 15.1262 8.42053 14.7567 8.83104L10.9618 13.0476L9.20711 11.2929C8.81659 10.9023 8.18343 10.9023 7.7929 11.2929C7.40237 11.6834 7.40237 12.3165 7.79289 12.7071L10.2929 15.2071C10.4869 15.4011 10.752 15.5069 11.0263 15.4997C11.3005 15.4925 11.5598 15.3729 11.7433 15.169L16.2433 10.169Z" fill="inherit"></path></svg><p>제목은 프로젝트를 직관적으로 알 수 있게 작성해주세요. <span class="because">(50자이내)</span></p></div>
-            <div class="oneFive"><svg width="27" height="27" stroke-width="0" viewBox="0 0 24 24" fill="current" xmlns="http://www.w3.org/2000/svg" type="solid" class="tw-fill-slate-5000 tw-w-4 tw-h-4 tw-flex-none"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.92893 4.92893C6.8043 3.05357 9.34784 2 12 2C14.6522 2 17.1957 3.05357 19.0711 4.92893C20.9464 6.8043 22 9.34784 22 12C22 13.3132 21.7413 14.6136 21.2388 15.8268C20.7362 17.0401 19.9997 18.1425 19.0711 19.0711C18.1425 19.9997 17.0401 20.7362 15.8268 21.2388C14.6136 21.7413 13.3132 22 12 22C10.6868 22 9.38642 21.7413 8.17317 21.2388C6.95991 20.7362 5.85752 19.9997 4.92893 19.0711C4.00035 18.1425 3.26375 17.0401 2.7612 15.8268C2.25866 14.6136 2 13.3132 2 12C2 9.34784 3.05357 6.8043 4.92893 4.92893ZM16.2433 10.169C16.6128 9.75846 16.5795 9.12617 16.169 8.75671C15.7585 8.38726 15.1262 8.42053 14.7567 8.83104L10.9618 13.0476L9.20711 11.2929C8.81659 10.9023 8.18343 10.9023 7.7929 11.2929C7.40237 11.6834 7.40237 12.3165 7.79289 12.7071L10.2929 15.2071C10.4869 15.4011 10.752 15.5069 11.0263 15.4997C11.3005 15.4925 11.5598 15.3729 11.7433 15.169L16.2433 10.169Z" fill="inherit"></path></svg><p>어떤 프로젝트인지 이해하기 쉽도록 명확하고 간결하게 요약해주새요. <span class="because">(150자이내)</span></p></div>
-            <div class="profilContent">
-                <ul class="listTitle"><svg width="14" height="14" stroke-width="0" viewBox="0 0 22 22" fill="current" xmlns="http://www.w3.org/2000/svg" type="solid" class="tww-fill-slate-500 tw-w-4 tw-h-4 tw-flex-none"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.92893 4.92893C6.8043 3.05357 9.34784 2 12 2C14.6522 2 17.1957 3.05357 19.0711 4.92893C20.9464 6.8043 22 9.34784 22 12C22 13.3132 21.7413 14.6136 21.2388 15.8268C20.7362 17.0401 19.9997 18.1425 19.0711 19.0711C18.1425 19.9997 17.0401 20.7362 15.8268 21.2388C14.6136 21.7413 13.3132 22 12 22C10.6868 22 9.38642 21.7413 8.17317 21.2388C6.95991 20.7362 5.85752 19.9997 4.92893 19.0711C4.00035 18.1425 3.26375 17.0401 2.7612 15.8268C2.25866 14.6136 2 13.3132 2 12C2 9.34784 3.05357 6.8043 4.92893 4.92893ZM16.2433 10.169C16.6128 9.75846 16.5795 9.12617 16.169 8.75671C15.7585 8.38726 15.1262 8.42053 14.7567 8.83104L10.9618 13.0476L9.20711 11.2929C8.81659 10.9023 8.18343 10.9023 7.7929 11.2929C7.40237 11.6834 7.40237 12.3165 7.79289 12.7071L10.2929 15.2071C10.4869 15.4011 10.752 15.5069 11.0263 15.4997C11.3005 15.4925 11.5598 15.3729 11.7433 15.169L16.2433 10.169Z" fill="inherit"></path></svg><p>소개에는 이런 내용이 있으면 좋아요👇</p>
-                    <li>어떤 프로젝트인지</li>
-                    <li>프로젝트를 기획한 배경</li>
-                    <li>프로젝트의 목적이나 달성하고 싶은 목표</li>
-                    <li>모집하고 싶은 역할과 인원수</li>
-                    <li>프로젝트 진행 방식</li>
-                </ul>
-                <p class="other">이미 진행 중인 프로젝트라면, 현재 구성원과 진행 상황을 알려주세요.</p>
-            </div>
-            <div class="button">
-                <button type="button" class="writeOk">등록하기</button>
-            </div>
-        </div> <!-- div.small-box -->
-    </div>  <!-- div.big-box -->
+            </div> <!-- div.middle-box -->
+            <div class="small-box">
+                <div class="five"><svg width="22" height="23" stroke-width="0" viewBox="0 0 24 24" fill="current" xmlns="http://www.w3.org/2000/svg" type="solid" class="tw-fill-slate-500 tw-w-4 tw-h-4 tw-flex-none"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.92893 4.92893C6.8043 3.05357 9.34784 2 12 2C14.6522 2 17.1957 3.05357 19.0711 4.92893C20.9464 6.8043 22 9.34784 22 12C22 13.3132 21.7413 14.6136 21.2388 15.8268C20.7362 17.0401 19.9997 18.1425 19.0711 19.0711C18.1425 19.9997 17.0401 20.7362 15.8268 21.2388C14.6136 21.7413 13.3132 22 12 22C10.6868 22 9.38642 21.7413 8.17317 21.2388C6.95991 20.7362 5.85752 19.9997 4.92893 19.0711C4.00035 18.1425 3.26375 17.0401 2.7612 15.8268C2.25866 14.6136 2 13.3132 2 12C2 9.34784 3.05357 6.8043 4.92893 4.92893ZM16.2433 10.169C16.6128 9.75846 16.5795 9.12617 16.169 8.75671C15.7585 8.38726 15.1262 8.42053 14.7567 8.83104L10.9618 13.0476L9.20711 11.2929C8.81659 10.9023 8.18343 10.9023 7.7929 11.2929C7.40237 11.6834 7.40237 12.3165 7.79289 12.7071L10.2929 15.2071C10.4869 15.4011 10.752 15.5069 11.0263 15.4997C11.3005 15.4925 11.5598 15.3729 11.7433 15.169L16.2433 10.169Z" fill="inherit"></path></svg><p>제목은 프로젝트를 직관적으로 알 수 있게 작성해주세요. <span class="because">(50자이내)</span></p></div>
+                <div class="oneFive"><svg width="27" height="27" stroke-width="0" viewBox="0 0 24 24" fill="current" xmlns="http://www.w3.org/2000/svg" type="solid" class="tw-fill-slate-5000 tw-w-4 tw-h-4 tw-flex-none"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.92893 4.92893C6.8043 3.05357 9.34784 2 12 2C14.6522 2 17.1957 3.05357 19.0711 4.92893C20.9464 6.8043 22 9.34784 22 12C22 13.3132 21.7413 14.6136 21.2388 15.8268C20.7362 17.0401 19.9997 18.1425 19.0711 19.0711C18.1425 19.9997 17.0401 20.7362 15.8268 21.2388C14.6136 21.7413 13.3132 22 12 22C10.6868 22 9.38642 21.7413 8.17317 21.2388C6.95991 20.7362 5.85752 19.9997 4.92893 19.0711C4.00035 18.1425 3.26375 17.0401 2.7612 15.8268C2.25866 14.6136 2 13.3132 2 12C2 9.34784 3.05357 6.8043 4.92893 4.92893ZM16.2433 10.169C16.6128 9.75846 16.5795 9.12617 16.169 8.75671C15.7585 8.38726 15.1262 8.42053 14.7567 8.83104L10.9618 13.0476L9.20711 11.2929C8.81659 10.9023 8.18343 10.9023 7.7929 11.2929C7.40237 11.6834 7.40237 12.3165 7.79289 12.7071L10.2929 15.2071C10.4869 15.4011 10.752 15.5069 11.0263 15.4997C11.3005 15.4925 11.5598 15.3729 11.7433 15.169L16.2433 10.169Z" fill="inherit"></path></svg><p>어떤 프로젝트인지 이해하기 쉽도록 명확하고 간결하게 요약해주새요. <span class="because">(150자이내)</span></p></div>
+                <div class="profilContent">
+                    <ul class="listTitle"><svg width="14" height="14" stroke-width="0" viewBox="0 0 22 22" fill="current" xmlns="http://www.w3.org/2000/svg" type="solid" class="tww-fill-slate-500 tw-w-4 tw-h-4 tw-flex-none"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.92893 4.92893C6.8043 3.05357 9.34784 2 12 2C14.6522 2 17.1957 3.05357 19.0711 4.92893C20.9464 6.8043 22 9.34784 22 12C22 13.3132 21.7413 14.6136 21.2388 15.8268C20.7362 17.0401 19.9997 18.1425 19.0711 19.0711C18.1425 19.9997 17.0401 20.7362 15.8268 21.2388C14.6136 21.7413 13.3132 22 12 22C10.6868 22 9.38642 21.7413 8.17317 21.2388C6.95991 20.7362 5.85752 19.9997 4.92893 19.0711C4.00035 18.1425 3.26375 17.0401 2.7612 15.8268C2.25866 14.6136 2 13.3132 2 12C2 9.34784 3.05357 6.8043 4.92893 4.92893ZM16.2433 10.169C16.6128 9.75846 16.5795 9.12617 16.169 8.75671C15.7585 8.38726 15.1262 8.42053 14.7567 8.83104L10.9618 13.0476L9.20711 11.2929C8.81659 10.9023 8.18343 10.9023 7.7929 11.2929C7.40237 11.6834 7.40237 12.3165 7.79289 12.7071L10.2929 15.2071C10.4869 15.4011 10.752 15.5069 11.0263 15.4997C11.3005 15.4925 11.5598 15.3729 11.7433 15.169L16.2433 10.169Z" fill="inherit"></path></svg><p>소개에는 이런 내용이 있으면 좋아요👇</p>
+                        <li>어떤 프로젝트인지</li>
+                        <li>프로젝트를 기획한 배경</li>
+                        <li>프로젝트의 목적이나 달성하고 싶은 목표</li>
+                        <li>모집하고 싶은 역할과 인원수</li>
+                        <li>프로젝트 진행 방식</li>
+                    </ul>
+                    <p class="other">이미 진행 중인 프로젝트라면, 현재 구성원과 진행 상황을 알려주세요.</p>
+                </div>
+                <div class="button">
+                    <button class="writeOk">등록하기</button>
+                </div>
+            </div> <!-- div.small-box -->
+        </div><!-- div.big-box -->
+    </form>
 </section>
 <footer class="footer" th:replace="fragment/footer :: footer"></footer>
 <script src="https://code.jquery.com/jquery-3.6.4.js"></script>

@@ -7,8 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.reactive.result.view.RedirectView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -31,15 +30,15 @@ public class projectController {
 
 
     @PostMapping("/write")
-    public RedirectView write(StudyDto studyDto, HttpServletRequest req, RedirectAttributes redirectAttributes){
+    public RedirectView write(StudyDto studyDto, HttpServletRequest req){
 
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
-        studyDto.setUserNumber(userNumber);
+
+//        studyDto.setUserNumber(userNumber);
+        studyDto.setUserNumber(1L);
+
         studyService.studyRegister(studyDto);
-
-        redirectAttributes.addAttribute("studyNumber",studyDto.getStudyNumber());
-
-        redirectAttributes.addFlashAttribute("studyNumber", studyDto.getStudyNumber());
+        System.out.println("==========123123==========");
 
 
         return new RedirectView("/meeting/home");

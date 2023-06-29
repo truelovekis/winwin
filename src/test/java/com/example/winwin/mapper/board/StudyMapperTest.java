@@ -39,7 +39,7 @@ class StudyMapperTest {
         userDto.setUserBelong("배달의 민족");
         userDto.setUserIdentity("W");
         userDto.setUserNickname("웅이");
-        userDto.setUserGender(1);
+//        userDto.setUserGender(1);
         userDto.setUserGrade(5);
         userDto.setUserWing(100L);
 
@@ -68,11 +68,11 @@ class StudyMapperTest {
     @Test
     @DisplayName("프로젝트, 모임 메인페이지 슬라이드 글")
     void mainSelect(){
-        int size = studyMapper.mainSelect().size();
+        int size = studyMapper.mainSelect(1).size();
 
         studyMapper.studyInsert(studyDto);
 
-        assertThat(studyMapper.mainSelect().size()).isEqualTo(size + 1);
+        assertThat(studyMapper.mainSelect(1).size()).isEqualTo(size + 1);
     }
 
     @Test

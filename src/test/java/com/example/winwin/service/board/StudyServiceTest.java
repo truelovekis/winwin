@@ -4,6 +4,7 @@ import com.example.winwin.dto.board.StudyDto;
 import com.example.winwin.dto.user.UserDto;
 import com.example.winwin.mapper.board.StudyMapper;
 import com.example.winwin.mapper.user.UserMapper;
+import com.example.winwin.vo.board.StudyVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.User;
 import org.junit.jupiter.api.BeforeEach;
@@ -108,7 +109,7 @@ class StudyServiceTest {
     @DisplayName("게시글 전체 조회")
     void findMainList() {
         doReturn(List.of(studyDto)).when(studyMapper).mainSelect();
-        List<StudyDto> foundList = studyService.findMainList();
+        List<StudyVo> foundList = studyService.findMainList();
         assertThat(foundList.size()).isEqualTo(1);
     }
 }
