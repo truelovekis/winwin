@@ -17,6 +17,14 @@
     flex-wrap: wrap;
 }
 
+.public-secret-select {
+    width: 80px;
+    height: 25px;
+    padding: 0px 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
 .admin-pfp {
     display: flex;
     margin-bottom: 50px;
@@ -133,12 +141,12 @@
 .small-category1 {
     width: 110px;
     margin-right: 10px;
-    border-bottom: 2px solid #595f63;
 }
 
 .small-category2 {
     width: 80px;
     margin-right: 10px;
+
 }
 
 .small-category1 > a {
@@ -174,6 +182,7 @@
 .small-category3 {
     width: 80px;
     margin-right: 10px;
+    border-bottom: 2px solid #595f63;
 }
 
 .small-category3 > a {
@@ -195,6 +204,7 @@
     background-color: rgba(198, 198, 198, 0.251);
     border-radius: 5px;
 }
+
 
 /* 회원관리 검색창 */
 
@@ -252,33 +262,7 @@ thead tr {
     height: 40px;
 }
 
-tr:last-child td {
-    /* border-bottom: none; */
-}
-
-#checkAll,
-#checking,
-.public-secret-select {
-    cursor: pointer;
-}
-
-.public-secret-select {
-    align-items: center;
-}
-
-.board-public-secret {
-    text-align: center;
-}
-
-.public-secret-select {
-    width: 80px;
-    height: 25px;
-    padding: 0px 5px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-}
-
-.Y {
+.Y{
     background-color: #eaf4ff;
     color: #007aff;
     border: none;
@@ -299,10 +283,6 @@ tr:last-child td {
     cursor: pointer;
     width: 60px;
 }
-
-/* tbody {
-  height: 20px;
-} */
 
 .border-box {
     border: 1px solid rgba(115, 114, 114, 0.24);
@@ -341,17 +321,19 @@ tr:last-child td {
     font-size: 13px;
 }
 
-.datepicker {
-    width: 100px;
-}
-
 .search-text2 {
-    width: 80px;
+    width: 120px;
     height: 25px;
     padding: 0px 5px;
     border-radius: 5px;
     border: 1px solid #ddd;
 }
+
+#job-dep {
+    width: 80px;
+}
+
+/* 테이블 및 공개 비공개 버튼 */
 
 .remove-delete-button {
     margin-left: 965px;
@@ -368,11 +350,108 @@ tr:last-child td {
     cursor: pointer;
 }
 
+.secret-button-btn {
+    padding: 8px 10px;
+}
+
 /* 작성일 달력 css */
 input[type="date"]::before {
     content: attr(data-placeholder);
     width: 100%;
     color: gray;
+}
+
+#calender {
+    width: 100px;
+    height: 25px;
+    padding: 0px 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    align-items: center;
+}
+
+/* 검색창 css */
+
+#public-secret {
+    width: 80px;
+}
+
+/* 회원정보 직무/학과별 분류 */
+.job-list {
+    display: flex;
+    margin-bottom: 20px;
+    border: 1px solid rgba(115, 114, 114, 0.24);
+    padding: 10px 10px;
+}
+
+.job-category {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.job-chk {
+    display: none;
+}
+
+.job-category > li {
+    list-style: none;
+    width: 140px;
+    height: 35px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.job-category > li:hover {
+    color: #007aff;
+}
+
+.dep-list {
+    display: flex;
+    margin-bottom: 20px;
+    border: 1px solid rgba(115, 114, 114, 0.24);
+    padding: 10px 10px;
+    justify-content: center;
+}
+
+.dep-category {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.dep-category > li {
+    list-style: none;
+    width: 120px;
+    height: 35px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dep-category > li:hover {
+    color: #007aff;
+}
+
+.dep-chk {
+    display: none;
+}
+
+/* 진로정보 페이지 진입시 직무/학과 none처리 */
+.none {
+    display: none;
+}
+
+.datepicker {
+    width: 100px;
+}
+
+#checkAll,
+#checking {
+    cursor: pointer;
 }
 
 /* input font 적용 css */

@@ -1,7 +1,300 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.winwin.mapper.">
-    <select id="getTime" resultType="string">
-        SELECT SYSDATE FROM DUAL
+<mapper namespace="com.example.winwin.mapper.admin.AdminMapper">
+
+    <!--  검색한 회원 조회  -->
+    <select id="getUserInfo" parameterType="adminUserSearchVo" resultType="adminVo">
+        SELECT WU.USER_NAME,
+        WU.USER_ID,
+        MC.MAIN_NAME,
+        WU.USER_RRNUMBER,
+        WU.USER_PHONE_NUMBER,
+        M.MENTOR_STATUS,
+        WU.USER_EMAIL
+        FROM WW_USER WU
+        LEFT OUTER JOIN MENTOR M on WU.user_number = M.USER_NUMBER
+        LEFT OUTER JOIN SUB_CATEGORY SB on M.SUB_NUMBER = SB.SUB_NUMBER
+        LEFT OUTER JOIN MAIN_CATEGORY MC on SB.MAIN_CODE = MC.MAIN_CODE
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="id != null">
+                AND USER_ID LIKE '%' || #{id} || '%'
+            </if>
+            <if test="identity != null">
+                AND USER_IDENTITY LIKE '%' || #{identity} || '%'
+            </if>
+            <if test="mainCode != null">
+                AND SB.MAIN_CODE LIKE '%' || #{mainCode} || '%'
+            </if>
+            <if test="mentor != null">
+                AND MENTOR_STATUS LIKE '%' || #{mentor} || '%'
+            </if>
+        </trim>
+    </select>
+
+    <!--  전체 회원 조회  -->
+    <select id="selectTest" resultType="adminVo">
+        SELECT WU.USER_NAME,
+               WU.USER_ID,
+               MC.MAIN_NAME,
+               WU.USER_RRNUMBER,
+               WU.USER_PHONE_NUMBER,
+               M.MENTOR_STATUS,
+               WU.USER_EMAIL
+        FROM WW_USER WU
+                 LEFT OUTER JOIN MENTOR M on WU.user_number = M.USER_NUMBER
+                 LEFT OUTER JOIN SUB_CATEGORY SB on M.SUB_NUMBER = SB.SUB_NUMBER
+                 LEFT OUTER JOIN MAIN_CATEGORY MC on SB.MAIN_CODE = MC.MAIN_CODE
+    </select>
+
+
+    <!--  전체 게시판 조회  -->
+    <select id="selectBoard" resultType="adminVo">
+        SELECT c.COMMUNITY_NUMBER,
+               CC.CATEGORY_NAME,
+               C.COMMUNITY_TITLE,
+               WU.USER_NAME,
+               C.COMMUNITY_DATE,
+               C.COMMUNITY_STATUS
+        FROM COMMUNITY C
+                 LEFT OUTER JOIN COMMUNITY_CATEGORY CC ON C.category_number = CC.category_number
+                 LEFT OUTER JOIN WW_USER WU on C.user_number = WU.user_number
+    </select>
+
+    <!--  검색한 게시판 조회  -->
+    <select id="selectSearchBoard" resultType="adminVo" parameterType="adminBoardSearchVo">
+        SELECT
+        c.COMMUNITY_NUMBER,
+        CC.CATEGORY_NAME,
+        C.COMMUNITY_TITLE,
+        WU.USER_NAME,
+        C.COMMUNITY_DATE,
+        C.COMMUNITY_STATUS
+        FROM COMMUNITY C
+        LEFT OUTER JOIN COMMUNITY_CATEGORY CC ON C.category_number = CC.category_number
+        LEFT OUTER JOIN WW_USER WU on C.user_number = WU.user_number
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="name != null and name != ''">
+                AND WU.USER_NAME LIKE '%' || #{name} || '%'
+            </if>
+            <if test="categoryCode != null and categoryCode != ''">
+                AND C.CATEGORY_NUMBER LIKE '%' || #{categoryCode} || '%'
+            </if>
+            <if test="communityDate != null and communityDate != ''">
+                AND TRUNC(C.COMMUNITY_DATE) = TO_DATE(#{communityDate}, 'YYYY-MM-DD') <!-- DB형식이 SYSDATE일 경우 -->
+            </if>
+            <if test="status != null and status != ''">
+                AND C.COMMUNITY_STATUS LIKE '%' || #{status} || '%'
+            </if>
+        </trim>
+    </select>
+
+
+    <!-- 전체 윙 조회 -->
+    <select id="selectWing" resultType="adminVo">
+        SELECT WU.USER_NAME,
+               WU.USER_ID,
+               WU.USER_WING,
+               W.WING_EARN_DATE,
+               M.MENTOR_STATUS
+        FROM WW_USER WU
+                 LEFT OUTER JOIN WING W on WU.user_number = W.USER_NUMBER
+                 LEFT OUTER JOIN MENTOR M on W.user_number = M.USER_NUMBER
+    </select>
+
+    <!--  검색한 윙 조회  -->
+    <select id="selectSearchWing" parameterType="adminWingSearchVo" resultType="adminVo">
+        SELECT
+        WU.USER_NAME,
+        WU.USER_ID,
+        WU.USER_WING,
+        W.WING_EARN_DATE,
+        M.MENTOR_STATUS
+        FROM WW_USER WU
+        LEFT OUTER JOIN WING W on WU.user_number = W.USER_NUMBER
+        LEFT OUTER JOIN MENTOR M on W.user_number = M.USER_NUMBER
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="name != null">
+                AND WU.USER_NAME LIKE '%' || #{name} || '%'
+            </if>
+            <if test="id != null">
+                AND USER_ID LIKE '%' || #{id} || '%'
+            </if>
+            <if test="date != null">
+                AND TRUNC(W.WING_EARN_DATE) = TO_DATE(#{date}, 'YYYY-MM-DD') <!-- DB형식이 SYSDATE일 경우 -->
+            </if>
+            <if test="mentor != null">
+                AND MENTOR_STATUS LIKE '%' || #{mentor} || '%'
+            </if>
+        </trim>
+    </select>
+
+
+    <!--  전제 진로 정보 조회  -->
+    <select id="selectCareer" resultType="adminVo">
+        SELECT c2.CAREERINFO_NUMBER,
+               MAIN_NAME,
+               CAREERINFO_TITLE,
+               USER_NAME,
+               CAREERINFO_DATE,
+               CAREERINFO_STATUS
+        FROM WW_USER WU
+                 JOIN careerinfo c2 on WU.user_number = c2.user_number
+                 LEFT OUTER JOIN MENTOR M on WU.user_number = M.USER_NUMBER
+                 LEFT OUTER JOIN SUB_CATEGORY SB on M.SUB_NUMBER = SB.SUB_NUMBER
+                 LEFT OUTER JOIN MAIN_CATEGORY MC on SB.MAIN_CODE = MC.MAIN_CODE
+    </select>
+
+    <!--  검색한 진로 정보 조회  -->
+    <select id="selectSearchCareer" parameterType="adminCareerSearchVo" resultType="adminVo">
+        SELECT c2.CAREERINFO_NUMBER,
+        MAIN_NAME,
+        CAREERINFO_TITLE,
+        USER_NAME,
+        CAREERINFO_DATE,
+        CAREERINFO_STATUS
+        FROM WW_USER WU
+        JOIN careerinfo c2 on WU.user_number = c2.user_number
+        JOIN MENTOR M on WU.user_number = M.USER_NUMBER
+        JOIN SUB_CATEGORY SB on M.SUB_NUMBER = SB.SUB_NUMBER
+        JOIN MAIN_CATEGORY MC on SB.MAIN_CODE = MC.MAIN_CODE
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="name != null and name != ''">
+                AND WU.USER_NAME LIKE '%' || #{name} || '%'
+            </if>
+            <if test="code != null and code != ''">
+                AND MC.MAIN_CODE LIKE '%' || #{code} || '%'
+            </if>
+            <if test="date != null and date != ''">
+                AND TRUNC(C2.CAREERINFO_DATE) = TO_DATE(#{date}, 'YYYY-MM-DD') <!-- DB형식이 SYSDATE일 경우 -->
+            </if>
+            <if test="status != null and status != ''">
+                AND c2.CAREERINFO_STATUS LIKE '%' || #{status} || '%'
+            </if>
+        </trim>
+    </select>
+
+<!--  전체 나눔 조회  -->
+    <select id="selectShare" resultType="adminVo">
+    SELECT
+    WU.USER_NAME,
+    SHARE_NUMBER,
+    SHARE_TITLE,
+    SHARE_CONTENT,
+    SHARE_DATE,
+    share_status
+    FROM WW_USER WU
+    JOIN SHARE_FREE SF on WU.USER_NUMBER = SF.USER_NUMBER
+    </select>
+
+<!--  검색한 나눔 조회  -->
+    <select id="selectSearchShare" parameterType="adminShareSearchVo" resultType="adminVo">
+        SELECT
+        WU.USER_NAME,
+        SHARE_NUMBER,
+        SHARE_TITLE,
+        SHARE_CONTENT,
+        SHARE_DATE,
+        SHARE_STATUS
+        FROM WW_USER wu
+        JOIN SHARE_FREE SF on WU.USER_NUMBER = SF.USER_NUMBER
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="name != null and name != ''">
+                AND WU.USER_NAME LIKE '%' || #{name} || '%'
+            </if>
+            <if test="title != null and title != ''">
+                AND SF.SHARE_TITLE LIKE '%' || #{title} || '%'
+            </if>
+            <if test="shareDate != null and shareDate != ''">
+                AND TRUNC(SF.SHARE_DATE) = TO_DATE(#{shareDate}, 'YYYY-MM-DD') <!-- DB형식이 SYSDATE일 경우 -->
+            </if>
+            <if test="status != null and status != ''">
+                AND SF.SHARE_STATUS LIKE '%' || #{status} || '%'
+            </if>
+        </trim>
+    </select>
+
+    <!--  전체 신고 조회  -->
+    <select id="selectReport" resultType="adminVo">
+        SELECT WU.USER_NUMBER,
+               WU.USER_NAME,
+        USER_ID,
+        big_name,
+        Pb.police_date,
+        PC.CATEGORY_NAME as police_category_name,
+        USER_STATUS
+        FROM WW_USER WU
+        LEFT OUTER JOIN police_board pb on WU.user_number = pb.user_number
+        left outer join big_category bc on pb.big_code = bc.big_code
+        LEFT OUTER JOIN POLICE_CATEGORY PC ON PB.police_category = PC.category_number
+        <where>
+            <if test="userStatus == 2 or userStatus == 3 or userStatus == null">
+                AND WU.USER_STATUS = 2 or wu.USER_STATUS = 3
+            </if>
+        </where>
+    </select>
+
+    <!-- 검색한 신고 조회-->
+    <select id="selectSearchReport" parameterType="adminReportSearchVo" resultType="adminVo">
+        SELECT WU.USER_NUMBER,
+        WU.USER_NAME,
+        USER_ID,
+        big_name,
+        Pb.police_date,
+        PC.CATEGORY_NAME as police_category_name,
+        USER_STATUS
+        FROM WW_USER WU
+        LEFT OUTER JOIN police_board pb on WU.user_number = pb.user_number
+        left outer join big_category bc on pb.big_code = bc.big_code
+        LEFT OUTER JOIN POLICE_CATEGORY PC ON PB.police_category = PC.category_number
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="name != null and name != ''">
+                AND WU.USER_NAME LIKE '%' || #{name} || '%'
+            </if>
+            <if test="bigCode != null and bigCode != ''">
+                AND bc.BIG_CODE LIKE '%' || #{bigCode} || '%'
+            </if>
+            <if test="code != null and code != ''">
+                AND PC.CATEGORY_NUMBER LIKE '%' || #{code} || '%'
+            </if>
+            <if test="status != null and status != ''">
+                AND USER_STATUS LIKE '%' || #{status} || '%'
+            </if>
+        </trim>
+    </select>
+
+
+    <!--  게시판(커뮤니티) 상태 변경  -->
+    <update id="updateStatus">
+        update COMMUNITY
+        set COMMUNITY_STATUS = #{communityStatus}
+        where COMMUNITY_NUMBER = #{communityNumber}
+    </update>
+
+    <!--  게시판(진로정보) 상태 변경  -->
+    <update id="updateCareer">
+        update CAREERINFO
+        set CAREERINFO_STATUS = #{careerInfoStatus}
+        where CAREERINFO_NUMBER = #{careerInfoNumber}
+    </update>
+
+<!--  게시판(나눔) 상태 변경  -->
+    <update id="updateShare">
+        update SHARE_FREE
+        set SHARE_STATUS = #{shareStatus}
+        where SHARE_NUMBER = #{shareNumber}
+    </update>
+
+<!--  신고 회원 상태 변경  -->
+        <update id="updateReport">
+            update WW_USER
+            set USER_STATUS = #{userStatus}
+            where USER_NUMBER = #{userNumber}
+        </update>
+
+    <!-- 게시글 진로정보 subCategory 정보 가져오기 -->
+    <select id="getMainCategory" resultType="mainCategoryVo">
+        SELECT *
+        FROM MAIN_CATEGORY
     </select>
 </mapper>
+

@@ -47,30 +47,39 @@
             <!--  -->
 
             <!-- 회원 정보 검색 및 테이블 -->
+            <form action="/admin/searchReport" method="get">
             <div class="search">
                 <span>이름 : </span>
-                <input type="text" placeholder="이름" class="search-text">
+                <input name="name" type="text" placeholder="이름" class="search-text" style="font-family: NanumSquareAcr;">
                 <span>게시판 :  </span>
-                <select name="identity" id="identity" class="search-text2">
-                    <option value="1">직장인</option>
-                    <option value="2">대학생</option>
+                <select name="bigCode" id="identity" class="search-text2" style="font-family: NanumSquareAcr;">
+                    <option value="100">멘토멘티</option>
+                    <option value="200">진로정보</option>
+                    <option value="300">QnA</option>
+                    <option value="400">커뮤니티</option>
+                    <option value="500">모임</option>
+                    <option value="600">나눔</option>
+                    <option value="700">문의사항</option>
                 </select>
                 <span>신고사유 : </span>
-                <select name="reason" id="reason">
-                    <option value="1">욕설</option>
-                    <option value="2">허위PR</option>
-                    <option value="3">허위광고</option>
-                    <option value="4">음란물</option>
+                <select name="code" id="reason" style="font-family: NanumSquareAcr;">
+                    <option value="1">욕설/비방글</option>
+                    <option value="2">저작권침해</option>
+                    <option value="3">음란성</option>
+                    <option value="4">불법광고</option>
+                    <option value="5">개인정보 침해 및 명예 훼손</option>
+                    <option value="6">폭력/잔인/혐오</option>
+                    <option value="7">도배성</option>
                 </select>
                 <span>상태 : </span>
-                <select name="mandm" id="result" class="search-text2">
-                    <option value="1">7일 정지</option>
-                    <option value="2">14일 정지</option>
-                    <option value="3">30일 정지</option>
-                    <option value="4">영구 정지</option>
+                <select name="status" id="result" class="search-text2" style="font-family: NanumSquareAcr;">
+                    <option value="3">영구 정지</option>
+                    <option value="2">일반 신고 회원</option>
                 </select>
-                <button type="button" class="search-btn">검색</button>
+                <button type="text" class="search-btn" style="font-family: NanumSquareAcr;">검색</button>
             </div>
+
+            </form>
             <div class="border-box">
                 <table class="user-table" border="1px" width="100%" height="300">
                     <thead>
@@ -80,7 +89,7 @@
                         </td>
                         <td class="user-name" align="center">이름</td>
                         <td class="user-id" align="center">아이디</td>
-                        <td class="user-board" align="center">게시글</td>
+                        <td class="user-board" align="center">게시판</td>
                         <td class="user-report-date" align="center">신고 일자</td>
                         <td class="report-reason" align="center">신고 사유</td>
                         <td class="user-report-status" align="center">신고 상태</td>
@@ -90,49 +99,25 @@
 
 
                     <tbody>
-                    <tr class="user-table-category">
+                    <tr class="user-table-category" th:each="admin : ${adminReportList}">
                         <td class="checkbox">
-                            <input type="checkbox" name="" class="check" id="checking" >
+                            <input type="checkbox" name="" class="check check-box" id="checking" style="font-family: NanumSquareAcr;" th:data-number="${admin.userNumber}">
                         </td>
-                        <td class="user-name" align="center">홍길동</td>
-                        <td class="user-id" align="center">aaa</td>
-                        <td class="user-board" align="center">개발글 아니지롱~</td>
-                        <td class="user-report-date" align="center">2023-06-01</td>
-                        <td class="report-reason" align="center">욕설</td>
+                        <td class="user-name" align="center" th:text="${admin.userName}"></td>
+                        <td class="user-id" align="center" th:text="${admin.userId}"></td>
+                        <td class="user-board" align="center" th:text="${admin.bigName}"></td>
+                        <td class="user-report-date" align="center" th:text="${#strings.substring(admin.policeDate, 0, 10)}"></td>
+                        <td class="report-reason" align="center" th:text="${admin.policeCategoryName}"></td>
                         <td class="board-public-secret" align="center">
-                            <select name="user-report-select" class="user-report-select">
-                                <option value="1">7일 정지</option>
-                                <option value="2">14일 정지</option>
-                                <option value="3">30일 정지</option>
-                                <option value="4">영구 정지</option>
+                            <select name="user-report-select" class="user-report-select" style="font-family: NanumSquareAcr;">
+                                <option value="2">일반 신고 회원</option>
+                                <option value="3">영구 정지</option>
                             </select>
                         </td>
                         <td class="report-resulting-success" align="center">
-                            <div class="blind-button">7일 정지</div>
+                            <div th:if="${admin.userStatus} == 2"  class="blind-button Y" th:text="신고회원"></div>
+                            <div th:if="${admin.userStatus} == 3"  class="blind-button N" th:text="영구정지"></div>
                         </td>
-                    </tr>
-
-                    <tr class="user-table-category">
-                        <td class="checkbox">
-                            <input type="checkbox" name="" class="check" id="checking">
-                        </td>
-                        <td class="user-name" align="center">김철수</td>
-                        <td class="user-id" align="center">bbb</td>
-                        <td class="user-board" align="center">컴공과 질문있습니다.</td>
-                        <td class="user-report-date" align="center">2023-06-01</td>
-                        <td class="report-reason" align="center">음란물</td>
-                        <td class="board-public-secret" align="center">
-                            <select name="user-report-select" class="user-report-select">
-                                <option value="1">7일 정지</option>
-                                <option value="2">14일 정지</option>
-                                <option value="3">30일 정지</option>
-                                <option value="4">영구 정지</option>
-                            </select>
-                        </td>
-                        <td class="report-resulting-success" align="center">
-                            <div class="success-button">영구 정지</div>
-                        </td>
-                    </tr>
                     </tr>
                     </tbody>
                 </table>
@@ -140,7 +125,7 @@
             <!--  -->
         </div>
         <div class="remove-delete-button">
-            <button class="remove-button-btn">변경</button>
+            <button type="button" class="remove-button-btn" id="changeStatusBtn" style="font-family: NanumSquareAcr;">변경</button>
         </div>
     </div>
 </div>
@@ -155,6 +140,7 @@
 ></script>
 <script th:src="@{/js/admin/adminUser.js}"></script>
 <script th:src="@{/js/admin/adminReport.js}"></script>
+<script th:src="@{/js/admin/reportStatus.js}"></script>
 <script th:src="@{/js/fragment/header.js}" ></script>
 </body>
 </html>
