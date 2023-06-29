@@ -28,34 +28,34 @@ $(document).ready(function () {
         var blindButton = row.find(".blind-button");
         var successButton = row.find(".success-button");
 
-        if (selectValue === "1") {
-            blindButton.text("7일 정지").css({
+        if (selectValue === "2") {
+            blindButton.text("신고회원").css({
                 "background-color": "#eaf4ff",
                 color: "#007aff",
             });
-            successButton.text("7일 정지").css({
+            successButton.text("신고회원").css({
                 "background-color": "#eaf4ff",
                 color: "#007aff",
             });
-        } else if (selectValue === "2") {
-            blindButton.text("14일 정지").css({
-                "background-color": "#eaf4ff",
-                color: "#007aff",
-            });
-            successButton.text("14일 정지").css({
-                "background-color": "#eaf4ff",
-                color: "#007aff",
-            });
+        // } else if (selectValue === "2") {
+        //     blindButton.text("14일 정지").css({
+        //         "background-color": "#eaf4ff",
+        //         color: "#007aff",
+        //     });
+        //     successButton.text("14일 정지").css({
+        //         "background-color": "#eaf4ff",
+        //         color: "#007aff",
+        //     });
+        // } else if (selectValue === "3") {
+        //     blindButton.text("30일 정지").css({
+        //         "background-color": "#eaf4ff",
+        //         color: "#007aff",
+        //     });
+        //     successButton.text("30일 정지").css({
+        //         "background-color": "#eaf4ff",
+        //         color: "#007aff",
+        //     });
         } else if (selectValue === "3") {
-            blindButton.text("30일 정지").css({
-                "background-color": "#eaf4ff",
-                color: "#007aff",
-            });
-            successButton.text("30일 정지").css({
-                "background-color": "#eaf4ff",
-                color: "#007aff",
-            });
-        } else if (selectValue === "4") {
             blindButton.text("영구 정지").css({
                 "background-color": "rgb(255, 237, 237)",
                 color: "red",
@@ -68,13 +68,13 @@ $(document).ready(function () {
     }
 
     function resetReportSelect(row) {
-        var blindButton = row.find(".blind-button");
+        // var blindButton = row.find(".blind-button");
         var successButton = row.find(".success-button");
 
-        blindButton.text("7일 정지").css({
-            "background-color": "#eaf4ff",
-            color: "#007aff",
-        });
+        // blindButton.text("신고회원").css({
+        //     "background-color": "#eaf4ff",
+        //     color: "#007aff",
+        // });
         successButton.text("영구 정지").css({
             "background-color": "rgb(255, 237, 237)",
             color: "red",

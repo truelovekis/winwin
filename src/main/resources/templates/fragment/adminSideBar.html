@@ -14,39 +14,39 @@
         <div class="pfp-image-upload">
           <label for="adminImageUpload">
             <div class="pfp-icon">
-              <img class="pfp-icon-image" src="https://cdn.comento.kr/images/illust/illust-photo-upload.svg"></img>
+<!--              <img class="pfp-icon-image" src="https://cdn.comento.kr/images/illust/illust-photo-upload.svg"></img>-->
             </div>
           </label>
           <input type="file" id="adminImageUpload" name="adminImageUpload" />
         </div>
         <!-- 관리자 닉네임, 카톡ID -->
         <div class="admin-nickname-email">
-          <div class="admin-nickname">길동쓰</div>
+          <div class="admin-nickname"></div>
           <div class="admin-email-box">
-            <div class="admin-email">aaa@naver.com</div>
-            <div class="social-icon">
-              <img src="https://cdn.comento.kr/icon/icon-kakao-medium.svg" alt="">
-            </div>
+            <div class="admin-email"></div>
+<!--            <div class="social-icon">-->
+<!--&lt;!&ndash;              <img src="https://cdn.comento.kr/icon/icon-kakao-medium.svg" alt="">&ndash;&gt;-->
+<!--            </div>-->
           </div>
         </div>
       </div>
       <div class="admin-side-menu">
-        <a href="#" class="side-menu">
+        <a th:href="@{/admin/user}" class="side-menu">
           <div class="admin-managementname user-management">
             회원 관리
           </div>
         </a>
-        <a href="#" class="side-menu">
+        <a th:href="@{/admin/board}" class="side-menu">
           <div class="admin-managementname board-management">
             게시판 관리
           </div>
         </a>
-        <a href="#" class="side-menu">
+        <a th:href="@{/admin/point}" class="side-menu">
           <div class="admin-managementname point-management">
             포인트 관리
           </div>
         </a>
-        <a href="#" class="side-menu">
+        <a th:href="@{/admin/report}" class="side-menu">
           <div class="admin-managementname report-management">
             신고 관리
           </div>

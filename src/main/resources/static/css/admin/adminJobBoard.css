@@ -179,6 +179,32 @@
     border-radius: 5px;
 }
 
+.small-category3 {
+    width: 80px;
+    margin-right: 10px;
+}
+
+.small-category3 > a {
+    text-decoration: none;
+    color: black;
+    width: 80px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.small-category3 > a:hover {
+    background-color: rgba(198, 198, 198, 0.251);
+    border-radius: 5px;
+}
+
+.small-category3 > a:hover {
+    background-color: rgba(198, 198, 198, 0.251);
+    border-radius: 5px;
+}
+
+
 /* 회원관리 검색창 */
 
 .search {
@@ -235,7 +261,7 @@ thead tr {
     height: 40px;
 }
 
-.public-button {
+.Y{
     background-color: #eaf4ff;
     color: #007aff;
     border: none;
@@ -246,9 +272,9 @@ thead tr {
     width: 60px;
 }
 
-.secret-button {
-    background-color: rgb(255, 237, 237);
-    color: red;
+.N {
+    background-color: rgb(220 255 226);
+    color: #587c60;
     border: none;
     border-radius: 5px;
     padding: 7px 5px;

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.winwin.mapper.file.ShareFileMapper">
+
+    <!-- 나눔 파일 등록하기 -->
+    <insert id="shareFileInsert">
+        insert into SHARE_FILE (FILE_NUMBER, FILE_SYSTEM_NAME, FILE_UPLOAD_PATH, FILE_UUID, SHARE_NUMBER)
+        values (SEQ_SHARE_FILE.nextval, #{fileSystemName}, #{fileUploadPath}, #{fileUuid}, #{shareNumber})
+    </insert>
+
+    <!-- 나눔 글 번호로 파일 조회하기 -->
+    <select id="shareFileList" resultType="shareFileDto">
+        select FILE_NUMBER, FILE_SYSTEM_NAME, FILE_UPLOAD_PATH, FILE_UUID, SHARE_NUMBER
+        from SHARE_FILE
+        WHERE SHARE_NUMBER = #{shareNumber}
+    </select>
+
+    <!-- 나눔 글 번호로 파일 삭제하기 -->
+    <delete id="shareFileDelete">
+        delete from SHARE_FILE
+        where SHARE_NUMBER = #{shareNumber}
+    </delete>
+
+    <!-- 나눔 글 전날 파일 업로드 된 것 조회하기 -->
+    <select id="shareOldSelect" resultType="shareFileDto">
+        select FILE_NUMBER, FILE_SYSTEM_NAME, FILE_UPLOAD_PATH, FILE_UUID, SHARE_NUMBER
+        from SHARE_FILE
+        WHERE FILE_UPLOAD_PATH = TO_CHAR(CURRENT_DATE - 1, 'YYYY/MM/DD')
+    </select>
+
+</mapper>

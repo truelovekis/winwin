@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.file.CommunityFile">
+    <insert id="insert">
+        <selectKey keyProperty="fileNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_COMMUNITY_FILE.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO COMMUNITY_FILE (FILE_NUMBER, FILE_SYSTEM_NAME, FILE_UPLOAD_PATH, FILE_UUID, COMMUNITY_NUMBER)
+        VALUES (#{fileNumber}, #{fileSystemName}, #{fileUploadPath}, #{fileUuid}, #{communityNumber})
+    </insert>
 
+    <delete id="delete">
+        DELETE FROM COMMUNITY_FILE
+        WHERE COMMUNITY_NUMBER = #{communityNumber}
+    </delete>
+
+    <select id="selectList" resultType="communityFileDto">
+        SELECT FILE_NUMBER, FILE_SYSTEM_NAME, FILE_UPLOAD_PATH, FILE_UUID, COMMUNITY_NUMBER
+        FROM COMMUNITY_FILE
+        WHERE COMMUNITY_NUMBER = #{communityNumber}
+    </select>
+
+    <select id="selectOldList" resultType="communityFileDto">
+        SELECT FILE_NUMBER, FILE_SYSTEM_NAME, FILE_UPLOAD_PATH, FILE_UUID, COMMUNITY_NUMBER
+        FROM COMMUNITY_FILE
+        WHERE FILE_UPLOAD_PATH = TO_CHAR(CURRENT_DATE - 1, 'yyyy/mm/dd')
+    </select>
 </mapper>

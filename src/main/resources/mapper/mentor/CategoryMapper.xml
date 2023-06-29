@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.winwin.mapper.mentor.CategoryMapper">
+     <select id="categoryH" resultType="categoryVo">
+         SELECT *
+         FROM MAIN_CATEGORY mc
+         WHERE MAIN_CODE LIKE '1__'
+     </select>
+
+    <select id="categoryJ" resultType="categoryVo">
+        SELECT *
+        FROM MAIN_CATEGORY mc
+        WHERE MAIN_CODE LIKE '2__'
+    </select>
+
+    <select id="subCategory" resultType="categoryVo">
+        SELECT *
+        FROM SUB_CATEGORY sc
+        WHERE main_code = #{mainCode}
+    </select>
+</mapper>

@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CommunityRead</title>
+    <link rel="stylesheet" th:href="@{/css/user/loginModal.css}" />
+    <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
     <link rel="stylesheet" th:href="@{/css/community/communityRead.css}" />
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
     <style>
@@ -19,8 +22,7 @@
             font-family: "NanumSquareAcr";
         }
     </style>
-    <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
-    <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
+
 
 </head>
 <body>
@@ -31,28 +33,31 @@
             <div class="first">
                 <div class="Profil">
                     <img src="@{}" height="40px" width="40px">
-                    <div class="id"> <p>truluvkis</p></div>
+                    <div class="id"> <p th:text="${community.userNickname}"></p></div>
                     <div class="dropdown">
                         <button class="dropbtn">
                             <span class="dropbtn_icon"> <svg data-v-bd9f2bcc="" data-v-3035bc76="" width="24" height="24" fill="black" xmlns="http://www.w3.org/2000/svg" class="c-Applicatio c-icon" style="fill: rgb(148, 155, 160);"><circle data-v-bd9f2bcc="" cx="12" cy="5.5" r="1.5"></circle><circle data-v-bd9f2bcc="" cx="12" cy="12" r="1.5"></circle><circle data-v-bd9f2bcc="" cx="12" cy="18.5" r="1.5"></circle></svg></span>
                         </button>
                         <div class="dropdown-content">
                             <a href="#">신고</a>
-                            <a href="#">수정</a>
-                            <a href="#">삭제</a>
+                            <a th:onclick="'fn_modify('+ ${community.communityNumber} +');'">수정</a>
+                            <a th:onclick="'fn_remove('+ ${community.communityNumber} +');'">삭제</a>
+                            <input type="hidden" class="community-num" th:value="${community.communityNumber}">
+                            <input type="hidden" name="userNumber" value="9"/>
                         </div>
                     </div>
                 </div>
-                <div class="imfor"> <p>삼성전자</p></div>
+                <div class="imfor"> <p th:text="${community.userBelong}"></p></div>
                 <div class="question">
                     <div class="Q">T.</div>
-                    <div class="title"><p>안녕하세요 웹디자이너 포트폴리오 pt관련해서 질문드립니다.</p></div>
+                    <div class="title"><p th:text="${community.communityTitle}"></p></div>
                 </div>
-                <div class="content"><p>이번에 삼성 전자에서 면접을 보게 되었는데 포트폴리오 관련 Pt를 할 수 있을 것 같아 질문드립니다. 어떤방식으로 pt를 진행해야 할지 고민입니다ㅠ</p></div>
+                <div class="content"><p th:text="${community.communityContent}"></p></div>
                 <div class="img-box">
-                    <img src="../img/corgi-g5894d3ae3_1920.jpg" width="200px" height="200px">
-                    <img src="../img/corgi-g5894d3ae3_1920.jpg" width="200px" height="200px">
-                    <img src="../img/corgi-g5894d3ae3_1920.jpg" width="200px" height="200px">
+<!--                    <div th:if="${community.fileSystemName == null}" style="background-image: url(https://via.placeholder.com/200x200)">-->
+<!--                    <div th:unless="${community.fileSystemName == null}" th:style="${'background-image: url(/upload/' + community.fileUploadPath + '/th_' + community.fileUuid + '_' + community.fileSystemName + ')'}">-->
+<!--                    <img src="../img/corgi-g5894d3ae3_1920.jpg" width="200px" height="200px">-->
+<!--                    <img src="../img/corgi-g5894d3ae3_1920.jpg" width="200px" height="200px">-->
                 </div>
 
                 <div class="icon">
@@ -86,7 +91,7 @@
 
                         <div class="likeCnt"><p>123</p></div>
                     </div>
-                    <div class="date">2023.06.08</div>
+                    <div class="date" th:text="${#strings.substring(#strings.replace(community.communityDate, '-', '.'), 0, 10)}">></div>
                 </div>
             </div>
             <div class="justbox"></div>
@@ -111,15 +116,17 @@
                             <button class="dropbtn2">
                                 <span class="dropbtn_icon2"> <svg data-v-bd9f2bcc="" data-v-3035bc76="" width="24" height="24" fill="black" xmlns="http://www.w3.org/2000/svg" class="c-Applicatio c-icon" style="fill: rgb(148, 155, 160);"><circle data-v-bd9f2bcc="" cx="12" cy="5.5" r="1.5"></circle><circle data-v-bd9f2bcc="" cx="12" cy="12" r="1.5"></circle><circle data-v-bd9f2bcc="" cx="12" cy="18.5" r="1.5"></circle></svg></span>
                             </button>
-                            <div class="dropdown-content2">
+                            <div class="dropdown-content2" >
+
                                 <a href="#">신고</a>
-                                <a href="#">수정</a>
-                                <a href="#">삭제</a>
+                                <a href="#" class="btn-modify">수정</a>
+                                <a href="#" class="btn-remove">삭제</a>
+
                             </div>
                         </div>
                     </div>
                     <div class="description"><p>OpenAi</p></div>
-                    <div class="Aicontent">면접준비를 하기 전에 자신이 맡은 프로젝트에 대해 상세하게 설명할 수 있도록 준비하시길 권장합니다.</div>
+                    <div class="Aicontent" th:text="${}">면접준비를 하기 전에 자신이 맡은 프로젝트에 대해 상세하게 설명할 수 있도록 준비하시길 권장합니다.</div>
                     <div class="answer">
                         <div class="answer-box"></div>
                         <div class="answer-box-comment"><p>답변이 도움이 되었나요?</p></div>
@@ -148,12 +155,12 @@
                             <div class="date1">2023.06.08</div>
                         </div>
                     </div>
-                    <div class="newComment">
-                        <textarea class="newComment2" style="font-family:NanumSquareLight;" placeholder="답변에 대한 의견이 있으신가요?"></textarea>
-                        <button class="send" type="button">
-                            <svg data-v-bd9f2bcc="" data-v-3035bc76="" width="24" height="24" viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg" class="c-pplication c-icon" style="fill: #ddd;"><path data-v-bd9f2bcc="" fill-rule="evenodd" clip-rule="evenodd" d="M20.4582 12.9062C21.2277 12.5471 21.2277 11.4529 20.4582 11.0938L5.42255 4.07716C4.57275 3.68059 3.69362 4.5666 4.09681 5.41328L6.75715 11H11C11.5523 11 12 11.4477 12 12C12 12.5523 11.5523 13 11 13H6.75712L4.09681 18.5867C3.69362 19.4333 4.57275 20.3193 5.42255 19.9228L20.4582 12.9062Z"></path></svg>
-                        </button>
-                    </div>
+<!--                    <div class="newComment">-->
+<!--                        <textarea class="newComment2" style="font-family:NanumSquareLight;" placeholder="답변에 대한 의견이 있으신가요?"></textarea>-->
+<!--                        <button class="send" type="button">-->
+<!--                            <svg data-v-bd9f2bcc="" data-v-3035bc76="" width="24" height="24" viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg" class="c-pplication c-icon" style="fill: #ddd;"><path data-v-bd9f2bcc="" fill-rule="evenodd" clip-rule="evenodd" d="M20.4582 12.9062C21.2277 12.5471 21.2277 11.4529 20.4582 11.0938L5.42255 4.07716C4.57275 3.68059 3.69362 4.5666 4.09681 5.41328L6.75715 11H11C11.5523 11 12 11.4477 12 12C12 12.5523 11.5523 13 11 13H6.75712L4.09681 18.5867C3.69362 19.4333 4.57275 20.3193 5.42255 19.9228L20.4582 12.9062Z"></path></svg>-->
+<!--                        </button>-->
+<!--                    </div>-->
                 </div>
             </div>
         </div>
@@ -162,7 +169,7 @@
 </section>
 <footer class="footer" th:replace="fragment/footer :: footer"></footer>
 <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
-<script type="module" th:src="@{/js/board/communityRead.js}"></script>
+<script type="text/javascript" th:src="@{/js/community/communityRead.js}"></script>
 <script th:src="@{/js/fragment/header.js}" ></script>
 </body>
 </html>

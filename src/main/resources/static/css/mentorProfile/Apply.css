@@ -54,22 +54,38 @@ svg {
 }
 .rr {
     display: flex;
-    flex: 1 1 0%;
     align-items: center;
-    border: 1px solid#ddd;
+    border: 1px solid #ddd;
     width: 50%;
     height: 70px;
+    border-radius: 3px;
+}
+
+.rr-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 70%;
+    overflow: hidden;
+    margin: 0 10px 0 10px;
+}
+
+.rr-img > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .add {
     display: flex;
     justify-content: center;
-    flex: 1 1 0%;
     align-items: center;
-    border: 1px solid#ddd;
-    width: 35%;
+    border: 1px solid #ddd;
+    width: 34%;
     color: #94a3b8;
     background-color: #f1f5f9;
+    border-radius: 3px;
+    padding: 10px 5px;
+    flex-direction: column;
 }
 
 .skill {
@@ -77,7 +93,7 @@ svg {
     justify-content: center;
     flex: 1 1 0%;
     align-items: center;
-    width: 20%;
+    width: 80%;
     gap: 0.5rem;
 }
 .skill1 {

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>main</title>
+</head>
+<link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
+<link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
+<link rel="stylesheet" th:href="@{/css/mentorProfile/Apply.css}"/>
+<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+<style>
+  body {
+    font-family: "NanumSquareLight";
+    font-family: "NanumSquare";
+    font-family: "NanumSquareBold";
+    font-family: "NanumSquareExtraBold";
+    font-family: "NanumSquareAcb";
+    font-family: "NanumSquareAceb";
+    font-family: "NanumSquareAcl";
+    font-family: "NanumSquareAcr";
+  }
+</style>
+
+<body>
+<header class="header" th:replace="fragment/header :: header"></header>
+<!--폼태그 신청하기-->
+<form th:action="@{/mentor/apply}" method="post" class="apply-box">
+  <input type="hidden" value="6"/>
+<div class="TT" style="margin-left: 30%;     margin-top: 5%;">
+  <p>기본 프로필</p>
+  <a th:href="@{/mentor/self}" class="pp" style="margin-right: 50%;">편집</a>
+</div>
+<br />
+<div class="Expro" style="margin-left: 30%;">
+  <div class="rr">
+    <div class="rr-img">
+    <img
+            src="https://www.thelec.kr/news/photo/202210/18518_16299_646.jpg"
+            width="100"
+    />
+      </div>
+    <div class="drow">
+      <div class="nickname"><span th:text="${mentor.userName}"></span> </div>
+      <p class="intr"><span th:text="${mentor.userBelong}"></span> </p>
+    </div>
+  </div>
+</div>
+<br />
+<br />
+<div class="TT" style="margin-left: 30%;">
+  <p>경력</p>
+  <a th:href="@{/mentor/career}" class="pp" style="margin-right: 50%;">추가</a>
+</div>
+<br />
+  <div th:if="${mentor2} == null" class="add" style="margin-left: 30%;">아직 경력이 없어요</div>
+  <div th:if="${mentor2} != null" class="add" style="margin-left: 30%;">
+    <div  th:each="mentor2 : ${mentor2}">
+    <span th:text="${mentor2.careerCompany}"></span> / <span th:text="${mentor2.careerTitle}"></span><br/>
+    </div>
+  </div>
+
+<br />
+<br />
+<div class="TT" style="margin-left: 30%;">
+  <p>스킬</p>
+  <a th:href="@{/mentor/skill}" class="pp"style="margin-right: 50%;">편집</a>
+</div>
+<br />
+<div class="skill" th:if="${skill} != null">
+  <div class="skill1" th:each="skill : ${skill}">
+    <span th:text="${skill.skillName}"></span>
+  </div>
+<!--  <div class="skill1">Spring</div>-->
+<!--  <div class="skill1">MySQL</div>-->
+</div>
+<div class="skill" style="margin-left: 25.5%;" th:if="${skill} == null">
+    <div>
+      <span>스킬을 추가해주세요</span>
+    </div>
+  </div>
+
+  <button type="button" class="apply">신청하기</button>
+</form>
+<footer class="header" th:replace="fragment/footer :: footer"></footer>
+<script
+        src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+        crossorigin="anonymous"></script>
+<script th:src="@{/js/fragment/header.js}" ></script>
+<script th:src="@{/js/mentor/apply.js}"></script>
+</body>
+</html>

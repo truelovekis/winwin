@@ -15,6 +15,7 @@
 .community-pfp {
   position: fixed;
   left: 250px;
+  top: 200px;
   /* display: none; */
 }
 
@@ -177,6 +178,18 @@
   border-radius: 5px;
   padding: 20px;
   cursor: pointer;
+}
+
+.share-title{
+  color: black;
+}
+
+a{
+  text-decoration: black;
+}
+
+a:visited{
+  text-decoration: black;
 }
 
 .share-sub-content {
