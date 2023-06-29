@@ -3,6 +3,7 @@
 
 <configuration>
     <typeAliases>
-<!--        <typeAlias type="com.example.app.dto.UserDto" alias="userDto"/>-->
+        <typeAlias type="com.example.winwin.dto.board.CsDto" alias="csDto"/>
+        <typeAlias type="com.example.winwin.vo.CsVo" alias="csVo"/>
     </typeAliases>
 </configuration>

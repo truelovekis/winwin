@@ -13,11 +13,11 @@ public class UserDto {
     private String userId;
     private String userPassword;
     private String userEmail;
-    private int userRrnumber;
+    private String userRrnumber;
     private int userGender;
     private String userBelong;
     private String userIdentity;
-    private String userNickName;
+    private String userNickname;
     private int userStatus;
     private Long userWing;
     private int userGrade;
