@@ -53,5 +53,8 @@
 
         <typeAlias type="com.example.winwin.dto.board.CsDto" alias="csDto"/>
         <typeAlias type="com.example.winwin.vo.CsVo" alias="csVo"/>
+        <typeAlias type="com.example.winwin.dto.board.StudyDto" alias="studyDto"/>
+        <typeAlias type="com.example.winwin.vo.board.StudyVo" alias="studyVo"/>
+        <typeAlias type="com.example.winwin.dto.user.UserDto" alias="userDto"/>
     </typeAliases>
 </configuration>
