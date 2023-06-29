@@ -24,16 +24,22 @@
     <main>
       <div class="goal-container">
         <div class="goal-wrap">
-          <div class="goal-box" th:fragment="goal">
+          <div class="goal-box none" th:fragment="goal">
             <h3>어떤 목적으로 오셨나요?</h3>
             <h6>멘토 가입 시 추가 인증이 필요합니다.</h6>
-            <button class="goal-mm-btn" id="goal-mentor">MENTOR</button>
-            <button class="goal-mm-btn">MENTEE</button>
-            <button class="goal-mm-btn">MENTOR + MENTEE</button>
+            <button type="button" class="goal-mm-btn btn1" id="goal-mentor">MENTOR</button>
+            <button type="button" class="goal-mm-btn btn2">MENTEE</button>
+            <button type="button" class="goal-mm-btn btn3">MENTOR + MENTEE</button>
           </div>
-          <button class="goal-next"><span>다음</span></button>
+          <button type="button" class="goal-next"><span>다음</span></button>
         </div>
       </div>
     </main>
+    <script
+            th:src="@{https://code.jquery.com/jquery-3.6.3.js}"
+            integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+            crossorigin="anonymous"
+    ></script>
+    <script th:src="@{/js/user/goal.js}"></script>
   </body>
 </html>

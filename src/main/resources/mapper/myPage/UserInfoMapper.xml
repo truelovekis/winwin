@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.winwin.mapper.myPage.UserInfoMapper">
+    <select id="selectProfile" resultType="string">
+
+    </select>
+    <select id="selectUserInfo" resultType="userVo">
+        select USER_NUMBER, USER_NAME, USER_ID, USER_PASSWORD, USER_EMAIL, USER_NICKNAME, USER_PHONE_NUMBER, USER_WING, GRADE_NAME
+        from WW_USER u join GRADE g
+                            on u.USER_GRADE = g.GRADE_NUMBER
+        where USER_NUMBER = #{userNumber}
+    </select>
+    <select id="selectMentorTag" resultType="string">
+        select sc.SUB_NAME
+        from MENTOR m join SUB_CATEGORY sc
+                           on m.sub_number = sc.SUB_NUMBER
+        where m.USER_NUMBER = #{userNumber} and m.MENTOR_STATUS = 1
+    </select>
+    <select id="selectInterestTag" resultType="map">
+        SELECT SB.SUB_NUMBER val, SUB_NAME name
+        FROM SU_BRIDGE SB join SUB_CATEGORY SC
+                               ON SB.SUB_NUMBER = SC.SUB_NUMBER
+        WHERE USER_NUMBER = #{userNumber}
+    </select>
+    <select id="selectBoardCnt" resultType="_int">
+        select
+                (select count(USER_NUMBER) from CAREERINFO where USER_NUMBER = #{userNumber})
+                + (select count(USER_NUMBER) from QNA where USER_NUMBER = #{userNumber})
+                + (select count(USER_NUMBER) from COMMUNITY where USER_NUMBER = #{userNumber})
+                + (select count(USER_NUMBER) from STUDY where USER_NUMBER = #{userNumber})
+                + (select count(USER_NUMBER) from SHARE_FREE where USER_NUMBER = #{userNumber})
+                + (select count(USER_NUMBER) from CS where USER_NUMBER = #{userNumber})
+        from DUAL
+    </select>
+    <select id="selectCommentCnt" resultType="_int">
+        select
+                (select count(USER_NUMBER) from CAREERINFO_COMMENT where USER_NUMBER = #{userNumber})
+                + (select count(USER_NUMBER) from QNA_COMMENT where USER_NUMBER = #{userNumber})
+                + (select count(USER_NUMBER) from COMMUNITY_COMMENT where USER_NUMBER = #{userNumber})
+                + (select count(USER_NUMBER) from STUDY_COMMENT where USER_NUMBER = #{userNumber})
+                + (select count(USER_NUMBER) from CS_COMMENT where USER_NUMBER = #{userNumber})
+        from DUAL
+    </select>
+
+    <update id="updateUserInfo">
+        update WW_USER
+        set  USER_ID = #{userId},  USER_PASSWORD = #{userPassword}, USER_EMAIL = #{userEmail}, USER_NICKNAME = #{userNickname}, USER_PHONE_NUMBER = #{userPhoneNumber}
+        where USER_NUMBER = #{userNumber}
+    </update>
+    <insert id="insertInterestTag">
+        insert into SU_BRIDGE (BRIDGE_NUMBER, SUB_NUMBER, USER_NUMBER)
+        values (SEQ_BRIDGE.NEXTVAL, #{subNumber}, #{userNumber})
+    </insert>
+    <delete id="deleteInterestTag">
+        delete
+        from SU_BRIDGE
+        where USER_NUMBER = #{userNumber}
+    </delete>
+
+    <update id="deleteUser">
+        UPDATE WW_USER
+        SET USER_STATUS = 0
+        WHERE USER_NUMBER = #{userNumber}
+    </update>
+</mapper>

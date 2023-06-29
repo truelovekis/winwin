@@ -24,7 +24,7 @@
     </style>
   </head>
   <body>
-    <header class="header"  th:replace="fragment/header :: header"></header>
+    <header class="header" th:replace="fragment/header :: header"></header>
     <main>
       <div class="wrap">
         <div class="container">
@@ -37,136 +37,161 @@
                 <h4 id="point-page">프로필</h4>
               </div>
               <div class="category-contain">
-                <h4>회원 탈퇴</h4>
+                <h4><a class="no-point-page" th:href="@{/myPage/resumePR}">회원 탈퇴</a></h4>
               </div>
             </div>
             <!-- 내용 메인페이지 -->
+          <form th:action="@{/myPage/userInfoModify}" method="post" enctype="multipart/form-data">
             <div class="modify-content">
               <div class="top-box">
                 <div class="profile-box">
-                  <img src="/winwin/img/profile-basic.png" alt="">
-                  <label for="img-box"></label>
-                  <input type="file" id="img-box">
+                  <label for="img-box" class="profile-label">
+                    <div th:if="${profile == null}" class="img-box" style="background-image: url(https://via.placeholder.com/70x70)"></div>
+                    <div th:unless="${profile == null}" class="img-box"
+                         th:style="${'background-image: url(/profile/' + profile.pfpUuid + '_' + profile.pfpSystemName + ')'}"></div>
+                  </label>
+                  <input class="profile-file" type="file" id="img-box" name="pfpFile">
                   <div class="text-box">
-                    <span>Mentee</span>
-                    <span>|</span>
-                    <span>it개발</span>
+                    <span th:if="${userInfo.mentorTag[0] == null}">Mentee</span>
+                    <span th:unless="${userInfo.mentorTag[0] == null}">
+                      Mentor
+                      <span>|</span>
+                      <span th:text="${userInfo.mentorTag[0]}">it개발</span></span>
                     <div class="name">
-                      <span id="user-name">정소이</span>
-                      <span class="mentor-grade">Lv.천사</span>
+                      <span id="user-name" th:text="${userInfo.userVo.userName}">이름</span>
+                      <span class="mentor-grade">Lv.<span class="mentor-grade2" th:text="${userInfo.userVo.gradeName}"/></span>
                     </div>
                   </div>
                 </div>
                 <div class="board-info">
                   <div class="write">
-                      <span class="number">0건</span>
+                      <span class="number"><span class="number" th:text="${userInfo.boardCnt}"/>건</span>
                       <span class="gray">내 글</span>
                   </div>
                   <div class="comment">
-                      <span class="number">3건</span>
+                      <span class="number"><span  class="number" th:text="${userInfo.commentCnt}"/>건</span>
                       <span class="gray">내 댓글</span>
                   </div>
                 </div>
               </div>
               <!-- 연락처, 이메일 변경 -->
               <div class="info-modify-box">
-                <div class="nickname-modify">
-                  <span class="info-modify">닉네임 변경</span>
-                  <input type="text" class="input" placeholder="연락처 입력">
+                <div class="info-modify-wrap">
+                  <div class="info-modify">아이디 변경</div>
+                  <input type="text" name="userId" class="input" th:value="${userInfo.userVo.userId}">
                 </div>
-                <div class="phone-modify">
-                  <span class="info-modify">연락처 변경</span>
-                  <input type="text" class="input" placeholder="연락처 입력">
+                <div class="info-modify-wrap">
+                  <div class="info-modify">비밀번호 변경</div>
+                  <input type="text" name="userPassword" class="input" th:value="${userInfo.userVo.userPassword}">
                 </div>
-                <div class="email-modify">
-                  <span class="info-modify">이메일 변경</span>
-                  <input type="text" class="input" placeholder="이메일 입력">
+                <div class="info-modify-wrap">
+                  <div class="info-modify">닉네임 변경</div>
+                  <input type="text" name="userNickName" class="input" th:value="${userInfo.userVo.userNickName}">
                 </div>
+                <div class="info-modify-wrap">
+                  <div class="info-modify">연락처 변경</div>
+                  <input type="text" name="userPhoneNumber" class="input"  th:value="${userInfo.userVo.userPhoneNumber}">
+                </div>
+                <div class="info-modify-wrap">
+                  <div class="info-modify">이메일 변경</div>
+                  <input type="text" name="userEmail" class="input" th:value="${userInfo.userVo.userEmail}">
+                </div>
+                <button type="submit" class="button">수정하기</button>
               </div>
-              <hr/>
+          </form>
               <div class="resume-info">
-                <h3>나의 관심분야</h3>
-                <div class="job-dep-box">
-                  <!-- 1차 카테고리(직무/학과) -->
-                  <div class="select">
-                    <div class="selected">
-                      <div class="selected-value">1차 카테고리(선택)</div>
-                      <div class="arrow">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          height="1em"
-                          viewBox="0 0 448 512"
-                        >
-                          <path
-                            d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"
-                          />
-                        </svg>
-                      </div>
+              <h3>나의 관심분야</h3>
+              <div class="job-dep-box">
+                <!-- 1차 카테고리(직무/학과) -->
+                <div class="select">
+                  <div class="selected">
+                    <div class="selected-value">1차 카테고리(선택)</div>
+                    <div class="arrow">
+                      <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              height="1em"
+                              viewBox="0 0 448 512"
+                      >
+                        <path
+                                d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"
+                        />
+                      </svg>
                     </div>
-                    <ul class="first-option-box">
-                      <li class="option first-option-category1" value="1">직무</li>
-                      <li class="option first-option-category2" value="2">학과</li>
-                    </ul>
                   </div>
-                  <!-- /1차 카테고리(직무/학과) -->
-      
-                  <!-- 2차 카테고리 직무별/학과별 카테고리 -->
-                  <div class="select">
-                    <div class="selected">
-                      <div class="selected-value">2차 카테고리(선택)</div>
-                      <div class="arrow">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          height="1em"
-                          viewBox="0 0 448 512"
-                        >
-                          <path
-                            d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                    <!-- 2차 카테고리 직무일 때 -->
-                    <ul class="second-job-box">
-                    </ul>
-                    <!-- /2차 카테고리 직무일 때 -->
-                  </div>
-                  <!-- /2차 카테고리 직무별/학과별 카테고리 -->
-      
-                  <!-- 3차 카테고리 -->
-                  <div class="select">
-                    <div class="selected">
-                      <div class="selected-value">3차 카테고리(선택)</div>
-                      <div class="arrow">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          height="1em"
-                          viewBox="0 0 448 512"
-                        >
-                          <path
-                            d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-      
-                    <!-- 2차 카테고리 직무 선택시 3차 소분류 -->
-                    <ul class="third-job-box">
-                    </ul>
-                    <!-- /2차 카테고리 직무 선택시 3차 소분류 -->
-                  </div>
-                  <!-- /3차 카테고리 -->
-      
+                  <ul class="first-option-box option-box none">
+                    <li class="option first-option-category1" value="1">직무</li>
+                    <li class="option first-option-category2" value="2">학과</li>
+                  </ul>
                 </div>
-                <!-- 1, 2, 3차 카테고리 선택 시 태그 출력 -->
-                <div class="tag-wrap">
-                  <div class="select-tag">
+                <!-- /1차 카테고리(직무/학과) -->
+
+                <!-- 2차 카테고리 직무별/학과별 카테고리 -->
+                <div class="select">
+                  <div class="selected">
+                    <div class="selected-value">2차 카테고리(선택)</div>
+                    <div class="arrow">
+                      <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              height="1em"
+                              viewBox="0 0 448 512"
+                      >
+                        <path
+                                d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"
+                        />
+                      </svg>
+                    </div>
                   </div>
+                  <!-- 2차 카테고리 직무일 때 -->
+                  <ul class="second-job-box option-box none">
+                    <li>1차 카테고리를 선택하세요</li>
+                  </ul>
+                  <!-- /2차 카테고리 직무일 때 -->
                 </div>
-                <!-- /1, 2, 3차 카테고리 선택 시 태그 출력 -->
+                <!-- /2차 카테고리 직무별/학과별 카테고리 -->
+
+                <!-- 3차 카테고리 -->
+                <div class="select">
+                  <div class="selected">
+                    <div class="selected-value">3차 카테고리(선택)</div>
+                    <div class="arrow">
+                      <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              height="1em"
+                              viewBox="0 0 448 512"
+                      >
+                        <path
+                                d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+
+                  <!-- 2차 카테고리 직무 선택시 3차 소분류 -->
+                  <ul class="third-job-box option-box none">
+                    <li>2차 카테고리를 선택하세요</li>
+                  </ul>
+                  <!-- /2차 카테고리 직무 선택시 3차 소분류 -->
+                </div>
+                <!-- /3차 카테고리 -->
+
               </div>
+              <!-- 1, 2, 3차 카테고리 선택 시 태그 출력 -->
+          <form th:action="@{/myPage/interestTagModify}"  class="form" method="post" enctype="multipart/form-data">
+              <div class="tag-wrap">
+                <div class="select-tag">
+                  <tr th:each="tag : ${userInfo.interestTag}">
+                    <div class="tag">
+                      <td>@[[${tag.NAME}]]</td><input type="hidden" th:value="${tag.VAL}" name="subNumber">
+                    </div>
+                  </tr>
+                </div>
+              </div>
+            <button type="submit" class="button">수정하기</button>
+          </form>
+              <!-- /1, 2, 3차 카테고리 선택 시 태그 출력 -->
             </div>
-            
+            </div>
+
           </div>
         </div>
       </div>

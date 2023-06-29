@@ -35,3 +35,8 @@ $likeDown.on('click', function(){
     $(this).parents('.community-btn').find('.bi-hand-thumbs-up-fill').hide();
     $(this).parents('.community-btn').find('.bi-hand-thumbs-up').show();
 });
+
+
+function fn_read(communityNumber){
+    location.href = "/community/read?communityNumber="+communityNumber;
+}

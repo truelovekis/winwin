@@ -87,26 +87,26 @@ $("li").hover(
 //   $(".login-join").click(function () {
 //     $(".login-container").fadeIn();
 //   });
-
+//
 //   $(".login-wrap").click(function () {
 //     $(".login-container").fadeOut();
 //   });
-
+//
 //   // $(".find-id-containder").fadeIn();
 // });
-
-$(".login-join").on("click", function () {
-  $(".login-container").removeClass("none");
-  $(".login-container").css({
-    position: "fixed",
-    left: "50%",
-    top: "50%",
-    transform: "translate(-50%, -50%)",
-  });
-});
-
-$(".login-container").on("click", function (e) {
-  if ($(e.target).hasClass("login-container")) {
-    $(".login-container").addClass("none");
-  }
-});
+//
+// $(".login-join").on("click", function () {
+//   $(".login-container").removeClass("none");
+//   $(".login-container").css({
+//     position: "fixed",
+//     left: "50%",
+//     top: "50%",
+//     transform: "translate(-50%, -50%)",
+//   });
+// });
+//
+// $(".login-container").on("click", function (e) {
+//   if ($(e.target).hasClass("login-container")) {
+//     $(".login-container").addClass("none");
+//   }
+// });

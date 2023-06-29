@@ -3,6 +3,10 @@
   padding: 0px;
 }
 
+#point-list-5 {
+  font-weight: 700;
+}
+
 .wrap {
   display: flex;
   justify-content: center;
@@ -75,21 +79,12 @@
   margin-bottom: 25px;
 }
 
-.point-list-5 {
-  font-weight: 700;
-}
-
 .list > a:hover {
   font-weight: 700;
 }
 
 #list-plus {
   margin-top: 20px;
-}
-
-hr {
-  width: 90%;
-  border: 1px solid #ddd;
 }
 
 /* =========================================================== */
