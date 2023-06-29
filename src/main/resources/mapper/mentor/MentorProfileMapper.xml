@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.winwin.mapper.mentor.MentorMapper">
+    <select id="mentor" resultType="mentorVo">
+        SELECT MENTOR_NUMBER , wu.USER_NUMBER , USER_NAME, user_belong
+        FROM MENTOR m JOIN WW_USER wu
+        ON m.USER_NUMBER = wu.USER_NUMBER AND m.MENTOR_NUMBER  = #{mentorNumber}
+    </select>
+
+    <select id="mentor2" resultType="mentorVo">
+        SELECT m.MENTOR_NUMBER , m.USER_NUMBER , mc.CAREER_COMPANY , mc.CAREER_TITLE
+        FROM MENTOR m JOIN MENTOR_CAREER mc
+        ON m.MENTOR_NUMBER = mc.MENTOR_NUMBER AND m.MENTOR_NUMBER = #{mentorNumber}
+    </select>
+
+    <insert id="mentorPr">
+        INSERT INTO MENTOR_PROFILE(MP_NUMBER, USER_NUMBER, MENTOR_NUMBER, MENTOR_PR)
+        VALUES(SEQ_MP.NEXTVAL, #{userNumber}, #{mentorNumber}, #{mentorPr})
+    </insert>
+
+    <insert id="skillInsert">
+        INSERT INTO MENTOR_SKILL(SKILL_NUMBER, SKILL_NAME, MENTOR_NUMBER)
+        VALUES(SEQ_SKILL.NEXTVAL, #{skillName}, #{mentorNumber})
+    </insert>
+
+    <insert id="careerInsert">
+        INSERT INTO MENTOR_CAREER
+        (CAREER_NUMBER, CAREER_COMPANY, CAREER_TITLE, MENTOR_NUMBER, CAREER_LINK ,CAREER_STATUS, CAREER_START_DATE, CAREER_END_DATE)
+        VALUES(SEQ_MENTOR_CAREER.NEXTVAL, #{careerCompany}, #{careerTitle}, #{mentorNumber}, #{careerLink} , #{careerStatus}, #{careerStartDate}, #{careerEndDate})
+    </insert>
+
+    <select id="mentorProfile" resultType="mentorVo">
+        SELECT J1.user_name, J1.user_belong, J1.mentor_number , mp.mentor_pr
+        FROM (
+                 SELECT u.USER_NAME , u.USER_BELONG , m.MENTOR_NUMBER
+                 FROM MENTOR m JOIN WW_USER u
+                 ON m.USER_NUMBER = u.USER_NUMBER AND m.MENTOR_NUMBER = #{mentorNumber}
+                 GROUP BY u.USER_NAME , u.USER_BELONG , m.MENTOR_NUMBER
+             ) J1 JOIN MENTOR_PROFILE mp
+        ON J1.mentor_number = mp.MENTOR_NUMBER
+    </select>
+
+    <select id="profileSkill" resultType="skillVo">
+        SELECT skill_name
+        FROM MENTOR_SKILL ms
+        WHERE MENTOR_NUMBER = #{mentorNumber}
+    </select>
+
+    <select id="profileCareer" resultType="careerVo">
+        SELECT mc.CAREER_COMPANY , mc.CAREER_TITLE , TO_CHAR(TO_DATE(mc.CAREER_END_DATE, 'YYYY.mm.DD'), 'YYYY.mm') CAREER_END_DATE , TO_CHAR(TO_DATE(mc.CAREER_START_DATE, 'YYYY.mm.DD'),'YYYY.mm') CAREER_START_DATE , CAREER_STATUS, ROUND(((TO_DATE(mc.CAREER_END_DATE, 'YYYY.mm.DD') - TO_DATE(mc.CAREER_START_DATE, 'YYYY.mm.DD'))/30/12)) career_annual
+        FROM MENTOR_CAREER mc JOIN MENTOR m
+        ON mc.MENTOR_NUMBER = m.MENTOR_NUMBER  AND m.MENTOR_NUMBER = #{mentorNumber}
+    </select>
+
+    <select id="careerList" resultType="careerInfoVo">
+        SELECT CAREERINFO_NUMBER , CAREERINFO_TITLE , DBMS_LOB.SUBSTR(CAREERINFO_CONTENT, 3000, 1) AS CAREERINFO_CONTENT  , wu.USER_NAME , J1.CAREERINFO_CNT , wu.user_belong
+        FROM (
+                 SELECT CAREERINFO_NUMBER , CAREERINFO_TITLE , DBMS_LOB.SUBSTR(CAREERINFO_CONTENT, 3000, 1) AS CAREERINFO_CONTENT  , m.USER_NUMBER , CAREERINFO_CNT
+                 FROM CAREERINFO c JOIN MENTOR m
+                 ON c.MENTOR_NUMBER = m.MENTOR_NUMBER
+                 WHERE m.MENTOR_NUMBER = #{mentorNumber}
+             ) J1 JOIN WW_USER wu
+        ON J1. user_number = wu.USER_NUMBER
+    </select>
+
+    <select id="careerInfoLike" resultType="_int">
+        SELECT COUNT(CL.USER_NUMBER) CAREERINFO_LIKE
+        FROM CAREERINFO c JOIN CAREERINFO_LIKE cl
+        ON C.CAREERINFO_NUMBER = CL.CAREERINFO_NUMBER AND C.CAREERINFO_NUMBER = #{careerInfoNumber}
+    </select>
+
+    <select id="mentorAvg" resultType="mentorVo">
+        SELECT NVL(ROUND(AVG(REVIEW_STAR), 1), 0) review_avg
+        FROM MENTOR_REVIEW mr
+        WHERE MENTOR_NUMBER = #{mentorNumber}
+    </select>
+
+    <delete id="skillDelete">
+        DELETE FROM MENTOR_SKILL
+        WHERE MENTOR_NUMBER = #{mentorNumber}
+    </delete>
+
+    <insert id="reviewInsert">
+        INSERT INTO MENTOR_REVIEW(REVIEW_NUMBER, REVIEW_CONTENT, REVIEW_STAR, USER_NUMBER, MENTOR_NUMBER)
+        VALUES(SEQ_REVIEW.NEXTVAL, #{reviewContent}, #{reviewStar}/2, #{userNumber}, #{mentorNumber})
+    </insert>
+
+</mapper>

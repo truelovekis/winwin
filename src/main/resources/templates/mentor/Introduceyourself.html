@@ -24,6 +24,7 @@
 </style>
 <body>
 <header class="header" th:replace="fragment/header :: header"></header>
+<form th:action="@{/mentor/self}" method="post" class="self">
 <nav class="tw-fixed">
   <button type="button" class="back-button">
     <svg
@@ -44,19 +45,19 @@
     </svg>
   </button>
   <p class="tw-text-lg">자기소개</p>
-  <button type="button" class="success-btn">완료</button>
+  <button type="submit" class="success-btn">완료</button>
 </nav>
 <div class="update-main">
   <div class="update-sub">
     <div class="main-mf8">
       <div class="th-relative">
-        <label for="profile_image" class="proimage">
+        <label for="file" class="proimage">
           <!-- 프로필 사진 수정 -->
-          <input type="file" name="pp" id="profile_image" class="none" />
+          <input type="file" name="pp" id="file" class="none" />
           <!-- /프로필 사진 수정 -->
           <div class="round">
                 <span class="photo">
-                  <img src="./img/img.png" alt="" class="photo-in" />
+                  <img src="" class="photo-in" />
                 </span>
           </div>
           <div class="tw-rounded-full tw-bg-white tw-absolute tw-bottom-2 tw-right-0">
@@ -84,26 +85,24 @@
 
     <div class="main-mp8">
       <div class="name-var">
-        <label for="name"
-        >이름
+        <label for="name">이름
           <span class="name-ins">*</span>
         </label>
-        <p class="writer-cnt">2<!-- -->/<!-- -->20</p>
+<!--        <p class="writer-cnt"><span class="cnt">0</span>/20</p>-->
       </div>
-      <input type="text" class="name-box" placeholder="이름을 입력해주세요." name="name" maxlength="20" />
+      <input type="text" class="name-box" th:value="${mentor.userName}" name="name" maxlength="20" />
     </div>
     <div class="main-mp4">
       <div class="job">
-        <label for="name"
-        >대표 직함
+        <label for="name">대표 직함
           <span class="name-ins">*</span>
         </label>
-        <p class="writer-cnt">17<!-- -->/<!-- -->40</p>
+<!--        <p class="writer-cnt"><span class="cnt2">0</span>/40</p>-->
       </div>
       <input
               type="text"
               class="title-box"
-              placeholder="본인을 대표하는 직함을 알려주세요."
+              th:value="${mentor.userBelong}"
               name="title"
               maxlength="40"
       />
@@ -115,25 +114,23 @@
         >자기소개
           <span class="name-ins">*</span>
         </label>
-        <p class="writer-cnt">0<!-- -->/<!-- -->150</p>
+        <p class="writer-cnt"><span class="cnt3">0</span>/150</p>
       </div>
       <input
               type="text"
               class="short-box"
               placeholder="나를 소개해주세요."
-              name="shortDescription"
+              name="mentorPr"
               maxlength="150"
       />
     </div>
   </div>
 </div>
-
-
-
-
-
-
+</form>
   <footer class="header" th:replace="fragment/footer :: footer"></footer>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+<script type="module" th:src="@{/js/mentor/mentor.js}"></script>
 <script th:src="@{/js/fragment/header.js}" ></script>
+<script th:src="@{/js/mentor/self.js}"></script>
 </html>

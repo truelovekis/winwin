@@ -24,6 +24,7 @@
 </style>
 <body>
 <header class="header" th:replace="fragment/header :: header"></header>
+<form th:action="@{/mentor/skill}" method="post" class="skill-box">
 <nav class="tw-fixed">
     <button type="button" class="back-button">
         <svg
@@ -44,13 +45,39 @@
         </svg>
     </button>
     <p class="tw-text-lg">스킬</p>
-    <button type="button" class="success-btn">완료</button>
+    <button type="submit" class="success-btn">완료</button>
 </nav>
 <div class="tw-pt-5">
     <div class="tw-flex">
         <h4 class="tw-mb-0">내 스킬을 선택해 주세요.</h4>
-        <div class="tw-flex2">
-            <div class="tw-flexr2"></div>
+        <div class="tw-flex2" >
+            <div class="tw-flexr2">
+                <div th:each="skill : ${skill}">
+                <button type="button" class="tw-boarder2">
+                    <h3 th:text="${skill.skillName}" class="tw-font-bold2"/>
+                    <input type="hidden" th:value="${skill.skillName}" name="skillName">
+                <div class="presentation">
+                    <svg
+                            width="16"
+                            height="16"
+                            stroke-width="0"
+                            viewBox="0 0 24 24"
+                            fill="current"
+                            xmlns="http://www.w3.org/2000/svg"
+                            type="solid"
+                            class="icn-white"
+                    >
+                        <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M5.29289 5.29289C5.68342 4.90237 6.31658 4.90237 6.70711 5.29289L12 10.5858L17.2929 5.29289C17.6834 4.90237 18.3166 4.90237 18.7071 5.29289C19.0976 5.68342 19.0976 6.31658 18.7071 6.70711L13.4142 12L18.7071 17.2929C19.0976 17.6834 19.0976 18.3166 18.7071 18.7071C18.3166 19.0976 17.6834 19.0976 17.2929 18.7071L12 13.4142L6.70711 18.7071C6.31658 19.0976 5.68342 19.0976 5.29289 18.7071C4.90237 18.3166 4.90237 17.6834 5.29289 17.2929L10.5858 12L5.29289 6.70711C4.90237 6.31658 4.90237 5.68342 5.29289 5.29289Z"
+                                fill="inherit"
+                        ></path>
+                    </svg>
+                </div>
+                </button>
+                </div>
+            </div>
             <div class="tw-items">
                 <input type="text" class="form-control" placeholder="가지고 있는 스킬을 입력하세요." />
                 <svg
@@ -122,6 +149,7 @@
         </div>
     </div>
 </div>
+</form>
 <footer class="header" th:replace="fragment/footer :: footer"></footer>
 </body>
 <script
@@ -129,6 +157,6 @@
         integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
         crossorigin="anonymous"
 ></script>
-<script th:src="@{/js/mentorProfile/skillUpdate.js}"></script>
+<script th:src="@{/js/mentor/skillUpdate.js}"></script>
 <script th:src="@{/js/fragment/header.js}" ></script>
 </html>

@@ -4,10 +4,6 @@ $('select[name="selectbox"] > option:checked').val();
 $('select[name="selectbox"] > option:checked').text();
 
 document.querySelector("#selectbox > option:checked");
-document.querySelector("#selectbox > option:checked").value;
-document.querySelector('select[name="selectbox"] > option:checked').innerText;
-
-// document.querySelector("#selectbox")[];
 makeYear();
 makeMonth();
 
@@ -64,11 +60,27 @@ let nowBox = $("#now-box").html();
 $("#is-current-career").on("change", function () {
     console.log($(this).is(":checked"));
     let selectBox = `
-    <input id="now-input" value="현재" disabled>
+    <input id="now-input" value="재직 중" disabled>
   `;
     if ($(this).is(":checked")) {
-        $("#now-box").html(selectBox);
+        $('#status').val('Y');
+        // $("#now-box").html(selectBox);
     } else {
+        $('#status').val('N');
         $("#now-box").html(nowBox);
     }
+});
+
+let $back = $('.back-button');
+
+$back.on('click', function (){
+    window.location.href = '/mentor/apply';
+});
+
+$('.custom-control-label').on('click', function (){
+   let text = '';
+   text = `
+   재직 중
+   `;
+    $('.endDate').html(text);
 });

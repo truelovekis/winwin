@@ -4,10 +4,11 @@ $skillBtn.on("click", function () {
     let $targetBox = $(".tw-flexr2");
     let selectBtn = "";
     let text = $(this).find("h3").text();
-
+    console.log("이거다!!!!")
     selectBtn = `
   <button type="button" class="tw-boarder2">
   <h3 class="tw-font-bold2">${text}</h3>
+  <input type="hidden" value="${text}" name="skillName"/>
   <div class="presentation">
     <svg
       width="16"
@@ -37,6 +38,8 @@ $(".tw-flexr2").on("click", ".icn-white", function () {
     $(this).closest(".tw-boarder2").detach();
 });
 
+
+
 $(".ins-btn").on("click", function () {
     let $targetBox = $(".tw-flexr2");
     let value = $(".form-control").val();
@@ -45,6 +48,7 @@ $(".ins-btn").on("click", function () {
     let selectBtn = `
   <button type="button" class="tw-boarder2">
   <h3 class="tw-font-bold2">${value}</h3>
+  <input type="hidden" value="${value}" name="skillName"/>
   <div class="presentation">
     <svg
       width="16"
@@ -69,3 +73,14 @@ $(".ins-btn").on("click", function () {
 
     $targetBox.append(selectBtn);
 });
+
+let $back = $('.back-button');
+
+$back.on('click', function (){
+    window.location.href = '/mentor/apply';
+});
+
+// $('.success-btn').on('click', function (){
+//     $('.skill-box').submit();
+//     window.location.href = '/mentor/skill';
+// });
