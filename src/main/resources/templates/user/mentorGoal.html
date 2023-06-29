@@ -24,9 +24,11 @@
     <main>
       <div class="mentor-goal-container">
         <div class="mentor-goal-wrap">
-          <div class="mentor-goal-box" th:fragment="mentorGoal">
+          <div class="mentor-goal-box none" th:fragment="mentorGoal">
             <h3>직장인 인증서류 확인</h3>
             <h6>경력을 증명해 주세요!</h6>
+            <h5>회사명</h5>
+            <input type="text" name="userBelong" class="userBelong" placeholder="회사명을 입력해 주세요."/>
             <hr class="mentor-goal-hr" />
             <input
               type="file"
@@ -53,8 +55,8 @@
               ></span>
             </div>
             <div class="mentor-goal-name-box">
-              <span class="mentor-goal-file-name mentor-goal-none mentor-goal-name1"
-                ><span class="mentor-goal-file-name1">파일명</span>
+              <span class="mentor-goal-file-name mentor-goal-none mentor-goal-name2"
+                ><span class="mentor-goal-file-name2">파일명</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"

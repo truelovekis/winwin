@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
-  <link rel="stylesheet" th:href="@{/css/user/modal.css}">
+  <link rel="stylesheet" th:href="@{/css/user/loginModal.css}">
   <link rel="stylesheet" th:href="@{/css/user/agreement.css}">
   <link rel="stylesheet" th:href="@{/css/user/findId.css}">
   <link rel="stylesheet" th:href="@{/css/user/findPassword.css}">
@@ -13,6 +13,10 @@
   <link rel="stylesheet" th:href="@{/css/user/join.css}">
   <link rel="stylesheet" th:href="@{/css/user/message.css}">
   <link rel="stylesheet" th:href="@{/css/user/selfCheck.css}">
+  <link rel="stylesheet" th:href="@{/css/user/jobDepSelect.css}">
+  <link rel="stylesheet" th:href="@{/css/user/mentorGoal.css}">
+  <link rel="stylesheet" th:href="@{/css/user/mentorGoal2.css}">
+  <link rel="stylesheet" th:href="@{/css/user/signUp.css}">
   <link th:href="@{https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css}" rel="stylesheet" />
   <style>
     body {
@@ -28,12 +32,14 @@
   </style>
 </head>
 <body>
-<div class="agreement-container">
-  <div class="agreement-wrap">
+<div class="modal-container none">
+  <div class="modal-wrap">
     <div th:replace="user/login :: login"></div>
+    <button type="button" th:onclick="|location.href='@{/main/main}'|" class="login-end"><span>로그인</span></button>
     <div th:replace="user/findId :: findId"></div>
     <div th:replace="user/findPassword :: findPassword"></div>
     <div th:replace="user/join :: join"></div>
+    <div th:replace="user/jobDepSelect :: jobDepSelect"></div>
     <div th:replace="user/agreement :: agreement"></div>
     <div th:replace="user/goal :: goal"></div>
     <div th:replace="user/identity :: identity"></div>
@@ -42,7 +48,8 @@
     <div th:replace="user/message :: message"></div>
     <div th:replace="user/selfCheck :: selfCheck"></div>
     <div th:replace="user/signUp :: signUp"></div>
-    <button class="agreement-next"><span>다음</span></button>
+    <button type="button" th:onclick="|location.href='@{/main/main}'|" class="home-btn none"><span>홈으로</span></button>
+    <button class="modal-next none"><span>다음</span></button>
   </div>
 </div>
 <script
@@ -50,10 +57,12 @@
         integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
         crossorigin="anonymous"
 ></script>
-<script th:src="@{/js/agreement.js}"></script>
-<script th:src="@{/js/modal.js}"></script>
-<script th:src="@{/js/join.js}"></script>
-<script th:src="@{/js/mentorGoal.js}"></script>
-<script th:src="@{/js/mentorGoal2.js}"></script>
+<script th:src="@{/js/user/agreement.js}"></script>
+<script th:src="@{/js/user/loginModal.js}"></script>
+<script th:src="@{/js/user/join.js}"></script>
+<script th:src="@{/js/user/mentorGoal.js}"></script>
+<script th:src="@{/js/user/mentorGoal2.js}"></script>
+<script th:src="@{/js/user/jobDepSelect.js}"></script>
+<script th:src="@{/js/user/goal.js}"></script>
 </body>
 </html>

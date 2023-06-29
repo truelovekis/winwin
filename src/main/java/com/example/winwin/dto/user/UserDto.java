@@ -4,6 +4,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
 @Component
 @Data
 @NoArgsConstructor
@@ -14,7 +18,7 @@ public class UserDto {
     private String userPassword;
     private String userEmail;
     private String userRrnumber;
-    private int userGender;
+    private String userGender;
     private String userBelong;
     private String userIdentity;
     private String userNickname;
@@ -22,4 +26,5 @@ public class UserDto {
     private Long userWing;
     private int userGrade;
     private String userPhoneNumber;
+    private int userVerification;
 }
