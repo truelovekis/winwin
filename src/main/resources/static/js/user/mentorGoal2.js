@@ -16,10 +16,12 @@ $("#mentor-goal-2-file").on("change", function () {
   }
 });
 
-$(".bi-trash3").on("click", function () {
+$(".bi-trash2").on("click", function () {
   let targetName = $(this).closest(".mentor-goal-2-name-box").find(".mentor-goal-2-file-name1").text();
   $(this).closest(".mentor-goal-2-name-box").find(".mentor-goal-2-file-name1").text("");
   $(this).closest(".mentor-goal-2-name-box").find(".mentor-goal-2-name1").addClass("mentor-goal-2-none");
+  $(this).closest(".mentor-goal-2-name-box").find(".mentor-goal-2-file-name2").text("");
+  $(this).closest(".mentor-goal-2-name-box").find(".mentor-goal-2-name2").addClass("mentor-goal-2-none");
 
   let $input = $("#mentor-goal-2-file");
   let oldFiles = $input[0].files;

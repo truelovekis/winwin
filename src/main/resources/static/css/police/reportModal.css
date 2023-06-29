@@ -5,8 +5,8 @@
 
 /* 모달 창 스타일 */
 .reportModal {
-    /* display: none; */
-    position: fixed;
+    display: none;
+    position: absolute;
     z-index: 9999;
     top: 0;
     left: 0;
@@ -14,7 +14,6 @@
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
-    display: flex;
     justify-content: center;
     align-items: center;
 }

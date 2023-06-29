@@ -11,3 +11,68 @@ $(".header-li").hover(
         $(this).find(".sub").addClass("none");
     }
 );
+
+// 모달창
+$(function () {
+  $(".login-move").click(function () {
+    $(".modal-container").fadeIn();
+    // $('.modal-form')[0].reset();
+  });
+
+  // $(".modal-container").fadeOut();
+  //   $(this).reset();
+  //   $('.form-reset')[0].reset();
+});
+
+// 모달창이 나타났을 때 스크롤 제거
+$(".login-move").on("click", function () {
+  $(".modal-container").removeClass("none");
+
+  $('body').css('overflow', 'hidden');
+});
+
+// 검은 화면 누르면 모달창 제거
+$(".modal-container").on("click", function (e) {
+
+  if ($(e.target).hasClass("modal-container")) {
+      $(".modal-container").addClass("none");
+      $('body').css('overflow', 'auto');
+
+        modalSetUp2();
+  }
+
+});
+
+
+// ==============================================
+// 필수값 누락 시
+
+// let $modalForm = $('#modal-form')
+//
+// $(function (){
+//     $modalForm.validate({
+//         message :
+//     })
+// })
+
+
+function modalSetUp2(){
+    $('.modal-wrap>div').addClass('none');
+    $('.modal-wrap>button').addClass('none');
+    $('.modal-wrap>div').removeClass('disappear');
+    $('.login-box').removeClass('none');
+    $('.login-end').removeClass('none');
+    $('.login-box').removeClass('disappear');
+    $current = $('.login-box');
+    $next = null;
+    $('.form-reset')[0].reset();
+}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.winwin.mapper.share.ShareMapper">
+
+    <!-- 나눔 글 등록하기 -->
+    <insert id="shareInsert">
+        <selectKey keyProperty="shareNumber" order="BEFORE" resultType="long">
+            select SEQ_SHARE.nextval from DUAL
+        </selectKey>
+        insert into SHARE_FREE(SHARE_NUMBER, SHARE_TITLE, SHARE_CONTENT, SHARE_WING, USER_NUMBER)
+        values (#{shareNumber}, #{shareTitle}, #{shareContent}, #{shareWing}, #{userNumber})
+    </insert>
+
+    <!-- 나눔 글 번호로 조회하기 -->
+    <select id="shareSelectNumber" resultType="shareVo">
+        SELECT SHARE_NUMBER, SHARE_TITLE, SHARE_CONTENT, SHARE_STATUS, SHARE_READ_CNT, SHARE_DATE
+             ,SHARE_WING, S.USER_NUMBER, WU.USER_ID FROM SHARE_FREE S JOIN WW_USER WU
+                 ON SHARE_NUMBER = #{shareNumber} AND S.USER_NUMBER = WU.USER_NUMBER
+    </select>
+
+    <!-- 나눔 글 전체 최신순 조회하기 -->
+    <select id="shareSelectAll" resultType="shareVo">
+        SELECT S.share_number, SHARE_TITLE, SHARE_CONTENT, SHARE_STATUS, SHARE_DATE, S.USER_NUMBER, SHARE_READ_CNT,
+               USER_ID, file_system_name, file_uuid, file_upload_path
+        FROM SHARE_FREE S JOIN WW_USER U ON S.USER_NUMBER = U.USER_NUMBER
+                          LEFT JOIN (
+            select FILE_UPLOAD_PATH, FILE_UUID, FILE_SYSTEM_NAME, SHARE_NUMBER, RK
+            FROM (
+                     select FILE_UPLOAD_PATH, FILE_UUID, FILE_SYSTEM_NAME, SHARE_NUMBER,
+                            RANK() over (PARTITION BY SHARE_NUMBER ORDER BY FILE_NUMBER) RK
+                     FROM share_file
+                 )
+            WHERE RK = 1
+        ) J
+                                    ON S.SHARE_NUMBER = J.share_number
+        ORDER BY S.share_number DESC
+    </select>
+
+    <!-- 나눔 글 상세보기 진입 시 조회 수 증가 -->
+    <update id="shareReadCnt">
+        update SHARE_FREE
+        set SHARE_READ_CNT = SHARE_READ_CNT + 1
+        where share_number = #{shareNumber}
+    </update>
+
+    <!-- 나눔 글 번호로 수정하기 -->
+    <update id="shareUpdate">
+        update SHARE_FREE
+        set SHARE_TITLE = #{shareTitle},
+            SHARE_CONTENT = #{shareContent}
+        where SHARE_NUMBER = #{shareNumber}
+    </update>
+
+    <!-- 나눔 글 번호로 삭제하기 -->
+    <delete id="shareDelete">
+        delete from SHARE_FREE
+        where SHARE_NUMBER = #{shareNumber}
+    </delete>
+</mapper>

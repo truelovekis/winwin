@@ -34,7 +34,7 @@
             <div class="title"><h2>회원 정보 수정</h2></div>
             <div class="category">
               <div class="category-contain">
-                <h4>프로필</h4>
+                <h4><a class="no-point-page" th:href="@{/myPage/userInfoModify}">프로필</a></h4>
               </div>
               <div class="category-contain">
                 <h4 id="point-page">회원 탈퇴</h4>
@@ -48,7 +48,9 @@
               3개월간 동일한 정보로 가입이 불가능합니다.<br/>
               작성하신 글들은 모두 삭제됩니다.</p>
               <div class="delete-btn">
-                <button>회원 탈퇴하기</button>
+                <form th:action="@{/myPage/userDelete}" method="post">
+                  <button>회원 탈퇴하기</button>
+                </form>
               </div>
             </div>
             
