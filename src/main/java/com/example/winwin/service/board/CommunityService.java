@@ -1,7 +1,67 @@
 package com.example.winwin.service.board;
 
+import com.example.winwin.dto.board.CommunityDto;
+import com.example.winwin.mapper.board.CommunityMapper;
+import com.example.winwin.service.file.CommunityFileService;
+import com.example.winwin.vo.board.CommunityVo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
+@Transactional
 public class CommunityService {
+    private final CommunityMapper communityMapper;
+    private final CommunityFileService communityFileService;
+
+    public void register(CommunityDto communityDto){
+        if (communityDto == null) {
+            throw new IllegalArgumentException("게시판 정보가 없습니다.");
+        }
+        communityMapper.insert(communityDto);
+    }
+
+    public void remove(Long communityNumber){
+        if (communityNumber == null){
+            throw new IllegalArgumentException("게시물 번호 누락");
+        }
+        communityFileService.remove(communityNumber);
+        communityMapper.delete(communityNumber);
+    }
+
+    public void modify(CommunityDto communityDto, List<MultipartFile> files) throws IOException{
+        communityFileService.remove(communityDto.getCommunityNumber());
+        communityFileService.registerAndSaveFiles(files, communityDto.getCommunityNumber());
+        communityMapper.update(communityDto);
+    }
+
+    public void modify(CommunityDto communityDto ){
+        if( communityDto == null){
+            throw new IllegalArgumentException("게시물 수정 정보 누락");
+        }
+        communityMapper.update(communityDto);
+    }
+
+    @Transactional(readOnly = true)
+    public CommunityVo find(Long communityNumber){
+        if(communityNumber == null){
+            throw new IllegalArgumentException("게시물 번호 누락");
+        }
+        return Optional.ofNullable(communityMapper.select(communityNumber))
+                .orElseThrow(()->{throw new IllegalArgumentException("존재하지 않는 게시물 번호"); });
+    }
+
+    @Transactional(readOnly = true)
+    public List<CommunityVo> findAll(CommunityVo communityVo){
+        return communityMapper.selectAll(communityVo);
+    }
+
+
 }

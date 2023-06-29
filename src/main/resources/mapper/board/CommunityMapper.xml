@@ -1,5 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.board.CommunityMapper">
-    
+
+    <insert id="insert">
+        <selectKey keyProperty="communityNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_COMMUNITY.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO COMMUNITY(COMMUNITY_NUMBER, COMMUNITY_TITLE, COMMUNITY_CONTENT, CATEGORY_NUMBER, USER_NUMBER)
+        VALUES (#{communityNumber}, #{communityTitle}, #{communityContent}, #{categoryNumber}, #{userNumber})
+    </insert>
+
+    <update id="update">
+        UPDATE COMMUNITY
+        SET COMMUNITY_TITLE = #{communityTitle} , COMMUNITY_CONTENT = #{communityContent}, COMMUNITY_DATE = SYSDATE
+        WHERE COMMUNITY_NUMBER = #{communityNumber}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM COMMUNITY
+        WHERE COMMUNITY_NUMBER = #{communityNumber}
+    </delete>
+
+    <select id="select" resultType="communityVo">
+        SELECT C.COMMUNITY_NUMBER, C.COMMUNITY_CONTENT, C.COMMUNITY_TITLE, C.COMMUNITY_DATE,
+               C.USER_NUMBER, U.USER_NICKNAME, U.USER_BELONG
+        FROM COMMUNITY C JOIN WW_USER U
+        ON C.USER_NUMBER = U.USER_NUMBER
+        WHERE C.COMMUNITY_NUMBER = #{communityNumber}
+    </select>
+
+    <select id="selectAll" resultType="communityVo">
+        SELECT C.COMMUNITY_NUMBER, C.COMMUNITY_TITLE, C.COMMUNITY_CONTENT, C.COMMUNITY_DATE, C.COMMUNITY_CNT, C.CATEGORY_NUMBER
+             ,C.USER_NUMBER, U.USER_ID
+             ,T.CATEGORY_NAME
+        FROM COMMUNITY C JOIN WW_USER U
+                              ON C.USER_NUMBER = U.USER_NUMBER
+                         JOIN community_category T
+                              ON C.CATEGORY_NUMBER = T.CATEGORY_NUMBER
+        <if test="categoryTypeStr != 'all'">
+        WHERE C.CATEGORY_NUMBER = #{categoryNumber}
+        </if>
+        ORDER BY C.COMMUNITY_NUMBER DESC
+    </select>
+
+
 </mapper>
