@@ -1,25 +1,28 @@
-package com.example.winwin.dto.user;
+package com.example.winwin.vo.user;
 
+import com.example.winwin.dto.user.UserDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @Data
 @NoArgsConstructor
-public class UserDto {
+public class UserVo {
     private Long userNumber;
     private String userName;
     private String userId;
     private String userPassword;
     private String userEmail;
-    private String userRrnumber;
+    private int userRrnumber;
     private int userGender;
     private String userBelong;
     private String userIdentity;
-    private String userNickname;
+    private String userNickName;
+    private String userPhoneNumber;
     private int userStatus;
     private Long userWing;
-    private int userGrade;
-    private String userPhoneNumber;
+    private String gradeName;
 }

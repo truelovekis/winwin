@@ -3,6 +3,9 @@
 
 <configuration>
     <typeAliases>
-<!--        <typeAlias type="com.example.app.dto.UserDto" alias="userDto"/>-->
+        <typeAlias type="com.example.winwin.dto.user.UserDto" alias="userDto"/>
+        <typeAlias type="com.example.winwin.dto.user.UserPfpDto" alias="userPfpDto"/>
+        <typeAlias type="com.example.winwin.vo.myPage.MyPageVo" alias="myPageVo"/>
+        <typeAlias type="com.example.winwin.vo.user.UserVo" alias="userVo"/>
     </typeAliases>
 </configuration>
