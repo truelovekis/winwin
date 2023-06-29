@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.winwin.mapper.mentor.MentorMapper">
+    <select id="mentorList" resultType="mentorVo">
+        SELECT M1.user_number , M1.mentor_number , M1.user_name , M1.PFP_UPLOAD_PATH , M1.PFP_SYSTEM_NAME , M1.PFP_UUID ,mc.CAREER_COMPANY , TO_CHAR(TO_DATE(mc.CAREER_END_DATE, 'YYYY.mm.DD'), 'YYYY.mm') CAREER_END_DATE , TO_CHAR(TO_DATE(mc.CAREER_START_DATE, 'YYYY.mm.DD'), 'YYYY.mm') CAREER_START_DATE, ROUND(((TO_DATE(mc.CAREER_END_DATE, 'YYYY.mm.DD') - TO_DATE(mc.CAREER_START_DATE, 'YYYY.mm.DD'))/30/12)) career_annual
+        FROM (
+                 SELECT J1.user_number, J1.mentor_number, J1.user_name, J1.user_belong  , UP.PFP_UPLOAD_PATH , UP.PFP_SYSTEM_NAME , UP.PFP_UUID
+                 FROM (
+                          SELECT u.USER_NUMBER , m.MENTOR_NUMBER , u.user_name , u.USER_BELONG
+                          FROM WW_USER u JOIN MENTOR m
+                                              ON u.USER_NUMBER = m.USER_NUMBER
+                          WHERE mentor_status = 'Y'
+                      )J1 LEFT OUTER JOIN USER_PFP up
+                                          ON J1.user_number = up.USER_NUMBER
+             ) M1 JOIN MENTOR_CAREER mc
+                       ON M1.mentor_number = mc.MENTOR_NUMBER AND M1.user_belong = mc.CAREER_COMPANY
+        ORDER BY mc.CAREER_NUMBER desc
+    </select>
+
+    <select id="mentorCareer" resultType="careerVo">
+        SELECT MC.CAREER_COMPANY , MC.CAREER_TITLE , TO_CHAR(TO_DATE(mc.CAREER_END_DATE, 'YYYY.mm.DD'), 'YYYY.mm') CAREER_END_DATE , TO_CHAR(TO_DATE(mc.CAREER_START_DATE, 'YYYY.mm.DD'),'YYYY.mm') CAREER_START_DATE , ROUND(((TO_DATE(mc.CAREER_END_DATE, 'YYYY.mm.DD') - TO_DATE(mc.CAREER_START_DATE, 'YYYY.mm.DD'))/30/12)) career_annual , career_status
+        FROM MENTOR_CAREER mc
+        where MC.MENTOR_NUMBER = #{mentorNumber}
+    </select>
+
+    <select id="mentorSkill" resultType="skillVo">
+        SELECT m.MENTOR_NUMBER , ms.SKILL_NAME
+        FROM MENTOR m JOIN MENTOR_SKILL ms
+        ON m.MENTOR_NUMBER = ms.MENTOR_NUMBER AND m.MENTOR_NUMBER = #{mentorNumber}
+    </select>
+
+    <select id="categoryList" resultType="categoryVo">
+        SELECT mc.MAIN_CODE , mc.MAIN_NAME , sc.SUB_NAME
+        FROM MAIN_CATEGORY mc JOIN SUB_CATEGORY sc
+        ON mc.MAIN_CODE  = sc.MAIN_CODE
+    </select>
+
+    <update id="mentorUpdate">
+        UPDATE MENTOR
+        SET MENTOR_STATUS = #{mentorStatus}
+        WHERE MENTOR_NUMBER = #{mentorNumber}
+    </update>
+
+    <select id="loginMentor" resultType="mentorVo">
+        SELECT M1.user_number , M1.mentor_number , M1.user_name , M1.PFP_UPLOAD_PATH , M1.PFP_SYSTEM_NAME , M1.PFP_UUID ,mc.CAREER_COMPANY , TO_CHAR(TO_DATE(mc.CAREER_END_DATE, 'YYYY.mm.DD'), 'YYYY.mm') CAREER_END_DATE , TO_CHAR(TO_DATE(mc.CAREER_START_DATE, 'YYYY.mm.DD'), 'YYYY.mm') CAREER_START_DATE, ROUND((TO_DATE(CAREER_END_DATE ) - TO_DATE(CAREER_START_DATE))/30/12) AS career_annua
+             , M1.mentor_status
+        FROM (
+                 SELECT J1.user_number, J1.mentor_number, J1.user_name, J1.user_belong  , UP.PFP_UPLOAD_PATH , UP.PFP_SYSTEM_NAME , UP.PFP_UUID, J1.mentor_status
+                 FROM (
+                          SELECT u.USER_NUMBER , m.MENTOR_NUMBER , u.user_name , u.USER_BELONG, m.MENTOR_STATUS
+                          FROM WW_USER u JOIN MENTOR m
+                          ON u.USER_NUMBER = m.USER_NUMBER AND m.mentor_number = #{mentorNumber}
+                      )J1 LEFT OUTER JOIN USER_PFP up
+                 ON J1.user_number = up.USER_NUMBER
+             ) M1 JOIN MENTOR_CAREER mc
+        ON M1.mentor_number = mc.MENTOR_NUMBER AND M1.user_belong = mc.CAREER_COMPANY
+    </select>
+
+</mapper>

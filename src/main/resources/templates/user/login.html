@@ -26,21 +26,21 @@
       <div class="login-container">
         <div class="login-wrap">
           <div class="login-box" th:fragment="login">
-            <img src="/winwin/img/winwin-logo.png" alt="" />
+            <img th:src="@{/img/winwin-logo.png}" alt="" />
             <h4>안녕하세요.</h4>
             <h4>WinWin입니다.</h4>
             <input type="text" class="login-input" id="login-id" placeholder="아이디" />
             <input type="text" class="login-input" id="login-password" placeholder="비밀번호" />
             <div class="login-page-wrap">
               <div class="login-page-move">
-                <a href="">아이디 찾기&nbsp;&nbsp;&nbsp;&nbsp; |</a
-                ><a href="">비밀번호 찾기&nbsp;&nbsp;&nbsp;&nbsp; | </a>
-                <a href="">회원가입</a>
+                <a href="" class="find-id-link">아이디 찾기&nbsp;&nbsp;&nbsp;&nbsp; |</a
+                ><a href="" class="find-pw-link">비밀번호 찾기&nbsp;&nbsp;&nbsp;&nbsp; | </a>
+                <a href="" class="join-link">회원가입</a>
               </div>
             </div>
             <div class="login-kakao-btn">
               <button class="login-kakao">
-                <img src="/winwin/img/kakao.png" alt="" />
+                <img th:src="@{/img/kakao.png}" alt="" />
                 <span>카카오 로그인</span>
               </button>
             </div>

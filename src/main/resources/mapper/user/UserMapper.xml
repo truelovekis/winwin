@@ -2,19 +2,73 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.user.UserMapper">
 
-    <!-- 회원가입 -->
-    <insert id="insert">
-        <selectKey keyProperty="userNumber" order="BEFORE" resultType="long" >
-            SELECT SEQ_USER.NEXTVAL FROM DUAL
+    <!--회원가입-->
+    <insert id="join">
+        <selectKey keyProperty="userNumber" order="BEFORE" resultType="Long">
+            SELECT SEQ_WWUSER.NEXTVAL FROM DUAL
         </selectKey>
-        insert into WW_USER (USER_NUMBER, USER_NAME, USER_ID, USER_PASSWORD, USER_EMAIL, USER_RRNUMBER, USER_GENDER,
-        USER_BELONG, USER_IDENTITY, USER_NICKNAME, USER_STATUS, USER_GRADE, USER_WING)
-        values (#{userNumber}, #{userName}, #{userId}, #{userPassword}, #{userEmail}, #{userRrnumber}, #{userGender}, #{userBelong}, #{userIdentity}, #{userNickname}, #{userStatus}, #{userGrade}, #{userWing})
+        INSERT INTO WW_USER (USER_NUMBER, USER_NAME, USER_ID, USER_PASSWORD, USER_EMAIL, USER_RRNUMBER, USER_NICKNAME,
+        USER_PHONE_NUMBER, USER_BELONG, USER_GENDER, USER_IDENTITY)
+        VALUES (#{userNumber}, #{userName}, #{userId}, #{userPassword}, #{userEmail}, #{userRrnumber}, #{userNickname},
+        #{userPhoneNumber}, #{userBelong},
+        <trim suffix=",">
+            <if test="userGender == 1 or userGender == 3">
+                '남'
+            </if>
+            <if test="userGender == 2 or userGender == 4">
+                '여'
+            </if>
+        </trim>
+        <trim suffix=")">
+            <if test="userIdentity.equals('identity-worker')">
+                '직장인'
+            </if>
+            <if test="userIdentity.equals('identity-un-student')">
+                '대학생'
+            </if>
+            <if test="userIdentity.equals('identity-high-student')">
+                '고등학생'
+            </if>
+        </trim>
     </insert>
 
-    <!-- 로그인 -->
-    <select id="selectUserNumber" resultType="long">
-        SELECT USER_NUMBER FROM WW_USER
+    <!--관심분야 선택 (회원가입)-->
+<!--    <select id="joinCategory" resultType="userCategoryVo">-->
+<!--        select sc.main_code, sc.sub_number, sc.sub_name-->
+<!--        from main_category mc join sub_category sc-->
+<!--        on mc.main_code = sc.main_code;-->
+<!--    </select>-->
+
+    <!--로그인-->
+    <select id="login" resultType="Long">
+        SELECT USER_NUMBER, USER_WING
+        FROM WW_USER
         WHERE USER_ID = #{userId} AND USER_PASSWORD = #{userPassword}
     </select>
+
+    <!--회원번호로 이름, 윙 갯수 조회-->
+    <select id="findUserInfo" resultType="userDto">
+        SELECT USER_NAME, USER_WING
+        FROM WW_USER
+        WHERE USER_NUMBER = #{userNumber}
+    </select>
+
+    <!-- 아이디 중복 체크 -->
+    <select id="checkId" resultType="_int">
+        SELECT COUNT (*)
+        FROM WW_USER
+        WHERE USER_ID = #{userId}
+    </select>
+
+    <!-- 닉네임 중복 체크 -->
+    <select id="checkNickname" resultType="_int">
+        SELECT COUNT (*)
+        FROM WW_USER
+        WHERE USER_NICKNAME = #{userNickname}
+    </select>
+
+    <insert id="mentorInsert">
+        INSERT INTO MENTOR (MENTOR_NUMBER, MENTOR_STATUS, USER_NUMBER, SUB_NUMBER)
+        VALUES ();
+    </insert>
 </mapper>

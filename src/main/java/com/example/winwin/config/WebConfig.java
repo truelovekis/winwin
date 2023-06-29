@@ -10,13 +10,19 @@ public class WebConfig implements WebMvcConfigurer {
     @Value("${file.dir}")
     private String fileDir;
 
+    @Value("${pfp.dir}")
+    private String pfpDir;
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        addResourceHandler() 리소스 경로와 연결될 URL경로를 작성한다.
-//        리소스는 자원이고 현재 우리가 필요한 자원은 이미지 파일이다.
+//        addResourceHandler() 리소스 경로와 연결될 URL 경로를 작성한다.
+//        리소스는 자원이고, 우리가 필요한 자원은 이미지 파일이다.
         registry.addResourceHandler("/upload/**")
-//                실제 리소스가 존재하는 외부 경로를 알려준다.
-                .addResourceLocations("file:"+ fileDir);
-//        로컬디스크 경로는 file: 을 반드시 사용해야한다.
+//                실제 리소스가 존재하는 외부 경로를 알려준다. fileDir 은 apllication.properties 에 저장되어있음
+                .addResourceLocations("file:" + fileDir);
+//        로컬디스크 경로는 file:을 반드시 사용해야 한다.
+
+        registry.addResourceHandler("/profile/**")
+                .addResourceLocations("file:" + pfpDir);
     }
 }

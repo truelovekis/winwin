@@ -14,6 +14,15 @@ body {
     font-family: "NanumSquareAcr";
 }
 
+.big-box{
+    height: 100%;
+}
+
+
+footer{
+    height: 60px;
+}
+
 .first1{
     background-color: #fff;
     padding-top: 35px;

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.winwin.mapper.file.MyPageFile">
+    <insert id="insertProfile">
+        INSERT INTO USER_PFP (PFP_NUMBER, PFP_UPLOAD_PATH, PFP_SYSTEM_NAME, PFP_UUID, USER_NUMBER)
+        VALUES (SEQ_PFP_NUMBER.NEXTVAL, #{pfpUploadPath}, #{pfpSystemName}, #{pfpUuid}, #{userNumber})
+    </insert>
+    <select id="selectProfile" resultType="userPfpDto">
+        SELECT PFP_UPLOAD_PATH, PFP_SYSTEM_NAME, PFP_UUID
+        FROM USER_PFP
+        WHERE USER_NUMBER = #{userNumber}
+    </select>
+    <update id="updateProfile">
+        UPDATE USER_PFP
+        SET PFP_UPLOAD_PATH = #{pfpUploadPath}, PFP_SYSTEM_NAME = #{pfpSystemName}, PFP_UUID = #{pfpUuid}
+        WHERE USER_NUMBER = #{userNumber}
+    </update>
+    <delete id="deleteProfile">
+        DELETE FROM USER_PFP
+        WHERE USER_NUMBER = #{userNumber}
+    </delete>
+</mapper>

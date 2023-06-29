@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--  <link rel="stylesheet" th:href="@{/css/user/loginModal.css}" />-->
+  <link rel="stylesheet" th:href="@{/css/community/communityModify.css}">
+  <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
+  <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
+  <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+    <style>
+      body {
+        font-family: "NanumSquareLight";
+        font-family: "NanumSquare";
+        font-family: "NanumSquareBold";
+        font-family: "NanumSquareExtraBold";
+        font-family: "NanumSquareAcb";
+        font-family: "NanumSquareAceb";
+        font-family: "NanumSquareAcl";
+        font-family: "NanumSquareAcr";
+      }
+    </style>
+  <title>커뮤니티</title>
+</head>
+<body>
+<header class="header" th:replace="fragment/header :: header"></header>
+  <form id="community-write" th:action="@{/community/modify}" method="post" enctype="multipart/form-data">
+  <div class="write-main">
+    <div class="main-title">
+      <div class="sub1">
+        <h2>게시글 수정하기</h2>
+        <a th:href="@{/community/list/all}">
+        <img th:src="@{/img/k.png}" class="k">
+        </a>
+    </div>
+      <span class="sub-title"></span>
+    </div>
+    <div class="write-main-box">
+<!--      <div class="write-category">-->
+        <input type="hidden" name="userNumber" value="9"/>
+        <input type="hidden" name="communityNumber" th:value="${community.communityNumber}"/>
+<!--        <select name="categoryNumber" id="community-category" class="content-a" onchange="alert(this.value)">-->
+<!--          <option value="">카테고리</option>-->
+<!--          <option value="10">고등학생</option>-->
+<!--          <option value="20">대학생</option>-->
+<!--          <option value="30">직장인</option>-->
+<!--        </select>-->
+<!--      </div>-->
+      <div class="write-title content-a">
+        <input th:value="${community.communityTitle}" name="communityTitle" type="text" placeholder="제목을 입력하세요" style="font-family: NanumSquareAcr;" required/>
+      </div>
+      <div class="write-content content-a">
+        <textarea th:text="${community.communityContent}" name="communityContent" id="communityContent" cols="30" rows="10" placeholder="나에게 맞는 카테고리를 선택하여 게시글을 작성해보세요." style="font-family: NanumSquareAcr;" required></textarea>
+      </div>
+      <div>
+        <span class="text-cnt content-a">글자수 : <span class="cnt">0</span>/500</span>
+      </div>
+      <div class="file-main-img">
+      <div class="file-img">
+        <label for="file" class="input-file-btn">
+          <img th:src="@{/img/camera.png}">
+          <div class="img-text">
+          이미지<br>
+          업로드<br>
+          (<span class="file-cnt">0</span>/3)
+          </div>
+        </label>
+        <input type="file" id="file" name="communityFile" accept="image/*" multiple/>
+      </div>
+      <!-- 파일 리스트 -->
+      <ul class="file-list">
+      </ul>
+      <!-- 파일 리스트 끝 -->
+    </div>
+    </div>
+      <button type="submit" class="write-btn" style="font-family: NanumSquareAcr;">작성하기</button>
+  </div>
+</form>
+<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:src="@{/js/community/communityModify.js}"></script>
+</body>
+
+</html>

@@ -104,6 +104,7 @@ button {
     margin-top: 8px;
     width: 240px;
     height: 45px;
+    align-items: center;
 }
 .custom-select {
     --tw-text-opacity: 1;
@@ -234,6 +235,7 @@ input {
     border: 1px solid #cbd5e1;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    resize: none;
 }
 input {
     padding-left: 10px;
@@ -248,16 +250,33 @@ textarea::placeholder {
 }
 
 #now-input {
-    --tw-text-opacity: 1;
-    border-color: #cbd5e1 !important;
-    display: block;
-    width: 496px;
-    height: 45px;
-    line-height: 1.5;
+    /*--tw-text-opacity: 1;*/
+    /*border-color: #cbd5e1 !important;*/
+    /*display: block;*/
+    /*width: 496px;*/
+    /*height: 45px;*/
+    /*line-height: 1.5;*/
+    /*color: #0f172a;*/
+    /*background-color: rgb(248 250 252);*/
+    /*border: 1px solid #cbd5e1;*/
+    /*border-radius: 0.25rem;*/
+    /*transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;*/
+    /*font-weight: 530;*/
+    border: 1px solid #cbd5e1;
+    padding: 7px 7px;
+    border-radius: 3px;
     color: #0f172a;
     background-color: rgb(248 250 252);
-    border: 1px solid #cbd5e1;
-    border-radius: 0.25rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    font-weight: 530;
+}
+
+.startDate {
+    border: 1px solid #ddd;
+    padding: 7px 7px;
+    border-radius: 3px;
+}
+
+.endDate {
+    border: 1px solid #ddd;
+    padding: 7px 7px;
+    border-radius: 3px;
 }

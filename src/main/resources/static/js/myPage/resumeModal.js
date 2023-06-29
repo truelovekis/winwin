@@ -37,3 +37,19 @@ $(".save-btn").on("click", function () {
     }, 1000);
   });
 });
+
+$('.resume-box').on('click', function () {
+  $('.resumeModal').removeClass("none");
+  $('.modal-wrap').css({
+    position: "fixed",
+    left: "50%",
+    top: "50%",
+    transform: "translate(-50%, -50%)",
+  });
+});
+
+$('.modal-wrap').on('click', function (e) {
+  if ($(e.target).hasClass("modal-wrap")) {
+    $('.resumeModal').addClass("none");
+  }
+});

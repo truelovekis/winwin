@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>profile</title>
+
+</head>
+<link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
+<link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
+<link rel="stylesheet" th:href="@{/css/mentorProfile/DefaultProfile.css}" />
+<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+<style>
+  body {
+    font-family: "NanumSquareLight";
+    font-family: "NanumSquare";
+    font-family: "NanumSquareBold";
+    font-family: "NanumSquareExtraBold";
+    font-family: "NanumSquareAcb";
+    font-family: "NanumSquareAceb";
+    font-family: "NanumSquareAcl";
+    font-family: "NanumSquareAcr";
+  }
+</style>
+<body>
+<header class="header" th:replace="fragment/header :: header"></header>
+<div class="mentorProfile">
+<div class="background">
+  <div class="startpage">
+    <div class="pageflex">
+      <img src="./img/img.png" alt="" class="main-img" />
+      <div class="subflex">
+        <div class="star-score">
+              <span class="ipc-rating-star ipc-rating-star--baseAlt ipc-rating-star--imdb ipc-rating-star-group--imdb">
+                <div class="container">
+                  <div id="star">
+                    <svg class="svg-star" viewBox="0 0 51 50" version="1.1" 1 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                      <defs></defs>
+                      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                        <path d="M19.1599493,39.1271248 C17.4576451,40.0218018 16.7108089,39.4773077 17.0355266,37.5846452 L18.2375322,30.5785868 L18.3264535,30.0602965 L17.9498333,29.6932963 L12.8580559,24.7315783 C11.4811669,23.3898591 11.7682637,22.5119148 13.669534,22.2357297 L20.7061974,21.2135596 L21.226418,21.1379905 L21.459124,20.6666223 L24.606016,14.2922998 C25.457074,12.5684024 26.381668,12.5700646 27.231905,14.2922998 L30.378797,20.6666223 L30.611503,21.1379905 L31.131724,21.2135596 L38.168387,22.2357297 C40.071492,22.5121813 40.355428,23.3911516 38.979865,24.7315783 L33.888088,29.6932963 L33.511468,30.0602965 L33.600389,30.5785868 L34.802395,37.5846452 C35.127425,39.4791331 34.378634,40.020939 32.677972,39.1271248 L26.384189,35.8193128 L25.918961,35.5748037 L25.453732,35.8193128 L19.1599493,39.1271248 L19.1599493,39.1271248 Z" class="star-svg" sketch:type="MSShapeGroup"></path>
+                        <path d="M11.8549664,10.3594235 C12.3017741,10.0347987 12.9263186,10.1327118 13.2503254,10.5786688 L17.3677086,16.2457607 C17.6915364,16.6914713 17.5949564,17.3136884 17.1450336,17.6405765 C16.6982259,17.9652013 16.0736814,17.8672882 15.7496746,17.4213312 L11.6322914,11.7542393 C11.3084636,11.3085287 11.4050436,10.6863116 11.8549664,10.3594235 Z M5.32767265,35.6857297 C5.12078315,35.1736602 5.36687878,34.5913546 5.87797335,34.384859 L12.3728135,31.7607733 C12.8836257,31.5543918 13.4639954,31.7986308 13.6723273,32.3142703 C13.8792169,32.8263398 13.6331212,33.4086454 13.1220266,33.615141 L6.62718654,36.2392267 C6.11637435,36.4456082 5.53600456,36.2013692 5.32767265,35.6857297 Z M25.5785358,40.5006854 C26.1307365,40.5103241 26.5705943,40.9643812 26.560974,41.5155305 L26.4387214,48.5193743 C26.4291064,49.0702191 25.9775146,49.5090205 25.4214642,49.4993146 C24.8692635,49.4896759 24.4294057,49.0356188 24.439026,48.4844695 L24.5612786,41.4806257 C24.5708936,40.9297809 25.0224854,40.4909795 25.5785358,40.5006854 Z M38.4554268,32.0273298 C38.6975325,31.5309396 39.29494,31.3241858 39.7903851,31.5658306 L46.0863572,34.6365813 C46.5815286,34.8780926 46.7883668,35.4728192 46.5445732,35.9726702 C46.3024675,36.4690604 45.70506,36.6758142 45.2096149,36.4341694 L38.9136428,33.3634187 C38.4184714,33.1219074 38.2116332,32.5271808 38.4554268,32.0273298 Z M32.6680582,17.4971568 C32.2388524,17.1495928 32.1717851,16.5209873 32.5186875,16.0925986 L36.9270206,10.6487606 C37.2737313,10.2206086 37.8997436,10.152856 38.3319418,10.5028432 C38.7611476,10.8504072 38.8282149,11.4790127 38.4813125,11.9074014 L34.0729794,17.3512394 C33.7262687,17.7793914 33.1002564,17.847144 32.6680582,17.4971568 Z" class="spark" sketch:type="MSShapeGroup"></path>
+                      </g>
+                    </svg>
+                  </div>
+                </div>
+                <span th:text="${review.reviewAvg}" /> </span>
+        </div>
+        <button type="button" class="messageBox">
+          <svg width="24" height="24" stroke-width="0" viewBox="0 0 24 24" fill="#64748b" xmlns="http://www.w3.org/2000/svg" class="icn-message">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 5C7.4683 5 4.00002 8.24178 4.00002 12C4.00002 13.3513 4.43831 14.6186 5.20915 15.6993C5.40238 15.9702 5.44819 16.3195 5.33134 16.6311L4.56804 18.6666L7.5489 18.0704C7.75979 18.0282 7.97865 18.0552 8.17302 18.1472C9.36799 18.7131 10.6744 19.0045 11.9966 19L12 19C16.5317 19 20 15.7582 20 12C20 8.24178 16.5317 5 12 5ZM2.00002 12C2.00002 6.92222 6.59173 3 12 3C17.4083 3 22 6.92222 22 12C22 17.0772 17.4093 20.9992 12.0017 21H12V20L12.0034 21L12.0017 21C10.4946 21.0049 9.00427 20.6961 7.62501 20.0948L3.19613 20.9806C2.84009 21.0518 2.47343 20.9244 2.23822 20.6478C2.003 20.3712 1.9362 19.9888 2.06369 19.6489L3.27881 16.4085C2.46828 15.1107 2.00002 13.6065 2.00002 12ZM7.00002 12C7.00002 11.4477 7.44773 11 8.00002 11H8.01002C8.5623 11 9.01002 11.4477 9.01002 12C9.01002 12.5523 8.5623 13 8.01002 13H8.00002C7.44773 13 7.00002 12.5523 7.00002 12ZM11 12C11 11.4477 11.4477 11 12 11H12.01C12.5623 11 13.01 11.4477 13.01 12C13.01 12.5523 12.5623 13 12.01 13H12C11.4477 13 11 12.5523 11 12ZM15 12C15 11.4477 15.4477 11 16 11H16.01C16.5623 11 17.01 11.4477 17.01 12C17.01 12.5523 16.5623 13 16.01 13H16C15.4477 13 15 12.5523 15 12Z" fill="inherit"></path>
+          </svg>
+          <span class="message-in"> 메시지 </span>
+        </button>
+      </div>
+    </div>
+    <div class="info-text">
+      <div class="name-box">
+
+        <h1 class="name-text" th:text="${profile.userName}"></h1>
+      </div>
+      <p class="text-base" th:text="${profile.userBelong}"></p>
+      <div class="tag-flex">
+        <button type="button" class="Tag">
+          <span class="Posts"></span>
+        </button>
+      </div>
+    </div>
+    <p class="appeal" th:text="${profile.mentorPr}"></p>
+  </div>
+
+</div>
+<div class="Information">
+  <ul class="Information-in">
+
+    <li class="pro">
+      <button type="button" class="pro-btn li-btn">프로필</button>
+      <div class="pro-bottom li-bottom">
+        <div class="grid-flex">
+          <div class="col-start">
+            <div class="page-flex">
+              <div class="skill-page" aria-label="스킬">
+                <div class="skill-flex">
+                  <p class="font-bold">스킬</p>
+                </div>
+                <div class="board-flex">
+                  <div class="boarder" th:each="skill : ${skill}">
+                    <h3 class="reader" th:text="${skill.skillName}"></h3>
+                  </div>
+                </div>
+              </div>
+              <hr color="#CBD5E1" />
+              <div class="Career-page" aria-label="경력">
+                <div class="Carrer-page">
+                  <p class="font-bold">경력 ・ 12년차</p>
+                </div>
+                <div class="BT-form">
+
+                  <div class="CR-flex" th:each="career : ${career}">
+                    <div class="Career-img">
+                      <span>
+                        <img src="./img/./kakao.webp" alt="" style="width: 24px" />
+                      </span>
+                    </div>
+                    <div class="kakao-flex">
+                      <a href="" target="_blank" rel="noreferrer">
+                        <span style="color: black">
+                          <span class="font-bold" style="color: black" />
+                          <span class="font-bold" th:text="${career.careerCompany}"/> <span class="careertitle" th:text="${career.careerTitle}"/>
+                        </span>
+                      </a>
+                      <p class="font-base"><span th:text="${career.careerStartDate}"/> ~ <span th:text="${career.careerEndDate}"/></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="board">
+      <button type="button" class="board-btn li-btn">게시물</button>
+      <div class="board-bottom li-bottom">
+      </div>
+    </li>
+
+    <li class="career">
+      <button type="button" class="career-btn li-btn">후기</button>
+      <input type="hidden" th:value="${profile.mentorNumber}" class="mentor-num"/>
+      <div class="career-bottom li-bottom">
+      </div>
+    </li>
+
+  </ul>
+</div>
+<div class="changeView" style="margin-left: 30%;">
+
+</div>
+</div>
+<input type="hidden" th:value="${profile.mentorNumber}" class="mentor-num"/>
+<footer class="header" th:replace="fragment/footer :: footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+<script type="module" th:src="@{/js/mentor/DefaultProfile.js}"></script>
+<script th:src="@{/js/fragment/header.js}" ></script>
+</html>

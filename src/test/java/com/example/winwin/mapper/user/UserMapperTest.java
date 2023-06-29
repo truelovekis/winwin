@@ -4,6 +4,8 @@ import com.example.winwin.dto.user.UserDto;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,34 +21,65 @@ class UserMapperTest {
 
     @Autowired
     private UserMapper userMapper;
+
     private UserDto userDto;
 
     @BeforeEach
     void setUp(){
         userDto = new UserDto();
 
-        userDto.setUserName("박웅이");
-        userDto.setUserId("eee");
+        userDto.setUserId("aaa");
         userDto.setUserPassword("1234");
-        userDto.setUserEmail("eee@gmail.com");
-        userDto.setUserRrnumber("940406");
-        userDto.setUserGender(1);
-        userDto.setUserBelong("배달의 민족");
-        userDto.setUserIdentity("W");
-        userDto.setUserNickname("웅이");
+        userDto.setUserEmail("aaa@naver.com");
+        userDto.setUserBelong("분당고등학교");
+        userDto.setUserName("소이");
+        userDto.setUserNickname("숑");
+        userDto.setUserRrnumber("001109");
+        userDto.setUserGender("F");
+        userDto.setUserIdentity("H");
         userDto.setUserGrade(5);
-        userDto.setUserWing(300L);
+        userDto.setUserWing(0L);
+        userDto.setUserStatus(1);
+        userDto.setUserPhoneNumber("01020626339");
     }
 
     @Test
-    @DisplayName("회원가입 및 로그인 테스트")
-    void insert() {
-        userMapper.insert(userDto);
-
-        userMapper.selectUserNumber("eee", "1234");
-
-        assertThat(userMapper.selectUserNumber("eee","1234"))
-                .isEqualTo(userDto.getUserNumber());
+    void join() {
+        userMapper.join(userDto);
     }
 
+    @Test
+    void login() {
+        userMapper.join(userDto);
+
+        Long userNumber = userMapper.login(userDto.getUserId(), userDto.getUserPassword());
+
+        assertThat(userDto.getUserNumber()).isEqualTo(userNumber);
+    }
+
+    @Test
+    void findUserInfo() {
+        userMapper.join(userDto);
+
+        UserDto userInfo = userMapper.findUserInfo(userDto.getUserNumber());
+
+        assertThat(userDto.getUserName()).isEqualTo(userInfo.getUserName());
+    }
+
+    @Test
+    void testCheckId() {
+
+        int check = userMapper.checkId("bbbb");
+
+        assertThat(check).isEqualTo(0);
+    }
+
+    @Test
+    void checkNickname() {
+//        userMapper.join(userDto);
+
+        int check = userMapper.checkNickname("ㅣㅣ");
+
+        assertThat(check).isEqualTo(0);
+    }
 }
