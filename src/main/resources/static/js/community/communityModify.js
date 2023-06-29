@@ -57,6 +57,7 @@ $fileInput.on('change', function(){
 
 });
 
+
 // 글자수
 $('#communityContent').on('keyup', function(e) {
     let $content = $(this).val();

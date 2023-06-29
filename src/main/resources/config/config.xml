@@ -3,6 +3,11 @@
 
 <configuration>
     <typeAliases>
+        <typeAlias type="com.example.winwin.vo.board.CommunityVo" alias="communityVo"/>
+        <typeAlias type="com.example.winwin.vo.board.CommunityCommentVo" alias="communityCommentVo"/>
+        <typeAlias type="com.example.winwin.dto.board.CommunityDto" alias="communityDto"/>
+        <typeAlias type="com.example.winwin.dto.board.CommunityCommentDto" alias="communityCommentDto"/>
+        <typeAlias type="com.example.winwin.dto.file.CommunityFileDto" alias="communityFileDto"/>
         <typeAlias type="com.example.winwin.dto.user.UserDto" alias="userDto"/>
         <typeAlias type="com.example.winwin.dto.user.UserPfpDto" alias="userPfpDto"/>
         <typeAlias type="com.example.winwin.vo.myPage.MyPageVo" alias="myPageVo"/>
