@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>관리자 페이지 - 게시글 관리 - 진로 정보</title>
+  <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
+  <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
+  <link rel="stylesheet" th:href="@{/css/fragment/adminSideBar.css}" />
+  <link rel="stylesheet" th:href="@{/css/admin/adminJobBoard.css}" />
+  <link rel="stylesheet" th:href="@{/css/admin/datepicker.css}">
+  <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+  <style>
+    body {
+      font-family: "NanumSquareLight";
+      font-family: "NanumSquare";
+      font-family: "NanumSquareBold";
+      font-family: "NanumSquareExtraBold";
+      font-family: "NanumSquareAcb";
+      font-family: "NanumSquareAceb";
+      font-family: "NanumSquareAcl";
+      font-family: "NanumSquareAcr";
+    }
+  </style>
+</head>
+
+<body>
+<header class="header" th:replace="fragment/header :: header"></header>
+<div class="admin-main">
+  <div class="admin-app">
+    <!-- 관리자 사이드 메뉴 -->
+    <div class="admin-container" th:replace="fragment/adminSideBar :: adminSideBar"></div>
+    <!-- 관리자 사이드 메뉴 끝 -->
+
+    <!-- 관리자 카테고리  -->
+    <div class="admin-category">
+      <div class="category">
+        <div class="big-category">
+          <h2>게시글 관리</h2>
+
+          <div class="small-category-kind">
+            <div class="small-category1">
+              <a th:href="@{/admin/board}" class="small-category-a">
+                <h4>커뮤니티 정보</h4>
+              </a>
+            </div>
+            <div class="small-category2">
+              <a href="#" class="small-category-a">
+                <h4>진로 정보</h4>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--  -->
+
+      <!-- 회원 정보 검색 및 테이블 -->
+      <form action="/admin/searchCareer" method="get">
+        <div class="search">
+          <span>작성자 : </span>
+          <input name="name" type="text" placeholder="작성자" class="search-text" style="font-family: NanumSquareAcr;">
+          <span>직무/학과 : </span>
+          <select name="code" onchange="sendSelection()" id="job-dep" class="search-text2" style="font-family: NanumSquareAcr;">
+            <option value="1" selected="selected" class="select-all" style="font-family: NanumSquareAcr;">전체</option>
+            <option value="104" class="select-job" style="font-family: NanumSquareAcr;">직무</option>
+            <option value="3" class="select-dep" style="font-family: NanumSquareAcr;">학과</option>
+          </select>
+          <span>작성일 : </span>
+          <input name="date" class="datepicker" style="font-family: NanumSquareAcr;">
+          <span>공개/비공개 : </span>
+          <select name="status" id="public-secret" class="search-text2" style="font-family: NanumSquareAcr;">
+            <option value="1" style="font-family: NanumSquareAcr;">공개</option>
+            <option value="secret" style="font-family: NanumSquareAcr;">비공개</option>
+          </select>
+          <button type="text" class="search-btn" style="font-family: NanumSquareAcr;">검색</button>
+        </div>
+      </form>
+      <!--  -->
+
+      <!-- 직무/학과별 분류 -->
+      <form action="/admin/mainCategory" method="post">
+      <div class="job-list none" th:each="admin : ${mainCategoryList}" >
+        <ul class="job-category">
+          <li class="job-big-cateogry">
+            <input type="checkbox" name="job-checked01" class="job-chk" id="job-checked01" style="font-family: NanumSquareAcr;">
+            <label for="job-checked01" style="cursor: pointer;">
+      <span class="job-name">
+        <span th:text="${admin.mainName}"></span>
+      </span>
+            </label>
+          </li>
+<!--          <li class="job-big-cateogry">-->
+<!--            <input type="checkbox" name="job-checked01" class="job-chk" id="job-checked01" style="font-family: NanumSquareAcr;">-->
+<!--            <label for="job-checked01" style="cursor: pointer;" >-->
+<!--                    <span class="job-name">-->
+<!--                      <span value="201">서비스업</span>-->
+<!--                    </span>-->
+<!--            </label>-->
+<!--          </li>-->
+<!--          <li class="job-big-cateogry">-->
+<!--            <input type="checkbox" name="job-checked02" class="job-chk" id="job-checked02" style="font-family: NanumSquareAcr;">-->
+<!--            <label for="job-checked02" style="cursor: pointer;">-->
+<!--                    <span class="job-name">-->
+<!--                      <span value="202">금융·은행업</span>-->
+<!--                    </span>-->
+<!--            </label>-->
+<!--          </li>-->
+<!--          <li class="job-big-cateogry">-->
+<!--            <input type="checkbox" name="job-checked03" class="job-chk" id="job-checked03" style="font-family: NanumSquareAcr;">-->
+<!--            <label for="job-checked03" style="cursor: pointer;font-family: NanumSquareAcr;">-->
+<!--                    <span class="job-name">-->
+<!--                      <span value="203">IT·정보통신업</span>-->
+<!--                    </span>-->
+<!--            </label>-->
+<!--          </li>-->
+<!--          <li class="job-big-cateogry">-->
+<!--            <input type="checkbox" name="job-checked04" class="job-chk" id="job-checked04" style="font-family: NanumSquareAcr;">-->
+<!--            <label for="job-checked04" style="cursor: pointer;">-->
+<!--                    <span class="job-name">-->
+<!--                      <span value="204">판매·유통업</span>-->
+<!--                    </span>-->
+<!--            </label>-->
+<!--          </li>-->
+<!--          <li class="job-big-cateogry">-->
+<!--            <input type="checkbox" name="job-checked05" class="job-chk" id="job-checked05" style="font-family: NanumSquareAcr;">-->
+<!--            <label for="job-checked05" style="cursor: pointer;">-->
+<!--                    <span class="job-name">-->
+<!--                      <span value="205">제조·생산·화학업</span>-->
+<!--                    </span>-->
+<!--            </label>-->
+<!--          </li>-->
+<!--          <li class="job-big-cateogry">-->
+<!--            <input type="checkbox" name="job-checked06" class="job-chk" id="job-checked06" style="font-family: NanumSquareAcr;">-->
+<!--            <label for="job-checked06" style="cursor: pointer;">-->
+<!--                    <span class="job-name">-->
+<!--                      <span value="206">교육업</span>-->
+<!--                    </span>-->
+<!--            </label>-->
+<!--          </li>-->
+<!--          <li class="job-big-cateogry">-->
+<!--            <input type="checkbox" name="job-checked07" class="job-chk" id="job-checked07" style="font-family: NanumSquareAcr;">-->
+<!--            <label for="job-checked07" style="cursor: pointer;">-->
+<!--                    <span class="job-name">-->
+<!--                      <span value="207">건설업</span>-->
+<!--                    </span>-->
+<!--            </label>-->
+<!--          </li>-->
+<!--          <li class="job-big-cateogry">-->
+<!--            <input type="checkbox" name="job-checked08" class="job-chk" id="job-checked08" style="font-family: NanumSquareAcr;">-->
+<!--            <label for="job-checked08" style="cursor: pointer;">-->
+<!--                    <span class="job-name">-->
+<!--                      <span value="208">의료·제약업</span>-->
+<!--                    </span>-->
+<!--            </label>-->
+<!--          </li>-->
+<!--          <li class="job-big-cateogry">-->
+<!--            <input type="checkbox" name="job-checked09" class="job-chk" id="job-checked09" style="font-family: NanumSquareAcr;">-->
+<!--            <label for="job-checked09" style="cursor: pointer;">-->
+<!--                    <span class="job-name">-->
+<!--                      <span value="209">미디어·광고업</span>-->
+<!--                    </span>-->
+<!--            </label>-->
+<!--          </li>-->
+<!--          <li class="job-big-cateogry">-->
+<!--            <input type="checkbox" name="job-checked10" class="job-chk" id="job-checked10" style="font-family: NanumSquareAcr;">-->
+<!--            <label for="job-checked10" style="cursor: pointer;">-->
+<!--                    <span class="job-name">-->
+<!--                      <span value="210">문화·예술·디자인업</span>-->
+<!--                    </span>-->
+<!--            </label>-->
+<!--          </li>-->
+<!--          <li class="job-big-cateogry">-->
+<!--            <input type="checkbox" name="job-checked10" class="job-chk" id="job-checked10" style="font-family: NanumSquareAcr;">-->
+<!--            <label for="job-checked10" style="cursor: pointer;">-->
+<!--                    <span class="job-name">-->
+<!--                      <span value="211">기관·협회</span>-->
+<!--                    </span>-->
+<!--            </label>-->
+<!--          </li>-->
+        </ul>
+      </div>
+      </form>
+
+      <div class="dep-list none">
+        <ul class="dep-category">
+          <li class="dep-big-cateogry">
+            <input type="checkbox" name="dep-checked01" class="dep-chk" id="dep-checked01" style="font-family: NanumSquareAcr;">
+            <label for="dep-checked01" style="cursor: pointer;" value="101">
+                    <span class="dep-name">
+                      <span>인문사회계열</span>
+                    </span>
+            </label>
+          </li>
+          <li class="dep-big-cateogry">
+            <input type="checkbox" name="dep-checked02" class="dep-chk" id="dep-checked02" style="font-family: NanumSquareAcr;">
+            <label for="dep-checked02" style="cursor: pointer;">
+                    <span class="job-name">
+                      <span>자연과학계열</span>
+                    </span>
+            </label>
+          </li>
+          <li class="dep-big-cateogry">
+            <input type="checkbox" name="dep-checked03" class="dep-chk" id="dep-checked03" style="font-family: NanumSquareAcr;">
+            <label for="dep-checked03" style="cursor: pointer;">
+                    <span class="job-name">
+                      <span id="value2">예체능계열</span>
+                    </span>
+            </label>
+          </li>
+          <li class="dep-big-cateogry">
+            <input type="checkbox" name="dep-checked04" class="dep-chk" id="dep-checked04">
+            <label for="dep-checked04" style="cursor: pointer;">
+                    <span name="code" class="job-name">
+                      <span id="value3">공학계열</span>
+                    </span>
+            </label>
+          </li>
+          <li class="dep-big-cateogry">
+            <input type="checkbox" name="dep-checked05" class="dep-chk" id="dep-checked05">
+            <label for="dep-checked05" style="cursor: pointer;">
+                    <span class="job-name">
+                      <span id="value4">의학계열</span>
+                    </span>
+            </label>
+          </li>
+<!--          <li class="dep-big-cateogry">-->
+<!--            <input type="checkbox" name="dep-checked06" class="dep-chk" id="dep-checked06">-->
+<!--            <label for="dep-checked06" style="cursor: pointer;">-->
+<!--                    <span class="job-name">-->
+<!--                      <span>건설업</span>-->
+<!--                    </span>-->
+<!--            </label>-->
+<!--          </li>-->
+        </ul>
+      </div>
+
+      <!--  -->
+
+      <div class="border-box">
+        <table class="user-table" border="1px" width="100%" height="300">
+          <thead>
+          <tr class="user-table-category">
+            <td class="checkbox">
+              <input type="checkbox" name="" id="checkAll">
+            </td>
+            <td class="board-category" align="center">직무</td>
+            <td class="board-name" align="center">글 제목</td>
+            <td class="board-writer" align="center">작성자</td>
+            <td class="board-writer-date" align="center">작성일</td>
+            <td class="board-public-secret" align="center">공개/비공개</td>
+            <td class="board-status" align="center">상태</td>
+          </tr>
+          </thead>
+
+
+          <tbody>
+          <tr class="user-table-category" th:each="admin : ${adminCareerList}">
+            <td class="checkbox">
+              <input type="checkbox" name="" class="check check-box" id="checking" th:data-number="${admin.careerInfoNumber}">
+            </td>
+            <td class="board-category" align="center" th:text="${admin.mainName}"></td>
+            <td class="board-name" align="center" th:text="${admin.careerInfoTitle}"></td>
+            <td class="board-writer" align="center" th:text="${admin.userName}"></td>
+            <td class="board-writer-date" align="center" th:text="${#strings.substring(admin.careerInfoDate, 0, 10)}"></td>
+            <td class="board-public-secret" align="center">
+              <select name="public-secret-select" class="public-secret-select">
+                <option value="1">공개</option>
+                <option value="0">비공개</option>
+              </select>
+            </td>
+            <td class="board-status" align="center">
+              <div th:if="${admin.careerInfoStatus} == 1" class="public-button public-secret-button Y" th:text="공개"></div>
+              <div th:if="${admin.careerInfoStatus} == 0" class="public-button public-secret-button N" th:text="비공개"></div>
+
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <!--  -->
+    </div>
+
+    <!-- 버튼 어떻게 바꿀지 구상중... -->
+    <div class="remove-delete-button">
+      <button type="button" class="remove-button-btn" id="changeStatusBtn">변경</button>
+    </div>
+    <!--  -->
+  </div>
+</div>
+</div>
+
+
+<footer class="header" th:replace="fragment/footer :: footer"></footer>
+<script
+        src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+        crossorigin="anonymous"
+></script>
+<script th:src="@{/js/admin/adminUser.js}"></script>
+<script th:src="@{/js/admin/adminJobBoard.js}"></script>
+<script th:src="@{/js/admin/careerStatus.js}"></script>
+<script th:src="@{/js/fragment/header.js}" ></script>
+
+<!-- 작성일 jquery-ui -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+  $(function(){
+    $.datepicker.setDefaults({
+      dateFormat: "yy-mm-dd",
+      prevText: "이전 달",
+      nextText: "다음 달",
+      monthNames: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+      monthNamesShort: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+      dayNames: ["일", "월", "화", "수", "목", "금", "토"],
+      dayNamesShort: ["일", "월", "화", "수", "목", "금", "토"],
+      dayNamesMin: ["일", "월", "화", "수", "목", "금", "토"],
+      showMonthAfterYear: true,
+      yearSuffix: "년",
+    });
+
+    $('.datepicker').datepicker();
+  })
+</script>
+<!--  -->
+</body>
+</html>
