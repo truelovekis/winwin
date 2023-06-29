@@ -46,6 +46,7 @@
   padding-top: 10px;
   outline: none;
   font-size: 15px;
+
 }
 
 .login-input::placeholder {
@@ -56,6 +57,10 @@
 
 #login-id {
   margin-top: 15px;
+}
+
+#login-password{
+  -webkit-text-security: disc;
 }
 
 .login-page-wrap {
@@ -82,6 +87,7 @@
   display: flex;
   justify-content: center;
   padding-right: 10px;
+  cursor: pointer;
 }
 
 .login-kakao {

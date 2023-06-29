@@ -63,6 +63,16 @@
   color: #000;
 }
 
+.goal-mm-btn:focus {
+  border: 1px solid #000;
+  color: #000;
+}
+
+.hover{
+  border: 1px solid #000;
+  color: #000;
+}
+
 #goal-mentor {
   margin-top: 23px;
 }
