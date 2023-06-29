@@ -121,7 +121,6 @@ public class AdminController {
     }
 
 
-
     // 데이터 가져오기
     @PostMapping("/mainCategory")
     public String adminMainCategory(Model model){
