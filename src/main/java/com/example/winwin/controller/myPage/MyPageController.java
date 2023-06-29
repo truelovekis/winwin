@@ -138,22 +138,14 @@ public class MyPageController {
     // 회원정보 수정하기
     @PostMapping("/userInfoModify")
     public RedirectView updateUserInfo(HttpServletRequest req, RedirectAttributes redirectAttributes,
-                                       String userId, String userPassword, String userNickName,
-                                       String userPhoneNumber, String userEmail,
-                                       @RequestParam("pfpFile") MultipartFile file){
+                                       UserDto userDto, @RequestParam("pfpFile") MultipartFile file){
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
-        UserDto userDto = new UserDto();
-        userDto.setUserId(userId);
-        userDto.setUserPassword(userPassword);
 //        userDto.setUserNumber(userNumber);
         userDto.setUserNumber(1L);
-        userDto.setUserNickname(userNickName);
-        userDto.setUserPhoneNumber(userPhoneNumber);
-        userDto.setUserEmail(userEmail);
         redirectAttributes.addFlashAttribute("userDto", userDto);
         myPageService.updateUserInfo(userDto);
 
-        if(file != null) {
+        if( !file.isEmpty() ) {
             try {
 //                myPageService.removeProfile(userNumber);
                 myPageService.removeProfile(1L);

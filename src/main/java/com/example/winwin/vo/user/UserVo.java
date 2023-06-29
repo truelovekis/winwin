@@ -20,7 +20,7 @@ public class UserVo {
     private int userGender;
     private String userBelong;
     private String userIdentity;
-    private String userNickName;
+    private String userNickname;
     private String userPhoneNumber;
     private int userStatus;
     private Long userWing;
