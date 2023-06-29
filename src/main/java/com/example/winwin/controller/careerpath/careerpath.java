@@ -19,6 +19,4 @@ public class careerpath {
     public String careerDetail(){
         return "careerpath/careerpathdetail";
     }
-
-
 }

@@ -120,8 +120,6 @@ public class AdminController {
         return "admin/adminReport";
     }
 
-
-
     // 데이터 가져오기
     @PostMapping("/mainCategory")
     public String adminMainCategory(Model model){
@@ -131,5 +129,4 @@ public class AdminController {
         model.addAttribute("mainCategoryList", mainCategoryList);
         return "admin/adminJobBoard";
     }
-
 }

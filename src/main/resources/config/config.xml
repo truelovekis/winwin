@@ -3,7 +3,6 @@
 
 <configuration>
     <typeAliases>
-
 <!--        <typeAlias type="com.example.app.dto.UserDto" alias="userDto"/>-->
         <typeAlias type="com.example.winwin.dto.admin.AdminVo" alias="adminVo"/>
 
@@ -52,5 +51,7 @@
         <typeAlias type="com.example.winwin.vo.user.UserVo" alias="userVo"/>
         <typeAlias type="com.example.winwin.vo.user.UserCategoryVo" alias="userCategoryVo"/>
 
+        <typeAlias type="com.example.winwin.dto.board.CsDto" alias="csDto"/>
+        <typeAlias type="com.example.winwin.vo.CsVo" alias="csVo"/>
     </typeAliases>
 </configuration>
