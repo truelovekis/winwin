@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.winwin.mapper.TimeMapper">
+<mapper namespace="com.example.winwin.mapper.user.UserMapper">
 
+    <!-- 회원가입 -->
+    <insert id="insert">
+        <selectKey keyProperty="userNumber" order="BEFORE" resultType="long" >
+            SELECT SEQ_USER.NEXTVAL FROM DUAL
+        </selectKey>
+        insert into WW_USER (USER_NUMBER, USER_NAME, USER_ID, USER_PASSWORD, USER_EMAIL, USER_RRNUMBER, USER_GENDER,
+        USER_BELONG, USER_IDENTITY, USER_NICKNAME, USER_STATUS, USER_GRADE, USER_WING)
+        values (#{userNumber}, #{userName}, #{userId}, #{userPassword}, #{userEmail}, #{userRrnumber}, #{userGender}, #{userBelong}, #{userIdentity}, #{userNickname}, #{userStatus}, #{userGrade}, #{userWing})
+    </insert>
+
+    <!-- 로그인 -->
+    <select id="selectUserNumber" resultType="long">
+        SELECT USER_NUMBER FROM WW_USER
+        WHERE USER_ID = #{userId} AND USER_PASSWORD = #{userPassword}
+    </select>
 </mapper>

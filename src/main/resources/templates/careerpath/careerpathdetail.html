@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>게시판</title>
+  <title>진로 정보 상세게시판</title>
+  <link rel="stylesheet" th:href="@{/css/user/loginModal.css}" />
   <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
   <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
-  <link rel="stylesheet" th:href="@{/css/meeting/careerpathdetail.css}" />
+  <link rel="stylesheet" th:href="@{/css/careerpath/careerpathdetail.css}" />
   <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
   <style>
     body {
@@ -44,7 +45,7 @@
     </div>
     <div class="status-wrap">
       <div class="icon-wrap">
-        <img class="icon-img" th:src="{/img/careerpathdetail.png}">
+        <img class="icon-img" th:src="@{/img/careerpathdetail.png}">
       </div>
       <div class="text-wrap">
         <div><span class="text-id">회사생활 20년차</span></div>
@@ -296,6 +297,6 @@
 <footer class="footer" th:replace="fragment/footer :: footer"></footer>
 <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 <script th:src="@{/js/fragment/header.js}" ></script>
-<script th:src="@{/js/meeting/careerpathdetail.js}"></script>
+<script th:src="@{/js/careerpath/careerpathdetail.js}"></script>
 </body>
 </html>

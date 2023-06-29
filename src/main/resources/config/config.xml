@@ -3,6 +3,14 @@
 
 <configuration>
     <typeAliases>
-<!--        <typeAlias type="com.example.app.dto.UserDto" alias="userDto"/>-->
+        <!-- 나눔, 나눔 파일 Dto, Vo -->
+        <typeAlias type="com.example.winwin.dto.share.ShareDto" alias="shareDto"/>
+        <typeAlias type="com.example.winwin.vo.share.ShareVo" alias="shareVo"/>
+        <typeAlias type="com.example.winwin.dto.file.ShareFileDto" alias="shareFileDto"/>
+        <!--        -->
+
+        <!-- 신고 Dto -->
+        <typeAlias type="com.example.winwin.dto.police.PoliceBoardDto" alias="policeBoardDto"/>
+        <!--        -->
     </typeAliases>
 </configuration>

@@ -2,4 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.police.PoliceBoardMapper">
 
+    <!-- 나눔 글 신고하기 -->
+    <insert id="shareReportInsert">
+        insert into POLICE_BOARD (POLICE_NUMBER, BIG_CODE, BOARD_NUMBER, POLICE_CATEGORY, USER_NUMBER)
+        values (SEQ_POLICE_BOARD.nextval, #{bigCode}, #{boardNumber}, #{policeCategory}, #{userNumber})
+    </insert>
+    <!--    -->
+
+    <!-- 신고항목 글 번호로 조회하기 -->
+    <select id="shareReportSelect" resultType="policeBoardDto">
+        select POLICE_NUMBER, BIG_CODE, BOARD_NUMBER, POLICE_CATEGORY, USER_NUMBER, POLICE_DATE
+        from POLICE_BOARD
+        where board_number = #{boardNumber}
+    </select>
+
+    <!-- 나눔 글 삭제 시 해당 신고항목 삭제 -->
+    <delete id="shareReportDelete">
+        delete
+        from POLICE_BOARD
+        where BOARD_NUMBER = #{boardNumber}
+    </delete>
+
 </mapper>
