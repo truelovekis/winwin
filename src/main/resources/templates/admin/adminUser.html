@@ -47,27 +47,42 @@
       <!--  -->
 
       <!-- 회원 정보 검색 및 테이블 -->
-      <form action="#">
+      <form action="/admin/result" method="get">
         <div class="search">
-          <span>이름 : </span>
-          <input type="text" placeholder="이름" class="search-text">
+          <span>아이디 : </span>
+          <input name="id" type="text" placeholder="아이디" class="search-text" style="font-family: NanumSquareAcr;">
           <span>신원 :  </span>
-          <select name="identity" id="identity" class="search-text2">
-            <option value="1">직장인</option>
-            <option value="2">대학생</option>
+          <select name="identity" id="identity" class="search-text2" style="font-family: NanumSquareAcr;">
+            <option value="W" class="officeWorkers" style="font-family: NanumSquareAcr;">직장인</option>
+            <option value="U" class="collegeStudent" style="font-family: NanumSquareAcr;">대학생</option>
+            <option value="H" class="highSchool" style="font-family: NanumSquareAcr;">고등학생</option>
           </select>
           <span>부서/학과 : </span>
-          <select name="dep" id="department">
-            <option value="1">it개발</option>
-            <option value="2">디자인</option>
-            <option value="3">컴퓨터공학과</option>
+          <select name="mainCode" id="department" class="select-btn" style="font-family: NanumSquareAcr;">
+            <option value="201" style="font-family: NanumSquareAcr;" class="hideNone">서비스업</option>
+            <option value="202" style="font-family: NanumSquareAcr;" class="hideNone">금융·은행업</option>
+            <option value="203" style="font-family: NanumSquareAcr;" class="hideNone">IT·정보통신업</option>
+            <option value="204" style="font-family: NanumSquareAcr;" class="hideNone">판매·유통업</option>
+            <option value="205" style="font-family: NanumSquareAcr;" class="hideNone">제조·생산·화학업</option>
+            <option value="206" style="font-family: NanumSquareAcr;" class="hideNone">교육업</option>
+            <option value="207" style="font-family: NanumSquareAcr;" class="hideNone">건설업</option>
+            <option value="208" style="font-family: NanumSquareAcr;" class="hideNone">의료·제약업</option>
+            <option value="209" style="font-family: NanumSquareAcr;" class="hideNone">미디어·광고업</option>
+            <option value="210" style="font-family: NanumSquareAcr;" class="hideNone">문화·예술·디자인업</option>
+            <option value="211" style="font-family: NanumSquareAcr;" class="hideNone">기관·협회</option>
+            <option value="101" style="font-family: NanumSquareAcr;" class="hide">인문사회계열</option>
+            <option value="102" style="font-family: NanumSquareAcr;" class="hide">자연과학계열</option>
+            <option value="103" style="font-family: NanumSquareAcr;" class="hide">예체능계열</option>
+            <option value="104" style="font-family: NanumSquareAcr;" class="hide">공학계열</option>
+            <option value="105" style="font-family: NanumSquareAcr;" class="hide">의학계열</option>
+            <option value="" style="font-family: NanumSquareAcr;" class="hide2" selected> -- </option>
           </select>
           <span>멘토/멘티 : </span>
-          <select name="mandm" id="mandm" class="search-text2">
-            <option value="mentor">멘토</option>
-            <option value="mentee">멘티</option>
+          <select name="mentor" id="mandm" class="search-text2" style="font-family: NanumSquareAcr;">
+            <option value="1" style="font-family: NanumSquareAcr;">멘토</option>
+            <option value="0" style="font-family: NanumSquareAcr;">멘티</option>
           </select>
-          <button type="button" class="search-btn">검색</button>
+          <button type="text" class="search-btn" style="font-family: NanumSquareAcr;">검색</button>
         </div>
       </form>
 
@@ -81,7 +96,7 @@
             <td class="user-name" align="center">이름</td>
             <td class="user-id" align="center">아이디</td>
             <td class="user-dep" align="center">부서/학과</td>
-            <td class="user-register-date" align="center">가입일</td>
+            <td class="user-register-date" align="center">생년월일</td>
             <td class="user-phonenumber" align="center">전화번호</td>
             <td class="user-mento-menti" align="center">멘토/멘티</td>
             <td class="user-email" align="center">이메일</td>
@@ -89,45 +104,30 @@
           </thead>
 
           <tbody>
-          <tr class="user-table-category">
+          <tr class="user-table-category" th:each="admin : ${adminVoList}">
             <td class="checkbox">
               <input type="checkbox" name="" class="check" id="checking">
             </td>
-            <td class="user-id" align="center">aaa</td>
-            <td class="user-job" align="center">백엔드 개발자</td>
-            <td class="user-dep" align="center">개발</td>
-            <td class="user-register-date" align="center">2023-06-01</td>
-            <td class="user-phonenumber" align="center">010-1111-1111</td>
+            <td class="user-id" align="center" th:text="${admin.userName}"></td>
+            <td class="user-job" align="center" th:text="${admin.userId}"></td>
+            <td class="user-dep" align="center" th:text="${admin.mainName}"></td>
+            <td class="user-register-date" align="center"th:text="${admin.userRrnumber}"></td>
+            <td class="user-phonenumber" align="center" th:text="${admin.userPhonenumber}"></td>
             <td class="user-mento-menti" align="center">
-              <button type="button" class="mento-button">멘토</button>
+              <button th:if="${admin.mentorStatus} == 1" type="button" class="mento-button Y" style="font-family: NanumSquareAcr;" th:text="멘토"></button>
+              <button th:if="${admin.mentorStatus} == 0" type="button" class="mento-button N" style="font-family: NanumSquareAcr;" th:text="멘티"></button>
             </td>
-            <td class="user-email" align="center">aaa@gmail.com</td>
+            <td class="user-email" align="center" th:text="${admin.userEmail}"></td>
           </tr>
           </form>
-
-          <tr class="user-table-category">
-            <td class="checkbox">
-              <input type="checkbox" name="" class="check" id="checking">
-            </td>
-            <td class="user-id" align="center">bbb</td>
-            <td class="user-job" align="center">대학생</td>
-            <td class="user-dep" align="center">컴공과</td>
-            <td class="user-register-date" align="center">2023-06-01</td>
-            <td class="user-phonenumber" align="center">010-2222-2222</td>
-            <td class="user-mento-menti" align="center">
-              <button type="button" class="menti-button">멘티</button>
-            </td>
-            <td class="user-email" align="center">bbb@gmail.com</td>
-          </tr>
-          </tr>
           </tbody>
         </table>
       </div>
       <!--  -->
     </div>
-    <div class="delete-button">
-      <button class="delete-button-btn">삭제</button>
-    </div>
+<!--    <div class="delete-button">-->
+<!--      <button class="delete-button-btn" style="font-family: NanumSquareAcr;">삭제</button>-->
+<!--    </div>-->
   </div>
 </div>
 </div>
@@ -141,5 +141,6 @@
 ></script>
 <script th:src="@{/js/fragment/footer.js}" ></script>
 <script th:src="@{/js/fragment/header.js}" ></script>
+<script th:src="@{/js/admin/adminUser.js}" ></script>
 </body>
 </html>

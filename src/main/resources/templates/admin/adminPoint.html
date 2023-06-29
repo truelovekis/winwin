@@ -52,20 +52,20 @@
       <!--  -->
 
       <!-- 회원 정보 검색 및 테이블 -->
-      <form action="#">
+      <form action="/admin/searchWing" method="get">
         <div class="search">
           <span>이름 : </span>
-          <input type="text" placeholder="이름" class="search-text">
+          <input name="name" type="text" placeholder="이름" class="search-text" style="font-family: NanumSquareAcr;">
           <span>아이디 :  </span>
-          <input type="text" placeholder="아이디" class="search-text">
-          <span>가입일 : </span>
-          <input class="datepicker">
+          <input name="id" type="text" placeholder="아이디" class="search-text" style="font-family: NanumSquareAcr;">
+          <span>획득일 : </span>
+          <input name="date" class="datepicker">
           <span>멘토/멘티 : </span>
-          <select name="public-secret" id="public-secret" class="search-text2">
-            <option value="public">멘토</option>
-            <option value="secret">멘티</option>
+          <select name="mentor" id="public-secret" class="search-text2" style="font-family: NanumSquareAcr;">
+            <option value="1" style="font-family: NanumSquareAcr;">멘토</option>
+            <option value="0" style="font-family: NanumSquareAcr;">멘티</option>
           </select>
-          <button type="button" class="search-btn">검색</button>
+          <button type="text" class="search-btn" style="font-family: NanumSquareAcr;">검색</button>
         </div>
       </form>
 
@@ -74,40 +74,28 @@
           <thead>
           <tr class="user-table-category">
             <td class="checkbox">
-              <input type="checkbox" name="" id="checkAll">
+              <input type="checkbox" name="" id="checkAll" style="font-family: NanumSquareAcr;">
             </td>
             <td class="user-name" align="center">이름</td>
             <td class="user-id" align="center">아이디</td>
             <td class="point-cnt" align="center">포인트 수량</td>
-            <td class="user-register-date" align="center">가입일</td>
+            <td class="user-register-date" align="center">획득일</td>
             <td class="user-status" align="center">멘토/멘티</td>
           </tr>
           </thead>
 
           <tbody>
-          <tr class="user-table-category">
+          <tr class="user-table-category" th:each="admin : ${adminPointList}">
             <td class="checkbox">
-              <input type="checkbox" name="" class="check"id="checking">
+              <input type="checkbox" name="" class="check"id="checking" style="font-family: NanumSquareAcr;">
             </td>
-            <td class="user-name" align="center">홍길동</td>
-            <td class="user-id" align="center">aaa</td>
-            <td class="point-cnt" align="center">30윙</td>
-            <td class="user-register-date" align="center">2023-06-01</td>
+            <td class="user-name" align="center" th:text="${admin.userName}"></td>
+            <td class="user-id" align="center" th:text="${admin.userId}"></td>
+            <td class="point-cnt" align="center" th:text="${admin.userWing}"></td>
+            <td class="user-register-date" align="center" th:text="${#strings.substring(admin.wingEarnDate, 0, 10)}"></td>
             <td class="user-status" align="center">
-              <div class="mento-button">멘토</div>
-            </td>
-          </tr>
-
-          <tr class="user-table-category">
-            <td class="checkbox">
-              <input type="checkbox" name="" class="check"id="checking">
-            </td>
-            <td class="user-name" align="center">김철수</td>
-            <td class="user-id" align="center">bbb</td>
-            <td class="point-cnt" align="center">320윙</td>
-            <td class="user-register-date" align="center">2023-06-01</td>
-            <td class="user-status" align="center">
-              <div class="menti-button">비공개</div>
+              <div th:if="${admin.mentorStatus} == 1" class="mento-button Y" th:text="멘토"></div>
+              <div th:if="${admin.mentorStatus} == 0" class="mento-button N" th:text="멘티"></div>
             </td>
           </tr>
           </tbody>

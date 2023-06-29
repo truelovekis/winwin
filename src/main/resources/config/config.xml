@@ -4,5 +4,21 @@
 <configuration>
     <typeAliases>
 <!--        <typeAlias type="com.example.app.dto.UserDto" alias="userDto"/>-->
+        <typeAlias type="com.example.winwin.dto.admin.AdminVo" alias="adminVo"/>
+
+
+        <!--    관리자 페이지    -->
+        <typeAlias type="com.example.winwin.dto.admin.AdminUserSearchVo" alias="adminUserSearchVo"/>
+        <typeAlias type="com.example.winwin.dto.admin.AdminBoardSearchVo" alias="adminBoardSearchVo"/>
+        <typeAlias type="com.example.winwin.dto.admin.AdminWingSearchVo" alias="adminWingSearchVo"/>
+        <typeAlias type="com.example.winwin.dto.admin.AdminCareerSearchVo" alias="adminCareerSearchVo"/>
+        <typeAlias type="com.example.winwin.dto.admin.AdminShareSearchVo" alias="adminShareSearchVo"/>
+        <typeAlias type="com.example.winwin.dto.admin.AdminReportSearchVo" alias="adminReportSearchVo"/>
+
+
+        <!--   관리자 페이지    -->
+
+
+        <typeAlias type="com.example.winwin.dto.admin.MainCategoryVo" alias="mainCategoryVo"/>
     </typeAliases>
 </configuration>
