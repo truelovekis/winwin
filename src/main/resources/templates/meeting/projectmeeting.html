@@ -4,9 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>게시판</title>
+  <link rel="stylesheet" th:href="@{/css/user/loginModal.css}" />
   <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
   <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
-  <link rel="stylesheet" th:href="@{/css/meeting/projectmeeting.css}" />
+  <link rel="stylesheet" th:href="@{/css/project/projectmeeting.css}" />
   <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
   <style>
     body {
@@ -24,29 +25,7 @@
 <body>
 <header class="header" th:replace="fragment/header :: header"></header>
 <!--  모집글 작성하기 모달창 영역  -->
-<article class="modal-wrap" onclick="fn_modal_close(this, event)">
-  <div class="select-box">
-<!--    <div class="x-box">-->
-<!--      <div class="x" >X</div>-->
-<!--    </div>-->
-    <div class="select-box-content">
-      <h1>👀</h1>
-      <h1>프로젝트 유형을 골라주세요.</h1>
-    </div>
-    <div class="page-move-wrap">
-      <div class="page-move1">
-        <div class="sub-content">
-          <span class="page-text">프로젝트</span><span><svg width="24" height="24" stroke-width="0" viewBox="0 0 24 24" fill="#cbd5e1" xmlns="http://www.w3.org/2000/svg" class="tw-fill-slate-500 hover:tw-fill-slate-900 modal-right-arrow"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.2929 19.7071C12.9024 19.3166 12.9024 18.6834 13.2929 18.2929L18.5858 13L3 13C2.44772 13 2 12.5523 2 12C2 11.4478 2.44772 11 3 11L18.5858 11.0001L13.2929 5.7071C12.9024 5.31658 12.9024 4.68341 13.2929 4.29289C13.6834 3.90237 14.3166 3.90237 14.7071 4.29289L21.7071 11.2929C21.8946 11.4805 22 11.7348 22 12.0001C22 12.2653 21.8946 12.5196 21.7071 12.7072L14.7071 19.7071C14.3166 20.0976 13.6834 20.0976 13.2929 19.7071Z" fill="inherit"></path></svg></span>
-        </div>
-      </div>
-      <div class="page-move2">
-        <div class="sub-content">
-          <span class="page-text">스터디/모임</span><svg width="24" height="24" stroke-width="0" viewBox="0 0 24 24" fill="#cbd5e1" xmlns="http://www.w3.org/2000/svg" class="tw-fill-slate-500 hover:tw-fill-slate-900 modal-right-arrow"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.2929 19.7071C12.9024 19.3166 12.9024 18.6834 13.2929 18.2929L18.5858 13L3 13C2.44772 13 2 12.5523 2 12C2 11.4478 2.44772 11 3 11L18.5858 11.0001L13.2929 5.7071C12.9024 5.31658 12.9024 4.68341 13.2929 4.29289C13.6834 3.90237 14.3166 3.90237 14.7071 4.29289L21.7071 11.2929C21.8946 11.4805 22 11.7348 22 12.0001C22 12.2653 21.8946 12.5196 21.7071 12.7072L14.7071 19.7071C14.3166 20.0976 13.6834 20.0976 13.2929 19.7071Z" fill="inherit"></path></svg>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
+
 <main class="container">
   <!--    멤버 구인 영역    -->
   <section class="search">
@@ -87,7 +66,9 @@
         </div>
       </div>
       <div class="aside-sec3">
+
         <div class="aside-btn"  onclick="fn_modal()">모집글 작성하기</div>
+
       </div>
     </aside>
     <section class="aside-right">
@@ -113,7 +94,7 @@
             <div class="project-text-wrap">
               <div class="project-sub-text2">모집 중</div><div class="vertical">&nbsp;|&nbsp;</div><div class="project-sub-text3">[백엔드 개발자 모집]업무생산성 향상 툴(이메일 클라이언트) 개발 프로젝트</div><div class="new-text">&nbsp;NEW</div>
             </div>
-            </div>
+          </div>
           <br/>
           <div class="project-content2">
           <span class="project-sub-text4">안녕하세요! 이메일 기반 업무생산성 향상 툴 개발 사이드프로젝트를 진행하실 백엔드, 프론트엔드 개발자 팀원 각각 한분을 모시고 있습니다.
@@ -143,9 +124,6 @@
             <span class="project-sub-text4">💰 창업/수익 창출</span>
             <p class="project-sub-text5">좋아요
               <span class="project-sub-text6">24</span>
-              •
-              채팅
-              <span class="project-sub-text7">6</span>
             </p>
           </div>
         </div>
@@ -188,9 +166,6 @@
             <span class="project-sub-text4">💰 창업/수익 창출</span>
             <p class="project-sub-text5">좋아요
               <span class="project-sub-text6">24</span>
-              •
-              채팅
-              <span class="project-sub-text7">6</span>
             </p>
           </div>
         </div>
@@ -233,9 +208,6 @@
             <span class="project-sub-text4">💰 창업/수익 창출</span>
             <p class="project-sub-text5">좋아요
               <span class="project-sub-text6">24</span>
-              •
-              채팅
-              <span class="project-sub-text7">6</span>
             </p>
           </div>
         </div>
@@ -244,8 +216,35 @@
   </section>
 </main>
 <footer class="footer" th:replace="fragment/footer :: footer"></footer>
+<article class="modal-wrap" onclick="fn_modal_close(this, event)">
+  <div class="select-box">
+    <!--    <div class="x-box">-->
+    <!--      <div class="x" >X</div>-->
+    <!--    </div>-->
+    <div class="select-box-content">
+      <h1>👀</h1>
+      <h1>프로젝트 유형을 골라주세요.</h1>
+    </div>
+    <div class="page-move-wrap">
+      <a th:href="@{/project/write}">
+        <div class="page-move1">
+          <div class="sub-content">
+            <span class="page-text">프로젝트</span><span><svg width="24" height="24" stroke-width="0" viewBox="0 0 24 24" fill="#cbd5e1" xmlns="http://www.w3.org/2000/svg" class="tw-fill-slate-500 hover:tw-fill-slate-900 modal-right-arrow"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.2929 19.7071C12.9024 19.3166 12.9024 18.6834 13.2929 18.2929L18.5858 13L3 13C2.44772 13 2 12.5523 2 12C2 11.4478 2.44772 11 3 11L18.5858 11.0001L13.2929 5.7071C12.9024 5.31658 12.9024 4.68341 13.2929 4.29289C13.6834 3.90237 14.3166 3.90237 14.7071 4.29289L21.7071 11.2929C21.8946 11.4805 22 11.7348 22 12.0001C22 12.2653 21.8946 12.5196 21.7071 12.7072L14.7071 19.7071C14.3166 20.0976 13.6834 20.0976 13.2929 19.7071Z" fill="inherit"></path></svg></span>
+          </div>
+        </div>
+      </a>
+      <a th:href="@{/project/write}">
+        <div class="page-move2">
+          <div class="sub-content">
+            <span class="page-text">스터디/모임</span><svg width="24" height="24" stroke-width="0" viewBox="0 0 24 24" fill="#cbd5e1" xmlns="http://www.w3.org/2000/svg" class="tw-fill-slate-500 hover:tw-fill-slate-900 modal-right-arrow"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.2929 19.7071C12.9024 19.3166 12.9024 18.6834 13.2929 18.2929L18.5858 13L3 13C2.44772 13 2 12.5523 2 12C2 11.4478 2.44772 11 3 11L18.5858 11.0001L13.2929 5.7071C12.9024 5.31658 12.9024 4.68341 13.2929 4.29289C13.6834 3.90237 14.3166 3.90237 14.7071 4.29289L21.7071 11.2929C21.8946 11.4805 22 11.7348 22 12.0001C22 12.2653 21.8946 12.5196 21.7071 12.7072L14.7071 19.7071C14.3166 20.0976 13.6834 20.0976 13.2929 19.7071Z" fill="inherit"></path></svg>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</article>
 <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 <script th:src="@{/js/fragment/header.js}" ></script>
-<script th:src="@{/js/meeting/projectmeeting.js}"></script>
+<script th:src="@{/js/project/projectmeeting.js}"></script>
 </body>
 </html>

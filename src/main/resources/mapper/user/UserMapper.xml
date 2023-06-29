@@ -71,4 +71,5 @@
         INSERT INTO MENTOR (MENTOR_NUMBER, MENTOR_STATUS, USER_NUMBER, SUB_NUMBER)
         VALUES ();
     </insert>
+
 </mapper>

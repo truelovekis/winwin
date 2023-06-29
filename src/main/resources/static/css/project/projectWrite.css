@@ -1,9 +1,24 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.container-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.flex-wrap {
+    display: flex;
+    justify-content: flex-end;
+}
 
 .big-box{
     width: 1050px;
-    display: flex;
     margin: auto;
-    margin-top: 62px;
+    margin-top: 10px;
 }
 
 .middle-box{
@@ -116,6 +131,11 @@ h3{
     margin-left: 25px;
     margin-top: -10px;
 }
+.recruit{
+    margin-bottom: 40px;
+    margin-left: 25px;
+    margin-top: -10px;
+}
 
 .openChat-box{
     margin: 0px 25px;
@@ -150,13 +170,11 @@ h3{
 .radioButton{
     margin: -10px 26px;
     height: 60px;
-    cursor: pointer;
 }
 
 .timeRadio{
     margin: -10px 26px;
     height: 60px;
-    cursor: pointer;
 }
 
 .Profil{
@@ -253,9 +271,6 @@ h3{
     margin: -14px -25px;
 }
 
-ul>li{
-    margin-bottom: 13px;
-}
 
 .profilContent p{
     padding: 10px;

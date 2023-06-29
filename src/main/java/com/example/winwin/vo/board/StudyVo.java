@@ -1,4 +1,4 @@
-package com.example.winwin.dto.board;
+package com.example.winwin.vo.board;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 @NoArgsConstructor
-public class StudyDto {
+public class StudyVo {
     private Long studyNumber;
     private String studyTitle;
     private String studyContent;
@@ -21,6 +21,9 @@ public class StudyDto {
     private String userNickname;
     private Long categoryNumber;
     private Long purposeNumber;
+    private String purposeName;
     private Long timeNumber;
     private Long studyReadCnt;
+    private int likeCnt;
+    private String isNew;
 }

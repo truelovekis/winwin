@@ -4,7 +4,6 @@ import com.example.winwin.dto.user.UserDto;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,18 +13,19 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 
-@SpringBootTest
-@Transactional
-@Slf4j
-class UserMapperTest {
 
+
+
+@SpringBootTest
+@Slf4j
+@Transactional
+class UserMapperTest {
     @Autowired
     private UserMapper userMapper;
-
     private UserDto userDto;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         userDto = new UserDto();
 
         userDto.setUserId("aaa");
@@ -83,3 +83,4 @@ class UserMapperTest {
         assertThat(check).isEqualTo(0);
     }
 }
+

@@ -26,3 +26,4 @@ public interface UserMapper {
     // 닉네임 중복 체크
     public int checkNickname(String userNickname);
 }
+
