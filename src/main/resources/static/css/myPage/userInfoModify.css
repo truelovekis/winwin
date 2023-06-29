@@ -112,7 +112,6 @@ hr {
 /* =========================================================== */
 .mypage-main {
   width: 700px;
-  height: 1000px;
   padding: 30px 0px;
 }
 
@@ -206,6 +205,11 @@ hr {
   margin-left: 10px;
 }
 
+.mentor-grade2 {
+  color: #1b5192;
+  font-size: 14px;
+}
+
 .board-info {
   display: flex;
 }
@@ -226,6 +230,7 @@ hr {
 
 .number {
   font-size: 16px;
+  text-align: center;
 }
 
 .gray {
@@ -234,18 +239,24 @@ hr {
   margin-top: 20px;
 }
 
-hr {
-  width: 100%;
-  border: 1px solid #ddd;
-}
-
 /* 핸드폰, 이메일 변경 */
 .info-modify-box {
-  margin: 10px 0px 40px 0px;
+  margin: 10px 0px;
+  border-bottom: 2px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .info-modify {
   font-size: 16px;
+  width: 100px;
+}
+
+.info-modify-wrap{
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
 }
 
 .email-modify {
@@ -257,6 +268,11 @@ hr {
 }
 
 /* 이력 정보 */
+.resume-info{
+  display: flex;
+  flex-direction: column;
+}
+
 .resume-info > h3 {
   margin: 30px 0px;
 }
@@ -305,6 +321,7 @@ select:invalid {
   border-radius: 5px;
   border: 1px solid #ddd;
   padding-left: 15px;
+  font-size: 14px;
 }
 
 .input::placeholder {
@@ -346,9 +363,8 @@ ul {
   display: inline-block;
   width: 250px;
   border: 1px solid #ddd;
-  margin: 0 10px;
+  margin-right: 10px;
   border-radius: 5px;
-  height: 45px;
 }
 
 .select:hover {
@@ -373,10 +389,6 @@ ul {
   display: flex;
   justify-content: space-between;
   padding: 8px 5px;
-}
-
-.selected {
-  margin-top: 3px;
 }
 
 .select .selected .selected-value {
@@ -416,21 +428,9 @@ ul {
   font-weight: 600;
 }
 
-.select ul li,
-.select .selected .selected-value {
-  white-space: nowrap;
-  /* 줄바꿈 안함 */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  /* 말줄임 적용 */
-  font-size: 14px;
-  font-weight: 600;
-}
-
 .select ul {
   width: 220px;
-  border: 1px solid #999;
-  display: none;
+  border: 1px solid #ddd;
   position: absolute;
   background: #fff;
   border-top: none;
@@ -461,12 +461,6 @@ ul {
   justify-content: center;
   margin-top: 30px;
   overflow-wrap: normal;
-  width: 260px;
-}
-
-.select-tag {
-  display: flex;
-  justify-content: center;
 }
 
 .select-tag .tag {
@@ -504,3 +498,29 @@ ul {
   transition: all 0.25s ease-in-out;
 }
 /* /하단 나의 관심분야 */
+
+.none{
+  display: none;
+}
+
+.button{
+  margin: 10px 10px 10px auto;
+}
+
+.form{
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-label {
+  cursor: pointer;
+}
+
+.img-box{
+  width: 70px;
+  height: 70px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  border-radius: 50px;
+  background-size: cover;
+}

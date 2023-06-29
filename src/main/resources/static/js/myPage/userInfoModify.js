@@ -1,73 +1,56 @@
-// 1,2,3차 카테고리 선택
+// 프로필 사진 미리보기
+$('.profile-file').on('change', function(){
+    let files = this.files;
 
-const selectBoxElements = document.querySelectorAll(".select");
+    let src = URL.createObjectURL(files[0]);
 
-function toggleSelectBox(selectBox) {
-    selectBox.classList.toggle("active");
-}
+    $('.img-box').css('background-image', `url(${src})`).css('background-size', 'cover').data('name', `${files[0].name}`);
+})
 
-function selectOption(optionElement) {
-    const selectBox = optionElement.closest(".select");
-    const selectedElement = selectBox.querySelector(".selected-value");
-    selectedElement.textContent = optionElement.textContent;
-}
+// 나의 관심분야 3가지 카테고리 박스
+let $boxes = $('.select');
 
-selectBoxElements.forEach((selectBoxElement) => {
-    selectBoxElement.addEventListener("click", function (e) {
-        const targetElement = e.target;
-        const isOptionElement = targetElement.classList.contains("option");
-
-        if (isOptionElement) {
-            selectOption(targetElement);
-        }
-
-        toggleSelectBox(selectBoxElement);
-        if (e.target.classList.contains("option")) {
-            $(e.target).closest(".select").find(".arrow").removeClass("arrow-after");
-        }
-
-        e.preventDefault();
-    });
-});
-
-document.addEventListener("click", function (e) {
-    const targetElement = e.target;
-    const isSelect =
-        targetElement.classList.contains("select") ||
-        targetElement.closest(".select");
-
-    if (isSelect) {
-        return;
-    }
-
-    const allSelectBoxElements = document.querySelectorAll(".select");
-
-    allSelectBoxElements.forEach((boxElement) => {
-        boxElement.classList.remove("active");
-        $(boxElement).find(".arrow").removeClass("arrow-after");
-    });
-});
-
-// 클릭시 arrow 180도 회전
-$(".select").on("click", function (e) {
-    // $('.arrow').css({"transform":"rotate(180deg)","transition":"all ease 0.5s"})
-
-    // $(this).find('.arrow').css({"transform":"rotate(180deg)","transform-origin":"center","transition":"all ease 0.5s"})
-
-    if (e.target.tagName != "LI") {
-        $(this).find(".arrow").addClass("arrow-after");
+//클릭하면 리스트 div 보기,닫기
+$boxes.on('click', function(){
+    if($(this).closest('.select').find('.option-box').hasClass('none')){
+        $('.option-box').addClass('none');
+        $(this).closest('.select').find('.option-box').toggleClass('none');
+    }else{
+        $('.option-box').addClass('none');
     }
 });
 
-$(".third-job-box").on("click", ".option2", function () {
+//고른 항목 텍스트 상위로 복사
+$('.select').on('click', '.option', function(){
+    $(this).closest('.select').find('.selected-value').text($(this).text());
+});
+
+//다른 곳 클릭 시 리스트 div 닫기
+$("body").on('click', function(e){
+    if(!$(e.target).closest('.select').hasClass('select')){
+        $boxes.each((i, box) => {$(box).find('.option-box').addClass('none');});
+    }
+});
+
+//3차 카테고리 선택 시 태그 추가(최대 3개)
+$(".third-job-box").on("click", ".option", function () {
     let text = $(this).text();
+    let val = $(this).val();
 
     let existingTags = $(".select-tag .tag");
-    if (existingTags.length >= 3) {
-        return; // 최대 3개의 태그만 생성 가능
+    if (existingTags.length >= 3) { return; }
+
+    for(let i=0; i<existingTags.length; i++){
+        if(existingTags.eq(i).find('input').val() == val){
+            return;
+        }
     }
 
-    let tagHtml = `<div class="tag">@${text}</div>`;
+    let tagHtml = `
+        <div class="tag">@${text}
+            <input type="hidden" value="${val}" name="subNumber">
+        </div>
+    `;
 
     $(".select-tag").append(tagHtml);
 });
@@ -75,6 +58,7 @@ $(".third-job-box").on("click", ".option2", function () {
 $(".select-tag").on("click", ".tag", function () {
     $(this).detach();
 });
+
 
 // 1, 2, 3차 카테고리 별 항목 띄우기
 
@@ -137,6 +121,8 @@ $(".option").on("click", function () {
 $(".second-job-box").on("click", ".option", function () {
     let text = "";
 
+
+
     if ($(this).val() == "1") {
         let obj = [{ number: 1, name: "서비스업1" }];
         text = makeSmallCate(obj);
@@ -187,8 +173,9 @@ function makeSmallCate(obj) {
     let text = "";
 
     list.forEach((cate) => {
-        text += `<li class="option2" value="${cate.number}">${cate.name}</li>`;
+        text += `<li class="option" value="${cate.number}">${cate.name}</li>`;
     });
 
     return text;
 }
+
