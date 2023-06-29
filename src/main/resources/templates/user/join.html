@@ -24,24 +24,30 @@
     <main>
       <!-- <div class="join-container"> -->
       <div class="join-wrap">
-        <div class="join-box" th:fragment="join">
+        <div class="join-box none" th:fragment="join">
           <h3>회원가입</h3>
           <span class="join-title" id="join-first">아이디</span>
-          <input type="text" class="join-input" placeholder="아이디 입력" />
+          <input type="text"  id="join-id-input" class="join-input" name="userId" placeholder="아이디 입력" required/>
           <span class="join-check-msg" id="join-check-id-msg"></span>
+          <span class="join-title">닉네임</span>
+          <input type="text" class="join-input" id="userNickname" name="userNickname" placeholder="닉네임 입력" required/>
+          <span class="join-check-msg" id="join-check-nickname-msg"></span>
           <span class="join-title">비밀번호</span>
           <input
             type="text"
             class="join-input"
             id="join-pw-input"
+            name="userPassword"
             placeholder="대문자/특수문자 포함 8자리 이상 입력해주세요."
+            required
           />
           <span class="join-check-msg" id="join-check-pw-msg"></span>
           <span class="join-title">비밀번호 확인</span>
           <input type="text" class="join-input" id="join-pw-input2" placeholder="비밀번호 확인" />
           <span class="join-check-msg" id="join-check-pw-msg2"></span>
           <span class="join-title">이메일</span>
-          <input type="text" class="join-input" placeholder="이메일 입력" />
+          <input type="text" class="join-input" id="userEmail" name="userEmail" placeholder="이메일 입력" required/>
+          <span class="join-check-msg" id="join-check-email-msg"></span>
         </div>
         <button class="join-next"><span>다음</span></button>
       </div>

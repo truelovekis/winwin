@@ -3,9 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Header</title>
-  <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
+  <link rel="stylesheet" th:href="@{/css/user/loginModal.css}">
+  <link rel="stylesheet" th:href="@{/css/fragment/header.css}">
+  <link th:href="@{https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css}" rel="stylesheet" />
+  <style>
+    body {
+      font-family: "NanumSquareLight";
+      font-family: "NanumSquare";
+      font-family: "NanumSquareBold";
+      font-family: "NanumSquareExtraBold";
+      font-family: "NanumSquareAcb";
+      font-family: "NanumSquareAceb";
+      font-family: "NanumSquareAcl";
+      font-family: "NanumSquareAcr";
+    }
+  </style>
 </head>
 <body>
+
+<!--헤더 시작-->
 <header class="header" th:fragment="header">
   <div class="big-box">
   <div class="hwrap">
@@ -16,62 +32,100 @@
       <div class="hcenter">
         <ul class="hctg-list">
           <li class="header-li">
-            <a href="" class="h-font">멘토 : 멘티</a>
-            <div class="sub-ctg-1 sub none">
-              <a href="">업계</a>
-              <a href="">입시</a>
-            </div>
+            <a th:href="@{/mentor/list}" class="h-font">멘토 : 멘티</a>
+<!--            <div class="sub-ctg-1 sub none">-->
+<!--              <a href="">업계</a>-->
+<!--              <a href="">입시</a>-->
+<!--            </div>-->
           </li>
           <li class="header-li">
-            <a href="" class="h-font">커뮤니티</a>
-            <div class="sub-ctg-2 sub none">
-              <a href="">직장인 게시판</a>
-              <a href="">취준생 게시판</a>
-              <a href="">대학생 게시판</a>
-              <a href="">고등학생 게시판</a>
-            </div>
-          </li>
-          <li class="header-li">
-            <a href="" class="h-font">프로젝트/스터디</a>
-            <div class="sub-ctg-3 sub none">
-              <a href="">홈</a>
-              <a href="">프로젝트</a>
-              <a href="">스터디</a>
-            </div>
-          </li>
-          <li class="header-li">
-            <a href="" class="h-font">나눔</a>
+            <a th:href="@{/career/list}" class="h-font">진로정보</a>
           </li>
           <li class="header-li">
             <a href="" class="h-font">Q&A</a>
           </li>
           <li class="header-li">
-            <a href="" class="h-font">문의사항</a>
+            <a href="" class="h-font">커뮤니티</a>
+            <div class="sub-ctg-2 sub none">
+              <a th:href="@{/community/list/all}">타임라인</a>
+              <a th:href="@{/community/list/30}">직장인 게시판</a>
+              <a th:href="@{/community/list/20}">대학생 게시판</a>
+              <a th:href="@{/community/list/10}">고등학생 게시판</a>
+            </div>
+          </li>
+          <li class="header-li">
+            <a th:href="@{/meeting/home}" class="h-font">모임</a>
+            <div class="sub-ctg-3 sub none">
+              <a th:href="@{/meeting/home}">홈</a>
+              <a th:href="@{/meeting/meeting}">프로젝트/스터디</a>
+            </div>
+          </li>
+          <li class="header-li">
+            <a th:href="@{/share/list}" class="h-font">나눔</a>
+          </li>
+          <li class="header-li">
+            <a th:href="@{/cs/main}" class="h-font">문의사항</a>
           </li>
         </ul>
       </div>
       <div class="header-nav-r">
         <!-- 로그인 안했을 때 -->
+        <th:block th:if="${session.userNumber == null} ">
         <button class="login-join">
-          <span>가입/로그인</span>
+          <a class="login-move">가입/로그인</a>
         </button>
         <img th:src="@{/img/profile-basic.png}" alt="" class="basic-img" />
+        </th:block>
         <!-- 로그인 했을 때 -->
-        <!-- <div class="h-profile">
-          <span class="wing-point"
-            ><img src="../springProject/img/wing-icon.png" alt="" class="wing-icon" />&nbsp;3290 윙
-          </span>
-          <span>|&nbsp;&nbsp;</span>
-          <a href="" class="h-user-name">정소이 님<img src="" alt="" /></a>
-          <a href=""><img src="/winwin/img/profile-basic.png" alt="" class="profile-img" /></a>
-        </div> -->
+         <div class="h-profile" th:unless="${session.userNumber == null} " >
+
+<!--          <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>-->
+           <span class="wing-point" th:text="${session.userWing}"></span>
+           <img th:src="@{/img/wing-icon.png}" alt="" class="wing-icon"/>
+           <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+          <a href="" class="h-user-name" ><span th:text="${session.userName}"></span>님</a>
+          <a href=""><img th:src="@{/img/profile-basic.png}" alt="" class="profile-img" /></a>
+           <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <a class="h-logout">로그아웃</a>
+        </div>
         <!-- 여기까지 -->
       </div>
     </div>
   </div>
   <hr id="header-sun"/>
   </div>
+  <!--모달창-->
+  <div class="modal-container none">
+    <form class="form-reset">
+    <div class="modal-wrap">
+      <div th:replace="user/login :: login"></div>
+      <button type="button" class="login-end"><span>로그인</span></button>
+      <div th:replace="user/findId :: findId"></div>
+      <div th:replace="user/findPassword :: findPassword"></div>
+      <div th:replace="user/join :: join"></div>
+      <div th:replace="user/jobDepSelect :: jobDepSelect"></div>
+      <div th:replace="user/agreement :: agreement"></div>
+      <div th:replace="user/goal :: goal"></div>
+      <div th:replace="user/identity :: identity"></div>
+      <div th:replace="user/mentorGoal :: mentorGoal"></div>
+      <div th:replace="user/mentorGoal2 :: mentorGoal2"></div>
+      <div th:replace="user/message :: message"></div>
+      <div th:replace="user/selfCheck :: selfCheck"></div>
+      <div th:replace="user/signUp :: signUp"></div>
+      <button type="button" class="home-btn none"><span>홈으로</span></button>
+      <button type="button" class="modal-next none"><span>다음</span></button>
+    </div>
+    </form>
+  </div>
 </header>
-<script th:src="/js/fragment/header.js"></script>
+<!--헤더 끝-->
+
+<script
+        th:src="@{https://code.jquery.com/jquery-3.6.3.js}"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+        crossorigin="anonymous"
+></script>
+<script th:src="@{/js/fragment/header.js}"></script>
+<script th:src="@{/js/user/loginModal.js}"></script>
 </body>
 </html>

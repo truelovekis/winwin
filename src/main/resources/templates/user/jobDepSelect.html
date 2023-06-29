@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" th:href="@{/css/user/JobDepSelectModal.css}" />
+  <link rel="stylesheet" th:href="@{/css/user/jobDepSelect.css}" />
   <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
   <style>
     body {
@@ -24,8 +24,9 @@
 <main>
   <div class="job-dep-modal">
     <div class="job-dep-wrap">
-      <div class="job-dep-box">
-        <h2>직무/학과</h2>
+      <div class="job-dep-box none" th:fragment="jobDepSelect">
+        <h3>직무/학과</h3>
+        <h6>관심있는 직무 또는 학과를 선택해 주세요.</h6>
         <!-- 1차 카테고리(직무/학과) -->
         <div class="select">
           <div class="selected">
@@ -39,7 +40,7 @@
               </svg>
             </div>
           </div>
-          <ul class="first-option-box">
+          <ul class="first-option-box" >
             <li class="option first-option-category1" value="1">직무</li>
             <li class="option first-option-category2" value="2">학과</li>
           </ul>
@@ -125,6 +126,6 @@
         integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
         crossorigin="anonymous"
 ></script>
-<script th:src="@{/js/user/JobDepSelectModal.js}"></script>
+
 </body>
 </html>

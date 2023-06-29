@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Main</title>
+    <link rel="stylesheet" th:href="@{/css/user/loginModal.css}" />
     <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
     <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
     <link rel="stylesheet" th:href="@{/css/main/main.css}" />
@@ -23,70 +24,7 @@
     </style>
   </head>
   <body>
-    <header class="header"  th:replace="fragment/header :: header">
-<!--      <div class="hwrap">-->
-<!--        <div class="hcontainer">-->
-<!--          <div class="header-nav-l">-->
-<!--            <a href="" class="logo"><img th:src="@{/img/winwin-logo.png}" alt="" /></a>-->
-<!--          </div>-->
-<!--          <div class="hcenter">-->
-<!--            <ul class="hctg-list">-->
-<!--              <li>-->
-<!--                <a href="" class="h-font">멘토 : 멘티</a>-->
-<!--                <div class="sub-ctg-1 sub none">-->
-<!--                  <a href="">업계</a>-->
-<!--                  <a href="">입시</a>-->
-<!--                </div>-->
-<!--              </li>-->
-<!--              <li>-->
-<!--                <a href="" class="h-font">커뮤니티</a>-->
-<!--                <div class="sub-ctg-2 sub none">-->
-<!--                  <a href="">직장인 게시판</a>-->
-<!--                  <a href="">취준생 게시판</a>-->
-<!--                  <a href="">대학생 게시판</a>-->
-<!--                  <a href="">고등학생 게시판</a>-->
-<!--                </div>-->
-<!--              </li>-->
-<!--              <li>-->
-<!--                <a href="" class="h-font">프로젝트/스터디</a>-->
-<!--                <div class="sub-ctg-3 sub none">-->
-<!--                  <a href="">홈</a>-->
-<!--                  <a href="">프로젝트</a>-->
-<!--                  <a href="">모임/스터디</a>-->
-<!--                </div>-->
-<!--              </li>-->
-<!--              <li>-->
-<!--                <a href="" class="h-font">나눔</a>-->
-<!--              </li>-->
-<!--              <li>-->
-<!--                <a href="" class="h-font">Q&A</a>-->
-<!--              </li>-->
-<!--              <li>-->
-<!--                <a href="" class="h-font">문의사항</a>-->
-<!--              </li>-->
-<!--            </ul>-->
-<!--          </div>-->
-<!--          <div class="header-nav-r">-->
-<!--            &lt;!&ndash; 로그인 안했을 때 &ndash;&gt;-->
-<!--            <button class="login-join">-->
-<!--              <span>가입/로그인</span>-->
-<!--            </button>-->
-<!--            <img src="/winwin/img/profile-basic.png" alt="" class="basic-img" />-->
-<!--            &lt;!&ndash; 로그인 했을 때 &ndash;&gt;-->
-<!--            &lt;!&ndash; <div class="h-profile">-->
-<!--              <span class="wing-point"-->
-<!--                ><img src="../springProject/img/wing-icon.png" alt="" class="wing-icon" />&nbsp;3290 윙-->
-<!--              </span>-->
-<!--              <span>|&nbsp;&nbsp;</span>-->
-<!--              <a href="" class="h-user-name">정소이 님<img src="" alt="" /></a>-->
-<!--              <a href=""><img src="/winwin/img/profile-basic.png" alt="" class="profile-img" /></a>-->
-<!--            </div> &ndash;&gt;-->
-<!--            &lt;!&ndash; 여기까지 &ndash;&gt;-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <hr />-->
-    </header>
+    <header class="header"  th:replace="fragment/header :: header"></header>
 
     <main>
       <div class="container">
@@ -453,5 +391,12 @@
     crossorigin="anonymous"
   ></script>
   <script th:src="@{/js/fragment/header.js}" ></script>
-  <script th:src="@{/js/fragment/footer.js}" ></script>
+<!--  모달 js-->
+<!--  <script th:src="@{/js/user/agreement.js}"></script>-->
+  <script th:src="@{/js/user/loginModal.js}"></script>
+<!--  <script th:src="@{/js/user/join.js}"></script>-->
+<!--  <script th:src="@{/js/user/mentorGoal.js}"></script>-->
+<!--  <script th:src="@{/js/user/mentorGoal2.js}"></script>-->
+<!--  <script th:src="@{/js/user/jobDepSelect.js}"></script>-->
+
 </html>

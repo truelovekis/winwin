@@ -72,7 +72,7 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
-hr {
+.agreement-hr {
   margin: 12px 0;
   background: #dddd;
   height: 1px;
@@ -104,6 +104,10 @@ hr {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+}
+
+.agreement-btn-first{
+  margin-top: 10px;
 }
 
 .agreement-btn-box > span {

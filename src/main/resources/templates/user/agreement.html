@@ -24,8 +24,8 @@
     <main>
       <div class="agreement-container">
         <div class="agreement-wrap">
-          <div class="agreement-box" th:fragment="agreement">
-            <img src="/winwin/img/winwin-logo.png" alt="" />
+          <div class="agreement-box none" th:fragment="agreement" >
+            <img th:src="@{/img/winwin-logo.png}" alt="" />
             <h4>고객님</h4>
             <h4>환영합니다!</h4>
             <div class="agreement-input-btn">
@@ -34,8 +34,8 @@
                 <label for="check1" class="label1 check00"></label>
                 <span>전체 약관동의</span>
               </div>
-              <hr />
-              <div class="agreement-btn-box">
+              <hr class="agreement-hr"/>
+              <div class="agreement-btn-box agreement-btn-first">
                 <input type="checkbox" id="check2" class="check" /><br />
                 <label for="check2" class="label2"></label>
                 <span>이용약관 동의필수 (필수)</span>
@@ -51,10 +51,36 @@
                 <span>제 3자 개인정보 수집 동의 (선택)</span>
               </div>
             </div>
+
+<!--            <div class="join-box" >-->
+<!--              <h3>회원가입</h3>-->
+<!--              <span class="join-title" id="join-first">아이디</span>-->
+<!--              <input type="text" class="join-input" name="userId" placeholder="아이디 입력" required/>-->
+<!--              <span class="join-check-msg" id="join-check-id-msg"></span>-->
+<!--              <span class="join-title">비밀번호</span>-->
+<!--              <input-->
+<!--                      type="text"-->
+<!--                      class="join-input"-->
+<!--                      id="join-pw-input"-->
+<!--                      name="userPassword"-->
+<!--                      placeholder="대문자/특수문자 포함 8자리 이상 입력해주세요."-->
+<!--                      required-->
+<!--              />-->
+<!--              <span class="join-check-msg" id="join-check-pw-msg"></span>-->
+<!--              <span class="join-title">비밀번호 확인</span>-->
+<!--              <input type="text" class="join-input" id="join-pw-input2" placeholder="비밀번호 확인" />-->
+<!--              <span class="join-check-msg" id="join-check-pw-msg2"></span>-->
+<!--              <span class="join-title">이메일</span>-->
+<!--              <input type="text" class="join-input" name="userEmail" placeholder="이메일 입력" required/>-->
+<!--            </div>-->
+
           </div>
           <button class="agreement-next"><span>다음</span></button>
         </div>
       </div>
+
+
+
     </main>
     <script
       src="https://code.jquery.com/jquery-3.6.3.js"

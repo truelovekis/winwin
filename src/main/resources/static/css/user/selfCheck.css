@@ -43,13 +43,6 @@
   margin-top: 5px;
 }
 
-.self-box > span {
-  display: block;
-  font-size: 13px;
-  font-weight: 700;
-  margin-top: 20px;
-}
-
 #self-first {
   margin-top: 20px;
 }
@@ -63,12 +56,12 @@
   width: 20px;
   height: 25px;
   border: 1px solid #ddd;
+  text-align: center;
 }
 
 #self-char {
   display: inline;
   font-size: 12px;
-  margin-left: 5px;
 }
 
 .self-input::placeholder {
@@ -82,7 +75,8 @@
 }
 
 /* 인증 버튼 */
-.self-certified {
+.self-certified,
+.self-certified-check{
   border-radius: 20px;
   border: 1px solid #ddd;
   background-color: white;
@@ -107,8 +101,35 @@
   cursor: pointer;
 }
 
-.self-next > span {
-  font-size: 15px;
+.title-name {
+  font-size: 13px;
   font-weight: 900;
-  color: #fff;
+  color: #000000;
+  display: block;
+}
+
+.self-msg{
+  display: block;
+  font-size: 8px;
+  color: #e06c6c;
+  margin: 5px 0px 20px 0px;
+}
+
+#verificationCode-msg{
+  display: block;
+  font-size: 8px;
+  color: #e06c6c;
+  margin-top: 5px;
+}
+
+.identity-radio{
+  font-size: 12px;
+  margin: 10px 0px 20px 0px;
+  display: flex;
+  align-content: center;
+  /*text-align: center;*/
+}
+
+.radioInput{
+  margin-right: 10px;
 }

@@ -24,9 +24,11 @@
     <main>
       <div class="mentor-goal-2-container">
         <div class="mentor-goal-2-wrap">
-          <div class="mentor-goal-2-box" th:fragment="mentorGoal2">
+          <div class="mentor-goal-2-box none" th:fragment="mentorGoal2">
             <h3>대학생 인증서류 확인</h3>
             <h6>학력을 증명해 주세요!</h6>
+            <h5>학교명</h5>
+            <input type="text" name="userBelong" class="userBelong" placeholder="학교명을 입력해 주세요."/>
             <hr class="mentor-goal-2-hr" />
             <input
               type="file"
@@ -44,7 +46,7 @@
                   width="16"
                   height="16"
                   fill="currentColor"
-                  class="mentor-goal-2-bi bi-trash3"
+                  class="mentor-goal-2-bi bi-trash2"
                   viewBox="0 0 16 16"
                 >
                   <path
@@ -53,14 +55,14 @@
               ></span>
             </div>
             <div class="mentor-goal-2-name-box">
-              <span class="mentor-goal-2-file-name mentor-goal-2-none mentor-goal-2-name1"
-                ><span class="mentor-goal-2-file-name1">파일명</span>
+              <span class="mentor-goal-2-file-name mentor-goal-2-none mentor-goal-2-name2"
+                ><span class="mentor-goal-2-file-name2">파일명</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
                   height="16"
                   fill="currentColor"
-                  class="mentor-goal-2-bi bi-trash3"
+                  class="mentor-goal-2-bi bi-trash2"
                   viewBox="0 0 16 16"
                 >
                   <path
