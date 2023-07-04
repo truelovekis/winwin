@@ -11,14 +11,14 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/comment/*")
+@RequestMapping("/comments/*")
 public class CommunityCommentController {
     private final CommunityCommentService communityCommentService;
 
     @PostMapping("/comment")
     public String commentRegister(@RequestBody CommunityCommentDto communityCommentDto, HttpServletRequest req){
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
-        communityCommentDto.setUserNumber(9L);
+        communityCommentDto.setUserNumber(userNumber);
         System.out.println(communityCommentDto);
         communityCommentService.register(communityCommentDto);
         return "작성 성공!";
@@ -29,7 +29,7 @@ public class CommunityCommentController {
         return communityCommentService.findList(communityNumber);
     }
 
-    @PatchMapping("/{communityNumber}")
+    @PatchMapping("/{commentNumber}")
     public void commentModify(@PathVariable("commentNumber") Long commentNumber, @RequestBody CommunityCommentDto communityCommentDto){
         communityCommentDto.setCommentNumber(commentNumber);
         communityCommentService.modify(communityCommentDto);

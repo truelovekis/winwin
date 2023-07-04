@@ -118,6 +118,21 @@ input[type="checkbox"] {
     width: 100%;
     height: 45px;
     margin-top: 10px;
+}.report-button {
+    text-align: center;
+}
+
+.report-btn {
+    padding: 10px 20px;
+    background-color: #1b5192;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    height: 45px;
+    margin-top: 10px;
 }
 
 .report-list > span {
