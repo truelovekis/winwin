@@ -3,6 +3,14 @@
   padding: 0;
 }
 
+/*body{*/
+/*  -ms-overflow-style: none;*/
+/*}*/
+
+/*::-webkit-scrollbar {*/
+/*  display: none;*/
+/*}*/
+
 section {
   margin: auto;
 }
@@ -202,7 +210,7 @@ input:checked + .slider:before {
   background-color: #f8fafc;
 }
 
-.none {
+.none2 {
   display: none;
 }
 
@@ -285,7 +293,7 @@ input:checked + .slider:before {
 }
 
 /* 모달창 */
-.modal-wrap {
+.modal-wrap1 {
   position: absolute;
   /* display: none; */
   align-items: center;
@@ -535,7 +543,7 @@ input:checked + .slider:before {
 .select ul {
   width: 220px;
   border: 1px solid #999;
-  display: none;
+  /*display: none;*/
   position: absolute;
   background: #fff;
   border-top: none;

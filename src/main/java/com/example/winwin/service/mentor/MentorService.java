@@ -1,12 +1,16 @@
 package com.example.winwin.service.mentor;
 
 import com.example.winwin.dto.mentor.*;
+import com.example.winwin.mapper.file.MyPageFile;
 import com.example.winwin.mapper.mentor.MentorMapper;
+import com.example.winwin.vo.myPage.MyPageVo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,8 +20,8 @@ public class MentorService {
 
 // 등록된 멘토 프로필 리스트
     @Transactional(readOnly = true)
-    public List<MentorVo> findList(){
-        List<MentorVo> list = mentorMapper.mentorList();
+    public List<MentorVo> findList(Long userNumber){
+        List<MentorVo> list = mentorMapper.mentorList(userNumber);
         for (int i=0; i<list.size(); i++){
             MentorVo mentorVo = list.get(i);
 
@@ -28,7 +32,7 @@ public class MentorService {
         return list;
     }
 
-//    멘토 경럭 리스트(멘토 프로필 리스트)
+//    멘토 경력 리스트(멘토 프로필 리스트)
     public List<CareerVo> findCareerList(Long mentorNumber){
         List<CareerVo> career = mentorMapper.mentorCareer(mentorNumber);
 
@@ -142,11 +146,11 @@ public class MentorService {
         if (mentorNumber == null) {
             throw new IllegalArgumentException("멘토 번호 누락!");
         }
-//        mentorMapper.skillDelete(mentorNumber);
-        mentorMapper.skillDelete(6L);
+        mentorMapper.skillDelete(mentorNumber);
+//        mentorMapper.skillDelete(6L);
         SkillVo skillVo = new SkillVo();
-//        skillVo.setMentorNumber(mentorNumber);
-        skillVo.setMentorNumber(6L);
+        skillVo.setMentorNumber(mentorNumber);
+//        skillVo.setMentorNumber(6L);
         for (int i=0; i<skillList.size(); i++){
             skillVo.setSkillName(skillList.get(i));
             mentorMapper.skillInsert(skillVo);
@@ -158,7 +162,6 @@ public class MentorService {
         if (mentorNumber == null) {
             throw new IllegalArgumentException("멘토 번호 누락!");
         }
-        careerVo.setMentorNumber(6L);
         mentorMapper.careerInsert(careerVo);
     }
 
@@ -174,8 +177,6 @@ public class MentorService {
         if (reviewVo == null) {
             throw new IllegalArgumentException("리뷰 정보 누락!");
         }
-        reviewVo.setMentorNumber(1L);
-        reviewVo.setUserNumber(6L);
         mentorMapper.reviewInsert(reviewVo);
     }
 
@@ -184,17 +185,40 @@ public class MentorService {
         if (mentorVo == null) {
             throw new IllegalArgumentException("상태? 누락!");
         }
-        mentorVo.setMentorNumber(6L);
         mentorMapper.mentorUpdate(mentorVo);
     }
 
 //    로그인한 회원의 멘토 프로필
-    public MentorVo findLoginMentor(Long mentorNumber, MentorVo mentorVo){
+    public MentorVo findLoginMentor(Long mentorNumber){
         if (mentorNumber == null) {
             throw new IllegalArgumentException("멘토 번호 누락!");
         }
-        mentorVo.setMentorNumber(6L);
         return mentorMapper.loginMentor(mentorNumber);
     }
+
+//    관심 멘토
+    public void registerLike(LikeDto likeDto){
+        if (likeDto == null) {
+            throw new IllegalArgumentException("회원 정보 누락!");
+        }
+        mentorMapper.mentorLike(likeDto);
+    }
+
+//    좋아요 삭제
+    public void removeLike(LikeDto likeDto){
+        if (likeDto == null) {
+            throw new IllegalArgumentException("정보 누락!");
+        }
+        mentorMapper.likeDelete(likeDto);
+    }
+
+//    멘토 신청하기
+    public void addMentor(MentorVo mentorVo){
+        if (mentorVo == null) {
+            throw new IllegalArgumentException("정보 누락!");
+        }
+        mentorMapper.addMentor(mentorVo);
+    }
+
 
 }

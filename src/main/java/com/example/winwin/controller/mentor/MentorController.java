@@ -1,7 +1,9 @@
 package com.example.winwin.controller.mentor;
 
 import com.example.winwin.dto.mentor.*;
+import com.example.winwin.dto.user.UserPfpDto;
 import com.example.winwin.service.mentor.MentorService;
+import com.example.winwin.service.myPage.MyPageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -20,38 +23,34 @@ import java.util.List;
 @RequestMapping("/mentor/*")
 public class MentorController {
     private final MentorService mentorService;
+    private final MyPageService myPageService;
 
 //    멘토:멘티 리스트 페이지 처리
     @GetMapping("/list")
-    public String mentorList(Model model, Long mentorNumber, MentorVo mentorVo){
-        List<MentorVo> mentorList = mentorService.findList();
+    public String mentorList(Model model, MentorVo mentorVo, HttpServletRequest req){
+
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+        List<MentorVo> mentorList = mentorService.findList(userNumber==null? 0 : userNumber);
         model.addAttribute("mentorList", mentorList);
 
-        MentorVo loginMentor = mentorService.findLoginMentor(6L, mentorVo);
+        Long mentorNumber = (Long)req.getSession().getAttribute("mentorNumber");
+        MentorVo loginMentor = mentorService.findLoginMentor(mentorNumber==null?0:mentorNumber);
         model.addAttribute("loginMentor", loginMentor);
 
-        List<SkillVo> skill = mentorService.profileSkill(6L);
+        List<SkillVo> skill = mentorService.profileSkill(mentorNumber==null?0:mentorNumber);
         model.addAttribute("skill", skill);
 
-        List<CareerVo> career = mentorService.profileCareer(6L);
+        List<CareerVo> career = mentorService.profileCareer(mentorNumber==null?0:mentorNumber);
         model.addAttribute("career" , career);
 
         return "mentor/mentorProfile";
-    }
-
-    @PostMapping("/list")
-    public RedirectView mentorModify(MentorVo mentorVo, RedirectAttributes redirectAttributes){
-        mentorService.modifyMentor(mentorVo);
-        redirectAttributes.addFlashAttribute("mentorNumber",mentorVo.getMentorNumber());
-
-        return new RedirectView("/mentor/list");
     }
 
 //    멘토:멘티 멘토 개인 프로필 처리
     @GetMapping("/profile")
     public String profile(Model model, Long mentorNumber){
         MentorVo mentorVo = mentorService.findProfile(mentorNumber);
-        model.addAttribute("profile", mentorVo);
+        model.addAttribute("profile2", mentorVo);
 
         List<SkillVo> skill = mentorService.profileSkill(mentorNumber);
         model.addAttribute("skill", skill);
@@ -70,13 +69,15 @@ public class MentorController {
 
 //    멘토 프로필 등록하기 처리
     @GetMapping("/apply")
-    public String apply(Long mentorNumber, Model model){
-        MentorVo mentor = mentorService.findMentor(6L);
-        List<MentorVo> mentor2 = mentorService.findMentor2(6L);
-        List<CareerVo> careerList = mentorService.findCareerList(6L);
+    public String apply(Model model, HttpServletRequest req){
+
+        Long mentorNumber = (Long) req.getSession().getAttribute("mentorNumber");
+        MentorVo mentor = mentorService.findMentor(mentorNumber);
+        List<MentorVo> mentor2 = mentorService.findMentor2(mentorNumber);
+        List<CareerVo> careerList = mentorService.findCareerList(mentorNumber);
         model.addAttribute("careerList", careerList);
 
-        List<SkillVo> skill = mentorService.findSkill(6L);
+        List<SkillVo> skill = mentorService.findSkill(mentorNumber);
         model.addAttribute("skill", skill);
 
         model.addAttribute("mentor", mentor);
@@ -94,7 +95,7 @@ public class MentorController {
     //    멘토 프로필 등록하기 기본 페이지 처리
     @GetMapping("/self")
     public String self(Long mentorNumber, Model model){
-        MentorVo mentor = mentorService.findMentor(6L);
+        MentorVo mentor = mentorService.findMentor(mentorNumber);
 
         model.addAttribute("mentor", mentor);
         return "mentor/Introduceyourself";
@@ -102,9 +103,9 @@ public class MentorController {
 
     @PostMapping("/self")
     public RedirectView self(MentorVo mentorVo, HttpServletRequest req, RedirectAttributes redirectAttributes){
-        Long userNumber = (Long) req.getSession().getAttribute("mentorNumber");
-        mentorVo.setMentorNumber(6L);
-        mentorVo.setUserNumber(6L);
+        Long mentorNumber = (Long) req.getSession().getAttribute("mentorNumber");
+        mentorVo.setMentorNumber(mentorNumber);
+        mentorVo.setUserNumber(mentorNumber);
         mentorService.mentorPrRegister(mentorVo);
 
         return new RedirectView("/mentor/apply");
@@ -123,14 +124,15 @@ public class MentorController {
         careerVo.setMentorNumber(mentorNumber);
 
 //        mentorService.careerModify(mentorNumber,careerVo);
-        mentorService.careerRegister(6L,careerVo);
+        mentorService.careerRegister(mentorNumber,careerVo);
 
         return new RedirectView("/mentor/apply");
     }
 
 //    멘토 프로필 등록하기 스킬 처리
     @GetMapping("/skill")
-    public String defaultProfile(Model model, Long mentorNumber){
+    public String defaultProfile(Model model,HttpServletRequest req){
+        Long mentorNumber = (Long) req.getSession().getAttribute("mentorNumber");
         List<SkillVo> skill = mentorService.findSkill(mentorNumber);
         model.addAttribute("skill", skill);
 

@@ -25,9 +25,12 @@
     </style>
   </head>
   <body>
+  <input type="hidden" th:value="${session.mentorNumber}">
+  <input type="hidden" th:value="${session.userNumber}">
   <header class="header" th:replace="fragment/header :: header"></header>
     <!-- 모달창 -->
-    <article class="modal-wrap none">
+    <article class="modal-wrap1 none">
+      <input type="hidden" class="addNumber"/>
       <div class="select-box">
         <div class="profile-box">
           <div class="mento-profile-photo-box">
@@ -41,11 +44,12 @@
         </div>
         <hr />
         <span id="agree">해당 멘토에게 신청할 경우 아래 신청하기를 눌러주세요</span>
-        <button>신청하기</button>
+        <button class="um-btn">신청하기</button>
       </div>
     </article>
     <!-- /모달창 -->
     <section class="body-wrap">
+
       <!-- 왼쪽 사이드 -->
       <aside class="aside">
         <div class="">
@@ -65,7 +69,7 @@
           </div>
           <div class="">
             <div>
-              <button type="button" class="mento-button profile-button">
+              <button type="button" id="mentor" class="mento-button profile-button" th:data-mentorNumber="${session.mentorNumber}" th:data-userNumber="${session.userNumber}" th:value="${session.mentorNumber}">
                 내 프로필 등록하기
               </button>
             </div>
@@ -80,36 +84,37 @@
       </aside>
       <!-- /왼쪽 사이드 -->
       <main class="main">
+        <th:block th:if="${session.mentorNumber} != null">
         <section class="mento-myProfile-on">
           <div class="">내 프로필 올려두기</div>
-          <input type="hidden" id="status" name="mentorStatus" th:value="${loginMentor.mentorStatus}"/>
-          <form th:action="@{/mentor/list}" method="post" class="profile-btn">
-
+<!--          <form th:action="@{/mentor/list}" method="post" class="profile-btn">-->
           <div class="toggle-switch">
               <p class="toggle-ment">내림&nbsp</p>
               <p class="toggle-ment none">올림&nbsp</p>
+            <input type="hidden" id="status" name="mentorStatus" th:value="${loginMentor.mentorStatus}"/>
               <label for="suggest-profile" class="switch">
                 <input id="suggest-profile" type="checkbox"/>
                 <span class="slider round"></span>
             </label>
           </div>
-          </form>
-        </section>
+<!--          </form>-->
 
+        </section>
+        </th:block>
         <!-- 태그 필터 -->
         <main class="main1">
           <div class="tag-wrap">
             <div class="select-tag">
-              <span class="tag">@계열1</span>
-              <span class="tag">@계열2</span>
-              <span class="tag">@계열3</span>
-              <span class="tag">@계열4</span>
-              <span class="tag">@계열5</span>
-              <span class="tag">@계열6</span>
-              <span class="tag">@계열7</span>
-              <span class="tag">@계열8</span>
-              <span class="tag">@계열9</span>
-              <span class="tag">@계열10</span>
+<!--              <span class="tag">@계열1</span>-->
+<!--              <span class="tag">@계열2</span>-->
+<!--              <span class="tag">@계열3</span>-->
+<!--              <span class="tag">@계열4</span>-->
+<!--              <span class="tag">@계열5</span>-->
+<!--              <span class="tag">@계열6</span>-->
+<!--              <span class="tag">@계열7</span>-->
+<!--              <span class="tag">@계열8</span>-->
+<!--              <span class="tag">@계열9</span>-->
+<!--              <span class="tag">@계열10</span>-->
             </div>
           </div>
 
@@ -194,7 +199,9 @@
         <!-- /태그 필터 -->
 
         <!-- 내 프로필 -->
+        <th:block th:if="${session.mentorNumber} != null">
         <div class="myProfile-box">
+          <input type="hidden" th:value="${session.mentorNumber}" class="myNumber"/>
 <!--          <input type="hidden" value="6">-->
           <article class="item myProfile">
             <section class="mento-profile">
@@ -202,12 +209,14 @@
                 <a href="" class="page-move">
                   <div class="flex">
                     <div class="mento-profile-photo-box">
-                      <img src="data:image/jpeg;base64,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" width="100" class="mento-profile-photo"/>
+                      <img th:if="${profile == null}" class="img-box" src="/img/profile-basic.png"/>
+                      <img th:unless="${profile == null}" class="img-box"
+                           th:style="${'background-image: url(/profile/' + profile.pfpUuid + '_' + profile.pfpSystemName + ')'}"/>
                     </div>
                     <div class="flex text-wrap">
                       <div class="mento-name"><span th:text="${loginMentor.userName}"></span> </div>
                       <div class="mento-career">
-                         <span th:text="${loginMentor.careerCompany}"></span> · <span th:text="${loginMentor.careerAnnual}" /> 년차
+                         <span th:text="${loginMentor.careerCompany}"></span> · <span th:text="${loginMentor.careerAnnual}"/> 년차
                       </div>
                     </div>
                   </div>
@@ -264,43 +273,58 @@
                 </svg>
               </div>
             </div>
+
           </article>
         </div>
+        </th:block>
         <!-- /내 프로필 -->
 
         <!-- 멘토 프로필 -->
-        <div  >
-
-        <article class="item" th:each="mentorList : ${mentorList}">
-         <input type="hidden" class="mentor-num" th:value="${mentorList.mentorNumber}"/>
+        <div>
+        <article class="item" th:each="mentorList : ${mentorList}" th:if="${mentorList.mentorNumber} != ${session.mentorNumber}" th:id="'id-'+ ${mentorList.mentorNumber}">
           <section class="mento-profile">
             <div class="item__box">
+              <input type="hidden" class="add-num" th:value="${mentorList.mentorNumber}"/>
               <a th:href="@{/mentor/profile(mentorNumber=${mentorList.mentorNumber})}" class="page-move">
                 <div class="flex">
                   <div class="mento-profile-photo-box">
-                    <img th:src="@{/profile}" width="100" class="mento-profile-photo"/>
+<!--                    <img th:src="@{/profile}" width="100" class="mento-profile-photo"/>-->
+                    <img th:if="${profile == null}" class="img-box" src="/img/profile-basic.png"/>
+                    <img th:unless="${profile == null}" class="img-box"
+                         th:style="${'background-image: url(/profile/' + profile.pfpUuid + '_' + profile.pfpSystemName + ')'}"/>
                   </div>
                   <div class="flex text-wrap" >
                     <div class="mento-name"> <span th:text="${mentorList.userName}"></span> </div>
                     <div class="mento-career">
                         <span th:text="${mentorList.careerCompany}"/> · <span th:text="${mentorList.careerAnnual}"/>년차
-<!--                      백엔드 개발자&nbsp; · &nbsp;2년차-->
                     </div>
                   </div>
                 </div>
               </a>
 
               <div class="mento-button-box">
-                <button class="like-button">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart like" viewBox="0 0 16 16">
+                  <input type="hidden" class="mentor-num" th:value="${mentorList.mentorNumber}"/>
+                <button class="like-button" th:value="${mentorList.likeCnt}">
+                  <div th:if="${mentorList.likeCnt} == 0" class="like-up like0" th:value="${mentorList.likeCnt}">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
                     <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
                   </svg>
 
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill like none" viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill none2" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                    </svg>
+                  </div>
+                  <div th:if="${mentorList.likeCnt} == 1" class="like-down like0" th:value="${mentorList.likeCnt}">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                   </svg>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart none2" viewBox="0 0 16 16">
+                      <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                    </svg>
+                  </div>
                 </button>
-                <button class="message-button">메시지</button>
+                <button class="message-button">신청하기</button>
               </div>
             </div>
             <div class="skill-tags">
@@ -351,6 +375,7 @@
             </div>
           </div>
         </article>
+
         <!-- /멘토 프로필 -->
         </div>
       </main>
@@ -358,10 +383,10 @@
 
 
   <footer class="footer" th:replace="fragment/footer :: footer"></footer>
-
-    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
-    <script th:src="@{/js/mentor/mentorProfile.js}"></script>
-    <script th:src="@{/js/fragment/header.js}" ></script>
-
+  <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+<!--  <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>-->
+  <script th:src="@{/js/user/loginModal.js}"></script>
+  <script th:src="@{/js/fragment/header.js}" ></script>
+  <script th:src="@{/js/mentor/mentorProfile.js}"></script>
   </body>
 </html>

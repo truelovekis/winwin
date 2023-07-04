@@ -1,92 +1,92 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Agreement</title>
-    <link rel="stylesheet" href="/winwin/css/user/agreement.css" />
-    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
-    <style>
-      body {
-        font-family: "NanumSquareLight";
-        font-family: "NanumSquare";
-        font-family: "NanumSquareBold";
-        font-family: "NanumSquareExtraBold";
-        font-family: "NanumSquareAcb";
-        font-family: "NanumSquareAceb";
-        font-family: "NanumSquareAcl";
-        font-family: "NanumSquareAcr";
-      }
-    </style>
-  </head>
-  <body>
-    <main>
-      <div class="agreement-container">
-        <div class="agreement-wrap">
-          <div class="agreement-box none" th:fragment="agreement" >
-            <img th:src="@{/img/winwin-logo.png}" alt="" />
-            <h4>고객님</h4>
-            <h4>환영합니다!</h4>
-            <div class="agreement-input-btn">
-              <div class="agreement-btn-box">
-                <input type="checkbox" id="check1" /><br />
-                <label for="check1" class="label1 check00"></label>
-                <span>전체 약관동의</span>
-              </div>
-              <hr class="agreement-hr"/>
-              <div class="agreement-btn-box agreement-btn-first">
-                <input type="checkbox" id="check2" class="check" /><br />
-                <label for="check2" class="label2"></label>
-                <span>이용약관 동의필수 (필수)</span>
-              </div>
-              <div class="agreement-btn-box">
-                <input type="checkbox" id="check3" class="check" /><br />
-                <label for="check3" class="label3"></label>
-                <span>개인정보 수집 및 이용동의 (필수)</span>
-              </div>
-              <div class="agreement-btn-box">
-                <input type="checkbox" id="check4" class="check" /><br />
-                <label for="check4" class="label4"></label>
-                <span>제 3자 개인정보 수집 동의 (선택)</span>
-              </div>
-            </div>
-
-<!--            <div class="join-box" >-->
-<!--              <h3>회원가입</h3>-->
-<!--              <span class="join-title" id="join-first">아이디</span>-->
-<!--              <input type="text" class="join-input" name="userId" placeholder="아이디 입력" required/>-->
-<!--              <span class="join-check-msg" id="join-check-id-msg"></span>-->
-<!--              <span class="join-title">비밀번호</span>-->
-<!--              <input-->
-<!--                      type="text"-->
-<!--                      class="join-input"-->
-<!--                      id="join-pw-input"-->
-<!--                      name="userPassword"-->
-<!--                      placeholder="대문자/특수문자 포함 8자리 이상 입력해주세요."-->
-<!--                      required-->
-<!--              />-->
-<!--              <span class="join-check-msg" id="join-check-pw-msg"></span>-->
-<!--              <span class="join-title">비밀번호 확인</span>-->
-<!--              <input type="text" class="join-input" id="join-pw-input2" placeholder="비밀번호 확인" />-->
-<!--              <span class="join-check-msg" id="join-check-pw-msg2"></span>-->
-<!--              <span class="join-title">이메일</span>-->
-<!--              <input type="text" class="join-input" name="userEmail" placeholder="이메일 입력" required/>-->
-<!--            </div>-->
-
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agreement</title>
+  <link rel="stylesheet" href="/winwin/css/user/agreement.css" />
+  <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+  <style>
+    body {
+      font-family: "NanumSquareLight";
+      font-family: "NanumSquare";
+      font-family: "NanumSquareBold";
+      font-family: "NanumSquareExtraBold";
+      font-family: "NanumSquareAcb";
+      font-family: "NanumSquareAceb";
+      font-family: "NanumSquareAcl";
+      font-family: "NanumSquareAcr";
+    }
+  </style>
+</head>
+<body>
+<main>
+  <div class="agreement-container">
+    <div class="agreement-wrap">
+      <div class="agreement-box none" th:fragment="agreement" >
+        <img th:src="@{/img/winwin-logo.png}" alt="" />
+        <h4>고객님</h4>
+        <h4>환영합니다!</h4>
+        <div class="agreement-input-btn">
+          <div class="agreement-btn-box">
+            <input class="agreement-input" type="checkbox" id="check1" /><br />
+            <label for="check1" class="label1 check00"></label>
+            <span>전체 약관동의</span>
           </div>
-          <button class="agreement-next"><span>다음</span></button>
+          <hr class="agreement-hr"/>
+          <div class="agreement-btn-box agreement-btn-first">
+            <input type="checkbox" id="check2" class="check agreement-input" /><br />
+            <label for="check2" class="label2"></label>
+            <span>이용약관 동의필수 (필수)</span>
+          </div>
+          <div class="agreement-btn-box">
+            <input type="checkbox" id="check3" class="check agreement-input" /><br />
+            <label for="check3" class="label3"></label>
+            <span>개인정보 수집 및 이용동의 (필수)</span>
+          </div>
+          <div class="agreement-btn-box">
+            <input type="checkbox" id="check4" class="check agreement-input" /><br />
+            <label for="check4" class="label4"></label>
+            <span>제 3자 개인정보 수집 동의 (선택)</span>
+          </div>
         </div>
+
+        <!--            <div class="join-box" >-->
+        <!--              <h3>회원가입</h3>-->
+        <!--              <span class="join-title" id="join-first">아이디</span>-->
+        <!--              <input type="text" class="join-input" name="userId" placeholder="아이디 입력" required/>-->
+        <!--              <span class="join-check-msg" id="join-check-id-msg"></span>-->
+        <!--              <span class="join-title">비밀번호</span>-->
+        <!--              <input-->
+        <!--                      type="text"-->
+        <!--                      class="join-input"-->
+        <!--                      id="join-pw-input"-->
+        <!--                      name="userPassword"-->
+        <!--                      placeholder="대문자/특수문자 포함 8자리 이상 입력해주세요."-->
+        <!--                      required-->
+        <!--              />-->
+        <!--              <span class="join-check-msg" id="join-check-pw-msg"></span>-->
+        <!--              <span class="join-title">비밀번호 확인</span>-->
+        <!--              <input type="text" class="join-input" id="join-pw-input2" placeholder="비밀번호 확인" />-->
+        <!--              <span class="join-check-msg" id="join-check-pw-msg2"></span>-->
+        <!--              <span class="join-title">이메일</span>-->
+        <!--              <input type="text" class="join-input" name="userEmail" placeholder="이메일 입력" required/>-->
+        <!--            </div>-->
+
       </div>
+      <button class="agreement-next"><span>다음</span></button>
+    </div>
+  </div>
 
 
 
-    </main>
-    <script
-      src="https://code.jquery.com/jquery-3.6.3.js"
-      integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
-      crossorigin="anonymous"
-    ></script>
-    <script src="/winwin/js/user/agreement.js"></script>
-  </body>
+</main>
+<script
+        src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+        crossorigin="anonymous"
+></script>
+<script src="/winwin/js/user/agreement.js"></script>
+</body>
 </html>

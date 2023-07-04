@@ -1,5 +1,6 @@
 //헤더 서브카테고리 생기게
 $(".header-li").hover(
+
     function () {
         $(this).css("border-bottom", "2px solid #1b5192");
         $(this).find(".h-font").css("color", "#1b5192");

@@ -1,6 +1,8 @@
 package com.example.winwin.controller.user;
 
 import com.example.winwin.dto.user.UserDto;
+import com.example.winwin.service.mentor.LoginService;
+import com.example.winwin.service.mentor.MentorService;
 import com.example.winwin.service.user.UserService;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,7 @@ import javax.servlet.http.HttpSession;
 public class UserController {
 
     private final UserService userService;
+    private final LoginService loginService;
 
     @GetMapping
     public String loginModal(){
@@ -41,6 +44,9 @@ public class UserController {
             session.setAttribute("userNumber", userNumber);
             session.setAttribute("userName", userDto.getUserName());
             session.setAttribute("userWing", userDto.getUserWing());
+
+            Long mentorNumber = loginService.findMentorNumber(userId, userPassword);
+            session.setAttribute("mentorNumber", mentorNumber);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
             return new RedirectView("/user/login");

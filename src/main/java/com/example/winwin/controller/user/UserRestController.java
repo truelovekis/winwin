@@ -1,6 +1,9 @@
 package com.example.winwin.controller.user;
 
+import com.example.winwin.dto.mentor.MentorVo;
 import com.example.winwin.dto.user.UserDto;
+import com.example.winwin.service.mentor.LoginService;
+import com.example.winwin.service.mentor.MentorService;
 import com.example.winwin.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -14,12 +17,14 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/users/*")
 public class UserRestController {
     private final UserService userService;
+    private final LoginService loginService;
 
     @PostMapping("/login")
     public int login(@RequestBody UserDto userDto, HttpServletRequest req){
         try {
             Long userNumber = userService.findUserNumber(userDto.getUserId(), userDto.getUserPassword());
             UserDto userInfo = userService.findUserInfo(userNumber);
+            Long mentorNumber = loginService.findMentorNumber(userDto.getUserId(), userDto.getUserPassword());
 
             System.out.println(userNumber);
             System.out.println(userInfo.getUserName());
@@ -28,6 +33,7 @@ public class UserRestController {
             req.getSession().setAttribute("userNumber", userNumber);
             req.getSession().setAttribute("userName", userInfo.getUserName());
             req.getSession().setAttribute("userWing", userInfo.getUserWing());
+            req.getSession().setAttribute("mentorNumber", mentorNumber);
 
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
