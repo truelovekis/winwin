@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/user/loginModal.css}" />
     <link rel="stylesheet" th:href="@{/css/cs/csWrite.css}" />
+    <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
     <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
     <style>
@@ -25,17 +26,12 @@
 </head>
 
 <body>
-<header></header>
+<header class="header" th:replace="fragment/header :: header"></header>
 <form id="community-write" method="post" th:action="@{/cs/write}">
-<!-- 창식아 나중에 지워라.. 로그인 되면... -->
-    <input type="hidden" name="userNumber" value="3">
-<!--    -->
     <div class="write-main">
-
         <div class="main-title">
-            <div class="sub">
+            <div class="sub1">
                 <h2>문의 사항</h2>
-<!--                <img th:src="@{/img/k.png}" class="k" >-->
                 <a href="javascript:history.go(-1)">
                     <img th:src="@{/img/k.png}" class="k" alt="뒤로가기">
                 </a>
@@ -79,6 +75,9 @@
 </form>
 <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="module" th:src="@{/js/cs/csWrite.js}"></script>
+<script th:src="@{/js/fragment/header.js}" ></script>
+<!--  모달 js-->
+<script th:src="@{/js/user/loginModal.js}"></script>
 </body>
 
 </html>

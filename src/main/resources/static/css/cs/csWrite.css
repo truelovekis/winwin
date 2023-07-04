@@ -54,6 +54,7 @@ header{
     flex-direction: column;
     align-content: center;
     flex-wrap: wrap;
+    margin-top: 20px;
 }
 
 /* 글쓰기 기본 제목 */
@@ -61,7 +62,7 @@ header{
     margin: 0 0 15px 5px;
 }
 
-.sub {
+.sub1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -282,4 +283,8 @@ h2{
     background: none;
     border: none;
 
+}
+
+.big-box{
+    height: 100%;
 }

@@ -55,6 +55,7 @@ public class CommunityCommentService {
         communityCommentMapper.delete(commentNumber);
     }
 
+
     public void deleteCommunity(Long communityNumber){
         if (communityNumber == null) {
             throw new IllegalArgumentException("게시글 번호 누락");

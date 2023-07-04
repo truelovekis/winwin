@@ -2,7 +2,7 @@ package com.example.winwin.service.cs;
 
 import com.example.winwin.dto.board.CsDto;
 import com.example.winwin.mapper.board.CsMapper;
-import com.example.winwin.vo.CsVo;
+import com.example.winwin.vo.board.CsVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,11 +13,9 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class CsService {
-
     private final CsMapper csMapper;
 
     public void register(CsDto csDto) {
-//            csMapper.insert(csDto);
         if (csDto == null) {
             throw new IllegalArgumentException("게시판 정보가 없습니다.");
         }

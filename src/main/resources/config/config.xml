@@ -83,6 +83,7 @@
         <typeAlias type="com.example.winwin.vo.user.UserCategoryVo" alias="userCategoryVo"/>
         <!--        -->
 
+<<<<<<< HEAD
         <!-- Qna -->
         <typeAlias type="com.example.winwin.dto.board.QnaDto" alias="qnaDto"/>
         <typeAlias type="com.example.winwin.dto.board.QnaCommentDto" alias="qnaCommentDto"/>
@@ -95,6 +96,9 @@
         <!--    -->
 
         <!-- 프로젝트, 모임 -->
+
+        <typeAlias type="com.example.winwin.dto.board.CsDto" alias="csDto"/>
+        <typeAlias type="com.example.winwin.vo.board.CsVo" alias="csVo"/>
         <typeAlias type="com.example.winwin.dto.board.StudyDto" alias="studyDto"/>
         <typeAlias type="com.example.winwin.dto.board.StudyLikeDto" alias="studyLikeDto"/>
         <typeAlias type="com.example.winwin.Dto.board.StudyCommentDto" alias="studyCommentDto"/>

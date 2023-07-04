@@ -1,7 +1,7 @@
 package com.example.winwin.mapper.board;
 
 import com.example.winwin.dto.board.CsDto;
-import com.example.winwin.vo.CsVo;
+import com.example.winwin.vo.board.CsVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
