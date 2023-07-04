@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.winwin.mapper.board.CsComment">
+<mapper namespace="com.example.winwin.mapper.board.CsCommentMapper">
 
+<!--    <insert id="insert">-->
+<!--        <selectKey keyProperty="csNumber" order="BEFORE" resultType="long">-->
+<!--        SELECT-->
+<!--        </selectKey>-->
+<!--        insert into CS_COMMENT (COMMENT_NUMBER, COMMENT_CONTENT, COMMENT_DATE, USER_NUMBER, CS_NUMBER)-->
+<!--        values (#{commentNumber, #{commentContent} ,#{commentDate}, #{userNumber}, #{csNumber})-->
+<!--    </insert>-->
+
+<!--    <select id="selectList" resultType="csReplayVo">-->
+
+
+
+<!--    </select>-->
+
+<!--    <select id="select" resultType="csReplayVo">-->
+
+<!--    </select>-->
+
+<!--    <update id="update">-->
+
+<!--    </update>-->
+
+<!--    <delete id="delete">-->
+
+<!--    </delete>-->
 </mapper>

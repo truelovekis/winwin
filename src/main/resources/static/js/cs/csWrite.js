@@ -14,3 +14,5 @@ $('#communityContent').on('keyup', function(e) {
 function goBack() {
     window.history.back();
 }
+
+

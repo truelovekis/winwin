@@ -2,7 +2,7 @@ package com.example.winwin.service.cs;
 
 import com.example.winwin.dto.board.CsDto;
 import com.example.winwin.mapper.board.CsMapper;
-import com.example.winwin.vo.CsVo;
+import com.example.winwin.vo.board.CsVo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

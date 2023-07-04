@@ -5,10 +5,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/user/loginModal.css}" />
-    <link rel="stylesheet" th:href="@{/css/cs/csWrite.css}" />
+    <link rel="stylesheet" th:href="@{/css/user/loginModal.css}"/>
+    <link rel="stylesheet" th:href="@{/css/cs/csWrite.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fragment/header.css}"/>
     <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
-    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet"/>
     <style>
         body {
             font-family: "NanumSquareLight";
@@ -25,17 +26,16 @@
 </head>
 
 <body>
-<header></header>
+<header class="header" th:replace="fragment/header :: header"></header>
 <form id="community-write" method="post" th:action="@{/cs/modify}">
     <!-- 창식아 나중에 지워라.. 로그인 되면... -->
-    <input type="hidden" name="userNumber" value="3">
+    <!--    <input type="hidden" name="userNumber" value="3">-->
     <!--    -->
     <div class="write-main">
 
         <div class="main-title">
-            <div class="sub">
+            <div class="sub1">
                 <h2>문의 사항</h2>
-                <!--                <img th:src="@{/img/k.png}" class="k" >-->
                 <a href="javascript:history.go(-1)">
                     <img th:src="@{/img/k.png}" class="k" alt="뒤로가기">
                 </a>
@@ -48,10 +48,12 @@
             </div>
             <div class="write-title content-a">
                 <input type="hidden" name="csNumber" th:value="${cs.csNumber}">
-                <input type="text" th:value="${cs.csTitle}" name="csTitle" placeholder="제목을 입력하세요" style="font-family:NanumSquareLight;">
+                <input type="text" th:value="${cs.csTitle}" name="csTitle" placeholder="제목을 입력하세요"
+                       style="font-family:NanumSquareLight;">
             </div>
             <div class="write-content content-a">
-                <textarea name="csContent" th:text="${cs.csContent}" id="communityContent" cols="30" rows="10" placeholder="궁금한 점을 작성해주세요." style="font-family:NanumSquareLight;"></textarea>
+                <textarea name="csContent" th:text="${cs.csContent}" id="communityContent" cols="30" rows="10"
+                          placeholder="궁금한 점을 작성해주세요." style="font-family:NanumSquareLight;"></textarea>
             </div>
             <div>
                 <span class="text-cnt content-a">글자수 : <span class="cnt">0</span>/500</span>
@@ -80,6 +82,9 @@
 </form>
 <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="module" th:src="@{/js/cs/csWrite.js}"></script>
+<script th:src="@{/js/fragment/header.js}"></script>
+<!--  모달 js-->
+<script th:src="@{/js/user/loginModal.js}"></script>
 </body>
 
 </html>

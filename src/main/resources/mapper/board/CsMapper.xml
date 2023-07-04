@@ -11,19 +11,18 @@
 
     <select id="select" resultType="csVo">
         SELECT CS_NUMBER, CS_CONTENT, CS_TITLE, CS_DATE, C.USER_NUMBER, U.USER_ID,
-            U.USER_NICKNAME, U.USER_BELONG
+               U.USER_NICKNAME, U.USER_BELONG
         FROM CS C JOIN WW_USER U
-        ON  C.USER_NUMBER = U.USER_NUMBER
+                       ON  C.USER_NUMBER = U.USER_NUMBER
         WHERE C.CS_NUMBER = #{csNumber}
     </select>
 
     <select id="selectAll" resultType="csVo">
         SELECT CS_NUMBER, CS_CONTENT, CS_TITLE, CS_DATE, C.USER_NUMBER, U.USER_ID
         FROM CS C JOIN WW_USER U
-        ON  C.USER_NUMBER = U.USER_NUMBER
+                       ON  C.USER_NUMBER = U.USER_NUMBER
         ORDER BY C.CS_NUMBER DESC
     </select>
-
 
 
     <update id="update">

@@ -6,8 +6,8 @@
 .wrap {
     display: flex;
     justify-content: end;
-    /*width: 1050px;*/
-    width: 800px;
+    width: 1050px;
+    /*width: 800px;*/
     margin: auto;
 }
 
@@ -61,6 +61,11 @@
     height: 45px;
     align-items: center;
 }
+community-pfp.main-btn{
+    display: flex;
+    height: 45px;
+    align-items: center;
+}
 
 .pfp-main-btn {
     border-radius: 7px;
@@ -85,6 +90,7 @@
     width: 245px;
     height: 100px;
     justify-content: space-around;
+    margin-top: 20px;
 }
 
 .pfp-sub-btn {

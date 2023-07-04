@@ -1,4 +1,4 @@
-package com.example.winwin.vo;
+package com.example.winwin.vo.board;
 
 
 import lombok.Data;
