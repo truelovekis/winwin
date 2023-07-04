@@ -16,22 +16,42 @@
         WHERE COMMUNITY_NUMBER = #{communityNumber}
     </update>
 
+    <update id="upHit">
+        UPDATE COMMUNITY
+        SET COMMUNITY_CNT = COMMUNITY_CNT+1
+        WHERE COMMUNITY_NUMBER = #{communityNumber}
+    </update>
+
+<!--    업데이트문으로 조회수 처리하지 말기!!!-->
+<!--    <update id="commentCnt">-->
+<!--        UPDATE COMMUNITY C-->
+<!--        SET C.COMMENT_CNT = (SELECT COUNT(COMMENT_NUMBER) FROM COMMUNITY_COMMENT WHERE COMMUNITY_NUMBER = #{communityNumber})-->
+<!--        WHERE C.COMMUNITY_NUMBER = #{communityNumber}-->
+<!--    </update>-->
+
+    <select id="commentCnt">
+        SELECT COUNT(*)
+        FROM COMMUNITY_COMMENT
+        WHERE COMMUNITY_NUMBER = #{communityNumber}
+    </select>
+
     <delete id="delete">
         DELETE FROM COMMUNITY
         WHERE COMMUNITY_NUMBER = #{communityNumber}
     </delete>
 
     <select id="select" resultType="communityVo">
-        SELECT C.COMMUNITY_NUMBER, C.COMMUNITY_CONTENT, C.COMMUNITY_TITLE, C.COMMUNITY_DATE,
-               C.USER_NUMBER, U.USER_NICKNAME, U.USER_BELONG
+        SELECT C.COMMUNITY_NUMBER, C.COMMUNITY_CONTENT, C.COMMUNITY_TITLE, C.COMMUNITY_DATE
+               , C.USER_NUMBER, C.COMMUNITY_CNT, U.USER_NICKNAME, U.USER_BELONG, U.USER_IDENTITY
         FROM COMMUNITY C JOIN WW_USER U
         ON C.USER_NUMBER = U.USER_NUMBER
         WHERE C.COMMUNITY_NUMBER = #{communityNumber}
     </select>
 
     <select id="selectAll" resultType="communityVo">
-        SELECT C.COMMUNITY_NUMBER, C.COMMUNITY_TITLE, C.COMMUNITY_CONTENT, C.COMMUNITY_DATE, C.COMMUNITY_CNT, C.CATEGORY_NUMBER
-             ,C.USER_NUMBER, U.USER_ID
+        SELECT (SELECT COUNT(*) FROM COMMUNITY_COMMENT WHERE COMMUNITY_COMMENT.COMMUNITY_NUMBER = C.COMMUNITY_NUMBER) AS COMMENT_CNT
+               ,C.COMMUNITY_NUMBER, C.COMMUNITY_TITLE, C.COMMUNITY_CONTENT, C.COMMUNITY_DATE, C.COMMUNITY_CNT, C.CATEGORY_NUMBER
+             ,C.USER_NUMBER, U.USER_ID, U.USER_BELONG, U.USER_NICKNAME, U.USER_IDENTITY
              ,T.CATEGORY_NAME
         FROM COMMUNITY C JOIN WW_USER U
                               ON C.USER_NUMBER = U.USER_NUMBER
@@ -43,5 +63,41 @@
         ORDER BY C.COMMUNITY_NUMBER DESC
     </select>
 
+<!--    <select id="selectAll" resultType="communityVo">-->
+<!--        SELECT (SELECT COUNT(*) FROM COMMUNITY_COMMENT WHERE COMMUNITY_COMMENT.COMMUNITY_NUMBER = C.COMMUNITY_NUMBER) AS COMMENT_CNT-->
+<!--        ,C.COMMUNITY_NUMBER, C.COMMUNITY_TITLE, C.COMMUNITY_CONTENT, C.COMMUNITY_DATE, C.COMMUNITY_CNT, C.CATEGORY_NUMBER-->
+<!--        ,C.USER_NUMBER, U.USER_ID-->
+<!--        ,T.CATEGORY_NAME-->
+<!--        FROM COMMUNITY C JOIN WW_USER U-->
+<!--        ON C.USER_NUMBER = U.USER_NUMBER-->
+<!--        JOIN community_category T-->
+<!--        ON C.CATEGORY_NUMBER = T.CATEGORY_NUMBER-->
+<!--        <if test="categoryTypeStr != 'all'">-->
+<!--            WHERE C.CATEGORY_NUMBER = #{categoryNumber}-->
+<!--        </if>-->
+<!--        AND U.USER_STATUS != '3'-->
+<!--        and C.COMMUNITY_STATUS != '0'-->
+<!--        ORDER BY C.COMMUNITY_NUMBER DESC-->
+<!--    </select>-->
+
+<!--    <select id="selectAll" resultType="communityVo">-->
+<!--        SELECT (SELECT COUNT(*) FROM COMMUNITY_COMMENT WHERE COMMUNITY_COMMENT.COMMUNITY_NUMBER = C.COMMUNITY_NUMBER) AS COMMENT_CNT-->
+<!--        ,C.COMMUNITY_NUMBER, C.COMMUNITY_TITLE, C.COMMUNITY_CONTENT, C.COMMUNITY_DATE, C.COMMUNITY_CNT, C.CATEGORY_NUMBER-->
+<!--        ,C.USER_NUMBER, U.USER_ID-->
+<!--        ,T.CATEGORY_NAME-->
+<!--        FROM COMMUNITY C JOIN WW_USER U-->
+<!--        ON C.USER_NUMBER = U.USER_NUMBER-->
+<!--        JOIN community_category T-->
+<!--        ON C.CATEGORY_NUMBER = T.CATEGORY_NUMBER-->
+<!--        WHERE U.USER_STATUS != '3'-->
+<!--        AND C.COMMUNITY_STATUS != '0'-->
+<!--        <if test="categoryTypeStr != 'all'">-->
+<!--            AND C.CATEGORY_NUMBER = #{categoryNumber}-->
+<!--        </if>-->
+<!--        ORDER BY C.COMMUNITY_NUMBER DESC-->
+<!--    </select>-->
+
 
 </mapper>
+
+

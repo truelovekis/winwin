@@ -60,7 +60,7 @@
   align-items: center;
 }
 
-.pfp-main-btn {
+.pfp-main-btn-css {
   border-radius: 7px;
   background-color: #1b5192;
   color: white;
@@ -71,7 +71,7 @@
   font-weight: lighter;
 }
 
-.pfp-main-btn:hover {
+.pfp-main-btn-css:hover {
   background-color: #153f71;
   color: white;
 }

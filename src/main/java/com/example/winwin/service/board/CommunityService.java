@@ -20,6 +20,7 @@ import java.util.Optional;
 public class CommunityService {
     private final CommunityMapper communityMapper;
     private final CommunityFileService communityFileService;
+    private final CommunityCommentService communityCommentService;
 
     public void register(CommunityDto communityDto){
         if (communityDto == null) {
@@ -33,6 +34,7 @@ public class CommunityService {
             throw new IllegalArgumentException("게시물 번호 누락");
         }
         communityFileService.remove(communityNumber);
+        communityCommentService.deleteCommunity(communityNumber);
         communityMapper.delete(communityNumber);
     }
 
@@ -47,6 +49,20 @@ public class CommunityService {
             throw new IllegalArgumentException("게시물 수정 정보 누락");
         }
         communityMapper.update(communityDto);
+    }
+
+    public int upHitCnt(Long communityNumber) {
+        if(communityNumber == null){
+            throw new IllegalArgumentException("게시물 번호 누락");
+        }
+        return communityMapper.upHit(communityNumber);
+    }
+
+    public int commentCnt(Long communityNumber){
+        if(communityNumber == null){
+            throw new IllegalArgumentException("댓글 번호 누락");
+        }
+        return communityMapper.commentCnt(communityNumber);
     }
 
     @Transactional(readOnly = true)

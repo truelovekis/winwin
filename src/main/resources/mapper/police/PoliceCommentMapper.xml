@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.police.PoliceCommentMapper">
-
+    <!-- 댓글 신고하기 -->
+    <insert id="commentReportInsert">
+        INSERT INTO POLICE_COMMENT (POLICE_NUMBER, BIG_CODE, COMMENT_NUMBER, POLICE_CATEGORY, USER_NUMBER)
+        VALUES (SEQ_POLICE_COMMENT.NEXTVAL, #{bigCode}, #{commentNumber}, #{policeCategory}, #{userNumber})
+    </insert>
+    <!--    -->
 </mapper>
