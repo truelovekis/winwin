@@ -142,22 +142,8 @@ function reportAjax(){
     })
 }
 
-// 조회수 증가시키기
-function shareReadCnt(){
-    let shareNumber = $('.share-num').val();
 
-    $.ajax({
-       url: '/share/read' + shareNumber,
-        type: 'post',
-        success : function (result){
-            console.log('조회수 증가!');
-        }
-    });
-}
 
-$(document).ready(function (){
-   shareReadCnt();
-});
 
 
 

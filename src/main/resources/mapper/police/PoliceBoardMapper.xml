@@ -3,7 +3,7 @@
 <mapper namespace="com.example.winwin.mapper.police.PoliceBoardMapper">
 
     <!-- 나눔 글 신고하기 -->
-    <insert id="shareReportInsert">
+    <insert id="reportInsert">
         insert into POLICE_BOARD (POLICE_NUMBER, BIG_CODE, BOARD_NUMBER, POLICE_CATEGORY, USER_NUMBER)
         values (SEQ_POLICE_BOARD.nextval, #{bigCode}, #{boardNumber}, #{policeCategory}, #{userNumber})
     </insert>

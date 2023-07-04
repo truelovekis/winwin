@@ -43,7 +43,7 @@ class ShareMapperTest {
         userDto.setUserGrade(5);
         userDto.setUserWing(300L);
 
-//        userMapper.insert(userDto);
+        userMapper.join(userDto);
 
         shareDto = new ShareDto();
         shareDto.setShareTitle("title");

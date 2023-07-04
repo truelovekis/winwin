@@ -6,10 +6,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/police")
-public class SharePoliceRestController {
+public class PoliceRestController {
 
     private final PoliceService policeService;
 
@@ -17,10 +19,11 @@ public class SharePoliceRestController {
 //
 //    나눔 글 신고하기
     @PostMapping("/share")
-    public void shareReport(@RequestBody PoliceBoardDto policeBoardDto){
+    public void shareReport(@RequestBody PoliceBoardDto policeBoardDto, HttpServletRequest req){
 //        로그인 세션 처리
-        policeBoardDto.setUserNumber(8L);
-//      ------------------------------------
+        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
+        policeBoardDto.setUserNumber(userNumber);
+
         policeBoardDto.setBigCode("600");
         policeService.policeBoardRegister(policeBoardDto);
 
