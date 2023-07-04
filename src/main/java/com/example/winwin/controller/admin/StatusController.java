@@ -1,5 +1,7 @@
 package com.example.winwin.controller.admin;
 
+import com.example.winwin.dto.admin.MainCategoryVo;
+import com.example.winwin.dto.mentor.CategoryVo;
 import com.example.winwin.service.admin.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
@@ -74,5 +76,16 @@ public class StatusController {
         return "변경성공";
     }
 
+    // 직무, 학과 데이터 가져오기
+    @GetMapping("/cateJob")
+    public List<MainCategoryVo> findCateJob(String mainCode){
+
+        return adminService.findCateJob();
+    }
+
+    @GetMapping("/cateDep")
+    public List<MainCategoryVo> findCateDep(){
+        return adminService.findCategoryH();
+    }
 
 }

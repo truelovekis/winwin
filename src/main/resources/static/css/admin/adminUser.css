@@ -48,8 +48,8 @@
 }
 
 .admin-nickname-email {
-    margin-left: 15px;
-    margin-top: 30px;
+    margin-left: 10px;
+    margin-top: 42px;
 }
 
 .admin-nickname {
@@ -222,8 +222,8 @@ tr:last-child td {
 }
 
 .N {
-    background-color: rgb(220 255 226);
-    color: #587c60;
+    background-color: #f2db1069;
+    color: #a59500;
     border: none;
     border-radius: 5px;
     padding: 6px 11px;

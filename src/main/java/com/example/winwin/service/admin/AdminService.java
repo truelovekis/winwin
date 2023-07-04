@@ -1,6 +1,7 @@
 package com.example.winwin.service.admin;
 
 import com.example.winwin.dto.admin.*;
+import com.example.winwin.dto.mentor.CategoryVo;
 import com.example.winwin.mapper.admin.AdminMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
@@ -75,11 +76,7 @@ public class AdminService {
         return adminMapper.selectSearchReport(adminReportSearchVo);
     }
 
-    // 게시글 진로정보 subCategory 정보 가져오기
-    public List<MainCategoryVo> findMainCategory() {
 
-        return adminMapper.getMainCategory();
-    }
 
     // 커뮤니티 상태 변경
     public void modifyBoardStatus(Long communityNumber, String communityStatus) {
@@ -112,6 +109,20 @@ public class AdminService {
             throw new IllegalArgumentException("신고회원 수정 정보 누락");
         }
         adminMapper.updateReport(userNumber, userStatus);
+    }
+
+
+    // 게시글 진로정보 subCategory 정보 가져오기
+    public List<MainCategoryVo> findCateJob(){
+        List<MainCategoryVo> cateJob = adminMapper.getCateJob();
+
+        return cateJob;
+    }
+
+    public List<MainCategoryVo> findCategoryH(){
+        List<MainCategoryVo> categoryH = adminMapper.getCateDep();
+
+        return categoryH;
     }
 
 }
