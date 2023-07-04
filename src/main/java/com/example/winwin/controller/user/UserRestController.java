@@ -3,6 +3,7 @@ package com.example.winwin.controller.user;
 import com.example.winwin.dto.mentor.CategoryVo;
 import com.example.winwin.dto.user.UserDto;
 import com.example.winwin.service.mentor.CategoryService;
+import com.example.winwin.service.mentor.LoginService;
 import com.example.winwin.service.mentor.MentorService;
 import com.example.winwin.service.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import java.util.List;
 @RequestMapping("/users/*")
 public class UserRestController {
     private final UserService userService;
+    private final LoginService loginService;
 
 //    로그인 세션처리
     @PostMapping("/login")
@@ -25,6 +27,7 @@ public class UserRestController {
         try {
             Long userNumber = userService.findUserNumber(userDto.getUserId(), userDto.getUserPassword());
             UserDto userInfo = userService.findUserInfo(userNumber);
+            Long mentorNumber = loginService.findMentorNumber(userDto.getUserId(), userDto.getUserPassword());
 
             System.out.println(userNumber);
             System.out.println(userInfo.getUserName());
@@ -35,6 +38,7 @@ public class UserRestController {
             req.getSession().setAttribute("userName", userInfo.getUserName());
             req.getSession().setAttribute("userWing", userInfo.getUserWing());
             req.getSession().setAttribute("userStatus", userInfo.getUserStatus());
+            req.getSession().setAttribute("mentorNumber", mentorNumber);
 
         } catch (IllegalArgumentException e) {
             e.printStackTrace();

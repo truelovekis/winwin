@@ -273,6 +273,39 @@ $('.login-end').on('click', function (){
     }
 });
 
+// $('.login-end').on('click', function (){
+//     console.log('login!!!');
+//
+//     $.ajax({
+//         url : '/mentors/mentor',
+//         type : 'post',
+//         data : JSON.stringify({userId : $('#login-id').val() , userPassword: $('#login-password').val()}),
+//         contentType : "application/json; charset=utf-8",
+//         async : false,
+//         success: function (result2){
+//             $(".modal-container").addClass("none");
+//             $('body').css('overflow', 'auto');
+//             modalSetUp();
+//
+//             if(result2 == 0){
+//                 console.log("없는 멘토 회원")
+//             }else{
+//                 let tmp = window.location.href;
+//                 window.location.href = tmp;
+//             }
+//         }
+//     })
+//     function modalSetUp(){
+//         $('.modal-wrap>div').addClass('none');
+//         $('.modal-wrap>button').addClass('none');
+//         $('.login-box').removeClass('none');
+//         $('.login-end').removeClass('none');
+//         $('.login-box').removeClass('disappear');
+//         $current = $('.login-box');
+//         $next = null;
+//         $('.form-reset')[0].reset();
+//     }
+// });
 
 
 // 회원가입 처리

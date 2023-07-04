@@ -27,5 +27,6 @@ public class MentorVo {
     private List<CareerInfoVo> info;
     private String pfpUploadPath;
     private String pfpSystemName;
-    private String pfpUuId;
+    private String pfpUuid;
+    private int likeCnt;
 }

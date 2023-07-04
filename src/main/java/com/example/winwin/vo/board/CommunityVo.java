@@ -23,4 +23,6 @@ public class CommunityVo {
     private String fileUploadPath;
     private String fileUuid;
     private String categoryTypeStr;
+    private String userStatus; // 추가함
+    private String communityStatus; // 추가함
 }

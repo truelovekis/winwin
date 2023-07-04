@@ -57,6 +57,12 @@
         <typeAlias type="com.example.winwin.dto.mentor.SkillVo" alias="skillVo"/>
         <typeAlias type="com.example.winwin.dto.mentor.ReviewVo" alias="reviewVo"/>
         <typeAlias type="com.example.winwin.dto.mentor.CategoryVo" alias="categoryVo"/>
+            <typeAlias type="com.example.winwin.dto.mentor.LoginVo" alias="loginVo"/>
+        <typeAlias type="com.example.winwin.dto.mentor.LikeDto" alias="likeDto"/>
+        <!-- mentor -->
+
+
+
         <typeAlias type="com.example.winwin.vo.board.CommunityVo" alias="communityVo"/>
         <typeAlias type="com.example.winwin.vo.board.CommunityCommentVo" alias="communityCommentVo"/>
         <typeAlias type="com.example.winwin.dto.board.CommunityDto" alias="communityDto"/>
