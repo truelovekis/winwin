@@ -46,6 +46,19 @@ $('.resume-box').on('click', function () {
     top: "50%",
     transform: "translate(-50%, -50%)",
   });
+
+  let resumeNumber = $(this).closest('.resume-box').find('input').val();
+  $.ajax({
+    url : "/myPages/resume",
+    type : 'get',
+    data : {resumeNumber, resumeNumber},
+    success : function(resumeVo){
+      fillResume(resumeVo);
+    },
+    error : function(a, b, c){
+      console.log(c);
+    }
+  });
 });
 
 $('.modal-wrap').on('click', function (e) {
@@ -53,3 +66,53 @@ $('.modal-wrap').on('click', function (e) {
     $('.resumeModal').addClass("none");
   }
 });
+
+function fillResume(resumeVo){
+  $('.rm-name').text(resumeVo.resumeDto.resumeName);
+  $('.rm-phone').text(resumeVo.userPhoneNumber);
+  $('.rm-address').text(resumeVo.resumeDto.resumeAddress);
+  $('.rm-email').text(resumeVo.resumeDto.resumeEmail);
+  $('.rm-website').text(resumeVo.resumeDto.resumeWebsite);
+  $('.rm-website').prop('href', 'http://' + resumeVo.resumeDto.resumeWebsite);
+  $('.modal-img').css('background-image', 'url(/profile/' + resumeFile.Uuid + '_' + resumeFile.SystemName + ')');
+  $('.rm-school1').text(resumeVo.resumeDto.resumeSchool1);
+  $('.rm-school2').text(resumeVo.resumeDto.resumeSchool2);
+  $('.rm-school-start1').text(resumeVo.resumeDto.schoolStartDate1);
+  $('.rm-school-start2').text(resumeVo.resumeDto.schoolStartDate2);
+  if(resumeVo.resumeDto.schoolEndDate1 != ""){
+    $('.rm-school-end1').text(' ~ ' + resumeVo.resumeDto.schoolEndDate1);
+  }
+  if(resumeVo.resumeDto.schoolEndDate2 != ""){
+    $('.rm-school-end2').text(' ~ ' + resumeVo.resumeDto.schoolEndDate2);
+  }
+  $('.rm-career1').text(resumeVo.resumeDto.resumeCareer1);
+  $('.rm-career2').text(resumeVo.resumeDto.resumeCareer2);
+  $('.rm-career3').text(resumeVo.resumeDto.resumeCareer3);
+  $('.rm-career-start1').text(resumeVo.resumeDto.careerStartDate1);
+  $('.rm-career-start2').text(resumeVo.resumeDto.careerStartDate2);
+  $('.rm-career-start3').text(resumeVo.resumeDto.careerStartDate3);
+  if(resumeVo.resumeDto.careerEndDate1 != ""){
+    $('.rm-career-end1').text(' ~ ' + resumeVo.resumeDto.careerEndDate1);
+  }
+  if(resumeVo.resumeDto.careerEndDate2 != ""){
+    $('.rm-career-end2').text(' ~ ' + resumeVo.resumeDto.careerEndDate2);
+  }
+  if(resumeVo.resumeDto.careerEndDate3 != ""){
+    $('.rm-career-end3').text(' ~ ' + resumeVo.resumeDto.careerEndDate3);
+  }
+  $('.rm-certi-name1').text(resumeVo.resumeDto.resumeCertiName1);
+  $('.rm-certi-name2').text(resumeVo.resumeDto.resumeCertiName2);
+  $('.rm-certi-name3').text(resumeVo.resumeDto.resumeCertiName3);
+  $('.rm-certi-name4').text(resumeVo.resumeDto.resumeCertiName4);
+  $('.rm-certi-name5').text(resumeVo.resumeDto.resumeCertiName5);
+  $('.rm-certi-grade1').text(resumeVo.resumeDto.resumeCertiGrade1);
+  $('.rm-certi-grade2').text(resumeVo.resumeDto.resumeCertiGrade2);
+  $('.rm-certi-grade3').text(resumeVo.resumeDto.resumeCertiGrade3);
+  $('.rm-certi-grade4').text(resumeVo.resumeDto.resumeCertiGrade4);
+  $('.rm-certi-grade5').text(resumeVo.resumeDto.resumeCertiGrade5);
+  $('.rm-certi-noto1').text(resumeVo.resumeDto.resumeCertiNoto1);
+  $('.rm-certi-noto2').text(resumeVo.resumeDto.resumeCertiNoto2);
+  $('.rm-certi-noto3').text(resumeVo.resumeDto.resumeCertiNoto3);
+  $('.rm-certi-noto4').text(resumeVo.resumeDto.resumeCertiNoto4);
+  $('.rm-certi-noto5').text(resumeVo.resumeDto.resumeCertiNoto5);
+}

@@ -12,6 +12,13 @@
   fill: black;
 }
 
+.bi1-box,
+.bi2-box,
+.bi3-box{
+  margin: 15px 0;
+}
+
+
 .wrap {
   display: flex;
   justify-content: center;
@@ -22,7 +29,7 @@
 }
 
 .h3 {
-  margin: 15px 0px;
+  margin: 30px 0 15px 0;
   display: flex;
 }
 
@@ -39,10 +46,6 @@ input {
 input::placeholder {
   font-size: 13px;
   color: #b4b4b4;
-}
-
-.last-input {
-  margin-bottom: 40px;
 }
 
 .school-input-box {
@@ -133,7 +136,7 @@ input::placeholder {
   display: flex;
   justify-content: end;
   margin-right: 12px;
-  margin-top: 20px;
+  margin-top: 50px;
 }
 
 button:hover {
