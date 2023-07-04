@@ -1,0 +1,880 @@
+
+body{
+    margin: auto;
+    background-color: #f7f8f8;
+}
+
+body {
+    font-family: "NanumSquareLight";
+    font-family: "NanumSquare";
+    font-family: "NanumSquareBold";
+    font-family: "NanumSquareExtraBold";
+    font-family: "NanumSquareAcb";
+    font-family: "NanumSquareAceb";
+    font-family: "NanumSquareAcl";
+    font-family: "NanumSquareAcr";
+}
+
+/* 헤더 */
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+header {
+    position: sticky;
+    top: 0px;
+    z-index: 10;
+}
+
+hr {
+    width: 100%;
+    height: 1px;
+    border: 0px;
+    background-color: #ddd;
+    margin: 0px;
+}
+
+a {
+    text-decoration-line: none;
+}
+
+.hwrap {
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+}
+
+.hcontainer {
+    width: 1050px;
+    height: 70px;
+    display: flex;
+}
+
+.logo {
+    font-size: 40px;
+    font-weight: bold;
+    text-decoration-line: none;
+    color: rgb(40, 106, 76);
+    margin-top: 30px;
+}
+
+.logo > img {
+    width: 130px;
+}
+
+.hctg-container {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.hcenter {
+    height: 100%;
+    display: flex;
+    margin-left: 30px;
+}
+
+.hctg-list {
+    display: flex;
+    align-items: flex-end;
+    height: 70px;
+}
+
+.hctg-list > li {
+    font-size: 14px;
+    font-weight: 600;
+    list-style: none;
+    padding: 15px;
+}
+
+.sub {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    position: absolute;
+}
+
+.h-font {
+    color: #868686;
+}
+
+.header-nav-l {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-nav-r {
+    display: flex;
+    align-items: center;
+    margin-top: 25px;
+    position: relative;
+    left: 28%;
+}
+
+.header-nav-r > a {
+    font-size: 15px;
+    color: #949ba0;
+    margin-right: 10px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.header-nav-r > a > span {
+    display: block;
+}
+
+.basic-img {
+    width: 30px;
+    position: relative;
+    left: 7px;
+}
+
+.sub-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.sub-ctg-box {
+    width: 1050px;
+    display: flex;
+}
+
+.sub > a {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1b5192;
+    padding: 15px 10px 10px 10px;
+}
+
+.sub-ctg-1 {
+    margin-left: 7px;
+}
+
+.sub-ctg-2 {
+    margin-left: -15px;
+}
+
+.sub-ctg-3 {
+    margin-left: 30px;
+}
+
+.login-join {
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.login-join > span {
+    font-weight: 700;
+    color: #868686;
+}
+
+/* =================================================== */
+/* 로그인 했을 때 헤더 */
+.h-profile {
+    display: flex;
+    align-items: center;
+}
+
+.wing-point {
+    margin-right: 10px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.wing-icon {
+    width: 15px;
+}
+
+.h-user-name {
+    font-size: 16px;
+    color: #000;
+    font-weight: 600;
+}
+
+.profile-img {
+    width: 30px;
+    margin-left: 10px;
+}
+/* 헤더 */
+
+footer{
+    height: 60px;
+}
+
+.first1{
+    background-color: #fff;
+    margin-top: 47px;
+}
+
+.first{
+    width: 1050px;
+    margin: 0 auto;
+}
+
+.Profil{
+    display: flex;
+}
+
+.Profil>img{
+    margin: 10px 200px;
+    margin-right: -13px;
+    border-radius: 70%;
+    overflow: hidden;
+}
+
+.Profil>.id{
+    margin: 23px 20px;
+}
+
+.id>p{
+    font-size: 13px;
+}
+
+.first{
+    background-color: #fff;
+}
+
+.first>.imfor{
+    height: 50px;
+    margin: -2px 201px;
+}
+
+.imfor>p{
+    font-size: 11px;
+    color: gray;
+}
+
+.question{
+    display: flex;
+    margin-top: -20px;
+}
+
+.question>.Q{
+    margin: -7px 200px;
+    color: #1b5192;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.question>.title{
+    margin: -7.5px -190px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.content{
+    margin: 15px 200px;
+    font-size: 14px;
+    white-space: pre-wrap;
+    margin-bottom: 25px;
+    line-height: 20px;
+}
+
+/* svg 아이콘 ================================ */
+.icon{
+    display: flex;
+    margin: 0 180px;
+    height: 40px;
+}
+
+.read-count{
+    display: flex;
+    height: 17px;
+}
+
+.readCount-btn{
+    background-color: white;
+    border: none;
+    width: 10px;
+    margin: 23px 10px;
+    cursor: pointer;
+}
+
+.readCount-num{
+    color: rgb(148, 155, 160);
+    margin: 27px 5px;
+    font-size: 13px;
+}
+
+.check{
+    display: flex;
+    margin-top: 1.5px;
+    margin-left: -13px;
+    height: 10px;
+}
+
+.check-btn{
+    background-color: white;
+    border: none;
+    width: 10px;
+    margin: 23px 18px;
+    cursor: pointer;
+}
+
+.checkCnt{
+    color: rgb(148, 155, 160);
+    margin: -13px -2px;
+    font-size: 13px;
+}
+
+.checkCnt > p {
+    margin: 38.5px -4px;
+}
+
+.hide{
+    display: none;
+}
+
+.like{
+    display: flex;
+    margin-top: -11px;
+    margin-left: 11px;
+}
+
+.like-btn{
+    border: none;
+    background: none;
+    margin: 33px 3px;
+    cursor: pointer;
+}
+
+.likeCnt p{
+    font-size: 13px;
+    color: rgb(148, 155, 160);
+    margin: 38px 0;
+}
+/* svg 아이콘 ================================ */
+
+.date{
+    margin: 27px 406px;
+    font-size: 13px;
+    color: rgb(148, 155, 160);
+}
+
+.date1{
+    margin-left: 605px;
+    font-size: 13px;
+    color: rgb(148, 155, 160);
+}
+
+.justbox{
+    height: 30px;
+}
+
+.second1{
+    background-color: #f7f8f8;
+}
+
+.second{
+    background-color: #f7f8f8;
+    margin-top: 20px;
+    margin: auto;
+    width: 1050px;
+}
+
+.empty-box{
+    height: 30px;
+}
+
+.comment{
+    border-radius: 3.5px;
+    height: 50px;
+    margin: auto;
+    display: flex;
+    width: 700px;
+    justify-content: flex-end;
+}
+
+.comment1{
+    border: 1px solid #ddd;
+    border-radius: 3.5px;
+    height: 50px;
+    width: 100%;
+    margin: auto;
+    resize: none;
+    font-size: 15px;
+    padding: 7px;
+}
+
+.comment2{
+    border: 1px solid #ddd;
+    border-radius: 3.5px;
+    height: 250px;
+    width: 700px;
+    margin: auto;
+    resize: none;
+    font-size: 15px;
+    padding: 7px;
+    background-color: white;
+}
+
+.newComment3{
+    border: none;
+    width: 600px;
+    resize: none;
+    margin: -20px 60px;
+    padding: 5px;
+    height: 150px;
+}
+
+.commentProfil{
+    display: flex;
+    margin: 30px 20px;
+}
+
+.commentName{
+    margin-left: 10px;
+}
+
+.commentProfil img{
+    border-radius: 70%;
+}
+
+.commentBtn2{
+    height: 35px;
+    color: #1b5192;
+    border-radius: 5px;
+    background-color: #c1d7f1;
+    border: none;
+    margin: auto;
+    margin-top: -35px;
+    margin-left: 617px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+}
+
+.commentBtn{
+    height: 35px;
+    color: #1b5192;
+    border-radius: 5px;
+    background-color: #c1d7f1;
+    border: none;
+    margin: auto;
+    margin-top: 15px;
+    margin-right: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+}
+
+.empty-box2{
+    height: 35px;
+}
+
+.commentCnt{
+    width: 700px;
+    margin: auto;
+    font-weight: bold;
+    font-size: 13.5px;
+    color: gray;
+}
+
+.commentAi{
+    width: 700px;
+    margin: auto;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 3.5px;
+}
+
+.profil{
+    display: flex;
+    margin: 25px 25px;
+}
+
+.profil>img{
+    border-radius: 70%;
+}
+
+.profil>.Commento{
+    margin: -10px 10px;
+    width: 100px;
+    font-weight: bold;
+}
+
+.c-Application{
+    margin-left: 450px;
+}
+
+.description{
+    margin: 0 85px;
+    color: gray;
+}
+
+.description>p{
+    font-size: 12px;
+    margin-top: -41px;
+}
+
+.Aicontent{
+    margin: 40px 25px;
+    font-size: 15px;
+    line-height: 20px;
+}
+
+.answer-box{
+    width: 10px;
+}
+
+.answer{
+    width: 650px;
+    margin: auto;
+    color: #1b5192;
+    border-radius: 3.5px;
+    background-color: #e8f1fc;
+    height: 60px;
+    display: flex;
+    font-size: 14px;
+    align-items: center;
+}
+
+.icon2{
+    display: flex;
+    margin: 40px 0;
+}
+
+.goodorbad{
+    margin-left: 330px;
+    display: flex;
+    margin-bottom: -9px;
+}
+
+.good{
+    border: none;
+    color: #1b5192;
+    background-color: #e8f1fc;
+    cursor: pointer;
+    margin-top: -5px;
+}
+
+.empty-box3{
+    width: 15px;
+}
+
+.bad{
+    border:none;
+    color: #1b5192;
+    background-color: #e8f1fc;
+    cursor: pointer;
+}
+
+.parent{
+    height: 60px;
+    border-bottom: 1px solid #ddd;
+}
+
+.newComment{
+    margin: 20px 20px;
+    height: 50px;
+    display: flex;
+}
+
+.newComment2{
+    margin-top: -2px;
+    resize: none;
+    border-color: #ddd;
+    border-radius: 3.5px;
+    width: 630px;
+    height: 40px;
+    font-size: 13.5px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 7px;
+}
+
+.send{
+    border: none;
+    border-radius: 3.5px;
+    background-color: #fff;
+    margin-left: 10px;
+    margin-bottom: -4px;
+    cursor: pointer;
+}
+
+.c-pplication{
+    background-color: #fff;
+}
+
+.c-Applicatio{
+    margin-top: 18px;
+}
+
+.img-box{
+    flex-direction: column-reverse;
+    margin: 30px 176px;
+    margin-bottom: 24px;
+    border-radius: 3.5px;
+    width: 1000px;
+}
+
+.img-box img{
+    border-radius: 3.5px;
+    margin-left: 22px;
+}
+
+.dropdown{
+    position: relative;
+    display: inline-block;
+    margin-left: 496px;
+    margin-top: -2px;
+}
+
+.dropbtn{
+    border: none;
+    background: none;
+    font-weight: 400;
+    color : rgb(37, 37, 37);
+    padding : 5px;
+    text-align: left;
+    cursor : pointer;
+    font-size : 12px;
+}
+.dropdown-content{
+    display : none;
+    position : absolute;
+    z-index : 1; /*다른 요소들보다 앞에 배치*/
+    font-weight: 400;
+    background-color: #f9f9f9;
+    min-width : 100px;
+    font-weight: bold;
+    border-radius: 3.5px;
+    border-bottom: 1px solid #ddd;
+}
+
+.dropdown-content a{
+    display : block;
+    text-decoration : none;
+    color : rgb(37, 37, 37);
+    font-size: 12px;
+    padding : 10px 20px;
+}
+
+.dropdown-content a:hover{
+    background-color : #ececec
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown2{
+    position : relative;
+    display : inline-block;
+    margin-left: 450px;
+    margin-top: -10px;
+}
+
+.dropbtn2{
+    border: none;
+    background-color: white;
+    font-weight: 400;
+    color : rgb(37, 37, 37);
+    padding : 5px;
+    text-align: left;
+    cursor : pointer;
+    font-size : 12px;
+}
+.dropdown-content2{
+    display : none;
+    position : absolute;
+    z-index : 1; /*다른 요소들보다 앞에 배치*/
+    font-weight: 400;
+    background-color: #f9f9f9;
+    min-width : 100px;
+    font-weight: bold;
+    border-radius: 3.5px;
+    border-bottom: 1px solid #ddd;
+}
+
+.dropdown-content2 a{
+    display : block;
+    text-decoration : none;
+    color : rgb(37, 37, 37);
+    font-size: 12px;
+    padding : 10px 20px;
+}
+
+.dropdown-content2 a:hover{
+    background-color : #ececec
+}
+
+.dropdown2:hover .dropdown-content2 {
+    display: block;
+}
+
+.bi-hand-thumbs-up{
+    margin-bottom: -2px;
+}
+
+.big-box{
+    height: 100%;
+}
+
+
+/*댓글 수정 처리*/
+.modify-box {
+    display: flex;
+}
+
+.modify-content {
+    width: 80%;
+    resize: none;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    margin-left: 25px;
+    font-size: 15px;
+    line-height: 20px;
+}
+
+.modify-content-btn {
+    height: 40px;
+    width: 70px;
+    margin-right: 25px;
+    color: #1b5192;
+    border-radius: 5px;
+    background-color: #c1d7f1;
+    border: none;
+    margin: auto;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/*==================================================*/
+/* 모달 창 스타일 */
+.reportModal {
+    display: none;
+    position: absolute;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center;
+}
+
+.reportModal-content {
+    background-color: #fefefe;
+    /* margin: 15% auto; */
+    padding: 35px 40px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    width: 350px;
+    /* height: 400px; */
+}
+
+/* 제목 스타일 */
+h2 {
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+/* 신고 카테고리 스타일 */
+.report-category {
+    margin-bottom: 20px;
+}
+
+#report-language,
+#report-copyright,
+#report-adult,
+#false-maketing,
+#report-info-honor,
+#reprot-disgust,
+#report-castle {
+    cursor: pointer;
+}
+
+.report-list {
+    margin-bottom: 20px;
+}
+
+.report-list label {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+/* input checkbox모양 css */
+
+input[type="checkbox"] {
+    display: none;
+}
+
+.label1,
+.label2,
+.label3,
+.label4,
+.label5,
+.label6,
+.label7 {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #ddd;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    top: 3px;
+}
+
+#report-language:checked ~ .label1::after,
+#report-copyright:checked ~ .label2::after,
+#report-adult:checked ~ .label3::after,
+#false-maketing:checked ~ .label4::after,
+#report-info-honor:checked ~ .label5::after,
+#reprot-disgust:checked ~ .label6::after,
+#report-castle:checked ~ .label7::after {
+    content: "✔";
+    font-size: 13px;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    top: -2px;
+    padding-bottom: 10px;
+    color: #fff;
+    background-color: #1b5192;
+}
+
+/* 신고하기 버튼 스타일 */
+.report-button {
+    text-align: center;
+}
+
+.report-btn {
+    padding: 10px 20px;
+    background-color: #1b5192;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    height: 45px;
+    margin-top: 10px;
+}
+
+.creport-btn {
+    padding: 10px 20px;
+    background-color: #1b5192;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    height: 45px;
+    margin-top: 10px;
+}
+
+.report-list > span {
+    font-weight: 500;
+}

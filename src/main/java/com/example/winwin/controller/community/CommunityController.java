@@ -3,8 +3,10 @@ package com.example.winwin.controller.community;
 
 import com.example.winwin.dto.board.CommunityDto;
 import com.example.winwin.dto.file.CommunityFileDto;
+import com.example.winwin.service.board.CommunityCommentService;
 import com.example.winwin.service.board.CommunityService;
 import com.example.winwin.service.file.CommunityFileService;
+import com.example.winwin.vo.board.CommunityCommentVo;
 import com.example.winwin.vo.board.CommunityVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CommunityController {
     private final CommunityService communityService;
+    private final CommunityCommentService communityCommentService;
     private final CommunityFileService communityFileService;
 
     /**
@@ -45,6 +48,7 @@ public class CommunityController {
         }
 
         List<CommunityVo> communityVoList = communityService.findAll(paramCommunityVo);
+
         if(communityVoList.size() > 0){
             for (CommunityVo communityVo: communityVoList) {
 
@@ -72,17 +76,18 @@ public class CommunityController {
     }
 
     @GetMapping("/write")
-    public String communityWriteForm(HttpServletRequest req){
+    public String communityWriteForm(HttpServletRequest req, Model model) {
         Long userNumber = (Long) req.getSession().getAttribute("userNumber");
-//        return userNumber == null ? "user/login" : "community/communityWrite";
+//        return userNumber == null ? "users/login" : "community/communityWrite";
         return "community/communityWrite";
+
     }
 
     @PostMapping("/write")
     public RedirectView communityWrite(CommunityDto communityDto, HttpServletRequest req, RedirectAttributes redirectAttributes,
                                        @RequestParam("communityFile") List<MultipartFile> files){
-//        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
-//        communityDto.setUserNumber(userNumber);
+        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
+        communityDto.setUserNumber(userNumber);
         communityService.register(communityDto);
         redirectAttributes.addFlashAttribute("communityNumber", communityDto.getCommunityNumber());
 
@@ -99,8 +104,16 @@ public class CommunityController {
     @GetMapping("/read")
     public String communityReadForm(Long communityNumber, Model model){
         CommunityVo communityVo = communityService.find(communityNumber);
+        List<CommunityCommentVo> communityCommentVoList = communityCommentService.findList(communityNumber);
         List<CommunityFileDto> fileList =  communityFileService.findList(communityNumber);
+        communityService.upHitCnt(communityNumber);
+        System.out.println("=========================");
+        System.out.println(communityNumber);
+        System.out.println("========================");
+        int commentCnt = communityService.commentCnt(communityNumber);
         model.addAttribute("community", communityVo);
+        model.addAttribute("commentList", communityCommentVoList);
+        model.addAttribute("commentCnt", commentCnt);
         return "community/communityRead";
     }
 
