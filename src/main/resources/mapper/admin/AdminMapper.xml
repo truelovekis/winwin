@@ -108,21 +108,21 @@
         WU.USER_ID,
         WU.USER_WING,
         W.WING_EARN_DATE,
-        M.MENTOR_STATUS
+        MENTOR_STATUS
         FROM WW_USER WU
         LEFT OUTER JOIN WING W on WU.user_number = W.USER_NUMBER
-        LEFT OUTER JOIN MENTOR M on W.user_number = M.USER_NUMBER
+        LEFT OUTER JOIN MENTOR M ON WU.USER_NUMBER = M.USER_NUMBER
         <trim prefix="WHERE" prefixOverrides="AND">
-            <if test="name != null">
+            <if test="name != null and name != ''">
                 AND WU.USER_NAME LIKE '%' || #{name} || '%'
             </if>
-            <if test="id != null">
+            <if test="id != null and id != ''">
                 AND USER_ID LIKE '%' || #{id} || '%'
             </if>
-            <if test="date != null">
+            <if test="date != null and date != ''">
                 AND TRUNC(W.WING_EARN_DATE) = TO_DATE(#{date}, 'YYYY-MM-DD') <!-- DB형식이 SYSDATE일 경우 -->
             </if>
-            <if test="mentor != null">
+            <if test="mentor != null and mentor != ''">
                 AND MENTOR_STATUS LIKE '%' || #{mentor} || '%'
             </if>
         </trim>
@@ -291,10 +291,19 @@
             where USER_NUMBER = #{userNumber}
         </update>
 
-    <!-- 게시글 진로정보 subCategory 정보 가져오기 -->
-    <select id="getMainCategory" resultType="mainCategoryVo">
+
+    <!-- 게시글 진로정보 mainCategory 정보 가져오기 -->
+    <select id="getCateDep" resultType="mainCategoryVo">
         SELECT *
-        FROM MAIN_CATEGORY
+        FROM MAIN_CATEGORY mc
+        WHERE MAIN_CODE LIKE '1__'
     </select>
+
+    <select id="getCateJob" resultType="mainCategoryVo">
+        SELECT *
+        FROM MAIN_CATEGORY mc
+        WHERE MAIN_CODE LIKE '2__'
+    </select>
+
 </mapper>
 

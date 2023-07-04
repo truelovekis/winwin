@@ -9,4 +9,7 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 public class MainCategoryVo {
     private String mainName;
+    private String mainCode;
+    private Long mainNumber;
+
 }

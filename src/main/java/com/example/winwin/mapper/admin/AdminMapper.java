@@ -57,6 +57,7 @@ public interface AdminMapper{
     public void updateReport(Long userNumber, String userStatus);
 
     // 게시글 진로정보 mainCategory 정보 가져오기
-    public List<MainCategoryVo> getMainCategory();
+    public List<MainCategoryVo> getCateJob();
+    public List<MainCategoryVo> getCateDep();
 
 }

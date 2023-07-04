@@ -90,7 +90,7 @@ class AdminMapperTest {
     void selectSearchWing(){
         AdminWingSearchVo adminWingSearchVo = new AdminWingSearchVo();
         adminWingSearchVo.setName("김에스더");
-        adminWingSearchVo.setId("estherk773");
+//        adminWingSearchVo.setId("estherk773");
 //        adminWingSearchVo.setDate("2023-06-23, YYYY-MM-DD");
    //     adminWingSearchVo.setMentor("0");
 

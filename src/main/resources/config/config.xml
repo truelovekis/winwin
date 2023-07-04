@@ -4,6 +4,7 @@
 <configuration>
     <typeAliases>
 
+
         <!-- User -->
         <typeAlias type="com.example.winwin.dto.user.UserDto" alias="userDto"/>
         <typeAlias type="com.example.winwin.dto.file.UserFileDto" alias="userFileDto"/>
@@ -15,9 +16,10 @@
         <typeAlias type="com.example.winwin.vo.user.UserVo" alias="userVo"/>
         <!--        -->
 
-        <!--    관리자 페이지    -->
-        <typeAlias type="com.example.winwin.dto.admin.AdminVo" alias="adminVo"/>
-        <typeAlias type="com.example.winwin.dto.admin.AdminUserSearchVo" alias="adminUserSearchVo"/>
+
+            <!--    관리자 페이지    -->
+            <typeAlias type="com.example.winwin.dto.admin.AdminVo" alias="adminVo"/>
+            <typeAlias type="com.example.winwin.dto.admin.AdminUserSearchVo" alias="adminUserSearchVo"/>
         <typeAlias type="com.example.winwin.dto.admin.AdminBoardSearchVo" alias="adminBoardSearchVo"/>
         <typeAlias type="com.example.winwin.dto.admin.AdminWingSearchVo" alias="adminWingSearchVo"/>
         <typeAlias type="com.example.winwin.dto.admin.AdminCareerSearchVo" alias="adminCareerSearchVo"/>
@@ -32,6 +34,7 @@
         <typeAlias type="com.example.winwin.dto.board.CsCommentDto" alias="csCommentDto"/>
         <typeAlias type="com.example.winwin.vo.CsVo" alias="csVo"/>
         <!--        -->
+
 
         <!-- 나눔, 나눔 파일 Dto, Vo -->
         <typeAlias type="com.example.winwin.dto.share.ShareDto" alias="shareDto"/>

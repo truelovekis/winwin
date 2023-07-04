@@ -22,6 +22,11 @@
     font-weight: 700;
 }
 
+.admin-nickname-email {
+    margin-left: 9px;
+    margin-top: 42px;
+}
+
 /*.user-management {*/
 /*    font-weight: bold;*/
 /*}*/

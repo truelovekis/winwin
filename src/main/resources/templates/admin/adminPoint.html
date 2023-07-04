@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>관리자 페이지 - 게시글 관리 - 포인트 관리</title>
+  <link rel="stylesheet" th:href="@{/css/user/loginModal.css}" />
   <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
   <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
   <link rel="stylesheet" th:href="@{/css/fragment/adminSideBar.css}" />
@@ -62,6 +63,7 @@
           <input name="date" class="datepicker">
           <span>멘토/멘티 : </span>
           <select name="mentor" id="public-secret" class="search-text2" style="font-family: NanumSquareAcr;">
+            <option value="" style="font-family: NanumSquareAcr;">선택</option>
             <option value="1" style="font-family: NanumSquareAcr;">멘토</option>
             <option value="0" style="font-family: NanumSquareAcr;">멘티</option>
           </select>
@@ -116,6 +118,7 @@
 ></script>
 <script th:src="@{/js/admin/adminUser.js}"></script>
 <script th:src="@{/js/fragment/header.js}" ></script>
+<script th:src="@{/js/user/loginModal.js}"></script>
 <!-- 작성일 jquery-ui -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
