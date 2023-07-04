@@ -73,9 +73,13 @@
         <typeAlias type="com.example.winwin.dto.board.CommunityCommentDto" alias="communityCommentDto"/>
         <typeAlias type="com.example.winwin.dto.board.CommunityCommentUdDto" alias="communityCommentUdDto"/>
         <typeAlias type="com.example.winwin.dto.file.CommunityFileDto" alias="communityFileDto"/>
+        <typeAlias type="com.example.winwin.dto.file.ResumeFileDto" alias="resumeFileDto"/>
         <typeAlias type="com.example.winwin.dto.user.UserDto" alias="userDto"/>
         <typeAlias type="com.example.winwin.dto.user.UserPfpDto" alias="userPfpDto"/>
+        <typeAlias type="com.example.winwin.dto.user.ResumeDto" alias="resumeDto"/>
         <typeAlias type="com.example.winwin.vo.myPage.MyPageVo" alias="myPageVo"/>
+        <typeAlias type="com.example.winwin.vo.myPage.ResumeVo" alias="resumeVo"/>
+        <typeAlias type="com.example.winwin.vo.user.UserVo" alias="userVo"/>
         <typeAlias type="com.example.winwin.vo.user.UserCategoryVo" alias="userCategoryVo"/>
         <!--        -->
 

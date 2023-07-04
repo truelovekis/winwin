@@ -1,5 +1,8 @@
 package com.example.winwin.controller.myPage;
 
+import com.example.winwin.dto.file.ResumeFileDto;
+import com.example.winwin.dto.user.ResumeDto;
+import com.example.winwin.dto.user.ResumePrDto;
 import com.example.winwin.dto.user.UserDto;
 import com.example.winwin.dto.user.UserPfpDto;
 import com.example.winwin.service.myPage.MyPageService;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
+
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -76,7 +80,13 @@ public class MyPageController {
     }
 
     @GetMapping("/resume")
-    public String resume(){
+    public String resume(HttpServletRequest req, Model model){
+        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
+//        myPageService.getResume(userNumber);
+        List<ResumeDto> resumeList = myPageService.getResumeList(1L);
+
+        model.addAttribute("resumeList", resumeList);
+
         return "myPage/resume";
     }
 
@@ -86,7 +96,13 @@ public class MyPageController {
     }
 
     @GetMapping("/resumePr")
-    public String resumePR(){
+    public String resumePR(HttpServletRequest req, Model model){
+        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
+//        myPageService.getResume(userNumber);
+        List<ResumePrDto> prList = myPageService.getPrList(1L);
+
+        model.addAttribute("prList", prList);
+
         return "myPage/resumePr";
     }
 
@@ -100,9 +116,44 @@ public class MyPageController {
         return "myPage/resumeWrite";
     }
 
+    // 이력서 작성하기
+    @PostMapping("/resumeWrite")
+    public RedirectView resumeWrite(ResumeDto resumeDto, HttpServletRequest req,
+                                    @RequestParam("resumeFile") MultipartFile file){
+        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
+//        resumeDto.setUserNumber(userNumber);
+        resumeDto.setUserNumber(1L);
+
+        Long resumeNumber = myPageService.registerResume(resumeDto);
+
+        if( !file.isEmpty() ) {
+            try {
+                ResumeFileDto resumeFileDto = myPageService.saveResumeFile(file);
+                resumeFileDto.setResumeNumber(resumeDto.getResumeNumber());
+                myPageService.registerResumeFile(resumeFileDto);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return new RedirectView ("/myPage/resume");
+    }
+
     @GetMapping("/resumePrWrite")
     public String resumePrWrite(){
         return "myPage/resumePrWrite";
+    }
+
+    // 자기소개서 작성하기
+    @PostMapping("/resumePrWrite")
+    public RedirectView resumePrWrite(ResumePrDto resumePrDto, HttpServletRequest req){
+        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
+//        resumePrDto.setUserNumber(userNumber);
+        resumePrDto.setUserNumber(1L);
+
+        myPageService.registerPr(resumePrDto);
+
+        return new RedirectView("/myPage/resumePr");
     }
 
     @GetMapping("/userDelete")
@@ -110,6 +161,7 @@ public class MyPageController {
         return "myPage/userDelete";
     }
 
+    // 회원 탈퇴
     @PostMapping("/userDelete")
     public String userDelete(HttpServletRequest req){
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");

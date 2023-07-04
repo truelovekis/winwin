@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.myPage.ResumePrMapper">
-
+    <insert id="insertPr">
+        INSERT INTO RESUME_PR (PR_NUMBER, PR_BIG_TITLE, PR_SMALL_TITLE, PR_CONTENT1, PR_CONTENT2, PR_CONTENT3, USER_NUMBER)
+        VALUES (SEQ_RESUME_PR.nextval, #{prBigTitle}, #{prSmallTitle}, #{prContent1}, #{prContent2}, #{prContent3}, #{userNumber})
+    </insert>
+    <select id="selectPrList">
+        SELECT PR_NUMBER, PR_BIG_TITLE, PR_SMALL_TITLE, PR_CONTENT1, USER_NUMBER
+        FROM RESUME_PR
+        WHERE USER_NUMBER = #{userNumber}
+    </select>
+    <select id="selectPr">
+        SELECT PR_NUMBER, PR_BIG_TITLE, PR_SMALL_TITLE, PR_CONTENT1, PR_CONTENT2, PR_CONTENT3, USER_NUMBER
+        FROM RESUME_PR
+        WHERE USER_NUMBER = #{userNumber}
+    </select>
 </mapper>

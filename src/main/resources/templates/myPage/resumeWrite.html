@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -25,87 +25,105 @@
   <body>
   <header class="header"  th:replace="fragment/header :: header"></header>
     <main>
-      <div class="wrap">
-        <div class="container">
-          <div class="img-wrap">
-            <div class="img-box upload">
-              <label for="img-upload">
-                <img th:src="@{/img/camera.png}" alt="" />
-                이미지 <br />
-                업로드
-              </label>
-              <input type="file" id="img-upload" />
+      <form th:action="@{/myPage/resumeWrite}" method="post" enctype="multipart/form-data">
+        <div class="wrap">
+          <div class="container">
+            <div class="img-wrap">
+              <div class="img-box upload">
+                <label for="img-upload">
+                  <img th:src="@{/img/camera.png}" alt="" />
+                  이미지 <br />
+                  업로드
+                </label>
+                <input type="file" name="resumeFile" id="img-upload" />
+              </div>
+              <div class="img-box preview"></div>
             </div>
-            <div class="img-box preview"></div>
-          </div>
-          <h3 class="h3">제목</h3>
-          <input type="text" class="last-input" placeholder="제목을 입력하세요." />
-          <h3 class="h3">인적사항</h3>
-          <input type="text" placeholder="이름을 입력하세요." />
-          <input type="text" placeholder="주소를 입력하세요." />
-          <input type="text" placeholder="이메일을 입력하세요." />
-          <input type="text" class="last-input" placeholder="포트폴리오 홈페이지 주소를 입력하세요. (선택)" />
-          <h3 class="h3">학력사항
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
-              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-              <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
-            </svg>
-          </h3>
-          <div class="school-input-box">
-            <input type="text" class="school" placeholder="학교를 입력하세요." />
-            <select name="graduation" id="graduation">
-              <option value="1">졸업</option>
-              <option value="2">재학</option>
-            </select>
-          </div>
-          <div class="school-date-box">
-            <input type="date" class="school-date" />
-            <input type="date" class="school-date last-input" />
-          </div>
-
-          <h3 class="h3">경력사항
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
-              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-              <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
-            </svg>
-          </h3>
-          <div class="school-input-box">
-            <input type="text" class="school" placeholder="직장명을 입력하세요." />
-          </div>
-          <div class="school-date-box">
-            <input type="date" class="school-date" />
-            <input type="date" class="school-date last-input" />
-          </div>
-          <h3 class="h3">자격사항
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
-              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-              <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
-            </svg>
-          </h3>
-          <div class="certificate">
-            <input type="text" class="certificate-input" placeholder="자격증 이름을 입력하세요." />
-            <input type="text" class="certificate-input" placeholder="자격증 등급을 입력하세요." />
-          </div>
-          <input type="text" placeholder="증빙 기관을 입력하세요." />
-          <div class="btn">
-            <button id="delete">등록취소</button>
-            <button>등록하기</button>
+            <h3 class="h3">제목</h3>
+            <input name="resumeTitle" type="text" class="last-input" placeholder="제목을 입력하세요." />
+            <h3 class="h3">인적사항</h3>
+            <input name="resumeName" type="text" placeholder="이름을 입력하세요." />
+            <input name="resumeAddress" type="text" placeholder="주소를 입력하세요." />
+            <input name="resumeEmail" type="text" placeholder="이메일을 입력하세요." />
+            <input name="resumeWebsite" type="text" class="last-input" placeholder="포트폴리오 홈페이지 주소를 입력하세요. (선택)" />
+            <h3 class="h3">학력사항
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle bi1p" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dash-circle bi1m" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+              </svg>
+            </h3>
+            <div class="bi1">
+              <div class="bi1-box">
+                <div class="school-input-box">
+                  <input name="resumeSchool1" type="text" class="school" placeholder="학교를 입력하세요." />
+                  <select name="graduation1" id="graduation">
+                    <option value="1">졸업</option>
+                    <option value="2">재학</option>
+                  </select>
+                </div>
+                <div class="school-date-box">
+                  <input name="schoolStartDate1" type="date" class="school-date" />
+                  <input name="schoolEndDate1" type="date" class="school-date last-input" />
+                </div>
+              </div>
+            </div>
+            <h3 class="h3">경력사항
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle bi2p" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dash-circle bi2m" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+              </svg>
+            </h3>
+            <div class="bi2">
+              <div class="bi2-box">
+                <div class="school-input-box">
+                  <input name="resumeCareer1" type="text" class="school" placeholder="직장명을 입력하세요." />
+                </div>
+                <div class="school-date-box">
+                  <input name="careerStartDate1" type="date" class="school-date" />
+                  <input name="careerEndDate1" type="date" class="school-date last-input" />
+                </div>
+              </div>
+            </div>
+            <h3 class="h3">자격사항
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle bi3p" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dash-circle bi3m" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+              </svg>
+            </h3>
+            <div class="bi3">
+              <div class="bi3-box">
+                <div class="certificate">
+                  <input name="resumeCertiName1" type="text" class="certificate-input" placeholder="자격증 이름을 입력하세요." />
+                  <input name="resumeCertiGrade1" type="text" class="certificate-input" placeholder="자격증 등급을 입력하세요." />
+                </div>
+                <input name="resumeCertiNoto1" type="text" placeholder="증빙 기관을 입력하세요." />
+              </div>
+            </div>
+                <div class="btn">
+                  <button id="delete">등록취소</button>
+                  <button>등록하기</button>
+            </div>
           </div>
         </div>
-      </div>
+      </form>
     </main>
+    <script
+            src="https://code.jquery.com/jquery-3.6.3.js"
+            integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+            crossorigin="anonymous"
+    ></script>
     <script th:src="@{/js/fragment/header.js}" ></script>
     <script th:src="@{/js/myPage/resumeWrite.js}" ></script>
   </body>

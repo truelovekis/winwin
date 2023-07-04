@@ -43,17 +43,15 @@
               </div>
             </div>
             <div class="my-mentor-content">
-              <div class="resume-box">
-                <div class="text-box">
-                  <h3>최선을 다하겠습니다!</h3>
-                  <span class="university">단국대학교 시각디자인과 졸업</span>
-                  <span class="certificate">ITQ 파워포인트 취득 <br/> GTQ 포토샵 취득</span>
+              <tr th:each="resume : ${resumeList}">
+                <div class="resume-box">
+                  <div class="text-box">
+                    <h3 th:text="${resume.resumeTitle}"></h3>
+                    <input name="resumeNumber" th:value="${resume.resumeNumber}" type="hidden">
+                  </div>
                 </div>
-                <div class="img-box">
-                  <img th:src="@{/img/search.PNG}" alt="">
-                </div>
-              </div>
-              <a th:href="@{/myPage/resumeWrite}">
+              </tr>
+              <a class="addResume" th:href="@{/myPage/resumeWrite}">
                 <div class="resume-plus">
                   <svg xmlns="http://www.w3.org/2000/svg" color="#c5c5c5" width="30" height="30" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
@@ -79,6 +77,7 @@
             referrerpolicy="no-referrer"
     ></script>
     <script th:src="@{/js/fragment/header.js}" ></script>
+    <script th:src="@{/js/myPage/resume.js}" ></script>
     <script th:src="@{/js/myPage/resumeModal.js}"></script>
   </body>
 </html>
