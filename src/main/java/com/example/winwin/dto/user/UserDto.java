@@ -22,9 +22,8 @@ public class UserDto {
     private String userBelong;
     private String userIdentity;
     private String userNickname;
-    private int userStatus;
-    private Long userWing;
+    private String userStatus;
     private int userGrade;
+    private Long userWing;
     private String userPhoneNumber;
-    private int userVerification;
 }

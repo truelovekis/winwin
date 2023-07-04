@@ -3,6 +3,7 @@ package com.example.winwin.mapper.board;
 import com.example.winwin.dto.board.StudyDto;
 import com.example.winwin.dto.user.UserDto;
 import com.example.winwin.mapper.user.UserMapper;
+import com.example.winwin.vo.board.StudyVo;
 import lombok.extern.slf4j.Slf4j;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -23,10 +24,13 @@ class StudyMapperTest {
     @Autowired
     private StudyMapper studyMapper;
     private StudyDto studyDto;
+    private StudyVo studyVo;
+
 
     @Autowired
     private UserMapper userMapper;
     private UserDto userDto;
+
 
     @BeforeEach
     void setUp(){
@@ -37,13 +41,12 @@ class StudyMapperTest {
         userDto.setUserEmail("eee@gmail.com");
         userDto.setUserRrnumber("940406");
         userDto.setUserBelong("배달의 민족");
-        userDto.setUserIdentity("W");
         userDto.setUserNickname("웅이");
-//        userDto.setUserGender(1);
+        userDto.setUserPhoneNumber("01012341234");
         userDto.setUserGrade(5);
         userDto.setUserWing(100L);
 
-        userMapper.insert(userDto);
+        userMapper.join(userDto);
 
         studyDto = new StudyDto();
         studyDto.setStudyTitle("글머리");
@@ -62,6 +65,25 @@ class StudyMapperTest {
         studyDto.setUserNumber(userDto.getUserNumber());
 
         studyMapper.studyInsert(studyDto);
+
+        studyVo = new StudyVo();
+        studyVo.setStudyTitle("글머리");
+        studyVo.setStudyContent("내용");
+        studyVo.setStudySummaryTitle("요약제목");
+        studyVo.setStudySummaryContent("요약내용");
+        studyVo.setStudyRole("백엔드");
+        studyVo.setStudyStatus("1");
+        studyVo.setStudyOpenlink("kakao");
+        studyVo.setUserNickname("고기");
+        studyVo.setUserNumber(userDto.getUserNumber());
+        studyVo.setCategoryNumber(1L);
+        studyVo.setPurposeNumber(1L);
+        studyVo.setTimeNumber(1L);
+        studyVo.setStudyReadCnt(0L);
+        studyVo.setUserNumber(userDto.getUserNumber());
+        studyVo.setLikeCnt(1);
+        studyVo.setUserNumber(1L);
+
 
     }
 
@@ -98,9 +120,9 @@ class StudyMapperTest {
     @Test
     @DisplayName("게시글 상세보기")
     void studySelect(){
-        StudyDto foundStudy = studyMapper.studySelect(studyDto.getStudyNumber());
+        StudyVo foundStudy = studyMapper.studySelect(studyVo.getStudyNumber());
 
-        assertThat(foundStudy.getStudyNumber()).isEqualTo(studyDto.getStudyNumber());
+        assertThat(foundStudy.getStudyNumber()).isEqualTo(studyVo.getStudyNumber());
     }
 
 }

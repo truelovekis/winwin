@@ -49,7 +49,7 @@ class StudyServiceTest {
         userDto.setUserBelong("배달의 민족");
         userDto.setUserIdentity("W");
         userDto.setUserNickname("웅이");
-        userDto.setUserGender(1);
+        /*userDto.setUserGender(1);*/
         userDto.setUserGrade(5);
         userDto.setUserWing(100L);
 
@@ -101,15 +101,15 @@ class StudyServiceTest {
     @DisplayName("게시글 번호로 상세보기")
     void studyFind() {
         doReturn(studyDto).when(studyMapper).studySelect(any(Long.class));
-        StudyDto foundDto = studyService.studyFind(1L);
+        StudyVo foundDto = studyService.studyFind(1L);
         assertThat(foundDto.getStudyContent()).isEqualTo(studyDto.getStudyContent());
     }
 
     @Test
     @DisplayName("게시글 전체 조회")
     void findMainList() {
-        doReturn(List.of(studyDto)).when(studyMapper).mainSelect();
-        List<StudyVo> foundList = studyService.findMainList();
+        doReturn(List.of(studyDto)).when(studyMapper).mainSelect(1);
+        List<StudyVo> foundList = studyService.findMainList(1);
         assertThat(foundList.size()).isEqualTo(1);
     }
 }

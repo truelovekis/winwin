@@ -23,6 +23,7 @@ public class StudyVo {
     private Long purposeNumber;
     private String purposeName;
     private Long timeNumber;
+    private String timeName;
     private Long studyReadCnt;
     private int likeCnt;
     private String isNew;

@@ -10,3 +10,11 @@ likeBtn.onclick = function(){
     dislikeBtn.classList.remove('hide');
 
 }
+
+/*수정 하기*/
+function fn_modify(studyNumber){
+    console.log("aaaaaaaaaaa")
+    if(confirm("정말 수정하시겠습니까?")){
+        location.href = "/project/modify?studyNumber=" + studyNumber;
+    }
+}

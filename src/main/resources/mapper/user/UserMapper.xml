@@ -40,7 +40,7 @@
 <!--    </select>-->
 
     <!--로그인-->
-    <select id="login" resultType="Long">
+    <select id="login" resultType="long">
         SELECT USER_NUMBER, USER_WING
         FROM WW_USER
         WHERE USER_ID = #{userId} AND USER_PASSWORD = #{userPassword}

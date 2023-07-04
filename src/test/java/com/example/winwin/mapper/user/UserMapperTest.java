@@ -3,8 +3,6 @@ package com.example.winwin.mapper.user;
 import com.example.winwin.dto.user.UserDto;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,18 +26,18 @@ class UserMapperTest {
     void setUp() {
         userDto = new UserDto();
 
+        userDto.setUserName("소이");
         userDto.setUserId("aaa");
         userDto.setUserPassword("1234");
         userDto.setUserEmail("aaa@naver.com");
-        userDto.setUserBelong("분당고등학교");
-        userDto.setUserName("소이");
-        userDto.setUserNickname("숑");
         userDto.setUserRrnumber("001109");
-        userDto.setUserGender("F");
-        userDto.setUserIdentity("H");
-        userDto.setUserGrade(5);
-        userDto.setUserWing(0L);
-        userDto.setUserStatus(1);
+        userDto.setUserBelong("분당고등학교");
+        userDto.setUserGender("1");
+        userDto.setUserIdentity("1");
+        userDto.setUserNickname("숑");
+        userDto.setUserStatus("1");
+        userDto.setUserGrade(1);
+        userDto.setUserWing(5L);
         userDto.setUserPhoneNumber("01020626339");
     }
 
@@ -69,7 +67,7 @@ class UserMapperTest {
     @Test
     void testCheckId() {
 
-        int check = userMapper.checkId("bbbb");
+        int check = userMapper.checkId("aaa");
 
         assertThat(check).isEqualTo(0);
     }
@@ -78,7 +76,7 @@ class UserMapperTest {
     void checkNickname() {
 //        userMapper.join(userDto);
 
-        int check = userMapper.checkNickname("ㅣㅣ");
+        int check = userMapper.checkNickname("숑");
 
         assertThat(check).isEqualTo(0);
     }
