@@ -26,12 +26,7 @@ public class UserController {
         return "user/loginModal";
     }
 
-//    @PostMapping("/loginModal")
-//    public RedirectView join(UserDto userDto){
-//        userService.userRegister(userDto);
-//        return new RedirectView("/user/loginModal");
-//    }
-
+    /* 로그인 */
     @PostMapping("/login")
     public RedirectView login(String userId, String userPassword, HttpServletRequest req){
         try {
@@ -41,6 +36,7 @@ public class UserController {
             session.setAttribute("userNumber", userNumber);
             session.setAttribute("userName", userDto.getUserName());
             session.setAttribute("userWing", userDto.getUserWing());
+            session.setAttribute("userStatus", userDto.getUserStatus());
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
             return new RedirectView("/user/login");
@@ -48,12 +44,12 @@ public class UserController {
         return new RedirectView("/main/main");
     }
 
-//    @PostMapping("/checkId")
-//    public int joinCheck(UserDto userDto, HttpServletRequest req){
-//        HttpSession session = req.getSession();
-//        session.setAttribute("userId", userDto.getUserId());
-//        return 1;
-//    }
+    /* 로그아웃 */
+    @GetMapping("/logout")
+    public RedirectView logout(HttpServletRequest req){
+        req.getSession().invalidate();
+        return new RedirectView("/main/main");
+    }
 
 
 

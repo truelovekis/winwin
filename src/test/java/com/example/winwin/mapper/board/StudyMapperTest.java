@@ -43,7 +43,7 @@ class StudyMapperTest {
         userDto.setUserGrade(5);
         userDto.setUserWing(100L);
 
-        userMapper.insert(userDto);
+//        userMapper.insert(userDto);
 
         studyDto = new StudyDto();
         studyDto.setStudyTitle("글머리");

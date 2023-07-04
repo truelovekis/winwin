@@ -35,11 +35,11 @@ class UserMapperTest {
         userDto.setUserName("소이");
         userDto.setUserNickname("숑");
         userDto.setUserRrnumber("001109");
-        userDto.setUserGender("F");
+//        userDto.setUserGender("여");
         userDto.setUserIdentity("H");
         userDto.setUserGrade(5);
         userDto.setUserWing(0L);
-        userDto.setUserStatus(1);
+        userDto.setUserStatus("1");
         userDto.setUserPhoneNumber("01020626339");
     }
 
@@ -81,6 +81,11 @@ class UserMapperTest {
         int check = userMapper.checkNickname("ㅣㅣ");
 
         assertThat(check).isEqualTo(0);
+    }
+
+    @Test
+    void categoryBridge() {
+
     }
 }
 

@@ -27,9 +27,16 @@
           <div class="goal-box none" th:fragment="goal">
             <h3>어떤 목적으로 오셨나요?</h3>
             <h6>멘토 가입 시 추가 인증이 필요합니다.</h6>
-            <button type="button" class="goal-mm-btn btn1" id="goal-mentor">MENTOR</button>
-            <button type="button" class="goal-mm-btn btn2">MENTEE</button>
-            <button type="button" class="goal-mm-btn btn3">MENTOR + MENTEE</button>
+            <input type="hidden" class="goal-mm-value" value="">
+            <button type="button" class="goal-mm-btn btn1" id="goal-mentor" value="mentor" name="userPosition">MENTOR
+<!--              <input type="hidden" name="userPosition" value="mentor" class="positionInput"/>-->
+            </button>
+            <button type="button" class="goal-mm-btn btn2" value="mentee" name="userPosition">MENTEE
+<!--              <input type="hidden" name="userPosition" value="mentee" class="positionInput"/>-->
+            </button>
+            <button type="button" class="goal-mm-btn btn3" value="mentorMentee" name="userPosition">MENTOR + MENTEE
+<!--              <input type="hidden" name="userPosition" value="mentorMentee" class="positionInput"/>-->
+            </button>
           </div>
           <button type="button" class="goal-next"><span>다음</span></button>
         </div>

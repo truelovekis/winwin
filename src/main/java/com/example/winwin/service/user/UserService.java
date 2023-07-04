@@ -1,13 +1,17 @@
 package com.example.winwin.service.user;
 
+import com.example.winwin.dto.mentor.CategoryVo;
+import com.example.winwin.dto.user.MentorDto;
 import com.example.winwin.dto.user.UserDto;
 import com.example.winwin.mapper.user.UserMapper;
+import com.example.winwin.vo.user.CategoryBridgeVo;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -59,7 +63,44 @@ public class UserService {
         return userMapper.checkNickname(userNickname);
     }
 
+    // 관심분야 카테고리
+    public List<CategoryVo> findCategoryJ(){
+        List<CategoryVo> categoryJ = userMapper.categoryJ();
 
+        for (int i=0; i<categoryJ.size(); i++){
+            categoryJ.get(i).getMainCode();
+            categoryJ.get(i).getMainName();
+        }
+
+        return categoryJ;
+    }
+
+    public List<CategoryVo> findCategoryH(){
+        List<CategoryVo> categoryH = userMapper.categoryH();
+
+        for (int i=0; i<categoryH.size(); i++){
+            categoryH.get(i).getSubNumber();
+            categoryH.get(i).getSubName();
+        }
+
+        return categoryH;
+    }
+
+    public List<CategoryVo> findSubCategory(String maindCode){
+        List<CategoryVo> subCategory = userMapper.subCategory(maindCode);
+        return subCategory;
+    }
+
+    public void categoryBridge(CategoryBridgeVo categoryBridgeVo){
+        if(categoryBridgeVo == null){throw new IllegalArgumentException("존재하지 않는 카테고리 번호");};
+        userMapper.categoryBridge(categoryBridgeVo);
+
+    }
+
+    public void joinMentor(MentorDto mentorDto){
+        if(mentorDto == null){throw new IllegalArgumentException("존재하지 않는 회원");};
+        userMapper.joinMentor(mentorDto);
+    }
 
 
 }

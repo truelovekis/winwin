@@ -22,9 +22,10 @@ public class UserDto {
     private String userBelong;
     private String userIdentity;
     private String userNickname;
-    private int userStatus;
+    private String userStatus;
     private Long userWing;
     private int userGrade;
     private String userPhoneNumber;
     private int userVerification;
+    private String userPosition;
 }
