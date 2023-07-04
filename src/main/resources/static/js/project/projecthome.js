@@ -1,15 +1,16 @@
 // 모집글 작성하기 모달창 영역
 let searchButton = document.querySelector(".search-button");
-let modalWrap = document.querySelector(".modal-wrap");
+let projectmodal = document.querySelector(".projectmodal-wrap");
+
 
 searchButton.addEventListener("click", function () {
-    modalWrap.style.display = "flex";
+    projectmodal.style.display = "flex";
     document.body.style.overflow = "hidden"; //모달창 스크롤 막기
 });
 
-modalWrap.addEventListener("click", function (e) {
-    if($(e.target).hasClass("modal-wrap")){
-        modalWrap.style.display = "none";
+projectmodal.addEventListener("click", function (e) {
+    if($(e.target).hasClass("projectmodal-wrap")){
+        projectmodal.style.display = "none";
         document.body.style.overflow = "unset"; //모달창 스크롤 복구
     }
 
@@ -112,4 +113,10 @@ $('.nav-span3').on('mouseout', function(){
     $('.nav-span3').css("color","rgb(100, 116, 139)")
     $('.nav-span3').css("font-weight","500")
 });
+
+
+
+
+
+
 

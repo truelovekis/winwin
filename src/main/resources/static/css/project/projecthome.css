@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 
@@ -16,7 +15,7 @@
 }
 
 /*모달창 영역*/
-.modal-wrap{
+.projectmodal-wrap{
     background-color: rgba(0, 0, 0, 0.4);
     position: absolute;
     margin: auto;
@@ -70,6 +69,8 @@
     border: 1px solid #ddd;
     border-radius: 5px;
     cursor: pointer;
+    box-sizing: border-box;
+
 }
 
 .page-move2{
@@ -80,6 +81,7 @@
     border-radius: 5px;
     margin-top: 20px;
     cursor: pointer;
+    box-sizing: border-box;
 }
 
 .sub-content{
@@ -197,6 +199,7 @@
     padding: 8px 10px 10px 28px;
     background-color: #1b5192;
     color: #fff;
+    box-sizing: border-box;
     cursor: pointer;
 }
 /*인기프로젝트 TOP10 영역*/
@@ -225,7 +228,7 @@ strong{
 
 }
 
-.topten-banner > h4{
+.topten-banner > a> h4{
     text-align: right;
     padding-right: 40px;
 }
@@ -257,6 +260,7 @@ strong{
     cursor: pointer;
     margin-right: 20px;
     margin-left: 25px;
+    box-sizing: border-box;
 }
 
 .topten-cardbox:hover {
@@ -300,6 +304,7 @@ strong{
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
+    cursor: pointer;
     overflow: hidden;
     max-width: 400px;
 }
@@ -365,7 +370,7 @@ strong{
 
 }
 
-.study-banner > h4{
+.study-banner > a> h4{
     text-align: right;
     padding-right: 40px;
 }
@@ -394,10 +399,13 @@ strong{
     padding: 20px;
     border-radius: 5px;
     border: 1px solid #ddd;
-    cursor: pointer;
+
     margin-right: 20px;
     margin-left: 25px;
+    box-sizing: border-box;
 }
+
+
 
 .study-cardbox:hover {
     /*box-shadow: 0 10px 10px -5px;*/
@@ -441,6 +449,7 @@ strong{
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    cursor: pointer;
     max-width: 400px;
 }
 
@@ -511,6 +520,7 @@ strong{
     background-color: rgb(219, 234, 254);
     font-size: 15px;
     font-weight: 600;
+    box-sizing: border-box;
 }
 
 .qna-img{

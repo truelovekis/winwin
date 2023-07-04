@@ -1,12 +1,12 @@
-let modalWrap = $(".modal-wrap");
+let projectmodalwrap = $(".projectmodal-wrap");
 
 function fn_modal(){
-    modalWrap.css("display","flex");
+    projectmodalwrap.css("display","flex");
     $("body").css("overflow","hidden"); //모달창 스크롤 막기
 }
 function fn_modal_close(target, e){
-    if($(e.target).hasClass("modal-wrap")) {
-        modalWrap.css("display", "none");
+    if($(e.target).hasClass("projectmodal-wrap")) {
+        projectmodalwrap.css("display", "none");
         $("body").css("overflow", "unset"); //모달창 스크롤 막기
     }
 }

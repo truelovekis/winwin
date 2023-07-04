@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>projectWrite</title>
+    <title>projectModify</title>
     <link rel="stylesheet" th:href="@{/css/user/loginModal.css}" />
     <link rel="stylesheet" th:href="@{/css/project/projectWrite.css}" />
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
@@ -26,13 +26,13 @@
 <body>
 <header class="header" th:replace="fragment/header :: header"></header>
 <section>
-    <form action="/project/write" method="post" >
+    <form action="/project/modify" method="post" >
         <div class="container-box">
             <div class="middle-box">
                 <div class="Title">
                     <div class="sideTitle"><p>프로젝트 / 모임</p></div>
                     <div class="contentTitle">
-                        <input class="title" name="studyTitle" cols="30" rows="10" placeholder="제목을 입력하세요." style="font-family:NanumSquareLight;"></input>
+                        <input class="title" name="studyTitle" cols="30" rows="10" placeholder="제목을 입력하세요." th:value="${studyVo.studyTitle}" style="font-family:NanumSquareLight;"></input>
                     </div>
                 </div> <!-- div.Title -->
 
@@ -40,10 +40,10 @@
                 <h3 class="summary-h3">요약</h3>
                 <div class="summary">
                     <div class="summaryTitle">
-                        <input class="title2" name="studySummaryTitle" placeholder="프로젝트 요약을 입력하세요." style="font-family:NanumSquareLight;">
+                        <input class="title2" name="studySummaryTitle" placeholder="프로젝트 요약을 입력하세요. "th:value="${studyVo.studySummaryTitle}" style="font-family:NanumSquareLight;">
                     </div>
                     <div class="summaryContent">
-                        <textarea class="content" name="studySummaryContent" cols="30" rows="10" style="font-family:NanumSquareLight; line-height: 20px; " placeholder="예시 - 온/오프라인으로 달리기 모임을 만들고 찾을 수 있는 앱을 기획 중입니다. 현재 기획자 1명, 백엔드 개발자 1명이 있고, 함께하실 디자이너와 프론트 개발자를 찾고 있어요!"></textarea>
+                        <textarea class="content" name="studySummaryContent" cols="30" rows="10" style="font-family:NanumSquareLight; line-height: 20px; " th:text="${studyVo.studySummaryContent}"></textarea>
                     </div>
                 </div> <!-- div.summary -->
 
@@ -51,14 +51,14 @@
 
                 <h3 class="recruitment-h3">모집 역할</h3>
                 <div class="recruitment">
-                    <input class="recruitmentTitle" name="studyRole" cols="30" rows="10"><p></p></input>
+                    <input class="recruitmentTitle" name="studyRole" cols="30" rows="10"  th:value="${studyVo.studyRole}"><p></p></input>
                 </div>
 
 
 
                 <h3 class="openChat-box-h3">오픈 채팅방 링크</h3>
                 <div class="openChat-box">
-                    <input class="openChat-link" name="studyOpenlink" cols="30" rows="10"><p></p></input>
+                    <input class="openChat-link" name="studyOpenlink" cols="30" rows="10" th:value="${studyVo.studyOpenlink}"><p></p></input>
                 </div>
 
                 <h3 class="project-box-h3">상태 처리</h3>
@@ -93,7 +93,7 @@
 
                 <h3 class="profil-h3">소개</h3>
                 <div class="Profil">
-                    <textarea class="projectProfil" name="studyContent" cols="30" rows="10" placeholder="프로젝트 소개를 입력하세요." style="font-family:NanumSquareLight;"></textarea>
+                    <textarea class="projectProfil" name="studyContent" cols="30" rows="10" placeholder="프로젝트 소개를 입력하세요." th:text="${studyVo.studyContent}" style="font-family:NanumSquareLight;"></textarea>
                 </div>
 
 

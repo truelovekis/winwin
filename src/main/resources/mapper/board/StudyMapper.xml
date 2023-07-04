@@ -12,7 +12,7 @@
     </insert>
 
     <!--프로젝트,모임 게시글 수정-->
-    <update id="studyUpdate">
+    <update id="studyUpdate"                  >
         UPDATE STUDY
         SET STUDY_TITLE = #{studyTitle}, STUDY_CONTENT = #{studyContent},STUDY_SUMMARY_TITLE = #{studySummaryTitle}, STUDY_SUMMARY_CONTENT = #{studySummaryContent}, STUDY_ROLE = #{studyRole}, STUDY_OPENLINK = #{studyOpenlink},  PURPOSE_NUMBER = #{purposeNumber}, CATEGORY_NUMBER =#{categoryNumber}, TIME_NUMBER = #{timeNumber}
         WHERE STUDY_NUMBER = #{studyNumber}
@@ -25,14 +25,29 @@
     </delete>
 
     <!--프로젝트,모임 게시물 READ 조회-->
-    <select id="studySelect" resultType="studyDto">
-        SELECT STUDY_NUMBER, STUDY_TITLE, STUDY_CONTENT, STUDY_SUMMARY_TITLE, STUDY_SUMMARY_CONTENT, STUDY_ROLE, STUDY_STATUS, STUDY_OPENLINK, STUDY_DATE,
+    <select id="studySelect" resultType="studyVo">
+        SELECT STUDY_NUMBER, STUDY_TITLE, STUDY_CONTENT, STUDY_SUMMARY_TITLE, STUDY_SUMMARY_CONTENT, STUDY_ROLE, STUDY_STATUS, STUDY_OPENLINK, STUDY_DATE, STUDY_READ_CNT,
+               P.PFP_SYSTEM_NAME, P.PFP_UPLOAD_PATH, P.PFP_UUID,
+               C.CATEGORY_NAME, R.PURPOSE_NAME, T.TIME_NAME,
                S.USER_NUMBER, U.USER_NICKNAME
         FROM STUDY S
                  JOIN WW_USER U
-                      ON S.STUDY_NUMBER = #{studyNumber} AND S.USER_NUMBER = U.USER_NUMBER
+                      ON S.STUDY_NUMBER = 1 AND S.USER_NUMBER = U.USER_NUMBER
+                 LEFT JOIN USER_PFP P
+                           ON P.USER_NUMBER = S.USER_NUMBER
+                 JOIN STUDY_CATEGORY C
+                      ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER
+                 JOIN STUDY_PURPOSE_CATEGORY R
+                      ON R.PURPOSE_NUMBER = S.PURPOSE_NUMBER
+                 JOIN STUDY_TIME_CATEGORY T
+                      ON T.TIME_NUMBER = S.TIME_NUMBER
     </select>
 
+    <select id="likeSelect" resultType="_int">
+        SELECT COUNT(USER_NUMBER) FROM STUDY_LIKE
+        WHERE USER_NUMBER = #{userNumber} AND STUDY_NUMBER = #{studyNumber}
+    </select>
+    
     <!--프로젝트, 모임 메인페이지 슬라이드 -->
     <select id="mainSelect" resultType="studyVo">
         SELECT S.STUDY_NUMBER, STUDY_TITLE, STUDY_SUMMARY_CONTENT,
