@@ -43,17 +43,16 @@
               </div>
             </div>
             <div class="my-mentor-content">
-              <div class="resume-box">
-                <div class="text-box">
-                  <h3>피할 수 없다면 즐겨라!</h3>
-                  <span class="pr-title">실패는 나의 경험치</span>
-                  <div class="pr-content">
-                    배움에 대해 돈을 아끼지 않는 부모님 밑에서 자랐습니다. 여러 예체능 학원에 다니면서 다양한 경험을 쌓으며 제가 겪은 실패들은 모두 성장을 위한 경험으로 남았습니다. 학원 바둑 대회에서 패배하고 올 때면 항상 부모님께서는 ‘패배도 경험이다.’라는 말을 해주며 저에게 나아갈 방향을 알려주셨습니다. 이런 실패를 계기로 부족한 부분을 보완하고 개선해 나가는 과정에서 더욱 발전할 수 있었습니다.
-                    대학교 입학 후 첫 시험에 3.3의 학점을 얻었습니다. 저는 제 성적에 실망했고, 장학금을 받기에는 턱없이 부족했습니다. 이 악물고 공부하여 성적은 점점 올라갔으며 마침내 1등의 성적으로 장학금을 받았습니다. 해당 경험 처음의 실패에 좌절하지 않고 더욱 노력해 나가면 달성할 수 있다는 것을 배웠습니다. 그리고 학점에 관한 기준은 그저 숫자일 뿐 그 의미는 어떠한 부분에서도 할 수 있다는 자신감을 주었습니다.
+              <tr th:each="pr : ${prList}">
+                <div class="resume-box">
+                  <div class="text-box">
+                    <h3 th:text="${pr.prBigTitle}"></h3>
+                    <span class="pr-title" th:text="${pr.prSmallTitle}">실패는 나의 경험치</span>
+                    <div class="pr-content" th:text="${pr.prContent1}"></div>
                   </div>
                 </div>
-              </div>
-              <a th:href="@{/myPage/resumePrWrite}">
+              </tr>
+              <a class="addPr" th:href="@{/myPage/resumePrWrite}">
                 <div class="resume-plus">
                   <svg xmlns="http://www.w3.org/2000/svg" color="#c5c5c5" width="30" height="30" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
@@ -79,6 +78,7 @@
             referrerpolicy="no-referrer"
     ></script>
     <script th:src="@{/js/fragment/header.js}" ></script>
+    <script th:src="@{/js/myPage/resume.js}" ></script>
     <script th:src="@{/js/myPage/resumePrModal.js}" ></script>
   </body>
 </html>

@@ -1,5 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.myPage.ResumeMapper">
-
+    <insert id="insertResume">
+        <selectKey resultType="long" keyProperty="resumeNumber" order="BEFORE">
+            SELECT SEQ_RESUME.NEXTVAL FROM DUAL
+        </selectKey>
+        insert into RESUME (RESUME_NUMBER, RESUME_TITLE, RESUME_NAME, RESUME_ADDRESS, RESUME_EMAIL, RESUME_WEBSITE,
+                            RESUME_SCHOOL1, SCHOOL_START_DATE1, SCHOOL_END_DATE1, RESUME_SCHOOL2, SCHOOL_START_DATE2,
+                            SCHOOL_END_DATE2, RESUME_CAREER1, CAREER_START_DATE1, CAREER_END_DATE1, RESUME_CAREER2,
+                            CAREER_START_DATE2, CAREER_END_DATE2, RESUME_CAREER3, CAREER_START_DATE3, CAREER_END_DATE3,
+                            RESUME_CERTI_NAME1, RESUME_CERTI_GRADE1, RESUME_CERTI_NOTO1, RESUME_CERTI_NAME2,
+                            RESUME_CERTI_GRADE2, RESUME_CERTI_NOTO2, RESUME_CERTI_NAME3, RESUME_CERTI_GRADE3,
+                            RESUME_CERTI_NOTO3, RESUME_CERTI_NAME4, RESUME_CERTI_GRADE4, RESUME_CERTI_NOTO4, RESUME_CERTI_NAME5,
+                            RESUME_CERTI_GRADE5, RESUME_CERTI_NOTO5, USER_NUMBER)
+        values (#{resumeNumber}, #{resumeTitle}, #{resumeName}, #{resumeAddress}, #{resumeEmail}, #{resumeWebsite},
+                #{resumeSchool1}, #{schoolStartDate1}, #{schoolEndDate1}, #{resumeSchool2}, #{schoolStartDate2},
+                #{schoolEndDate2}, #{resumeCareer1}, #{careerStartDate1}, #{careerEndDate1}, #{resumeCareer2}, #{careerStartDate2}, #{careerEndDate2}, #{resumeCareer3}, #{careerStartDate3}, #{careerEndDate3},
+                #{resumeCertiName1}, #{resumeCertiGrade1}, #{resumeCertiNoto1}, #{resumeCertiName2},
+                #{resumeCertiGrade2}, #{resumeCertiNoto2}, #{resumeCertiName3}, #{resumeCertiGrade3},
+                #{resumeCertiNoto3}, #{resumeCertiName4}, #{resumeCertiGrade4}, #{resumeCertiNoto4}, #{resumeCertiName5},
+                #{resumeCertiGrade5}, #{resumeCertiNoto5}, #{userNumber})
+    </insert>
+    <select id="selectResumeList" resultType="resumeDto">
+        SELECT RESUME_NUMBER, RESUME_TITLE, USER_NUMBER
+        FROM RESUME
+        WHERE USER_NUMBER = #{userNumber}
+    </select>
+    <select id="selectResume" resultType="resumeDto">
+        SELECT RESUME_NUMBER, RESUME_TITLE, RESUME_NAME, RESUME_ADDRESS, RESUME_EMAIL, RESUME_WEBSITE,
+               RESUME_SCHOOL1, TO_CHAR(SCHOOL_START_DATE1, 'yyyy-mm-dd') SCHOOL_START_DATE1, TO_CHAR(SCHOOL_END_DATE1, 'yyyy-mm-dd') SCHOOL_END_DATE1,
+               RESUME_SCHOOL2, TO_CHAR(SCHOOL_START_DATE2, 'yyyy-mm-dd') SCHOOL_START_DATE2, TO_CHAR(SCHOOL_END_DATE2, 'yyyy-mm-dd') SCHOOL_END_DATE2,
+               RESUME_CAREER1, TO_CHAR(CAREER_START_DATE1, 'yyyy-mm-dd') CAREER_START_DATE1, TO_CHAR(CAREER_END_DATE1, 'yyyy-mm-dd') CAREER_END_DATE1,
+               RESUME_CAREER2, TO_CHAR(CAREER_START_DATE2, 'yyyy-mm-dd') CAREER_START_DATE2, TO_CHAR(CAREER_END_DATE2, 'yyyy-mm-dd') CAREER_END_DATE2,
+               RESUME_CAREER3, TO_CHAR(CAREER_START_DATE3, 'yyyy-mm-dd') CAREER_START_DATE3, TO_CHAR(CAREER_END_DATE3, 'yyyy-mm-dd') CAREER_END_DATE3,
+               RESUME_CERTI_NAME1, RESUME_CERTI_GRADE1, RESUME_CERTI_NOTO1,
+               RESUME_CERTI_NAME2, RESUME_CERTI_GRADE2, RESUME_CERTI_NOTO2,
+               RESUME_CERTI_NAME3, RESUME_CERTI_GRADE3, RESUME_CERTI_NOTO3,
+               RESUME_CERTI_NAME4, RESUME_CERTI_GRADE4, RESUME_CERTI_NOTO4,
+               RESUME_CERTI_NAME5, RESUME_CERTI_GRADE5, RESUME_CERTI_NOTO5, USER_NUMBER
+        FROM RESUME
+        WHERE RESUME_NUMBER = #{resumeNumber}
+    </select>
+    <select id="selectPhone">
+        SELECT USER_PHONE_NUMBER
+        FROM WW_USER
+        WHERE USER_NUMBER = #{userNumber}
+    </select>
 </mapper>

@@ -48,7 +48,8 @@
                   <label for="img-box" class="profile-label">
                     <div th:if="${profile == null}" class="img-box" style="background-image: url(https://via.placeholder.com/70x70)"></div>
                     <div th:unless="${profile == null}" class="img-box"
-                         th:style="${'background-image: url(/profile/' + profile.pfpUuid + '_' + profile.pfpSystemName + ')'}"></div>
+                         th:style="${'background-image: url(/profile/' + profile.pfpUuid + '_' + profile.pfpSystemName + ')'}">
+                    </div>
                   </label>
                   <input class="profile-file" type="file" id="img-box" name="pfpFile">
                   <div class="text-box">
@@ -86,7 +87,7 @@
                 </div>
                 <div class="info-modify-wrap">
                   <div class="info-modify">닉네임 변경</div>
-                  <input type="text" name="userNickName" class="input" th:value="${userInfo.userVo.userNickName}">
+                  <input type="text" name="userNickname" class="input" th:value="${userInfo.userVo.userNickname}">
                 </div>
                 <div class="info-modify-wrap">
                   <div class="info-modify">연락처 변경</div>
