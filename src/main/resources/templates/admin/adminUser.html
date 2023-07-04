@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>관리자 페이지 - 회원 관리</title>
+  <link rel="stylesheet" th:href="@{/css/user/loginModal.css}" />
   <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
   <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
   <link rel="stylesheet" th:href="@{/css/fragment/adminSideBar.css}" />
@@ -53,6 +54,7 @@
           <input name="id" type="text" placeholder="아이디" class="search-text" style="font-family: NanumSquareAcr;">
           <span>신원 :  </span>
           <select name="identity" id="identity" class="search-text2" style="font-family: NanumSquareAcr;">
+            <option value="" class="officeWorkers" style="font-family: NanumSquareAcr;">선택</option>
             <option value="W" class="officeWorkers" style="font-family: NanumSquareAcr;">직장인</option>
             <option value="U" class="collegeStudent" style="font-family: NanumSquareAcr;">대학생</option>
             <option value="H" class="highSchool" style="font-family: NanumSquareAcr;">고등학생</option>
@@ -79,6 +81,7 @@
           </select>
           <span>멘토/멘티 : </span>
           <select name="mentor" id="mandm" class="search-text2" style="font-family: NanumSquareAcr;">
+            <option value="" style="font-family: NanumSquareAcr;">선택</option>
             <option value="1" style="font-family: NanumSquareAcr;">멘토</option>
             <option value="0" style="font-family: NanumSquareAcr;">멘티</option>
           </select>
@@ -142,5 +145,6 @@
 <script th:src="@{/js/fragment/footer.js}" ></script>
 <script th:src="@{/js/fragment/header.js}" ></script>
 <script th:src="@{/js/admin/adminUser.js}" ></script>
+<script th:src="@{/js/user/loginModal.js}"></script>
 </body>
 </html>

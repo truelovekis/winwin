@@ -30,16 +30,16 @@ class MentorControllerTest {
     private MentorService mentorService;
     private MentorVo mentorVo;
 
-    @BeforeEach
-    void setUp(){
-        mentorVo = new MentorVo();
-        mentorVo.setSkillName("JAVA");
-        mentorVo.setCareerCompany("삼성");
-        mentorVo.setUserName("홍길동");
-        mentorVo.setCareerTitle("백엔드");
-        mentorVo.setCareerStartDate("2012.06.26");
-        mentorVo.setCareerEndDate("2016.05.14");
-    }
+//    @BeforeEach
+//    void setUp(){
+//        mentorVo = new MentorVo();
+//        mentorVo.setSkillName("JAVA");
+//        mentorVo.setCareerCompany("삼성");
+//        mentorVo.setUserName("홍길동");
+//        mentorVo.setCareerTitle("백엔드");
+//        mentorVo.setCareerStartDate("2012.06.26");
+//        mentorVo.setCareerEndDate("2016.05.14");
+//    }
 
     @Test
     void mentorList() throws Exception {

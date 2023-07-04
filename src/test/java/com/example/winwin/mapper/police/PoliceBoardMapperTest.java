@@ -32,40 +32,40 @@ class PoliceBoardMapperTest {
     private ShareDto shareDto;
     private UserDto userDto;
 
-    @BeforeEach
-    void setUp(){
-        userDto = new UserDto();
-        userDto.setUserName("박웅이");
-        userDto.setUserId("eee");
-        userDto.setUserPassword("1234");
-        userDto.setUserEmail("eee@gmail.com");
-        userDto.setUserRrnumber("940406");
-        userDto.setUserBelong("배달의 민족");
-        userDto.setUserIdentity("W");
-        userDto.setUserNickname("웅이");
-        userDto.setUserGender(1);
-        userDto.setUserGrade(5);
-        userDto.setUserWing(300L);
-
-        userMapper.insert(userDto);
-
-        shareDto = new ShareDto();
-        shareDto.setShareTitle("title");
-        shareDto.setShareContent("content");
-        shareDto.setShareWing(300);
-        shareDto.setShareStatus("1");
-        shareDto.setUserNumber(userDto.getUserNumber());
-
-        shareMapper.shareInsert(shareDto);
-
-        policeBoardDto = new PoliceBoardDto();
-        policeBoardDto.setBigCode("600");
-        policeBoardDto.setBoardNumber(shareDto.getShareNumber());
-        policeBoardDto.setPoliceCategory(1L);
-        policeBoardDto.setUserNumber(userDto.getUserNumber());
-
-        policeBoardMapper.shareReportInsert(policeBoardDto);
-    }
+//    @BeforeEach
+//    void setUp(){
+//        userDto = new UserDto();
+//        userDto.setUserName("박웅이");
+//        userDto.setUserId("eee");
+//        userDto.setUserPassword("1234");
+//        userDto.setUserEmail("eee@gmail.com");
+//        userDto.setUserRrnumber("940406");
+//        userDto.setUserBelong("배달의 민족");
+//        userDto.setUserIdentity("W");
+//        userDto.setUserNickname("웅이");
+//        userDto.setUserGender(1);
+//        userDto.setUserGrade(5);
+//        userDto.setUserWing(300L);
+//
+//        userMapper.insert(userDto);
+//
+//        shareDto = new ShareDto();
+//        shareDto.setShareTitle("title");
+//        shareDto.setShareContent("content");
+//        shareDto.setShareWing(300);
+//        shareDto.setShareStatus("1");
+//        shareDto.setUserNumber(userDto.getUserNumber());
+//
+//        shareMapper.shareInsert(shareDto);
+//
+//        policeBoardDto = new PoliceBoardDto();
+//        policeBoardDto.setBigCode("600");
+//        policeBoardDto.setBoardNumber(shareDto.getShareNumber());
+//        policeBoardDto.setPoliceCategory(1L);
+//        policeBoardDto.setUserNumber(userDto.getUserNumber());
+//
+//        policeBoardMapper.shareReportInsert(policeBoardDto);
+//    }
 
     @Test
     @DisplayName("게시글 번호로 신고항목 조회하기")
