@@ -3,6 +3,7 @@ package com.example.winwin.service.share;
 import com.example.winwin.dto.share.ShareDto;
 import com.example.winwin.mapper.share.ShareMapper;
 import com.example.winwin.service.file.ShareFileService;
+import com.example.winwin.vo.infinityScroll.Criteria;
 import com.example.winwin.vo.share.ShareVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -71,8 +72,23 @@ public class ShareService {
             throw new IllegalArgumentException("나눔 글 번호가 일치하지 않습니다.");
         }
 //        수정사항 : 나눔 글 삭제 시 share_file 삭제 참고 - BK_sniper
-        
+
+        shareFileService.shareFileRemove(shareNumber);
         shareMapper.shareDelete(shareNumber);
     }
 
+//    나눔 페이지 무한스크롤
+    public List<ShareVo> findListPage(Criteria criteria){
+        if(criteria == null){
+            throw new IllegalArgumentException("페이지 처리에 필요한 정보가 누락되었습니다.");
+        }
+
+        return shareMapper.selectScroll(criteria);
+    }
+
+//    나눔 메인페이지 갯수 구하기
+    public int findTotal(){
+
+        return shareMapper.selectTotal();
+    }
 }

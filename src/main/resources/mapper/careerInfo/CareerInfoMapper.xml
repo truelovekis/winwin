@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.winwin.mapper.career.CareerInfoMapper">
+
+    <!-- 진로정보 글 등록하기   -->
+    <insert id="careerInfoInsert">
+        <selectKey keyProperty="careerInfoNumber" order="BEFORE" resultType="long">
+            select SEQ_CAREERINFO.nextval from dual
+        </selectKey>
+        insert into CAREERINFO (CAREERINFO_NUMBER, CAREERINFO_TITLE, CAREERINFO_CONTENT, USER_NUMBER
+                                CAREERINFO_CNT, USER_NUMBER)
+        values (#{careerInfoNumber}, #{careerInfoTitle}, #{careerInfoContent}, #{userNumber});
+    </insert>
+    <!--    -->
+
+    <!-- 진로정보 글 번호로 조회하기 -->
+    <select id="careerInfoSelectNumber" resultType="careerDto">
+        select CAREERINFO_NUMBER, CAREERINFO_TITLE, CAREERINFO_CONTENT, CAREERINFO_LIKE_CNT, CAREERINFO_CNT, CAREERINFO_STATUS, CAREERINFO_DATE
+        from CAREERINFO CI join WW_USER WU
+        on CAREERINFO_NUMBER = #{careerInfoNumber} and CI.USER_NUMBER = WU.USER_NUMBER;
+    </select>
+    <!--    -->
+
+    <!-- 진로정보 글 전체 최신순 및 카테고리 별 조회하기 -->
+
+    <!--    -->
+
+    <!-- 진로정보 글 상세보기 진입 시 조회수 증가 -->
+    <update id="careerInfoReadCnt">
+        update CAREERINFO
+        set CAREERINFO_CNT = CAREERINFO_CNT + 1
+        where CAREERINFO_NUMBER = #{careerInfoNumber}
+    </update>
+
+    <!-- 진로정보 글 번호로 수정하기 -->
+    <update id="careerInfoUpdate">
+        update CAREERINFO
+        set CAREERINFO_TITLE = #{careerInfoTitle},
+            CAREERINFO_CONTENT = #{careerInfoContent}
+        where CAREERINFO_NUMBER = #{careerInfoNumber}
+    </update>
+    <!--    -->
+
+    <!-- 진로정보 글 번호로 삭제하기 -->
+    <delete id="careerInfoDelete">
+        delete from CAREERINFO
+        where CAREERINFO_NUMBER = #{careerInfoNumber}
+    </delete>
+    <!--    -->
+</mapper>

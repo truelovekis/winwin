@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/user/loginModal.css}"/>
-    <link rel="stylesheet" th:href="@{/css/share/share.css}">
     <link rel="stylesheet" th:href="@{/css/fragment/header.css}"/>
     <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
+    <link rel="stylesheet" th:href="@{/css/share/share.css}">
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet"/>
     <style>
         body {
@@ -27,13 +27,11 @@
 
 <body>
 <header class="header" th:replace="fragment/header :: header"></header>
+
 <div class="wrap">
     <div class="community">
-        <!-- 로그인 아직 안되서 히든 박아놈.. -->
-        <input type="hidden" th:value="8">
-        <!--        -->
         <!-- 회원 프로필&질문하기 버튼 / 로그인 했을 때 -->
-        <div class="community-pfp">
+        <div class="community-pfp" th:unless="${session.userNumber}">
             <div class="community-user">
                 <div class="community-pfp-img">
                     <label class="user-file">
@@ -48,7 +46,7 @@
                 </div>
             </div>
             <div class="community-pfp-main-btn">
-                <a th:href="@{/share/write}" class="pfp-main-btn">작성하기</a>
+                <a href="" th:data-user-number="${session.userNumber}" class="pfp-main-btn">작성하기</a>
             </div>
             <div class="community-pfp-sub-btn">
             <!-- 병합하고 마이페이지에 있는 이력서, 자소서 이동 -->
@@ -58,60 +56,86 @@
         </div>
         <!-- 회원 프로필&질문하기 버튼 끝 -->
 
-        <!-- 나눔 게시글 리스트 -->
-        <!-- 시작! -->
-        <div class="share-main-box" th:each="share : ${shareList}">
-            <div class="share-box">
-                <div class="share-sub-content">
-                    <div class="share-sub-title">
-                        <a class="share-title-path" th:href="@{/share/read(shareNumber=${share.shareNumber})}">
-                            <div class="share-title">
-                                <span th:if="${share.shareStatus == '1'}">
-                                    <span class="N">나눔 중</span>
-                                </span>
-                                <span th:if="${share.shareStatus == '0'}">
-                                    <span class="E">마감</span>
-                                </span>
-                                |
-                                <span th:text="${share.shareTitle}"></span>
-                            </div>
-                        </a>
-                        <div class="share-content" th:text="${share.shareContent}"></div>
-                    </div>
-                    <div class="share-sub-box">
-                        <div class="share-btn">
-                            <div class="share-cnt">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                     class="bi bi-eye" viewBox="0 0 16 16">
-                                    <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
-                                    <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
-                                </svg>
-                                <span th:text="${share.shareReadCnt}"></span></div>
-                        </div>
-                        <div class="share-time" th:text="${share.shareDate}"></div>
-                    </div>
-
+        <!-- 회원 프로필&질문하기 버튼 / 로그인 안했을 때 -->
+        <div class="community-pfp" th:if="${session.userNumber}">
+            <div class="community-user">
+                <div class="community-pfp-img">
+                    <label class="user-file">
+                        <img src="../../img/plus.png" class="plusimg"/>
+                    </label>
+                    <img src="../../img/userpfp.jpg" class="userpfp"/>
                 </div>
-                <div class="share-sub-img">
-                    <div class="share-img">
-                        <img th:if="${share.fileSystemName == null }"
-                             th:src="@{/img/default-camera.png}">
-                        <img th:unless="${share.fileSystemName == null}"
-                             th:src="${'/upload/' + share.fileUploadPath + '/th_' + share.fileUuid + '_'+ share.fileSystemName}">
-                    </div>
+                <div>
+                    <div class="community-user-name">김아무개</div>
+                    <div class="community-pfp-belong">시스게이트</div>
+                    <div class="community-pfp-department">DB 유지보수 관리</div>
                 </div>
             </div>
+            <div class="community-pfp-main-btn">
+                <a href="" th:data-userNumber="${session.userNumber}" th:value="${session.userNumber}" class="pfp-main-btn">작성하기</a>
+            </div>
+            <div class="community-pfp-sub-btn">
+                <!-- 병합하고 마이페이지에 있는 이력서, 자소서 이동 -->
+                <button type="button" class="pfp-sub-btn">이력서</button>
+                <button type="button" class="pfp-sub-btn">자소서</button>
+            </div>
         </div>
+        <!-- 회원 프로필&질문하기 버튼 끝 -->
+
+        <!-- 나눔 게시글 리스트 -->
+        <!-- 시작! -->
+<!--        <div class="share-main-box" th:each="share : ${shareList}">-->
+<!--            <div class="share-box">-->
+<!--                <div class="share-sub-content">-->
+<!--                    <div class="share-sub-title">-->
+<!--                        <a class="share-title-path" th:href="@{/share/read(shareNumber=${share.shareNumber})}">-->
+<!--                            <div class="share-title">-->
+<!--                                <span th:if="${share.shareStatus == '1'}">-->
+<!--                                    <span class="N">나눔 중</span>-->
+<!--                                </span>-->
+<!--                                <span th:if="${share.shareStatus == '0'}">-->
+<!--                                    <span class="E">마감</span>-->
+<!--                                </span>-->
+<!--                                |-->
+<!--                                <span th:text="${share.shareTitle}"></span>-->
+<!--                            </div>-->
+<!--                        </a>-->
+<!--                        <div class="share-content" th:text="${share.shareContent}"></div>-->
+<!--                    </div>-->
+<!--                    <div class="share-sub-box">-->
+<!--                        <div class="share-btn">-->
+<!--                            <div class="share-cnt">-->
+<!--                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"-->
+<!--                                     class="bi bi-eye" viewBox="0 0 16 16">-->
+<!--                                    <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>-->
+<!--                                    <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>-->
+<!--                                </svg>-->
+<!--                                <span th:text="${share.shareReadCnt}"></span></div>-->
+<!--                        </div>-->
+<!--                        <div class="share-time" th:text="${share.shareDate}"></div>-->
+<!--                    </div>-->
+
+<!--                </div>-->
+<!--                <div class="share-sub-img">-->
+<!--                    <div class="share-img">-->
+<!--                        <img th:if="${share.fileSystemName == null }"-->
+<!--                             th:src="@{/img/default-camera.png}">-->
+<!--                        <img th:unless="${share.fileSystemName == null}"-->
+<!--                             th:src="${'/upload/' + share.fileUploadPath + '/th_' + share.fileUuid + '_'+ share.fileSystemName}">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
         <!-- 끝! -->
 
 
     </div>
 </div>
-</div>
 <footer class="footer" th:replace="fragment/footer :: footer"></footer>
 <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script th:src="@{/js/share/share.js}"></script>
 <script th:src="@{/js/fragment/header.js}"></script>
+<script th:src="@{/js/user/loginModal.js}"></script>
+<script th:src="@{/js/share/share.js}"></script>
 </body>
 
 </html>

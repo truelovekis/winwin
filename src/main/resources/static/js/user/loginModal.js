@@ -530,11 +530,6 @@ $('#userVerification').on('blur', function (){
     }
 });
 
-
-
-
-
-
 // ========================================
 // 약관 동의 js
 //체크박스 전체선택
@@ -554,6 +549,13 @@ $(".agreement-input-btn").on("click", ".check", function () {
 $(".agreement-check").on("change", function () {
     if ($("#agreement-check2").is(":checked") && $("#agreement-check3").is(":checked") && $("#agreement-check4").is(":checked")) {
         $("#agreement-check1").prop("checked", true);
+    }
+});
+
+$(".check").on("change", function () {
+
+    if ($("#check2").is(":checked") && $("#check3").is(":checked") && $("#check4").is(":checked")) {
+        $("#check1").prop("checked", true);
     }
 });
 
@@ -915,6 +917,7 @@ $(".bi-trash2").on("click", function () {
     $input[0].files = newFiles;
 
     console.log($input[0].files);
+
 });
 
 

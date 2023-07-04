@@ -3,23 +3,35 @@
 
 <configuration>
     <typeAliases>
-<!--        <typeAlias type="com.example.app.dto.UserDto" alias="userDto"/>-->
-        <typeAlias type="com.example.winwin.dto.admin.AdminVo" alias="adminVo"/>
 
+        <!-- User -->
+        <typeAlias type="com.example.winwin.dto.user.UserDto" alias="userDto"/>
+        <typeAlias type="com.example.winwin.dto.file.UserFileDto" alias="userFileDto"/>
+        <typeAlias type="com.example.winwin.dto.user.DiaryDto" alias="diaryDto"/>
+        <typeAlias type="com.example.winwin.dto.user.GradeDto" alias="gradeDto"/>
+        <typeAlias type="com.example.winwin.dto.user.MentorCareerDto" alias="memtorCareerDto"/>
+        <typeAlias type="com.example.winwin.dto.user.MentorDto" alias="memtorDto"/>
+        <typeAlias type="com.example.winwin.dto.user.MentorLikeDto" alias="memtorLikeDto"/>
+        <typeAlias type="com.example.winwin.vo.user.UserVo" alias="userVo"/>
+        <!--        -->
 
         <!--    관리자 페이지    -->
+        <typeAlias type="com.example.winwin.dto.admin.AdminVo" alias="adminVo"/>
         <typeAlias type="com.example.winwin.dto.admin.AdminUserSearchVo" alias="adminUserSearchVo"/>
         <typeAlias type="com.example.winwin.dto.admin.AdminBoardSearchVo" alias="adminBoardSearchVo"/>
         <typeAlias type="com.example.winwin.dto.admin.AdminWingSearchVo" alias="adminWingSearchVo"/>
         <typeAlias type="com.example.winwin.dto.admin.AdminCareerSearchVo" alias="adminCareerSearchVo"/>
         <typeAlias type="com.example.winwin.dto.admin.AdminShareSearchVo" alias="adminShareSearchVo"/>
         <typeAlias type="com.example.winwin.dto.admin.AdminReportSearchVo" alias="adminReportSearchVo"/>
-
-
         <!--   관리자 페이지    -->
 
-
         <typeAlias type="com.example.winwin.dto.admin.MainCategoryVo" alias="mainCategoryVo"/>
+
+        <!-- CS -->
+        <typeAlias type="com.example.winwin.dto.board.CsDto" alias="csDto"/>
+        <typeAlias type="com.example.winwin.dto.board.CsCommentDto" alias="csCommentDto"/>
+        <typeAlias type="com.example.winwin.vo.CsVo" alias="csVo"/>
+        <!--        -->
 
         <!-- 나눔, 나눔 파일 Dto, Vo -->
         <typeAlias type="com.example.winwin.dto.share.ShareDto" alias="shareDto"/>
@@ -27,34 +39,69 @@
         <typeAlias type="com.example.winwin.dto.file.ShareFileDto" alias="shareFileDto"/>
         <!--        -->
 
+        <!-- 진로정보 페이지  -->
+        <typeAlias type="com.example.winwin.dto.careerInfo.CareerInfoDto" alias="careerInfoDto"/>
+        <typeAlias type="com.example.winwin.dto.careerInfo.CareerInfoLikeDto" alias="careerInfoLikeDto"/>
+        <typeAlias type="com.example.winwin.dto.careerInfo.CareerInfoCommentDto" alias="careerInfoCommentDto"/>
+        <!--  -->
+
         <!-- 신고 Dto -->
         <typeAlias type="com.example.winwin.dto.police.PoliceBoardDto" alias="policeBoardDto"/>
+        <typeAlias type="com.example.winwin.dto.police.PoliceCommentDto" alias="policeCommentDto"/>
         <!--        -->
 
-        <!--        <typeAlias type="com.example.app.dto.UserDto" alias="userDto"/>-->
-
-        <!-- mentor-->
-        <typeAlias type="com.example.winwin.dto.mentor.MentorVo" alias="mentorVo"/>
+        <!-- mentor, 진로정보 -->
         <typeAlias type="com.example.winwin.dto.mentor.CareerVo" alias="careerVo"/>
-        <typeAlias type="com.example.winwin.dto.mentor.SkillVo" alias="skillVo"/>
         <typeAlias type="com.example.winwin.dto.mentor.CareerInfoVo" alias="careerInfoVo"/>
+        <typeAlias type="com.example.winwin.dto.mentor.MentorVo" alias="mentorVo"/>
+        <typeAlias type="com.example.winwin.dto.mentor.SkillVo" alias="skillVo"/>
         <typeAlias type="com.example.winwin.dto.mentor.ReviewVo" alias="reviewVo"/>
         <typeAlias type="com.example.winwin.dto.mentor.CategoryVo" alias="categoryVo"/>
         <typeAlias type="com.example.winwin.vo.board.CommunityVo" alias="communityVo"/>
         <typeAlias type="com.example.winwin.vo.board.CommunityCommentVo" alias="communityCommentVo"/>
         <typeAlias type="com.example.winwin.dto.board.CommunityDto" alias="communityDto"/>
+        <typeAlias type="com.example.winwin.dto.board.CommunityGoodDto" alias="communityGoodDto"/>
         <typeAlias type="com.example.winwin.dto.board.CommunityCommentDto" alias="communityCommentDto"/>
+        <typeAlias type="com.example.winwin.dto.board.CommunityCommentUdDto" alias="communityCommentUdDto"/>
         <typeAlias type="com.example.winwin.dto.file.CommunityFileDto" alias="communityFileDto"/>
         <typeAlias type="com.example.winwin.dto.user.UserDto" alias="userDto"/>
         <typeAlias type="com.example.winwin.dto.user.UserPfpDto" alias="userPfpDto"/>
         <typeAlias type="com.example.winwin.vo.myPage.MyPageVo" alias="myPageVo"/>
-        <typeAlias type="com.example.winwin.vo.user.UserVo" alias="userVo"/>
         <typeAlias type="com.example.winwin.vo.user.UserCategoryVo" alias="userCategoryVo"/>
+        <!--        -->
 
-        <typeAlias type="com.example.winwin.dto.board.CsDto" alias="csDto"/>
-        <typeAlias type="com.example.winwin.vo.CsVo" alias="csVo"/>
+        <!-- Qna -->
+        <typeAlias type="com.example.winwin.dto.board.QnaDto" alias="qnaDto"/>
+        <typeAlias type="com.example.winwin.dto.board.QnaCommentDto" alias="qnaCommentDto"/>
+        <typeAlias type="com.example.winwin.dto.board.QnaGoodDto" alias="qnaGoodDto"/>
+        <typeAlias type="com.example.winwin.dto.board.QnaCommentUdDto" alias="qnaCommentUdDto"/>
+        <!--     -->
+
+        <!-- Qs -->
+        <typeAlias type="com.example.winwin.dto.board.QsBridgeDto" alias="qsBridgeDto"/>
+        <!--    -->
+
+        <!-- 프로젝트, 모임 -->
         <typeAlias type="com.example.winwin.dto.board.StudyDto" alias="studyDto"/>
+        <typeAlias type="com.example.winwin.dto.board.StudyLikeDto" alias="studyLikeDto"/>
+        <typeAlias type="com.example.winwin.Dto.board.StudyCommentDto" alias="studyCommentDto"/>
         <typeAlias type="com.example.winwin.vo.board.StudyVo" alias="studyVo"/>
-        <typeAlias type="com.example.winwin.dto.user.UserDto" alias="userDto"/>
+        <!--        -->
+
+        <!-- 무한 스크롤 처리 criteria, pageVo-->
+        <typeAlias type="com.example.winwin.vo.infinityScroll.Criteria" alias="criteria"/>
+        <typeAlias type="com.example.winwin.vo.infinityScroll.PageVo" alias="pageVo"/>
+        <!--        -->
+
+        <!-- 쪽지 -->
+        <typeAlias type="com.example.winwin.dto.chatting.ChattingDto" alias="chattingDto"/>
+        <!--     -->
+
+        <!-- 이력서  -->
+        <typeAlias type="com.example.winwin.dto.file.ResumeFileDto" alias="resumeFileDto"/>
+
+        <!--        -->
+
     </typeAliases>
+
 </configuration>

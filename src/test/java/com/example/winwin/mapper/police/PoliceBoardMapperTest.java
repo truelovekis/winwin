@@ -49,6 +49,7 @@ class PoliceBoardMapperTest {
 
 //        userMapper.insert(userDto);
 
+
         shareDto = new ShareDto();
         shareDto.setShareTitle("title");
         shareDto.setShareContent("content");
@@ -64,7 +65,7 @@ class PoliceBoardMapperTest {
         policeBoardDto.setPoliceCategory(1L);
         policeBoardDto.setUserNumber(userDto.getUserNumber());
 
-        policeBoardMapper.shareReportInsert(policeBoardDto);
+        policeBoardMapper.reportInsert(policeBoardDto);
     }
 
     @Test

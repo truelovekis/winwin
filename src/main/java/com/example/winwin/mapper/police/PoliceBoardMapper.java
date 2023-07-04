@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface PoliceBoardMapper {
 
 //    나눔 글 신고하기
-    void shareReportInsert(PoliceBoardDto policeBoardDto);
+    void reportInsert(PoliceBoardDto policeBoardDto);
 
 //    신고항목 게시글 번호로 조회하기
     PoliceBoardDto shareReportSelect(Long boardNumber);
