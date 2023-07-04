@@ -29,7 +29,9 @@
 <div class="background">
   <div class="startpage">
     <div class="pageflex">
-      <img src="./img/img.png" alt="" class="main-img" />
+      <img th:if="${profile == null}" class="main-img" src="/img/profile-basic.png"/>
+      <img th:unless="${profile == null}" class="main-img"
+           th:style="${'background-image: url(/profile/' + profile.pfpUuid + '_' + profile.pfpSystemName + ')'}"/>
       <div class="subflex">
         <div class="star-score">
               <span class="ipc-rating-star ipc-rating-star--baseAlt ipc-rating-star--imdb ipc-rating-star-group--imdb">
@@ -56,17 +58,17 @@
     </div>
     <div class="info-text">
       <div class="name-box">
-
-        <h1 class="name-text" th:text="${profile.userName}"></h1>
+      <input type="hidden" th:value="${profile2.mentorNumber}">
+        <h1 class="name-text" th:text="${profile2.userName}"></h1>
       </div>
-      <p class="text-base" th:text="${profile.userBelong}"></p>
+      <p class="text-base" th:text="${profile2.userBelong}"></p>
       <div class="tag-flex">
         <button type="button" class="Tag">
           <span class="Posts"></span>
         </button>
       </div>
     </div>
-    <p class="appeal" th:text="${profile.mentorPr}"></p>
+    <p class="appeal" th:text="${profile2.mentorPr}"></p>
   </div>
 
 </div>

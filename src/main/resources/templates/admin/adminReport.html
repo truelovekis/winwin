@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>관리자 페이지 - 신고 내역</title>
+    <link rel="stylesheet" th:href="@{/css/user/loginModal.css}" />
     <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
     <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
     <link rel="stylesheet" th:href="@{/css/fragment/adminSideBar.css}" />
@@ -53,6 +54,7 @@
                 <input name="name" type="text" placeholder="이름" class="search-text" style="font-family: NanumSquareAcr;">
                 <span>게시판 :  </span>
                 <select name="bigCode" id="identity" class="search-text2" style="font-family: NanumSquareAcr;">
+                    <option value="">선택</option>
                     <option value="100">멘토멘티</option>
                     <option value="200">진로정보</option>
                     <option value="300">QnA</option>
@@ -63,6 +65,7 @@
                 </select>
                 <span>신고사유 : </span>
                 <select name="code" id="reason" style="font-family: NanumSquareAcr;">
+                    <option value="">선택</option>
                     <option value="1">욕설/비방글</option>
                     <option value="2">저작권침해</option>
                     <option value="3">음란성</option>
@@ -73,8 +76,9 @@
                 </select>
                 <span>상태 : </span>
                 <select name="status" id="result" class="search-text2" style="font-family: NanumSquareAcr;">
-                    <option value="3">영구 정지</option>
+                    <option value="">선택</option>
                     <option value="2">일반 신고 회원</option>
+                    <option value="3">영구 정지</option>
                 </select>
                 <button type="text" class="search-btn" style="font-family: NanumSquareAcr;">검색</button>
             </div>
@@ -110,7 +114,8 @@
                         <td class="report-reason" align="center" th:text="${admin.policeCategoryName}"></td>
                         <td class="board-public-secret" align="center">
                             <select name="user-report-select" class="user-report-select" style="font-family: NanumSquareAcr;">
-                                <option value="2">일반 신고 회원</option>
+                                <option value="">선택</option>
+                                <option value="2">신고 회원</option>
                                 <option value="3">영구 정지</option>
                             </select>
                         </td>
@@ -142,5 +147,6 @@
 <script th:src="@{/js/admin/adminReport.js}"></script>
 <script th:src="@{/js/admin/reportStatus.js}"></script>
 <script th:src="@{/js/fragment/header.js}" ></script>
+<script th:src="@{/js/user/loginModal.js}"></script>
 </body>
 </html>

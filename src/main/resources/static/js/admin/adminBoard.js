@@ -34,8 +34,8 @@ function handlePublicSecret(checkboxIndexes, selectValue) {
             });
         } else if (selectValue === "0") {
             publicSecretButton.text("비공개").css({
-                "background-color": "rgb(255, 237, 237)",
-                color: "red",
+                "background-color": "rgb(220 255 226)",
+                color: "#587c60",
             });
         }
     });

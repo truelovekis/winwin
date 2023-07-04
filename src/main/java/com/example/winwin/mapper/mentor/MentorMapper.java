@@ -2,6 +2,7 @@ package com.example.winwin.mapper.mentor;
 
 import com.example.winwin.dto.mentor.*;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.lang.management.MemoryNotificationInfo;
 import java.util.List;
@@ -15,7 +16,7 @@ public interface MentorMapper {
 
 //    멘토:멘티
 //    등록된 멘토 프로필 리스트 조회
-    public List<MentorVo> mentorList();
+    public List<MentorVo> mentorList(Long userNumber);
 
 //    멘토가 등록한 경력 리스트
     public List<CareerVo> mentorCareer(Long mentorNumber);
@@ -59,4 +60,13 @@ public interface MentorMapper {
 
 //    로그인한 회원의 멘토 프로필
     public MentorVo loginMentor(Long mentorNumber);
+
+//    관심 멘토
+    public void mentorLike(LikeDto likeDto);
+
+//    좋아요 삭제
+    public void likeDelete(LikeDto likeDto);
+
+//    멘토 신청
+    public void addMentor(MentorVo mentorVo);
 }

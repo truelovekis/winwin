@@ -18,5 +18,9 @@ public interface CommunityMapper {
     public CommunityVo select(Long communityNumber);
 //    전체조회
     public List<CommunityVo> selectAll(CommunityVo communityVo);
+//    조회수증가
+    public int upHit(Long communityNumber);
+//    댓글수조회
+    public int commentCnt(Long communityNumber);
 
 }

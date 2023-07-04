@@ -1,6 +1,7 @@
 package com.example.winwin.controller.admin;
 
 import com.example.winwin.dto.admin.*;
+import com.example.winwin.dto.user.UserDto;
 import com.example.winwin.service.admin.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -18,6 +21,8 @@ import java.util.List;
 public class AdminController {
 
     private final AdminService adminService;
+
+
 
 
     @GetMapping("/user")
@@ -120,13 +125,4 @@ public class AdminController {
         return "admin/adminReport";
     }
 
-    // 데이터 가져오기
-    @PostMapping("/mainCategory")
-    public String adminMainCategory(Model model){
-        List<MainCategoryVo> mainCategoryList = adminService.findMainCategory();
-        System.out.println("mainCategoryList");
-        System.out.println(mainCategoryList);
-        model.addAttribute("mainCategoryList", mainCategoryList);
-        return "admin/adminJobBoard";
-    }
 }

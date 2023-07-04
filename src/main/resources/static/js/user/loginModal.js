@@ -56,7 +56,7 @@ $('.modal-next').on('click', function(){
 
     if($current.hasClass('agreement-box')){
         //약관 확인
-        if (!$("#check2").is(":checked") || !$("#check3").is(":checked")) {
+        if (!$("#agreement-check2").is(":checked") || !$("#agreement-check3").is(":checked")) {
             console.log('약관 확인 처리!')
             return;
         }
@@ -108,7 +108,7 @@ $('.modal-next').on('click', function(){
     }
 
     if($current.hasClass('job-dep-box')){
-        $next = $('.identity-belong-box');
+        $next = $('.goal-box');
     }
 
     if ($current.hasClass('identity-belong-box')){
@@ -126,12 +126,23 @@ $('.modal-next').on('click', function(){
 
 
     if ($current.hasClass('mentor-goal-box')){
+
+        if($('.userBelong').val() == ''){
+            $('#com-check-msg').html("회사명을 입력해 주세요.");
+            return;
+        }
         $next = $('.sign-box');
         $('.modal-next').addClass('none');
         $('.home-btn').removeClass('none');
     }
 
     if ($current.hasClass('mentor-goal-2-box')){
+
+        if($('.userBelong').val() == ''){
+            $('#un-check-msg').html("학교명을 입력해 주세요.");
+            return;
+        }
+
         $next = $('.sign-box');
         console.log("마지막 페이지");
         $('.modal-next').addClass('none');
@@ -202,18 +213,24 @@ $('.join-link').on('click', function(e){
 // 가입 목적 버튼에 따라 다음페이지가 달라짐
 $('.btn1').on('click', function(){
     console.log("btn1!!!!");
+    console.log($('.goal-mm-btn').find($('.positionInput')).val());
+    $('.goal-mm-value').val('mentor');
 
     $next = $('.identity-belong-box');
+
 
 })
 
 $('.btn3').on('click', function (){
+    console.log($('.goal-mm-btn').find($('.positionInput')).val());
+    $('.goal-mm-value').val('mentorMentee');
     $next = $('.identity-belong-box');
 
 })
 
 $('.btn2').on('click', function (){
-
+    console.log($(this).find($('.positionInput')).val());
+    $('.goal-mm-value').val('mentee');
     $next = $('.sign-box');
 
 })
@@ -256,6 +273,39 @@ $('.login-end').on('click', function (){
     }
 });
 
+// $('.login-end').on('click', function (){
+//     console.log('login!!!');
+//
+//     $.ajax({
+//         url : '/mentors/mentor',
+//         type : 'post',
+//         data : JSON.stringify({userId : $('#login-id').val() , userPassword: $('#login-password').val()}),
+//         contentType : "application/json; charset=utf-8",
+//         async : false,
+//         success: function (result2){
+//             $(".modal-container").addClass("none");
+//             $('body').css('overflow', 'auto');
+//             modalSetUp();
+//
+//             if(result2 == 0){
+//                 console.log("없는 멘토 회원")
+//             }else{
+//                 let tmp = window.location.href;
+//                 window.location.href = tmp;
+//             }
+//         }
+//     })
+//     function modalSetUp(){
+//         $('.modal-wrap>div').addClass('none');
+//         $('.modal-wrap>button').addClass('none');
+//         $('.login-box').removeClass('none');
+//         $('.login-end').removeClass('none');
+//         $('.login-box').removeClass('disappear');
+//         $current = $('.login-box');
+//         $next = null;
+//         $('.form-reset')[0].reset();
+//     }
+// });
 
 
 // 회원가입 처리
@@ -328,9 +378,29 @@ $('.home-btn').on('click', function (){
     form.appendChild(hiddenField);
 
 
+    $('.job-tag>input').each((i, obj) => {
+        let value = $(obj).val();
+
+        hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "subNumber");
+        hiddenField.setAttribute("value", value);
+        form.appendChild(hiddenField);
+    })
+
+    hiddenField = document.createElement("input");
+    hiddenField.setAttribute("type", "hidden");
+    hiddenField.setAttribute("name", "userPosition");
+    hiddenField.setAttribute("value", $('.goal-mm-value').val());
+    form.appendChild(hiddenField);
+
+
+
+
     document.body.appendChild(form);
     form.submit();
 });
+
 
 
 
@@ -396,18 +466,18 @@ $('#userNickname').on('blur', function() {
 
 
 // SMS 인증
-// $('#sms-check').on('click', function() {
-//     $.ajax({
-//         url: '/users/v1/send',
-//         type: 'post',
-//         data : JSON.stringify({phoneNumber : $('#userPhoneNumber').val()}),
-//         contentType : "application/json; charset=utf-8",
-//         success : function(result) {
-//             console.log('통신 성공!');
-//             $('#user-phone-msg').text('인증번호 전송 완료');
-//         }
-//     });
-// });
+$('#sms-check').on('click', function() {
+    $.ajax({
+        url: '/users/v1/send',
+        type: 'post',
+        data : JSON.stringify({phoneNumber : $('#userPhoneNumber').val()}),
+        contentType : "application/json; charset=utf-8",
+        success : function(result) {
+            console.log('통신 성공!');
+            $('#user-phone-msg').text('인증번호 전송 완료');
+        }
+    });
+});
 
 
 
@@ -493,28 +563,30 @@ $('#userVerification').on('blur', function (){
     }
 });
 
-
-
-
-
-
 // ========================================
 // 약관 동의 js
 //체크박스 전체선택
-$("#check1").on("click", function () {
+$("#agreement-check1").on("click", function () {
     if ($(this).is(":checked")) {
-        $(".check").prop("checked", true);
+        $(".agreement-check").prop("checked", true);
     } else {
-        $(".check").prop("checked", false);
+        $(".agreement-check").prop("checked", false);
     }
 });
 
 $(".agreement-input-btn").on("click", ".check", function () {
     console.log("check");
-    $("#check1").prop("checked", false);
+    $("#agreement-check1").prop("checked", false);
+});
+
+$(".agreement-check").on("change", function () {
+    if ($("#agreement-check2").is(":checked") && $("#agreement-check3").is(":checked") && $("#agreement-check4").is(":checked")) {
+        $("#agreement-check1").prop("checked", true);
+    }
 });
 
 $(".check").on("change", function () {
+
     if ($("#check2").is(":checked") && $("#check3").is(":checked") && $("#check4").is(":checked")) {
         $("#check1").prop("checked", true);
     }
@@ -525,30 +597,30 @@ $(".check").on("change", function () {
 
 // 1,2,3차 카테고리 선택
 
-const selectBoxElements = document.querySelectorAll(".select");
+const selectBoxElements = document.querySelectorAll(".job-select");
 
 function toggleSelectBox(selectBox) {
-    selectBox.classList.toggle("active");
+    selectBox.classList.toggle("job-active");
 }
 
 function selectOption(optionElement) {
-    const selectBox = optionElement.closest(".select");
-    const selectedElement = selectBox.querySelector(".selected-value");
+    const selectBox = optionElement.closest(".job-select");
+    const selectedElement = selectBox.querySelector(".job-selected-value");
     selectedElement.textContent = optionElement.textContent;
 }
 
 selectBoxElements.forEach((selectBoxElement) => {
     selectBoxElement.addEventListener("click", function (e) {
         const targetElement = e.target;
-        const isOptionElement = targetElement.classList.contains("option");
+        const isOptionElement = targetElement.classList.contains("job-option");
 
         if (isOptionElement) {
             selectOption(targetElement);
         }
 
         toggleSelectBox(selectBoxElement);
-        if (e.target.classList.contains("option")) {
-            $(e.target).closest(".select").find(".arrow").removeClass("arrow-after");
+        if (e.target.classList.contains("job-option")) {
+            $(e.target).closest(".job-select").find(".job-arrow").removeClass("job-arrow-after");
         }
 
         e.preventDefault();
@@ -557,164 +629,238 @@ selectBoxElements.forEach((selectBoxElement) => {
 
 document.addEventListener("click", function (e) {
     const targetElement = e.target;
-    const isSelect = targetElement.classList.contains("select") || targetElement.closest(".select");
+    const isSelect = targetElement.classList.contains("job-select") || targetElement.closest(".job-select");
 
     if (isSelect) {
         return;
     }
 
-    const allSelectBoxElements = document.querySelectorAll(".select");
+    const allSelectBoxElements = document.querySelectorAll(".job-select");
 
     allSelectBoxElements.forEach((boxElement) => {
-        boxElement.classList.remove("active");
-        $(boxElement).find(".arrow").removeClass("arrow-after");
+        boxElement.classList.remove("job-active");
+        $(boxElement).find(".job-arrow").removeClass("job-arrow-after");
     });
 });
 
 // 클릭시 arrow 180도 회전
-$(".select").on("click", function (e) {
+$(".job-select").on("click", function (e) {
     // $('.arrow').css({"transform":"rotate(180deg)","transition":"all ease 0.5s"})
 
     // $(this).find('.arrow').css({"transform":"rotate(180deg)","transform-origin":"center","transition":"all ease 0.5s"})
 
-    if (e.target.tagName != "LI") {
-        $(this).find(".arrow").addClass("arrow-after");
-    }
+    // if (e.target.tagName != "LI") {
+    //     $(this).find(".job-arrow").addClass("job-arrow-after");
+    // }
 });
 
-$(".third-job-box").on("click", ".option2", function () {
+$(".job-third-job-box").on("click", ".job-option2", function () {
     let text = $(this).text();
 
-    let existingTags = $(".select-tag .tag");
-    if (existingTags.length >= 3) {
-        return; // 최대 3개의 태그만 생성 가능
-    }
+    // let existingTags = $(".job-select-tag .job-tag");
+    // if (existingTags.length >= 3) {
+    //     return; // 최대 3개의 태그만 생성 가능
+    // }
 
-    let tagHtml = `<div class="tag">@${text}</div>`;
+    let tagHtml = `<div class="job-tag">@${text}</div>`;
 
-    $(".select-tag").append(tagHtml);
+    $(".job-select-tag").append(tagHtml);
 });
 
-$(".select-tag").on("click", ".tag", function () {
+$(".job-select-tag").on("click", ".job-tag", function () {
+    $(this).detach();
+});
+
+// 나의 관심분야 3가지 카테고리 박스
+let $boxes = $('.job-select');
+
+//클릭하면 리스트 div 보기,닫기
+$boxes.on('click', function(){
+    if($(this).closest('.job-select').find('.job-option-box').hasClass('none')){
+        $('.job-option-box').addClass('none');
+        $(this).closest('.job-select').find('.job-option-box').toggleClass('none');
+    }else{
+        $('.job-option-box').addClass('none');
+    }
+});
+
+//고른 항목 텍스트 상위로 복사
+$('.job-select').on('click', '.option', function(){
+    $(this).closest('.job-select').find('.job-selected-value').text($(this).text());
+});
+
+//다른 곳 클릭 시 리스트 div 닫기
+$("body").on('click', function(e){
+    if(!$(e.target).closest('.job-select').hasClass('job-select')){
+        $boxes.each((i, box) => {$(box).find('.job-option-box').addClass('none');});
+    }
+});
+
+//3차 카테고리 선택 시 태그 추가(최대 3개)
+$(".job-third-job-box").on("click", ".job-option", function () {
+    let text = $(this).text();
+    let val = $(this).val();
+
+    let existingTags = $(".job-select-tag .job-tag");
+    if (existingTags.length >= 3) { return; }
+
+    for(let i=0; i<existingTags.length; i++){
+        if(existingTags.eq(i).text() == '@' + text){
+            return;
+        }
+    }
+
+    let tagHtml = `<div class="job-tag" name="subNumber" value="${val}">@${text}
+                                <input type="hidden" name="subNumber" value="${val}"/>
+                            </div>
+                            `;
+
+    $(".job-select-tag").append(tagHtml);
+});
+
+$(".job-select-tag").on("click", ".job-tag", function () {
     $(this).detach();
 });
 
 // 1, 2, 3차 카테고리 별 항목 띄우기
 
 // 1차 카테고리
-let $category = $(".first-option-box");
+let $category = $(".job-first-option-box");
 // 2차 카테고리
-let $jobBox = $(".second-job-box");
+let $jobBox = $(".job-second-job-box");
 // 3차 카테고리
-let $depBox = $(".third-job-box");
+let $depBox = $(".job-third-job-box");
 
-$(".option").on("click", function () {
+$(".job-option").on("click", function () {
     let text = "";
     $jobBox.html(text);
     // 직무일때
+    let ss = $(this).val();
     if ($(this).val() == "1") {
         // 백엔드 작업시 비동기 통신 사용해서 꽂기
-        // $.ajax({
-        //   url: "....",
-        //   type: "get",
-        //   data: { cateNumber: 1 },
-        //   success: function (result) {
-        //     text = makeMiddleCate(result);
-        //   },
-        // });
+        $.ajax({
+          url: "/users/categoryJ",
+          type: "get",
+          data: { mainCode: ss },
+          dataType : 'json',
+          success: function (result) {
+            makeMiddleCate(result);
+          },
+        });
 
-        let obj = [
-            { number: 1, name: "서비스업" },
-            { number: 2, name: "의료/제약" },
-            { number: 3, name: "제조/화학" },
-            { number: 4, name: "판매/유통" },
-            { number: 5, name: "IT/웹/통신" },
-        ];
-        text = makeMiddleCate(obj);
+        // let obj = [
+        //     { number: 1, name: "서비스업" },
+        //     { number: 2, name: "의료/제약" },
+        //     { number: 3, name: "제조/화학" },
+        //     { number: 4, name: "판매/유통" },
+        //     { number: 5, name: "IT/웹/통신" },
+        // ];
+        // text = makeMiddleCate(obj);
     }
 
     // 학과일때
     if ($(this).val() == "2") {
         // 백엔드 작업시 비동기 통신 사용해서 꽂기
-        // $.ajax({
-        //   url: "....",
-        //   type: "get",
-        //   data: { cateNumber: 1 },
-        //   success: function (result) {
-        //     text = makeMiddleCate(result);
-        //   },
-        // });
-
-        let obj = [
-            { number: 11, name: "사회" },
-            { number: 12, name: "자연과학" },
-            { number: 13, name: "의약" },
-            { number: 14, name: "교육" },
-        ];
-        text = makeMiddleCate(obj);
+        $.ajax({
+          url: "/users/categoryH",
+          type: "get",
+            data: { mainCode: ss },
+            dataType : 'json',
+          success: function (result) {
+            makeMiddleCate(result);
+          },
+        });
+        //
+        // let obj = [
+        //     { number: 11, name: "사회" },
+        //     { number: 12, name: "자연과학" },
+        //     { number: 13, name: "의약" },
+        //     { number: 14, name: "교육" },
+        // ];
+        // text = makeMiddleCate(obj);
     }
 
     $jobBox.html(text);
 });
 
-$(".second-job-box").on("click", ".option", function () {
+$(".job-second-job-box").on("click", ".job-option", function () {
     let text = "";
 
-    if ($(this).val() == "1") {
-        let obj = [{ number: 1, name: "서비스업1" }];
-        text = makeSmallCate(obj);
-    } else if ($(this).val() == "2") {
-        let obj = [{ number: 2, name: "의료/제약1" }];
-        text = makeSmallCate(obj);
-    } else if ($(this).val() == "3") {
-        let obj = [{ number: 3, name: "제조/화학1" }];
-        text = makeSmallCate(obj);
-    } else if ($(this).val() == "4") {
-        let obj = [{ number: 4, name: "판매/유통1" }];
-        text = makeSmallCate(obj);
-    } else if ($(this).val() == "5") {
-        let obj = [{ number: 5, name: "IT/웹/통신1" }];
-        text = makeSmallCate(obj);
-    } else if ($(this).val() == "11") {
-        let obj = [{ number: 11, name: "사회1" }];
-        text = makeSmallCate(obj);
-    } else if ($(this).val() == "12") {
-        let obj = [{ number: 12, name: "자연과학1" }];
-        text = makeSmallCate(obj);
-    } else if ($(this).val() == "13") {
-        let obj = [{ number: 13, name: "의약1" }];
-        text = makeSmallCate(obj);
-    } else if ($(this).val() == "14") {
-        let obj = [{ number: 14, name: "교육1" }];
-        text = makeSmallCate(obj);
-    }
-
+    $depBox.html(text)
+    let ss = $(this).val();
+    $.ajax({
+        url : '/users/subCategory',
+        type : 'get',
+        data : { mainCode : ss },
+        dataType : 'json',
+        success : function (result) {
+            let text2 = '';
+            result.forEach(r => {
+                text2 +=`
+                    <li class="job-option" value="${r.subNumber}">${r.subName}</li>
+                    `;
+            });
+            $('.job-third-job-box').html(text2);
+        }
+    });
     $depBox.html(text);
+
+    // if ($(this).val() == "1") {
+    //     let obj = [{ number: 1, name: "서비스업1" }];
+    //     text = makeSmallCate(obj);
+    // } else if ($(this).val() == "2") {
+    //     let obj = [{ number: 2, name: "의료/제약1" }];
+    //     text = makeSmallCate(obj);
+    // } else if ($(this).val() == "3") {
+    //     let obj = [{ number: 3, name: "제조/화학1" }];
+    //     text = makeSmallCate(obj);
+    // } else if ($(this).val() == "4") {
+    //     let obj = [{ number: 4, name: "판매/유통1" }];
+    //     text = makeSmallCate(obj);
+    // } else if ($(this).val() == "5") {
+    //     let obj = [{ number: 5, name: "IT/웹/통신1" }];
+    //     text = makeSmallCate(obj);
+    // } else if ($(this).val() == "11") {
+    //     let obj = [{ number: 11, name: "사회1" }];
+    //     text = makeSmallCate(obj);
+    // } else if ($(this).val() == "12") {
+    //     let obj = [{ number: 12, name: "자연과학1" }];
+    //     text = makeSmallCate(obj);
+    // } else if ($(this).val() == "13") {
+    //     let obj = [{ number: 13, name: "의약1" }];
+    //     text = makeSmallCate(obj);
+    // } else if ($(this).val() == "14") {
+    //     let obj = [{ number: 14, name: "교육1" }];
+    //     text = makeSmallCate(obj);
+    // }
+    //
+    // $depBox.html(text);
 });
 
 // 2, 3차 카테고리 선택 시 항목 띄어주는 함수
 
-function makeMiddleCate(obj) {
-    let list = obj;
-    let text = "";
+function makeMiddleCate(result) {
+    let text2 = '';
 
-    list.forEach((cate) => {
-        text += `<li class="option" value="${cate.number}">${cate.name}</li>`;
+    result.forEach((r) => {
+        text2 += `<li class="job-option" value="${r.mainCode}">${r.mainName}</li>`;
     });
 
-    return text;
+    $('.job-second-job-box').html(text2);
+
+    return text2;
 }
 
-function makeSmallCate(obj) {
-    let list = obj;
-    let text = "";
-
-    list.forEach((cate) => {
-        text += `<li class="option2" value="${cate.number}">${cate.name}</li>`;
-    });
-
-    return text;
-}
+// function makeSmallCate(obj) {
+//     let list = obj;
+//     let text = "";
+//
+//     list.forEach((cate) => {
+//         text += `<li class="job-option job-option2" value="${cate.number}">${cate.name}</li>`;
+//     });
+//
+//     return text;
+// }
 
 // ========================================
 // 직장인 인증 js
@@ -804,6 +950,7 @@ $(".bi-trash2").on("click", function () {
     $input[0].files = newFiles;
 
     console.log($input[0].files);
+
 });
 
 

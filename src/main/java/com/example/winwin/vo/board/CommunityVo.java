@@ -12,10 +12,12 @@ public class CommunityVo {
     private String categoryName;  // 추가함
     private String userNickname;  // 추가함
     private String userBelong; // 추가함
+    private String userIdentity; // 추가함
     private String communityTitle;
     private String communityContent;
     private String communityDate;
     private int communityCnt;
+    private int commentCnt;
     private Long categoryNumber;
     private Long userNumber;
     private String userId;
@@ -23,4 +25,7 @@ public class CommunityVo {
     private String fileUploadPath;
     private String fileUuid;
     private String categoryTypeStr;
+    private String userStatus; // 추가함
+    private String communityStatus; // 추가함
+
 }

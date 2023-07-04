@@ -335,7 +335,7 @@ thead tr {
 /* 테이블 및 공개 비공개 버튼 */
 
 .remove-delete-button {
-    margin-left: 965px;
+    margin-left: 927px;
     margin-top: 10px;
 }
 
@@ -382,6 +382,10 @@ input[type="date"]::before {
     border: 1px solid rgba(115, 114, 114, 0.24);
     padding: 10px 10px;
 }
+
+/*.job-big-cateogry{*/
+/*    background-color: #eaf4ff ;*/
+/*}*/
 
 .job-category {
     display: flex;
@@ -457,3 +461,10 @@ input[type="date"]::before {
 input {
     font-family: "NanumSquare";
 }
+
+
+/*.code-btn:hover {*/
+/*    padding: 10px;*/
+/*    background-color: #007aff;*/
+/*    border-radius: 5px;*/
+/*}*/

@@ -56,8 +56,3 @@ $fileInput.on('change', function(){
     });
 
 });
-
-// $('.write-btn').on('click', function (){
-//     $('#share-write').submit();
-//     window.location.href = '/share/list';
-// });

@@ -270,14 +270,14 @@
 
 /* =================================================== */
 
-input[type="checkbox"] {
+.agreement-input[type="checkbox"] {
     display: none;
 }
 
-.label1,
-.label2,
-.label3,
-.label4 {
+.agreement-label1,
+.agreement-label2,
+.agreement-label3,
+.agreement-label4 {
     display: inline-block;
     width: 15px;
     height: 15px;
@@ -297,10 +297,10 @@ input[type="checkbox"] {
     border: 0;
 }
 
-#check1:checked ~ .label1::after,
-#check2:checked ~ .label2::after,
-#check3:checked ~ .label3::after,
-#check4:checked ~ .label4::after {
+#agreement-check1:checked ~ .agreement-label1::after,
+#agreement-check2:checked ~ .agreement-label2::after,
+#agreement-check3:checked ~ .agreement-label3::after,
+#agreement-check4:checked ~ .agreement-label4::after {
     content: "✔";
     font-size: 13px;
     width: 15px;
@@ -709,11 +709,11 @@ input[type="checkbox"] {
     margin-bottom: 15px;
 }
 
-ul {
+.job-dep-box > ul {
     list-style-type: none;
 }
 
-.select {
+.job-select {
     display: inline-block;
     width: 100%;
     border: 1px solid #ddd;
@@ -722,7 +722,7 @@ ul {
     height: 45px;
 }
 
-.select:hover {
+.job-select:hover {
     /*box-shadow: 0 10px 10px -5px;*/
     -webkit-box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.12), 0 10px 10px -5px rgba(0, 0, 0, 0.24);
     -moz-box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.12), 0 10px 10px -5px rgba(0, 0, 0, 0.24);
@@ -736,44 +736,44 @@ ul {
     transition: all 0.25s ease-in-out;
 }
 
-.select .selected {
+.job-select .job-selected {
     display: flex;
     justify-content: space-between;
     padding: 8px 5px;
 }
 
-.selected {
+.job-selected {
     margin-top: 3px;
 }
 
-.select .selected .selected-value {
+.job-select .job-selected .job-selected-value {
     max-width: 130px;
     cursor: pointer;
 }
 
-.select .selected .arrow {
+.job-select .job-selected .job-arrow {
     background-size: 50% 50%;
 }
 
-.arrow {
+.job-arrow {
     display: flex;
     justify-content: center;
     align-items: center;
     transition: all ease 0.5s;
 }
 
-.arrow-after {
+.job-arrow-after {
     transform: rotate(180deg);
     transform-origin: center;
 }
 
-.arrow > svg {
+.job-arrow > svg {
     cursor: pointer;
 }
 
 /* 1차 카테고리 font */
-.select ul li,
-.select .selected .selected-value {
+.job-select ul li,
+.job-select .job-selected .job-selected-value {
     white-space: nowrap;
     /* 줄바꿈 안함 */
     overflow: hidden;
@@ -783,8 +783,8 @@ ul {
     font-weight: 600;
 }
 
-.select ul li,
-.select .selected .selected-value {
+.job-select ul li,
+.job-select .job-selected .job-selected-value {
     white-space: nowrap;
     /* 줄바꿈 안함 */
     overflow: hidden;
@@ -794,7 +794,7 @@ ul {
     font-weight: 600;
 }
 
-.select ul {
+.job-select ul {
     width: 250px;
     border: 1px solid #ddd;
     display: none;
@@ -805,20 +805,20 @@ ul {
     cursor: pointer;
 }
 
-.select.active ul {
+.job-select.job-active ul {
     display: initial;
 }
 
-.select ul li {
+.job-select ul li {
     padding: 8px 5px;
 }
 
-.select ul li:hover {
+.job-select ul li:hover {
     background-color: rgb(241, 245, 249);
 }
 
 /* 카테고리 선택 시 카테고리 출력 css */
-.tag-wrap {
+.job-tag-wrap {
     /* margin-left: 25px; */
     display: flex;
     justify-content: center;
@@ -826,7 +826,7 @@ ul {
     /* flex-direction: column; */
 }
 
-.select-tag {
+.job-select-tag {
     display: flex;
     justify-content: center;
     margin-top: 30px;
@@ -834,16 +834,16 @@ ul {
     width: 260px;
 }
 
-.select-tag {
+.job-select-tag {
     display: flex;
     justify-content: center;
 }
 
-.select-tag .tag {
+.job-select-tag .job-tag {
     margin: 0 5px;
 }
 
-.tag {
+.job-tag {
     display: inline-block;
     background-color: rgb(241, 245, 249);
     border-radius: 10px;
@@ -856,7 +856,7 @@ ul {
     cursor: pointer;
 }
 
-.tag:hover {
+.job-tag:hover {
     /*box-shadow: 0 10px 10px -5px;*/
     -webkit-box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.12), 0 10px 10px -5px rgba(0, 0, 0, 0.24);
     -moz-box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.12), 0 10px 10px -5px rgba(0, 0, 0, 0.24);
@@ -1153,12 +1153,19 @@ ul {
     height: 30px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
     padding-left: 5px;
 }
 
 #userBelong::placeholder{
     font-size: 12px;
+}
+
+#com-check-msg{
+    font-size: 8px;
+    color: #e06c6c;
+    display: block;
+    margin: 5px 0px;
 }
 
 /*===========================================*/
@@ -1339,12 +1346,20 @@ ul {
     height: 30px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
+    margin-top: 5px;
     padding-left: 5px;
 }
 
 .userBelong::placeholder{
     font-size: 12px;
+}
+
+#un-check-msg{
+    display: block;
+    margin: 5px 0px;
+    font-size: 8px;
+    color: #e06c6c;
 }
 
 /*===========================================*/

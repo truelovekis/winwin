@@ -2,82 +2,85 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!--  <link rel="stylesheet" th:href="@{/css/user/loginModal.css}" />-->
-  <link rel="stylesheet" th:href="@{/css/share/shareWrite.css}">
-  <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
-  <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
-  <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/user/loginModal.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fragment/header.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
+    <link rel="stylesheet" th:href="@{/css/share/shareWrite.css}">
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet"/>
     <style>
-      body {
-        font-family: "NanumSquareAcr";
-      }
+        body {
+            font-family: "NanumSquareAcr";
+        }
     </style>
-  <title>나눔 - 글 작성하기</title>
+    <title>나눔 - 글 작성하기</title>
 </head>
 
 <body>
 <header class="header" th:replace="fragment/header :: header"></header>
-  <form th:action="@{/share/write}" method="post" enctype="multipart/form-data" id="share-write">
+<form th:action="@{/share/write}" method="post" enctype="multipart/form-data" id="share-write">
     <div class="write-main">
-      <input type="hidden" name="userNumber" value="8">
-      <div class="main-title">
-        <div class="sub1">
-          <h2>물건 나눔하기</h2>
-          <a th:href="@{/share/list}">
-          <img th:src="@{/img/k.png}" class="k">
-          </a>
-        </div>
-
-      </div>
-      <div class="write-main-box">
-        <div class="write-category">
+        <div class="main-title">
+            <div class="sub1">
+                <h2>물건 나눔하기</h2>
+                <a th:href="@{/share/list}">
+                    <img th:src="@{/img/k.png}" class="k">
+                </a>
+            </div>
 
         </div>
-        <div class="write-title content-a">
-          <input type="text" name="shareTitle" placeholder="제목을 입력하세요" style="font-family: NanumSquareAcr;">
+        <div class="write-main-box">
+            <div class="write-category">
+
+            </div>
+            <div class="write-title content-a">
+                <input type="text" name="shareTitle" placeholder="제목을 입력하세요" style="font-family: NanumSquareAcr;">
+            </div>
+            <div class="write-content content-a">
+                <textarea name="shareContent" id="" cols="30" rows="10" placeholder="나눔 할 물건의 사진을 첨부하고 글을 작성해보세요."
+                          style="font-family: NanumSquareAcr;"></textarea>
+            </div>
+
+            <div class="file-main-img">
+                <div class="file-img">
+                    <label for="share-file" class="input-file-btn">
+                        <img src="../../img/camera.png">
+                        <div class="img-text">
+                            이미지<br>
+                            업로드<br>
+                            (<span class="file-cnt">0</span>/3)
+                        </div>
+                    </label>
+                    <input type="file" id="share-file" name="shareFile" accept="image/*" multiple/>
+                </div>
+
+                <!-- 파일 리스트 -->
+                <ul class="file-list">
+
+                </ul>
+                <!-- 파일 리스트 끝 -->
+            </div>
+
+            <div>
+                <span class="text-cnt content-a">글자수 : 0/500</span>
+            </div>
+
+            <div class="wing-ea">
+                <input type="text" name="shareWing" placeholder="윙 갯수를 적어주세요" class="wingea"
+                       style="font-family: NanumSquareAcr;">
+            </div>
+
         </div>
-        <div class="write-content content-a">
-          <textarea name="shareContent" id="" cols="30" rows="10" placeholder="나눔 할 물건의 사진을 첨부하고 글을 작성해보세요." style="font-family: NanumSquareAcr;"></textarea>
-        </div>
-
-        <div class="file-main-img">
-          <div class="file-img">
-            <label for="share-file" class="input-file-btn">
-              <img src="../../img/camera.png">
-              <div class="img-text">
-                이미지<br>
-                업로드<br>
-                (<span class="file-cnt">0</span>/3)
-              </div>
-            </label>
-            <input type="file" id="share-file" name="shareFile" accept="image/*" multiple/>
-          </div>
-
-          <!-- 파일 리스트 -->
-          <ul class="file-list">
-
-          </ul>
-          <!-- 파일 리스트 끝 -->
-        </div>
-
-        <div>
-          <span class="text-cnt content-a">글자수 : 0/500</span>
-        </div>
-
-        <div class="wing-ea">
-          <input type="text" name="shareWing" placeholder="윙 갯수를 적어주세요" class="wingea" style="font-family: NanumSquareAcr;">
-        </div>
-
-      </div>
-      <button type="submit" class="write-btn" style="font-family: NanumSquareAcr;">나눔 올리기</button>
+        <button type="submit" class="write-btn" style="font-family: NanumSquareAcr;">나눔 올리기</button>
     </div>
-  </form>
+</form>
 
-  <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script th:src="@{/js/share/shareWrite.js}"></script>
+<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:src="@{/js/fragment/header.js}"></script>
+<script th:src="@{/js/user/loginModal.js}"></script>
+<script th:src="@{/js/share/shareWrite.js}"></script>
 </body>
 
 </html>

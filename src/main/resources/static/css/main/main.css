@@ -387,11 +387,24 @@ h4 {
 .project-title > span {
   font-size: 23px;
   font-weight: 700;
+  width: 418px; /* 너비는 변경될수 있습니다. */
+  text-overflow: ellipsis; /* 위에 설정한 100px 보다 길면 말줄임표처럼 표시합니다. */
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden; /* 내용이 길면 감춤니다 */
 }
 
 .project-content > span {
   font-size: 14px;
   font-weight: 500;
+  width: 418px; /* 너비는 변경될수 있습니다. */
+  text-overflow: ellipsis; /* 위에 설정한 100px 보다 길면 말줄임표처럼 표시합니다. */
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden; /* 내용이 길면 감춤니다 */
 }
 
 .goal {

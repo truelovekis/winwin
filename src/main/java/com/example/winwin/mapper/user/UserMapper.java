@@ -1,9 +1,13 @@
 package com.example.winwin.mapper.user;
 
+import com.example.winwin.dto.mentor.CategoryVo;
+import com.example.winwin.dto.user.MentorDto;
+import com.example.winwin.vo.user.CategoryBridgeVo;
 import com.example.winwin.dto.user.UserDto;
-import com.example.winwin.vo.user.UserCategoryVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface UserMapper {
@@ -25,5 +29,17 @@ public interface UserMapper {
     
     // 닉네임 중복 체크
     public int checkNickname(String userNickname);
+
+    // 관심분야 카테고리
+    public List<CategoryVo> categoryH();
+    public List<CategoryVo> categoryJ();
+    public List<CategoryVo> subCategory(String mainCode);
+    
+    // 회원이 어떤 카테고리를 선택했는지
+    public void categoryBridge(CategoryBridgeVo categoryBridgeVo);
+
+    // 멘토로 가입 시
+    public void joinMentor(MentorDto mentorDto);
+
 }
 

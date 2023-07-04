@@ -40,3 +40,56 @@ $likeDown.on('click', function(){
 function fn_read(communityNumber){
     location.href = "/community/read?communityNumber="+communityNumber;
 }
+
+
+
+// 모달창
+$(function () {
+    $(".pfp-main-btn").click(function () {
+        $(".modal-container").fadeIn();
+    });
+});
+
+// 모달창이 나타났을 때 스크롤 제거
+$(".pfp-main-btn").on("click", function () {
+    $(".modal-container").removeClass("none");
+    $('body').css('overflow', 'hidden');
+});
+
+// 검은 화면 누르면 모달창 제거
+$(".modal-container").on("click", function (e) {
+    if ($(e.target).hasClass("modal-container")) {
+        $(".modal-container").addClass("none");
+        $('body').css('overflow', 'auto');
+        modalSetUp2();
+    }
+});
+
+function modalSetUp2(){
+    $('.modal-wrap>div').addClass('none');
+    $('.modal-wrap>button').addClass('none');
+    $('.modal-wrap>div').removeClass('disappear');
+    $('.login-box').removeClass('none');
+    $('.login-end').removeClass('none');
+    $('.login-box').removeClass('disappear');
+    $current = $('.login-box');
+    $next = null;
+    $('.form-reset')[0].reset();
+}
+
+
+// 병구가 확인한 질문하기 모달창 처리
+// $('.pfp-main-btn').on('click', function (e) {
+//     e.preventDefault();
+//
+//     let userNumber = $('.pfp-main-btn').data('usernumber');
+//     console.log(userNumber);
+//
+//     if(userNumber){
+//         window.location.href = '/share/write';
+//     }else {
+//         $('.login-move').trigger('click');
+//     }
+// });
+
+

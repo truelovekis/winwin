@@ -27,6 +27,8 @@
     <header class="header"  th:replace="fragment/header :: header"></header>
 
     <main>
+      <input type="hidden" th:value="${session.mentorNumber}"/>
+      <input type="hidden" th:value="${session.userNumber}"/>
       <div class="container">
         <div class="wrap">
           <div class="ctg-top">
@@ -110,13 +112,14 @@
                     <a href=""><strong>프로젝트</strong> </a>
                   </div>
                   <div class="project-title">
-                    <span>[111 개발자 모집]업무생산...</span>
+                    <span>[111 개발자 모집]업무생산업무생산업무생산업무생산업무생산업무생산업무생산업무생산업무생산</span>
                   </div>
                   <div class="project-content">
-                    <span
-                      >안녕하세요! 이메일 기반 업무생산성 향상 툴 개발 사이드프로젝트를 진행하실 백엔드, 프론트엔드
+                    <span>
+                      안녕하세요! 이메일 기반 업무생산성 향상 툴 개발 사이드프로젝트를 진행하실 백엔드, 프론트엔드
                       개발자 팀원 각각 한분을 모시고 있습니다. 현재 저희는 pc앱 형식의 이메일 클라이언트(업무생산성
-                      향상...</span
+                      향상개발자 팀원 각각 한분을 모시고 있습니다. 현재 저희는 pc앱 형식의 이메일 클라이언트(업무생산성
+                      향상</span
                     >
                   </div>
                   <div class="goal">
@@ -128,13 +131,14 @@
                     <a href=""><strong>프로젝트</strong> </a>
                   </div>
                   <div class="project-title">
-                    <span>[222 개발자 모집]업무생산...</span>
+                    <span>[222 개발자 모집]업무생산업무생산업무생산업무생산업무생산업무생산업무생산업무생산업무생산</span>
                   </div>
                   <div class="project-content">
                     <span
                       >안녕하세요! 이메일 기반 업무생산성 향상 툴 개발 사이드프로젝트를 진행하실 백엔드, 프론트엔드
                       개발자 팀원 각각 한분을 모시고 있습니다. 현재 저희는 pc앱 형식의 이메일 클라이언트(업무생산성
-                      향상...</span
+                      향상개발자 팀원 각각 한분을 모시고 있습니다. 현재 저희는 pc앱 형식의 이메일 클라이언트(업무생산성
+                      향상</span
                     >
                   </div>
                   <div class="goal">
@@ -146,13 +150,14 @@
                     <a href=""><strong>프로젝트</strong> </a>
                   </div>
                   <div class="project-title">
-                    <span>[333 개발자 모집]업무생산...</span>
+                    <span>[333 개발자 모집]업무생산업무생산업무생산업무생산업무생산업무생산업무생산업무생산업무생산</span>
                   </div>
                   <div class="project-content">
                     <span
                       >안녕하세요! 이메일 기반 업무생산성 향상 툴 개발 사이드프로젝트를 진행하실 백엔드, 프론트엔드
                       개발자 팀원 각각 한분을 모시고 있습니다. 현재 저희는 pc앱 형식의 이메일 클라이언트(업무생산성
-                      향상...</span
+                      향상개발자 팀원 각각 한분을 모시고 있습니다. 현재 저희는 pc앱 형식의 이메일 클라이언트(업무생산성
+                      향상</span
                     >
                   </div>
                   <div class="goal">
@@ -164,13 +169,14 @@
                     <a href=""><strong>프로젝트</strong> </a>
                   </div>
                   <div class="project-title">
-                    <span>[444 개발자 모집]업무생산...</span>
+                    <span>[444 개발자 모집]업무생산업무생산업무생산업무생산업무생산업무생산업무생산업무생산</span>
                   </div>
                   <div class="project-content">
                     <span
                       >안녕하세요! 이메일 기반 업무생산성 향상 툴 개발 사이드프로젝트를 진행하실 백엔드, 프론트엔드
                       개발자 팀원 각각 한분을 모시고 있습니다. 현재 저희는 pc앱 형식의 이메일 클라이언트(업무생산성
-                      향상...</span
+                      향상개발자 팀원 각각 한분을 모시고 있습니다. 현재 저희는 pc앱 형식의 이메일 클라이언트(업무생산성
+                      향상</span
                     >
                   </div>
                   <div class="goal">
@@ -204,7 +210,7 @@
               <span class="title-s">더 많은 주제로 이야기해요</span>
             </div>
             <div class="worries-wrap">
-              <button class="worries-box">
+              <button type="button" onclick="location.href='/community/list/30' " class="worries-box">
                 <div class="worries-content">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -221,7 +227,7 @@
                   <span>직장인고민</span>
                 </div>
               </button>
-              <button class="worries-box">
+              <button type="button" onclick="location.href='/career/list'" class="worries-box">
                 <div class="worries-content">
                   <!-- <img src="../springProject/img/worries-icon-2.png" alt="" /> -->
                   <svg
@@ -236,10 +242,10 @@
                       d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z"
                     />
                   </svg>
-                  <span>취업고민</span>
+                  <span>진로정보</span>
                 </div>
               </button>
-              <button class="worries-box">
+              <button type="button" onclick="location.href='/community/list/20'" class="worries-box">
                 <div class="worries-content">
                   <!-- <img src="../springProject/img/worries-icon-3.png" alt="" /> -->
                   <svg
@@ -262,7 +268,7 @@
               </button>
             </div>
             <div class="worries-wrap">
-              <button class="worries-box">
+              <button type="button" onclick="location.href='/community/list/10'" class="worries-box">
                 <div class="worries-content">
                   <!-- <img src="../springProject/img/worries-icon-4.png" alt="" /> -->
                   <svg
@@ -282,7 +288,7 @@
                   <span>학생고민</span>
                 </div>
               </button>
-              <button class="worries-box">
+              <button type="button" onclick="location.href='/meeting/home'" class="worries-box">
                 <div class="worries-content">
                   <!-- <img src="../springProject/img/worries-icon-5.png" alt="" /> -->
                   <svg
@@ -298,10 +304,10 @@
                       d="M2.965 12.695a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6c0 3.193-3.004 6-7 6a8.06 8.06 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a10.97 10.97 0 0 0 .398-2Zm-.8 3.108.02-.004c1.83-.363 2.948-.842 3.468-1.105A9.06 9.06 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.437 10.437 0 0 1-.524 2.318l-.003.011a10.722 10.722 0 0 1-.244.637c-.079.186.074.394.273.362a21.673 21.673 0 0 0 .693-.125ZM8 5.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z"
                     />
                   </svg>
-                  <span>친목</span>
+                  <span>프로젝트/스터디</span>
                 </div>
               </button>
-              <button class="worries-box">
+              <button type="button" onclick="location.href='/share/list'" class="worries-box">
                 <div class="worries-content">
                   <!-- <img src="../springProject/img/worries-icon-6.png" alt="" /> -->
                   <svg
@@ -338,7 +344,7 @@
         </div>
       </div>
       <div class="mentor-btn">
-        <button><span>멘토 만나러 가기</span></button>
+        <button type="button" onclick="location.href='/mentor/list'"><span>멘토 만나러 가기</span></button>
       </div>
     </main>
     <footer class="footer"  th:replace="fragment/footer :: footer">
@@ -392,11 +398,8 @@
   ></script>
   <script th:src="@{/js/fragment/header.js}" ></script>
 <!--  모달 js-->
-<!--  <script th:src="@{/js/user/agreement.js}"></script>-->
   <script th:src="@{/js/user/loginModal.js}"></script>
-<!--  <script th:src="@{/js/user/join.js}"></script>-->
-<!--  <script th:src="@{/js/user/mentorGoal.js}"></script>-->
-<!--  <script th:src="@{/js/user/mentorGoal2.js}"></script>-->
-<!--  <script th:src="@{/js/user/jobDepSelect.js}"></script>-->
+  <script th:src="@{/js/main/main.js}"></script>
+
 
 </html>

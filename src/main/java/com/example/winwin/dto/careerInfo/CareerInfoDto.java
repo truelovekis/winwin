@@ -1,4 +1,4 @@
-package com.example.winwin.dto.board;
+package com.example.winwin.dto.careerInfo;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

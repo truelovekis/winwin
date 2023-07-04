@@ -57,12 +57,12 @@ $(document).ready(function () {
         //     });
         } else if (selectValue === "3") {
             blindButton.text("영구 정지").css({
-                "background-color": "rgb(255, 237, 237)",
-                color: "red",
+                "background-color": "rgb(220 255 226)",
+                color: "#587c60",
             });
             successButton.text("영구 정지").css({
-                "background-color": "rgb(255, 237, 237)",
-                color: "red",
+                "background-color": "rgb(220 255 226)",
+                color: "#587c60",
             });
         }
     }
@@ -76,8 +76,8 @@ $(document).ready(function () {
         //     color: "#007aff",
         // });
         successButton.text("영구 정지").css({
-            "background-color": "rgb(255, 237, 237)",
-            color: "red",
+            "background-color": "rgb(220 255 226)",
+            color: "#587c60",
         });
     }
 });
