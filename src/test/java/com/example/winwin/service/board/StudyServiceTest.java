@@ -35,6 +35,7 @@ class StudyServiceTest {
 
     @InjectMocks
     private StudyService studyService;
+    private StudyVo studyVo;
     private StudyDto studyDto;
     private UserDto userDto;
 
@@ -49,9 +50,24 @@ class StudyServiceTest {
         userDto.setUserBelong("배달의 민족");
         userDto.setUserIdentity("W");
         userDto.setUserNickname("웅이");
-//        userDto.setUserGender(1);
         userDto.setUserGrade(5);
         userDto.setUserWing(100L);
+
+        studyVo = new StudyVo();
+        studyVo.setStudyTitle("글머리");
+        studyVo.setStudyContent("내용");
+        studyVo.setStudySummaryTitle("요약제목");
+        studyVo.setStudySummaryContent("요약내용");
+        studyVo.setStudyRole("백엔드");
+        studyVo.setStudyStatus("1");
+        studyVo.setStudyOpenlink("kakao");
+        studyVo.setUserNickname("고기");
+        studyVo.setUserNumber(userDto.getUserNumber());
+        studyVo.setCategoryNumber(1L);
+        studyVo.setPurposeNumber(1L);
+        studyVo.setTimeNumber(1L);
+        studyVo.setStudyReadCnt(0L);
+        studyVo.setUserNumber(userDto.getUserNumber());
 
         studyDto = new StudyDto();
         studyDto.setStudyTitle("글머리");
@@ -68,7 +84,6 @@ class StudyServiceTest {
         studyDto.setTimeNumber(1L);
         studyDto.setStudyReadCnt(0L);
         studyDto.setUserNumber(userDto.getUserNumber());
-
     }
 
     @Test
@@ -92,16 +107,25 @@ class StudyServiceTest {
     @Test
     @DisplayName("게시글 번호로 수정하기")
     void studyModify() {
-        doNothing().when(studyMapper).studyUpdate(any(StudyDto.class));
-        studyService.studyModify(studyDto);
-        verify(studyMapper, times(1)).studyUpdate(studyDto);
+        doNothing().when(studyMapper).studyUpdate(any(StudyVo.class));
+        studyService.studyModify(studyVo);
+        verify(studyMapper, times(1)).studyUpdate(studyVo);
     }
 
     @Test
     @DisplayName("게시글 번호로 상세보기")
     void studyFind() {
         doReturn(studyDto).when(studyMapper).studySelect(any(Long.class));
-        StudyDto foundDto = studyService.studyFind(1L);
+        StudyVo foundDto = studyService.studyFind(1L);
         assertThat(foundDto.getStudyContent()).isEqualTo(studyDto.getStudyContent());
+    }
+
+
+    @Test
+    @DisplayName("게시글 전체 조회")
+    void findMainList() {
+        doReturn(List.of(studyDto)).when(studyMapper).mainSelect(1);
+        List<StudyVo> foundList = studyService.findMainList(1);
+        assertThat(foundList.size()).isEqualTo(1);
     }
 }

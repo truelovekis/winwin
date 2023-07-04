@@ -31,14 +31,14 @@ public class StudyService {
         studyMapper.studyDelete(studyNumber);
     }
 
-    public void studyModify(StudyDto studyDto){
-        if(studyDto == null){
+    public void studyModify(StudyVo studyVo){
+        if(studyVo == null){
             throw new IllegalArgumentException("모임 수정 정보가 잘못되었습니다.");
         }
-        studyMapper.studyUpdate(studyDto);
+        studyMapper.studyUpdate(studyVo);
     }
 
-    public StudyDto studyFind(Long studyNumber) {
+    public StudyVo studyFind(Long studyNumber) {
         if (studyNumber == null) {
             throw new IllegalArgumentException("잘못되었습니다.");
         }
@@ -48,7 +48,6 @@ public class StudyService {
                     throw new IllegalArgumentException("존재하지 않는 글입니다.");
                 });
 
-//        return null;
     }
 
     @Transactional(readOnly = true)

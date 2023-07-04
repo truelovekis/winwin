@@ -26,6 +26,6 @@ public class UserDto {
     private Long userWing;
     private int userGrade;
     private String userPhoneNumber;
-    private int userVerification;
     private String userPosition;
+
 }

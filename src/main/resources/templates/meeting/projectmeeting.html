@@ -216,7 +216,8 @@
   </section>
 </main>
 <footer class="footer" th:replace="fragment/footer :: footer"></footer>
-<article class="modal-wrap" onclick="fn_modal_close(this, event)">
+
+<article class="projectmodal-wrap" onclick="fn_modal_close(this, event)">
   <div class="select-box">
     <!--    <div class="x-box">-->
     <!--      <div class="x" >X</div>-->
@@ -243,8 +244,11 @@
     </div>
   </div>
 </article>
+
 <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 <script th:src="@{/js/fragment/header.js}" ></script>
+<!--  모달 js-->
+<script th:src="@{/js/user/loginModal.js}"></script>
 <script th:src="@{/js/project/projectmeeting.js}"></script>
 </body>
 </html>
