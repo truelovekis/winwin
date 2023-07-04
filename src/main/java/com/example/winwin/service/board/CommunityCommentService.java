@@ -54,8 +54,5 @@ public class CommunityCommentService {
         }
         communityCommentMapper.delete(commentNumber);
     }
-
-
-
 }
 

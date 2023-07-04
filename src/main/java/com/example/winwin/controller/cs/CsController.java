@@ -3,9 +3,8 @@ package com.example.winwin.controller.cs;
 
 import com.example.winwin.dto.board.CsDto;
 import com.example.winwin.service.cs.CsService;
-import com.example.winwin.vo.CsVo;
+import com.example.winwin.vo.board.CsVo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,17 +31,16 @@ public class CsController {
 //    글 작성하기
     @GetMapping("/write")
     public String csWriteForm(HttpServletRequest req){
-//        Long userNumber = (long)req.getSession().getAttribute("userNumber");
-//        return userNumber == null ? "user/login" : "cs/csWrite";
+
         return "cs/csWrite";
     }
 
     @PostMapping("/write")
     public RedirectView csWrite(CsDto csDto, HttpServletRequest req){
-//        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
-        System.out.println(csDto);
-//        csDto.setUserNumber(3L);
+        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
+        csDto.setUserNumber(userNumber);
         csService.register(csDto);
+
         return new RedirectView("/cs/main");
     }
 
@@ -52,11 +50,10 @@ public class CsController {
         CsVo csVo = csService.findCs(csNumber);
         model.addAttribute("cs", csVo);
         return "cs/csRead";
+
     }
 
-
     /* 수정*/
-
     @GetMapping("/modify")
     public String modifyForm(Long csNumber, Model model){
         CsVo csVo = csService.findCs(csNumber);

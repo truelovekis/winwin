@@ -44,6 +44,34 @@ for (let i = 0; i < communityTimeElements.length; i++) {
     elapsedTimeElement.textContent = elapsedTime;
 }
 
+ //  작성 수정 삭제
+
+$('.pfp-main-btn').on('click', function (e) {
+    e.preventDefault();
+
+    let userNumber = $('.pfp-main-btn').data('usernumber');
+    console.log(userNumber);
+
+    if(userNumber){
+        window.location.href = '/cs/write';
+    }else {
+        $('.login-move').trigger('click');
+    }
+});
+
+$('.login-btn').on('click', function (e){
+    e.preventDefault();
+
+    let userNumber = $('.login-btn').data('usernumber');
+
+    if (userNumber){
+        window.location.href = '이동할 주소'
+    }else{
+        $('.login-move').trigger('click');
+    }
+
+});
+
 
 
 
