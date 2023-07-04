@@ -38,11 +38,11 @@ class PoliceServiceTest {
     @Test
     @DisplayName("나눔 신고하기 단위 테스트")
     void policeBoardRegister() {
-        doNothing().when(policeBoardMapper).shareReportInsert(any(PoliceBoardDto.class));
+        doNothing().when(policeBoardMapper).reportInsert(any(PoliceBoardDto.class));
 
-        policeBoardMapper.shareReportInsert(policeBoardDto);
+        policeBoardMapper.reportInsert(policeBoardDto);
 
-        verify(policeBoardMapper, times(1)).shareReportInsert(policeBoardDto);
+        verify(policeBoardMapper, times(1)).reportInsert(policeBoardDto);
 
     }
 

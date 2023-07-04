@@ -71,6 +71,7 @@ public class ShareController {
 //    나눔 글 작성 페이지 단순 이동
     @GetMapping("/write")
     public String shareWrite(HttpServletRequest req){
+        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
 
         return "/share/shareWrite";
     }
@@ -79,9 +80,8 @@ public class ShareController {
     @PostMapping("/write")
     public RedirectView shareWrite(ShareDto shareDto, HttpServletRequest req, RedirectAttributes redirectAttributes,
                                    @RequestParam("shareFile") List<MultipartFile> files){
-//        로그인 완려되면 주석해제하기
-//        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
-//        shareDto.setUserNumber(userNumber);
+        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
+        shareDto.setUserNumber(userNumber);
         shareService.shareRegister(shareDto);
 
         System.out.println("====================================");
@@ -104,6 +104,7 @@ public class ShareController {
 //    나눔 글 상세보기 단순 이동
     @GetMapping("/read")
     public String shareRead (Long shareNumber, Model model){
+        shareService.shareReadUpdate(shareNumber);
         ShareVo shareVo = shareService.findShare(shareNumber);
         model.addAttribute("share", shareVo);
 

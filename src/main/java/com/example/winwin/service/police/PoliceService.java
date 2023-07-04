@@ -21,7 +21,7 @@ public class PoliceService {
             throw new IllegalArgumentException("게시글 번호가 잘못되었습니다.");
         }
 
-        policeBoardMapper.shareReportInsert(policeBoardDto);
+        policeBoardMapper.reportInsert(policeBoardDto);
     }
 
 //    신고항목 게시글 번호로 조회하기

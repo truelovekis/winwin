@@ -515,6 +515,7 @@ $(".agreement-input-btn").on("click", ".check", function () {
 });
 
 $(".check").on("change", function () {
+
     if ($("#check2").is(":checked") && $("#check3").is(":checked") && $("#check4").is(":checked")) {
         $("#check1").prop("checked", true);
     }

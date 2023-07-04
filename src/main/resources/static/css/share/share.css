@@ -247,7 +247,7 @@ a:visited{
   margin: 5px 5px 5px 0;
 }
 
-span {
+.share-cnt > span{
   padding: 0 5px;
   color: gray;
 }

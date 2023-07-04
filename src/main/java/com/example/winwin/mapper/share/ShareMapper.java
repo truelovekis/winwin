@@ -1,10 +1,12 @@
 package com.example.winwin.mapper.share;
 
 import com.example.winwin.dto.share.ShareDto;
+import com.example.winwin.vo.infinityScroll.Criteria;
 import com.example.winwin.vo.share.ShareVo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -29,4 +31,10 @@ public interface ShareMapper {
 
 //    나눔 글 번호로 삭제하기
     void shareDelete(Long shareNumber);
+
+//    나눔 페이지 무한스크롤
+    List<ShareVo> selectScroll(Criteria criteria);
+
+//    나눔 메인페이지 갯수 구하기
+    int selectTotal();
 }
