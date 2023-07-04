@@ -26,8 +26,9 @@
   <div class="big-box">
   <div class="hwrap">
     <div class="hcontainer">
+      <div class="hcontainer2">
       <div class="header-nav-l">
-        <a href="" class="logo"><img th:src="@{/img/winwin-logo.png}" alt="" /></a>
+        <a th:href="@{/main/main}" class="logo"><img th:src="@{/img/winwin-logo.png}" alt="" /></a>
       </div>
       <div class="hcenter">
         <ul class="hctg-list">
@@ -68,6 +69,7 @@
           </li>
         </ul>
       </div>
+      </div>
       <div class="header-nav-r">
         <!-- 로그인 안했을 때 -->
         <th:block th:if="${session.userNumber == null} ">
@@ -76,19 +78,30 @@
         </button>
         <img th:src="@{/img/profile-basic.png}" alt="" class="basic-img" />
         </th:block>
+        <th:block th:unless="${session.userNumber == null} ">
         <!-- 로그인 했을 때 -->
-         <div class="h-profile" th:unless="${session.userNumber == null} " >
+         <div class="h-profile" th:unless="${session.userNumber != null and #strings.equals(session.userStatus, 'a')}">
 
 <!--          <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>-->
            <span class="wing-point" th:text="${session.userWing}"></span>
            <img th:src="@{/img/wing-icon.png}" alt="" class="wing-icon"/>
            <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-          <a href="" class="h-user-name" ><span th:text="${session.userName}"></span>님</a>
-          <a href=""><img th:src="@{/img/profile-basic.png}" alt="" class="profile-img" /></a>
+            <a th:href="@{/myPage/myMentor}" class="h-user-name" ><span th:text="${session.userName}"></span>님</a>
+            <a href=""><img th:src="@{/img/profile-basic.png}" alt="" class="profile-img" /></a>
            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-          <a class="h-logout">로그아웃</a>
+          <a class="h-logout"  th:href="@{/user/logout}">로그아웃</a>
         </div>
         <!-- 여기까지 -->
+
+        <!-- 관리자가 로그인 했을 때 -->
+        <div class="h-profile" th:if="${session.userNumber != null and #strings.equals(session.userStatus, 'a')}">
+          <a th:href="@{/admin/user}" class="h-user-name" ><span th:text="${session.userName}"></span>님</a>
+          <a href=""><img th:src="@{/img/profile-basic.png}" alt="" class="profile-img" /></a>
+          <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <a class="h-logout"  th:href="@{/user/logout}">로그아웃</a>
+        </div>
+        <!-- 여기까지 -->
+        </th:block>
       </div>
     </div>
   </div>

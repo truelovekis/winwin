@@ -43,11 +43,11 @@ class PoliceBoardMapperTest {
         userDto.setUserBelong("배달의 민족");
         userDto.setUserIdentity("W");
         userDto.setUserNickname("웅이");
-        userDto.setUserGender(1);
+        userDto.setUserGender("남");
         userDto.setUserGrade(5);
         userDto.setUserWing(300L);
 
-        userMapper.insert(userDto);
+//        userMapper.insert(userDto);
 
         shareDto = new ShareDto();
         shareDto.setShareTitle("title");

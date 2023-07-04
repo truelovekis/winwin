@@ -35,6 +35,7 @@ a {
     width: 1050px;
     height: 70px;
     display: flex;
+    justify-content: space-between;
 }
 
 .logo {
@@ -97,8 +98,8 @@ a {
     display: flex;
     align-items: center;
     margin-top: 25px;
-    position: relative;
-    left: 18%;
+    /*position: relative;*/
+    /*left: 18%;*/
 }
 
 .header-nav-r > a {
@@ -146,7 +147,7 @@ a {
 }
 
 .sub-ctg-3 {
-    margin-left: 30px;
+    /*margin-left: 10px;*/
 }
 
 .login-join {
@@ -197,9 +198,14 @@ a {
 .h-logout{
     font-size: 14px;
     cursor: pointer;
+    color: #000000;
+    /*font-weight: 700;*/
 }
 
 .none{
     display: none;
 }
 
+.hcontainer2{
+    display: flex;
+}
