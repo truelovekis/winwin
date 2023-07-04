@@ -40,6 +40,8 @@
         <if test="categoryTypeStr != 'all'">
         WHERE C.CATEGORY_NUMBER = #{categoryNumber}
         </if>
+        AND U.USER_STATUS != '3'
+        and C.COMMUNITY_STATUS != '0'
         ORDER BY C.COMMUNITY_NUMBER DESC
     </select>
 

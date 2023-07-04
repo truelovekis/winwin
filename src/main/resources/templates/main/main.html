@@ -27,6 +27,8 @@
     <header class="header"  th:replace="fragment/header :: header"></header>
 
     <main>
+      <input type="hidden" th:value="${session.mentorNumber}"/>
+      <input type="hidden" th:value="${session.userNumber}"/>
       <div class="container">
         <div class="wrap">
           <div class="ctg-top">

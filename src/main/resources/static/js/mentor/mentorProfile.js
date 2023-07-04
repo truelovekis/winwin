@@ -1,10 +1,27 @@
+// let page = 1;
+// $(window).on('scroll', function(){
+// //    $(window).scrollTop() : 현재 브라우저 스크롤 위치를 반환함
+//     console.log($(window).scrollTop());
+//     //$(document).height() : 문서 전체의 높이를 의미함
+//     console.log(`document : ${$(document).height()}`);
+//     //$(window).height() : 브라우저 화면의 높이를 의미함
+//     console.log(`window : ${$(window).height()}`);
+//
+//     if($(window).scrollTop() == $(document).height() - $(window).height()){
+//         console.log(++page);
+//         // reply.getListPage({boardNumber : boardNumber , page : page}, appendReply, showError);
+//     }
+// });
+
 
 let moreInfo = $(".mento-more-info-box");
+
 moreInfo.click(function () {
   $(this).find(".mento-more-info").toggleClass("none");
 });
 
 let share = $(".share-button");
+
 share.click(function CopyUrlToClipboard() {
   var url = 'http://localhost:10000/mentor/list'; // 현재 페이지의 URL 가져오기
   var tempInput = $("<input>"); // 임시로 input 요소 생성
@@ -17,8 +34,8 @@ share.click(function CopyUrlToClipboard() {
 });
 
 $(".message-button").on("click", function () {
-  $(".modal-wrap").removeClass("none");
-  $(".modal-wrap").css({
+  $(".modal-wrap1").removeClass("none");
+  $(".modal-wrap1").css({
     position: "fixed",
     left: "50%",
     top: "50%",
@@ -26,25 +43,21 @@ $(".message-button").on("click", function () {
   });
 
   let name = $(this).closest('.item__box').find('.mento-name').text();
+  let number = $(this).closest('.item__box').find('.add-num').val();
+    console.log(number);
     console.log(name);
     $('.mentorName').text(name);
+    $('.addNumber').text(number);
 });
 
-$(".modal-wrap").on("click", function (e) {
-  if ($(e.target).hasClass("modal-wrap")) {
-    $(".modal-wrap").addClass("none");
+$(".modal-wrap1").on("click", function (e) {
+  if ($(e.target).hasClass("modal-wrap1")) {
+    $(".modal-wrap1").addClass("none");
   }
 });
 
-
-
-$(".like-button").on("click", function () {
-  $(this).closest(".like-button").find(".bi-heart").toggleClass("none");
-  $(this).closest(".like-button").find(".bi-heart-fill").toggleClass("none");
-});
-
 // 태그 필터
-const selectBoxElements = document.querySelectorAll(".select");
+const selectBoxElements2 = document.querySelectorAll(".select");
 
 function toggleSelectBox(selectBox) {
   selectBox.classList.toggle("active");
@@ -56,8 +69,9 @@ function selectOption(optionElement) {
   selectedElement.textContent = optionElement.textContent;
 }
 
-selectBoxElements.forEach((selectBoxElement) => {
+selectBoxElements2.forEach((selectBoxElement) => {
   selectBoxElement.addEventListener("click", function (e) {
+      console.log("aaaaaaa")
     const targetElement = e.target;
     const isOptionElement = targetElement.classList.contains("option");
 
@@ -108,14 +122,6 @@ $(".middle-option-box").on("click", ".middle-option", function () {
 $(".select-tag").on("click", ".tag", function () {
   $(this).detach();
 });
-
-//멘토 프로필 등록 버튼
-let $mentor = $('.profile-button');
-
-$mentor.on('click', function (){
-  window.location.href = '/mentor/apply';
-});
-
 
 // 나의 관심분야 3가지 카테고리 박스
 let $boxes = $('.select');
@@ -169,15 +175,15 @@ $(".select-tag").on("click", ".tag", function () {
 // 1, 2, 3차 카테고리 별 항목 띄우기
 
 // 1차 카테고리
-let $category = $(".first-option-box");
+// let $category = $(".first-option-box");
 // 2차 카테고리
-let $jobBox = $(".second-job-box");
+let $jobBox2 = $(".second-job-box");
 // 3차 카테고리
-let $depBox = $(".third-job-box");
+let $depBox2 = $(".third-job-box");
 
 $(".option").on("click", function () {
     let text = "";
-    $jobBox.html(text);
+    $jobBox2.html(text);
     let ss = $(this).val();
     if($(this).val() == "1"){
         $.ajax({
@@ -201,12 +207,12 @@ $(".option").on("click", function () {
             },
         });
     }
-    $jobBox.html(text);
+    $jobBox2.html(text);
 });
 
 $(".second-job-box").on("click", ".option", function () {
     let text = "";
-    $depBox.html(text)
+    $depBox2.html(text)
     let ss = $(this).val();
     $.ajax({
         url : '/category/subCategory',
@@ -223,7 +229,7 @@ $(".second-job-box").on("click", ".option", function () {
             $('.third-job-box').html(text2);
         }
     });
-    $depBox.html(text);
+    $depBox2.html(text);
 });
 
 // 2, 3차 카테고리 선택 시 항목 띄어주는 함수
@@ -241,10 +247,6 @@ function makeMiddleCate(result) {
     return text2;
 }
 
-$('.profile-button').on('click', function (){
-    window.location.href = '/mentor/apply';
-});
-
 let check = $("#suggest-profile");
 let height = parseInt($(".myProfile").css("height")) + 25;
 
@@ -259,21 +261,122 @@ check.click(function () {
 });
 
 //멘토 프로필 업데이트
-$('#suggest-profile').on("change", function (){
+$('#suggest-profile').on("click", function (){
     console.log($(this).is(":checked"));
-    if($(this).is(":checked")) {
-        $('#status').val('Y');
+        let status = $('#status').val() == 'N' ? 'Y' : 'N';
         console.log("프로필 오픈!");
-        console.log($('#status').val());
-    }
-    else {
-        $('#status').val('N');
-        console.log("프로필 잠금!");
-        console.log($('#status').val());
-    }
-    $('.profile-btn').submit();
+
+        $.ajax({
+            url : '/mentor/list',
+            type : 'patch',
+            data : {mentorStatus : status},
+            success : function (){
+                console.log("성공!");
+                $('#status').val(status);
+                // console.log($('#status').val());
+            },
+            error : function (){
+                console.log("실패");
+            }
+        });
+    // $('.profile-btn').submit();
 });
 
-if($('#status').val() == 'Y'){
-    check.trigger('click');
-}
+$(function(){
+    if($('#status').val() == 'Y'){
+        $('#suggest-profile').attr('checked', 'true');
+        $(".toggle-ment").toggleClass("none");
+
+        if ($('p[class="toggle-ment none"]').text().trim() != "올림") {
+            $(".myProfile-box").css("height", height);
+        } else {
+            $(".myProfile-box").css("height", 0);
+        }
+    }
+});
+
+//좋아요(찜) 처리
+// $(".like-button").on("click", function () {
+//   $(this).closest(".like-button").find(".bi-heart").toggleClass("none");
+//   $(this).closest(".like-button").find(".bi-heart-fill").toggleClass("none");
+// });
+$(".like-button").on("click", function (e){
+    e.preventDefault();
+    console.log($(this).val());
+    let btn = $(this).find('.bi-heart');
+    let btn2 =$(this).find('.bi-heart-fill');
+    if ($(this).val() == 0){
+        let mentorNum = $(this).closest('.mento-button-box').find('.mentor-num').val();
+        console.log(mentorNum);
+        $.ajax({
+            url : '/mentor/like',
+            type : 'post',
+            data : {mentorNumber : mentorNum},
+            success : function (){
+
+                console.log("성공");
+            },
+            error : function (){
+                console.log("실패");
+            }
+        });
+        btn2.show();
+        btn.hide();
+    }
+
+    if($(this).val() == 1){
+        let mentorNum =  $(this).closest('.mento-button-box').find('.mentor-num').val();
+        $.ajax({
+            url : '/mentor/delete',
+            type : 'delete',
+            data : {mentorNumber : mentorNum},
+            success : function (){
+
+                console.log("성공");
+            },
+            error : function (){
+                console.log("실패");
+            }
+        });
+        btn2.hide();
+        btn.show();
+    }
+
+});
+
+$('.mento-button').on('click', function (e) {
+    e.preventDefault();
+
+    let mentorNumber = $('.mento-button').data('mentornumber');
+    let userNumber = $('.mento-button').data('usernumber');
+    console.log(mentorNumber);
+
+    if(mentorNumber > -1){
+        window.location.href = '/mentor/apply';
+    }
+    else if (mentorNumber == -1){
+        alert("멘토가 아닙니다");
+    }
+    else {
+        $('.login-move').trigger('click');
+    }
+});
+
+//멘토 신청하기
+$('.um-btn').on('click', function (){
+    let num =  $('.addNumber').text();
+    console.log(num);
+    $.ajax({
+        url : '/mentor/add',
+        type : 'post',
+        data : {mentorNumber : num},
+        success : function (){
+            console.log("성공");
+            alert("신청에 성공하셨습니다.");
+        },
+        error : function (){
+            console.log("실패");
+        }
+    });
+});
+
