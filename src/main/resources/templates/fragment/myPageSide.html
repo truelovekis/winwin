@@ -17,8 +17,8 @@
         </label>
         <input type="file" id="profile-img-upload" name="profile-upload" />
         <div class="user-info">
-          <span class="user-name">정소이</span>
-          <span class="user-email">aaa@naver.com <img src="../springProject/img/kakao-2.png" alt="" /></span>
+          <span class="user-name" th:text="${session.userName}"></span>
+          <span class="user-email" th:text="${session.userEmail}"></span>
         </div>
       </div>
     </div>

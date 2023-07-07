@@ -33,18 +33,24 @@
           <div class="mypage-main">
             <div class="title"><h2>활동 내역</h2></div>
             <div class="category">
-              <div class="category-contain">
-                <h4 id="point-page">커뮤니티</h4>
-              </div>
-              <div class="category-contain">
-                <h4 >프로젝트</h4>
-              </div>
-              <div class="category-contain">
-                <h4>나눔</h4>
-              </div>
+              <a th:href="@{/myPage/activityDetail}">
+                <div class="category-contain">
+                  <h4 id="point-page">커뮤니티</h4>
+                </div>
+              </a>
+              <a  th:href="@{/myPage/activityProject}">
+                <div class="category-contain">
+                  <h4 >프로젝트</h4>
+                </div>
+              </a>
+              <a th:href="@{/myPage/activityGive}">
+                <div class="category-contain">
+                  <h4>나눔</h4>
+                </div>
+              </a>
             </div>
             <div class="sub-category">
-              <span>내 글</span>
+              <span><a th:href="@{/myPage/activityDetail}">내 글</a></span>
               <span id="sub-point">내 댓글</span>
             </div>
             <!-- 내용 메인페이지 -->

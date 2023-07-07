@@ -74,7 +74,11 @@ function fillResume(resumeVo){
   $('.rm-email').text(resumeVo.resumeDto.resumeEmail);
   $('.rm-website').text(resumeVo.resumeDto.resumeWebsite);
   $('.rm-website').prop('href', 'http://' + resumeVo.resumeDto.resumeWebsite);
-  $('.modal-img').css('background-image', 'url(/profile/' + resumeFile.Uuid + '_' + resumeFile.SystemName + ')');
+  if(!resumeVo.resumeFileDto) {
+    $('.modal-img').css('background-image', 'url()');
+  }else{
+    $('.modal-img').css('background-image', 'url(/profile/' + resumeVo.resumeFileDto.fileUuid + '_' + resumeVo.resumeFileDto.fileSystemName + ')');
+  }
   $('.rm-school1').text(resumeVo.resumeDto.resumeSchool1);
   $('.rm-school2').text(resumeVo.resumeDto.resumeSchool2);
   $('.rm-school-start1').text(resumeVo.resumeDto.schoolStartDate1);

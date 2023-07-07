@@ -6,6 +6,7 @@ import com.example.winwin.dto.user.ResumePrDto;
 import com.example.winwin.dto.user.UserDto;
 import com.example.winwin.dto.user.UserPfpDto;
 import com.example.winwin.service.myPage.MyPageService;
+import com.example.winwin.vo.myPage.ActiveBoardVo;
 import com.example.winwin.vo.myPage.MyPageVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -35,7 +36,11 @@ public class MyPageController {
     }
 
     @GetMapping("/activityDetail")
-    public String activityDetail(){
+    public String activityDetail(HttpServletRequest req){
+        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
+        List<ActiveBoardVo> activeBoardVoList = myPageService.getActiveBoardList(userNumber);
+        req.setAttribute("activeBoardList", activeBoardVoList);
+
         return "myPage/activityDetail";
     }
 
@@ -47,6 +52,11 @@ public class MyPageController {
     @GetMapping("/activityProject")
     public String activityProject(){
         return "myPage/activityProject";
+    }
+
+    @GetMapping("/activityStudy")
+    public String activityStudy(){
+        return "myPage/activityStudy";
     }
 
     @GetMapping("/careerInfo")

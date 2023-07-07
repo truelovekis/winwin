@@ -13,6 +13,6 @@
     <select id="selectPr">
         SELECT PR_NUMBER, PR_BIG_TITLE, PR_SMALL_TITLE, PR_CONTENT1, PR_CONTENT2, PR_CONTENT3, USER_NUMBER
         FROM RESUME_PR
-        WHERE USER_NUMBER = #{userNumber}
+        WHERE PR_NUMBER = #{prNumber}
     </select>
 </mapper>

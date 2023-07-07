@@ -1,5 +1,6 @@
 package com.example.winwin.controller.myPage;
 
+import com.example.winwin.dto.file.ResumeFileDto;
 import com.example.winwin.dto.user.ResumePrDto;
 import com.example.winwin.service.myPage.MyPageService;
 import com.example.winwin.vo.myPage.ResumeVo;
@@ -25,17 +26,18 @@ public class MyPageRestController {
         resumeVo.setResumeDto(myPageService.getResume(resumeNumber));
 //        resumeVo.setUserPhoneNumber(myPageService.getPhoneNumber(userNumber));
         resumeVo.setUserPhoneNumber(myPageService.getPhoneNumber(1L));
+        resumeVo.setResumeFileDto(myPageService.getResumeFile(resumeNumber));
 
         return resumeVo;
     }
 
     @GetMapping("/pr")
-    public void getPr(HttpServletRequest req, Long prNumber){
+    public ResumePrDto getPr(Long prNumber){
         if(prNumber == null){
             throw new IllegalArgumentException("존재하지 않는 자기소개서입니다.");
         }
 
         ResumePrDto resumePrDto = myPageService.getPr(prNumber);
-        req.getSession().setAttribute("pr", resumePrDto);
+        return resumePrDto;
     }
 }

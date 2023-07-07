@@ -132,6 +132,7 @@ hr {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0px 10px;
 }
 
 #point-page {
@@ -146,7 +147,7 @@ hr {
 }
 
 .category-contain > h4:hover {
-  margin-top: 1px;
+  margin-top: -1px;
 }
 
 .page-move {
@@ -505,6 +506,19 @@ ul {
 
 .button{
   margin: 10px 10px 10px auto;
+  width: 70px;
+  height: 30px;
+  background-color: #94A3B8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.button:hover{
+  background-color: #1b5192;
 }
 
 .form{

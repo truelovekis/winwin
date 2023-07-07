@@ -147,7 +147,7 @@ hr {
 }
 
 .category-contain > h4:hover {
-  margin-top: 1px;
+  margin-top: -1px;
 }
 
 .page-move {
