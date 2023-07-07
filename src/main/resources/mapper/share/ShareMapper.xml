@@ -58,7 +58,6 @@
             WHERE RK = 1
         ) J
                            ON S.SHARE_NUMBER = J.share_number
-
         ORDER BY S.share_number DESC
     </select>
     <!--    -->

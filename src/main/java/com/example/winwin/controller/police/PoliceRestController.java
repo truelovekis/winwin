@@ -33,7 +33,6 @@ public class PoliceRestController {
 
     }
 
-
     @PostMapping("/community")
     public void communityReport(@RequestBody PoliceBoardDto policeBoardDto, HttpServletRequest req) {
 //        로그인 세션 처리

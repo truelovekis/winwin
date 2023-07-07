@@ -27,6 +27,7 @@ public class ShareFileRestController {
     //    나눔 페이지 리스트에 파일 업로드한 이미지 띄어주기
     @GetMapping("/imgList")
     public List<ShareFileDto> imgList(Long shareNumber){
+
         return shareFileService.shareFileFindList(shareNumber);
     }
 

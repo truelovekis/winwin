@@ -21,7 +21,7 @@ public class ShareRestController {
 
     private final ShareService shareService;
 
-//  무한 스크롤 RestController
+//  나눔 글 무한 스크롤
     @GetMapping("/list/{page}")
     public Map<String, Object> shareListPage(@PathVariable("page") int page){
         Criteria criteria = new Criteria();

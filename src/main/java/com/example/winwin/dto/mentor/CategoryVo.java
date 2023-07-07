@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 public class CategoryVo {
     private String mainCode;
+    private Long mainNumber;
     private String mainName;
     private String subName;
-    private Long mainNumber;
     private Long subNumber;
 }

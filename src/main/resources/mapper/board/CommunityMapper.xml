@@ -65,7 +65,6 @@
         ORDER BY C.COMMUNITY_NUMBER DESC
     </select>
 
-</mapper>
 <!--    <select id="selectAll" resultType="communityVo">-->
 <!--        SELECT (SELECT COUNT(*) FROM COMMUNITY_COMMENT WHERE COMMUNITY_COMMENT.COMMUNITY_NUMBER = C.COMMUNITY_NUMBER) AS COMMENT_CNT-->
 <!--        ,C.COMMUNITY_NUMBER, C.COMMUNITY_TITLE, C.COMMUNITY_CONTENT, C.COMMUNITY_DATE, C.COMMUNITY_CNT, C.CATEGORY_NUMBER-->
@@ -99,7 +98,6 @@
 <!--        </if>-->
 <!--        ORDER BY C.COMMUNITY_NUMBER DESC-->
 <!--    </select>-->
-
 
 </mapper>
 

@@ -38,29 +38,6 @@ public class ShareController {
 
         List<ShareVo> shareVoList = shareService.shareFindAll();
 
-//        글 작성 몇 분전 보여주기
-        if(shareVoList.size() > 0){
-            for (ShareVo shareVo: shareVoList) {
-
-                // reg_date를 LocalDateTime으로 변환
-                LocalDateTime communityDate = LocalDateTime.parse(shareVo.getShareDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-
-                // 현재 시간과의 차이 계산
-                long minutesDiff = ChronoUnit.MINUTES.between(communityDate, LocalDateTime.now());
-                long hoursDiff = ChronoUnit.HOURS.between(communityDate, LocalDateTime.now());
-                long daysDiff = ChronoUnit.DAYS.between(communityDate, LocalDateTime.now());
-
-                // 경과 시간 표시
-                if (minutesDiff < 60) {
-                    shareVo.setShareDate(minutesDiff + "분 전");
-                } else if (hoursDiff < 24) {
-                    shareVo.setShareDate(hoursDiff + "시간 전");
-                } else if (daysDiff < 365) {
-                    shareVo.setShareDate(daysDiff + "일 전");
-                }
-            }
-        }
-
         model.addAttribute("shareList", shareVoList);
 
         return "share/share";

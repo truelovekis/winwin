@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @Data
 @NoArgsConstructor
@@ -17,8 +19,15 @@ public class CareerInfoVo {
     private int careerInfoLike;
     private Long mentorNumber;
     private String userName;
+    private String userNickname;
+    private Long userNumber;
+    private String pfpUploadPath;
+    private String pfpSystename;
+    private String pfpUuid;
     private String userBelong;
-    private String careerTitle;
     private String careerAnnual;
-
+    private int subNumber;
+    private String subName;
+    private String gradeName;
+    private List<Integer> tagList;
 }
