@@ -115,6 +115,7 @@ $('.commentBtn').on('click', function(){
     }
 
     let commentObj = {
+
         commentContent : content,
         communityNumber : communityNumber
     }
@@ -184,7 +185,7 @@ function showComment(replies) {
 
     replies.forEach(r => {
         text += `<div class="commentAi"  data-num="${r.commentNumber}">
-                    <input type="hidden" class="comment-num" value="${r.commentNumber}">
+                    <input type="hidden" class="comment-num" th:value="${r.commentNumber}">
                     <div class="profil">
                         <img src="../img/corgi-g5894d3ae3_1920.jpg" height="50px" width="50px">
                         <div class="Commento"><p>코멘토 AI 봇</p></div>
@@ -383,6 +384,7 @@ reportModal.addEventListener("click", function (e){
     if ($(e.target).hasClass("reportModal")){
         reportModal.style.display = "none";
         document.body.style.overflow = "unset";
+
     }
 });
 

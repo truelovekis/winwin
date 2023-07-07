@@ -26,7 +26,10 @@ public class CsService {
         if (csNumber == null) {
             throw new IllegalArgumentException("게시판 번호 누락");
         }
+
+
         csMapper.delete(csNumber);
+
     }
 
     public void modify(CsDto csDto) {
