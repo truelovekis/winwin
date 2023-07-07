@@ -41,7 +41,7 @@ $(window).on('scroll', function () {
     if (Math.round($(window).scrollTop()) == $(document).height() - $(window).height() - 1) {
         console.log(++page)
         console.log("====================================")
-        getListPage({page : page}, appendList, showError)
+        getListPage({page: page}, appendList, showError)
     }
 });
 
@@ -74,7 +74,7 @@ function appendList(map) {
                                 <span>
                                     ${share.shareStatus == '1' ? '<span class="N">나눔 중</span>'
                                     : '<span class="E">마감</span>'
-                                    }
+                                        } 
                                 </span>
                                 |
                                 <span>${share.shareTitle}</span>
@@ -99,9 +99,9 @@ function appendList(map) {
                 <div class="share-sub-img">
                     <div class="share-img">
                         ${share.fileSystemName == null ?
-                        '<img src="/img/default-camera.png">' :
-                        '<img src=/upload/' + share.fileUploadPath + '/th_' + share.fileUuid + '_' + share.fileSystemName +'>'
-                        }
+            '<img src="/img/default-camera.png">' :
+            '<img src=/upload/' + share.fileUploadPath + '/th_' + share.fileUuid + '_' + share.fileSystemName + '>'
+        }
                 
                     </div>
                 </div>
@@ -114,7 +114,7 @@ function appendList(map) {
     $('.community').append(text);
 }
 
-function showError(a,b,c){
+function showError(a, b, c) {
     console.error(c);
 }
 

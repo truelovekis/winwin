@@ -76,7 +76,15 @@ public class AdminService {
         return adminMapper.selectSearchReport(adminReportSearchVo);
     }
 
+    // 전체 댓글 신고 조회하기
+    public List<AdminVo> findReportComment(){
+        return adminMapper.selectReportComment();
+    }
 
+    // 검색한 댓글 신고 조회하기
+    public List<AdminVo> findSearchCommentReport(AdminCommentReportSearchVo adminCommentReportSearchVo){
+        return adminMapper.selectSearchReportComment(adminCommentReportSearchVo);
+    }
 
     // 커뮤니티 상태 변경
     public void modifyBoardStatus(Long communityNumber, String communityStatus) {
@@ -104,11 +112,27 @@ public class AdminService {
     }
 
     // 신고회원 상태 변경
-    public void modifyReportStatus(Long userNumber, String userStatus){
+    public void modifyUserStatus(Long userNumber, String userStatus){
         if (userNumber == null || userStatus == null ){
-            throw new IllegalArgumentException("신고회원 수정 정보 누락");
+            throw new IllegalArgumentException("회원 수정 정보 누락");
         }
-        adminMapper.updateReport(userNumber, userStatus);
+        adminMapper.updateUser(userNumber, userStatus);
+    }
+
+    // 신고 게시글 상태 변경
+    public void modifyBoardReportStatus(Long policeBoard, String boardStatus){
+        if(policeBoard == null || boardStatus == null){
+            throw new IllegalArgumentException("신고 게시글 수정 정보 누락");
+        }
+        adminMapper.updateBoard(policeBoard, boardStatus);
+    }
+
+    // 신고 댓글 상태 변경
+    public void modifyCommentReportStatus(Long policeNumber, String commentStatus){
+        if(policeNumber == null || commentStatus == null){
+            throw new IllegalArgumentException("신고 댓글 수정 정보 누락");
+        }
+        adminMapper.updateCommentReport(policeNumber, commentStatus);
     }
 
 

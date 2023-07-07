@@ -9,7 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
     <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
     <link rel="stylesheet" th:href="@{/css/fragment/adminSideBar.css}" />
-    <link rel="stylesheet" th:href="@{/css/admin/adminreport.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin/adminCommentReport.css}" />
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
     <style>
         body {
@@ -40,55 +40,55 @@
 
                     <div class="report-category">
                     <div class="small-category1">
-                        <a href="#" class="small-category-a">
+                        <a th:href="@{/admin/report}" class="small-category-a">
                             <h4>게시글 신고</h4>
                         </a>
                     </div>
                     <div class="small-category2">
-                        <a th:href="@{/admin/commentReport}" class="small-category-a">
+                        <a href="#" class="small-category-a">
                             <h4>댓글 신고</h4>
                         </a>
                     </div>
-                    </div>
+                        </div>
 
                 </div>
             </div>
             <!--  -->
 
             <!-- 회원 정보 검색 및 테이블 -->
-            <form action="/admin/searchReport" method="get">
-            <div class="search">
-                <span>이름 : </span>
-                <input name="name" type="text" placeholder="이름" class="search-text" style="font-family: NanumSquareAcr;">
-                <span>게시판 :  </span>
-                <select name="bigCode" id="identity" class="search-text2" style="font-family: NanumSquareAcr;">
-                    <option value="">선택</option>
-                    <option value="200">진로정보</option>
-                    <option value="300">QnA</option>
-                    <option value="400">커뮤니티</option>
-                    <option value="500">모임</option>
-                    <option value="600">나눔</option>
-                    <option value="700">문의사항</option>
-                </select>
-                <span>신고사유 : </span>
-                <select name="code" id="reason" style="font-family: NanumSquareAcr;">
-                    <option value="">선택</option>
-                    <option value="1">욕설/비방글</option>
-                    <option value="2">저작권침해</option>
-                    <option value="3">음란성</option>
-                    <option value="4">불법광고</option>
-                    <option value="5">개인정보 침해 및 명예 훼손</option>
-                    <option value="6">폭력/잔인/혐오</option>
-                    <option value="7">도배성</option>
-                </select>
-                <span>상태 : </span>
-                <select name="status" id="result" class="search-text2" style="font-family: NanumSquareAcr;">
-                    <option value="">선택</option>
-                    <option value="1">공개</option>
-                    <option value="0">비공개</option>
-                </select>
-                <button type="text" class="search-btn" style="font-family: NanumSquareAcr;">검색</button>
-            </div>
+            <form action="/admin/searchCommentReport" method="get">
+                <div class="search">
+                    <span>이름 : </span>
+                    <input name="name" type="text" placeholder="이름" class="search-text" style="font-family: NanumSquareAcr;">
+                    <span>게시판 :  </span>
+                    <select name="bigCode" id="identity" class="search-text2" style="font-family: NanumSquareAcr;">
+                        <option value="">선택</option>
+                        <option value="200">진로정보</option>
+                        <option value="300">QnA</option>
+                        <option value="400">커뮤니티</option>
+                        <option value="500">모임</option>
+                        <option value="600">나눔</option>
+                        <option value="700">문의사항</option>
+                    </select>
+                    <span>신고사유 : </span>
+                    <select name="code" id="reason" style="font-family: NanumSquareAcr;">
+                        <option value="">선택</option>
+                        <option value="1">욕설/비방글</option>
+                        <option value="2">저작권침해</option>
+                        <option value="3">음란성</option>
+                        <option value="4">불법광고</option>
+                        <option value="5">개인정보 침해 및 명예 훼손</option>
+                        <option value="6">폭력/잔인/혐오</option>
+                        <option value="7">도배성</option>
+                    </select>
+                    <span>상태 : </span>
+                    <select name="status" id="result" class="search-text2" style="font-family: NanumSquareAcr;">
+                        <option value="">선택</option>
+                        <option value="1">공개</option>
+                        <option value="0">비공개</option>
+                    </select>
+                    <button type="text" class="search-btn" style="font-family: NanumSquareAcr;">검색</button>
+                </div>
 
             </form>
             <div class="border-box">
@@ -100,7 +100,7 @@
                         </td>
                         <td class="user-name" align="center">이름</td>
                         <td class="user-id" align="center">아이디</td>
-                        <td class="user-board" align="center">게시판</td>
+                        <td class="user-board" align="center">게시판(댓글)</td>
                         <td class="user-report-date" align="center">신고 일자</td>
                         <td class="report-reason" align="center">신고 사유</td>
                         <td class="user-report-status" align="center">신고 상태</td>
@@ -110,14 +110,14 @@
 
 
                     <tbody>
-                    <tr class="user-table-category" th:each="admin : ${adminReportList}">
+                    <tr class="user-table-category" th:each="admin : ${adminCommentReportList}">
                         <td class="checkbox">
-                            <input type="checkbox" name="" class="check check-box" id="checking" style="font-family: NanumSquareAcr;" th:data-number="${admin.policeBoard}">
+                            <input type="checkbox" name="" class="check check-box" id="checking" style="font-family: NanumSquareAcr;" th:data-number="${admin.policeNumber}">
                         </td>
                         <td class="user-name" align="center" th:text="${admin.userName}"></td>
                         <td class="user-id" align="center" th:text="${admin.userId}"></td>
                         <td class="user-board" align="center" th:text="${admin.bigName}"></td>
-                        <td class="user-report-date" align="center" th:text="${#strings.substring(admin.policeDate, 0, 10)}"></td>
+                        <td class="user-report-date" align="center" th:text="${#strings.substring(admin.commentDate, 0, 10)}"></td>
                         <td class="report-reason" align="center" th:text="${admin.policeCategoryName}"></td>
                         <td class="board-public-secret" align="center">
                             <select name="user-report-select" class="user-report-select" style="font-family: NanumSquareAcr;">
@@ -127,8 +127,8 @@
                             </select>
                         </td>
                         <td class="report-resulting-success" align="center">
-                            <div th:if="${admin.boardStatus} == 1"  class="blind-button Y" th:text="공개" th:value="${admin.boardStatus}"></div>
-                            <div th:if="${admin.boardStatus} == 0"  class="blind-button N" th:text="비공개"></div>
+                            <div th:if="${admin.commentStatus} == '1'"  class="blind-button Y" th:text="공개"></div>
+                            <div th:if="${admin.commentStatus} == '0'"  class="blind-button N" th:text="비공개"></div>
                         </td>
                     </tr>
                     </tbody>
@@ -151,8 +151,9 @@
         crossorigin="anonymous"
 ></script>
 <script th:src="@{/js/admin/adminUser.js}"></script>
-<!--<script th:src="@{/js/admin/adminReport.js}"></script>-->
-<script th:src="@{/js/admin/reportStatus.js}"></script>
+<script th:src="@{/js/admin/adminReport.js}"></script>
+<!--<script th:src="@{/js/admin/adminJobBoard.js}"></script>-->
+<script th:src="@{/js/admin/commentReportStatus.js}"></script>
 <script th:src="@{/js/fragment/header.js}" ></script>
 <script th:src="@{/js/user/loginModal.js}"></script>
 </body>

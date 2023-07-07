@@ -41,5 +41,10 @@ public class AdminVo {
     private String shareContent;
     private String shareDate;
     private String shareStatus;
+    private String commentDate;
+    private String commentStatus;
+    private Long policeNumber;
+    private String boardStatus;
+    private Long policeBoard;
 
 }
