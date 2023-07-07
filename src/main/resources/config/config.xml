@@ -14,6 +14,7 @@
         <typeAlias type="com.example.winwin.dto.user.MentorDto" alias="memtorDto"/>
         <typeAlias type="com.example.winwin.dto.user.MentorLikeDto" alias="memtorLikeDto"/>
         <typeAlias type="com.example.winwin.vo.user.UserVo" alias="userVo"/>
+        <typeAlias type="com.example.winwin.vo.user.CategoryBridgeVo" alias="categoryBridgeVo"/>
         <!--        -->
 
 
@@ -25,14 +26,17 @@
         <typeAlias type="com.example.winwin.dto.admin.AdminCareerSearchVo" alias="adminCareerSearchVo"/>
         <typeAlias type="com.example.winwin.dto.admin.AdminShareSearchVo" alias="adminShareSearchVo"/>
         <typeAlias type="com.example.winwin.dto.admin.AdminReportSearchVo" alias="adminReportSearchVo"/>
+        <typeAlias type="com.example.winwin.dto.admin.AdminCommentReportSearchVo" alias="adminCommentReportSearchVo"/>
+        <typeAlias type="com.example.winwin.dto.admin.MainCategoryVo" alias="mainCategoryVo"/>
         <!--   관리자 페이지    -->
 
-        <typeAlias type="com.example.winwin.dto.admin.MainCategoryVo" alias="mainCategoryVo"/>
 
         <!-- CS -->
         <typeAlias type="com.example.winwin.dto.board.CsDto" alias="csDto"/>
+        <typeAlias type="com.example.winwin.vo.board.CsVo" alias="csVo"/>
+<!--        <typeAlias type="com.example.winwin.dto.board.CsDto" alias="csDto"/>-->
         <typeAlias type="com.example.winwin.dto.board.CsCommentDto" alias="csCommentDto"/>
-        <typeAlias type="com.example.winwin.vo.CsVo" alias="csVo"/>
+<!--        <typeAlias type="com.example.winwin.vo.CsVo" alias="csVo"/>-->
         <!--        -->
 
 
@@ -73,7 +77,7 @@
         <typeAlias type="com.example.winwin.dto.board.CommunityCommentDto" alias="communityCommentDto"/>
         <typeAlias type="com.example.winwin.dto.board.CommunityCommentUdDto" alias="communityCommentUdDto"/>
         <typeAlias type="com.example.winwin.dto.file.CommunityFileDto" alias="communityFileDto"/>
-        <typeAlias type="com.example.winwin.dto.file.ResumeFileDto" alias="resumeFileDto"/>
+<!--        <typeAlias type="com.example.winwin.dto.file.ResumeFileDto" alias="resumeFileDto"/>-->
         <typeAlias type="com.example.winwin.dto.user.UserDto" alias="userDto"/>
         <typeAlias type="com.example.winwin.dto.user.UserPfpDto" alias="userPfpDto"/>
         <typeAlias type="com.example.winwin.dto.user.ResumeDto" alias="resumeDto"/>
@@ -83,7 +87,7 @@
         <typeAlias type="com.example.winwin.vo.user.UserCategoryVo" alias="userCategoryVo"/>
         <!--        -->
 
-<<<<<<< HEAD
+
         <!-- Qna -->
         <typeAlias type="com.example.winwin.dto.board.QnaDto" alias="qnaDto"/>
         <typeAlias type="com.example.winwin.dto.board.QnaCommentDto" alias="qnaCommentDto"/>
@@ -93,15 +97,13 @@
 
         <!-- Qs -->
         <typeAlias type="com.example.winwin.dto.board.QsBridgeDto" alias="qsBridgeDto"/>
+        <typeAlias type="com.example.winwin.vo.board.QsBridgeVo" alias="qsBridgeVo"/>
         <!--    -->
 
         <!-- 프로젝트, 모임 -->
-
-        <typeAlias type="com.example.winwin.dto.board.CsDto" alias="csDto"/>
-        <typeAlias type="com.example.winwin.vo.board.CsVo" alias="csVo"/>
         <typeAlias type="com.example.winwin.dto.board.StudyDto" alias="studyDto"/>
         <typeAlias type="com.example.winwin.dto.board.StudyLikeDto" alias="studyLikeDto"/>
-        <typeAlias type="com.example.winwin.Dto.board.StudyCommentDto" alias="studyCommentDto"/>
+        <typeAlias type="com.example.winwin.dto.board.StudyCommentDto" alias="studyCommentDto"/>
         <typeAlias type="com.example.winwin.vo.board.StudyVo" alias="studyVo"/>
         <!--        -->
 

@@ -110,19 +110,35 @@ public class AdminController {
     }
 
 
-    // 전체 신고 조회
+    // 전체 게시글 신고 조회
     @GetMapping("/report")
     public String adminReport(Model model){
         List<AdminVo> adminReportList = adminService.findReport();
         model.addAttribute("adminReportList", adminReportList);
         return "admin/adminReport";
     }
-    // 검색한 신고 조회
+    // 검색한 게시글 신고 조회
     @GetMapping("/searchReport")
     public String adminReportSearch(AdminReportSearchVo adminReportSearchVo, Model model){
         List<AdminVo> adminReportList = adminService.findSearchReport(adminReportSearchVo);
         model.addAttribute("adminReportList", adminReportList);
         return "admin/adminReport";
+    }
+
+    // 전체 댓글 신고 조회
+    @GetMapping("/commentReport")
+    public String adminCommentReport(Model model){
+        List<AdminVo> adminCommentReportList = adminService.findReportComment();
+        model.addAttribute("adminCommentReportList", adminCommentReportList);
+        return "admin/adminCommentReport";
+    }
+
+    // 검색한 댓글 신고 조회
+    @GetMapping("/searchCommentReport")
+    public String adminCommentReportSearch(AdminCommentReportSearchVo adminCommentReportSearchVo, Model model){
+        List<AdminVo> adminCommentReportList = adminService.findSearchCommentReport(adminCommentReportSearchVo);
+        model.addAttribute("adminCommentReportList", adminCommentReportList);
+        return "admin/adminCommentReport";
     }
 
 }

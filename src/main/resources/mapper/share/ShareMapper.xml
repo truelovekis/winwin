@@ -58,6 +58,9 @@
             WHERE RK = 1
         ) J
                            ON S.SHARE_NUMBER = J.share_number
+        WHERE
+            U.USER_STATUS != '3'
+    AND s.share_status = '1'
 
         ORDER BY S.share_number DESC
     </select>

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" th:href="@{/css/user/loginModal.css}" />
   <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
   <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
   <link rel="stylesheet" th:href="@{/css/qna/qnaWrite.css}" />
@@ -23,20 +24,123 @@
 </head>
 <body>
 <header class="header" th:replace="fragment/header :: header"></header>
+<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 <section>
+  <form th:action="@{/qna/write}" method="post">
+  <!-- 태그 필터 -->
+  <main class="main1">
+    <div class="tag-wrap">
+      <div class="select-tag">
+        <!--              <span class="tag">@계열1</span>-->
+        <!--              <span class="tag">@계열2</span>-->
+        <!--              <span class="tag">@계열3</span>-->
+        <!--              <span class="tag">@계열4</span>-->
+        <!--              <span class="tag">@계열5</span>-->
+        <!--              <span class="tag">@계열6</span>-->
+        <!--              <span class="tag">@계열7</span>-->
+        <!--              <span class="tag">@계열8</span>-->
+        <!--              <span class="tag">@계열9</span>-->
+        <!--              <span class="tag">@계열10</span>-->
+      </div>
+    </div>
+
+    <div class="select-wrap">
+      <div class="select">
+        <div class="selected">
+          <div class="selected-value">1차 카테고리(선택)</div>
+          <div class="arrow">
+            <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="1em"
+                    viewBox="0 0 448 512"
+            >
+              <path
+                      d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"
+              />
+            </svg>
+          </div>
+        </div>
+        <ul class="first-option-box option-box none">
+          <li class="option first-option-category1" value="1">직무</li>
+          <li class="option first-option-category2" value="2">학과</li>
+        </ul>
+      </div>
+      <!-- /1차 카테고리(직무/학과) -->
+
+      <!-- 2차 카테고리 직무별/학과별 카테고리 -->
+      <div class="select">
+        <div class="selected">
+          <div class="selected-value">2차 카테고리(선택)</div>
+          <div class="arrow">
+            <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="1em"
+                    viewBox="0 0 448 512"
+            >
+              <path
+                      d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"
+              />
+            </svg>
+          </div>
+        </div>
+        <!-- 2차 카테고리 직무일 때 -->
+        <ul class="second-job-box option-box none">
+          <li>1차 카테고리를 선택하세요</li>
+        </ul>
+        <!-- /2차 카테고리 직무일 때 -->
+      </div>
+      <!-- /2차 카테고리 직무별/학과별 카테고리 -->
+
+      <!-- 3차 카테고리 -->
+      <div class="select">
+        <div class="selected">
+          <div class="selected-value">3차 카테고리(선택)</div>
+          <div class="arrow">
+            <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="1em"
+                    viewBox="0 0 448 512"
+            >
+              <path
+                      d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"
+              />
+            </svg>
+          </div>
+        </div>
+
+        <!-- 2차 카테고리 직무 선택시 3차 소분류 -->
+        <ul class="third-job-box option-box none">
+          <li>2차 카테고리를 선택하세요</li>
+        </ul>
+        <!-- /2차 카테고리 직무 선택시 3차 소분류 -->
+      </div>
+      <!-- /3차 카테고리 -->
+
+    </div>
+    </div>
+
+    </div>
+
+  </main>
+  <!-- /태그 필터 -->
+
   <div class="big-box">
     <div class="first">
       <div class="profil-box">
         <img src="../img/corgi-g5894d3ae3_1920.jpg" width="25px" height="25px">
         <div class="nickName"><h3>truluvkis</h3></div>
       </div>
+
+
+
+
       <div class="contentTitle">
         <div class="title">
-          <input type="text" class="inputTitle" id="count_memo" minlength = "10" maxlength="100" placeholder="제목을 입력해주세요." style="font-family:NanumSquareLight;"/>
+          <input type="text" name="qnaTitle" class="inputTitle" id="count_memo" minlength = "10" maxlength="100" placeholder="제목을 입력해주세요." style="font-family:NanumSquareLight;"/>
           <div class="count"><span id="cnt">0 / 50</span></div>
         </div>
         <div class="content">
-                    <textarea name="" id="" cols="30" rows="10" class="textarea" placeholder="궁금한 내용을 적어주세요.
+                    <textarea name="qnaContent" id="" cols="30" rows="10" class="textarea" placeholder="궁금한 내용을 적어주세요.
 질문 내용이 구제척일수록 정확한 답변을 받을 수 있어요." style="font-family:NanumSquareLight;"></textarea>
         </div>
       </div>
@@ -60,13 +164,17 @@
         </ul>
       </div>
       <div class="button">
-        <button type="button" class="writeOk">등록하기</button>
+        <button type="submit" class="writeOk">등록하기</button>
       </div>
     </div> <!-- div.second -->
   </div> <!-- div.big-box -->
+  </form>
 </section>
-<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
-<script type="module" th:src="@{/js/qna/qnaWrite.js}"></script>
+<script th:src="@{/js/qna/qnaWrite.js}"></script>
+<script th:src="@{/js/mentor/mentorProfile.js}"></script>
+<script th:src="@{/js/fragment/header.js}" ></script>
+<!--  모달 js-->
+<script th:src="@{/js/user/loginModal.js}"></script>
 <!--<script th:src="@{/js/fragment/header.js}" ></script>-->
 </body>
 </html>

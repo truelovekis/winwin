@@ -1,4 +1,4 @@
-package com.example.winwin.dto.board;
+package com.example.winwin.vo.board;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,8 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 @NoArgsConstructor
-public class QsBridgeDto {
-    private Long qnaNumber;
-    private Long subNumber;
+public class QsBridgeVo {
     private String subName;
+    private Long userNumber;
 }

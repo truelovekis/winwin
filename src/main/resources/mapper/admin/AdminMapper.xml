@@ -34,16 +34,18 @@
     <!--  전체 회원 조회  -->
     <select id="selectTest" resultType="adminVo">
         SELECT WU.USER_NAME,
+               WU.USER_NUMBER,
                WU.USER_ID,
                MC.MAIN_NAME,
                WU.USER_RRNUMBER,
                WU.USER_PHONE_NUMBER,
                M.MENTOR_STATUS,
-               WU.USER_EMAIL
+               WU.USER_STATUS
         FROM WW_USER WU
                  LEFT OUTER JOIN MENTOR M on WU.user_number = M.USER_NUMBER
                  LEFT OUTER JOIN SUB_CATEGORY SB on M.SUB_NUMBER = SB.SUB_NUMBER
                  LEFT OUTER JOIN MAIN_CATEGORY MC on SB.MAIN_CODE = MC.MAIN_CODE
+        WHERE user_status != 'a'
     </select>
 
 
@@ -213,35 +215,32 @@
         </trim>
     </select>
 
-    <!--  전체 신고 조회  -->
+    <!--  전체 게시글 신고 조회  -->
     <select id="selectReport" resultType="adminVo">
         SELECT WU.USER_NUMBER,
+               pb.police_number as police_board,
                WU.USER_NAME,
         USER_ID,
         big_name,
         Pb.police_date,
         PC.CATEGORY_NAME as police_category_name,
-        USER_STATUS
+        pb.board_STATUS
         FROM WW_USER WU
-        LEFT OUTER JOIN police_board pb on WU.user_number = pb.user_number
-        left outer join big_category bc on pb.big_code = bc.big_code
-        LEFT OUTER JOIN POLICE_CATEGORY PC ON PB.police_category = PC.category_number
-        <where>
-            <if test="userStatus == 2 or userStatus == 3 or userStatus == null">
-                AND WU.USER_STATUS = 2 or wu.USER_STATUS = 3
-            </if>
-        </where>
+        JOIN police_board pb on WU.user_number = pb.user_number
+        join big_category bc on pb.big_code = bc.big_code
+        JOIN POLICE_CATEGORY PC ON PB.police_category = PC.category_number
     </select>
 
-    <!-- 검색한 신고 조회-->
+    <!-- 검색한 게시글 신고 조회-->
     <select id="selectSearchReport" parameterType="adminReportSearchVo" resultType="adminVo">
         SELECT WU.USER_NUMBER,
+        pb.police_number as police_board,
         WU.USER_NAME,
         USER_ID,
         big_name,
         Pb.police_date,
         PC.CATEGORY_NAME as police_category_name,
-        USER_STATUS
+        PB.BOARD_STATUS
         FROM WW_USER WU
         LEFT OUTER JOIN police_board pb on WU.user_number = pb.user_number
         left outer join big_category bc on pb.big_code = bc.big_code
@@ -257,7 +256,53 @@
                 AND PC.CATEGORY_NUMBER LIKE '%' || #{code} || '%'
             </if>
             <if test="status != null and status != ''">
-                AND USER_STATUS LIKE '%' || #{status} || '%'
+                AND BOARD_STATUS LIKE '%' || #{status} || '%'
+            </if>
+        </trim>
+    </select>
+
+<!--  전체 댓글 신고 조회   -->
+    <select id="selectReportComment">
+    SELECT WU.USER_NUMBER,
+           pc.police_NUMBER,
+    WU.USER_NAME,
+    USER_ID,
+    big_name,
+    Pc.comment_date,
+    PC2.CATEGORY_NAME as police_category_name,
+    pc.comment_status
+    FROM WW_USER WU
+    JOIN police_comment pc on WU.user_number = pc.user_number
+    join big_category bc on pc.big_code = bc.big_code
+    JOIN POLICE_CATEGORY PC2 on pc.police_category = PC2.category_number
+    </select>
+
+<!--  검색한 댓글 신고 조회  -->
+    <select id="selectSearchReportComment" parameterType="adminCommentReportSearchVo" resultType="adminVo">
+        SELECT WU.USER_NUMBER,
+               pc.police_number,
+               WU.USER_NAME,
+               USER_ID,
+               big_name,
+               Pc.comment_date,
+               PC2.CATEGORY_NAME as police_category_name,
+               pc.comment_status
+        FROM WW_USER WU
+                 LEFT OUTER JOIN police_comment pc on WU.user_number = pc.user_number
+                 left outer join big_category bc on pc.big_code = bc.big_code
+                 LEFT OUTER JOIN POLICE_CATEGORY PC2 on pc.police_category = PC2.category_number
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="name != null and name != ''">
+                AND WU.USER_NAME LIKE '%' || #{name} || '%'
+            </if>
+            <if test="bigCode != null and bigCode != ''">
+                AND bc.BIG_CODE LIKE '%' || #{bigCode} || '%'
+            </if>
+            <if test="code != null and code != ''">
+                AND PC2.CATEGORY_NUMBER LIKE '%' || #{code} || '%'
+            </if>
+            <if test="status != null and status != ''">
+                AND COMMENT_STATUS LIKE '%' || #{status} || '%'
             </if>
         </trim>
     </select>
@@ -284,13 +329,30 @@
         where SHARE_NUMBER = #{shareNumber}
     </update>
 
-<!--  신고 회원 상태 변경  -->
-        <update id="updateReport">
+<!--  회원 상태 변경  -->
+        <update id="updateUser">
             update WW_USER
             set USER_STATUS = #{userStatus}
             where USER_NUMBER = #{userNumber}
         </update>
 
+<!-- 신고 게시글 상태 변경  -->
+    <update id="updateBoard">
+        update police_board
+        set board_status = #{boardStatus}
+        where police_number = #{policeBoard}
+    </update>
+
+<!-- 신고 댓글 상태 변경  -->
+         <update id="updateCommentReport">
+             update police_comment
+            set comment_status = #{commentStatus}
+            where police_number = #{policeNumber}
+         </update>
+
+
+
+<!--  게시글 신고 상태 변경  -->
 
     <!-- 게시글 진로정보 mainCategory 정보 가져오기 -->
     <select id="getCateDep" resultType="mainCategoryVo">
