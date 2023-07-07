@@ -1,12 +1,9 @@
 package com.example.winwin.service.cs;
 
 
-import com.example.winwin.dto.board.CommunityCommentDto;
 import com.example.winwin.dto.board.CsCommentDto;
 import com.example.winwin.mapper.board.CsCommentMapper;
-import com.example.winwin.mapper.board.CsMapper;
-import com.example.winwin.vo.board.CommunityCommentVo;
-import com.example.winwin.vo.board.CsReplayVo;
+import com.example.winwin.vo.board.CsReplyVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +25,7 @@ public class CsReplayService {
     }
 
     @Transactional(readOnly = true)
-    public List<CsReplayVo> findList(Long csNumber) {
+    public List<CsReplyVo> findList(Long csNumber) {
         if (csNumber == null) {
             throw new IllegalArgumentException("댓글 번호 누락");
         }
@@ -38,7 +35,7 @@ public class CsReplayService {
 
     @Transactional(readOnly = true)
 
-    public CsReplayVo findComment(Long commentNumber) {
+    public CsReplyVo findComment(Long commentNumber) {
         if (commentNumber == null) {
             throw new IllegalArgumentException("댓글 번호 누락");
         }
@@ -59,6 +56,13 @@ public class CsReplayService {
             throw new IllegalArgumentException("댓글 번호 누락");
         }
         csCommentMapper.delete(commentNumber);
+    }
+
+    public void deleteReply(Long commentNumber){
+        if(commentNumber == null){
+            throw new IllegalArgumentException ("게시글 번호 누락");
+        }
+        csCommentMapper.deleteReplay(commentNumber);
     }
 }
 
