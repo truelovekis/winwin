@@ -94,13 +94,18 @@ hr {
 }
 
 .sub-category {
-  margin: 15px;
-  margin-left: 110px;
+  margin: 15px 15px 15px 110px;
 }
 
 .sub-category > span {
   cursor: pointer;
   margin-right: 15px;
+  font-size: 14px;
+  color: #000;
+}
+
+.sub-category a {
+  cursor: pointer;
   font-size: 14px;
   color: #000;
 }
@@ -136,6 +141,10 @@ hr {
   padding: 0px 10px;
 }
 
+.category-contain > h4:hover{
+  margin-top: -1px;
+}
+
 #point-page {
   border-bottom: 3px solid #000;
   color: #000;
@@ -145,10 +154,6 @@ hr {
   color: #000;
   background-color: rgba(198, 198, 198, 0.251);
   border-radius: 5px;
-}
-
-.category-contain > h4:hover {
-  margin-top: 1px;
 }
 
 .page-move {

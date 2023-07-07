@@ -4,9 +4,7 @@ import com.example.winwin.dto.chatting.ChattingDto;
 import com.example.winwin.service.chatting.ChattingService;
 import com.example.winwin.vo.myPage.ChattingVo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.reactive.result.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 

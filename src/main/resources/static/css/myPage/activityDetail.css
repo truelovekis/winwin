@@ -94,10 +94,17 @@ hr {
 }
 
 .sub-category {
-  margin: 15px;
+  margin: 15px 15px 15px 23px;
 }
 
 .sub-category > span {
+  cursor: pointer;
+  margin-right: 15px;
+  font-size: 14px;
+  color: #000;
+}
+
+.sub-category a {
   cursor: pointer;
   margin-right: 15px;
   font-size: 14px;
@@ -140,14 +147,19 @@ hr {
   color: #000;
 }
 
+/*.category-contain > h4:hover {*/
+/*  margin-top: 1px;*/
+/*}*/
+
+/*.category h4:hover{*/
+/*  margin-top: 1px;*/
+/*}*/
+
 .category-contain:hover {
   color: #000;
   background-color: rgba(198, 198, 198, 0.251);
   border-radius: 5px;
-}
-
-.category-contain > h4:hover {
-  margin-top: 1px;
+  margin-top: -1px;
 }
 
 .page-move {

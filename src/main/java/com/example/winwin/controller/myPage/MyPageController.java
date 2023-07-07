@@ -1,6 +1,5 @@
 package com.example.winwin.controller.myPage;
 
-import com.example.winwin.dto.chatting.ChattingDto;
 import com.example.winwin.dto.file.ResumeFileDto;
 import com.example.winwin.dto.user.ResumeDto;
 import com.example.winwin.dto.user.ResumePrDto;
@@ -9,6 +8,7 @@ import com.example.winwin.dto.user.UserPfpDto;
 import com.example.winwin.service.chatting.ChattingService;
 import com.example.winwin.service.myPage.MyPageService;
 import com.example.winwin.vo.myPage.ChattingVo;
+import com.example.winwin.vo.myPage.ActiveBoardVo;
 import com.example.winwin.vo.myPage.MyPageVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -39,7 +39,11 @@ public class MyPageController {
     }
 
     @GetMapping("/activityDetail")
-    public String activityDetail(){
+    public String activityDetail(HttpServletRequest req){
+        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
+        List<ActiveBoardVo> activeBoardVoList = myPageService.getActiveBoardList(userNumber);
+        req.setAttribute("activeBoardList", activeBoardVoList);
+
         return "myPage/activityDetail";
     }
 
@@ -51,6 +55,11 @@ public class MyPageController {
     @GetMapping("/activityProject")
     public String activityProject(){
         return "myPage/activityProject";
+    }
+
+    @GetMapping("/activityStudy")
+    public String activityStudy(){
+        return "myPage/activityStudy";
     }
 
     @GetMapping("/careerInfo")

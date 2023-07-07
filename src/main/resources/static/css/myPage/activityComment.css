@@ -95,7 +95,7 @@
   }
   
   .sub-category {
-    margin: 15px;
+    margin: 15px 15px 15px 23px;
   }
   
   .sub-category > span {
@@ -104,6 +104,12 @@
     font-size: 14px;
     color: #000;
   }
+
+.sub-category a {
+  cursor: pointer;
+  font-size: 14px;
+  color: #000;
+}
   
   #sub-point {
     font-weight: 700;
@@ -133,6 +139,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0px 10px;
   }
   
   #point-page {
@@ -144,10 +151,6 @@
     color: #000;
     background-color: rgba(198, 198, 198, 0.251);
     border-radius: 5px;
-  }
-  
-  .category-contain > h4:hover {
-    margin-top: 1px;
   }
   
   .page-move {

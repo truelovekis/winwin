@@ -9,5 +9,5 @@ import java.util.List;
 public interface ResumePrMapper {
     public void insertPr(ResumePrDto resumePrDto);
     public List<ResumePrDto> selectPrList(Long userNumber);
-    public ResumePrDto selectPr(Long userNumber);
+    public ResumePrDto selectPr(Long prNumber);
 }
