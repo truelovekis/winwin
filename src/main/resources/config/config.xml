@@ -43,8 +43,9 @@
         <typeAlias type="com.example.winwin.dto.board.CsCommentDto" alias="csCommentDto"/>
 
 
+
         <typeAlias type="com.example.winwin.vo.board.CsReplyVo" alias="CsReplyVo"/>
-        <!--        -->
+
 
 
 
@@ -79,6 +80,8 @@
 
         <typeAlias type="com.example.winwin.vo.board.CommunityVo" alias="communityVo"/>
         <typeAlias type="com.example.winwin.vo.board.CommunityCommentVo" alias="communityCommentVo"/>
+        <typeAlias type="com.example.winwin.vo.board.CommunityProfileVo" alias="communityProfileVo"/>
+        <typeAlias type="com.example.winwin.vo.board.CommunityGoodVo" alias="communityGoodVo"/>
         <typeAlias type="com.example.winwin.dto.board.CommunityDto" alias="communityDto"/>
         <typeAlias type="com.example.winwin.dto.board.CommunityGoodDto" alias="communityGoodDto"/>
         <typeAlias type="com.example.winwin.dto.board.CommunityCommentDto" alias="communityCommentDto"/>
@@ -109,11 +112,13 @@
 
 
 
+
         <typeAlias type="com.example.winwin.dto.board.StudyDto" alias="studyDto"/>
         <typeAlias type="com.example.winwin.dto.board.StudyLikeDto" alias="studyLikeDto"/>
         <typeAlias type="com.example.winwin.dto.board.StudyCommentDto" alias="studyCommentDto"/>
 
         <typeAlias type="com.example.winwin.dto.board.StudyDto" alias="studyDto"/>
+
 
         <typeAlias type="com.example.winwin.vo.board.StudyVo" alias="studyVo"/>
         <typeAlias type="com.example.winwin.dto.board.StudyLikeDto" alias="studyLikeDto"/>
@@ -131,7 +136,15 @@
 
         <!-- 이력서  -->
         <typeAlias type="com.example.winwin.dto.file.ResumeFileDto" alias="resumeFileDto"/>
+        <!--        -->
 
+        <!-- TODO -->
+        <typeAlias type="com.example.winwin.dto.TodoDto" alias="todoDto"/>
+        <!--        -->
+
+        <!-- WING -->
+        <typeAlias type="com.example.winwin.dto.wing.WingDto" alias="wingDto"/>
+        <typeAlias type="com.example.winwin.dto.wing.WingShareDto" alias="wingShareDto"/>
         <!--        -->
 
         <!-- TODO -->

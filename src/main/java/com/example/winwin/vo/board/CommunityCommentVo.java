@@ -12,4 +12,5 @@ public class CommunityCommentVo {
     private Long userNumber;
     private Long communityNumber;
     private String userId;
+    private String userBelong;
 }

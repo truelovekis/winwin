@@ -2,4 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.like.CommunityGoodMapper">
 
+    <!-- 좋아요 눌렀는지 안눌렀는지 -->
+    <select id="findLike" resultType="long">
+        SELECT COUNT(USER_NUMBER)
+        FROM COMMUNITY_GOOD
+        WHERE COMMUNITY_NUMBER = #{communityNumber} AND USER_NUMBER = #{userNumber}
+    </select>
+
+    <insert id="likeUp">
+        INSERT INTO COMMUNITY_GOOD (COMMUNITY_NUMBER, USER_NUMBER)
+        VALUES (#{communityNumber}, #{userNumber})
+    </insert>
+
+<!--    , (SELECT MAX(LIKE_CNT) + 1 FROM COMMUNITY_GOOD)-->
+
+    <delete id="unlike">
+        DELETE FROM COMMUNITY_GOOD
+        WHERE COMMUNITY_NUMBER = #{communityNumber} and USER_NUMBER = #{userNumber}
+    </delete>
+
+
+    <!--  좋아요 카운트  -->
+    <select id="likeCnt" resultType="int">
+        SELECT COUNT(USER_NUMBER)
+        FROM COMMUNITY_GOOD
+        WHERE COMMUNITY_NUMBER = #{communityNumber}
+    </select>
+
 </mapper>
