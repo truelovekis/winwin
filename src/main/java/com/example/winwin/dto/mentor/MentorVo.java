@@ -29,4 +29,7 @@ public class MentorVo {
     private String pfpSystemName;
     private String pfpUuid;
     private int likeCnt;
+    private Long subNumber;
+    private String subName;
+    private String umStatus;
 }

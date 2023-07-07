@@ -21,6 +21,7 @@ $(".changeView").html(makePro());
 
 $(".pro").on("click", function () {
     $('.pro-bottom').show();
+    $(".changeView2").show();
     $(".changeView").html(makePro());
     $('.career-bottom').hide();
     $(".li-bottom").css("width", "0");
@@ -32,6 +33,7 @@ $(".pro").on("click", function () {
 $(".career").on("click", function () {
     $('.pro-bottom').hide();
     $(".changeView").html(makeReview());
+    $(".changeView2").hide();
     $(".li-bottom").css("width", "0");
     $(this).find(".li-bottom").css("width", "100%");
     $(".li-btn").css("color", "#cbd5e1");
@@ -41,6 +43,7 @@ $(".career").on("click", function () {
 
 $(".board").on("click", function () {
     $('.pro-bottom').hide();
+    $(".changeView2").hide();
     makeInfo();
     $(".li-bottom").css("width", "0");
     $(this).find(".li-bottom").css("width", "100%");
@@ -49,8 +52,66 @@ $(".board").on("click", function () {
 });
 
 function makePro() {
-    return `
-  `;
+    let text = '';
+    // text +=
+    //     `
+    // <div class="changeView2">
+    //     <div class="grid-flex">
+    //         <div class="col-start">
+    //             <div class="page-flex">
+    //                 <div class="skill-page" aria-label="스킬">
+    //                     <div class="skill-flex">
+    //                         <p class="font-bold">스킬</p>
+    //                     </div>
+    //                     <div class="board-flex">`;
+    //
+    //                 map.forEach(skill => {
+    //                     text +=
+    //                         `<div class="boarder">
+    //                         <h3 class="reader"> ${skill.skillName}</h3>
+    //                         </div>`;
+    //                 });
+    //
+    //              text +=
+    //                         `
+    //                     </div>
+    //                 </div>
+    //                 <hr color="#CBD5E1"/>
+    //                 <div class="Career-page" aria-label="경력">
+    //                     <div class="Carrer-page">
+    //                         <p class="font-bold">경력 ・ 12년차</p>
+    //                     </div>
+    //                     <div class="BT-form">`;
+    //
+    //              map.forEach(career =>{
+    //                  text += `
+    //                  <div class="CR-flex">
+    //                             <div class="Career-img">
+    //                   <span>
+    //                     <img src="./img/./kakao.webp" alt="" style="width: 24px"/>
+    //                   </span>
+    //                             </div>
+    //                             <div class="kakao-flex">
+    //                                 <a href="" target="_blank" rel="noreferrer">
+    //                     <span style="color: black">
+    //                       <span class="font-bold" style="color: black"/>
+    //                       <span class="font-bold">${career.careerCompany}</span> <span class="careertitle">${career.careerTitle}</span>
+    //                     </span>
+    //                                 </a>
+    //                                 <p className="font-base"><span>${career.careerStartDate}</span> ~ <span>${career.careerEndDate}</span></p>
+    //                             </div>
+    //                         </div>
+    //                  `;
+    //              })
+    //                         text +=
+    //                             `
+    //                     </div>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     </div>
+    // </div> `;
+    return text;
 }
 
 
@@ -63,7 +124,9 @@ function makeInfo() {
         data : {mentorNumber : mentorNumber},
         success : function (info){
             let text ='';
-
+            text += `
+            <div class="inner-card-box-main">
+            `;
             info.forEach(c => {
                 text += `
                      <div class="inner-card-box">
@@ -77,11 +140,13 @@ function makeInfo() {
                          <div class="profile-like-wrap">
                            <div class="profile">
                              <div class="pf">
-                                 <img class="info-img class="tw-aspect-square tw-object-cover tw-rounded-full tw-w-12 tw-h-12 tw-rounded-full tw-bg-white tw-border tw-border-solid tw-border-slate-200 tw-object-cover tw-flex-none src="https://publy.imgix.net/user-uploaded/383030/2022.08/17d42cb41014db84702e0d738abfd9b59f0e987a3f1ebe8e0aaa7dadd7d9aaa1.jpeg?w=200&amp;h=200&amp;auto=format&amp;fm=jpeg" alt="성원님의 프로필 사진" title="성원님의 프로필 사진"></lmg></img>
+                             ${c.pfpSystemName == null ? '<img class="img-box2" src="/img/profile-basic.png"/>' :
+                                '<img class="img-box2" src=/profile/' + c.pfpUuid + '_' + c.pfpSystemName + '>' }
+<!--                                 <img class="info-img" src=""></lmg></img>-->
                              </div>
-                             <div class="info-text-box" >
+                             <div class="info-text-box">
                                <span class="info-user-name">${c.userName}</span>
-                               <br/>
+<!--                               <br/>-->
                                <span class="user-bottom">${c.userBelong} · 4년차</span>
                                <div class="info-content">
                                  <div class="sec1">
@@ -102,6 +167,7 @@ function makeInfo() {
                      </div>
                 `;
             });
+            text += `</div>`;
             $('.changeView').html(text);
         },
         error : function (){
@@ -118,33 +184,19 @@ $('.changeView').on('input', '.rating input' ,(e)=>{
     let star = $('.rating_star')[0];
     star.style.width = `${e.target.value * 10}%`;
 })
-// 별점 드래그 할 때
-// rating_input.addEventListener('input', () => {
-//     rating_star.style.width = `${rating_input.value * 10}%`;
-// });
 
 function makeReview() {
     let text = '';
+    let status = $('.umstatus').val();
+    console.log(status);
     text += `
   <div class="reply-flex">
-<!--  <input type="text" class="reply" placeholder="한 줄 후기를 등록 해보세요!!" name="reviewContent" id="review-content"/>-->
-<!--  <button type="submit" class="reply-btn">등록</button>-->
-
 </div>
-<div class="review-flex">
-<!--  <div class="star-rating">-->
-<!--    <input type="radio" id="5-stars" name="reviewStar" value="5"/>-->
-<!--    <label for="5-stars" class="star">&#9733;</label>-->
-<!--    <input type="radio" id="4-stars" name="reviewStar" value="4"/>-->
-<!--    <label for="4-stars" class="star">&#9733;</label>-->
-<!--    <input type="radio" id="3-stars" name="reviewStar" value="3"/>-->
-<!--    <label for="3-stars" class="star">&#9733;</label>-->
-<!--    <input type="radio" id="2-stars" name="reviewStar" value="2"/>-->
-<!--    <label for="2-stars" class="star">&#9733;</label>-->
-<!--    <input type="radio" id="1-star" name="reviewStar" value="1"/>-->
-<!--    <label for="1-star" class="star">&#9733;</label>-->
-<!--  </div>-->
-    <div class="rating_box">
+<div class="review-flex">`;
+
+    if(status == 'Y') {
+        text += `
+        <div class="rating_box">
         <div class="rating">
           ★★★★★
           <span class="rating_star">★★★★★</span>
@@ -154,18 +206,21 @@ function makeReview() {
           <input type="text" class="content" id="review-content" name="review-content" placeholder="한줄 평가를 입력하세요">
           <button type="submit" class="review-btn">등록</button>
         </div>
-      </div>
-  <div class="review-writer">
-  </div>
+      </div> `;
+    }
 
-</div>
-  `;
+  text += `
+    <div class="review-writer">
+      </div>
+    
+    </div>`;
+
     return text;
 }
 
-
 function showReview() {
     let mentorNumber = $('.mentor-num').val();
+    console.log(mentorNumber)
 
     $.ajax({
         url: '/review/list',
@@ -173,6 +228,7 @@ function showReview() {
         data: {mentorNumber: mentorNumber},
         dataType: 'json',
         success: function (reviews) {
+            console.log(reviews)
             let text = '';
 
             reviews.forEach(r => {
@@ -217,6 +273,6 @@ $('.changeView').on('click', '.review-btn', function (){
     }
     review.register(reviewObj, showReview, showError());
     $('#review-content').val('');
-})
+});
 
 

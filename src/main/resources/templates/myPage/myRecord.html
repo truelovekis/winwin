@@ -27,6 +27,7 @@
 </head>
 <body>
 <header class="header"  th:replace="fragment/header :: header"></header>
+<input type="hidden" th:value="${session.userNumber}"/>
 <div class="wrap">
     <div class="container">
         <div th:replace="fragment/myPageSide :: myPageSide"></div>
@@ -36,9 +37,9 @@
 
                 <!-- 버튼 눌렀을 때 나타나는 요소 -->
                 <div class="diary">
-                    <form method="post" class="diary-form">
-                        <div class="mypageDiary-title"><input type="text" class="title" placeholder="제목을 입력해주세요" style="font-family: NanumSquareAcr;"></div>
-                        <textarea id="summernote" class="summernote" name="editordata" style="font-family: NanumSquareAcr;"></textarea>
+                    <form method="post" class="diary-form" th:action="@{/mypage/diary}">
+                        <div class="mypageDiary-title"><input type="text" class="title" name="diaryTitle" placeholder="제목을 입력해주세요" style="font-family: NanumSquareAcr;"></div>
+                        <textarea id="summernote" class="summernote" name="diaryContent" style="font-family: NanumSquareAcr;"></textarea>
                         <div class="btn-box">
                             <div class="cancle-btn"><button type="button" class="cancle" style="font-family: NanumSquareAcr;">취소</button></div>
                             <div class="submit-btn"><button type="button" class="submit" style="font-family: NanumSquareAcr;">작성 완료</button></div>

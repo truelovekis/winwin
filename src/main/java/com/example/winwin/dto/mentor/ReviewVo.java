@@ -14,4 +14,5 @@ public class ReviewVo {
     private double reviewStar;
     private Long userNumber;
     private String userNickName;
+    private String umStatus;
 }
