@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/qna/*")
 @RequiredArgsConstructor
-public class Qnacontroller {
+public class QnaController {
     @GetMapping("/read")
     public String qnaRead(){
         return "/qna/qnaRead";
