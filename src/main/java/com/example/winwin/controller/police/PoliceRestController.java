@@ -35,31 +35,22 @@ public class PoliceRestController {
 
     }
 
-<<<<<<< HEAD
     //    모임 글 신고하기
     @PostMapping("/study")
     public void studyReport(@RequestBody PoliceBoardDto policeBoardDto, HttpServletRequest req) {
-=======
+        policeBoardDto.setBigCode("500");
+        policeService.policeBoardRegister(policeBoardDto);
+    }
+
     @PostMapping("/cs")
     public void csReport(@RequestBody PoliceBoardDto policeBoardDto, HttpServletRequest req) {
->>>>>>> work/work04
 //        로그인 세션 처리
         Long userNumber = (Long) req.getSession().getAttribute("userNumber");
         policeBoardDto.setUserNumber(userNumber);
-
-<<<<<<< HEAD
-        policeBoardDto.setBigCode("500");
-        policeService.policeBoardRegister(policeBoardDto);
-
-    }
-
-
-=======
         policeBoardDto.setBigCode("700");
         policeService.policeBoardRegister(policeBoardDto);
 
     }
->>>>>>> work/work04
 
     @PostMapping("/community")
     public void communityReport(@RequestBody PoliceBoardDto policeBoardDto, HttpServletRequest req) {
