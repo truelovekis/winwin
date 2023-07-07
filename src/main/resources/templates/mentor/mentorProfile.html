@@ -25,8 +25,8 @@
     </style>
   </head>
   <body>
-  <input type="hidden" th:value="${session.mentorNumber}">
-  <input type="hidden" th:value="${session.userNumber}">
+  <input type="hidden" th:value="${session.mentorNumber}" class="mentor">
+  <input type="hidden" th:value="${session.userNumber}" class="user">
   <header class="header" th:replace="fragment/header :: header"></header>
     <!-- 모달창 -->
     <article class="modal-wrap1 none">
@@ -84,10 +84,9 @@
       </aside>
       <!-- /왼쪽 사이드 -->
       <main class="main">
-        <th:block th:if="${session.mentorNumber} != null">
+        <th:block th:if="${session.mentorNumber != null and session.mentorNumber > -1 } ">
         <section class="mento-myProfile-on">
           <div class="">내 프로필 올려두기</div>
-<!--          <form th:action="@{/mentor/list}" method="post" class="profile-btn">-->
           <div class="toggle-switch">
               <p class="toggle-ment">내림&nbsp</p>
               <p class="toggle-ment none">올림&nbsp</p>
@@ -97,24 +96,13 @@
                 <span class="slider round"></span>
             </label>
           </div>
-<!--          </form>-->
-
         </section>
         </th:block>
         <!-- 태그 필터 -->
         <main class="main1">
           <div class="tag-wrap">
             <div class="select-tag">
-<!--              <span class="tag">@계열1</span>-->
-<!--              <span class="tag">@계열2</span>-->
-<!--              <span class="tag">@계열3</span>-->
-<!--              <span class="tag">@계열4</span>-->
-<!--              <span class="tag">@계열5</span>-->
-<!--              <span class="tag">@계열6</span>-->
-<!--              <span class="tag">@계열7</span>-->
-<!--              <span class="tag">@계열8</span>-->
-<!--              <span class="tag">@계열9</span>-->
-<!--              <span class="tag">@계열10</span>-->
+
             </div>
           </div>
 
@@ -197,9 +185,8 @@
 
         </main>
         <!-- /태그 필터 -->
-
         <!-- 내 프로필 -->
-        <th:block th:if="${session.mentorNumber} != null">
+        <th:block th:if="${session.mentorNumber != null and session.mentorNumber > -1}">
         <div class="myProfile-box">
           <input type="hidden" th:value="${session.mentorNumber}" class="myNumber"/>
 <!--          <input type="hidden" value="6">-->
@@ -278,17 +265,22 @@
         </div>
         </th:block>
         <!-- /내 프로필 -->
+        <th:block th:if="${mentorList == null or #lists.isEmpty(mentorList)}">
+          <div class="main-mentor">
+            등록된 멘토 프로필이 존재하지 않습니다.
+          </div>
+        </th:block>
 
         <!-- 멘토 프로필 -->
-        <div>
+        <th:block th:unless="${mentorList == null or #lists.isEmpty(mentorList)}">
+        <div class="main-mentor">
         <article class="item" th:each="mentorList : ${mentorList}" th:if="${mentorList.mentorNumber} != ${session.mentorNumber}" th:id="'id-'+ ${mentorList.mentorNumber}">
           <section class="mento-profile">
             <div class="item__box">
-              <input type="hidden" class="add-num" th:value="${mentorList.mentorNumber}"/>
+              <input type="hidden" class="mentor-num" th:data-num="${mentorList.mentorNumber}" th:value="${mentorList.mentorNumber}"/>
               <a th:href="@{/mentor/profile(mentorNumber=${mentorList.mentorNumber})}" class="page-move">
                 <div class="flex">
                   <div class="mento-profile-photo-box">
-<!--                    <img th:src="@{/profile}" width="100" class="mento-profile-photo"/>-->
                     <img th:if="${profile == null}" class="img-box" src="/img/profile-basic.png"/>
                     <img th:unless="${profile == null}" class="img-box"
                          th:style="${'background-image: url(/profile/' + profile.pfpUuid + '_' + profile.pfpSystemName + ')'}"/>
@@ -324,13 +316,21 @@
                     </svg>
                   </div>
                 </button>
-                <button class="message-button">신청하기</button>
+                <th:block th:if="${mentorList.umStatus} == 'N'">
+                <button class="message-button">대기중</button>
+                </th:block>
+                <th:block th:if="${mentorList.umStatus} == '0'">
+                  <button class="message-button">신청하기</button>
+                </th:block>
+                <th:block th:if="${mentorList.umStatus} == 'Y'">
+                  <button class="message-button">쪽지 보내기</button>
+                </th:block>
               </div>
             </div>
             <div class="skill-tags">
               <!--            스킬 나열 -->
               <div class="skill" th:each="skill : ${mentorList.skill}">
-                <span class="skill" th:text="${skill.skillName}"/>
+                <span class="skill2" th:text="${skill.skillName}"/>
               </div>
               <!--            /스킬 나열 -->
             </div>
@@ -378,6 +378,7 @@
 
         <!-- /멘토 프로필 -->
         </div>
+        </th:block>
       </main>
     </section>
 

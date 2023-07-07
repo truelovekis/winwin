@@ -2,9 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.mentor.MentorMapper">
     <select id="reviewList" resultType="reviewVo">
-        SELECT REVIEW_NUMBER , REVIEW_CONTENT , REVIEW_STAR, mr.USER_NUMBER , MENTOR_NUMBER , wu.USER_NICKNAME
-        FROM MENTOR_REVIEW mr JOIN WW_USER wu
-        ON mr.USER_NUMBER = wu.USER_NUMBER and mentor_number = #{mentorNumber}
+        SELECT REVIEW_CONTENT , REVIEW_STAR, J.USER_NUMBER , J.MENTOR_NUMBER , J.USER_NICKNAME , ub.UM_STATUS
+        FROM (
+                 SELECT REVIEW_NUMBER , REVIEW_CONTENT , REVIEW_STAR, mr.USER_NUMBER , MENTOR_NUMBER , wu.USER_NICKNAME
+                 FROM MENTOR_REVIEW mr JOIN WW_USER wu
+                 ON mr.USER_NUMBER = wu.USER_NUMBER and mentor_number = #{mentorNumber}
+             )J left JOIN UM_BRIDGE ub
+        ON J.user_number = ub.USER_NUMBER AND ub.UM_STATUS = 'Y'
     </select>
 
 </mapper>

@@ -5,7 +5,7 @@
 }
 
 .background {
-    margin-left: 35%;
+    /*margin-left: 35%;*/
 }
 
 .startpage {
@@ -32,6 +32,7 @@
     border-radius: 50%;
     background-color: pink;
     overflow: hidden;
+    margin-right: 10px;
 }
 
 .main-img > img {
@@ -41,7 +42,9 @@
 }
 .subflex {
     display: flex;
-    gap: 0.5rem;
+    /* gap: 0.5rem; */
+    align-items: center;
+    width: 150px;
 }
 
 /* 건드리지 마시오 */
@@ -195,7 +198,7 @@
     margin-right: auto;
     grid-column: span 8 / span 8;
     height: 53px;
-    margin-left: 35%;
+    /*margin-left: 35%;*/
 }
 .Information-in {
     list-style: none;
@@ -328,11 +331,31 @@
 .changeView {
     border-width: 0;
     border-top-width: 1px;
-    width: 1138.4px;
-    height: 1321.4px;
+    /* width: 1138.4px; */
+    height: auto;
     margin-top: 20px;
 }
+
+.changeView2 {
+    border-width: 0;
+    border-top-width: 1px;
+    /* width: 1138.4px; */
+    height: auto;
+    /*margin-top: 20px;*/
+    width: 900px;
+    margin-left: 275px;
+}
 .grid-flex {
+    /*padding-bottom: 5rem;*/
+    /*gap: 3rem;*/
+    /*grid-template-columns: repeat(12, minmax(0, 1fr));*/
+    /*width: 1024px;*/
+    /*display: grid;*/
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    /*padding-left: 1.5rem;*/
+    /*padding-right: 1.5rem;*/
+    /*margin-left: 7%;*/
     padding-bottom: 5rem;
     gap: 3rem;
     grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -340,106 +363,107 @@
     display: grid;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    margin-left: 7%;
+/* padding-left: 1.5rem; */
+/* padding-right: 1.5rem; */
+/* margin-left: 7%; */
 }
 .col-start {
-    grid-column-start: 3;
-    grid-column: span 8 / span 8;
+grid-column-start: 3;
+grid-column: span 8 / span 8;
 }
 .page-flex {
-    gap: 1.25rem;
-    flex-direction: column;
-    display: flex;
-    margin-top: 1.25rem;
+gap: 1.25rem;
+flex-direction: column;
+display: flex;
+margin-top: 1.25rem;
 }
 .skill-page {
-    font-size: 1rem;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    width: 100%;
+font-size: 1rem;
+/*padding-top: 15px;*/
+/*padding-bottom: 15px;*/
+width: 100%;
 }
 .Career-page {
-    font-size: 1rem;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    width: 100%;
+font-size: 1rem;
+padding-top: 10px;
+padding-bottom: 2rem;
+width: 100%;
 }
 .skill-flex {
-    display: flex;
-    justify-content: space-between;
+display: flex;
+justify-content: space-between;
 }
 .font-bold {
-    font-size: 1.125rem;
-    border-width: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    font-weight: 700;
+font-size: 1.125rem;
+border-width: 0;
+margin-top: 0;
+margin-bottom: 0;
+font-weight: 700;
 }
 
 .board-flex {
-    flex-wrap: wrap;
-    display: flex;
-    margin-top: 1.25rem;
+flex-wrap: wrap;
+display: flex;
+margin-top: 1.25rem;
 }
 
 .boarder {
-    --tw-text-opacity: 1;
-    color: rgb(51 65 85 / var(--tw-text-opacity));
-    padding-top: 6px;
-    padding-bottom: 6px;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-    border-width: 1px;
-    border-radius: 9999px;
-    background-color: #f1f5f9;
-    margin-right: 10px;
-    margin-bottom: 10px;
+--tw-text-opacity: 1;
+color: rgb(51 65 85 / var(--tw-text-opacity));
+padding-top: 6px;
+padding-bottom: 6px;
+padding-left: 0.75rem;
+padding-right: 0.75rem;
+border-width: 1px;
+border-radius: 9999px;
+background-color: #f1f5f9;
+margin-right: 10px;
+margin-bottom: 10px;
 }
 
 .reader {
-    line-height: 1.5;
-    font-size: 0.75rem;
-    color: #64748b;
-    font-weight: bold;
+line-height: 1.5;
+font-size: 0.75rem;
+color: #64748b;
+font-weight: bold;
 }
 
 .BT-form {
-    margin-top: 1.25rem;
+margin-top: 1.25rem;
 }
 .CR-flex {
-    gap: 0.5rem;
-    padding-bottom: 1.25rem;
-    align-items: flex-start;
-    flex-direction: row;
-    display: flex;
+gap: 0.5rem;
+padding-bottom: 1.25rem;
+/*align-items: flex-start;*/
+flex-direction: row;
+display: flex;
+align-items: center;
 }
 .Career-img {
-    width: 1.5rem;
-    height: 1.5rem;
-    position: relative;
+width: 1.5rem;
+height: 1.5rem;
+position: relative;
 }
 
 .kakao-flex {
-    font-size: 1rem;
-    flex-direction: column;
-    display: flex;
-    flex: 1 1 0%;
-    --tw-text-opacity: 1;
-    color: rgb(15 23 42 / var(--tw-text-opacity));
+font-size: 1rem;
+flex-direction: column;
+display: flex;
+flex: 1 1 0%;
+--tw-text-opacity: 1;
+color: rgb(15 23 42 / var(--tw-text-opacity));
 }
 
 .font-base {
-    margin-top: 0;
-    margin-bottom: 0;
-    font-size: 0.7rem;
-    color: #64748b;
-    font-weight: bold;
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.7rem;
+color: #64748b;
+font-weight: bold;
 }
 
 .tw-fill-color-slate-300 {
-    fill: #cbd5e1;
+fill: #cbd5e1;
 }
 
 /* 후기 css*/
@@ -489,6 +513,7 @@ article {
 .review-flex {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 .review-writer {
     display: flex;
@@ -496,6 +521,7 @@ article {
     padding-left: 5%;
     justify-content: center;
     flex-direction: column;
+    margin-left: 40px;
 }
 .review-review {
     padding: 13px 10px 15px 18px;
@@ -507,9 +533,12 @@ article {
 
 .btn-view {
     color: #333;
-    background-color: #fcf52d;
+    background-color: #fffa76;
     width: 90%;
+    padding: 5px 5px;
     margin-right: 10px;
+    border: 1px solid #d6d03d;
+    border-radius: 3px;
 }
 .name-can {
     width: 156px;
@@ -517,6 +546,7 @@ article {
     display: flex;
     width: 600px;
     margin: 10px 0;
+    align-items: center;
 }
 
 .reviewstar {
@@ -564,7 +594,7 @@ article {
 .info-content {
     display: flex;
     margin-left: 120px;
-    margin-top: -36px;
+    margin-top: -20px;
 }
 
 .sec1 {
@@ -592,7 +622,7 @@ article {
 .inner-card-box {
     width: 250px;
     border: 1px solid #ccc;
-    padding: 25px;
+    padding: 15px 20px 10px 20px;
     margin: 10px;
     display: inline-block;
     border-radius: 20px;
@@ -629,6 +659,10 @@ article {
 .info-text-box {
     margin-left: 10px;
     width: 200px;
+    display: flex;
+    /* align-content: center; */
+    flex-direction: column;
+    justify-content: center;
 }
 
 .info-user-name {
@@ -645,7 +679,6 @@ article {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin: 0 0 0 50px;
 }
 
 .rating {
@@ -679,7 +712,7 @@ article {
     border: 1px solid #ddd;
     border-radius: 3px;
     padding: 10px 5px;
-    width: 300px;
+    width: 500px;
     margin: 0 7px 0 0;
 }
 
@@ -687,4 +720,46 @@ article {
     border: 1px solid #ddd;
     border-radius: 3px;
     padding: 7px 7px;
+}
+
+.img-name {
+    display: flex;
+    align-items: center;
+}
+
+.mentorProfile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 1050px;
+    margin: auto;
+}
+
+.inner-card-box-main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.img-box2 {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: pink;
+    overflow: hidden;
+}
+
+.img-box2 > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.review-avg {
+    margin-left: 10px;
+}
+
+.mentor {
+    height: 500px;
 }

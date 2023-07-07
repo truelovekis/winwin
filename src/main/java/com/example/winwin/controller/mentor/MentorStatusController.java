@@ -1,7 +1,9 @@
 package com.example.winwin.controller.mentor;
 
+import com.example.winwin.dto.mentor.CareerVo;
 import com.example.winwin.dto.mentor.LikeDto;
 import com.example.winwin.dto.mentor.MentorVo;
+import com.example.winwin.dto.mentor.SkillVo;
 import com.example.winwin.service.mentor.MentorService;
 import com.sun.jdi.connect.spi.TransportService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -55,4 +58,25 @@ public class MentorStatusController {
         mentorService.addMentor(mentorVo);
         return "신청 성공!";
     }
+
+    @GetMapping("/sub")
+    public List<MentorVo> subCategory(HttpServletRequest req, @RequestParam(value = "subNumber", required = false) List<Integer> subList){
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+        List<MentorVo> mentorVo = mentorService.findList(userNumber==null? 0 : userNumber, subList);
+        return mentorVo;
+    }
+
+    @GetMapping("/skill2")
+    public List<SkillVo> skillList(Long mentorNumber){
+        List<SkillVo> skillVo = mentorService.findSkill(mentorNumber);
+        return skillVo;
+    }
+
+    @GetMapping("/career2")
+    public List<CareerVo> careerList(Long mentorNumber){
+        List<CareerVo> careerVo = mentorService.findCareerList(mentorNumber);
+        return careerVo;
+    }
+
+
 }

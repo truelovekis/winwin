@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,8 +21,8 @@ public class MentorService {
 
 // 등록된 멘토 프로필 리스트
     @Transactional(readOnly = true)
-    public List<MentorVo> findList(Long userNumber){
-        List<MentorVo> list = mentorMapper.mentorList(userNumber);
+    public List<MentorVo> findList(Long userNumber, List<Integer> subNumber){
+        List<MentorVo> list = mentorMapper.mentorList(userNumber, subNumber);
         for (int i=0; i<list.size(); i++){
             MentorVo mentorVo = list.get(i);
 
@@ -62,11 +63,11 @@ public class MentorService {
 
 //    멘토 프로필 상세 보기
     @Transactional(readOnly = true)
-    public MentorVo findProfile(Long mentorNumber){
+    public MentorVo findProfile(Long mentorNumber, Long userNumber){
         if (mentorNumber == null) {
             throw new IllegalArgumentException("멘토 번호 누락!");
         }
-        return mentorMapper.mentorProfile(mentorNumber);
+        return mentorMapper.mentorProfile(mentorNumber, userNumber);
     }
 
 //멘토 프로필 상세 보기(리뷰 페이지)

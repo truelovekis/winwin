@@ -27,10 +27,10 @@ public class MentorController {
 
 //    멘토:멘티 리스트 페이지 처리
     @GetMapping("/list")
-    public String mentorList(Model model, MentorVo mentorVo, HttpServletRequest req){
+    public String mentorList(Model model, MentorVo mentorVo, HttpServletRequest req, @RequestParam(value = "subNumber", required = false) List<Integer> subList){
 
         Long userNumber = (Long) req.getSession().getAttribute("userNumber");
-        List<MentorVo> mentorList = mentorService.findList(userNumber==null? 0 : userNumber);
+        List<MentorVo> mentorList = mentorService.findList(userNumber==null? 0 : userNumber, subList);
         model.addAttribute("mentorList", mentorList);
 
         Long mentorNumber = (Long)req.getSession().getAttribute("mentorNumber");
@@ -48,8 +48,9 @@ public class MentorController {
 
 //    멘토:멘티 멘토 개인 프로필 처리
     @GetMapping("/profile")
-    public String profile(Model model, Long mentorNumber){
-        MentorVo mentorVo = mentorService.findProfile(mentorNumber);
+    public String profile(Model model, Long mentorNumber, HttpServletRequest req){
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+        MentorVo mentorVo = mentorService.findProfile(mentorNumber, userNumber == null? 0 : userNumber);
         model.addAttribute("profile2", mentorVo);
 
         List<SkillVo> skill = mentorService.profileSkill(mentorNumber);
