@@ -30,12 +30,12 @@ $(document).ready(function () {
 
         if (selectValue === "2") {
             blindButton.text("신고회원").css({
-                "background-color": "#eaf4ff",
-                color: "#007aff",
+                "background-color": "rgb(255, 214 ,156)",
+            color: "rgb(254, 143, 0)",
             });
             successButton.text("신고회원").css({
-                "background-color": "#eaf4ff",
-                color: "#007aff",
+                "background-color": "rgb(255, 214 ,156)",
+                color: "rgb(254, 143, 0)",
             });
         // } else if (selectValue === "2") {
         //     blindButton.text("14일 정지").css({
@@ -46,23 +46,23 @@ $(document).ready(function () {
         //         "background-color": "#eaf4ff",
         //         color: "#007aff",
         //     });
-        // } else if (selectValue === "3") {
-        //     blindButton.text("30일 정지").css({
-        //         "background-color": "#eaf4ff",
-        //         color: "#007aff",
-        //     });
-        //     successButton.text("30일 정지").css({
-        //         "background-color": "#eaf4ff",
-        //         color: "#007aff",
-        //     });
+        } else if (selectValue === "1") {
+            blindButton.text("일반회원").css({
+                "background-color": "#eaf4ff",
+                color: "#007aff",
+            });
+            successButton.text("30일 정지").css({
+                "background-color": "#eaf4ff",
+                color: "#007aff",
+            });
         } else if (selectValue === "3") {
             blindButton.text("영구 정지").css({
-                "background-color": "rgb(220 255 226)",
-                color: "#587c60",
+                "background-color": "rgb(255, 237, 237)",
+                color: "red",
             });
             successButton.text("영구 정지").css({
-                "background-color": "rgb(220 255 226)",
-                color: "#587c60",
+                "background-color": "rgb(255, 237, 237)",
+                color: "red",
             });
         }
     }

@@ -62,16 +62,45 @@ public class StatusController {
         return "변경성공";
     }
 
-    // 신고회원 상태 변경
-    @PatchMapping("/updateReport")
-    public String modifyReport(@RequestBody Map<String, List<String>> requestBody) {
+    // 회원 상태 변경
+    @PatchMapping("/updateUser")
+    public String modifyUser(@RequestBody Map<String, List<String>> requestBody) {
         List<String> userNumberList = requestBody.get("userNumber");
         List<String> userStatusList = requestBody.get("userStatus");
 
         for (int i = 0; i < userNumberList.size(); i++) {
             Long userNumber = Long.parseLong(userNumberList.get(i));
             String userStatus = userStatusList.get(i);
-            adminService.modifyReportStatus(userNumber, userStatus);
+            adminService.modifyUserStatus(userNumber, userStatus);
+        }
+        return "변경성공";
+    }
+
+    // 신고 게시글 상태 변경
+    @PatchMapping("/updateBoard")
+    public String modifyBoard(@RequestBody Map<String, List<String>> requestBody){
+        List<String> policeNumberList = requestBody.get("policeBoard");
+        List<String> boardStatusList = requestBody.get("boardStatus");
+
+        for (int i = 0; i < policeNumberList.size(); i++) {
+            Long policeBoard = Long.parseLong(policeNumberList.get(i));
+            String boardStatus = boardStatusList.get(i);
+            adminService.modifyBoardReportStatus(policeBoard, boardStatus);
+        }
+        return "변경성공";
+    }
+
+
+    // 신고 댓글 상태 변경
+    @PatchMapping("/updateCommentReport")
+    public String modifyCommentReport(@RequestBody Map<String, List<String>> requestBody){
+        List<String> policeNumberList = requestBody.get("policeNumber");
+        List<String> commentStatusList = requestBody.get("commentStatus");
+
+        for (int i = 0; i < policeNumberList.size(); i++) {
+            Long policeNumber = Long.parseLong(policeNumberList.get(i));
+            String commentStatus = commentStatusList.get(i);
+            adminService.modifyCommentReportStatus(policeNumber, commentStatus);
         }
         return "변경성공";
     }

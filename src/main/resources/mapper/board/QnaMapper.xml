@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.board.QnaMapper">
+    <!--  qna 글 등록하기  -->
+    <insert id="insertQna">
+        <selectKey keyProperty="qnaNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_QNA.NEXTVAL FROM DUAL
+        </selectKey>
+        insert into QNA(QNA_NUMBER, QNA_TITLE, QNA_CONTENT, USER_NUMBER)
+        values (#{qnaNumber}, #{qnaTitle}, #{qnaContent}, #{userNumber})
+    </insert>
+
+<!--    <insert id="insertQs">-->
+<!--        insert into QS_BRIDGE (QNA_NUMBER, SUB_NUMBER)-->
+<!--        values (#{qnaNumber}, #{subNumber})-->
+<!--    </insert>-->
 
 </mapper>

@@ -102,14 +102,14 @@
             <td class="user-register-date" align="center">생년월일</td>
             <td class="user-phonenumber" align="center">전화번호</td>
             <td class="user-mento-menti" align="center">멘토/멘티</td>
-            <td class="user-email" align="center">이메일</td>
+            <td class="user-email" align="center">회원상태</td>
           </tr>
           </thead>
 
           <tbody>
           <tr class="user-table-category" th:each="admin : ${adminVoList}">
             <td class="checkbox">
-              <input type="checkbox" name="" class="check" id="checking">
+              <input type="checkbox" name="" class="check check-box" id="checking" th:data-number="${admin.userNumber}">
             </td>
             <td class="user-id" align="center" th:text="${admin.userName}"></td>
             <td class="user-job" align="center" th:text="${admin.userId}"></td>
@@ -120,7 +120,21 @@
               <button th:if="${admin.mentorStatus} == 1" type="button" class="mento-button Y" style="font-family: NanumSquareAcr;" th:text="멘토"></button>
               <button th:if="${admin.mentorStatus} == 0" type="button" class="mento-button N" style="font-family: NanumSquareAcr;" th:text="멘티"></button>
             </td>
-            <td class="user-email" align="center" th:text="${admin.userEmail}"></td>
+<!--            <td class="user-email" align="center" th:text="${admin.userEmail}"></td>-->
+            <td class="board-public-secret" align="center">
+              <select name="user-report-select" class="user-report-select" style="font-family: NanumSquareAcr;">
+                <option value="">선택</option>
+                <option value="1">일반 회원</option>
+                <option value="2">신고 회원</option>
+                <option value="3">영구 정지</option>
+              </select>
+            </td>
+            <td class="report-resulting-success" align="center">
+              <div th:if="${admin.userStatus} == 1"  class="blind-button Y" th:text="일반회원"></div>
+              <div th:if="${admin.userStatus} == 2"  class="blind-button A" th:text="신고회원"></div>
+              <div th:if="${admin.userStatus} == 3"  class="blind-button B" th:text="영구정지"></div>
+              <div th:if="${admin.userStatus} == 0"  class="blind-button B" th:text="탈퇴회원"></div>
+            </td>
           </tr>
           </form>
           </tbody>
@@ -128,9 +142,10 @@
       </div>
       <!--  -->
     </div>
-<!--    <div class="delete-button">-->
-<!--      <button class="delete-button-btn" style="font-family: NanumSquareAcr;">삭제</button>-->
-<!--    </div>-->
+
+    <div class="remove-delete-button">
+      <button type="button" class="remove-button-btn" id="changeStatusBtn" style="font-family: NanumSquareAcr;">변경</button>
+    </div>
   </div>
 </div>
 </div>
@@ -145,6 +160,8 @@
 <script th:src="@{/js/fragment/footer.js}" ></script>
 <script th:src="@{/js/fragment/header.js}" ></script>
 <script th:src="@{/js/admin/adminUser.js}" ></script>
+<script th:src="@{/js/admin/adminReport.js}" ></script>
+<script th:src="@{/js/admin/userStatus.js}" ></script>
 <script th:src="@{/js/user/loginModal.js}"></script>
 </body>
 </html>

@@ -12,7 +12,7 @@
         values (#{careerInfoNumber}, #{careerInfoTitle}, #{careerInfoContent}, #{userNumber});
     </insert>
     <!--    -->
-
+    
     <!-- 진로정보 글 번호로 조회하기 -->
     <select id="careerInfoSelectNumber" resultType="careerInfoDto">
         select CAREERINFO_NUMBER, CAREERINFO_TITLE, CAREERINFO_CONTENT, CAREERINFO_CNT, CAREERINFO_STATUS, CAREERINFO_DATE

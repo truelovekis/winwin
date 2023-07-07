@@ -58,9 +58,9 @@
         JOIN community_category T
         ON C.CATEGORY_NUMBER = T.CATEGORY_NUMBER
         <if test="categoryTypeStr != 'all'">
-            WHERE C.CATEGORY_NUMBER = #{categoryNumber}
+            and C.CATEGORY_NUMBER = #{categoryNumber}
         </if>
-        AND U.USER_STATUS != '3'
+        where U.USER_STATUS != '3'
         and C.COMMUNITY_STATUS != '0'
         ORDER BY C.COMMUNITY_NUMBER DESC
     </select>
@@ -99,4 +99,5 @@
 <!--        </if>-->
 <!--        ORDER BY C.COMMUNITY_NUMBER DESC-->
 <!--    </select>-->
+
 

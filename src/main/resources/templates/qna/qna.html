@@ -4,9 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" th:href="@{/css/qna/qna.css}">
+  <link rel="stylesheet" th:href="@{/css/user/loginModal.css}" />
   <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
   <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
+  <link rel="stylesheet" th:href="@{/css/qna/qna.css}">
+
   <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
   <style>
     body {
@@ -44,7 +46,7 @@
           </div>
         </div>
         <div class="community-pfp-main-btn">
-          <a href="#" class="pfp-main-btn">질문하기</a>
+          <a th:href="@{/qna/write}" class="pfp-main-btn">질문하기</a>
         </div>
         <div class="community-pfp-sub-btn">
           <button type="button" class="pfp-sub-btn">1234</button>
@@ -270,7 +272,9 @@
 <footer class="footer" th:replace="fragment/footer :: footer"></footer>
   <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script th:src="@{/js/qna/qna.js}"></script>
-  <script th:src="@{/js/fragment/header.js}" ></script>
+<script th:src="@{/js/fragment/header.js}" ></script>
+<!--  모달 js-->
+<script th:src="@{/js/user/loginModal.js}"></script>
 </body>
 
 </html>

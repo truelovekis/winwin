@@ -44,6 +44,12 @@ public interface AdminMapper{
     // 검색한 신고 조회
     public List<AdminVo> selectSearchReport(AdminReportSearchVo adminReportSearchVo);
 
+    // 전체 댓글 신고 조회
+    public List<AdminVo> selectReportComment();
+
+    // 검색한 댓글 신고 조회
+    public List<AdminVo> selectSearchReportComment(AdminCommentReportSearchVo adminCommentReportSearchVo);
+
     // 커뮤니티 상태 변경
     public void updateStatus(Long communityNumber, String communityStatus);
 
@@ -53,8 +59,14 @@ public interface AdminMapper{
     // 나눔 상태 변경
     public void updateShare(Long shareNumber, String shareStatus);
 
-    // 신고 회원 상태 변경
-    public void updateReport(Long userNumber, String userStatus);
+    // 회원 상태 변경
+    public void updateUser(Long userNumber, String userStatus);
+
+    // 게시글 신고 상태 변경
+    public void updateBoard(Long policeBoard, String boardStatus);
+
+    // 댓글 신고 상태 변경
+    public void updateCommentReport(Long policeNumber, String commentStatus);
 
     // 게시글 진로정보 mainCategory 정보 가져오기
     public List<MainCategoryVo> getCateJob();

@@ -105,12 +105,12 @@
     font-size: 16px;
 }
 
-.admin-side-menu > a:hover {
-    font-weight: 700;
+.report-management {
+    font-weight: bold;
 }
 
-.user-management {
-    font-weight: bold;
+.admin-side-menu > a:hover {
+    font-weight: 700;
 }
 
 .category {
@@ -126,12 +126,15 @@
     margin-bottom: 20px;
 }
 
-.small-category {
-    width: 80px;
-    border-bottom: 2px solid #595f63;
+.report-category{
+    display: flex;
 }
 
-.small-category > a {
+.small-category1 {
+    width: 80px;
+}
+
+.small-category1 > a {
     text-decoration: none;
     color: black;
     width: 80px;
@@ -141,7 +144,28 @@
     align-items: center;
 }
 
-.small-category > a:hover {
+.small-category1 > a:hover {
+    background-color: rgba(198, 198, 198, 0.251);
+    border-radius: 5px;
+}
+
+.small-category2 {
+    width: 80px;
+    border-bottom: 2px solid #595f63;
+    margin-left: 17px;
+}
+
+.small-category2 > a {
+    text-decoration: none;
+    color: black;
+    width: 80px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.small-category2 > a:hover {
     background-color: rgba(198, 198, 198, 0.251);
     border-radius: 5px;
 }
@@ -180,7 +204,7 @@
     padding: 5px 5px;
     color: gray;
     font-size: 12px;
-    height: 112px;
+    height: 150px;
     border: none;
 }
 
@@ -206,63 +230,35 @@ tr:last-child td {
     /* border-bottom: none; */
 }
 
-#checkAll,
-#checking {
-    cursor: pointer;
+.user-report-select {
+    width: 100px;
+    height: 25px;
+    padding: 0px 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
 }
 
 .Y {
-    width: 45px;
     background-color: #eaf4ff;
     color: #007aff;
     border: none;
     border-radius: 5px;
-    padding: 6px 11px;
+    padding: 7px 5px;
     font-weight: bold;
     cursor: pointer;
-}
-
-.A{
-    width: 45px;
-    background-color: rgb(255, 214, 156);
-    color: rgb(254, 143, 0);
-    border: none;
-    border-radius: 5px;
-    padding: 6px 11px;
-    font-weight: bold;
-    cursor: pointer;
+    width: 60px;
 }
 
 .N {
-    background-color: #f2db1069;
-    color: #a59500;
+    background-color: rgb(220 255 226);
+    color: #587c60;
     border: none;
     border-radius: 5px;
-    padding: 6px 11px;
+    padding: 7px 5px;
     font-weight: bold;
     cursor: pointer;
+    width: 60px;
 }
-
-.B{
-    width: 45px;
-    background-color: rgb(255, 237, 237);
-    color: red;
-    border: none;
-    border-radius: 5px;
-    padding: 6px 11px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-/*.menti-button {*/
-/*    background-color: rgb(255, 237, 237);*/
-/*    color: red;*/
-/*    border: none;*/
-/*    border-radius: 5px;*/
-/*    padding: 6px 11px;*/
-/*    font-weight: bold;*/
-/*    cursor: pointer;*/
-/*}*/
 
 /* tbody {
   height: 20px;
@@ -306,23 +302,28 @@ tr:last-child td {
 }
 
 .search-text2 {
-    width: 95px;
+    width: 100px;
     height: 25px;
     padding: 0px 5px;
     border-radius: 5px;
     border: 1px solid #ddd;
 }
 
-#department {
-    width: 120px;
+#reason {
+    width: 110px;
     height: 25px;
     padding: 0px 5px;
     border-radius: 5px;
     border: 1px solid #ddd;
+}
+
+#checkAll,
+#checking {
+    cursor: pointer;
 }
 
 .remove-delete-button {
-    margin-left: 929px;
+    margin-left: 927px;
     margin-top: 10px;
 }
 
@@ -331,25 +332,12 @@ tr:last-child td {
     color: #007aff;
     border: none;
     border-radius: 5px;
-    padding: 8px 16px;
+    padding: 8px 17px;
     font-weight: bold;
     cursor: pointer;
 }
 
-/*input font 적용 css */
+/* input font 적용 */
 input {
     font-family: "NanumSquare";
-}
-
-.hide{
-    display: none;
-}
-
-
-.user-report-select {
-    width: 100px;
-    height: 25px;
-    padding: 0px 5px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
 }
