@@ -2,7 +2,10 @@ package com.example.winwin.controller.cs;
 
 
 import com.example.winwin.dto.board.CsDto;
+import com.example.winwin.service.cs.CsReplyService;
 import com.example.winwin.service.cs.CsService;
+import com.example.winwin.vo.board.CommunityCommentVo;
+import com.example.winwin.vo.board.CsReplyVo;
 import com.example.winwin.vo.board.CsVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -19,6 +22,7 @@ import java.util.List;
 @RequestMapping("/cs/*")
 public class CsController {
     private final CsService csService;
+    private final CsReplyService csReplyService;
 
     //    CS 메인페이지
     @GetMapping("/main")
@@ -48,7 +52,10 @@ public class CsController {
     @GetMapping("/read")
     public String csRead(Long csNumber, Model model){
         CsVo csVo = csService.findCs(csNumber);
+        List<CsReplyVo> csReplyVoList = csReplyService.findList(csNumber);
+//        List<CommunityCommentVo> communityCommentVoList = communityCommentService.findList(communityNumber);
         model.addAttribute("cs", csVo);
+        model.addAttribute("replyList", csReplyVoList);
         return "cs/csRead";
 
     }

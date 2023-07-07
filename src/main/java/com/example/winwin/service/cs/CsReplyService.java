@@ -14,7 +14,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class CsReplayService {
+public class CsReplyService {
     private final CsCommentMapper csCommentMapper;
 
     public void register(CsCommentDto csCommentDto) {
@@ -27,14 +27,13 @@ public class CsReplayService {
     @Transactional(readOnly = true)
     public List<CsReplyVo> findList(Long csNumber) {
         if (csNumber == null) {
-            throw new IllegalArgumentException("댓글 번호 누락");
+            throw new IllegalArgumentException("글번호 누락");
         }
-
+        System.out.println("=========="+csCommentMapper.selectList(csNumber));
         return csCommentMapper.selectList(csNumber);
     }
 
     @Transactional(readOnly = true)
-
     public CsReplyVo findComment(Long commentNumber) {
         if (commentNumber == null) {
             throw new IllegalArgumentException("댓글 번호 누락");
@@ -58,11 +57,5 @@ public class CsReplayService {
         csCommentMapper.delete(commentNumber);
     }
 
-    public void deleteReply(Long commentNumber){
-        if(commentNumber == null){
-            throw new IllegalArgumentException ("게시글 번호 누락");
-        }
-        csCommentMapper.deleteReplay(commentNumber);
-    }
 }
 

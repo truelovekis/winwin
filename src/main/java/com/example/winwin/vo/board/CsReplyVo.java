@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 @NoArgsConstructor
-public class CsReplayVo {
-   private Long replayNumber;
-   private String replayContent;
-   private String replayDate;
+public class CsReplyVo {
+   private Long commentNumber;
+   private String commentContent;
+   private String commentDate;
    private Long  userNumber;
    private Long csNumber;
    private String userId;

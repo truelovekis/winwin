@@ -33,6 +33,16 @@ public class PoliceRestController {
 
     }
 
+    @PostMapping("/cs")
+    public void csReport(@RequestBody PoliceBoardDto policeBoardDto, HttpServletRequest req) {
+//        로그인 세션 처리
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+        policeBoardDto.setUserNumber(userNumber);
+
+        policeBoardDto.setBigCode("700");
+        policeService.policeBoardRegister(policeBoardDto);
+
+    }
 
     @PostMapping("/community")
     public void communityReport(@RequestBody PoliceBoardDto policeBoardDto, HttpServletRequest req) {
