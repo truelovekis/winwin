@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.winwin.mapper.chatting.ChattingMapper">
+
+    <!-- 쪽지 보내기 -->
+    <insert id="sendChatting">
+        <selectKey keyProperty="chattingNumber" order="BEFORE" resultType="Long">
+            SELECT SEQ_CHATTING.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO CHATTING (CHATTING_NUMBER, CHATTING_CONTENT, CHATTING_TO, CHATTING_FROM)
+        VALUES (#{chattingNumber}, #{chattingContent}, #{chattingTo}, #{chattingFrom})
+    </insert>
+
+    <!-- 마이페이지에 쪽지 데이터 꽂기 -->
+    <select id="chattingSelect" resultType="chattingVo">
+        SELECT CHATTING_NUMBER, CHATTING_CONTENT, CHATTING_DATE, CHATTING_TO, CHATTING_FROM,
+            WW_USER.USER_NICKNAME
+        FROM CHATTING JOIN WW_USER
+        ON CHATTING.CHATTING_FROM = WW_USER.USER_NUMBER
+        WHERE CHATTING_TO = #{userNumber}
+    </select>
+
+    <!-- 쪽지 모달창에 데이터 꽂기 -->
+    <select id="chattingSelectModal" resultType="chattingVo">
+        SELECT CHATTING_CONTENT, CHATTING_DATE, CHATTING_TO, WW_USER.USER_NICKNAME
+        FROM CHATTING JOIN WW_USER
+        ON CHATTING.CHATTING_FROM = WW_USER.USER_NUMBER
+        WHERE CHATTING_NUMBER = #{chattingNumber}
+    </select>
+</mapper>

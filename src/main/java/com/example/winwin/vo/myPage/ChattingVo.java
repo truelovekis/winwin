@@ -1,16 +1,18 @@
-package com.example.winwin.dto.chatting;
+package com.example.winwin.vo.myPage;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
 @Component
 @Data
 @NoArgsConstructor
-public class ChattingDto {
+public class ChattingVo {
     private Long chattingNumber;
     private String chattingContent;
     private String chattingDate;
     private Long chattingTo;
     private Long chattingFrom;
+    private String userNickname;
 }

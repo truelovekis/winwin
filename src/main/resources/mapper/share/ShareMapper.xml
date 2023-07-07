@@ -22,6 +22,7 @@
              , SHARE_DATE
              , SHARE_WING
              , S.USER_NUMBER
+             , WU.USER_NICKNAME
              , WU.USER_ID
         FROM SHARE_FREE S
                  JOIN WW_USER WU
@@ -39,6 +40,7 @@
                S.USER_NUMBER,
                SHARE_READ_CNT,
                USER_ID,
+               USER_NICKNAME,
                file_system_name,
                file_uuid,
                file_upload_path,

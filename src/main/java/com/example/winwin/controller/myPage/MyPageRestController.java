@@ -1,10 +1,14 @@
 package com.example.winwin.controller.myPage;
 
+import com.example.winwin.dto.chatting.ChattingDto;
 import com.example.winwin.dto.user.ResumePrDto;
+import com.example.winwin.service.chatting.ChattingService;
 import com.example.winwin.service.myPage.MyPageService;
 import com.example.winwin.vo.myPage.ResumeVo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/myPages/*")
 public class MyPageRestController {
     private final MyPageService myPageService;
+    private final ChattingService chattingService;
 
     @GetMapping("/resume")
     public ResumeVo getResume(HttpServletRequest req, Long resumeNumber){
@@ -38,4 +43,6 @@ public class MyPageRestController {
         ResumePrDto resumePrDto = myPageService.getPr(prNumber);
         req.getSession().setAttribute("pr", resumePrDto);
     }
+
+
 }

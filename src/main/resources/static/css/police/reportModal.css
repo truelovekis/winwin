@@ -16,6 +16,7 @@
     background-color: rgba(0, 0, 0, 0.4);
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .reportModal-content {
@@ -26,6 +27,7 @@
     border-radius: 10px;
     width: 350px;
     /* height: 400px; */
+    cursor: default;
 }
 
 /* 제목 스타일 */
@@ -137,4 +139,8 @@ input[type="checkbox"] {
 
 .report-list > span {
     font-weight: 500;
+}
+
+.none{
+    display: none;
 }

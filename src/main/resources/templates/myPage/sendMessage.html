@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume</title>
+    <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fragment/myPageSide.css}"/>
+    <link rel="stylesheet" th:href="@{/css/myPage/sendMessage.css}" />
+    <link rel="stylesheet" th:href="@{/css/chatting/sendModal.css}" />
+    <link rel="stylesheet" th:href="@{/css/chatting/inputModal.css}" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: "NanumSquareLight";
+            font-family: "NanumSquare";
+            font-family: "NanumSquareBold";
+            font-family: "NanumSquareExtraBold";
+            font-family: "NanumSquareAcb";
+            font-family: "NanumSquareAceb";
+            font-family: "NanumSquareAcl";
+            font-family: "NanumSquareAcr";
+        }
+    </style>
+</head>
+<body>
+<header class="header"  th:replace="fragment/header :: header"></header>
+<main>
+<div th:replace="chatting/sendModal :: sendModal" ></div>
+<div th:replace="chatting/inputModal :: inputModal"></div>
+    <div class="wrap">
+        <div class="container">
+            <div th:replace="fragment/myPageSide :: myPageSide"></div>
+            <!-- 마이페이지 쪽지함 메인 -->
+            <div class="chatting-main">
+                <div class="title">
+                    <h2>쪽지함</h2>
+                </div>
+                <div class="category">
+                    <div class="category-contain">
+                        <a th:href="@{/myPage/receiveMessage}">받은 쪽지</a>
+                    </div>
+                    <div class="category-contain">
+                        <a th:href="@{/myPage/sendMessage}" id="point-page">보낸 쪽지</a>
+                    </div>
+                </div>
+                <!-- 보낸 쪽지 메인 -->
+                <div class="send-main">
+                    <div class="message-box">
+                        <div class="message-box-top">
+                            <div class="sender-profile">
+                                <img class="sender-img" th:src="@{/img/profile-basic.png}"/>
+                                <span name="chattingTo" class="sender">정소이</span>
+                            </div>
+                            <button class="send-reply">✉ 보내기</button>
+                        </div>
+                        <span class="message-content" name="chattingContent">안녕하세용 소이예용 잘부탁드려용 안녕하세용 소이예용 잘부탁드려용 안녕하세용 소이예용 잘부탁드려용 안녕하세용 소이예용 잘부탁드려용 안녕하세용 소이예용 잘부탁드려용 안녕하세용 소이예용 잘부탁드려용 안녕하세용 소이예용 잘부탁드려용 안녕하세용 소이예용 잘부탁드려용</span>
+                        <div class="message-bottom-box">
+                            <span class="message-date" name="chattingDate">2010-03-02</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="footer"  th:replace="fragment/footer :: footer"></footer>
+<script
+        src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+        crossorigin="anonymous"
+></script>
+<script th:src="@{/lib/jspdf.min.js}"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+        integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+></script>
+<script th:src="@{/js/fragment/header.js}" ></script>
+<script th:src="@{/js/myPage/sendMessage.js}"></script>
+<script th:src="@{/js/chatting/inputModal.js}"></script>
+</body>
+</html>

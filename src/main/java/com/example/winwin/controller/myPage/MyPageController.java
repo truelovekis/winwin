@@ -1,11 +1,14 @@
 package com.example.winwin.controller.myPage;
 
+import com.example.winwin.dto.chatting.ChattingDto;
 import com.example.winwin.dto.file.ResumeFileDto;
 import com.example.winwin.dto.user.ResumeDto;
 import com.example.winwin.dto.user.ResumePrDto;
 import com.example.winwin.dto.user.UserDto;
 import com.example.winwin.dto.user.UserPfpDto;
+import com.example.winwin.service.chatting.ChattingService;
 import com.example.winwin.service.myPage.MyPageService;
+import com.example.winwin.vo.myPage.ChattingVo;
 import com.example.winwin.vo.myPage.MyPageVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -28,6 +31,7 @@ import java.util.List;
 @RequestMapping("/myPage/*")
 public class MyPageController {
     private final MyPageService myPageService;
+    private final ChattingService chattingService;
 
     @GetMapping("/activityComment")
     public String activityComment(){
@@ -77,6 +81,16 @@ public class MyPageController {
     @GetMapping("/myMentee")
     public String myMentee(){
         return "myPage/myMentee";
+    }
+
+//    @GetMapping("/receiveMessage")
+//    public String receiveMessage(){
+//        return "myPage/receiveMessage";
+//    }
+
+    @GetMapping("/sendMessage")
+    public String sendMessage(){
+        return "myPage/sendMessage";
     }
 
     @GetMapping("/resume")
@@ -239,4 +253,17 @@ public class MyPageController {
     public String myRecord(){
         return "myPage/myRecord";
     }
+
+    @GetMapping("/receiveMessage")
+    public String chattingSelect(Model model, HttpServletRequest req){
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+        List<ChattingVo> chattingVoList = chattingService.chattingSelect(userNumber);
+
+        model.addAttribute("chattingList", chattingVoList);
+
+        return "myPage/receiveMessage";
+    }
+
+
+
 }
