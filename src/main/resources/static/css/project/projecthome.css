@@ -3,6 +3,13 @@
     padding: 0;
 }
 
+.project-sub-text2{
+    font-size: 20px;
+    color: rgb(22, 163, 74);
+    font-weight: 600;
+    white-space: nowrap;
+    margin: auto 0;
+}
 
 .container{
     width: 1050px;
@@ -307,7 +314,12 @@ strong{
     cursor: pointer;
     overflow: hidden;
     max-width: 400px;
+    margin: auto 0;
 }
+.vertical{
+    margin: auto 0;
+}
+
 
 .topten-sub-text3{
     font-size: 14px;

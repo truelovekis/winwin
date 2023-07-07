@@ -63,8 +63,8 @@
 
                 <h3 class="project-box-h3">상태 처리</h3>
                 <div class="recruit">
-                    <input type="radio" value="" name="recruit" checked/> 모집 중
-                    <input type="radio" value="" name="recruit"/> 모집 완료
+                    <input type="radio" value="1" name="recruit" checked/> 모집 중
+                    <span style="color: gray; opacity: 0.8;"><input type="radio" value="2" name="recruit" disabled/> 모집 완료</span>
                 </div>
 
                 <h3 class="project-box-h3">카테고리</h3>
@@ -123,5 +123,6 @@
 <script th:src="@{/js/fragment/header.js}" ></script>
 <!--  모달 js-->
 <script th:src="@{/js/user/loginModal.js}"></script>
+
 </body>
 </html>

@@ -31,6 +31,53 @@ public class StudyService {
         studyMapper.studyDelete(studyNumber);
     }
 
+    public void studyLikeRemove(Long studyNumber){
+        if(studyNumber == null){
+            throw new IllegalArgumentException("좋아요 누른 게시글이 없습니다.");
+        }
+        studyMapper.studyLikeDelete(studyNumber);
+    }
+
+    public void likeRegister(Long userNumber, Long studyNumber){
+        if (userNumber == null || studyNumber == null) {
+            throw new IllegalArgumentException("좋아요 번호 누락.");
+        }
+        studyMapper.likeInsert(userNumber, studyNumber);
+    }
+
+    public void likeRemove(Long userNumber, Long studyNumber){
+        if (userNumber == null || studyNumber == null) {
+            throw new IllegalArgumentException("좋아요 번호 누락.");
+        }
+        studyMapper.likeDelete(userNumber, studyNumber);
+    }
+
+    public void likeProcess(Long userNumber, Long studyNumber){
+        if (userNumber == null || studyNumber == null) {
+            throw new IllegalArgumentException("좋아요 번호 누락.");
+        }
+        if(studyMapper.likeSelect(userNumber, studyNumber) == 0){
+            studyMapper.likeInsert(userNumber, studyNumber);
+        }else{
+            studyMapper.likeDelete(userNumber, studyNumber);
+        }
+    }
+
+    public int findLikeCnt(Long userNumber, Long studyNumber){
+        if (userNumber == null || studyNumber == null) {
+            throw new IllegalArgumentException("좋아요 번호 누락.");
+        }
+        return studyMapper.likeSelect(userNumber, studyNumber);
+    }
+
+    public void readUpdate(Long studyNumber){
+        if ( studyNumber == null){
+            throw new IllegalArgumentException("조회수 넘버 못찾음");
+        }
+        studyMapper.readCount(studyNumber);
+    }
+
+
     public void studyModify(StudyVo studyVo){
         if(studyVo == null){
             throw new IllegalArgumentException("모임 수정 정보가 잘못되었습니다.");
@@ -50,9 +97,21 @@ public class StudyService {
 
     }
 
+
+
     @Transactional(readOnly = true)
     public List<StudyVo> findMainList(int cateNumber){
         return studyMapper.mainSelect(cateNumber);
     }
 
+
+    @Transactional(readOnly = true)
+    public List<StudyVo> otherProjectList(int cateNumber){
+        return studyMapper.otherProject(cateNumber);
+    }
+
+    @Transactional(readOnly = true)
+    public List<StudyVo> findOtherList(Long cateNumber){
+        return studyMapper.selectOtherList(cateNumber);
+    }
 }

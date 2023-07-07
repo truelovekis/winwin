@@ -27,6 +27,7 @@
 <header class="header" th:replace="fragment/header :: header"></header>
 <section>
     <form action="/project/modify" method="post" >
+        <input type="hidden" name="studyNumber" th:value="${studyVo.studyNumber}">
         <div class="container-box">
             <div class="middle-box">
                 <div class="Title">
@@ -63,8 +64,8 @@
 
                 <h3 class="project-box-h3">상태 처리</h3>
                 <div class="recruit">
-                    <input type="radio" value="" name="recruit" checked/> 모집 중
-                    <input type="radio" value="" name="recruit"/> 모집 완료
+                    <input type="radio" value="1" name="studyStatus" checked/> 모집 중
+                    <input type="radio" value="0" name="studyStatus"/> 모집 완료
                 </div>
 
                 <h3 class="project-box-h3">카테고리</h3>
