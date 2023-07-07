@@ -1,6 +1,5 @@
 package com.example.winwin.controller.meeting;
 
-import com.example.winwin.dto.board.StudyDto;
 import com.example.winwin.service.board.StudyService;
 import com.example.winwin.vo.board.StudyVo;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +29,20 @@ public class meetingController {
     }
 
     @GetMapping("/meeting")
-    public String meetingMeetingForm(){
+    public String otherProjectForm(Integer categoryNumber, Model model){
+        categoryNumber = categoryNumber == null ? 0 : categoryNumber;
+        List<StudyVo> projectList = studyService.otherProjectList(categoryNumber);
+        System.out.println(projectList);
+        model.addAttribute("projectList", projectList);
+
         return "meeting/projectmeeting";
     }
+
+    @GetMapping("/meetingproject")
+    public String meetingproject(Long studyNumber, Model model) {
+        StudyVo studyVo = studyService.studyFind(studyNumber);
+        model.addAttribute("studyVo", studyVo);
+        return "/meeting/meeting";
+    }
+
 }
