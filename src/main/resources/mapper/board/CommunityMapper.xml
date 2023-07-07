@@ -80,6 +80,23 @@
         ORDER BY MC.CAREER_START_DATE DESC
     </select>
 
+<!--    <select id="selectAll" resultType="communityVo">-->
+<!--        SELECT (SELECT COUNT(*) FROM COMMUNITY_COMMENT WHERE COMMUNITY_COMMENT.COMMUNITY_NUMBER = C.COMMUNITY_NUMBER) AS COMMENT_CNT-->
+<!--        ,C.COMMUNITY_NUMBER, C.COMMUNITY_TITLE, C.COMMUNITY_CONTENT, C.COMMUNITY_DATE, C.COMMUNITY_CNT, C.CATEGORY_NUMBER-->
+<!--        ,C.USER_NUMBER, U.USER_ID-->
+<!--        ,T.CATEGORY_NAME-->
+<!--        FROM COMMUNITY C JOIN WW_USER U-->
+<!--        ON C.USER_NUMBER = U.USER_NUMBER-->
+<!--        JOIN community_category T-->
+<!--        ON C.CATEGORY_NUMBER = T.CATEGORY_NUMBER-->
+<!--        <if test="categoryTypeStr != 'all'">-->
+<!--            WHERE C.CATEGORY_NUMBER = #{categoryNumber}-->
+<!--        </if>-->
+<!--        AND U.USER_STATUS != '3'-->
+<!--        and C.COMMUNITY_STATUS != '0'-->
+<!--        ORDER BY C.COMMUNITY_NUMBER DESC-->
+<!--    </select>-->
+
 <!--    SELECT *-->
 <!--    FROM (SELECT USER_NUMBER, USER_NICKNAME-->
 <!--    FROM WW_USER-->
@@ -90,7 +107,6 @@
 <!--    on U.USER_NUMBER = M.USER_NUMBER-->
 <!--    left join MENTOR_CAREER MC-->
 <!--    on M.MENTOR_NUMBER = MC.MENTOR_NUMBER-->
-
 
 </mapper>
 

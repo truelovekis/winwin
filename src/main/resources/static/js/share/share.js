@@ -92,17 +92,17 @@ function appendList(map) {
                                 </svg>
                                 <span>${share.shareReadCnt}</span></div>
                         </div>
-                        <div class="share-time">${share.shareDate}</div>
+                        <div class="share-time">${timeForToday(share.shareDate)}</div>
                     </div>
 
                 </div>
                 <div class="share-sub-img">
                     <div class="share-img">
                         ${share.fileSystemName == null ?
-            '<img src="/img/default-camera.png">' :
-            '<img src=/upload/' + share.fileUploadPath + '/th_' + share.fileUuid + '_' + share.fileSystemName + '>'
-        }
-                
+
+                        '<img src="/img/default-camera.png">' :
+                        '<img src=/upload/' + share.fileUploadPath + '/th_' + share.fileUuid + '_' + share.fileSystemName +'>'
+                        }
                     </div>
                 </div>
             </div>
@@ -119,3 +119,35 @@ function showError(a, b, c) {
 }
 
 //-----------------------------------------------------------------------------------------
+
+function timeForToday(value){
+    // new Date() 현재 날짜와 시간
+    const today = new Date();
+    const timeValue = new Date(value);
+
+    console.log(today);
+    console.log(timeValue);
+
+    // Math.floor()는 소수점을 내림 처리 해준다.
+    // getTime()은 1970년 01/01 을 기준으로 지금까지 몇 ms가 지났는지 알려준다.
+    const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+
+    console.log(betweenTime);
+
+    if(betweenTime < 1) { return "방금 전"; }
+    if(betweenTime < 60) {
+        return `${betweenTime}분 전`;
+    }
+
+    const betweenTimeHour = Math.floor(betweenTime / 60);
+    if(betweenTimeHour < 24){
+        return `${betweenTimeHour}시간 전`;
+    }
+
+    const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+    if(betweenTimeDay < 365){
+        return `${betweenTimeDay}일 전`;
+    }
+
+    return `${Math.floor(betweenTimeDay / 365)}년 전`;
+}

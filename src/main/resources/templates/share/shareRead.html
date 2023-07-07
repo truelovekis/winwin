@@ -51,7 +51,7 @@
                     </div>
 
                     <div class="report-list">
-                        <input type="checkbox" id="report-adult" name="report-checkbox" value="3" />
+                        <input type="checkbox" id="report-adult" name="report-checkbox" value="3"/>
                         <label for="report-adult" class="label3 check"></label>
                         <span>음란성</span>
                     </div>
@@ -69,7 +69,7 @@
                     </div>
 
                     <div class="report-list">
-                        <input type="checkbox" id="reprot-disgust" name="report-checkbox" value="6" />
+                        <input type="checkbox" id="reprot-disgust" name="report-checkbox" value="6"/>
                         <label for="reprot-disgust" class="label6 check"></label>
                         <span>폭력/잔인/혐오</span>
                     </div>
@@ -115,9 +115,9 @@
                         </button>
                         <div class="dropdown-content">
                             <!-- <th:block th:if="${session.userNumber == board.userNumber}">-->
-                                <a class="police-btn">신고</a>
-                                <a th:onclick="'fn_modify('+ ${share.shareNumber} +');'">수정</a>
-                                <a th:onclick="'fn_remove('+ ${share.shareNumber} +');'">삭제</a>
+                            <a class="police-btn">신고</a>
+                            <a th:onclick="'fn_modify('+ ${share.shareNumber} +');'">수정</a>
+                            <a th:onclick="'fn_remove('+ ${share.shareNumber} +');'">삭제</a>
                             <input type="hidden" class="share-num" th:value="${share.shareNumber}">
                             <!--  </th:block>-->
                         </div>
@@ -142,7 +142,8 @@
                         <div class="readCount-num"><p class="read-count" th:text="${share.shareReadCnt}"></p></div>
                         </div>
                     </div>
-                    <div class="date" th:text="${#strings.substring(#strings.replace(share.shareDate, '-', '.'), 0, 10)}"></div>
+                    <div class="date"
+                         th:text="${#strings.substring(#strings.replace(share.shareDate, '-', '.'), 0, 10)}"></div>
                 </div>
                     <div class="share-bottom">
                         <div class="share-wing-box">
