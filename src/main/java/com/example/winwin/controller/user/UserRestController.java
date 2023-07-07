@@ -38,6 +38,7 @@ public class UserRestController {
             req.getSession().setAttribute("userName", userInfo.getUserName());
             req.getSession().setAttribute("userWing", userInfo.getUserWing());
             req.getSession().setAttribute("userStatus", userInfo.getUserStatus());
+            req.getSession().setAttribute("userNickname", userInfo.getUserNickname());
             req.getSession().setAttribute("mentorNumber", mentorNumber);
 
         } catch (IllegalArgumentException e) {

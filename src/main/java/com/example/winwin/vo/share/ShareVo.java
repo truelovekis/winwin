@@ -17,6 +17,7 @@ public class ShareVo {
     private int shareReadCnt;
     private Long userNumber;
     private String userId;
+    private String userNickname;
     private String fileSystemName;
     private String fileUploadPath;
     private String fileUuid;

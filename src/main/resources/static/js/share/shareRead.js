@@ -142,6 +142,29 @@ function reportAjax(){
     })
 }
 
+/* 쪽지 모달창 */
+$(function () {
+    $(".commentBtn").click(function () {
+        $(".input-wrap").fadeIn();
+    });
+});
+
+$(".commentBtn").on("click", function () {
+    $(".input-wrap").removeClass("none");
+
+    $('body').css('overflow', 'hidden');
+});
+
+$(".input-wrap").on("click", function (e) {
+
+    if ($(e.target).hasClass("input-wrap")) {
+        $(".input-wrap").addClass("none");
+        $('body').css('overflow', 'auto');
+
+        $('.form-reset')[0].reset();
+    }
+});
+
 
 
 

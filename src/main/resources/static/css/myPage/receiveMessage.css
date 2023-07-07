@@ -1,0 +1,155 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 1050px;
+    display: flex;
+}
+
+#point-list-7 {
+    font-weight: 700;
+}
+
+/*===============================================*/
+/* 쪽지함 메인 */
+
+.chatting-main{
+    /*width: 700px;*/
+    height: 1000px;
+    padding: 30px 0px;
+}
+
+.category {
+    margin-top: 30px;
+    display: flex;
+}
+
+.category-contain {
+    height: 39px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.category-contain > a {
+    font-size: 16px;
+    color: #9e9e9e;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+}
+
+.category-contain > a:hover{
+    margin-top: -1px;
+}
+
+#point-page {
+    border-bottom: 3px solid #000;
+    color: #000;
+    font-weight: 900;
+}
+
+.category-contain:hover {
+    color: #000;
+    background-color: rgba(198, 198, 198, 0.251);
+    border-radius: 5px;
+}
+
+.category-contain > h4:hover {
+    margin-top: 1px;
+}
+
+/*============================================*/
+/* 내용 */
+
+.receive-main{
+    margin-top: 30px;
+}
+
+.message-box{
+    width: 700px;
+    /*height: 120px;*/
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.message-box:hover{
+    border: 1px solid #9e9e9e;
+}
+
+.message-box-top{
+    display: flex;
+    justify-content: space-between;
+}
+
+.sender-profile{
+    display: flex;
+    align-items: center;
+}
+
+.sender-img{
+    width: 30px;
+    margin-right: 10px;
+}
+
+.sender{
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.send-reply{
+    width: 70px;
+    height: 30px;
+    font-size: 13px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: "NanumSquare";
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.send-reply:hover{
+    background-color: #000000;
+    color: white;
+}
+
+.message-content{
+    display: block;
+    margin: 15px 0px;
+    font-size: 15px;
+    line-height: 1.5;
+    text-overflow: ellipsis; /* 위에 설정한 100px 보다 길면 말줄임표처럼 표시합니다. */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden; /* 내용이 길면 감춤니다 */
+    cursor: pointer;
+}
+
+.message-bottom-box{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 14px;
+    color: #5e5e5e;
+}
+
+.message-police{
+    cursor: pointer;
+}
+
+.message-date{
+    margin-top: 3px;
+    margin-left: 10px;
+}

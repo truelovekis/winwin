@@ -40,6 +40,8 @@ public class UserController {
             session.setAttribute("userName", userDto.getUserName());
             session.setAttribute("userWing", userDto.getUserWing());
             session.setAttribute("userStatus", userDto.getUserStatus());
+            session.setAttribute("userNickname", userDto.getUserNickname());
+
             Long mentorNumber = loginService.findMentorNumber(userId, userPassword);
             session.setAttribute("mentorNumber", mentorNumber);
         } catch (IllegalArgumentException e) {

@@ -1,0 +1,94 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.input-wrap {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0px;
+    z-index: 30;
+    cursor: pointer;
+}
+
+.input-container {
+    border-radius: 10px;
+    background-color: white;
+    padding: 30px;
+    width: 400px;
+    cursor: default;
+}
+
+#inputMessage{
+    width: 95%;
+    height: 100px;
+    border-radius: 5px;
+    padding: 10px;
+    font-family: "NanumSquare";
+    resize: none;
+}
+
+#inputMessage::placeholder{
+    font-family: "NanumSquare";
+}
+
+.send-btn{
+    width: 70px;
+    height: 30px;
+    /*background-color: #1b5192;*/
+    border-radius: 5px;
+    border: 1px solid #000000;
+    margin-top: 5px;
+    background-color: #ffffff;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.send-btn:hover{
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.send-btn-box{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.warning-text{
+    font-size: 8px;
+    color: #e06c6c;
+}
+
+.send-text-box{
+    display: flex;
+    justify-content: space-between;
+}
+
+.send-text-count,
+.send-total-count{
+    font-size: 12px;
+}
+
+.input-message-box>h5{
+    display: inline;
+}
+
+.send-user-nickname{
+    margin: 10px 0px;
+    display: flex;
+    align-items: center;
+}
+
+.none{
+    display: none;
+}
+
+
+
+
+

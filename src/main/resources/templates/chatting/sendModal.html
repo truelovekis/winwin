@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume</title>
+  <link rel="stylesheet" th:href="@{/css/chatting/sendModal.css}" />
+  <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+  <style>
+    body {
+      font-family: "NanumSquareLight";
+      font-family: "NanumSquare";
+      font-family: "NanumSquareBold";
+      font-family: "NanumSquareExtraBold";
+      font-family: "NanumSquareAcb";
+      font-family: "NanumSquareAceb";
+      font-family: "NanumSquareAcl";
+      font-family: "NanumSquareAcr";
+    }
+  </style>
+</head>
+<body>
+<main>
+  <article th:fragment="sendModal">
+    <div class="send-wrap none">
+      <div class="send-container">
+        <div class="send-message-box">
+          <div class="send-message-profile">
+            <img class="send-message-profile-img" th:src="@{/img/profile-basic.png}">
+            <span class="send-sender"></span>
+          </div>
+          <div class="send-message-content">
+            <span class="send-content-chat"></span>
+          </div>
+          <div class="send-message-bottom">
+            <span class="send-date-s"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</main>
+<script
+        src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+        crossorigin="anonymous"
+></script>
+</body>
+</html>

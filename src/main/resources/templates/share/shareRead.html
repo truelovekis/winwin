@@ -10,6 +10,7 @@
     <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
     <link rel="stylesheet" th:href="@{/css/share/shareRead.css}"/>
     <link rel="stylesheet" th:href="@{/css/police/reportModal.css}" />
+    <link rel="stylesheet" th:href="@{/css/chatting/inputModal.css}" />
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet"/>
     <style>
         body {
@@ -26,6 +27,8 @@
 </head>
 <body>
 <header class="header" th:replace="fragment/header :: header"></header>
+<!-- 쪽지 모달창 -->
+<div th:replace="chatting/inputModal :: inputModal(nickname=${share.userNickname}, chattingTo=${share.userNumber})"></div>
 <section>
     <!-- 신고하기 모달창 -->
     <div class="reportModal">
@@ -91,9 +94,14 @@
     <div class="container-box">
         <div class="first1">
             <div class="first">
+                <div class="first-wrap">
                 <div class="Profil">
-                    <img src="@{}" height="40px" width="40px">
-                    <div class="id"><p>truluvkis</p></div>
+                    <div class="profile-box">
+                        <div class="profile-img-box">
+                            <img th:src="@{/img/profile-basic.png}"/>
+                        </div>
+                        <div class="id"><p th:text="${share.userNickname}">닉네임</p></div>
+                    </div>
                     <div class="dropdown">
                         <button class="dropbtn">
                             <span class="dropbtn_icon"> <svg data-v-bd9f2bcc="" data-v-3035bc76="" width="24"
@@ -117,35 +125,35 @@
                 </div>
                 <div class="imfor"><p>삼성전자</p></div>
                 <div class="question">
-                    <div class="Q">T.</div>
-                    <div class="title"><p th:text="${share.shareTitle}"></p></div>
+                    <span class="Q">T.</span>
+                    <span class="title" th:text="${share.shareTitle}"></span>
                 </div>
                 <div class="content"><p th:text="${share.shareContent}"></p></div>
-                <div class="img-box">
-
-                </div>
-
 
                 <div class="icon">
                     <!-- 조회 수  -->
                     <div class="read-count">
-                        <button class="readCount-btn" type="button">
+                        <div class="readCount-btn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19"
                                  style="fill: rgb(148, 155, 160);" class="bi bi-eye" viewBox="0 0 16 16">
                                 <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
                                 <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
                             </svg>
-                        </button>
                         <div class="readCount-num"><p class="read-count" th:text="${share.shareReadCnt}"></p></div>
+                        </div>
                     </div>
                     <div class="date" th:text="${#strings.substring(#strings.replace(share.shareDate, '-', '.'), 0, 10)}"></div>
                 </div>
-            </div>
-            <div class="wing-cnt-wirte">
-                <div class="wing-cnt" th:text="${share.shareWing} + '윙'" ></div>
-            </div>
-            <div class="comment">
-                <button type="button" class="commentBtn" style="font-family:NanumSquareLight;">신청 하기</button>
+                    <div class="share-bottom">
+                        <div class="share-wing-box">
+                            <span class="share-wing-count" th:text="${share.shareWing}"></span>
+                            <img th:src="@{/img/wing-icon.png}" class="share-wing-img"/>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <button type="button" class="commentBtn" style="font-family:NanumSquareLight;">신청하기</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -156,5 +164,6 @@
 <script th:src="@{/js/fragment/header.js}"></script>
 <script th:src="@{/js/user/loginModal.js}"></script>
 <script th:src="@{/js/police/reportModal.js}"></script>
+<script th:src="@{/js/chatting/inputModal.js}"></script>
 </body>
 </html>

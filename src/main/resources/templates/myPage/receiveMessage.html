@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume</title>
+  <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
+  <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
+  <link rel="stylesheet" th:href="@{/css/fragment/myPageSide.css}"/>
+  <link rel="stylesheet" th:href="@{/css/myPage/receiveMessage.css}" />
+  <link rel="stylesheet" th:href="@{/css/chatting/sendModal.css}" />
+  <link rel="stylesheet" th:href="@{/css/chatting/inputModal.css}" />
+  <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+  <style>
+    body {
+      font-family: "NanumSquareLight";
+      font-family: "NanumSquare";
+      font-family: "NanumSquareBold";
+      font-family: "NanumSquareExtraBold";
+      font-family: "NanumSquareAcb";
+      font-family: "NanumSquareAceb";
+      font-family: "NanumSquareAcl";
+      font-family: "NanumSquareAcr";
+    }
+  </style>
+</head>
+<body>
+<header class="header"  th:replace="fragment/header :: header"></header>
+<main>
+  <!-- 쪽지 모달창 -->
+  <div th:replace="chatting/inputModal :: inputModal(nickname='', chattingTo= '')"></div>
+  <div th:replace="chatting/sendModal :: sendModal" ></div>
+
+  <div class="wrap">
+    <div class="container">
+      <div th:replace="fragment/myPageSide :: myPageSide"></div>
+      <!-- 마이페이지 쪽지함 메인 -->
+      <div class="chatting-main">
+        <div class="title">
+          <h2>쪽지함</h2>
+        </div>
+        <div class="category">
+          <div class="category-contain">
+            <a th:href="@{/myPage/receiveMessage}" id="point-page">받은 쪽지</a>
+          </div>
+          <div class="category-contain">
+            <a th:href="@{/myPage/sendMessage}">보낸 쪽지</a>
+          </div>
+        </div>
+        <!--내용-->
+        <div class="receive-main">
+          <div class="message-box"  th:each="chatting : ${chattingList}">
+            <span class="message-list" th:text="${chatting.chattingNumber}" th:data-ctnum="${chatting.chattingNumber}"></span>
+            <div class="message-box-top">
+                <div class="sender-profile">
+                  <img class="sender-img" th:src="@{/img/profile-basic.png}"/>
+                  <span class="sender" th:text="${chatting.userNickname}"></span>
+                </div>
+                <button class="send-reply">✉ 답장</button>
+              </div>
+              <span class="message-content" th:text="${chatting.chattingContent}"></span>
+              <div class="message-bottom-box">
+                <span class="message-date" th:text="${chatting.chattingDate}"></span>
+              </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+<footer class="footer"  th:replace="fragment/footer :: footer"></footer>
+<script
+        src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+        crossorigin="anonymous"
+></script>
+<script th:src="@{/lib/jspdf.min.js}"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+        integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+></script>
+<script th:src="@{/js/fragment/header.js}" ></script>
+<script th:src="@{/js/myPage/receiveMessage.js}"></script>
+</body>
+</html>

@@ -2,10 +2,12 @@ package com.example.winwin.controller.share;
 
 
 import com.example.winwin.dto.share.ShareDto;
+import com.example.winwin.dto.user.UserDto;
 import com.example.winwin.service.file.ShareFileService;
 import com.example.winwin.service.share.ShareService;
 import com.example.winwin.vo.share.ShareVo;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -83,6 +85,8 @@ public class ShareController {
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
         shareDto.setUserNumber(userNumber);
         shareService.shareRegister(shareDto);
+
+        UserDto userDto = new UserDto();
 
         System.out.println("====================================");
         System.out.println(files);
