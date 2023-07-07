@@ -41,11 +41,15 @@ h3 {
   padding: 15px;
   font-size: 15px;
   font-family: "NanumSquare";
+  resize: none;
 }
 
 .text-box {
   display: flex;
   justify-content: flex-end;
+  color: #5e5e5e;
+  margin-top: 5px;
+  margin-right: 5px;
 }
 
 .growth-count,

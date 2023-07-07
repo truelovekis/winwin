@@ -83,6 +83,7 @@
         <typeAlias type="com.example.winwin.dto.user.ResumeDto" alias="resumeDto"/>
         <typeAlias type="com.example.winwin.vo.myPage.MyPageVo" alias="myPageVo"/>
         <typeAlias type="com.example.winwin.vo.myPage.ResumeVo" alias="resumeVo"/>
+        <typeAlias type="com.example.winwin.vo.myPage.ActiveBoardVo" alias="activeBoardVo"/>
         <typeAlias type="com.example.winwin.vo.user.UserVo" alias="userVo"/>
         <typeAlias type="com.example.winwin.vo.user.UserCategoryVo" alias="userCategoryVo"/>
         <!--        -->
@@ -119,8 +120,8 @@
 
         <!-- 이력서  -->
         <typeAlias type="com.example.winwin.dto.file.ResumeFileDto" alias="resumeFileDto"/>
-
         <!--        -->
+        <typeAlias type="com.example.winwin.vo.user.CategoryBridgeVo" alias="categoryBridgeVo"/>
 
     </typeAliases>
 

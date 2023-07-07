@@ -46,6 +46,19 @@ $('.resume-box').on('click', function () {
         top: "50%",
         transform: "translate(-50%, -50%)",
     });
+
+    let prNumber = $(this).closest('.resume-box').find('input').val();
+    $.ajax({
+        url : "/myPages/pr",
+        type : 'get',
+        data : {prNumber, prNumber},
+        success : function(resumePrDto){
+            fillResumePr(resumePrDto);
+        },
+        error : function(a, b, c){
+            console.log(c);
+        }
+    });
 });
 
 $('.modal-wrap').on('click', function (e) {
@@ -53,3 +66,11 @@ $('.modal-wrap').on('click', function (e) {
         $('.resumePrModal').addClass("none");
     }
 });
+
+function fillResumePr(resumePrDto) {
+    $('.resumePrModal-title').text(resumePrDto.prBigTitle);
+    $('.title-s').text(resumePrDto.prSmallTitle);
+    $('.prm-content1').text(resumePrDto.prContent1);
+    $('.prm-content2').text(resumePrDto.prContent2);
+    $('.prm-content3').text(resumePrDto.prContent3);
+}

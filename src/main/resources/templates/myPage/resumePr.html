@@ -47,8 +47,9 @@
                 <div class="resume-box">
                   <div class="text-box">
                     <h3 th:text="${pr.prBigTitle}"></h3>
-                    <span class="pr-title" th:text="${pr.prSmallTitle}">실패는 나의 경험치</span>
+                    <span class="pr-title" th:text="${pr.prSmallTitle}"></span>
                     <div class="pr-content" th:text="${pr.prContent1}"></div>
+                    <input name="prNumber" th:value="${pr.prNumber}" type="hidden">
                   </div>
                 </div>
               </tr>

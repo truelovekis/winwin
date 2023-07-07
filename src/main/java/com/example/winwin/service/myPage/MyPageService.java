@@ -7,9 +7,11 @@ import com.example.winwin.dto.user.UserDto;
 import com.example.winwin.dto.user.UserPfpDto;
 import com.example.winwin.mapper.file.MyPageFile;
 import com.example.winwin.mapper.file.ResumeFile;
+import com.example.winwin.mapper.myPage.ActivityMapper;
 import com.example.winwin.mapper.myPage.ResumeMapper;
 import com.example.winwin.mapper.myPage.ResumePrMapper;
 import com.example.winwin.mapper.myPage.UserInfoMapper;
+import com.example.winwin.vo.myPage.ActiveBoardVo;
 import com.example.winwin.vo.myPage.MyPageVo;
 import lombok.RequiredArgsConstructor;
 import net.coobird.thumbnailator.Thumbnailator;
@@ -36,9 +38,21 @@ public class MyPageService {
     private  final ResumeMapper resumeMapper;
     private final ResumePrMapper resumePrMapper;
     private final ResumeFile resumeFile;
+    private final ActivityMapper activityMapper;
 
     @Value("${pfp.dir}")
     private String pfpDir;
+
+//활동 내역
+//    내가 커뮤니티에 작성한 글 리스트 보기
+    @Transactional(readOnly = true)
+    public List<ActiveBoardVo> getActiveBoardList(Long userNumber){
+        if(userNumber == null){
+            throw new IllegalArgumentException("로그인이 필요합니다.");
+        }
+
+        return activityMapper.selectActiveBoardList(userNumber);
+    }
 
 //이력관리
 //    이력서 등록
