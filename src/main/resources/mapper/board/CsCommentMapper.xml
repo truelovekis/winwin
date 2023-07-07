@@ -2,29 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.board.CsCommentMapper">
 
-<!--    <insert id="insert">-->
-<!--        <selectKey keyProperty="csNumber" order="BEFORE" resultType="long">-->
-<!--        SELECT-->
-<!--        </selectKey>-->
-<!--        insert into CS_COMMENT (COMMENT_NUMBER, COMMENT_CONTENT, COMMENT_DATE, USER_NUMBER, CS_NUMBER)-->
-<!--        values (#{commentNumber, #{commentContent} ,#{commentDate}, #{userNumber}, #{csNumber})-->
-<!--    </insert>-->
+    <insert id="insert">
+        <selectKey keyProperty="commentNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_CS_COMMENT.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO CS_COMMENT (COMMENT_NUMBER, COMMENT_CONTENT, USER_NUMBER, CS_NUMBER)
+        VALUES (#{commentNumber}, #{commentContent}, #{userNumber}, #{csNumber})
+    </insert>
 
-<!--    <select id="selectList" resultType="csReplayVo">-->
+    <select id="selectList" resultType="csReplyVo">
+        SELECT COMMENT_NUMBER, COMMENT_CONTENT, COMMENT_DATE, U.USER_NUMBER, CS_NUMBER, USER_ID
+        FROM WW_USER U
+                 JOIN CS_COMMENT C
+                      ON CS_NUMBER = #{csNumber} AND U.USER_NUMBER = C.USER_NUMBER
+        ORDER BY COMMENT_NUMBER DESC
+    </select>
 
+    <!-- 댓글 수정-->
+    <update id="update">
+        UPDATE CS
+        SET CS_TITLE   = #{csTitle},
+            CS_CONTENT = #{csContent},
+            CS_DATE    = SYSDATE
+        WHERE CS_NUMBER = #{csNumber}
+    </update>
 
-
-<!--    </select>-->
-
-<!--    <select id="select" resultType="csReplayVo">-->
-
-<!--    </select>-->
-
-<!--    <update id="update">-->
-
-<!--    </update>-->
-
-<!--    <delete id="delete">-->
-
-<!--    </delete>-->
 </mapper>

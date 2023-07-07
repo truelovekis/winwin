@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" th:href="@{/css/user/loginModal.css}"/>
-    <link rel="stylesheet" th:href="@{/css/project/projectRead.css}"/>
-    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet"/>
     <link rel="stylesheet" th:href="@{/css/fragment/header.css}"/>
     <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
+    <link rel="stylesheet" th:href="@{/css/project/projectRead.css}"/>
+    <link rel="stylesheet" th:href="@{/css/police/reportModal.css}"/>
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet"/>
     <style>
         body {
             font-family: "NanumSquareLight";
@@ -25,12 +26,71 @@
 <body>
 <header class="header" th:replace="fragment/header :: header"></header>
 <section>
+    <!-- 신고하기 모달창 -->
+    <div class="reportModal">
+        <div class="reportModal-content">
+            <h2>신고하기</h2>
+            <!-- 신고 카테고리 -->
+            <form action="#" method="post">
+                <div class="report-category">
+                    <div class="report-list">
+                        <input type="checkbox" id="report-language" name="report-checkbox" value="1"/>
+                        <label for="report-language" class="label1 check">
+                        </label>
+                        <span>욕설/비방글</span>
+                    </div>
+
+                    <div class="report-list">
+                        <input type="checkbox" id="report-copyright" name="report-checkbox" value="2"/>
+                        <label for="report-copyright" class="label2 check"></label>
+                        <span>저작권 침해</span>
+                    </div>
+
+                    <div class="report-list">
+                        <input type="checkbox" id="report-adult" name="report-checkbox" value="3"/>
+                        <label for="report-adult" class="label3 check"></label>
+                        <span>음란성</span>
+                    </div>
+
+                    <div class="report-list">
+                        <input type="checkbox" id="false-maketing" name="report-checkbox" value="4"/>
+                        <label for="false-maketing" class="label4 check"></label>
+                        <span>불법 광고</span>
+                    </div>
+
+                    <div class="report-list">
+                        <input type="checkbox" id="report-info-honor" name="report-checkbox" value="5"/>
+                        <label for="report-info-honor" class="label5 check"></label>
+                        <span>개인정보 침해 및 명예훼손</span>
+                    </div>
+
+                    <div class="report-list">
+                        <input type="checkbox" id="reprot-disgust" name="report-checkbox" value="6"/>
+                        <label for="reprot-disgust" class="label6 check"></label>
+                        <span>폭력/잔인/혐오</span>
+                    </div>
+
+                    <div class="report-list">
+                        <input type="checkbox" id="report-castle" name="report-checkbox" value="7"/>
+                        <label for="report-castle" class="label7 check"></label>
+                        <span>도배성</span>
+                    </div>
+                </div>
+            </form>
+
+            <div class="report-button">
+                <button type="submit" class="report-btn">신고하기</button>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+
     <div class="container">
         <div class="flex-wrap">
 
             <div class="container-box">
                 <div class="head">
-                    <div class="smallTitle"><p>스터디/모임</p></div>
+                    <div class="smallTitle"><p th:text="${studyVo.categoryNumber == 1 ? '프로젝트' : '스터디/모임'}"></p></div>
 
                     <div class="dropdown">
                         <button class="dropbtn">
@@ -44,10 +104,14 @@
                                     data-v-bd9f2bcc="" cx="12" cy="18.5" r="1.5"></circle></svg></span>
                         </button>
                         <div class="dropdown-content">
-                            <a href="#">신고</a>
-                            <a style="cursor: pointer;" th:onclick="'fn_modify('+${studyVo.studyNumber} +');'">수정</a>
-                            <a href="#" >삭제</a>
+                            <a class="police-btn">신고</a>
+                            <a style="cursor: pointer;" th:onclick="'fn_modify('+${studyVo.studyNumber} +');'"
+                               th:if="${session.userNumber != null and session.userNumber == studyVo.userNumber}">수정</a>
+                            <a th:onclick="'fn_delete('+${studyVo.studyNumber} +');'"
+                               th:if="${session.userNumber != null and session.userNumber == studyVo.userNumber}">삭제</a>
+                            <input type="hidden" class="study-num" th:value="${studyVo.studyNumber}">
                         </div>
+
                     </div>
 
                     <div class="Title">
@@ -132,7 +196,6 @@
                     </div>
 
 
-
                 </div> <!-- div.head -->
 
             </div> <!-- div.big-box -->
@@ -141,23 +204,28 @@
 
                     <div class="profil-box">
                         <img src="../img/corgi-g5894d3ae3_1920.jpg" width="50px" height="50px">
-                        <div class="name">꽃내랑</div>
+                        <div class="name" th:text="${studyVo.userNickname}"></div>
 
                     </div> <!-- profil-box -->
 
                     <div class="profil-box2">
                         <div class="box1">
-                            <button type="button" class="chat-box">채팅하기</button>
+                            <a th:href="${studyVo.studyOpenlink}">
+                                <input type="button" value="오픈채팅하기" class="chat-box">
+                            </a>
                         </div>
                         <div class="box2">
-                            <button type="button" class="Like">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="12" fill="currentColor"
+                            <button type="button" class="Like" th:data-number="${studyVo.studyNumber}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="12"
+                                     fill="currentColor"
                                      class="bi bi-heart heart-click" viewBox="0 0 16 16">
                                     <path class="facebook"
                                           d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
                                 </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" fill="currentColor"
-                                     style="fill: rgb(233, 37, 37);" class="bi bi-heart-fill hide" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15"
+                                     fill="currentColor"
+                                     style="fill: rgb(233, 37, 37);" class="bi bi-heart-fill hide"
+                                     viewBox="0 0 16 16">
                                     <path fill-rule="evenodd"
                                           d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                                 </svg>
@@ -185,94 +253,67 @@
                             </svg>
                         </button>
                     </div>
-                    </div>
-
-                </div> <!-- lastTitle -->
-                <div class="icon2">
-                    <button type="button" class="prev">
-                        <svg width="19" height="20" stroke-width="0" viewBox="0 0 24 24" fill="current"
-                             xmlns="http://www.w3.org/2000/svg" class="tw-fill-slate-500 tw-opacity-40">
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M10.7071 4.2929C11.0976 4.68342 11.0976 5.31659 10.7071 5.70711L5.41423 10.9999H21C21.5523 10.9999 22 11.4477 22 11.9999C22 12.5522 21.5523 12.9999 21 12.9999H5.4142L10.7071 18.2929C11.0976 18.6834 11.0976 19.3166 10.7071 19.7071C10.3166 20.0976 9.68341 20.0976 9.29289 19.7071L2.29289 12.7071C2.10535 12.5195 2 12.2652 2 11.9999C2 11.7347 2.10536 11.4804 2.2929 11.2928L9.2929 4.29289C9.68342 3.90237 10.3166 3.90237 10.7071 4.2929Z"
-                                  fill="inherit"></path>
-                        </svg>
-                    </button>
-                    <div class="empty-box"></div>
-                    <button type="button" class="next2">
-                        <svg width="20" height="20" stroke-width="0" viewBox="0 0 24 24" fill="current"
-                             xmlns="http://www.w3.org/2000/svg" class="tw-fill-slate-500 hover:tw-fill-slate-900">
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M13.2929 19.7071C12.9024 19.3166 12.9024 18.6834 13.2929 18.2929L18.5858 13L3 13C2.44772 13 2 12.5523 2 12C2 11.4478 2.44772 11 3 11L18.5858 11.0001L13.2929 5.7071C12.9024 5.31658 12.9024 4.68341 13.2929 4.29289C13.6834 3.90237 14.3166 3.90237 14.7071 4.29289L21.7071 11.2929C21.8946 11.4805 22 11.7348 22 12.0001C22 12.2653 21.8946 12.5196 21.7071 12.7072L14.7071 19.7071C14.3166 20.0976 13.6834 20.0976 13.2929 19.7071Z"
-                                  fill="inherit"></path>
-                        </svg>
-                    </button>
                 </div>
 
-                <div class="otherProject">
-                    <div class="front">
+            </div> <!-- lastTitle -->
+            <div class="icon2">
+                <button type="button" class="prev left-arrow">
+                    <svg width="19" height="20" stroke-width="0" viewBox="0 0 24 24" fill="current"
+                         xmlns="http://www.w3.org/2000/svg" class="tw-fill-slate-500 tw-opacity-40 ">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M10.7071 4.2929C11.0976 4.68342 11.0976 5.31659 10.7071 5.70711L5.41423 10.9999H21C21.5523 10.9999 22 11.4477 22 11.9999C22 12.5522 21.5523 12.9999 21 12.9999H5.4142L10.7071 18.2929C11.0976 18.6834 11.0976 19.3166 10.7071 19.7071C10.3166 20.0976 9.68341 20.0976 9.29289 19.7071L2.29289 12.7071C2.10535 12.5195 2 12.2652 2 11.9999C2 11.7347 2.10536 11.4804 2.2929 11.2928L9.2929 4.29289C9.68342 3.90237 10.3166 3.90237 10.7071 4.2929Z"
+                              fill="inherit"></path>
+                    </svg>
+                </button>
+                <div class="empty-box"></div>
+                <button type="button" class="next2 right-arrow">
+                    <svg width="20" height="20" stroke-width="0" viewBox="0 0 24 24" fill="current"
+                         xmlns="http://www.w3.org/2000/svg" class="tw-fill-slate-500 hover:tw-fill-slate-900">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M13.2929 19.7071C12.9024 19.3166 12.9024 18.6834 13.2929 18.2929L18.5858 13L3 13C2.44772 13 2 12.5523 2 12C2 11.4478 2.44772 11 3 11L18.5858 11.0001L13.2929 5.7071C12.9024 5.31658 12.9024 4.68341 13.2929 4.29289C13.6834 3.90237 14.3166 3.90237 14.7071 4.29289L21.7071 11.2929C21.8946 11.4805 22 11.7348 22 12.0001C22 12.2653 21.8946 12.5196 21.7071 12.7072L14.7071 19.7071C14.3166 20.0976 13.6834 20.0976 13.2929 19.7071Z"
+                              fill="inherit"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="otherProject">
+                <div class="otherProject-box" style="width: 2030px;">
+                    <div class="front" th:each="other : ${otherList}">
                         <div class="bigTitle">
 
                             <div class="study">
-                                <p>스터디/모임</p>
+                                <p th:text="${other.categoryNumber == 1 ? '프로젝트' : '스터디/모임'}"></p>
                             </div>
-                            <h3 th:text="${studyVo.studyTitle}">메타버스 관련 프로젝트 팀원 모집</h3>
+                            <h3 style="font-size: 20px;
+                             color: rgb(22, 163, 74);
+                             font-weight: 600;"> 모집 중 | </h3>
+                            <h3 th:text="${other.studyTitle}">메타버스 관련 프로젝트 팀원 모집</h3>
                         </div>
 
-                        <div class="lastContent"><p th:text="${studyVo.studySummaryContent}">메타버스 관련 주제로 프로젝트를 진행하고 있으며, 초기 입원을 모집하려고 합니다.</p></div>
+                        <div class="lastContent"><p th:text="${other.studySummaryContent}">메타버스 관련 주제로 프로젝트를 진행하고
+                            있으며, 초기 입원을 모집하려고 합니다.</p></div>
                         <div class="sentence">
                             <div class="icon3">
-                                <svg width="12" height="12" stroke-width="0" viewBox="0 0 24 24" fill="current"
-                                     xmlns="http://www.w3.org/2000/svg" type="solid" class="tw-fill-slate-400">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                          d="M10 1C9.20435 1 8.44129 1.31607 7.87868 1.87868C7.31607 2.44129 7 3.20435 7 4V5H5C4.20435 5 3.44129 5.31607 2.87868 5.87868C2.31607 6.44129 2 7.20435 2 8V11.7527L3.3805 12.3302C6.04206 13.4065 8.94999 14 12 14L12.0012 14C14.9568 14.0036 17.8851 13.4359 20.6252 12.328C20.6375 12.323 20.6499 12.3182 20.6625 12.3137L22 11.8341V8C22 7.20435 21.6839 6.44129 21.1213 5.87868C20.5587 5.31607 19.7957 5 19 5H17V4C17 3.20435 16.6839 2.44129 16.1213 1.87868C15.5587 1.31607 14.7956 1 14 1H10ZM15 5V4C15 3.73478 14.8946 3.48043 14.7071 3.29289C14.5196 3.10536 14.2652 3 14 3H10C9.73478 3 9.48043 3.10536 9.29289 3.29289C9.10536 3.48043 9 3.73478 9 4V5H15ZM11 12C11 11.4477 11.4477 11 12 11H12.01C12.5623 11 13.01 11.4477 13.01 12C13.01 12.5523 12.5623 13 12.01 13H12C11.4477 13 11 12.5523 11 12Z"
-                                          fill="inherit"></path>
-                                    <path d="M22 13.9588L21.3562 14.1897C18.3827 15.3892 15.2058 16.0039 11.9994 16C8.6857 16 5.5217 15.3543 2.62489 14.182L2.61406 14.1776L2 13.9207V18C2 18.7956 2.31607 19.5587 2.87868 20.1213C3.44129 20.6839 4.20435 21 5 21H19C19.7957 21 20.5587 20.6839 21.1213 20.1213C21.6839 19.5587 22 18.7957 22 18V13.9588Z"
-                                          fill="inherit"></path>
-                                </svg>
-                                <p th:text="${studyVo.purposeName}">포트폴리오/직무 역할 강화</p>
+                                <p th:text="${other.purposeName}">포트폴리오/직무 역할 강화</p>
                             </div>
-                            <p th:text="${studyVo.likeCnt}">좋아요 5</p>
+                            <br>
+                            <p class="otherLike">좋아요
+
+                                <span th:text="${other.likeCnt}"></span>
+                            </p>
                         </div>
                     </div>
-
-                    <div class="front">
-                        <div class="bigTitle">
-
-                            <div class="study">
-                                <p>스터디/모임</p>
-                            </div>
-                            <h3 th:text="${studyVo.studyTitle}">메타버스 관련 프로젝트 팀원 모집</h3>
-                        </div>
-
-                        <div class="lastContent"><p th:text="${studyVo.studySummaryContent}">메타버스 관련 주제로 프로젝트를 진행하고 있으며, 초기 입원을 모집하려고 합니다.</p></div>
-                        <div class="sentence">
-                            <div class="icon3">
-                                <svg width="12" height="12" stroke-width="0" viewBox="0 0 24 24" fill="current"
-                                     xmlns="http://www.w3.org/2000/svg" type="solid" class="tw-fill-slate-400">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                          d="M10 1C9.20435 1 8.44129 1.31607 7.87868 1.87868C7.31607 2.44129 7 3.20435 7 4V5H5C4.20435 5 3.44129 5.31607 2.87868 5.87868C2.31607 6.44129 2 7.20435 2 8V11.7527L3.3805 12.3302C6.04206 13.4065 8.94999 14 12 14L12.0012 14C14.9568 14.0036 17.8851 13.4359 20.6252 12.328C20.6375 12.323 20.6499 12.3182 20.6625 12.3137L22 11.8341V8C22 7.20435 21.6839 6.44129 21.1213 5.87868C20.5587 5.31607 19.7957 5 19 5H17V4C17 3.20435 16.6839 2.44129 16.1213 1.87868C15.5587 1.31607 14.7956 1 14 1H10ZM15 5V4C15 3.73478 14.8946 3.48043 14.7071 3.29289C14.5196 3.10536 14.2652 3 14 3H10C9.73478 3 9.48043 3.10536 9.29289 3.29289C9.10536 3.48043 9 3.73478 9 4V5H15ZM11 12C11 11.4477 11.4477 11 12 11H12.01C12.5623 11 13.01 11.4477 13.01 12C13.01 12.5523 12.5623 13 12.01 13H12C11.4477 13 11 12.5523 11 12Z"
-                                          fill="inherit"></path>
-                                    <path d="M22 13.9588L21.3562 14.1897C18.3827 15.3892 15.2058 16.0039 11.9994 16C8.6857 16 5.5217 15.3543 2.62489 14.182L2.61406 14.1776L2 13.9207V18C2 18.7956 2.31607 19.5587 2.87868 20.1213C3.44129 20.6839 4.20435 21 5 21H19C19.7957 21 20.5587 20.6839 21.1213 20.1213C21.6839 19.5587 22 18.7957 22 18V13.9588Z"
-                                          fill="inherit"></path>
-                                </svg>
-                                <p th:text="${studyVo.purposeName}">포트폴리오/직무 역할 강화</p>
-                            </div>
-                            <p th:text="${studyVo.likeCnt}">좋아요 5</p>
-                        </div>
-                    </div>
-
                 </div>
-            </div> <!-- last-box -->
-        </div>
-
+            </div>
+        </div> <!-- last-box -->
 
     </div>
 </section>
 <footer class="footer" th:replace="fragment/footer :: footer"></footer>
 <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
-<script th:src="@{/js/project/projectRead.js}"></script>
 <script th:src="@{/js/fragment/header.js}"></script>
-<!--  모달 js-->
 <script th:src="@{/js/user/loginModal.js}"></script>
+<script th:src="@{/js/project/projectRead.js}"></script>
+<script th:src="@{/js/police/reportModal.js}"></script>
 </body>
 </html>

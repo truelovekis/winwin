@@ -7,10 +7,26 @@
         <selectKey keyProperty="careerInfoNumber" order="BEFORE" resultType="long">
             select SEQ_CAREERINFO.nextval from dual
         </selectKey>
-        insert into CAREERINFO (CAREERINFO_NUMBER, CAREERINFO_TITLE, CAREERINFO_CONTENT, USER_NUMBER
-                                CAREERINFO_CNT, USER_NUMBER)
-        values (#{careerInfoNumber}, #{careerInfoTitle}, #{careerInfoContent}, #{userNumber});
+        insert into CAREERINFO (CAREERINFO_NUMBER, CAREERINFO_TITLE, CAREERINFO_CONTENT, MENTOR_NUMBER
+                                )
+        values (#{careerInfoNumber}, #{careerInfoTitle}, #{careerInfoContent}, #{mentorNumber})
     </insert>
+    <!--    -->
+
+    <!-- 진로정보 멘토번호 찾기(작성하기 버튼 on / off)  -->
+    <select id="selectMentorNumber" resultType="long">
+        SELECT mentor_number
+        from mentor m join ww_user wu on m.user_number = wu.user_number
+        where wu.user_number = #{userNumber}
+    </select>
+    <!--    -->
+
+    <!-- 유저 태그 및 멘토 인증태그 찾기 -->
+    <select id="selectMentorTag" resultType="categoryVo">
+        select sub_name, sb.sub_number
+        from sub_category sc join su_bridge sb on sc.sub_number = sb.sub_number
+        where user_number = #{userNumber}
+    </select>
     <!--    -->
 
     <!-- 진로정보 글 번호로 조회하기 -->
@@ -21,8 +37,44 @@
     </select>
     <!--    -->
 
-    <!-- 진로정보 글 전체 최신순 및 카테고리 별 조회하기 -->
-
+    <!-- 진로정보 글 전체 좋아요순 및 카테고리 별 조회하기 -->
+    <select id="selectCareerInfoList" resultType="careerInfoVo">
+        SELECT S1.mentor_number, S1.user_number, S1.sub_number,
+               U.USER_NICKNAME,
+               PFP_UPLOAD_PATH, PFP_SYSTEM_NAME, PFP_UUID,
+               SC.sub_name,
+               G.grade_name,
+               CI.careerinfo_title, CI.careerinfo_content, CI.careerinfo_cnt,
+               NVL(J1.LIKE_CNT, 0) LIKE_CNT
+        FROM (
+                 SELECT mentor_number, mentor_status, user_number, sub_number
+                 FROM MENTOR M
+                 WHERE mentor_status='Y'
+                 <if test="tagList != null and tagList.size != 0">
+                   AND SUB_NUMBER IN
+                    <foreach collection="tagList" index="index" item="tagNumber" open="(" close=")" separator=",">
+                        #{tagNumber}
+                    </foreach>
+                 </if>
+             )S1
+                 JOIN WW_USER U
+                      ON S1.user_number = U.USER_NUMBER
+                 LEFT JOIN USER_PFP UP
+                           ON S1.user_number = UP.USER_NUMBER
+                 JOIN SUB_CATEGORY SC
+                      ON S1.sub_number = SC.SUB_NUMBER
+                 JOIN GRADE G
+                      ON U.USER_GRADE = G.GRADE_NUMBER
+                 JOIN CAREERINFO CI
+                      ON S1.user_number = CI.USER_NUMBER
+                 LEFT JOIN (
+            SELECT careerinfo_number, COUNT(user_number) LIKE_CNT
+            FROM CAREERINFO_LIKE
+            GROUP BY careerinfo_number
+        ) J1
+                           ON J1.careerinfo_number = CI.careerinfo_number
+        ORDER BY LIKE_CNT
+    </select>
     <!--    -->
 
     <!-- 진로정보 글 상세보기 진입 시 조회수 증가 -->
@@ -47,4 +99,5 @@
         where CAREERINFO_NUMBER = #{careerInfoNumber}
     </delete>
     <!--    -->
+
 </mapper>

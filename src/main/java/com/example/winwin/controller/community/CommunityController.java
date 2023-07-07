@@ -4,9 +4,12 @@ package com.example.winwin.controller.community;
 import com.example.winwin.dto.board.CommunityDto;
 import com.example.winwin.dto.file.CommunityFileDto;
 import com.example.winwin.service.board.CommunityCommentService;
+import com.example.winwin.service.board.CommunityGoodService;
 import com.example.winwin.service.board.CommunityService;
 import com.example.winwin.service.file.CommunityFileService;
 import com.example.winwin.vo.board.CommunityCommentVo;
+import com.example.winwin.vo.board.CommunityGoodVo;
+import com.example.winwin.vo.board.CommunityProfileVo;
 import com.example.winwin.vo.board.CommunityVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -31,6 +34,7 @@ public class CommunityController {
     private final CommunityService communityService;
     private final CommunityCommentService communityCommentService;
     private final CommunityFileService communityFileService;
+    private final CommunityGoodService communityGoodService;
 
     /**
      * 타임라인 목록
@@ -40,7 +44,8 @@ public class CommunityController {
      * /community/list/30 : 직장인
      */
     @GetMapping("/list/{categoryTypeStr}")
-    public String communityMainForm(@PathVariable("categoryTypeStr") String categoryTypeStr ,Model model){
+    public String communityMainForm(@PathVariable("categoryTypeStr") String categoryTypeStr ,Model model, HttpServletRequest req){
+        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
         CommunityVo paramCommunityVo = new CommunityVo();
         paramCommunityVo.setCategoryTypeStr(categoryTypeStr);
         if(!"all".equals(categoryTypeStr)){
@@ -48,7 +53,9 @@ public class CommunityController {
         }
 
         List<CommunityVo> communityVoList = communityService.findAll(paramCommunityVo);
+        List<CommunityProfileVo> communityProfileVoList = communityService.registerProfile(userNumber);
 
+        System.out.println("==================================="+communityVoList);
         if(communityVoList.size() > 0){
             for (CommunityVo communityVo: communityVoList) {
 
@@ -70,8 +77,8 @@ public class CommunityController {
                 }
             }
         }
-
         model.addAttribute("communityVoList", communityVoList);
+        model.addAttribute("communityProfileVoList", communityProfileVoList);
         return "community/communityMain";
     }
 
@@ -102,7 +109,8 @@ public class CommunityController {
     }
 
     @GetMapping("/read")
-    public String communityReadForm(Long communityNumber, Model model){
+    public String communityReadForm(Long communityNumber, Model model, HttpServletRequest req){
+        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
         CommunityVo communityVo = communityService.find(communityNumber);
         List<CommunityCommentVo> communityCommentVoList = communityCommentService.findList(communityNumber);
         List<CommunityFileDto> fileList =  communityFileService.findList(communityNumber);
@@ -111,9 +119,18 @@ public class CommunityController {
         System.out.println(communityNumber);
         System.out.println("========================");
         int commentCnt = communityService.commentCnt(communityNumber);
+        CommunityGoodVo communityGoodVo = new CommunityGoodVo();
+        communityGoodVo.setCommunityNumber(communityNumber);
+        communityGoodVo.setUserNumber(userNumber);
+        System.out.println("communityGoodVo"+communityGoodVo);
+        Long likeStatus = communityGoodService.findLike(communityGoodVo);
+        int likeCnt = communityGoodService.likeCnt(communityGoodVo);
+        System.out.println("likeStatuslikeStatus"+likeStatus);
         model.addAttribute("community", communityVo);
         model.addAttribute("commentList", communityCommentVoList);
         model.addAttribute("commentCnt", commentCnt);
+        model.addAttribute("likeStatus", likeStatus);
+        model.addAttribute("likeCnt", likeCnt);
         return "community/communityRead";
     }
 

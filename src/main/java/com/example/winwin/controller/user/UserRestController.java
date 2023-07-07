@@ -2,16 +2,12 @@ package com.example.winwin.controller.user;
 
 import com.example.winwin.dto.mentor.CategoryVo;
 import com.example.winwin.dto.user.UserDto;
-import com.example.winwin.service.mentor.CategoryService;
 import com.example.winwin.service.mentor.LoginService;
-import com.example.winwin.service.mentor.MentorService;
 import com.example.winwin.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController

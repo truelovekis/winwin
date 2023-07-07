@@ -16,6 +16,7 @@ projectmodal.addEventListener("click", function (e) {
 
 });
 
+let currentIdx = 1;
 
 // 탑텐 슬라이드 배너 영역
 $(function(){
@@ -24,16 +25,22 @@ $(function(){
     $(".topten-body").css("width",`${topten_width}px`);
 
 
-    let currentIdx = 1;
+
     $(".topten-right-arrow").on(
         "click",
         function(){
 
             if (currentIdx < (topten_length/2) ){
-                // $('topten-right-arrow').attr("fill", "#000");
+                $('.topten-left-arrow').attr("fill", "#000");
+                $('.topten-left-arrow').css("cursor", "pointer");
+
                 let tmp = currentIdx*1050;
                 $(".topten-body").css("transform",`translate(-${tmp}px)`);
                 currentIdx += 1;
+            }
+            if(currentIdx >= (topten_length/2)){
+                $('.topten-right-arrow').attr("fill", "#cbd5e1");
+                $('.topten-right-arrow').css("cursor", "auto");
             }
         }
     );
@@ -41,10 +48,17 @@ $(function(){
         "click",
         function(){
             if (currentIdx > 1 ) {
+                $('.topten-right-arrow').attr("fill", "#000");
+                $('.topten-right-arrow').css("cursor", "pointer");
                 currentIdx -= 1;
-                let tmp = (currentIdx-1) * 1050;
+                let tmp = -((currentIdx-1) * 1050);
                 $(".topten-body").css("transform", `translate(${tmp}px)`);
 
+            }
+
+            if(currentIdx <= 1){
+                $('.topten-left-arrow').attr("fill", "#cbd5e1");
+                $('.topten-left-arrow').css("cursor", "auto");
             }
         }
     );
@@ -62,11 +76,16 @@ $(function(){
         function(){
 
             if (currentIdx < (study_length/2) ){
-
+                $('.study-left-arrow').attr("fill", "#000");
+                $('.study-left-arrow').css("cursor", "pointer");
                 let tmp = currentIdx*1050;
                 $(".study-body").css("transform",`translate(-${tmp}px)`);
                 currentIdx += 1;
+            }
 
+            if(currentIdx >= (study_length/2)){
+                $('.study-right-arrow').attr("fill", "#cbd5e1");
+                $('.study-right-arrow').css("cursor", "auto");
             }
         }
     );
@@ -74,10 +93,17 @@ $(function(){
         "click",
         function(){
             if (currentIdx > 1 ) {
+                $('.study-right-arrow').attr("fill", "#000");
+                $('.study-right-arrow').css("cursor", "pointer");
                 currentIdx -= 1;
-                let tmp = (currentIdx-1) * 1050;
+                let tmp = -((currentIdx-1) * 1050);
                 $(".study-body").css("transform", `translate(${tmp}px)`);
 
+            }
+
+            if(currentIdx <= 1){
+                $('.study-left-arrow').attr("fill", "#cbd5e1");
+                $('.study-left-arrow').css("cursor", "auto");
             }
         }
     );

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping("/project/*")
@@ -23,44 +24,48 @@ public class projectController {
 
     @GetMapping("/read")
     public String projectRead(Long studyNumber, Model model) {
-       StudyVo studyVo = studyService.studyFind(studyNumber);
+        studyService.readUpdate(studyNumber);
+        StudyVo studyVo = studyService.studyFind(studyNumber);
+        List<StudyVo> otherList = studyService.findOtherList(studyVo.getCategoryNumber());
         model.addAttribute("studyVo", studyVo);
+        model.addAttribute("otherList", otherList);
         return "/project/projectRead";
     }
 
     @GetMapping("/modify")
-    public String update2(Long studyNumber, Model model){
+    public String update2(Long studyNumber, Model model) {
         StudyVo studyVo = studyService.studyFind(studyNumber);
         model.addAttribute("studyVo", studyVo);
         return "/project/projectModify";
     }
 
     @PostMapping("/modify")
-    public RedirectView update(StudyVo studyVo, RedirectAttributes redirectAttributes){
+    public RedirectView update(StudyVo studyVo, RedirectAttributes redirectAttributes) {
         studyService.studyModify(studyVo);
         redirectAttributes.addAttribute("studyNumber", studyVo.getStudyNumber());
-        return new RedirectView("/project/write");
+        return new RedirectView("/meeting/home");
     }
 
-    @PostMapping("/delete")
-    public String delete(StudyDto studyDto){
-        studyService.studyRemove(1L);
-        return "/project/home";
+    @GetMapping("/delete")
+    public RedirectView delete(Long studyNumber) {
+        studyService.studyLikeRemove(studyNumber);
+        studyService.studyRemove(studyNumber);
+        return new RedirectView("/meeting/home");
     }
+
 
     @GetMapping("/write")
-    public String projectWrite(){
+    public String projectWrite() {
         return "/project/projectWrite";
     }
 
 
     @PostMapping("/write")
-    public RedirectView write(StudyDto studyDto, HttpServletRequest req){
+    public RedirectView write(StudyDto studyDto, HttpServletRequest req) {
 
-        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
 
-//        studyDto.setUserNumber(userNumber);
-        studyDto.setUserNumber(1L);
+        studyDto.setUserNumber(userNumber);
 
         studyService.studyRegister(studyDto);
         System.out.println("==========123123==========");
