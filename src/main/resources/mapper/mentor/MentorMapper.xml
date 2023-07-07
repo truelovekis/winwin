@@ -2,25 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.mentor.MentorMapper">
     <select id="mentorList" resultType="mentorVo">
-        SELECT M1.user_number , M1.mentor_number , M1.user_name , M1.PFP_UPLOAD_PATH , M1.PFP_SYSTEM_NAME , M1.PFP_UUID ,mc.CAREER_COMPANY , TO_CHAR(TO_DATE(mc.CAREER_END_DATE, 'YYYY.mm.DD'), 'YYYY.mm') CAREER_END_DATE , TO_CHAR(TO_DATE(mc.CAREER_START_DATE, 'YYYY.mm.DD'), 'YYYY.mm') CAREER_START_DATE, ROUND(((TO_DATE(mc.CAREER_END_DATE, 'YYYY.mm.DD') - TO_DATE(mc.CAREER_START_DATE, 'YYYY.mm.DD'))/30/12)) career_annual
-             , NVL(S.LIKE_CNT, 0) LIKE_CNT
-        FROM (
-                 SELECT J1.user_number, J1.mentor_number, J1.user_name, J1.user_belong  , UP.PFP_UPLOAD_PATH , UP.PFP_SYSTEM_NAME , UP.PFP_UUID
-                 FROM (
-                          SELECT u.USER_NUMBER , m.MENTOR_NUMBER , u.user_name , u.USER_BELONG
-                          FROM WW_USER u JOIN MENTOR m
-                          ON u.USER_NUMBER = m.USER_NUMBER
-                          WHERE mentor_status = 'Y'
-                      )J1 LEFT OUTER JOIN USER_PFP up
-                 ON J1.user_number = up.USER_NUMBER
-             ) M1 JOIN MENTOR_CAREER mc
-             ON M1.mentor_number = mc.MENTOR_NUMBER AND M1.user_belong = mc.CAREER_COMPANY
-             LEFT JOIN (
+        SELECT S.MENTOR_NUMBER, MENTOR_STATUS, USER_NUMBER, USER_NAME, USER_BELONG,
+               PFP_SYSTEM_NAME, PFP_UPLOAD_PATH, PFP_UUID,
+               CAREER_COMPANY, NVL(UM_STATUS, '0') UM_STATUS,
+               TO_CHAR(TO_DATE(CAREER_END_DATE, 'YYYY.mm.DD'), 'YYYY.mm') CAREER_END_DATE , TO_CHAR(TO_DATE(CAREER_START_DATE, 'YYYY.mm.DD'), 'YYYY.mm') CAREER_START_DATE, ROUND(((TO_DATE(CAREER_END_DATE, 'YYYY.mm.DD') - TO_DATE(CAREER_START_DATE, 'YYYY.mm.DD'))/30/12)) career_annual,
+               NVL(LIKE_CNT, 0) LIKE_CNT
+        FROM(
+                SELECT DISTINCT M.MENTOR_NUMBER, MENTOR_STATUS, M.USER_NUMBER,
+                                USER_NAME, USER_BELONG,
+                                UP.PFP_SYSTEM_NAME, UP.PFP_UPLOAD_PATH, UP.PFP_UUID, UB.UM_STATUS
+                FROM MENTOR M
+                         JOIN WW_USER U
+                              ON M.MENTOR_STATUS = 'Y' AND M.USER_NUMBER = U.USER_NUMBER
+                         LEFT JOIN UM_BRIDGE UB
+                                   ON M.MENTOR_NUMBER = UB.MENTOR_NUMBER AND UB.USER_NUMBER = #{userNumber}
+                         LEFT JOIN SU_BRIDGE SB
+                                   ON M.USER_NUMBER = SB.USER_NUMBER
+                         LEFT JOIN SUB_CATEGORY C
+                                   ON SB.SUB_NUMBER = C.SUB_NUMBER
+                         LEFT JOIN USER_PFP UP
+                                   ON M.USER_NUMBER = UP.USER_NUMBER
+                <if test="subList != null and subList.size != 0">
+                WHERE M.SUB_NUMBER IN
+                      <foreach collection="subList" index="index" item="subNumber" open="(" close=")" separator=",">
+                          #{subNumber}
+                      </foreach>
+                </if>
+            )S
+                JOIN MENTOR_CAREER MC
+                ON S.MENTOR_NUMBER = MC.MENTOR_NUMBER AND S.USER_BELONG = MC.CAREER_COMPANY
+                LEFT JOIN (
             SELECT MENTOR_NUMBER, COUNT(ML.USER_NUMBER) LIKE_CNT FROM MENTOR_LIKE ML
             WHERE USER_NUMBER = #{userNumber}
             GROUP BY MENTOR_NUMBER
-        ) S
-        ON S.MENTOR_NUMBER = M1.MENTOR_NUMBER
+        ) L
+        ON S.MENTOR_NUMBER = L.MENTOR_NUMBER
         ORDER BY mc.CAREER_NUMBER desc
     </select>
 

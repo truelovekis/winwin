@@ -30,18 +30,23 @@
     </insert>
 
     <select id="mentorProfile" resultType="mentorVo">
-        SELECT M1.user_name, M1.user_belong, M1.mentor_number , M1.mentor_pr , M1.user_number , UP.PFP_NUMBER , UP.PFP_UPLOAD_PATH , UP.PFP_SYSTEM_NAME , UP.PFP_UUID
+        SELECT m1.USER_NAME , m1.USER_BELONG , m1.MENTOR_NUMBER, m1.user_number , m1.PFP_UPLOAD_PATH , m1.PFP_SYSTEM_NAME , m1.PFP_UUID ,
+               m1.MENTOR_PR , NVL(ub.UM_STATUS, '0') UM_STATUS
         FROM (
-                 SELECT J1.user_name, J1.user_belong, J1.mentor_number , mp.mentor_pr , J1.user_number
+                 SELECT p.USER_NAME , p.USER_BELONG , p.MENTOR_NUMBER, p.user_number , p.PFP_UPLOAD_PATH , p.PFP_SYSTEM_NAME , p.PFP_UUID ,
+                        mp.MENTOR_PR
                  FROM (
-                          SELECT u.USER_NAME , u.USER_BELONG , m.MENTOR_NUMBER, u.user_number
-                          FROM MENTOR m JOIN WW_USER u
-                                             ON m.USER_NUMBER = u.USER_NUMBER AND m.MENTOR_NUMBER = #{mentorNumber}
-                          GROUP BY u.USER_NAME , u.USER_BELONG , m.MENTOR_NUMBER , u.user_number
-                      ) J1 JOIN MENTOR_PROFILE mp
-                                ON J1.mentor_number = mp.MENTOR_NUMBER
-             ) M1 LEFT OUTER JOIN USER_PFP up
-                                  ON M1.user_number = up.USER_NUMBER
+                          SELECT u.USER_NAME , u.USER_BELONG , u.MENTOR_NUMBER, u.user_number , up.PFP_UPLOAD_PATH , up.PFP_SYSTEM_NAME , up.PFP_UUID
+                          FROM (
+                                   SELECT w.USER_NAME , w.USER_BELONG , m.MENTOR_NUMBER, w.user_number
+                                   FROM MENTOR m JOIN WW_USER w
+                                                      ON m.USER_NUMBER = w.USER_NUMBER  AND MENTOR_NUMBER = #{mentorNumber}
+                               )U LEFT OUTER JOIN USER_PFP up
+                                                  ON U.user_number = UP.USER_NUMBER
+                      ) P JOIN MENTOR_PROFILE mp
+                               ON P.mentor_number  = mp.MENTOR_NUMBER
+             )M1 LEFT OUTER JOIN UM_BRIDGE ub
+             ON m1.mentor_number = ub.MENTOR_NUMBER AND ub.USER_NUMBER = #{userNumber}
     </select>
 
     <select id="profileSkill" resultType="skillVo">

@@ -16,7 +16,7 @@ public interface MentorMapper {
 
 //    멘토:멘티
 //    등록된 멘토 프로필 리스트 조회
-    public List<MentorVo> mentorList(Long userNumber);
+    public List<MentorVo> mentorList(@Param("userNumber") Long userNumber, @Param("subList") List<Integer> subNumber);
 
 //    멘토가 등록한 경력 리스트
     public List<CareerVo> mentorCareer(Long mentorNumber);
@@ -25,7 +25,7 @@ public interface MentorMapper {
 
 //    멘토 프로필
 //    멘토 프로필 상세 보기
-    public MentorVo mentorProfile(Long mentorNumber);
+    public MentorVo mentorProfile(Long mentorNumber , Long userNumber);
 //    멘토 리뷰 평점
     public MentorVo mentorAvg(Long mentorNumber);
 

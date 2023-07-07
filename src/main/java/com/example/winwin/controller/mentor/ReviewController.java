@@ -25,7 +25,6 @@ public class ReviewController {
     public String reviewRegister(@RequestBody ReviewVo reviewVo, HttpServletRequest req){
         Long userNumber =(Long) req.getSession().getAttribute("userNumber");
         reviewVo.setUserNumber(userNumber);
-        reviewVo.setMentorNumber(1L);
         mentorService.reviewRegister(reviewVo);
         return "리뷰 성공!";
     }

@@ -1,19 +1,3 @@
-// let page = 1;
-// $(window).on('scroll', function(){
-// //    $(window).scrollTop() : 현재 브라우저 스크롤 위치를 반환함
-//     console.log($(window).scrollTop());
-//     //$(document).height() : 문서 전체의 높이를 의미함
-//     console.log(`document : ${$(document).height()}`);
-//     //$(window).height() : 브라우저 화면의 높이를 의미함
-//     console.log(`window : ${$(window).height()}`);
-//
-//     if($(window).scrollTop() == $(document).height() - $(window).height()){
-//         console.log(++page);
-//         // reply.getListPage({boardNumber : boardNumber , page : page}, appendReply, showError);
-//     }
-// });
-
-
 let moreInfo = $(".mento-more-info-box");
 
 moreInfo.click(function () {
@@ -33,14 +17,23 @@ share.click(function CopyUrlToClipboard() {
   alert("복사가 완료 되었습니다.");
 });
 
-$(".message-button").on("click", function () {
-  $(".modal-wrap1").removeClass("none");
-  $(".modal-wrap1").css({
-    position: "fixed",
-    left: "50%",
-    top: "50%",
-    transform: "translate(-50%, -50%)",
-  });
+//멘토 신청하기 버튼
+$(".main-mentor").on("click",'.message-button' ,function () {
+    let user =  $('.user').val();
+    console.log(user);
+    if(user == ''){
+        alert("로그인 해주세요");
+        $('.login-move').trigger('click');
+    }
+    if(user != ''){
+        $(".modal-wrap1").removeClass("none");
+        $(".modal-wrap1").css({
+            position: "fixed",
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+        });
+    }
 
   let name = $(this).closest('.item__box').find('.mento-name').text();
   let number = $(this).closest('.item__box').find('.add-num').val();
@@ -50,6 +43,7 @@ $(".message-button").on("click", function () {
     $('.addNumber').text(number);
 });
 
+//멘토 신청하기 모달
 $(".modal-wrap1").on("click", function (e) {
   if ($(e.target).hasClass("modal-wrap1")) {
     $(".modal-wrap1").addClass("none");
@@ -124,10 +118,10 @@ $(".select-tag").on("click", ".tag", function () {
 });
 
 // 나의 관심분야 3가지 카테고리 박스
-let $boxes = $('.select');
+let $boxes2= $('.select');
 
 //클릭하면 리스트 div 보기,닫기
-$boxes.on('click', function(){
+$boxes2.on('click', function(){
     if($(this).closest('.select').find('.option-box').hasClass('none')){
         $('.option-box').addClass('none');
         $(this).closest('.select').find('.option-box').toggleClass('none');
@@ -144,7 +138,7 @@ $('.select').on('click', '.option', function(){
 //다른 곳 클릭 시 리스트 div 닫기
 $("body").on('click', function(e){
     if(!$(e.target).closest('.select').hasClass('select')){
-        $boxes.each((i, box) => {$(box).find('.option-box').addClass('none');});
+        $boxes2.each((i, box) => {$(box).find('.option-box').addClass('none');});
     }
 });
 
@@ -162,10 +156,182 @@ $(".third-job-box").on("click", ".option", function () {
         }
     }
 
-    let tagHtml = `<div class="tag" value="${val}">@${text}</div>`;
+    let tagHtml = `<div class="tag" data-value="${val}">@${text}</div>`;
+
+    let list = [];
 
     $(".select-tag").append(tagHtml);
+    console.log($('.tag').data('value'));
+
+    $('.tag').each((i, obj) => {
+        let tmp = $(obj).data('value');
+        list.push(tmp);
+    });
+
+    console.log(list);
+    $.ajax({
+        url : '/mentor/sub',
+        type : 'get',
+        traditional : true,
+        data : {
+            subNumber : list
+        },
+        success : function (result){
+            showMentor(result);
+        }
+    });
+
+
 });
+
+$('.select-tag').on('click', '.tag' , function (){
+    console.log($('.tag').data('value'));
+    let tag = $('.tag').data('value');
+
+   if(tag == null){
+       window.location.href= '/mentor/list';
+       console.log('제발');
+   }
+});
+
+function showMentor(map){
+    let text = '';
+
+    map.forEach(mentor => {
+        text += `
+     <article class="item">
+          <section class="mento-profile">
+            <div class="item__box">
+              <input type="hidden" class="add-num" data-add="${mentor.mentorNumber}"/>
+              <a href="/mentor/profile?mentorNumber=${mentor.mentorNumber}" class="page-move">
+                <div class="flex">
+                  <div class="mento-profile-photo-box">
+                    ${mentor.pfpSystemName == null ? '<img className="img-box" src="/img/profile-basic.png"/>' : 
+                    '<img className="img-box" src=/profile/' + mentor.pfpUuid + '_' + mentor.pfpSystemName + '>' }
+                    
+                  </div>
+                  <div class="flex text-wrap" >
+                    <div class="mento-name"> <span>${mentor.userName}</span> </div>
+                    <div class="mento-career">
+                        <span>${mentor.careerCompany}</span> · <span>${mentor.careerAnnual}</span>년차
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <div class="mento-button-box">
+                  <input type="hidden" class="mentor-num" data-num="${mentor.mentorNumber}"/>
+                <button class="like-button" data-value="${mentor.likeCnt}"> `;
+        if(mentor.likeCnt == 0){
+            text+= `
+            <div class="like-up like0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                  </svg>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill none2" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                    </svg>
+                  </div>
+            `;
+        }
+        if (mentor.likeCnt == 1){
+            text += `
+            <div class="like-down like0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                  </svg>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart none2" viewBox="0 0 16 16">
+                      <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                    </svg>
+                  </div>
+            `;
+        }
+
+        text+=`                
+                </button>
+                <button class="message-button">신청하기</button>
+              </div>
+            </div>
+            <div class="skill-tags">
+              <!--            스킬 나열 -->
+              `;
+
+            mentor.skill.forEach(skills => {
+                text += `
+                    <div class="skill">
+                    <span className="skill2">${skills.skillName}</span>
+                    </div>
+                `;
+            });
+
+        text+=`
+            
+            </div>
+
+            <!-- 경력 -->
+            <div class="career1">`;
+
+        mentor.career.forEach(careers => {
+            text += `
+            <div class="career">
+               <div class="career-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-buildings" viewBox="0 0 16 16">
+                  <path d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022ZM6 8.694 1 10.36V15h5V8.694ZM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15Z"/>
+                  <path d="M2 11h1v1H2v-1Zm2 0h1v1H4v-1Zm-2 2h1v1H2v-1Zm2 0h1v1H4v-1Zm4-4h1v1H8V9Zm2 0h1v1h-1V9Zm-2 2h1v1H8v-1Zm2 0h1v1h-1v-1Zm2-2h1v1h-1V9Zm0 2h1v1h-1v-1ZM8 7h1v1H8V7Zm2 0h1v1h-1V7Zm2 0h1v1h-1V7ZM8 5h1v1H8V5Zm2 0h1v1h-1V5Zm2 0h1v1h-1V5Zm0-2h1v1h-1V3Z"/>
+                </svg>
+              </div>
+
+              <div class="main-career">
+                <span class="point">${careers.careerCompany}</span>
+                  <span class="point2">${careers.careerTitle}</span>
+                  <span class="date"> <span>${careers.careerStartDate} - <span>
+                    `;
+                 if(careers.careerStatus == 'Y') {
+                   text += `
+                   <span>재직 중</span>
+                   ` ;
+                }
+                 if(careers.careerStatus == 'N'){
+                     text += `
+                     ${careers.careerEndDate}
+                     `;
+                 }
+                text += `
+                </span>
+                <span class="date"> · <span class="date">${careers.careerAnnual}</span>년차</span>
+              </div>
+              </div>
+            `;
+        });
+              
+         text +=
+             ` </div>
+            <!-- /경력 -->
+
+          </section>
+          <div class="mento-more-info-box">
+            <div class="mento-more-info">
+              더보기
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 -2 16 16">
+                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+              </svg>
+            </div>
+            <div class="mento-more-info none">
+              닫기
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 -2 16 16">
+                <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+              </svg>
+            </div>
+          </div>
+        </article>
+    `;
+    });
+
+    $('.main-mentor').html(text);
+}
+
 
 $(".select-tag").on("click", ".tag", function () {
     $(this).detach();
@@ -296,55 +462,60 @@ $(function(){
 });
 
 //좋아요(찜) 처리
-// $(".like-button").on("click", function () {
-//   $(this).closest(".like-button").find(".bi-heart").toggleClass("none");
-//   $(this).closest(".like-button").find(".bi-heart-fill").toggleClass("none");
-// });
-$(".like-button").on("click", function (e){
-    e.preventDefault();
-    console.log($(this).val());
-    let btn = $(this).find('.bi-heart');
-    let btn2 =$(this).find('.bi-heart-fill');
-    if ($(this).val() == 0){
-        let mentorNum = $(this).closest('.mento-button-box').find('.mentor-num').val();
-        console.log(mentorNum);
-        $.ajax({
-            url : '/mentor/like',
-            type : 'post',
-            data : {mentorNumber : mentorNum},
-            success : function (){
-
-                console.log("성공");
-            },
-            error : function (){
-                console.log("실패");
-            }
-        });
-        btn2.show();
-        btn.hide();
+$(".main-mentor").on("click",'.like-button' ,function (e){
+    let user = $('.user').val();
+    if (user == ''){
+        alert("로그인 해주세요!");
+        $('.login-move').trigger('click')
     }
 
-    if($(this).val() == 1){
-        let mentorNum =  $(this).closest('.mento-button-box').find('.mentor-num').val();
-        $.ajax({
-            url : '/mentor/delete',
-            type : 'delete',
-            data : {mentorNumber : mentorNum},
-            success : function (){
+    if(user != ''){
+        e.preventDefault();
+        console.log($(this).val());
+        let btn = $(this).find('.bi-heart');
+        let btn2 =$(this).find('.bi-heart-fill');
+        if ($(this).val() == 0){
+            let mentorNum = $(this).closest('.mento-button-box').find('.mentor-num').val();
+            let num2 = $('.main-mentor').find('.mentor-num').data('num');
+            console.log(mentorNum);
+            $.ajax({
+                url : '/mentor/like',
+                type : 'post',
+                data : {mentorNumber : num2},
+                success : function (){
 
-                console.log("성공");
-            },
-            error : function (){
-                console.log("실패");
-            }
-        });
-        btn2.hide();
-        btn.show();
+                    console.log("성공");
+                },
+                error : function (){
+                    console.log("실패");
+                }
+            });
+            btn2.show();
+            btn.hide();
+        }
+
+        if($(this).val() == 1){
+            let mentorNum =  $(this).closest('.mento-button-box').find('.mentor-num').val();
+            let num2 = $('.main-mentor').find('.mentor-num').data('num');
+            $.ajax({
+                url : '/mentor/delete',
+                type : 'delete',
+                data : {mentorNumber : num2},
+                success : function (){
+
+                    console.log("성공");
+                },
+                error : function (){
+                    console.log("실패");
+                }
+            });
+            btn2.hide();
+            btn.show();
+        }
     }
-
 });
 
-$('.mento-button').on('click', function (e) {
+$('.profile-button').on('click', function (e) {
     e.preventDefault();
 
     let mentorNumber = $('.mento-button').data('mentornumber');
@@ -363,13 +534,15 @@ $('.mento-button').on('click', function (e) {
 });
 
 //멘토 신청하기
-$('.um-btn').on('click', function (){
+$('.modal-wrap1').on('click', '.um-btn' , function (){
     let num =  $('.addNumber').text();
+    let num2 = $('.main-mentor').find('.mentor-num').data('num');
     console.log(num);
+    console.log(num2);
     $.ajax({
         url : '/mentor/add',
         type : 'post',
-        data : {mentorNumber : num},
+        data : {mentorNumber : num2},
         success : function (){
             console.log("성공");
             alert("신청에 성공하셨습니다.");

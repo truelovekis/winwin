@@ -14,8 +14,8 @@
     <!--    -->
 
     <!-- 진로정보 글 번호로 조회하기 -->
-    <select id="careerInfoSelectNumber" resultType="careerDto">
-        select CAREERINFO_NUMBER, CAREERINFO_TITLE, CAREERINFO_CONTENT, CAREERINFO_LIKE_CNT, CAREERINFO_CNT, CAREERINFO_STATUS, CAREERINFO_DATE
+    <select id="careerInfoSelectNumber" resultType="careerInfoDto">
+        select CAREERINFO_NUMBER, CAREERINFO_TITLE, CAREERINFO_CONTENT, CAREERINFO_CNT, CAREERINFO_STATUS, CAREERINFO_DATE
         from CAREERINFO CI join WW_USER WU
         on CAREERINFO_NUMBER = #{careerInfoNumber} and CI.USER_NUMBER = WU.USER_NUMBER;
     </select>
