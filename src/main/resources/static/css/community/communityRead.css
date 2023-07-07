@@ -278,7 +278,7 @@ footer{
 /* svg 아이콘 ================================ */
 .icon{
     display: flex;
-    margin: 0 180px;
+    margin: 0 190px;
     height: 40px;
 }
 
@@ -333,7 +333,7 @@ footer{
 .like{
     display: flex;
     margin-top: -11px;
-    margin-left: 11px;
+    margin-left: 20px;
 }
 
 .like-btn{
@@ -351,15 +351,16 @@ footer{
 /* svg 아이콘 ================================ */
 
 .date{
-    margin: 27px 406px;
+    margin: 27px 440px;
     font-size: 13px;
     color: rgb(148, 155, 160);
 }
 
 .date1{
-    margin-left: 605px;
+    margin-left: 540px;
     font-size: 13px;
     color: rgb(148, 155, 160);
+    line-height: 5.5;
 }
 
 .justbox{
@@ -545,12 +546,19 @@ footer{
     margin-bottom: -9px;
 }
 
+/*.community-goodorbad{*/
+/*    margin-left: 435px;*/
+/*    display: flex;*/
+/*    margin-bottom: -9px;*/
+/*}*/
+
 .good{
     border: none;
     color: #1b5192;
     background-color: #e8f1fc;
     cursor: pointer;
     margin-top: -5px;
+    margin-left: 100px;
 }
 
 .empty-box3{

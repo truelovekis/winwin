@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.board.CommunityMapper">
-
     <insert id="insert">
         <selectKey keyProperty="communityNumber" order="BEFORE" resultType="long">
             SELECT SEQ_COMMUNITY.NEXTVAL FROM DUAL
@@ -48,59 +47,48 @@
         WHERE C.COMMUNITY_NUMBER = #{communityNumber}
     </select>
 
+<!--    MENTOR_CAREER / CAREER_COMPANY / CAREER_TITLE을 화면에 꽂는다. MC.CAREER_COMPANY, MC.CAREER_TITLE, U.USER_ID, U.USER_BELONG, U.USER_NICKNAME, U.USER_IDENTITY, s-->
     <select id="selectAll" resultType="communityVo">
-        SELECT (SELECT COUNT(*) FROM COMMUNITY_COMMENT WHERE COMMUNITY_COMMENT.COMMUNITY_NUMBER = C.COMMUNITY_NUMBER) AS COMMENT_CNT
+        SELECT (SELECT COUNT(*) FROM COMMUNITY_COMMENT WHERE COMMUNITY_COMMENT.COMMUNITY_NUMBER = C.COMMUNITY_NUMBER) AS COMMENT_CNT,
+               (SELECT COUNT(*) FROM COMMUNITY_GOOD WHERE COMMUNITY_GOOD.COMMUNITY_NUMBER = C.COMMUNITY_NUMBER) AS LIKE_CNT
                ,C.COMMUNITY_NUMBER, C.COMMUNITY_TITLE, C.COMMUNITY_CONTENT, C.COMMUNITY_DATE, C.COMMUNITY_CNT, C.CATEGORY_NUMBER
-             ,C.USER_NUMBER, U.USER_ID, U.USER_BELONG, U.USER_NICKNAME, U.USER_IDENTITY
-             ,T.CATEGORY_NAME
+             ,C.USER_NUMBER, T.CATEGORY_NAME
         FROM COMMUNITY C JOIN WW_USER U
         ON C.USER_NUMBER = U.USER_NUMBER
         JOIN community_category T
         ON C.CATEGORY_NUMBER = T.CATEGORY_NUMBER
         <if test="categoryTypeStr != 'all'">
-            WHERE C.CATEGORY_NUMBER = #{categoryNumber}
+            AND C.CATEGORY_NUMBER = #{categoryNumber}
         </if>
-        AND U.USER_STATUS != '3'
-        and C.COMMUNITY_STATUS != '0'
+        WHERE U.USER_STATUS != '3' and C.COMMUNITY_STATUS != '0'
         ORDER BY C.COMMUNITY_NUMBER DESC
     </select>
 
-</mapper>
-<!--    <select id="selectAll" resultType="communityVo">-->
-<!--        SELECT (SELECT COUNT(*) FROM COMMUNITY_COMMENT WHERE COMMUNITY_COMMENT.COMMUNITY_NUMBER = C.COMMUNITY_NUMBER) AS COMMENT_CNT-->
-<!--        ,C.COMMUNITY_NUMBER, C.COMMUNITY_TITLE, C.COMMUNITY_CONTENT, C.COMMUNITY_DATE, C.COMMUNITY_CNT, C.CATEGORY_NUMBER-->
-<!--        ,C.USER_NUMBER, U.USER_ID-->
-<!--        ,T.CATEGORY_NAME-->
-<!--        FROM COMMUNITY C JOIN WW_USER U-->
-<!--        ON C.USER_NUMBER = U.USER_NUMBER-->
-<!--        JOIN community_category T-->
-<!--        ON C.CATEGORY_NUMBER = T.CATEGORY_NUMBER-->
-<!--        <if test="categoryTypeStr != 'all'">-->
-<!--            WHERE C.CATEGORY_NUMBER = #{categoryNumber}-->
-<!--        </if>-->
-<!--        AND U.USER_STATUS != '3'-->
-<!--        and C.COMMUNITY_STATUS != '0'-->
-<!--        ORDER BY C.COMMUNITY_NUMBER DESC-->
-<!--    </select>-->
+    <select id="selectUserProfile" resultType="CommunityProfileVo">
+        SELECT MC.CAREER_COMPANY, MC.CAREER_TITLE, P.PFP_SYSTEM_NAME, P.PFP_UUID, MC.CAREER_START_DATE, U.USER_NICKNAME
+        FROM WW_USER U
+                 LEFT OUTER JOIN USER_PFP P
+                                 ON U.USER_NUMBER = P.USER_NUMBER
+                 LEFT OUTER JOIN MENTOR M
+                                 ON U.USER_NUMBER = M.USER_NUMBER
+                 LEFT OUTER JOIN MENTOR_CAREER MC
+                                 ON MC.MENTOR_NUMBER = M.MENTOR_NUMBER
+        <if test="userNumber  != null ">
+            WHERE U.USER_NUMBER = #{userNumber}
+        </if>
+        ORDER BY MC.CAREER_START_DATE DESC
+    </select>
 
-<!--    <select id="selectAll" resultType="communityVo">-->
-<!--        SELECT (SELECT COUNT(*) FROM COMMUNITY_COMMENT WHERE COMMUNITY_COMMENT.COMMUNITY_NUMBER = C.COMMUNITY_NUMBER) AS COMMENT_CNT-->
-<!--        ,C.COMMUNITY_NUMBER, C.COMMUNITY_TITLE, C.COMMUNITY_CONTENT, C.COMMUNITY_DATE, C.COMMUNITY_CNT, C.CATEGORY_NUMBER-->
-<!--        ,C.USER_NUMBER, U.USER_ID-->
-<!--        ,T.CATEGORY_NAME-->
-<!--        FROM COMMUNITY C JOIN WW_USER U-->
-<!--        ON C.USER_NUMBER = U.USER_NUMBER-->
-<!--        JOIN community_category T-->
-<!--        ON C.CATEGORY_NUMBER = T.CATEGORY_NUMBER-->
-<!--        WHERE U.USER_STATUS != '3'-->
-<!--        AND C.COMMUNITY_STATUS != '0'-->
-<!--        <if test="categoryTypeStr != 'all'">-->
-<!--            AND C.CATEGORY_NUMBER = #{categoryNumber}-->
-<!--        </if>-->
-<!--        ORDER BY C.COMMUNITY_NUMBER DESC-->
-<!--    </select>-->
-
+<!--    SELECT *-->
+<!--    FROM (SELECT USER_NUMBER, USER_NICKNAME-->
+<!--    FROM WW_USER-->
+<!--    WHERE USER_NUMBER = 1) U-->
+<!--    LEFT JOIN USER_PFP P-->
+<!--    ON U.USER_NUMBER = P.USER_NUMBER-->
+<!--    left join MENTOR M-->
+<!--    on U.USER_NUMBER = M.USER_NUMBER-->
+<!--    left join MENTOR_CAREER MC-->
+<!--    on M.MENTOR_NUMBER = MC.MENTOR_NUMBER-->
 
 </mapper>
-
 

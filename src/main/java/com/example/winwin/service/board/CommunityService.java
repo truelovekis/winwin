@@ -4,13 +4,13 @@ import com.example.winwin.dto.board.CommunityDto;
 import com.example.winwin.mapper.board.CommunityMapper;
 import com.example.winwin.service.file.CommunityFileService;
 import com.example.winwin.vo.board.CommunityVo;
+import com.example.winwin.vo.board.CommunityProfileVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -77,6 +77,10 @@ public class CommunityService {
     @Transactional(readOnly = true)
     public List<CommunityVo> findAll(CommunityVo communityVo){
         return communityMapper.selectAll(communityVo);
+    }
+
+    public List<CommunityProfileVo> registerProfile(Long userNumber){
+        return communityMapper.selectUserProfile(userNumber);
     }
 
 

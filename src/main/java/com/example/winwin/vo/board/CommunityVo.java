@@ -18,6 +18,7 @@ public class CommunityVo {
     private String communityDate;
     private int communityCnt;
     private int commentCnt;
+    private int likeCnt; // 좋아요 추가함
     private Long categoryNumber;
     private Long userNumber;
     private String userId;
@@ -27,5 +28,4 @@ public class CommunityVo {
     private String categoryTypeStr;
     private String userStatus; // 추가함
     private String communityStatus; // 추가함
-
 }

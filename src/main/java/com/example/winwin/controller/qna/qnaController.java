@@ -18,4 +18,9 @@ public class qnaController {
     public String qnaWrite(){
         return "/qna/qnaWrite";
     }
+
+    @GetMapping("/list")
+    public String qnaList(){
+        return "/qna/qna";
+    }
 }
