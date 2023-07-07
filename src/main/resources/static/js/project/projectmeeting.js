@@ -1,5 +1,6 @@
 let projectmodalwrap = $(".projectmodal-wrap");
 
+
 function fn_modal(){
     projectmodalwrap.css("display","flex");
     $("body").css("overflow","hidden"); //모달창 스크롤 막기
@@ -24,6 +25,8 @@ window.onscroll = function() {
 
     }
 }
+
+
 
 
 // 네비 영역 마우스오버 시 텍스트 강조

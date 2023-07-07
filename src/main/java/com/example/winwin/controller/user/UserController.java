@@ -2,11 +2,8 @@ package com.example.winwin.controller.user;
 
 import com.example.winwin.dto.user.UserDto;
 import com.example.winwin.service.mentor.LoginService;
-import com.example.winwin.service.mentor.MentorService;
 import com.example.winwin.service.user.UserService;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -108,13 +108,13 @@ class StudyMapperTest {
     @Test
     @DisplayName("프로젝트,모임 게시물 수정")
     void studyUpdate() {
-        studyDto.setStudyTitle("test title");
-        studyDto.setStudyContent("test content");
+        studyVo.setStudyTitle("test title");
+        studyVo.setStudyContent("test content");
 
-        studyMapper.studyUpdate(studyDto);
+        studyMapper.studyUpdate(studyVo);
 
-        assertThat(studyMapper.studySelect(studyDto.getStudyNumber()).getStudyTitle())
-                .isEqualTo(studyDto.getStudyTitle());
+        assertThat(studyMapper.studySelect(studyVo.getStudyNumber()).getStudyTitle())
+                .isEqualTo(studyVo.getStudyTitle());
     }
 
     @Test

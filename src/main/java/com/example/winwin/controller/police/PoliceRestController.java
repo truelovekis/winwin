@@ -6,6 +6,7 @@ import com.example.winwin.dto.police.PoliceCommentDto;
 
 import com.example.winwin.service.police.PoliceService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +22,7 @@ public class PoliceRestController {
 
     //    나눔 페이지 bigcode 600 고정
 //
+
 //    나눔 글 신고하기
     @PostMapping("/share")
     public void shareReport(@RequestBody PoliceBoardDto policeBoardDto, HttpServletRequest req) {
@@ -32,6 +34,19 @@ public class PoliceRestController {
         policeService.policeBoardRegister(policeBoardDto);
 
     }
+
+    //    모임 글 신고하기
+    @PostMapping("/study")
+    public void studyReport(@RequestBody PoliceBoardDto policeBoardDto, HttpServletRequest req) {
+//        로그인 세션 처리
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+        policeBoardDto.setUserNumber(userNumber);
+
+        policeBoardDto.setBigCode("500");
+        policeService.policeBoardRegister(policeBoardDto);
+
+    }
+
 
 
     @PostMapping("/community")
