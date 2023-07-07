@@ -2,6 +2,7 @@ package com.example.winwin.mapper.board;
 
 import com.example.winwin.dto.board.CommunityDto;
 import com.example.winwin.vo.board.CommunityVo;
+import com.example.winwin.vo.board.CommunityProfileVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -22,5 +23,7 @@ public interface CommunityMapper {
     public int upHit(Long communityNumber);
 //    댓글수조회
     public int commentCnt(Long communityNumber);
+//    프로필조회
+    public List<CommunityProfileVo> selectUserProfile(Long userNumber);
 
 }

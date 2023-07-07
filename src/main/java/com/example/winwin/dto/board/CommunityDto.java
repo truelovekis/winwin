@@ -15,4 +15,6 @@ public class CommunityDto {
     private int communityCnt;
     private Long categoryNumber;
     private Long userNumber;
+    private String userStatus;
+    private String communityStatus;
 }

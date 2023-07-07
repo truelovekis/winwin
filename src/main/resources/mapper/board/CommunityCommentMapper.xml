@@ -12,7 +12,7 @@
 
     <select id="selectList" resultType="communityCommentVo">
         SELECT COMMENT_NUMBER, COMMENT_CONTENT, COMMENT_DATE, COMMUNITY_NUMBER, R.USER_NUMBER,
-               USER_ID
+               USER_ID, USER_BELONG
         FROM WW_USER U JOIN COMMUNITY_COMMENT R
         ON COMMUNITY_NUMBER = #{communityNumber} AND U.USER_NUMBER = R.USER_NUMBER
         ORDER BY COMMENT_NUMBER DESC
