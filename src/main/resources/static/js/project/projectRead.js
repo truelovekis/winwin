@@ -8,6 +8,7 @@ dislikeBtn.onclick = function () {
     likeBtn.classList.remove('hide');   // 빨간하트에 적용되어 있던 .hide 삭제
 }
 likeBtn.onclick = function(){
+    confirm("좋아요를 취소 할까요?😢")
     likeBtn.classList.add('hide');
     dislikeBtn.classList.remove('hide');
 
