@@ -15,4 +15,5 @@ public class CareerInfoDto {
     private String careerInfoStatus;
     private int careerInfoCnt;
     private Long userNumber;
+    private Long mentorNumber;
 }

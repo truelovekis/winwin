@@ -11,6 +11,7 @@
 <link rel="stylesheet" th:href="@{/css/mentorProfile/DefaultProfile.css}" />
 <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
 <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
+<link rel="stylesheet" th:href="@{/css/chatting/inputModal.css}" />
 <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
 <style>
   body {
@@ -26,6 +27,10 @@
 </style>
 <body>
 <header class="header" th:replace="fragment/header :: header"></header>
+<!--쪽지 모달창-->
+<div th:replace="chatting/inputModal :: inputModal(nickname='', chattingTo='')"></div>
+<!--쪽지 모달창 끝-->
+<input type="hidden" class="userNumber" th:value="${session.userNumber}"/>
 <div class="mentorProfile">
 <div class="background">
   <div class="startpage">
@@ -35,7 +40,7 @@
       <img th:unless="${profile == null}" class="main-img"
            th:style="${'background-image: url(/profile/' + profile.pfpUuid + '_' + profile.pfpSystemName + ')'}"/>
         <div class="name-box">
-          <input type="hidden" th:value="${profile2.mentorNumber}">
+          <input type="hidden" class="mentornumber" th:data-num="${profile2.mentorNumber}" th:value="${profile2.mentorNumber}">
           <h1 class="name-text" th:text="${profile2.userName}"></h1>
           <p class="text-base" th:text="${profile2.userBelong}"></p>
         </div>
@@ -163,5 +168,6 @@
 <script th:src="@{/js/user/loginModal.js}"></script>
 <script th:src="@{/js/fragment/header.js}" ></script>
 <script type="module" th:src="@{/js/mentor/DefaultProfile.js}"></script>
+<script th:src="@{/js/chatting/inputModal.js}"></script>
 </body>
 </html>

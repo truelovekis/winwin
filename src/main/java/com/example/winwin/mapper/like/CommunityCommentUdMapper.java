@@ -1,7 +1,17 @@
 package com.example.winwin.mapper.like;
 
+import com.example.winwin.vo.board.CommunityCommentUdVo;
+import com.example.winwin.vo.board.CommunityGoodVo;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface CommunityCommentUdMapper {
+    public Long udFind(CommunityCommentUdVo communityCommentUdVo);
+    public void goodInsert(CommunityCommentUdVo communityCommentUdVo);
+    public void goodCancle(CommunityCommentUdVo communityCommentUdVo);
+    public void hateInsert(CommunityCommentUdVo communityCommentUdVo);
+    public void hateCancle(CommunityCommentUdVo communityCommentUdVo);
+    public int udCnt(CommunityCommentUdVo communityCommentUdVo);
+
+
 }

@@ -95,8 +95,12 @@ public class MentorController {
 
     //    멘토 프로필 등록하기 기본 페이지 처리
     @GetMapping("/self")
-    public String self(Long mentorNumber, Model model){
+    public String self(Model model,HttpServletRequest req){
+        Long mentorNumber = (Long) req.getSession().getAttribute("mentorNumber");
         MentorVo mentor = mentorService.findMentor(mentorNumber);
+
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+        mentor.setUserNumber(userNumber);
 
         model.addAttribute("mentor", mentor);
         return "mentor/Introduceyourself";
@@ -105,8 +109,9 @@ public class MentorController {
     @PostMapping("/self")
     public RedirectView self(MentorVo mentorVo, HttpServletRequest req, RedirectAttributes redirectAttributes){
         Long mentorNumber = (Long) req.getSession().getAttribute("mentorNumber");
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
         mentorVo.setMentorNumber(mentorNumber);
-        mentorVo.setUserNumber(mentorNumber);
+        mentorVo.setUserNumber(userNumber);
         mentorService.mentorPrRegister(mentorVo);
 
         return new RedirectView("/mentor/apply");

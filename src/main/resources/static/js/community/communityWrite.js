@@ -2,7 +2,9 @@ let $fileInput = $('#file');
 let $fileList = $('.file-list');
 let $fileCnt = $('.file-cnt');
 
+//=============================================
 // 파일 등록 시 체크 함수(체크할 file객체, 제한 길이)
+//=============================================
 function checkLength(files, num){
     if(files.length > num){
         alert(`파일은 최대 ${num}개 까지만 첨부 가능합니다.`);
@@ -11,8 +13,9 @@ function checkLength(files, num){
     return files;
 }
 
-
+//============
 // 파일 미리보기
+//============
 $fileInput.on('change', function(){
   let files = this.files;
 
@@ -45,7 +48,9 @@ $fileInput.on('change', function(){
     );
     $fileCnt.text(files.length);
   }
+   //===========
    // 이미지 삭제
+   // ==========
    $('.img-box-cancle').on('click', function(){
     $(this).parent().remove();
 
@@ -66,8 +71,9 @@ $fileInput.on('change', function(){
   });
 
 });
-
-// 글자수
+//===========
+// 글자수제한
+//===========
 $('#communityContent').on('keyup', function(e) {
     let $content = $(this).val();
     $('.cnt').html(""+$content.length+"");

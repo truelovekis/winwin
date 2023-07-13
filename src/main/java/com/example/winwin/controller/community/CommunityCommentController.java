@@ -25,8 +25,15 @@ public class CommunityCommentController {
     }
 
     @GetMapping("/list{communityNumber}")
-    public List<CommunityCommentVo> getCommentList(@PathVariable("communityNumber") Long communityNumber){
-        return communityCommentService.findList(communityNumber);
+    public List<CommunityCommentVo> getCommentList(HttpServletRequest req,
+            @PathVariable("communityNumber") Long communityNumber){
+        Long sessionUserNumber = (Long)req.getSession().getAttribute("userNumber");
+        System.out.println("======================"+sessionUserNumber+"===============================");
+        CommunityCommentVo communityCommentVo = new CommunityCommentVo();
+        communityCommentVo.setSessionUserNumber(sessionUserNumber);
+        communityCommentVo.setCommunityNumber(communityNumber);
+
+        return communityCommentService.findCommentUdList(communityCommentVo);
     }
 
     @PatchMapping("/{commentNumber}")

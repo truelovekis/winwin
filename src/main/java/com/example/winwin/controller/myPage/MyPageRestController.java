@@ -5,6 +5,9 @@ import com.example.winwin.dto.file.ResumeFileDto;
 import com.example.winwin.dto.user.ResumePrDto;
 import com.example.winwin.service.chatting.ChattingService;
 import com.example.winwin.service.myPage.MyPageService;
+import com.example.winwin.vo.infinityScroll.Criteria;
+import com.example.winwin.vo.infinityScroll.PageVo;
+import com.example.winwin.vo.myPage.ActiveBoardVo;
 import com.example.winwin.vo.myPage.ResumeVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
@@ -12,6 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -44,6 +50,23 @@ public class MyPageRestController {
 
         ResumePrDto resumePrDto = myPageService.getPr(prNumber);
         return resumePrDto;
+    }
+
+    @GetMapping("/myBoard/{page}")
+    public Map<String, Object> myBoard(HttpServletRequest req, @PathVariable("page") int page) {
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+        Criteria criteria = new Criteria();
+        criteria.setPage(page);
+        criteria.setAmount(5);
+        PageVo pageVo = new PageVo(criteria, myPageService.getUserInfo(userNumber).getBoardCnt());
+        List<ActiveBoardVo> activeBoardVoList = myPageService.getActiveBoardList(userNumber, criteria);
+
+        System.out.println("activeBoardVoList는 "+activeBoardVoList);
+        Map<String, Object> myBoard = new HashMap<>();
+        myBoard.put("pageVo", pageVo);
+        myBoard.put("activeBoardVoList", activeBoardVoList);
+
+        return myBoard;
     }
 
 
