@@ -8,22 +8,22 @@ $(document).ready(function() {
 
 function changeStatus() {
     let $checkedBox = $('.check-box:checked');
-    let policeBoard = [];
+    let policeNumber = [];
     let boardStatus = [];
 
     for(let i=0; i<$checkedBox.length; i++){
-        policeBoard.push( $checkedBox.eq(i).data('number'));
+        policeNumber.push( $checkedBox.eq(i).data('number'));
         boardStatus.push($checkedBox.closest('.user-table-category').find('.user-report-select').val());
     }
 
 
-    console.log(policeBoard)
+    console.log(policeNumber)
     console.log('=============================')
     console.log(boardStatus)
     // var communityNumber = document.getElementById("communityNumber").value;
     // var currentStatus = document.getElementById("currentStatus").value; // 현재 상태 값을 가져옵니다.
 
-    if (policeBoard == "") {
+    if (policeNumber == "") {
         alert("게시글 번호를 입력해주세요.");
         return false;
     }
@@ -35,7 +35,7 @@ function changeStatus() {
         url: "/status/updateBoard",
         contentType: "application/json; charset=utf-8",
         traditional : true,
-        data: JSON.stringify({policeBoard: policeBoard, boardStatus: boardStatus}),
+        data: JSON.stringify({policeNumber: policeNumber, boardStatus: boardStatus}),
         success: function() {
             alert("변경 성공");
         },

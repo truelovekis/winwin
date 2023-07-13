@@ -112,8 +112,8 @@ public class AdminController {
 
     // 전체 게시글 신고 조회
     @GetMapping("/report")
-    public String adminReport(Model model){
-        List<AdminVo> adminReportList = adminService.findReport();
+    public String adminReport(Model model, PoliceVo policeVo){
+        List<PoliceVo> adminReportList = adminService.findReport(policeVo);
         model.addAttribute("adminReportList", adminReportList);
         return "admin/adminReport";
     }
@@ -127,8 +127,8 @@ public class AdminController {
 
     // 전체 댓글 신고 조회
     @GetMapping("/commentReport")
-    public String adminCommentReport(Model model){
-        List<AdminVo> adminCommentReportList = adminService.findReportComment();
+    public String adminCommentReport(Model model, PoliceCommentVo policeCommentVo){
+        List<PoliceCommentVo> adminCommentReportList = adminService.findReportComment(policeCommentVo);
         model.addAttribute("adminCommentReportList", adminCommentReportList);
         return "admin/adminCommentReport";
     }

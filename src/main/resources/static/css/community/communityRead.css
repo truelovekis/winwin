@@ -208,7 +208,7 @@ footer{
 
 .first1{
     background-color: #fff;
-    margin-top: 47px;
+    padding-top: 35px;
 }
 
 .first{
@@ -462,6 +462,7 @@ footer{
     font-weight: bold;
     cursor: pointer;
     position: absolute;
+    padding: 5px;
 }
 
 .empty-box2{
@@ -719,9 +720,9 @@ footer{
     margin-bottom: -2px;
 }
 
-.big-box{
-    height: 100%;
-}
+/*.big-box{*/
+/*    height: 100%;*/
+/*}*/
 
 
 /*댓글 수정 처리*/
@@ -752,7 +753,7 @@ footer{
     cursor: pointer;
 }
 
-/*==================================================*/
+/*!*==================================================*!*/
 /* 모달 창 스타일 */
 .reportModal {
     display: none;

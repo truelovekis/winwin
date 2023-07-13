@@ -79,6 +79,7 @@ public class CommunityService {
         return communityMapper.selectAll(communityVo);
     }
 
+
     public List<CommunityProfileVo> registerProfile(Long userNumber){
         return communityMapper.selectUserProfile(userNumber);
     }

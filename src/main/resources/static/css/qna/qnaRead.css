@@ -166,7 +166,8 @@ footer{
 /* svg 아이콘 ================================ */
 
 .date{
-    margin: 27px 434px;
+    margin-left: 453px;
+    margin-top: 27px;
     font-size: 13px;
     color: rgb(148, 155, 160);
 }
@@ -347,12 +348,15 @@ footer{
     margin-bottom: -9px;
 }
 
-.good{
+.good-btn{
     border: none;
     color: #1b5192;
     background-color: #e8f1fc;
     cursor: pointer;
     margin-top: -5px;
+    font-family: NanumSquareLight;
+    font-weight: bold;
+    margin-left: 68px;
 }
 
 .empty-box3{
@@ -511,3 +515,114 @@ footer{
 .bi-hand-thumbs-up{
     margin-bottom: -2px;
 }
+
+/*신고 모달창*/
+
+
+/* 신고 카테고리 스타일 */
+.report-category {
+    margin-bottom: 20px;
+}
+
+#report-language,
+#report-copyright,
+#report-adult,
+#false-maketing,
+#report-info-honor,
+#reprot-disgust,
+#report-castle {
+    cursor: pointer;
+}
+
+.report-list {
+    margin-bottom: 20px;
+}
+
+.report-list label {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+/* input checkbox모양 css */
+
+input[type="checkbox"] {
+    display: none;
+}
+
+.label1,
+.label2,
+.label3,
+.label4,
+.label5,
+.label6,
+.label7 {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #ddd;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    top: 3px;
+}
+
+#report-language:checked ~ .label1::after,
+#report-copyright:checked ~ .label2::after,
+#report-adult:checked ~ .label3::after,
+#false-maketing:checked ~ .label4::after,
+#report-info-honor:checked ~ .label5::after,
+#reprot-disgust:checked ~ .label6::after,
+#report-castle:checked ~ .label7::after {
+    content: "✔";
+    font-size: 13px;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    top: -2px;
+    padding-bottom: 10px;
+    color: #fff;
+    background-color: #1b5192;
+}
+
+/* 신고하기 버튼 스타일 */
+.report-button {
+    text-align: center;
+}
+
+.report-btn {
+    padding: 10px 20px;
+    background-color: #1b5192;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    height: 45px;
+    margin-top: 10px;
+}
+
+.creport-btn {
+    padding: 10px 20px;
+    background-color: #1b5192;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    height: 45px;
+    margin-top: 10px;
+}
+
+.report-list > span {
+    font-weight: 500;
+}
+
+
+
+
+/**/

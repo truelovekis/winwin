@@ -2,4 +2,49 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.like.QnaCommentUdMapper">
 
+
+    <!-- 좋아요, 싫어요 눌렀는지 안눌렀는지 -->
+    <select id="qnaUdFind" resultType="long">
+        SELECT COUNT(UD_STATUS) AS udCount
+        FROM QNA_COMMENT_UD
+        WHERE COMMENT_NUMBER = #{commentNumber} AND USER_NUMBER = #{userNumber}
+          AND (UD_STATUS = 'u' OR UD_STATUS = 'd')
+        <choose>
+            <when test="userNumber != null">
+                AND USER_NUMBER = #{userNumber}
+            </when>
+            <otherwise>
+                AND 1=0
+            </otherwise>
+        </choose>
+    </select>
+
+    <insert id="qnaGoodInsert">
+        INSERT INTO QNA_COMMENT_UD (USER_NUMBER, COMMENT_NUMBER, UD_STATUS)
+        VALUES (#{userNumber}, #{commentNumber}, #{udStatus})
+    </insert>
+
+    <delete id="qnaGoodCancle">
+        DELETE FROM QNA_COMMENT_UD
+        WHERE COMMENT_NUMBER = #{commentNumber} and USER_NUMBER = #{userNumber}
+    </delete>
+
+    <insert id="qnaHateInsert">
+        INSERT INTO QNA_COMMENT_UD (USER_NUMBER, COMMENT_NUMBER, UD_STATUS)
+        VALUES (#{userNumber}, #{commentNumber}, #{udStatus})
+    </insert>
+
+    <delete id="qnaHateCancle">
+        DELETE FROM QNA_COMMENT_UD
+        WHERE COMMENT_NUMBER = #{commentNumber} and USER_NUMBER = #{userNumber}
+    </delete>
+
+    <!--  좋아요 카운트  -->
+    <select id="qnaUdCnt" resultType="int">
+        SELECT COUNT(UD_STATUS) AS UD_CNT
+        FROM QNA_COMMENT_UD
+                 JOIN QNA_COMMENT CC ON QNA_COMMENT_UD.COMMENT_NUMBER = CC.COMMENT_NUMBER
+        WHERE CC.COMMENT_NUMBER = #{commentNumber} AND UD_STATUS = 'u'
+    </select>
+
 </mapper>
