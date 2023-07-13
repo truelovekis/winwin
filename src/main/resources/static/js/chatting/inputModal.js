@@ -23,6 +23,8 @@ $('.send-btn').on('click', function (){
 
     let num = $('.chattingTo').data('num');
 
+    console.log("드러와 !!!!!!!!!!");
+    console.log(num);
 
     $.ajax({
         url: "/chattings/inputModal",
@@ -36,6 +38,7 @@ $('.send-btn').on('click', function (){
         }
     })
 });
+
 
 
 

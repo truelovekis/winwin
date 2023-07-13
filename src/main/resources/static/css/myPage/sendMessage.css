@@ -22,7 +22,7 @@
 
 .chatting-main{
     /*width: 700px;*/
-    height: 1000px;
+    /*height: 1000px;*/
     padding: 30px 0px;
 }
 
@@ -82,7 +82,7 @@
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 15px;
-
+    cursor: pointer;
 }
 
 .message-box:hover{

@@ -15,4 +15,6 @@ public class ChattingVo {
     private Long chattingTo;
     private Long chattingFrom;
     private String userNickname;
+    private String userName;
+    private Long userNumber;
 }

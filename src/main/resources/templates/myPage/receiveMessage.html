@@ -29,8 +29,8 @@
 <header class="header"  th:replace="fragment/header :: header"></header>
 <main>
   <!-- 쪽지 모달창 -->
-  <div th:replace="chatting/inputModal :: inputModal(nickname='', chattingTo= '')"></div>
-  <div th:replace="chatting/sendModal :: sendModal" ></div>
+    <div th:replace="chatting/inputModal :: inputModal(nickname='', chattingTo='')"></div>
+    <div th:replace="chatting/sendModal :: sendModal" ></div>
 
   <div class="wrap">
     <div class="container">
@@ -51,13 +51,13 @@
         <!--내용-->
         <div class="receive-main">
           <div class="message-box"  th:each="chatting : ${chattingList}">
-            <span class="message-list" th:text="${chatting.chattingNumber}" th:data-ctnum="${chatting.chattingNumber}"></span>
+            <span class="message-list" th:data-ctnum="${chatting.chattingNumber}" ></span>
             <div class="message-box-top">
                 <div class="sender-profile">
                   <img class="sender-img" th:src="@{/img/profile-basic.png}"/>
                   <span class="sender" th:text="${chatting.userNickname}"></span>
                 </div>
-                <button class="send-reply">✉ 답장</button>
+                <button class="send-reply" th:data-unum="${chatting.userNumber}">✉ 답장</button>
               </div>
               <span class="message-content" th:text="${chatting.chattingContent}"></span>
               <div class="message-bottom-box">
@@ -76,14 +76,8 @@
         integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
         crossorigin="anonymous"
 ></script>
-<script th:src="@{/lib/jspdf.min.js}"></script>
-<script
-        src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
-        integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer"
-></script>
 <script th:src="@{/js/fragment/header.js}" ></script>
+<script th:src="@{/js/chatting/inputModal.js}"></script>
 <script th:src="@{/js/myPage/receiveMessage.js}"></script>
 </body>
 </html>

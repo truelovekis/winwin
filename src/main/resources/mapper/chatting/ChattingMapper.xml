@@ -11,20 +11,41 @@
         VALUES (#{chattingNumber}, #{chattingContent}, #{chattingTo}, #{chattingFrom})
     </insert>
 
-    <!-- 마이페이지에 쪽지 데이터 꽂기 -->
+    <!-- 마이페이지에 쪽지 데이터 꽂기 (받은 메세지)-->
     <select id="chattingSelect" resultType="chattingVo">
         SELECT CHATTING_NUMBER, CHATTING_CONTENT, CHATTING_DATE, CHATTING_TO, CHATTING_FROM,
-            WW_USER.USER_NICKNAME
+            WW_USER.USER_NICKNAME, WW_USER.USER_NUMBER
         FROM CHATTING JOIN WW_USER
         ON CHATTING.CHATTING_FROM = WW_USER.USER_NUMBER
         WHERE CHATTING_TO = #{userNumber}
+        ORDER BY CHATTING_NUMBER DESC
+    </select>
+
+    <!-- 마이페이지에 쪽지 데이터 꽂기 (보낸 메세지)-->
+    <select id="chattingSelectFrom" resultType="chattingVo">
+        SELECT CHATTING_NUMBER, CHATTING_CONTENT, CHATTING_DATE, CHATTING_TO, CHATTING_FROM,
+               WW_USER.USER_NICKNAME, WW_USER.USER_NUMBER
+        FROM CHATTING JOIN WW_USER
+                           ON CHATTING.CHATTING_TO = WW_USER.USER_NUMBER
+        WHERE CHATTING_FROM = #{userNumber}
+        ORDER BY CHATTING_NUMBER DESC
     </select>
 
     <!-- 쪽지 모달창에 데이터 꽂기 -->
     <select id="chattingSelectModal" resultType="chattingVo">
-        SELECT CHATTING_CONTENT, CHATTING_DATE, CHATTING_TO, WW_USER.USER_NICKNAME
+        SELECT CHATTING_CONTENT, CHATTING_DATE, CHATTING_TO, WW_USER.USER_NICKNAME, WW_USER.USER_NAME
         FROM CHATTING JOIN WW_USER
         ON CHATTING.CHATTING_FROM = WW_USER.USER_NUMBER
         WHERE CHATTING_NUMBER = #{chattingNumber}
     </select>
+
+    <!-- 쪽지 모달창에 데이터 꽂기 (보낸 쪽지) -->
+    <select id="chattingSendModal" resultType="chattingVo">
+        SELECT CHATTING_CONTENT, CHATTING_DATE, CHATTING_TO, WW_USER.USER_NICKNAME, WW_USER.USER_NAME
+        FROM CHATTING JOIN WW_USER
+        ON CHATTING.CHATTING_TO = WW_USER.USER_NUMBER
+        WHERE CHATTING_NUMBER = #{chattingNumber}
+    </select>
+
+
 </mapper>
