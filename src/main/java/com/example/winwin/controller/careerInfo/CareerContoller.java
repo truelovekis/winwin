@@ -23,7 +23,10 @@ public class CareerContoller {
 
     private final CareerInfoService careerInfoService;
 
+//    보류
 //    세션으로 userNumber가져와서 페이지 진입할 때, 태그에 대한 리스트 뿌려줘
+//    userNumber == null 그냥 진입하고 글을 그냥 뿌려주기
+//    ------------------------------------------
 //    진로정보 메인페이지 단순이동
     @GetMapping("/list")
     public String careerpathForm(Model model, HttpServletRequest req){
@@ -39,8 +42,8 @@ public class CareerContoller {
     @GetMapping("/detail")
     public String careerDetail(Long careerInfoNumber, Model model){
         careerInfoService.careerInfoReadUpdate(careerInfoNumber);
-        CareerInfoDto careerInfoDto = careerInfoService.findCareerInfo(careerInfoNumber);
-        model.addAttribute("career", careerInfoDto);
+        CareerInfoVo careerInfoVo = careerInfoService.findCareerInfo(careerInfoNumber);
+        model.addAttribute("career", careerInfoVo);
 
         return "careerInfo/careerInfoDetail";
     }
@@ -48,28 +51,59 @@ public class CareerContoller {
 //    진로정보 글 작성하기 페이지 단순이동
     @GetMapping("/write")
     public String careerWrite (HttpServletRequest req){
+        Long mentorNumber = (Long)req.getSession().getAttribute("mentorNumber");
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
+
+//        CareerInfoVo careerInfoVo = careerInfoService.findMentorNumber(mentorNumber);
+
+//        멘토 번호 찾기
+        careerInfoService.findMentorNumber(userNumber);
+        System.out.println(userNumber);
+//        멘토 인증된 태그 찾기
+        careerInfoService.findMentorTag(mentorNumber);
 
         return "careerInfo/careerInfoWrite";
     }
 
+//    진로정보 글 작성하기
     @PostMapping("/write")
-    public RedirectView careerWrite(CareerInfoVo careerInfoVo, HttpServletRequest req){
+    public RedirectView careerWrite(CareerInfoDto careerInfoDto, HttpServletRequest req){
+        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
+        Long mentorNumber = (Long)req.getSession().getAttribute("mentorNumber");
+        System.out.println(mentorNumber);
+        careerInfoService.findMentorNumber(userNumber);
+        careerInfoService.findMentorTag(userNumber);
+        careerInfoDto.setMentorNumber(mentorNumber);
+        careerInfoDto.setUserNumber(userNumber);
 
-        return null;
+        careerInfoService.careerInfoRegister(careerInfoDto);
+
+        return new RedirectView("/career/list");
     }
+
 
 //    진로정보 글 수정하기 단순이동
     @GetMapping("/modify")
     public String careerModify(Long careerInfoNumber, Model model){
-        CareerInfoDto careerInfoDto = careerInfoService.findCareerInfo(careerInfoNumber);
-        model.addAttribute("career", careerInfoDto);
+        CareerInfoVo careerInfoVo = careerInfoService.findCareerInfo(careerInfoNumber);
+        model.addAttribute("career", careerInfoVo);
 
         return "careerInfo/careerInfoModify";
     }
 
 //    진로정보 글 삭제하기
+    @GetMapping("/remove")
+    public RedirectView careerInfoRemove(Long careerInfoNumber){
+        careerInfoService.careerInfoRemove(careerInfoNumber);
+
+        return new RedirectView("/career/list");
+    }
 
 //    진로정보 글 신고하기
+    @GetMapping("/report")
+    public RedirectView careerInfoReport(Long careerInfoNumber){
+
+        return new RedirectView("/career/report");
+    }
 
 }
