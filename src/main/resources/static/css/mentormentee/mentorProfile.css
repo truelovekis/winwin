@@ -242,6 +242,23 @@ input:checked + .slider:before {
   background-color: #d7e4f8;
 }
 
+.d-button,
+.chatting-button{
+  background: #e3f3ff;
+  color: #46699d;
+  border: none;
+  padding: 7px 10px;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.d-button:hover,
+.chatting-button:hover{
+  background-color: #d7e4f8;
+}
+
 .aside {
   margin-top: 15px;
 }

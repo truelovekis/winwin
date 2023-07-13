@@ -275,4 +275,46 @@ $('.changeView').on('click', '.review-btn', function (){
     $('#review-content').val('');
 });
 
+$('.messageBox').on('click', function (){
+    if($('.userNumber').val() == '' ){
+        alert("로그인 해주세요");
+    }
+
+    if($('.umstatus').val() == 'N'){
+        alert("멘토:멘티 관계가 아닙니다.");
+    }
+
+    if($('.userNumber').val() != null || $('.umstatus').val() == 'Y'){
+        $(function () {
+            $(".messageBox").click(function () {
+                $(".input-wrap").fadeIn();
+                let userNickname = $('.name-text').text();
+                let num = $('.mentornumber').data('num');
+                console.log(num);
+
+                $('.chattingTo').text(userNickname);
+                $('.chattingTo').data('num', num);
+            });
+        });
+
+        $(".messageBox").on("click", function () {
+            $(".input-wrap").removeClass("none");
+
+            $('body').css('overflow', 'hidden');
+        });
+
+        $(".input-wrap").on("click", function (e) {
+
+            if ($(e.target).hasClass("input-wrap")) {
+                $(".input-wrap").addClass("none");
+                $('body').css('overflow', 'auto');
+
+                $('.form-reset')[0].reset();
+            }
+        });
+    }
+})
+
+
+
 

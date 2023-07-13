@@ -26,8 +26,6 @@ public class ChattingRestController {
         chattingService.sendChatting(chattingDto);
     }
 
-
-
     /* 쪽지 확인 */
     @GetMapping("/sendModal")
     public ChattingVo chattingSelectModel(Long chattingNumber){

@@ -7,6 +7,7 @@
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
     crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/user/loginModal.css}" />
     <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
     <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
     <link rel="stylesheet" th:href="@{/css/myPage/myRecord.css}">
@@ -32,19 +33,21 @@
     <div class="container">
         <div th:replace="fragment/myPageSide :: myPageSide"></div>
             <div class="main">
+                <input type="hidden" class="userNumber" th:value="${session.userNumber}"/>
                 <!-- 새로운 다이어리 작성 버튼 -->
-                <div class="plus-btn"><button class="plusBtn" type="button"><img src="../../img/plus-icon-21722.png"></button></div>
+                <div class="plus-btn"><button class="plusBtn" type="button"><img th:src="@{/img/plus-icon-21722.png}"></button></div>
 
                 <!-- 버튼 눌렀을 때 나타나는 요소 -->
+                <div class="diary-sub">
                 <div class="diary">
-                    <form method="post" class="diary-form" th:action="@{/mypage/diary}">
+<!--                    <form method="post" class="diary-form" th:action="@{/mypage/diary}">-->
                         <div class="mypageDiary-title"><input type="text" class="title" name="diaryTitle" placeholder="제목을 입력해주세요" style="font-family: NanumSquareAcr;"></div>
                         <textarea id="summernote" class="summernote" name="diaryContent" style="font-family: NanumSquareAcr;"></textarea>
                         <div class="btn-box">
                             <div class="cancle-btn"><button type="button" class="cancle" style="font-family: NanumSquareAcr;">취소</button></div>
-                            <div class="submit-btn"><button type="button" class="submit" style="font-family: NanumSquareAcr;">작성 완료</button></div>
+                            <div class="submit-btn"><button type="submit" class="submit" style="font-family: NanumSquareAcr;">작성 완료</button></div>
                         </div>
-                    </form>
+<!--                    </form>-->
                 </div>
                 <!-- 버튼 눌렀을 때 나타나는 요소 끝 -->
 
@@ -52,132 +55,134 @@
                 <div class="diary-list">
 
                     <!-- 저장된 다이어리 리스트 -->
-                    <div class="list-btn">
-                        <div class="diary-main">
-                            <div class="diary-title">스터디 프로젝트</div>
+<!--                    <div class="list-btn">-->
+<!--                        <div class="diary-main">-->
+<!--                            <div class="diary-title">스터디 프로젝트</div>-->
 
-                            <div class="my-diary">
-                                <div class="diary-content">
+<!--                            <div class="my-diary">-->
+<!--                                <div class="diary-content">-->
 
-                                    <div class="title2">
-                                        <div class="list-title">스터디 프로젝트</div>
-                                        <div class="list-date">2023/06/12</div>
-                                    </div>
+<!--                                    <div class="title2">-->
+<!--                                        <div class="list-title">스터디 프로젝트</div>-->
+<!--                                        <div class="list-date">2023/06/12</div>-->
+<!--                                    </div>-->
 
-                                    <div class="list-content">내용</div>
+<!--                                    <div class="list-content">내용</div>-->
 
-                                    <div class="btn-box">
-                                        <div class="edit-btn"><button class="editBtn" type="button" style="font-family: NanumSquareAcr;">수정</button></div>
-                                        <div class="close-btn"><button class="closeBtn" type="button" style="font-family: NanumSquareAcr;">닫기</button></div>
-                                    </div>
-                                </div>
-                                <!-- 수정을 눌렀을 때 나타나는 요소 -->
-                                <div class="diary2">
-                                    <form method="post" class="diary-form2">
-                                        <div class="mypageDiary-title"><input type="text" class="title" placeholder="" style="font-family: NanumSquareAcr;"></div>
-                                        <textarea class="summernote" name="editordata"></textarea>
-                                        <div class="btn-box">
-                                            <div class="cancle-btn"><button type="button" class="edit-cancle" style="font-family: NanumSquareAcr;">취소</button></div>
-                                            <div class="submit-btn"><button type="button" class="edit-submit" style="font-family: NanumSquareAcr;">수정 완료</button></div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <!-- 수정을 눌렀을 때 나타나는 요소 끝 -->
-                            </div>
-                        </div>
+<!--                                    <div class="btn-box">-->
+<!--                                        <div class="edit-btn"><button class="editBtn" type="button" style="font-family: NanumSquareAcr;">수정</button></div>-->
+<!--                                        <div class="close-btn"><button class="closeBtn" type="button" style="font-family: NanumSquareAcr;">닫기</button></div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                &lt;!&ndash; 수정을 눌렀을 때 나타나는 요소 &ndash;&gt;-->
+<!--                                <div class="diary2">-->
+<!--                                    <form method="post" class="diary-form2">-->
+<!--                                        <div class="mypageDiary-title"><input type="text" class="title" placeholder="" style="font-family: NanumSquareAcr;"></div>-->
+<!--                                        <textarea class="summernote" name="editordata"></textarea>-->
+<!--                                        <div class="btn-box">-->
+<!--                                            <div class="cancle-btn"><button type="button" class="edit-cancle" style="font-family: NanumSquareAcr;">취소</button></div>-->
+<!--                                            <div class="submit-btn"><button type="button" class="edit-submit" style="font-family: NanumSquareAcr;">수정 완료</button></div>-->
+<!--                                        </div>-->
+<!--                                    </form>-->
+<!--                                </div>-->
+<!--                                &lt;!&ndash; 수정을 눌렀을 때 나타나는 요소 끝 &ndash;&gt;-->
+<!--                            </div>-->
+<!--                        </div>-->
 
-                    </div>
-                    <!-- 저장된 다이어리 리스트 끝 -->
+<!--                    </div>-->
+<!--                    &lt;!&ndash; 저장된 다이어리 리스트 끝 &ndash;&gt;-->
 
-                    <!-- 저장된 다이어리 리스트 -->
-                    <div class="list-btn">
+<!--                    &lt;!&ndash; 저장된 다이어리 리스트 &ndash;&gt;-->
+<!--                    <div class="list-btn">-->
 
-                        <div class="diary-main">
-                            <div class="diary-title">스터디 Spring</div>
+<!--                        <div class="diary-main">-->
+<!--                            <div class="diary-title">스터디 Spring</div>-->
 
-                            <div class="my-diary">
-                                <div class="diary-content">
+<!--                            <div class="my-diary">-->
+<!--                                <div class="diary-content">-->
 
-                                    <div class="title2">
-                                        <div class="list-title">스터디 Spring</div>
-                                        <div class="list-date">2023/06/13</div>
-                                    </div>
+<!--                                    <div class="title2">-->
+<!--                                        <div class="list-title">스터디 Spring</div>-->
+<!--                                        <div class="list-date">2023/06/13</div>-->
+<!--                                    </div>-->
 
-                                    <div class="list-content">내용</div>
+<!--                                    <div class="list-content">내용</div>-->
 
-                                    <div class="btn-box">
-                                        <div class="edit-btn"><button class="editBtn" type="button" style="font-family: NanumSquareAcr;">수정</button></div>
-                                        <div class="close-btn"><button class="closeBtn" type="button" style="font-family: NanumSquareAcr;">닫기</button></div>
-                                    </div>
+<!--                                    <div class="btn-box">-->
+<!--                                        <div class="edit-btn"><button class="editBtn" type="button" style="font-family: NanumSquareAcr;">수정</button></div>-->
+<!--                                        <div class="close-btn"><button class="closeBtn" type="button" style="font-family: NanumSquareAcr;">닫기</button></div>-->
+<!--                                    </div>-->
 
 
-                                </div>
+<!--                                </div>-->
 
-                                <!-- 수정을 눌렀을 때 나타나는 요소 -->
-                                <div class="diary2">
-                                    <form method="post" class="diary-form2">
-                                        <div class="mypageDiary-title"><input type="text" class="title" placeholder="" style="font-family: NanumSquareAcr;"></div>
-                                        <textarea class="summernote" name="editordata" style="font-family: NanumSquareAcr;"></textarea>
-                                        <div class="btn-box">
-                                            <div class="cancle-btn"><button type="button" class="edit-cancle" style="font-family: NanumSquareAcr;">취소</button></div>
-                                            <div class="submit-btn"><button type="button" class="edit-submit" style="font-family: NanumSquareAcr;">수정 완료</button></div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <!-- 수정을 눌렀을 때 나타나는 요소 끝 -->
+<!--                                &lt;!&ndash; 수정을 눌렀을 때 나타나는 요소 &ndash;&gt;-->
+<!--                                <div class="diary2">-->
+<!--                                    <form method="post" class="diary-form2">-->
+<!--                                        <div class="mypageDiary-title"><input type="text" class="title" placeholder="" style="font-family: NanumSquareAcr;"></div>-->
+<!--                                        <textarea class="summernote" name="editordata" style="font-family: NanumSquareAcr;"></textarea>-->
+<!--                                        <div class="btn-box">-->
+<!--                                            <div class="cancle-btn"><button type="button" class="edit-cancle" style="font-family: NanumSquareAcr;">취소</button></div>-->
+<!--                                            <div class="submit-btn"><button type="button" class="edit-submit" style="font-family: NanumSquareAcr;">수정 완료</button></div>-->
+<!--                                        </div>-->
+<!--                                    </form>-->
+<!--                                </div>-->
+<!--                                &lt;!&ndash; 수정을 눌렀을 때 나타나는 요소 끝 &ndash;&gt;-->
 
-                            </div>
+<!--                            </div>-->
 
-                        </div>
-                    </div>
-                    <!-- 저장된 다이어리 리스트 끝 -->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash; 저장된 다이어리 리스트 끝 &ndash;&gt;-->
 
-                    <!-- 저장된 다이어리 리스트 -->
-                    <div class="list-btn">
+<!--                    &lt;!&ndash; 저장된 다이어리 리스트 &ndash;&gt;-->
+<!--                    <div class="list-btn">-->
 
-                        <div class="diary-main">
-                            <div class="diary-title">자바스크립트</div>
+<!--                        <div class="diary-main">-->
+<!--                            <div class="diary-title">자바스크립트</div>-->
 
-                            <div class="my-diary">
-                                <div class="diary-content">
+<!--                            <div class="my-diary">-->
+<!--                                <div class="diary-content">-->
 
-                                    <div class="title2">
-                                        <div class="list-title">자바스크립트</div>
-                                        <div class="list-date">2023/06/13</div>
-                                    </div>
+<!--                                    <div class="title2">-->
+<!--                                        <div class="list-title">자바스크립트</div>-->
+<!--                                        <div class="list-date">2023/06/13</div>-->
+<!--                                    </div>-->
 
-                                    <div class="list-content">내용</div>
+<!--                                    <div class="list-content">내용</div>-->
 
-                                    <div class="btn-box">
-                                        <div class="edit-btn"><button class="editBtn" type="button" style="font-family: NanumSquareAcr;">수정</button></div>
-                                        <div class="close-btn"><button class="closeBtn" type="button" style="font-family: NanumSquareAcr;">닫기</button></div>
-                                    </div>
-                                </div>
+<!--                                    <div class="btn-box">-->
+<!--                                        <div class="edit-btn"><button class="editBtn" type="button" style="font-family: NanumSquareAcr;">수정</button></div>-->
+<!--                                        <div class="close-btn"><button class="closeBtn" type="button" style="font-family: NanumSquareAcr;">닫기</button></div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
 
-                                <!-- 수정을 눌렀을 때 나타나는 요소 -->
-                                <div class="diary2">
-                                    <form method="post" class="diary-form2">
-                                        <div class="mypageDiary-title"><input type="text" class="title" placeholder="" style="font-family: NanumSquareAcr;"></div>
-                                        <textarea class="summernote" name="editordata" style="font-family: NanumSquareAcr;"></textarea>
-                                        <div class="btn-box">
-                                            <div class="cancle-btn"><button type="button" class="edit-cancle" style="font-family: NanumSquareAcr;">취소</button></div>
-                                            <div class="submit-btn"><button type="button" class="edit-submit" style="font-family: NanumSquareAcr;">수정 완료</button></div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <!-- 수정을 눌렀을 때 나타나는 요소 끝 -->
+<!--                                &lt;!&ndash; 수정을 눌렀을 때 나타나는 요소 &ndash;&gt;-->
+<!--                                <div class="diary2">-->
+<!--                                    <form method="post" class="diary-form2">-->
+<!--                                        <div class="mypageDiary-title"><input type="text" class="title" placeholder="" style="font-family: NanumSquareAcr;"></div>-->
+<!--                                        <textarea class="summernote" name="editordata" style="font-family: NanumSquareAcr;"></textarea>-->
+<!--                                        <div class="btn-box">-->
+<!--                                            <div class="cancle-btn"><button type="button" class="edit-cancle" style="font-family: NanumSquareAcr;">취소</button></div>-->
+<!--                                            <div class="submit-btn"><button type="button" class="edit-submit" style="font-family: NanumSquareAcr;">수정 완료</button></div>-->
+<!--                                        </div>-->
+<!--                                    </form>-->
+<!--                                </div>-->
+<!--                                &lt;!&ndash; 수정을 눌렀을 때 나타나는 요소 끝 &ndash;&gt;-->
 
-                            </div>
-                        </div>
-                    </div>
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
                     <!-- 저장된 다이어리 리스트 끝 -->
                 </div>
 
+            </div>
             </div>
     </div>
 </div>
 
 <footer class="footer"  th:replace="fragment/footer :: footer"></footer>
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script>
     $('.summernote').summernote({
@@ -204,6 +209,8 @@
         ]
     });
 </script>
+
+<script th:src="@{/js/user/loginModal.js}"></script>
 <script th:src="@{/js/fragment/header.js}" ></script>
 <script th:src="@{/js/myPage/myRecord.js}"></script>
 </body>

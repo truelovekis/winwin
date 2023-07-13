@@ -19,6 +19,7 @@ $("#inputMessage").keyup(function (e) {
 
 
 // 쪽지 보내기
+// 쪽지 보내기
 $('.send-btn').on('click', function (){
 
     let num = $('.chattingTo').data('num');
