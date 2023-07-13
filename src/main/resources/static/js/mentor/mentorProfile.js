@@ -16,15 +16,16 @@ share.click(function CopyUrlToClipboard() {
     tempInput.remove(); // 임시 input 요소 제거
     alert("복사가 완료 되었습니다.");
 });
-
-$(".main-mentor").on("click",'.message-button' ,function () {
-    $(".modal-wrap1").removeClass("none");
-    $(".modal-wrap1").css({
-        position: "fixed",
-        left: "50%",
-        top: "50%",
-        transform: "translate(-50%, -50%)",
-    });
+//
+// $(".main-mentor").on("click",'.message-button' ,function () {
+//     $(".modal-wrap1").removeClass("none");
+//     $(".modal-wrap1").css({
+//         position: "fixed",
+//         left: "50%",
+//         top: "50%",
+//         transform: "translate(-50%, -50%)",
+//     });
+// }
 
 //멘토 신청하기 버튼
 $(".main-mentor").on("click",'.message-button' ,function () {
@@ -198,10 +199,10 @@ $('.select-tag').on('click', '.tag' , function (){
     console.log($('.tag').data('value'));
     let tag = $('.tag').data('value');
 
-   if(tag == null){
-       window.location.href= '/mentor/list';
-       console.log('제발');
-   }
+    if(tag == null){
+        window.location.href= '/mentor/list';
+        console.log('제발');
+    }
 });
 
 function showMentor(map){
@@ -267,14 +268,13 @@ function showMentor(map){
             <div class="skill-tags">
               <!--            스킬 나열 -->
               `;
-            mentor.skill.forEach(skills => {
-                text += `
+        mentor.skill.forEach(skills => {
+            text += `
                     <div class="skill">
                     <span class="skill2">${skills.skillName}</span>
                     </div>
                 `;
         });
-    });
         text+=`
             
             </div>
@@ -307,7 +307,7 @@ function showMentor(map){
                      ${careers.careerEndDate}
                      `;
             }
-                text += `
+            text += `
                 </span>
                 <span class="date"> · <span class="date">${careers.careerAnnual}</span>년차</span>
               </div>

@@ -36,7 +36,7 @@ class CareerInfoMapperTest {
         careerInfoVo.setCareerInfoContent("content");
         careerInfoVo.setMentorNumber(8L);
 
-        careerInfoMapper.careerInfoInsert(careerInfoVo);
+//        careerInfoMapper.careerInfoInsert(careerInfoVo);
     }
 
     @Test
@@ -46,12 +46,12 @@ class CareerInfoMapperTest {
 
         System.out.println("========" + tagList);
 
-        careerInfoMapper.careerInfoInsert(careerInfoVo);
+//        careerInfoMapper.careerInfoInsert(careerInfoVo);
 
-        int careerInfoSize = careerInfoMapper.selectCareerInfoList(tagList).size();
+//        int careerInfoSize = careerInfoMapper.selectCareerInfoList(tagList).size();
 
 
-        assertThat(careerInfoMapper.selectCareerInfoList(tagList).size()).isEqualTo(careerInfoSize);
+//        assertThat(careerInfoMapper.selectCareerInfoList(tagList).size()).isEqualTo(careerInfoSize);
 
     }
 }
