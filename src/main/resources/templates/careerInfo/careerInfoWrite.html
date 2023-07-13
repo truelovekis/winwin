@@ -29,23 +29,13 @@
     }
   </style>
   <title>진로정보 글 작성하기</title>
-  <script>
-    $(document).ready(function() {
-      $('#summernote').summernote({
-        placeholder: 'content',
-        minHeight: 370,
-        maxHeight: null,
-        focus: true,
-        lang : 'ko-KR'
-      });
-    });
-  </script>
 
 </head>
 
 <body>
 <header class="header" th:replace="fragment/header :: header"></header>
 <form th:action="@{/career/write}" method="post" id="community-write">
+  <input type="hidden" th:value="${session.mentorNumber}"/>
   <div class="write-main">
     <div class="main-title">
       <div class="sub1">
@@ -56,18 +46,19 @@
     </div>
     <div class="write-main-box">
       <div class="write-category">
-        <span class="project-sub-text1" >수학과<button type="button" class="close">✖️</button></span>
+        <span class="project-sub-text1">수학과<button type="button" class="close">✖️</button></span>
         <span class="project-sub-text1">간호조리사<button type="button" class="close">✖️</button></span>
         <span class="project-sub-text1">요리사<button type="button" class="close">✖️</button></span>
       </div>
       <div class="write-title content-a">
-        <input type="text" placeholder="제목을 입력하세요" id="count_memo" minlength = "10" maxlength="100" style="font-family:NanumSquareLight;"/>
+        <input type="text" placeholder="제목을 입력하세요" name="careerInfoTitle" id="count_memo" minlength = "10" maxlength="100" style="font-family:NanumSquareLight;"/>
         <div class="count"><span id="cnt">(0 / 25)</span></div>
       </div>
       <div class="write-content content-a">
         <div style="width: 100%; margin: auto;">
-          <textarea id="summernote" name="content"></textarea>
+          <textarea id="summernote" name="careerInfoContent" thu:text="${career.careerInfoContent}"></textarea>
         </div>
+
 
 
 
@@ -94,7 +85,7 @@
 
 
     </div>
-    <button type="button" class="write-btn">작성하기</button>
+    <button type="submit" class="write-btn">작성하기</button>
   </div>
 </form>
 

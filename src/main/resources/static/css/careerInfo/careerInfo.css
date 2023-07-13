@@ -682,3 +682,15 @@ ul {
     background-color: #153f71;;
 }
 
+/* 진로정보 타이틀 a태그 css*/
+
+.careerInfo-title-path{
+    text-decoration: black;
+    color: black;
+}
+
+.careerInfo-title-path:visited{
+    text-decoration: black;
+    color: black;
+}
+

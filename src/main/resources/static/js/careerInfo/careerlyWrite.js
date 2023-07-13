@@ -1,6 +1,8 @@
+//글자수 실시간 카운팅
+
 $('#count_memo').keyup(function (e){
     var content = $(this).val();
-    $('#cnt').html("("+content.length+" /25)");    //글자수 실시간 카운팅
+    $('#cnt').html("("+content.length+" /25)");
 
     if (content.length > 25){
         alert("최대 25자까지 입력 가능합니다.");
@@ -10,6 +12,7 @@ $('#count_memo').keyup(function (e){
 });
 
 //태그 삭제
+
 const closes = document.getElementsByClassName("close");
 
 const myFunction = function(event) {
@@ -20,3 +23,13 @@ const myFunction = function(event) {
 for (let i = 0; i < closes.length; i++) {
     closes[i].addEventListener('click', myFunction);
 }
+
+// let tagBtn = $('.close');
+
+// $('.close').on('click', function (e){
+//     let tagBtn = e.target;
+//     tagBtn.remove();
+// });
+
+
+
