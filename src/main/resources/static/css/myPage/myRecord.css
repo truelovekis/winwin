@@ -14,7 +14,6 @@
 
 .main{
     width: 1050px;
-    margin: auto;
 }
 
 /* 플러스 버튼 + 서머노트 */
@@ -100,6 +99,7 @@ textarea {
 .diary-list {
     display: flex;
     flex-direction: column;
+    /*height: 300px;*/
 }
 
 .list-btn {

@@ -63,12 +63,10 @@ label {
     height: 120px;
 }
 .round {
-    width: 7.5rem;
-    height: 7.5rem;
-    border-radius: 9999px;
+    border-radius: 70%;
     overflow: hidden;
     position: relative;
-    width: 120px;
+    width: 128px;
     height: 128px;
 }
 .photo {
@@ -230,7 +228,7 @@ label {
 .th-relative {
     position: relative;
     width: 120px;
-    margin-right: 100px;
+    margin-right: 50px;
     height: 128px;
 }
 .short-box {
@@ -251,3 +249,32 @@ label {
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
+.mento-profile-photo-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 70%;
+    overflow: hidden;
+    display: flex;
+    margin-right: 10px;
+    /* 이미지 중앙 맞추기 */
+    justify-content: center;
+
+}
+
+.img-box {
+    /*width: 60px;*/
+    /*height: 60px;*/
+    /*border-radius: 50%;*/
+    /*background-color: pink;*/
+    /*overflow: hidden;*/
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/*.img-box > img {*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    object-fit: cover;*/
+/*}*/
