@@ -3,6 +3,7 @@ package com.example.winwin.mapper.board;
 import com.example.winwin.dto.board.CommunityDto;
 import com.example.winwin.vo.board.CommunityVo;
 import com.example.winwin.vo.board.CommunityProfileVo;
+import com.example.winwin.vo.infinityScroll.Criteria;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -25,5 +26,9 @@ public interface CommunityMapper {
     public int commentCnt(Long communityNumber);
 //    프로필조회
     public List<CommunityProfileVo> selectUserProfile(Long userNumber);
+//    페이지 무한스크롤
+    List<CommunityVo> selectScroll(CommunityVo communityVo);
+//    메인페이지 갯수 구하기
+    int selectTotal();
 
 }

@@ -16,5 +16,5 @@ public interface CommunityCommentMapper {
     public void update(CommunityCommentDto communityCommentDto);
     public void delete(Long commentNumber);
     public void deleteCommunity(Long communityNumber);
-
+    List<CommunityCommentVo> findCommentUdList(CommunityCommentVo communityCommentVo);
 }

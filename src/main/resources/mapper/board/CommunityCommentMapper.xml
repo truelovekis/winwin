@@ -18,6 +18,27 @@
         ORDER BY COMMENT_NUMBER DESC
     </select>
 
+    <select id="findCommentUdList" resultType="communityCommentVo">
+        SELECT R.COMMENT_NUMBER, R.COMMENT_CONTENT, R.COMMENT_DATE, R.COMMUNITY_NUMBER, R.USER_NUMBER,
+               U.USER_ID, U.USER_BELONG,
+               NVL(CCU.UD_STATUS,'x') AS UD_STATUS
+             ,(SELECT COUNT(UD_STATUS) FROM COMMUNITY_COMMENT_UD WHERE COMMUNITY_COMMENT_UD.COMMENT_NUMBER = R.COMMENT_NUMBER AND CCU.UD_STATUS = 'u') AS UD_CNT
+        FROM WW_USER U JOIN COMMUNITY_COMMENT R
+        ON COMMUNITY_NUMBER = #{communityNumber} AND U.USER_NUMBER = R.USER_NUMBER
+        LEFT OUTER JOIN COMMUNITY_COMMENT_UD CCU
+        ON R.COMMENT_NUMBER = CCU.COMMENT_NUMBER
+        <choose>
+            <when test="sessionUserNumber != null">
+                AND CCU.USER_NUMBER = #{sessionUserNumber}
+            </when>
+            <otherwise>
+                AND 1=0
+            </otherwise>
+        </choose>
+        ORDER BY R.COMMENT_NUMBER DESC
+    </select>
+
+
     <select id="select" resultType="communityCommentVo">
         SELECT COMMENT_NUMBER, COMMENT_CONTENT, COMMENT_DATE, COMMUNITY_NUMBER, R.USER_NUMBER,
                USER_ID

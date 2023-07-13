@@ -63,7 +63,12 @@ public class CommunityCommentService {
         communityCommentMapper.deleteCommunity(communityNumber);
     }
 
+    public List<CommunityCommentVo> findCommentUdList(CommunityCommentVo communityCommentVo) {
+        if (communityCommentVo.getCommunityNumber() == null) {
+            throw new IllegalArgumentException("글 번호 누락");
+        }
 
-
+        return communityCommentMapper.findCommentUdList(communityCommentVo);
+    }
 }
 
