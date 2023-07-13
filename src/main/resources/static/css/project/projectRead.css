@@ -107,11 +107,10 @@ p>span{
 
 .first-box{
     margin: 30px 35px;
-    height: 100px;
 }
 
 .icon{
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .comment{
@@ -121,7 +120,7 @@ p>span{
 
 .second-box{
     margin: 30px 35px;
-    height: 100px;
+    height: 75px;
 }
 
 .recruitment{
@@ -134,12 +133,24 @@ p>span{
 
 .third-box{
     margin: 30px 35px;
-    height: 100px;
+    height: 75px;
+}
+.other-box{
+    font-weight: bold;
+    text-decoration-line: none;
+    margin: 20px 15px;
+    font-size: px;
+    line-height: 2;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    display: -webkit-box;
 }
 
 .fourth-box{
     margin: 30px 35px;
-    height: 100px;
+    height: 75px;
 }
 
 .radioButton{
@@ -254,6 +265,10 @@ p>span{
     border-radius: 3.5px;
     width: 480px;
 }
+.content{
+    line-height: 1.5;
+    font-size: 15px;
+}
 
 .study{
     margin: 15px 15px;
@@ -279,8 +294,14 @@ p>span{
 }
 
 .lastContent p{
-    font-size: 13px;
     margin: 20px 15px;
+    font-size: 15px;
+    line-height: 2;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    display: -webkit-box;
 }
 
 .sentence{

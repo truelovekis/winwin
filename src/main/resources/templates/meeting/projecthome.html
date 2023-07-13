@@ -80,7 +80,9 @@
                         <br/>
                         <br/>
                         <div class="topten-title-wrap">
-                            <div class="project-sub-text2">모집 중</div>
+                            <div class="project-sub-text2" th:text="${project.studyStatus == '1' ? '모집 중' : '모집 완료'}">모집
+                                중
+                            </div>
                             <div class="vertical">&nbsp;|&nbsp;</div>
                             <div class="topten-sub-text2">
                                 <a th:text="${project.studyTitle}"
@@ -142,11 +144,13 @@
                         <br>
                         <br>
                         <div class="study-title-wrap">
-                            <div class="project-sub-text2">모집 중</div>
+                            <div class="project-sub-text2" th:text="${study.studyStatus == '1' ? '모집 중' : '모집 완료'}">모집
+                                중
+                            </div>
                             <div class="vertical">&nbsp;|&nbsp;</div>
                             <div class="study-sub-text2">
                                 <a th:text="${study.studyTitle}"
-                                   th:href="${'/project/read?studyNumber=' + study  .studyNumber}" style="color: black;
+                                   th:href="${'/project/read?studyNumber=' + study.studyNumber}" style="color: black;
 }"></a>
                             </div>
                             <div class="new-text">&nbsp;NEW</div>
@@ -177,7 +181,9 @@
                 <span class="qna-text">프로젝트하다 막힐 때, 개발자 Q&A가 도와드려요!</span>
                 <br/>
                 <br/>
-                <div class="qna-btn">질문 보러 가기</div>
+                <a th:href="@{/qna/list}">
+                <div class="qna-btn" style="color: black">질문 보러 가기</div>
+                </a>
             </div>
             <div class="qna-sub-wrap2">
                 <img class="qna-img" th:src="@{/img/qna.PNG}" alt="qna-img">

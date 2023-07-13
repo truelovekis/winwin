@@ -22,6 +22,7 @@ public class projectController {
 
     private final StudyService studyService;
 
+    /*조회*/
     @GetMapping("/read")
     public String projectRead(Long studyNumber, Model model) {
         studyService.readUpdate(studyNumber);
@@ -32,6 +33,7 @@ public class projectController {
         return "/project/projectRead";
     }
 
+    /*글쓰기 수정 화면*/
     @GetMapping("/modify")
     public String update2(Long studyNumber, Model model) {
         StudyVo studyVo = studyService.studyFind(studyNumber);
@@ -39,6 +41,7 @@ public class projectController {
         return "/project/projectModify";
     }
 
+    /*글쓰기 수정*/
     @PostMapping("/modify")
     public RedirectView update(StudyVo studyVo, RedirectAttributes redirectAttributes) {
         studyService.studyModify(studyVo);
@@ -46,6 +49,7 @@ public class projectController {
         return new RedirectView("/meeting/home");
     }
 
+    /*글쓰기 삭제*/
     @GetMapping("/delete")
     public RedirectView delete(Long studyNumber) {
         studyService.studyLikeRemove(studyNumber);
@@ -53,13 +57,13 @@ public class projectController {
         return new RedirectView("/meeting/home");
     }
 
-
+    /*글쓰기*/
     @GetMapping("/write")
     public String projectWrite() {
         return "/project/projectWrite";
     }
 
-
+    /*글쓰기 보내기*/
     @PostMapping("/write")
     public RedirectView write(StudyDto studyDto, HttpServletRequest req) {
 

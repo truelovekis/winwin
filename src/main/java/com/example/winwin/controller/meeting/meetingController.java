@@ -24,7 +24,6 @@ public class meetingController {
         System.out.println(projectList);
         model.addAttribute("projectList", projectList);
         model.addAttribute("studyList", studyList);
-
         return "meeting/projecthome";
     }
 
@@ -34,7 +33,6 @@ public class meetingController {
         List<StudyVo> projectList = studyService.otherProjectList(categoryNumber);
         System.out.println(projectList);
         model.addAttribute("projectList", projectList);
-
         return "meeting/projectmeeting";
     }
 
