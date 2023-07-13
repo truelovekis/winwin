@@ -39,13 +39,13 @@ public interface AdminMapper{
     public List<AdminVo> selectSearchWing(AdminWingSearchVo adminWingSearchVo);
 
     // 전체 신고 조회
-    public List<AdminVo> selectReport();
+    public List<PoliceVo> selectReport(PoliceVo policeVo);
 
     // 검색한 신고 조회
     public List<AdminVo> selectSearchReport(AdminReportSearchVo adminReportSearchVo);
 
     // 전체 댓글 신고 조회
-    public List<AdminVo> selectReportComment();
+    public List<PoliceCommentVo> selectReportComment(PoliceCommentVo policeCommentVo);
 
     // 검색한 댓글 신고 조회
     public List<AdminVo> selectSearchReportComment(AdminCommentReportSearchVo adminCommentReportSearchVo);
@@ -63,7 +63,7 @@ public interface AdminMapper{
     public void updateUser(Long userNumber, String userStatus);
 
     // 게시글 신고 상태 변경
-    public void updateBoard(Long policeBoard, String boardStatus);
+    public void updateBoard(Long policeNumber, String boardStatus);
 
     // 댓글 신고 상태 변경
     public void updateCommentReport(Long policeNumber, String commentStatus);

@@ -1,8 +1,10 @@
 package com.example.winwin.mapper.board;
 
+import com.example.winwin.dto.admin.AdminVo;
 import com.example.winwin.dto.board.CommunityDto;
 import com.example.winwin.dto.board.QnaDto;
 import com.example.winwin.dto.board.QsBridgeDto;
+import com.example.winwin.vo.board.QnaVo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,4 +48,11 @@ class QnaMapperTest {
     }
 
 
+    @Test
+    void selectQna() {
+        QnaVo qnaVo = new QnaVo();
+        qnaVo.setQnaContent("간호사");
+        qnaVo.setQnaTitle("간호사");
+        qnaMapper.selectQna();
+    }
 }

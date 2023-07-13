@@ -33,6 +33,8 @@
         <typeAlias type="com.example.winwin.dto.admin.AdminReportSearchVo" alias="adminReportSearchVo"/>
         <typeAlias type="com.example.winwin.dto.admin.AdminCommentReportSearchVo" alias="adminCommentReportSearchVo"/>
         <typeAlias type="com.example.winwin.dto.admin.MainCategoryVo" alias="mainCategoryVo"/>
+        <typeAlias type="com.example.winwin.dto.admin.PoliceVo" alias="policeVo"/>
+        <typeAlias type="com.example.winwin.dto.admin.PoliceCommentVo" alias="policeCommentVo"/>
         <!--   관리자 페이지    -->
 
 
@@ -97,6 +99,10 @@
         <typeAlias type="com.example.winwin.dto.board.QnaCommentDto" alias="qnaCommentDto"/>
         <typeAlias type="com.example.winwin.dto.board.QnaGoodDto" alias="qnaGoodDto"/>
         <typeAlias type="com.example.winwin.dto.board.QnaCommentUdDto" alias="qnaCommentUdDto"/>
+        <typeAlias type="com.example.winwin.vo.board.QnaVo" alias="qnaVo"/>
+        <typeAlias type="com.example.winwin.vo.board.QnaCommentVo" alias="qnaCommentVo"/>
+        <typeAlias type="com.example.winwin.vo.board.QnaCommentUdVo" alias="qnaCommentUdVo"/>
+        <typeAlias type="com.example.winwin.vo.board.QnaProfileVo" alias="qnaProfileVo"/>
         <!--     -->
 
         <!-- Qs -->

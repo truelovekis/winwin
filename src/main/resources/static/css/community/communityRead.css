@@ -208,7 +208,6 @@ footer{
 
 .first1{
     background-color: #fff;
-    /*margin-top: 47px;*/
     padding-top: 35px;
 }
 
@@ -772,7 +771,7 @@ footer{
     cursor: pointer;
 }
 
-/*==================================================*/
+/*!*==================================================*!*/
 /* 모달 창 스타일 */
 .reportModal {
     display: none;

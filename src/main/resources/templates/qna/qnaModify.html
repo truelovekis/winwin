@@ -25,7 +25,7 @@
 <body>
 <header class="header" th:replace="fragment/header :: header"></header>
 <section>
-  <form th:action="@{/qna/write}" method="post" class="qna-form">
+  <form th:action="@{/qna/modify}" method="post" class="qna-form">
   <!-- 태그 필터 -->
   <main class="main1">
     <div class="tag-wrap">
@@ -127,19 +127,19 @@
     <div class="first">
       <div class="profil-box">
         <img src="../img/corgi-g5894d3ae3_1920.jpg" width="25px" height="25px">
-        <div class="nickName"><h3 th:text="${qna.userNickname}"></h3></div>
+        <div class="nickName"><h3 th:text="${qna.userNickname}">truluvkis</h3></div>
       </div>
 
 
 
-
+<input type="hidden" name="qnaNumber" th:value="${qna.qnaNumber}">
       <div class="contentTitle">
         <div class="title">
-          <input type="text" name="qnaTitle" class="inputTitle" id="count_memo" minlength = "10" maxlength="100" placeholder="제목을 입력해주세요." style="font-family:NanumSquareLight;"/>
+          <input th:value="${qna.qnaTitle}" type="text" name="qnaTitle" class="inputTitle" id="count_memo" minlength = "10" maxlength="100" placeholder="제목을 입력해주세요." style="font-family:NanumSquareLight;"/>
           <div class="count"><span id="cnt">0 / 50</span></div>
         </div>
         <div class="content">
-                    <textarea name="qnaContent" id="" cols="30" rows="10" class="textarea" placeholder="궁금한 내용을 적어주세요.
+                    <textarea th:text="${qna.qnaContent}" name="qnaContent" id="" cols="30" rows="10" class="textarea" placeholder="궁금한 내용을 적어주세요.
 질문 내용이 구제척일수록 정확한 답변을 받을 수 있어요." style="font-family:NanumSquareLight;"></textarea>
         </div>
       </div>
@@ -163,7 +163,7 @@
         </ul>
       </div>
       <div class="button">
-        <button type="button" class="writeOk">등록하기</button>
+        <button type="submit" class="writeOk">등록하기</button>
       </div>
     </div> <!-- div.second -->
   </div> <!-- div.big-box -->

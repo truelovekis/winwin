@@ -216,31 +216,88 @@
     </select>
 
     <!--  전체 게시글 신고 조회  -->
-    <select id="selectReport" resultType="adminVo">
-        SELECT WU.USER_NUMBER,
-               pb.police_number as police_board,
-               WU.USER_NAME,
-        USER_ID,
-        big_name,
-        Pb.police_date,
-        PC.CATEGORY_NAME as police_category_name,
-        pb.board_STATUS
-        FROM WW_USER WU
-        JOIN police_board pb on WU.user_number = pb.user_number
-        join big_category bc on pb.big_code = bc.big_code
-        JOIN POLICE_CATEGORY PC ON PB.police_category = PC.category_number
+    <select id="selectReport" resultType="policeVo">
+        SELECT POLICE_NUMBER, BC.BIG_NAME, BOARD_NUMBER, PC.CATEGORY_NAME, J1. USER_NUMBER,
+               TO_CHAR(POLICE_DATE,'YYYY-MM-DD') AS POLICE_DATE,
+               TITLE, STATUS,
+               U.USER_NAME, U.USER_ID
+        FROM (
+                 SELECT POLICE_NUMBER, PB.BIG_CODE, BOARD_NUMBER, POLICE_CATEGORY, USER_NUMBER, POLICE_DATE,
+                        C.TITLE, C.STATUS
+                 FROM POLICE_BOARD PB
+                          JOIN (
+                     SELECT COMMUNITY_NUMBER, COMMUNITY_TITLE AS TITLE, COMMUNITY_STATUS AS STATUS, 400 AS BIG_CODE
+                     FROM COMMUNITY
+                 ) C
+                               ON PB.BIG_CODE = C.BIG_CODE AND PB.BOARD_NUMBER = C.COMMUNITY_NUMBER
+
+                 UNION ALL
+                 SELECT POLICE_NUMBER, PB.BIG_CODE, BOARD_NUMBER, POLICE_CATEGORY, USER_NUMBER, POLICE_DATE,
+                        Q.TITLE, Q.STATUS
+                 FROM POLICE_BOARD PB
+                          JOIN (
+                     SELECT QNA_NUMBER, QNA_TITLE AS TITLE, '0' AS STATUS, 300 AS BIG_CODE
+                     FROM QNA
+                 ) Q
+                               ON PB.BIG_CODE = Q.BIG_CODE AND PB.BOARD_NUMBER = Q.QNA_NUMBER
+                 UNION ALL
+                 SELECT POLICE_NUMBER, PB.BIG_CODE, BOARD_NUMBER, POLICE_CATEGORY, USER_NUMBER, POLICE_DATE,
+                        CI.TITLE, CI.STATUS
+                 FROM POLICE_BOARD PB
+                          JOIN (
+                     SELECT CAREERINFO_NUMBER, CAREERINFO_TITLE AS TITLE, '0' AS STATUS, 200 AS BIG_CODE
+                     FROM CAREERINFO
+                 ) CI
+                               ON PB.BIG_CODE = CI.BIG_CODE AND PB.BOARD_NUMBER = CI.CAREERINFO_NUMBER
+                 UNION ALL
+                 SELECT POLICE_NUMBER, PB.BIG_CODE, BOARD_NUMBER, POLICE_CATEGORY, USER_NUMBER, POLICE_DATE,
+                        S.TITLE, S.STATUS
+                 FROM POLICE_BOARD PB
+                          JOIN (
+                     SELECT STUDY_NUMBER, STUDY_TITLE AS TITLE, '0' AS STATUS, 500 AS BIG_CODE
+                     FROM STUDY
+                 ) S
+                               ON PB.BIG_CODE = S.BIG_CODE AND PB.BOARD_NUMBER = S.STUDY_NUMBER
+                 UNION ALL
+                 SELECT POLICE_NUMBER, PB.BIG_CODE, BOARD_NUMBER, POLICE_CATEGORY, USER_NUMBER, POLICE_DATE,
+                        SH.TITLE, SH.STATUS
+                 FROM POLICE_BOARD PB
+                          JOIN (
+                     SELECT SHARE_NUMBER, SHARE_TITLE AS TITLE, '0' AS STATUS, 600 AS BIG_CODE
+                     FROM SHARE_FREE
+                 ) SH
+                               ON PB.BIG_CODE = SH.BIG_CODE AND PB.BOARD_NUMBER = SH.SHARE_NUMBER
+             )J1
+                 JOIN BIG_CATEGORY BC ON J1.BIG_CODE = BC.BIG_CODE
+                 JOIN POLICE_CATEGORY PC ON J1.POLICE_CATEGORY = PC.CATEGORY_NUMBER
+                 JOIN WW_USER U ON J1.USER_NUMBER = U.USER_NUMBER
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="userName != null and userName != ''">
+                AND USER_NAME LIKE '%' || #{userName} || '%'
+            </if>
+            <if test="bigCode != null and bigCode != ''">
+                AND J1.BIG_CODE LIKE '%' || #{bigCode} || '%'
+            </if>
+            <if test="categoryNumber != null and categoryNumber != ''">
+                AND CATEGORY_NUMBER LIKE '%' || #{categoryNumber} || '%'
+            </if>
+            <if test="status != null and status != ''">
+                AND STATUS LIKE '%' || #{status} || '%'
+            </if>
+        </trim>
+        ORDER BY POLICE_DATE DESC
     </select>
 
     <!-- 검색한 게시글 신고 조회-->
     <select id="selectSearchReport" parameterType="adminReportSearchVo" resultType="adminVo">
         SELECT WU.USER_NUMBER,
-        pb.police_number as police_board,
+        pb.police_number as police_number,
         WU.USER_NAME,
         USER_ID,
         big_name,
-        Pb.police_date,
-        PC.CATEGORY_NAME as police_category_name,
-        PB.BOARD_STATUS
+        to_char(Pb.police_date, 'yyyy-mm-dd') as police_date,
+        PC.CATEGORY_NAME as category_name,
+        PB.BOARD_STATUS as status
         FROM WW_USER WU
         LEFT OUTER JOIN police_board pb on WU.user_number = pb.user_number
         left outer join big_category bc on pb.big_code = bc.big_code
@@ -262,21 +319,81 @@
     </select>
 
 <!--  전체 댓글 신고 조회   -->
-    <select id="selectReportComment">
-    SELECT WU.USER_NUMBER,
-           pc.police_NUMBER,
-    WU.USER_NAME,
-    USER_ID,
-    big_name,
-    Pc.comment_date,
-    PC2.CATEGORY_NAME as police_category_name,
-    pc.comment_status
-    FROM WW_USER WU
-    JOIN police_comment pc on WU.user_number = pc.user_number
-    join big_category bc on pc.big_code = bc.big_code
-    JOIN POLICE_CATEGORY PC2 on pc.police_category = PC2.category_number
-    </select>
+    <select id="selectReportComment" resultType="policeCommentVo">
+<!--    SELECT WU.USER_NUMBER,-->
+<!--           pc.police_NUMBER,-->
+<!--    WU.USER_NAME,-->
+<!--    USER_ID,-->
+<!--    big_name,-->
+<!--    Pc.comment_date,-->
+<!--    PC2.CATEGORY_NAME as police_category_name,-->
+<!--    pc.comment_status-->
+<!--    FROM WW_USER WU-->
+<!--    JOIN police_comment pc on WU.user_number = pc.user_number-->
+<!--    join big_category bc on pc.big_code = bc.big_code-->
+<!--    JOIN POLICE_CATEGORY PC2 on pc.police_category = PC2.category_number-->
 
+        SELECT J1.POLICE_NUMBER, BC.BIG_NAME, COMMENT_NUMBER, PC.CATEGORY_NAME, J1. USER_NUMBER,
+        TO_CHAR(COMMENT_DATE,'YYYY-MM-DD') AS COMMENT_DATE,
+        CONTENT, STATUS,
+        U.USER_NAME, U.USER_ID
+        FROM (
+        SELECT POLICE_NUMBER, PM.BIG_CODE, CM.COMMENT_NUMBER, POLICE_CATEGORY, USER_NUMBER, COMMENT_DATE,
+        CM.CONTENT, CM.STATUS
+        FROM POLICE_COMMENT PM
+        JOIN (
+        SELECT COMMUNITY_COMMENT.COMMENT_NUMBER, COMMENT_CONTENT AS CONTENT, COMMUNITY_COMMENT_STATUS AS STATUS, 400 AS BIG_CODE
+        FROM COMMUNITY_COMMENT
+        ) CM
+        ON PM.BIG_CODE = CM.BIG_CODE AND PM.COMMENT_NUMBER = CM.COMMENT_NUMBER
+
+        UNION ALL
+        SELECT POLICE_NUMBER, PM.BIG_CODE, QM.COMMENT_NUMBER, POLICE_CATEGORY, USER_NUMBER, COMMENT_DATE,
+        QM.CONTENT, QM.STATUS
+        FROM POLICE_COMMENT PM
+        JOIN (
+        SELECT QNA_COMMENT.COMMENT_NUMBER, COMMENT_CONTENT AS CONTENT, QNA_COMMENT_STATUS AS STATUS, 300 AS BIG_CODE
+        FROM QNA_COMMENT
+        ) QM
+        ON PM.BIG_CODE = QM.BIG_CODE AND PM.COMMENT_NUMBER = QM.COMMENT_NUMBER
+        UNION ALL
+        SELECT POLICE_NUMBER, PM.BIG_CODE, SM.COMMENT_NUMBER, POLICE_CATEGORY, USER_NUMBER, COMMENT_DATE,
+        SM.CONTENT, SM.STATUS
+        FROM POLICE_COMMENT PM
+        JOIN (
+        SELECT STUDY_COMMENT.COMMENT_NUMBER, COMMENT_CONTENT AS CONTENT, STUDY_COMMENT_STATUS AS STATUS, 500 AS BIG_CODE
+        FROM STUDY_COMMENT
+        ) SM
+        ON PM.BIG_CODE = SM.BIG_CODE AND PM.COMMENT_NUMBER = SM.COMMENT_NUMBER
+        UNION ALL
+        SELECT POLICE_NUMBER, PM.BIG_CODE, M.COMMENT_NUMBER, POLICE_CATEGORY, USER_NUMBER, COMMENT_DATE,
+        M.CONTENT, M.STATUS
+        FROM POLICE_COMMENT PM
+        JOIN (
+        SELECT CAREERINFO_COMMENT.COMMENT_NUMBER, COMMENT_CONTENT AS CONTENT, CAREER_COMMENT_STATUS AS STATUS, 200 AS BIG_CODE
+        FROM CAREERINFO_COMMENT
+        ) M
+        ON PM.BIG_CODE = M.BIG_CODE AND PM.COMMENT_NUMBER = M.COMMENT_NUMBER
+
+        )J1
+        JOIN BIG_CATEGORY BC ON J1.BIG_CODE = BC.BIG_CODE
+        JOIN POLICE_CATEGORY PC ON J1.POLICE_CATEGORY = PC.CATEGORY_NUMBER
+        JOIN WW_USER U ON J1.USER_NUMBER = U.USER_NUMBER
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="userName != null and userName != ''">
+                AND U.USER_NAME LIKE '%' || #{userName} || '%'
+            </if>
+            <if test="bigCode != null and bigCode != ''">
+                AND bc.BIG_CODE LIKE '%' || #{bigCode} || '%'
+            </if>
+            <if test="categoryNumber != null and categoryNumber != ''">
+                AND PC.CATEGORY_NUMBER LIKE '%' || #{categoryNumber} || '%'
+            </if>
+            <if test="status != null and status != ''">
+                AND STATUS LIKE '%' || #{status} || '%'
+            </if>
+        </trim>
+    </select>
 <!--  검색한 댓글 신고 조회  -->
     <select id="selectSearchReportComment" parameterType="adminCommentReportSearchVo" resultType="adminVo">
         SELECT WU.USER_NUMBER,
@@ -340,7 +457,7 @@
     <update id="updateBoard">
         update police_board
         set board_status = #{boardStatus}
-        where police_number = #{policeBoard}
+        where police_number = #{policeNumber}
     </update>
 
 <!-- 신고 댓글 상태 변경  -->
