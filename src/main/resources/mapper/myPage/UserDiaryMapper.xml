@@ -1,5 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.myPage.UserDiaryMapper">
+    <insert id="diaryInsert">
+        INSERT INTO DIARY (DIARY_NUMBER, DIARY_TITLE, DIARY_CONTENT, USER_NUMBER)
+        VALUES(SEQ_DIARY.NEXTVAL, #{diaryTitle}, #{diaryContent}, #{userNumber})
+    </insert>
+
+    <select id="diaryList" resultType="diaryVo">
+        SELECT DIARY_NUMBER , DIARY_TITLE , DIARY_CONTENT , DIARY_DATE
+        FROM DIARY d
+        WHERE USER_NUMBER = #{userNumber}
+    </select>
+
+    <update id="diaryUpdate">
+        UPDATE DIARY
+        SET DIARY_TITLE=#{diaryTitle}, DIARY_CONTENT=#{diaryContent}, DIARY_DATE = SYSDATE
+        WHERE DIARY_NUMBER= #{diaryNumber}
+    </update>
+
+    <select id="selectListPage" resultType="diaryVo">
+        SELECT DIARY_NUMBER , DIARY_TITLE , DIARY_CONTENT , DIARY_DATE
+        FROM (
+        SELECT rownum rn , DIARY_NUMBER , DIARY_TITLE , DIARY_CONTENT , DIARY_DATE
+        FROM (
+        SELECT rownum rn , DIARY_NUMBER , DIARY_TITLE , DIARY_CONTENT , DIARY_DATE
+        FROM DIARY d
+        WHERE USER_NUMBER = #{userNumber}
+        )
+            <![CDATA[
+            WHERE ROWNUM  <= #{criteria.page} * #{criteria.amount}
+            ]]>
+        )
+        WHERE rn > (#{criteria.page} - 1) * #{criteria.amount}
+    </select>
+
+    <select id="selectTotal" resultType="_int">
+        SELECT COUNT(DIARY_NUMBER)
+        FROM DIARY d
+    </select>
 
 </mapper>

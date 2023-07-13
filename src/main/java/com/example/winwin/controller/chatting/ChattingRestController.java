@@ -14,14 +14,16 @@ import javax.servlet.http.HttpServletRequest;
 public class ChattingRestController {
     private final ChattingService chattingService;
 
+    /* 쪽지 보내기 */
     @PostMapping("/inputModal")
     public void sendChatting(@RequestBody ChattingDto chattingDto, HttpServletRequest req){
         Long chattingFrom = (Long)req.getSession().getAttribute("userNumber");
         chattingDto.setChattingFrom(chattingFrom);
 
-//        System.out.println(chattingDto);
+        System.out.println(chattingDto);
         chattingService.sendChatting(chattingDto);
     }
+
 
     @GetMapping("/sendModal")
     public ChattingVo chattingSelectModel(Long chattingNumber){

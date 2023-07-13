@@ -16,15 +16,16 @@ share.click(function CopyUrlToClipboard() {
     tempInput.remove(); // 임시 input 요소 제거
     alert("복사가 완료 되었습니다.");
 });
-
-$(".main-mentor").on("click",'.message-button' ,function () {
-    $(".modal-wrap1").removeClass("none");
-    $(".modal-wrap1").css({
-        position: "fixed",
-        left: "50%",
-        top: "50%",
-        transform: "translate(-50%, -50%)",
-    });
+//
+// $(".main-mentor").on("click",'.message-button' ,function () {
+//     $(".modal-wrap1").removeClass("none");
+//     $(".modal-wrap1").css({
+//         position: "fixed",
+//         left: "50%",
+//         top: "50%",
+//         transform: "translate(-50%, -50%)",
+//     });
+// }
 
 //멘토 신청하기 버튼
 $(".main-mentor").on("click",'.message-button' ,function () {
@@ -274,7 +275,6 @@ function showMentor(map){
                     </div>
                 `;
         });
-    });
         text+=`
             
             </div>
@@ -592,4 +592,38 @@ $('.modal-wrap1').on('click', '.um-btn' , function (){
             console.log("실패");
         }
     })
+});
+
+// $('.main-mentor').on('click','.chatting-button', function (){
+//     $('.input-wrap').show();
+//
+// });
+
+/* 쪽지 모달창 */
+$(function () {
+    $(".chatting-button").click(function () {
+        $(".input-wrap").fadeIn();
+        let userNickname = $(this).closest('.item').find('.mento-name2').text();
+        let num = $(this).closest('.item').find('.mentor-num').data('num');
+        console.log(num);
+
+        $('.chattingTo').text(userNickname);
+        $('.chattingTo').data('num', num);
+    });
+});
+
+$(".chatting-button").on("click", function () {
+    $(".input-wrap").removeClass("none");
+
+    $('body').css('overflow', 'hidden');
+});
+
+$(".input-wrap").on("click", function (e) {
+
+    if ($(e.target).hasClass("input-wrap")) {
+        $(".input-wrap").addClass("none");
+        $('body').css('overflow', 'auto');
+
+        $('.form-reset')[0].reset();
+    }
 });

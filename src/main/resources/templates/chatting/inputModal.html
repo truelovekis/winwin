@@ -28,7 +28,7 @@
           <h3>쪽지 보내기</h3>
           <div class="send-user-nickname">
             <h5>To.&nbsp;</h5>
-            <h5 class="chattingTo" name="chattingTo" th:text="${nickname}"></h5>
+            <h5 class="chattingTo" name="chattingTo" th:text="${nickname}" th:data-num="${chattingTo}"></h5>
             <h5>님</h5>
           </div>
           <textarea id="inputMessage" cols="80"

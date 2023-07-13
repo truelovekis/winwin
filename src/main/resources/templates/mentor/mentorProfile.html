@@ -7,6 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/mentormentee/mentorProfile.css}" />
     <link rel="stylesheet" th:href="@{/css/fragment/header.css}" />
     <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
+    <link rel="stylesheet" th:href="@{/css/chatting/inputModal.css}" />
     <link
             href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css"
             rel="stylesheet"
@@ -28,6 +29,9 @@
 <input type="hidden" th:value="${session.mentorNumber}" class="mentor">
 <input type="hidden" th:value="${session.userNumber}" class="user">
 <header class="header" th:replace="fragment/header :: header"></header>
+<!--쪽지 모달창-->
+<div th:replace="chatting/inputModal :: inputModal(nickname='', chattingTo='')"></div>
+<!--쪽지 모달창 끝-->
 <!-- 모달창 -->
 <article class="modal-wrap1 none">
     <input type="hidden" class="addNumber"/>
@@ -185,11 +189,11 @@
 
         </main>
         <!-- /태그 필터 -->
+
         <!-- 내 프로필 -->
         <th:block th:if="${session.mentorNumber != null and session.mentorNumber > -1}">
             <div class="myProfile-box">
                 <input type="hidden" th:value="${session.mentorNumber}" class="myNumber"/>
-                <!--          <input type="hidden" value="6">-->
                 <article class="item myProfile">
                     <section class="mento-profile">
                         <div class="item__box">
@@ -216,7 +220,7 @@
                         <div class="skill-tags">
                             <!-- 스킬 나열 -->
                             <div class="skill" th:each="skill : ${skill}">
-                                <span class="skill" th:text="${skill.skillName}"/>
+                                <span class="skill2" th:text="${skill.skillName}"/>
                             </div>
                             <!-- /스킬 나열 -->
                         </div>
@@ -278,6 +282,7 @@
                     <section class="mento-profile">
                         <div class="item__box">
                             <input type="hidden" class="mentor-num" th:data-num="${mentorList.mentorNumber}" th:value="${mentorList.mentorNumber}"/>
+<!--                            <input type="hidden" class="mentor-num" th:data-num2="${mentorList.mentorNumber}" th:value="${mentorList.mentorNumber}"/>-->
                             <a th:href="@{/mentor/profile(mentorNumber=${mentorList.mentorNumber})}" class="page-move">
                                 <div class="flex">
                                     <div class="mento-profile-photo-box">
@@ -286,7 +291,7 @@
                                              th:style="${'background-image: url(/profile/' + profile.pfpUuid + '_' + profile.pfpSystemName + ')'}"/>
                                     </div>
                                     <div class="flex text-wrap" >
-                                        <div class="mento-name"> <span th:text="${mentorList.userName}"></span> </div>
+                                        <div class="mento-name"> <span class="mento-name2" th:text="${mentorList.userName}"></span> </div>
                                         <div class="mento-career">
                                             <span th:text="${mentorList.careerCompany}"/> · <span th:text="${mentorList.careerAnnual}"/>년차
                                         </div>
@@ -317,13 +322,13 @@
                                     </div>
                                 </button>
                                 <th:block th:if="${mentorList.umStatus} == 'N'">
-                                    <button class="message-button">대기중</button>
+                                    <button class="d-button">대기중</button>
                                 </th:block>
                                 <th:block th:if="${mentorList.umStatus} == '0'">
                                     <button class="message-button">신청하기</button>
                                 </th:block>
                                 <th:block th:if="${mentorList.umStatus} == 'Y'">
-                                    <button class="message-button">쪽지 보내기</button>
+                                    <button class="chatting-button">쪽지 보내기</button>
                                 </th:block>
                             </div>
                         </div>
@@ -389,5 +394,6 @@
 <script th:src="@{/js/user/loginModal.js}"></script>
 <script th:src="@{/js/fragment/header.js}" ></script>
 <script th:src="@{/js/mentor/mentorProfile.js}"></script>
+<script th:src="@{/js/chatting/inputModal.js}"></script>
 </body>
 </html>

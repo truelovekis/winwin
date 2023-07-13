@@ -4,6 +4,16 @@
     text-decoration: none;
 }
 
+.apply-wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.apply-container{
+    width: 600px;
+}
+
 p {
     margin-top: 0;
     margin-bottom: 0;
@@ -46,6 +56,7 @@ svg {
 .intr {
     font-size: 0.875rem;
     color: #64748b;
+    margin-top: 2px;
 }
 .TT {
     display: flex;
@@ -56,7 +67,7 @@ svg {
     display: flex;
     align-items: center;
     border: 1px solid #ddd;
-    width: 50%;
+    /*width: 50%;*/
     height: 70px;
     border-radius: 3px;
 }
@@ -76,21 +87,22 @@ svg {
 }
 
 .add {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     border: 1px solid #ddd;
-    width: 34%;
+    /*width: 34%;*/
     color: #94a3b8;
     background-color: #f1f5f9;
     border-radius: 3px;
-    padding: 10px 5px;
+    padding: 10px;
     flex-direction: column;
+}
+
+.add-box{
+    line-height: 1.5;
 }
 
 .skill {
     display: flex;
-    justify-content: center;
+    /*justify-content: center;*/
     flex: 1 1 0%;
     align-items: center;
     width: 80%;
@@ -110,7 +122,6 @@ svg {
     color: rgb(148 163 184 / var(--tw-text-opacity));
 }
 .apply {
-    margin-left: 67%;
     width: 80px;
     background-color: #1b5192;
     height: 30px;
@@ -118,9 +129,15 @@ svg {
     color: rgb(255 255 255 / var(--tw-text-opacity));
     border-radius: 0.25rem;
     border: none;
-    margin-top: 25px;
     cursor: pointer;
     margin-bottom: 5%;
+    font-weight: bold;
+}
+
+.apply-btn{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
 }
 
 .pp {
@@ -130,4 +147,16 @@ svg {
 
 .tw-cursor-pointer {
     cursor: pointer;
+}
+
+.mento-profile-photo-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 70%;
+    overflow: hidden;
+    display: flex;
+    margin-right: 10px;
+    /* 이미지 중앙 맞추기 */
+    justify-content: center;
+    margin-left: 10px;
 }
