@@ -1,6 +1,5 @@
 package com.example.winwin.controller.cs;
 
-import com.example.winwin.dto.board.CommunityCommentDto;
 import com.example.winwin.dto.board.CsCommentDto;
 import com.example.winwin.service.cs.CsReplyService;
 import com.example.winwin.vo.board.CsReplyVo;
@@ -34,11 +33,10 @@ public class CsReplyRestController {
 
     @PatchMapping("/{commentNumber}")
     public void commentModify(@PathVariable("commentNumber") Long commentNumber, @RequestBody CsCommentDto csCommentDto) {
-        System.out.println("11111111111111111111111"+commentNumber);
+        System.out.println("modify 레컨 들어옴");
         csCommentDto.setCommentNumber(commentNumber);
-        System.out.println("222222222222222");
         csReplyService.modify(csCommentDto);
-        System.out.println("555555555555555555");
+        System.out.println("레컨 끝남");
     }
 
     @GetMapping("/{commentNumber}")
@@ -46,9 +44,12 @@ public class CsReplyRestController {
         return csReplyService.findComment(commentNumber);
     }
 
+
     @DeleteMapping("/{commentNumber}")
     public void commentRemove(@PathVariable("commentNumber") Long commentNumber) {
+        System.out.println("zzzzzzzzzzzzzzzzzz");
         csReplyService.remove(commentNumber);
+        System.out.println("완료");
     }
 
 }
