@@ -3,6 +3,10 @@
   padding: 0px;
 }
 
+a{
+  color: black;
+}
+
 /*header {*/
 /*  position: sticky;*/
 /*  top: 0px;*/
@@ -343,8 +347,8 @@ h4 {
 }
 
 .project-box {
-  width: 430px;
-  min-height: 250px;
+  width: 438px;
+  max-height: 250px;
   border-radius: 10px;
   border: 1px solid#ddd;
   border-color: rgb(234, 236, 238);
@@ -354,17 +358,13 @@ h4 {
   position: relative;
 }
 
-#first-box {
-  margin-left: 15px;
-}
-
 .icon {
   display: flex;
   align-items: center;
 }
 
 .project-tag {
-  width: 70px;
+  width: 80px;
   height: 20px;
   background-color: #f1f5f9;
   border-radius: 5px;
@@ -373,21 +373,32 @@ h4 {
   align-items: center;
 }
 
-.project-tag > a {
-  font-size: 13px;
+.project-tag > strong {
+  font-size: 11px;
   color: #94a3b8;
-  font-weight: 1200;
+  font-weight: 700;
 }
 
 .project-title {
+  display: flex;
+  justify-content: center;
   margin-top: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  font-size: 23px;
 }
 
-.project-title > span {
+.project-status{
+  font-size: 23px;
+  color: rgb(22, 163, 74);
+  font-weight: 600;
+  /*white-space: nowrap;*/
+  /*margin: auto 0;*/
+}
+
+.project-title-s {
   font-size: 23px;
   font-weight: 700;
-  width: 418px; /* 너비는 변경될수 있습니다. */
+  width: 345px; /* 너비는 변경될수 있습니다. */
   text-overflow: ellipsis; /* 위에 설정한 100px 보다 길면 말줄임표처럼 표시합니다. */
   display: -webkit-box;
   -webkit-line-clamp: 1;
@@ -399,6 +410,7 @@ h4 {
   font-size: 14px;
   font-weight: 500;
   width: 418px; /* 너비는 변경될수 있습니다. */
+  height: 84px;
   text-overflow: ellipsis; /* 위에 설정한 100px 보다 길면 말줄임표처럼 표시합니다. */
   line-height: 1.5;
   display: -webkit-box;
@@ -408,13 +420,14 @@ h4 {
 }
 
 .goal {
-  margin-top: 50px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .goal > span {
   font-size: 14px;
   font-weight: 700;
-  color: #94a3b8;
+  color: #000000;
 }
 
 .goal > svg {
@@ -845,6 +858,16 @@ h4 {
   font-size: 15px;
   font-weight: 900;
   color: #fff;
+}
+
+.project-like-btn{
+  color: #94a3b8;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.box-click{
+  cursor: pointer;
 }
 
 .none {

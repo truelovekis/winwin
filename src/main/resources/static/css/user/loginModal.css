@@ -722,6 +722,11 @@
     height: 45px;
 }
 
+.job-dep-text{
+    font-size: 8px;
+    color: #e06c6c;
+}
+
 .job-select:hover {
     /*box-shadow: 0 10px 10px -5px;*/
     -webkit-box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.12), 0 10px 10px -5px rgba(0, 0, 0, 0.24);
@@ -829,7 +834,7 @@
 .job-select-tag {
     display: flex;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 10px;
     overflow-wrap: normal;
     width: 260px;
 }
@@ -975,6 +980,12 @@
     font-weight: 900;
     color: #fff;
 }
+
+#join-pw-input,
+#join-pw-input2{
+    -webkit-text-security: disc;
+}
+
 
 /*===========================================*/
 /*mentorGoal-box*/

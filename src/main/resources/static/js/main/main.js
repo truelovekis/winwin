@@ -2,7 +2,7 @@
 let $slideBox = $(".project-slide");
 let $slideContent = $(".project-box");
 
-let slideWidth = 487;
+let slideWidth = 490;
 
 let slideCnt = $slideContent.length;
 

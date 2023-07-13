@@ -97,10 +97,10 @@ public class MyPageController {
 //        return "myPage/receiveMessage";
 //    }
 
-    @GetMapping("/sendMessage")
-    public String sendMessage(){
-        return "myPage/sendMessage";
-    }
+//    @GetMapping("/sendMessage")
+//    public String sendMessage(){
+//        return "myPage/sendMessage";
+//    }
 
     @GetMapping("/resume")
     public String resume(HttpServletRequest req, Model model){
@@ -263,6 +263,7 @@ public class MyPageController {
         return "myPage/myRecord";
     }
 
+    // 받은 메세지 조회
     @GetMapping("/receiveMessage")
     public String chattingSelect(Model model, HttpServletRequest req){
         Long userNumber = (Long) req.getSession().getAttribute("userNumber");
@@ -273,6 +274,15 @@ public class MyPageController {
         return "myPage/receiveMessage";
     }
 
+    // 보낸 메세지 조회
+    @GetMapping("/sendMessage")
+    public String chattingSelectFrom(Model model, HttpServletRequest req){
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+        List<ChattingVo> chattingVoList2 = chattingService.chattingSelectFrom(userNumber);
+
+        model.addAttribute("chattingList", chattingVoList2);
+        return "myPage/sendMessage";
+    }
 
 
 }

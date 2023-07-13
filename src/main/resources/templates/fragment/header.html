@@ -76,7 +76,7 @@
         <button class="login-join">
           <a class="login-move">가입/로그인</a>
         </button>
-        <img th:src="@{/img/profile-basic.png}" alt="" class="basic-img" />
+<!--        <img th:src="@{/img/profile-basic.png}" alt="" class="basic-img" />-->
         </th:block>
         <th:block th:unless="${session.userNumber == null} ">
         <!-- 로그인 했을 때 -->
@@ -86,8 +86,8 @@
            <span class="wing-point" th:text="${session.userWing}"></span>
            <img th:src="@{/img/wing-icon.png}" alt="" class="wing-icon"/>
            <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-            <a th:href="@{/myPage/myMentor}" class="h-user-name" ><span th:text="${session.userName}"></span>님</a>
-            <a href=""><img th:src="@{/img/profile-basic.png}" alt="" class="profile-img" /></a>
+            <a th:href="@{/myPage/myMentor}" class="h-user-name" ><span th:text="${session.userNickname}"></span>님</a>
+<!--            <a href=""><img th:src="@{/img/profile-basic.png}" alt="" class="profile-img" /></a>-->
            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
           <a class="h-logout"  th:href="@{/user/logout}">로그아웃</a>
         </div>
@@ -96,7 +96,7 @@
         <!-- 관리자가 로그인 했을 때 -->
         <div class="h-profile" th:if="${session.userNumber != null and #strings.equals(session.userStatus, 'a')}">
           <a th:href="@{/admin/user}" class="h-user-name" ><span th:text="${session.userName}"></span>님</a>
-          <a href=""><img th:src="@{/img/profile-basic.png}" alt="" class="profile-img" /></a>
+<!--          <a href=""><img th:src="@{/img/profile-basic.png}" alt="" class="profile-img" /></a>-->
           <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
           <a class="h-logout"  th:href="@{/user/logout}">로그아웃</a>
         </div>

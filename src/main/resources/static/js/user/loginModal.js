@@ -73,6 +73,8 @@ $('.modal-next').on('click', function(){
             return;
         }else if($('#self-number').val() == '' || $('#self-gender').val() == ''){
             return;
+        }else if($('#self-gender').val() >= 5){
+            return;
         }else if(!numberPattern.test($('#self-number').val()) || !numberPattern.test($('#self-gender').val())){
             return;
         }else if($('#userPhoneNumber').val() == ''){
@@ -108,8 +110,21 @@ $('.modal-next').on('click', function(){
     }
 
     if($current.hasClass('job-dep-box')){
+
+        if($('.job-tag').val() == null){
+            $('.job-dep-text').html("최소 1개 이상의 태그를 선택해 주세요.");
+            return;
+        }
+
         $next = $('.goal-box');
     }
+
+    // if($current.hasClass('goal-box')){
+    //     if($('.goal-mm-value').val() == null){
+    //         $next = $('.goal-box');
+    //     }
+    // }
+
 
     if ($current.hasClass('identity-belong-box')){
         let $selectBox = $('select[name=identity-belong]');
@@ -212,29 +227,26 @@ $('.join-link').on('click', function(e){
 
 // 가입 목적 버튼에 따라 다음페이지가 달라짐
 $('.btn1').on('click', function(){
-    console.log("btn1!!!!");
-    console.log($('.goal-mm-btn').find($('.positionInput')).val());
+
     $('.goal-mm-value').val('mentor');
 
     $next = $('.identity-belong-box');
 
-
 })
 
 $('.btn3').on('click', function (){
-    console.log($('.goal-mm-btn').find($('.positionInput')).val());
-    $('.goal-mm-value').val('mentorMentee');
-    $next = $('.identity-belong-box');
 
+    $('.goal-mm-value').val('mentorMentee');
+
+    $next = $('.identity-belong-box');
 })
 
 $('.btn2').on('click', function (){
-    console.log($(this).find($('.positionInput')).val());
+
     $('.goal-mm-value').val('mentee');
+
     $next = $('.sign-box');
-
 })
-
 
 
 
@@ -541,6 +553,8 @@ $('#self-number').on('blur', function (){
 $('#self-gender').on('blur', function (){
     if(!numberPattern.test($('#self-gender').val())){
         $('#user-rrnumber-msg').text('올바른 형식의 주민등록번호가 아닙니다.');
+    }else if ($('#self-gender').val() >= 5){
+        $('#user-rrnumber-msg').text('올바른 형식의 주민등록번호가 아닙니다.');
     }else{
         $('#user-rrnumber-msg').text('');
     }
@@ -562,6 +576,16 @@ $('#userVerification').on('blur', function (){
         $('#user-phone-msg').text('')
     }
 });
+
+// 관심분야 태그 필수 선택 (최소 1개)
+// $('.job-select-tag').on('blur', function (){
+//     if($('.job-tag').val() == null){
+//         $('.job-dep-text').html("최소 1개 이상의 태그를 선택해 주세요.");
+//     }else{
+//         $('.job-dep-text').html('');
+//     }
+// });
+
 
 // ========================================
 // 약관 동의 js

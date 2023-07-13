@@ -18,15 +18,23 @@ public class ChattingService {
 
     // 쪽지 보내기
     public void sendChatting(ChattingDto chattingDto){
-        if(chattingDto == null){throw new IllegalArgumentException("채팅 정보 xxxxxxxxxxx");};
+        if(chattingDto == null){throw new IllegalArgumentException("채팅 정보 xxxxxxxxxxx");}
         chattingMapper.sendChatting(chattingDto);
     }
 
-    // 쪽지 조회하기
+    // 쪽지 조회하기 (받은 쪽지)
     public List<ChattingVo> chattingSelect(Long userNumber){
         if(userNumber == null){throw new IllegalArgumentException("존재하지 않는 회원");}
 
         return Optional.ofNullable(chattingMapper.chattingSelect(userNumber))
+                .orElseThrow(()->{throw new IllegalArgumentException("존재하지 않는 회원 번호");});
+    }
+
+    // 쪽지 조회하기 (보낸 쪽지)
+    public List<ChattingVo> chattingSelectFrom(Long userNumber){
+        if(userNumber == null){throw new IllegalArgumentException("존재하지 않는 회원");}
+
+        return Optional.ofNullable(chattingMapper.chattingSelectFrom(userNumber))
                 .orElseThrow(()->{throw new IllegalArgumentException("존재하지 않는 회원 번호");});
     }
     
@@ -36,5 +44,20 @@ public class ChattingService {
         if(chattingNumber == null){throw new IllegalArgumentException("존재하지 않는 쪽지");}
         
         return chattingMapper.chattingSelectModal(chattingNumber);
+    }
+
+    // 쪽지 모달창 조회하기 (보낸 쪽지)
+    @Transactional(readOnly = true)
+    public ChattingVo chattingSendModal(Long chattingNumber){
+        if(chattingNumber == null){throw new IllegalArgumentException("존재하지 않는 쪽지");}
+
+        return chattingMapper.chattingSendModal(chattingNumber);
+    }
+
+    // 답장하기 (회원 이름, 닉네임 조회)
+    public ChattingVo selectChattingName(Long chattingNumber){
+        if(chattingNumber == null){throw new IllegalArgumentException("존재하지 않는 쪽지");}
+
+        return chattingMapper.selectChattingName(chattingNumber);
     }
 }
