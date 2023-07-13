@@ -1,60 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.winwin.mapper.myPage.ResumeMapper">
+<mapper namespace="com.example.winwin.mapper.myPage.ActivityMapper">
     <select id="selectActiveBoardList" resultType="activeBoardVo">
-        SELECT 200 BIG_CATEGORY, C.CAREERINFO_NUMBER BOARD_NUMBER,
-               CAREERINFO_TITLE BOARD_TITLE, DBMS_LOB.SUBSTR(CAREERINFO_CONTENT, 100, 1) BOARD_CONTENT,
-               TO_CHAR(CAREERINFO_DATE, 'yyyy-mm-dd') BOARD_DATE, CAREERINFO_CNT BOARD_CNT,
-               (SELECT count(user_number) from CAREERINFO_COMMENT CC WHERE CC.CAREERINFO_NUMBER = C.CAREERINFO_NUMBER) BOARD_COMMENT,
-               (SELECT count(user_number) from CAREERINFO_LIKE CL WHERE CL.CAREERINFO_NUMBER = C.CAREERINFO_NUMBER) BOARD_LIKE,
-               -1 BOARD_GOOD
-        FROM CAREERINFO C
-        WHERE C.USER_NUMBER = 1
-        UNION ALL
-        SELECT 300 BIG_CATEGORY, Q.QNA_NUMBER BOARD_NUMBER,
-               QNA_TITLE BOARD_TITLE, QNA_CONTENT BOARD_CONTENT,
-               TO_CHAR(QNA_DATE, 'yyyy-mm-dd') BOARD_DATE, QNA_CNT BOARD_CNT,
-               (SELECT count(user_number) from QNA_COMMENT QC WHERE QC.QNA_NUMBER = Q.QNA_NUMBER) BOARD_COMMENT,
-               -1 BOARD_LIKE,
-               (SELECT count(user_number) from QNA_GOOD QG WHERE QG.QNA_NUMBER = Q.QNA_NUMBER) BOARD_GOOD
-        FROM QNA Q
-        WHERE USER_NUMBER = 1
-        UNION ALL
-        SELECT 400 BIG_CATEGORY, C.COMMUNITY_NUMBER BOARD_NUMBER,
-               COMMUNITY_TITLE BOARD_TITLE, COMMUNITY_CONTENT BOARD_CONTENT,
-               TO_CHAR(COMMUNITY_DATE, 'yyyy-mm-dd') BOARD_DATE, COMMUNITY_CNT BOARD_CNT,
-               (SELECT count(user_number) from COMMUNITY_COMMENT CC WHERE CC.COMMUNITY_NUMBER = C.COMMUNITY_NUMBER) BOARD_COMMENT,
-               -1 BOARD_LIKE,
-               (SELECT count(user_number) from COMMUNITY_GOOD CG WHERE CG.COMMUNITY_NUMBER = C.COMMUNITY_NUMBER) BOARD_GOOD
-        FROM COMMUNITY C
-        WHERE USER_NUMBER = 1
-        UNION ALL
-        SELECT 500 BIG_CATEGORY, S.STUDY_NUMBER BOARD_NUMBER,
-               STUDY_TITLE BOARD_TITLE, STUDY_CONTENT BOARD_CONTENT,
-               TO_CHAR(STUDY_DATE, 'yyyy-mm-dd') BOARD_DATE, STUDY_READ_CNT BOARD_CNT,
-               (SELECT count(user_number) from STUDY_COMMENT SC WHERE SC.STUDY_NUMBER = S.STUDY_NUMBER) BOARD_COMMENT,
-               (SELECT count(user_number) from STUDY_LIKE SL WHERE SL.STUDY_NUMBER = S.STUDY_NUMBER) BOARD_LIKE,
-               -1 BOARD_GOOD
-        FROM STUDY S
-        WHERE USER_NUMBER = 1
-        UNION ALL
-        SELECT 600 BIG_CATEGORY, SHARE_NUMBER BOARD_NUMBER,
-               SHARE_TITLE BOARD_TITLE, SHARE_CONTENT BOARD_CONTENT,
-               TO_CHAR(SHARE_DATE, 'yyyy-mm-dd') BOARD_DATE, SHARE_READ_CNT BOARD_CNT,
-               -1 BOARD_COMMENT,
-               -1 BOARD_LIKE,
-               -1 BOARD_GOOD
-        FROM SHARE_FREE
-        WHERE USER_NUMBER = 1
-        UNION ALL
-        SELECT 700 BIG_CATEGORY, C.CS_NUMBER BOARD_NUMBER,
-               CS_TITLE BOARD_TITLE, CS_CONTENT BOARD_CONTENT,
-               TO_CHAR(CS_DATE, 'yyyy-mm-dd') BOARD_DATE, -1 BOARD_CNT,
-               (SELECT count(user_number) from CS_COMMENT CC WHERE CC.CS_NUMBER = C.CS_NUMBER) BOARD_COMMENT,
-               -1 BOARD_LIKE,
-               -1 BOARD_GOOD
-        FROM CS C
-        WHERE USER_NUMBER = 1
-        ORDER BY BOARD_DATE DESC
+        SELECT BIG_CATEGORY, BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, BOARD_DATE, BOARD_CNT, BOARD_COMMENT, BOARD_LIKE, BOARD_GOOD
+        FROM(
+                SELECT ROWNUM RN, BIG_CATEGORY, BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, BOARD_DATE, BOARD_CNT, BOARD_COMMENT, BOARD_LIKE, BOARD_GOOD
+                FROM(
+                        SELECT 200 BIG_CATEGORY, C.CAREERINFO_NUMBER BOARD_NUMBER,
+                               CAREERINFO_TITLE BOARD_TITLE, DBMS_LOB.SUBSTR(CAREERINFO_CONTENT, 100, 1) BOARD_CONTENT,
+                               TO_CHAR(CAREERINFO_DATE, 'yyyy-mm-dd') BOARD_DATE, CAREERINFO_CNT BOARD_CNT,
+                               (SELECT count(user_number) from CAREERINFO_COMMENT CC WHERE CC.CAREERINFO_NUMBER = C.CAREERINFO_NUMBER) BOARD_COMMENT,
+                               (SELECT count(user_number) from CAREERINFO_LIKE CL WHERE CL.CAREERINFO_NUMBER = C.CAREERINFO_NUMBER) BOARD_LIKE,
+                               -1 BOARD_GOOD
+                        FROM CAREERINFO C
+                        WHERE C.USER_NUMBER = #{userNumber}
+                        UNION ALL
+                        SELECT 300 BIG_CATEGORY, Q.QNA_NUMBER BOARD_NUMBER,
+                               QNA_TITLE BOARD_TITLE, QNA_CONTENT BOARD_CONTENT,
+                               TO_CHAR(QNA_DATE, 'yyyy-mm-dd') BOARD_DATE, QNA_CNT BOARD_CNT,
+                               (SELECT count(user_number) from QNA_COMMENT QC WHERE QC.QNA_NUMBER = Q.QNA_NUMBER) BOARD_COMMENT,
+                               -1 BOARD_LIKE,
+                               (SELECT count(user_number) from QNA_GOOD QG WHERE QG.QNA_NUMBER = Q.QNA_NUMBER) BOARD_GOOD
+                        FROM QNA Q
+                        WHERE USER_NUMBER = #{userNumber}
+                        UNION ALL
+                        SELECT 400 BIG_CATEGORY, C.COMMUNITY_NUMBER BOARD_NUMBER,
+                               COMMUNITY_TITLE BOARD_TITLE, COMMUNITY_CONTENT BOARD_CONTENT,
+                               TO_CHAR(COMMUNITY_DATE, 'yyyy-mm-dd') BOARD_DATE, COMMUNITY_CNT BOARD_CNT,
+                               (SELECT count(user_number) from COMMUNITY_COMMENT CC WHERE CC.COMMUNITY_NUMBER = C.COMMUNITY_NUMBER) BOARD_COMMENT,
+                               -1 BOARD_LIKE,
+                               (SELECT count(user_number) from COMMUNITY_GOOD CG WHERE CG.COMMUNITY_NUMBER = C.COMMUNITY_NUMBER) BOARD_GOOD
+                        FROM COMMUNITY C
+                        WHERE USER_NUMBER = #{userNumber}
+                        UNION ALL
+                        SELECT 500 BIG_CATEGORY, S.STUDY_NUMBER BOARD_NUMBER,
+                               STUDY_TITLE BOARD_TITLE, STUDY_CONTENT BOARD_CONTENT,
+                               TO_CHAR(STUDY_DATE, 'yyyy-mm-dd') BOARD_DATE, STUDY_READ_CNT BOARD_CNT,
+                               (SELECT count(user_number) from STUDY_COMMENT SC WHERE SC.STUDY_NUMBER = S.STUDY_NUMBER) BOARD_COMMENT,
+                               (SELECT count(user_number) from STUDY_LIKE SL WHERE SL.STUDY_NUMBER = S.STUDY_NUMBER) BOARD_LIKE,
+                               -1 BOARD_GOOD
+                        FROM STUDY S
+                        WHERE USER_NUMBER = #{userNumber}
+                        UNION ALL
+                        SELECT 600 BIG_CATEGORY, SHARE_NUMBER BOARD_NUMBER,
+                               SHARE_TITLE BOARD_TITLE, SHARE_CONTENT BOARD_CONTENT,
+                               TO_CHAR(SHARE_DATE, 'yyyy-mm-dd') BOARD_DATE, SHARE_READ_CNT BOARD_CNT,
+                               -1 BOARD_COMMENT,
+                               -1 BOARD_LIKE,
+                               -1 BOARD_GOOD
+                        FROM SHARE_FREE
+                        WHERE USER_NUMBER = #{userNumber}
+                        UNION ALL
+                        SELECT 700 BIG_CATEGORY, C.CS_NUMBER BOARD_NUMBER,
+                               CS_TITLE BOARD_TITLE, CS_CONTENT BOARD_CONTENT,
+                               TO_CHAR(CS_DATE, 'yyyy-mm-dd') BOARD_DATE, -1 BOARD_CNT,
+                               (SELECT count(user_number) from CS_COMMENT CC WHERE CC.CS_NUMBER = C.CS_NUMBER) BOARD_COMMENT,
+                               -1 BOARD_LIKE,
+                               -1 BOARD_GOOD
+                        FROM CS C
+                        WHERE USER_NUMBER = #{userNumber}
+                        ORDER BY BOARD_DATE DESC
+                      )
+                <![CDATA[
+                WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
+                ]]>
+                )
+        WHERE RN > (#{criteria.page} - 1) * #{criteria.amount}
     </select>
 </mapper>

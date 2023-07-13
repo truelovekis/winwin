@@ -11,6 +11,7 @@ import com.example.winwin.mapper.myPage.ActivityMapper;
 import com.example.winwin.mapper.myPage.ResumeMapper;
 import com.example.winwin.mapper.myPage.ResumePrMapper;
 import com.example.winwin.mapper.myPage.UserInfoMapper;
+import com.example.winwin.vo.infinityScroll.Criteria;
 import com.example.winwin.vo.myPage.ActiveBoardVo;
 import com.example.winwin.vo.myPage.MyPageVo;
 import lombok.RequiredArgsConstructor;
@@ -46,12 +47,12 @@ public class MyPageService {
 //활동 내역
 //    내가 커뮤니티에 작성한 글 리스트 보기
     @Transactional(readOnly = true)
-    public List<ActiveBoardVo> getActiveBoardList(Long userNumber){
+    public List<ActiveBoardVo> getActiveBoardList(Long userNumber, Criteria criteria){
         if(userNumber == null){
             throw new IllegalArgumentException("로그인이 필요합니다.");
         }
 
-        return activityMapper.selectActiveBoardList(userNumber);
+        return activityMapper.selectActiveBoardList(userNumber, criteria);
     }
 
 //이력관리
