@@ -45,4 +45,7 @@ public interface StudyMapper {
     /*조회수 처리*/
     public void readCount(Long studyNumber);
 
+/*    *//*모집중 처리*//*
+    public List<StudyVo> recruiting(int cateNumber);*/
+
 }

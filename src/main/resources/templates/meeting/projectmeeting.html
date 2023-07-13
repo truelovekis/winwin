@@ -97,7 +97,9 @@
                     <span class="qna-text">프로젝트하다 막힐 때, 개발자 Q&A가 도와드려요!</span>
                     <br/>
                     <br/>
-                    <div class="qna-btn">질문 보러 가기</div>
+                    <a th:href="@{/qna/list}">
+                    <div class="qna-btn" style="color: black">질문 보러 가기</div>
+                    </a>
                 </div>
                 <div class="qna-sub-wrap2">
                     <img class="qna-img" th:src="@{/img/qna.PNG}" alt="qna-img">
@@ -114,7 +116,7 @@
                         </div>
                         <br/>
                         <div class="project-text-wrap">
-                            <div class="project-sub-text2">모집 중</div>
+                            <div class="project-sub-text2"th:text="${project.studyStatus == '1' ? '모집 중' : '모집 완료'}">모집 중</div>
                             <div class="vertical">&nbsp;|&nbsp;</div>
                             <div class="project-sub-text3">
                                 <a th:text="${project.studyTitle}"

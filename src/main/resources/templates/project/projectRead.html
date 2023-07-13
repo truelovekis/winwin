@@ -90,7 +90,8 @@
 
             <div class="container-box">
                 <div class="head">
-                    <div class="smallTitle"><p th:text="${studyVo.categoryNumber == 1 ? '프로젝트' : '스터디/모임'}"></p></div>
+                    <div class="smallTitle"><p th:text="${studyVo.categoryNumber == 1 ? '사이드 프로젝트' : '스터디/모임'}"></p>
+                    </div>
 
                     <div class="dropdown">
                         <button class="dropbtn">
@@ -116,9 +117,8 @@
 
                     <div class="Title">
                         <div class="blueTitle">
-                            <h3> 모집 중 | </h3>
-
-                            <span style="line-height: 1.8;" th:text="${studyVo.studyTitle}"></span>
+                            <h3 th:text="${studyVo.studyStatus == '1' ? '모집 중 |' : '모집 완료 |'}"></h3>
+                            <span style="line-height: 1.8; font-weight: bold;" th:text="${studyVo.studyTitle}"></span>
                         </div>
                         <div class="justTitle">
                             <div class="date"><p th:text="${studyVo.studyDate}"></p></div>
@@ -286,8 +286,11 @@
                             </div>
                             <h3 style="font-size: 20px;
                              color: rgb(22, 163, 74);
-                             font-weight: 600;"> 모집 중 | </h3>
-                            <h3 th:text="${other.studyTitle}">메타버스 관련 프로젝트 팀원 모집</h3>
+                             font-weight: 600;" th:text="${other.studyStatus == '1' ? '모집 중 |' : '모집 완료 |'}"> 모집 중
+                                 </h3>
+                            <a class="other-box" th:text="${other.studyTitle}"
+                               th:href="${'/project/read?studyNumber=' + other.studyNumber}" style="color: black;
+}"></a>
                         </div>
 
                         <div class="lastContent"><p th:text="${other.studySummaryContent}">메타버스 관련 주제로 프로젝트를 진행하고
