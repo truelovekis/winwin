@@ -4,7 +4,7 @@
     <select id="loginMentor" resultType="Long">
         SELECT NVL(mentor_number, -1) mentor_number , mentor_status
         FROM WW_USER w LEFT OUTER JOIN MENTOR m
-        ON w.USER_NUMBER = m.MENTOR_NUMBER
+        ON w.USER_NUMBER = m.USER_NUMBER
         WHERE USER_ID = #{userId} AND USER_PASSWORD = #{userPassword}
     </select>
 

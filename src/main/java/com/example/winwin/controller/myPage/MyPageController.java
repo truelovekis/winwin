@@ -7,8 +7,8 @@ import com.example.winwin.dto.user.UserDto;
 import com.example.winwin.dto.user.UserPfpDto;
 import com.example.winwin.service.chatting.ChattingService;
 import com.example.winwin.service.myPage.MyPageService;
-import com.example.winwin.vo.myPage.ChattingVo;
 import com.example.winwin.vo.myPage.ActiveBoardVo;
+import com.example.winwin.vo.myPage.ChattingVo;
 import com.example.winwin.vo.myPage.MyPageVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -40,10 +40,6 @@ public class MyPageController {
 
     @GetMapping("/activityDetail")
     public String activityDetail(HttpServletRequest req){
-        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
-        List<ActiveBoardVo> activeBoardVoList = myPageService.getActiveBoardList(userNumber);
-        req.setAttribute("activeBoardList", activeBoardVoList);
-
         return "myPage/activityDetail";
     }
 
@@ -97,16 +93,16 @@ public class MyPageController {
 //        return "myPage/receiveMessage";
 //    }
 
-    @GetMapping("/sendMessage")
-    public String sendMessage(){
-        return "myPage/sendMessage";
-    }
+//    @GetMapping("/sendMessage")
+//    public String sendMessage(){
+//        return "myPage/sendMessage";
+//    }
 
     @GetMapping("/resume")
     public String resume(HttpServletRequest req, Model model){
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
-//        myPageService.getResume(userNumber);
-        List<ResumeDto> resumeList = myPageService.getResumeList(1L);
+        myPageService.getResume(userNumber);
+        List<ResumeDto> resumeList = myPageService.getResumeList(userNumber);
 
         model.addAttribute("resumeList", resumeList);
 
@@ -121,8 +117,8 @@ public class MyPageController {
     @GetMapping("/resumePr")
     public String resumePR(HttpServletRequest req, Model model){
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
-//        myPageService.getResume(userNumber);
-        List<ResumePrDto> prList = myPageService.getPrList(1L);
+        myPageService.getResume(userNumber);
+        List<ResumePrDto> prList = myPageService.getPrList(userNumber);
 
         model.addAttribute("prList", prList);
 
@@ -144,10 +140,8 @@ public class MyPageController {
     public RedirectView resumeWrite(ResumeDto resumeDto, HttpServletRequest req,
                                     @RequestParam("resumeFile") MultipartFile file){
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
-//        resumeDto.setUserNumber(userNumber);
-        resumeDto.setUserNumber(1L);
-
-        Long resumeNumber = myPageService.registerResume(resumeDto);
+        resumeDto.setUserNumber(userNumber);
+        resumeDto.setUserNumber(userNumber);
 
         if( !file.isEmpty() ) {
             try {
@@ -171,8 +165,8 @@ public class MyPageController {
     @PostMapping("/resumePrWrite")
     public RedirectView resumePrWrite(ResumePrDto resumePrDto, HttpServletRequest req){
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
-//        resumePrDto.setUserNumber(userNumber);
-        resumePrDto.setUserNumber(1L);
+        resumePrDto.setUserNumber(userNumber);
+        resumePrDto.setUserNumber(userNumber);
 
         myPageService.registerPr(resumePrDto);
 
@@ -188,8 +182,8 @@ public class MyPageController {
     @PostMapping("/userDelete")
     public String userDelete(HttpServletRequest req){
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
-//        myPageService.withdrawUser(userNumber);
-        myPageService.withdrawUser(1L);
+        myPageService.withdrawUser(userNumber);
+        myPageService.withdrawUser(userNumber);
 
         return "main/main";
     }
@@ -199,12 +193,11 @@ public class MyPageController {
     public String userInfoModify(HttpServletRequest req, Model model){
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
 
-//        MyPageVo userInfo = myPageService.getUserInfo(userNumber);
-        MyPageVo userInfo = myPageService.getUserInfo(1L);
+        MyPageVo userInfo = myPageService.getUserInfo(userNumber);
         model.addAttribute("userInfo", userInfo);
 
-//        UserPfpDto Profile = myPageService.getProfile(userNumber);
-        UserPfpDto profile = myPageService.getProfile(1L);
+        UserPfpDto Profile = myPageService.getProfile(userNumber);
+        UserPfpDto profile = myPageService.getProfile(userNumber);
         model.addAttribute("profile", profile);
 
         return "myPage/userInfoModify";
@@ -215,18 +208,15 @@ public class MyPageController {
     public RedirectView updateUserInfo(HttpServletRequest req, RedirectAttributes redirectAttributes,
                                        UserDto userDto, @RequestParam("pfpFile") MultipartFile file){
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
-//        userDto.setUserNumber(userNumber);
-        userDto.setUserNumber(1L);
+        userDto.setUserNumber(userNumber);
         redirectAttributes.addFlashAttribute("userDto", userDto);
         myPageService.updateUserInfo(userDto);
 
         if( !file.isEmpty() ) {
             try {
-//                myPageService.removeProfile(userNumber);
-                myPageService.removeProfile(1L);
+                myPageService.removeProfile(userNumber);
                 UserPfpDto userPfpDto = myPageService.saveFile(file);
-//                userPfpDto.setUserNumber(userNumber);
-                userPfpDto.setUserNumber(1L);
+                userPfpDto.setUserNumber(userNumber);
                 myPageService.registerProfile(userPfpDto);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -240,10 +230,9 @@ public class MyPageController {
     public RedirectView interestTagModify(HttpServletRequest req, RedirectAttributes redirectAttributes,
                                           @RequestParam("subNumber") List<String> tagList){
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
-//        myPageService.modifyInterestTag(userNumber, tagList);
-        myPageService.modifyInterestTag(1L, tagList);
+        myPageService.modifyInterestTag(userNumber, tagList);
 
-        MyPageVo userInfo = myPageService.getUserInfo(1L);
+        MyPageVo userInfo = myPageService.getUserInfo(userNumber);
         redirectAttributes.addFlashAttribute("userInfo", userInfo);
 
         return new RedirectView("/myPage/userInfoModify");
@@ -263,6 +252,7 @@ public class MyPageController {
         return "myPage/myRecord";
     }
 
+    // 받은 메세지 조회
     @GetMapping("/receiveMessage")
     public String chattingSelect(Model model, HttpServletRequest req){
         Long userNumber = (Long) req.getSession().getAttribute("userNumber");
@@ -273,6 +263,15 @@ public class MyPageController {
         return "myPage/receiveMessage";
     }
 
+    // 보낸 메세지 조회
+    @GetMapping("/sendMessage")
+    public String chattingSelectFrom(Model model, HttpServletRequest req){
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+        List<ChattingVo> chattingVoList2 = chattingService.chattingSelectFrom(userNumber);
+
+        model.addAttribute("chattingList", chattingVoList2);
+        return "myPage/sendMessage";
+    }
 
 
 }

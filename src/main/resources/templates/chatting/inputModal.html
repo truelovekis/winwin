@@ -24,11 +24,11 @@
 <main>
     <div class="input-wrap none" th:fragment="inputModal(nickname, chattingTo)">
       <div class="input-container">
-        <div class="input-message-box" th:data-ctNum="chattingNumber">
+        <div class="input-message-box">
           <h3>쪽지 보내기</h3>
           <div class="send-user-nickname">
             <h5>To.&nbsp;</h5>
-            <h5 class="chattingTo" name="chattingTo" th:text="${nickname}"></h5>
+            <h5 class="chattingTo" name="chattingTo" th:text="${nickname}" th:data-num="${chattingTo}"></h5>
             <h5>님</h5>
           </div>
           <textarea id="inputMessage" cols="80"

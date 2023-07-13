@@ -18,11 +18,11 @@ public class CareerInfoVo {
     private Long careerInfoCnt;
     private int careerInfoLike;
     private Long mentorNumber;
+    private Long userNumber;
     private String userName;
     private String userNickname;
-    private Long userNumber;
+    private String pfpSystemname;
     private String pfpUploadPath;
-    private String pfpSystename;
     private String pfpUuid;
     private String userBelong;
     private String careerAnnual;

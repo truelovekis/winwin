@@ -29,7 +29,7 @@
 <header class="header"  th:replace="fragment/header :: header"></header>
 <main>
 <div th:replace="chatting/sendModal :: sendModal" ></div>
-<div th:replace="chatting/inputModal :: inputModal"></div>
+<div th:replace="chatting/inputModal :: inputModal(nickname='', chattingTo='')"></div>
     <div class="wrap">
         <div class="container">
             <div th:replace="fragment/myPageSide :: myPageSide"></div>
@@ -48,18 +48,19 @@
                 </div>
                 <!-- 보낸 쪽지 메인 -->
                 <div class="send-main">
-                    <div class="message-box">
-                        <div class="message-box-top">
-                            <div class="sender-profile">
-                                <img class="sender-img" th:src="@{/img/profile-basic.png}"/>
-                                <span name="chattingTo" class="sender">정소이</span>
+                    <div class="message-box" th:each="chatting : ${chattingList}">
+                        <span class="message-list" th:data-cnum="${chatting.chattingNumber}"></span>
+                            <div class="message-box-top">
+                                <div class="sender-profile">
+                                    <img class="sender-img" th:src="@{/img/profile-basic.png}"/>
+                                    <span name="chattingTo" class="sender" th:text="${chatting.userNickname}"></span>
+                                </div>
+                                <button class="send-reply" th:data-uunum="${chatting.userNumber}">✉ 보내기</button>
                             </div>
-                            <button class="send-reply">✉ 보내기</button>
-                        </div>
-                        <span class="message-content" name="chattingContent">안녕하세용 소이예용 잘부탁드려용 안녕하세용 소이예용 잘부탁드려용 안녕하세용 소이예용 잘부탁드려용 안녕하세용 소이예용 잘부탁드려용 안녕하세용 소이예용 잘부탁드려용 안녕하세용 소이예용 잘부탁드려용 안녕하세용 소이예용 잘부탁드려용 안녕하세용 소이예용 잘부탁드려용</span>
-                        <div class="message-bottom-box">
-                            <span class="message-date" name="chattingDate">2010-03-02</span>
-                        </div>
+                            <span class="message-content" th:text="${chatting.chattingContent}"></span>
+                            <div class="message-bottom-box">
+                                <span class="message-date" th:text="${chatting.chattingDate}"></span>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -71,13 +72,6 @@
         src="https://code.jquery.com/jquery-3.6.3.js"
         integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
         crossorigin="anonymous"
-></script>
-<script th:src="@{/lib/jspdf.min.js}"></script>
-<script
-        src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
-        integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer"
 ></script>
 <script th:src="@{/js/fragment/header.js}" ></script>
 <script th:src="@{/js/myPage/sendMessage.js}"></script>
