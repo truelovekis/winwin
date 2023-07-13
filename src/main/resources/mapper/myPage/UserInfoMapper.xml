@@ -14,7 +14,7 @@
         select sc.SUB_NAME
         from MENTOR m join SUB_CATEGORY sc
                            on m.sub_number = sc.SUB_NUMBER
-        where m.USER_NUMBER = #{userNumber} and m.MENTOR_STATUS = 1
+        where m.USER_NUMBER = #{userNumber}
     </select>
     <select id="selectInterestTag" resultType="map">
         SELECT SB.SUB_NUMBER val, SUB_NAME name

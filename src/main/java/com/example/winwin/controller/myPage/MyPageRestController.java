@@ -35,8 +35,7 @@ public class MyPageRestController {
         ResumeVo resumeVo = new ResumeVo();
 
         resumeVo.setResumeDto(myPageService.getResume(resumeNumber));
-//        resumeVo.setUserPhoneNumber(myPageService.getPhoneNumber(userNumber));
-        resumeVo.setUserPhoneNumber(myPageService.getPhoneNumber(1L));
+        resumeVo.setUserPhoneNumber(myPageService.getPhoneNumber(userNumber));
         resumeVo.setResumeFileDto(myPageService.getResumeFile(resumeNumber));
 
         return resumeVo;

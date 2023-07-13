@@ -253,6 +253,9 @@ public class MyPageService {
 //        전체 경로와 파일이름을 연결한다.
         File uploadFile = new File(uploadPath, sysName);
 
+//        매개변수로 받은 파일을 우리가 만든 경로와 이름으로 저장한다.
+//        file.transferTo(uploadFile);
+
 //        썸네일 크기로 파일을 저장한다.
         if(Files.probeContentType(uploadFile.toPath()).startsWith("image")) {
             FileOutputStream out = new FileOutputStream(new File(uploadPath, sysName));
