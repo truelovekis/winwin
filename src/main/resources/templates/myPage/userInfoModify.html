@@ -53,11 +53,11 @@
                   </label>
                   <input class="profile-file" type="file" id="img-box" name="pfpFile">
                   <div class="text-box">
-                    <span th:if="${userInfo.mentorTag[0] == null}">Mentee</span>
-                    <span th:unless="${userInfo.mentorTag[0] == null}">
+                    <span th:if="${userInfo.mentorTag.size == 0}">Mentee</span>
+                    <span th:unless="${userInfo.mentorTag.size == 0}">
                       Mentor
                       <span>|</span>
-                      <span th:text="${userInfo.mentorTag[0]}">it개발</span></span>
+                      <span th:text="${userInfo.mentorTag[0]}"></span></span>
                     <div class="name">
                       <span id="user-name" th:text="${userInfo.userVo.userName}">이름</span>
                       <span class="mentor-grade">Lv.<span class="mentor-grade2" th:text="${userInfo.userVo.gradeName}"/></span>
