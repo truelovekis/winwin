@@ -18,13 +18,13 @@
     </select>
 
     <select id="selectAll" resultType="csVo">
-        SELECT CS_NUMBER, CS_CONTENT, CS_TITLE, CS_DATE, C.USER_NUMBER, U.USER_ID
+        SELECT CS_NUMBER, CS_CONTENT, CS_TITLE, CS_DATE, C.USER_NUMBER, C.CS_READ_CNT ,U.USER_ID
         FROM CS C JOIN WW_USER U
                        ON  C.USER_NUMBER = U.USER_NUMBER
         ORDER BY C.CS_NUMBER DESC
     </select>
 
-
+    <!-- 게시글 수정 -->
     <update id="update">
         UPDATE CS
         SET CS_TITLE = #{csTitle}, CS_CONTENT = #{csContent}

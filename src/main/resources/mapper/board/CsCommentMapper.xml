@@ -20,11 +20,17 @@
 
     <!-- 댓글 수정-->
     <update id="update">
-        UPDATE CS
-        SET CS_TITLE   = #{csTitle},
-            CS_CONTENT = #{csContent},
-            CS_DATE    = SYSDATE
-        WHERE CS_NUMBER = #{csNumber}
+        UPDATE CS_COMMENT
+        SET COMMENT_CONTENT = #{commentContent},
+            COMMENT_DATE = SYSDATE
+        WHERE COMMENT_NUMBER = #{commentNumber}
+
+
     </update>
+
+    <delete id="delete">
+        DELETE FROM CS_COMMENT
+        WHERE COMMENT_NUMBER = #{commentNumber}
+    </delete>
 
 </mapper>

@@ -13,5 +13,5 @@ public class CommunityProfileVo extends CommunityVo{
     private String pfpSystemName;
     private String pfpUuid;
     private String careerStartDate;
-
+    // 추가함
 }

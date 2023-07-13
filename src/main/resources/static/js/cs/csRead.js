@@ -73,7 +73,7 @@ $('.commentBtn').on('click', function(){
     $('.comment1').val('');
 });
 
-
+// 댓글 등록하기
 function register(commentObj, callback, error){
     $.ajax({
         url : "/replies/reply",
@@ -89,6 +89,7 @@ function register(commentObj, callback, error){
     });
 }
 
+// 댓글 리스트 뽑아오기
 function getList(csNumber, callback, error){
 
     $.ajax({
@@ -105,6 +106,7 @@ function getList(csNumber, callback, error){
     });
 }
 
+// 댓글 ....
 function getView(csNumber, callback, error){
     $.ajax({
         url : `/replies/list/${csNumber}`,
@@ -123,17 +125,17 @@ function getView(csNumber, callback, error){
 function showComment(replies) {
     console.log(replies);
     let text = '';
-// ↓ html 코드 가져옴
 
+// ↓ html 코드 가져옴
  replies.forEach(r => {
      text +=  `<div class="commentAi" data-num="${r.commentNumber}">
-            <input type="hidden" class="comment-num" th:value="${r.commentNumber}">
+            <input type="hidden" class="comment-num" value="${r.commentNumber}">
         <div class="profil">
             <img src="../img/corgi-g5894d3ae3_1920.jpg" height="50px" width="50px">
                 <div class="Commento"><p>코멘토 AI 봇</p></div>
                 <div class="dropdown2">
                     <button class="dropbtn2">
-                        <span class="dropbtn_icon2"> <svg data-v-bd9f2bcc="" data-v-3035bc76="" width="24" height="24" fill="black" xmlns="http://www.w3.org/2000/svg" className="c-Applicatio c-icon" style="fill: rgb(148, 155, 160);"><circle data-v-bd9f2bcc="" cx="12" cy="5.5" r="1.5"></circle><circle data-v-bd9f2bcc="" cx="12" cy="12" r="1.5"></circle><circle data-v-bd9f2bcc="" cx="12" cy="18.5" r="1.5"></circle></svg></span>
+                        <span class="dropbtn_icon2"> <svg data-v-bd9f2bcc="" data-v-3035bc76="" width="24" height="24" fill="black" xmlns="http://www.w3.org/2000/svg" class="c-Applicatio c-icon" style="fill: rgb(148, 155, 160);"><circle data-v-bd9f2bcc="" cx="12" cy="5.5" r="1.5"></circle><circle data-v-bd9f2bcc="" cx="12" cy="12" r="1.5"></circle><circle data-v-bd9f2bcc="" cx="12" cy="18.5" r="1.5"></circle></svg></span>
                     </button> `;
 
                     if(r.userNumber == loginNumber) {
@@ -142,7 +144,7 @@ function showComment(replies) {
                     
                         <a href="#">신고</a>
                         <a href="#" class="btn-modify">수정</a>
-                        <a href="#" class="btn=remote">삭제</a>
+                        <a href="#" class="btn-remove">삭제</a>
                 
                         
                         </div> `;
@@ -162,7 +164,7 @@ function showComment(replies) {
                 <button class="good" type="button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                          class="bi bi-hand-thumbs-up" viewBox="0 0 16 16">
-                        <path d="M8.864.046C7.908-.193 7.02.53 6.956 1.466c-.072 1.051-.23 2.016-.428 2.59-.125.36-.479 1.013-1.04 1.639-.557.623-1.282 1.178-2.131 1.41C2.685 7.288 2 7.87 2 8.72v4.001c0 .845.682 1.464 1.448 1.545 1.07.114 1.564.415 2.068.723l.048.03c.272.165.578.348.97.484.397.136.861.217 1.466.217h3.5c.937 0 1.599-.477 1.934-1.064a1.86 1.86 0 0 0 .254-.912c0-.152-.023-.312-.077-.464.201-.263.38-.578.488-.901.11-.33.172-.762.004-1.149.069-.13.12-.269.159-.403.077-.27.113-.568.113-.857 0-.288-.036-.585-.113-.856a2.144 2.144 0 0 0-.138-.362 1.9 1.9 0 0 0 .234-1.734c-.206-.592-.682-1.1-1.2-1.272-.847-.282-1.803-.276-2.516-.211a9.84 9.84 0 0 0-.443.05 9.365 9.365 0 0 0-.062-4.509A1.38 1.38 0 0 0 9.125.111L8.864.046zM11.5 14.721H8c-.51 0-.863-.069-1.14-.164-.281-.097-.506-.228-.776-.393l-.04-.024c-.555-.339-1.198-.731-2.49-.868-.333-.036-.554-.29-.554-.55V8.72c0-.254.226-.543.62-.65 1.095-.3 1.977-.996 2.614-1.708.635-.71 1.064-1.475 1.238-1.978.243-.7.407-1.768.482-2.85.025-.362.36-.594.667-.518l.262.066c.16.04.258.143.288.255a8.34 8.34 0 0 1-.145 4.725.5.5 0 0 0 .595.644l.003-.001.014-.003.058-.014a8.908 8.908 0 0 1 1.036-.157c.663-.06 1.457-.054 2.11.164.175.058.45.3.57.65.107.308.087.67-.266 1.022l-.353.353.353.354c.043.043.105.141.154.315.048.167.075.37.075.581 0 .212-.027.414-.075.582-.05.174-.111.272-.154.315l-.353.353.353.354c.047.047.109.177.005.488a2.224 2.224 0 0 1-.505.805l-.353.353.353.354c.006.005.041.05.041.17a.866.866 0 0 1-.121.416c-.165.288-.503.56-1.066.56z"/>
+                            <path d="M8.864.046C7.908-.193 7.02.53 6.956 1.466c-.072 1.051-.23 2.016-.428 2.59-.125.36-.479 1.013-1.04 1.639-.557.623-1.282 1.178-2.131 1.41C2.685 7.288 2 7.87 2 8.72v4.001c0 .845.682 1.464 1.448 1.545 1.07.114 1.564.415 2.068.723l.048.03c.272.165.578.348.97.484.397.136.861.217 1.466.217h3.5c.937 0 1.599-.477 1.934-1.064a1.86 1.86 0 0 0 .254-.912c0-.152-.023-.312-.077-.464.201-.263.38-.578.488-.901.11-.33.172-.762.004-1.149.069-.13.12-.269.159-.403.077-.27.113-.568.113-.857 0-.288-.036-.585-.113-.856a2.144 2.144 0 0 0-.138-.362 1.9 1.9 0 0 0 .234-1.734c-.206-.592-.682-1.1-1.2-1.272-.847-.282-1.803-.276-2.516-.211a9.84 9.84 0 0 0-.443.05 9.365 9.365 0 0 0-.062-4.509A1.38 1.38 0 0 0 9.125.111L8.864.046zM11.5 14.721H8c-.51 0-.863-.069-1.14-.164-.281-.097-.506-.228-.776-.393l-.04-.024c-.555-.339-1.198-.731-2.49-.868-.333-.036-.554-.29-.554-.55V8.72c0-.254.226-.543.62-.65 1.095-.3 1.977-.996 2.614-1.708.635-.71 1.064-1.475 1.238-1.978.243-.7.407-1.768.482-2.85.025-.362.36-.594.667-.518l.262.066c.16.04.258.143.288.255a8.34 8.34 0 0 1-.145 4.725.5.5 0 0 0 .595.644l.003-.001.014-.003.058-.014a8.908 8.908 0 0 1 1.036-.157c.663-.06 1.457-.054 2.11.164.175.058.45.3.57.65.107.308.087.67-.266 1.022l-.353.353.353.354c.043.043.105.141.154.315.048.167.075.37.075.581 0 .212-.027.414-.075.582-.05.174-.111.272-.154.315l-.353.353.353.354c.047.047.109.177.005.488a2.224 2.224 0 0 1-.505.805l-.353.353.353.354c.006.005.041.05.041.17a.866.866 0 0 1-.121.416c-.165.288-.503.56-1.066.56z"/>
                     </svg>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                          class="bi bi-hand-thumbs-up-fill hide" viewBox="0 0 16 16">
@@ -182,15 +184,15 @@ function showComment(replies) {
         </div> `;
                     }
                text +=`         
-        <div class="parent">
-            <div class="icon2">
-                <div class="date1">${timeForToday(r.commentDate)}</div>
+            <div class="parent">
+                <div class="icon2">
+                    <div class="date1">${timeForToday(r.commentDate)}</div>
+                </div>
             </div>
-        </div> `;
+        </div>`;
 
         });
     console.log("333");
-    console.log(text);
     $('#csCommentList').html(text);
 
 }
@@ -203,8 +205,8 @@ function timeForToday(value){
     const today = new Date();
     const timeValue = new Date(value);
 
-    console.log(today);
-    console.log(timeValue);
+    // console.log(today);
+    // console.log(timeValue);
 
     // Math.floor()는 소수점을 내림 처리 해준다.
     // getTime()은 1970년 01/01 을 기준으로 지금까지 몇 ms가 지났는지 알려준다.
@@ -297,10 +299,11 @@ function reportAjax(){
 
 // 리플 수정 버튼 처리
 $('#csCommentList').on('click', '.btn-modify', function (){
-    let $content = $(this).closest('.commentAi').find('.Aicontent');
-    $content.replaceWith(`
+    let content = $(this).closest('.commentAi').find('.Aicontent');
+    console.log(content);
+    content.replaceWith(`
    <div class= 'modify-box'>
-   <textarea class='modify-content'>${$content.text()}</textarea>
+   <textarea class='modify-content'>${content.text()}</textarea>
    <button type='button' class='modify-content-btn'>수정 완료</button>
    </div>
     `);
@@ -311,9 +314,8 @@ $('#csCommentList').on('click', '.btn-modify', function (){
 const csNumber = $('.cs-num').val();
 
 $('#csCommentList').on('click', '.modify-content-btn', function (){
-    console.log('modify!!!');
     let commentNumber = $(this).closest('.commentAi').data('num');
-    let commentContent = $(this).closest('modify-box').find('.modify-content').val();
+    let commentContent = $(this).closest('.modify-box').find('.modify-content').val();
 
     let commentObj = {
         commentNumber : commentNumber,
@@ -328,15 +330,16 @@ $('#csCommentList').on('click', '.modify-content-btn', function (){
 
 
 
-
+// 댓글 수정하기
 function modify(commentObj, callback, error){
-    console.log("7777777777777777")
+    console.log("modify 들어옴")
     $.ajax({
         url : `/replies/${commentObj.commentNumber}`,
         type : 'patch',
         data : JSON.stringify(commentObj),
         contentType : 'application/json; charset=utf-8',
         success : function (result){
+            console.log("modify ajax성공했따");
             if(callback){
                 callback(result);
             }
@@ -347,4 +350,49 @@ function modify(commentObj, callback, error){
 }
 
 
+// 리플 삭제 버튼 처리
+$('#csCommentList').on('click', '.btn-remove', function (e) {
+    $('.dropdown-content2').addClass('none');
 
+    let commentNumber = $(this).closest('.commentAi').data('num');
+    console.log(commentNumber);
+    remove(commentNumber, function(){
+        getList(csNumber, showComment, showError);
+    }, showError);
+
+});
+
+// 댓글 삭제
+function remove(commentNumber, callback, error){
+    $.ajax({
+        url : `/replies/${commentNumber}`,
+        type : 'delete',
+        success : function () {
+
+            console.log("replise 들어옴");
+            if(callback){
+                callback();
+                console.log("callback함수 실행!!")
+            }
+        },
+        error : error
+    });
+    console.log("js끝마침");
+}
+
+// 게시판  로그인 했을시 수정 삭제
+
+/* 수정하기 */
+// function fn_modify(csNumber){
+//     console.log("aaaaaaaaaaa")
+//     if(confirm("정말 수정하시겠습니까?")){
+//         location.href = "/cs/modify?CsNumber=" + csNumber;
+//     }
+// }
+// /*삭제 하기*/
+// function fn_remove(csNumber){
+//     console.log("bbbbbb")
+//     if(confirm("정말 삭제하시겠습니까?")){
+//         location.href = "/cs/delete?csNumber=" + csNumber;
+//     }
+// }
