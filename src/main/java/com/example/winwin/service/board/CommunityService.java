@@ -5,6 +5,7 @@ import com.example.winwin.mapper.board.CommunityMapper;
 import com.example.winwin.service.file.CommunityFileService;
 import com.example.winwin.vo.board.CommunityVo;
 import com.example.winwin.vo.board.CommunityProfileVo;
+import com.example.winwin.vo.infinityScroll.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -81,6 +82,21 @@ public class CommunityService {
 
     public List<CommunityProfileVo> registerProfile(Long userNumber){
         return communityMapper.selectUserProfile(userNumber);
+    }
+
+    //    나눔 페이지 무한스크롤
+    public List<CommunityVo> findListPage(CommunityVo communityVo){
+        if(communityVo == null){
+            throw new IllegalArgumentException("페이지 처리에 필요한 정보가 누락되었습니다.");
+        }
+
+        return communityMapper.selectScroll(communityVo);
+    }
+
+    //    나눔 메인페이지 갯수 구하기
+    public int findTotal(){
+
+        return communityMapper.selectTotal();
     }
 
 

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.board.CommunityMapper">
+
+    <!-- 커뮤니티 게시글 작성 -->
     <insert id="insert">
         <selectKey keyProperty="communityNumber" order="BEFORE" resultType="long">
             SELECT SEQ_COMMUNITY.NEXTVAL FROM DUAL
@@ -9,36 +11,34 @@
         VALUES (#{communityNumber}, #{communityTitle}, #{communityContent}, #{categoryNumber}, #{userNumber})
     </insert>
 
+    <!-- 커뮤니티 게시글 업데이트 -->
     <update id="update">
         UPDATE COMMUNITY
         SET COMMUNITY_TITLE = #{communityTitle} , COMMUNITY_CONTENT = #{communityContent}, COMMUNITY_DATE = SYSDATE
         WHERE COMMUNITY_NUMBER = #{communityNumber}
     </update>
 
+    <!-- 커뮤니티 게시글 조회수 누적 & 카운트 -->
     <update id="upHit">
         UPDATE COMMUNITY
         SET COMMUNITY_CNT = COMMUNITY_CNT+1
         WHERE COMMUNITY_NUMBER = #{communityNumber}
     </update>
 
-<!--    업데이트문으로 조회수 처리하지 말기!!!-->
-<!--    <update id="commentCnt">-->
-<!--        UPDATE COMMUNITY C-->
-<!--        SET C.COMMENT_CNT = (SELECT COUNT(COMMENT_NUMBER) FROM COMMUNITY_COMMENT WHERE COMMUNITY_NUMBER = #{communityNumber})-->
-<!--        WHERE C.COMMUNITY_NUMBER = #{communityNumber}-->
-<!--    </update>-->
-
+    <!-- 커뮤니티 댓글 카운트 -->
     <select id="commentCnt">
         SELECT COUNT(*)
         FROM COMMUNITY_COMMENT
         WHERE COMMUNITY_NUMBER = #{communityNumber}
     </select>
 
+    <!-- 커뮤니티 게시글 삭제 -->
     <delete id="delete">
         DELETE FROM COMMUNITY
         WHERE COMMUNITY_NUMBER = #{communityNumber}
     </delete>
 
+    <!-- 커뮤니티 게시글 조회 -->
     <select id="select" resultType="communityVo">
         SELECT C.COMMUNITY_NUMBER, C.COMMUNITY_CONTENT, C.COMMUNITY_TITLE, C.COMMUNITY_DATE
                , C.USER_NUMBER, C.COMMUNITY_CNT, U.USER_NICKNAME, U.USER_BELONG, U.USER_IDENTITY
@@ -47,7 +47,7 @@
         WHERE C.COMMUNITY_NUMBER = #{communityNumber}
     </select>
 
-<!--    MENTOR_CAREER / CAREER_COMPANY / CAREER_TITLE을 화면에 꽂는다. MC.CAREER_COMPANY, MC.CAREER_TITLE, U.USER_ID, U.USER_BELONG, U.USER_NICKNAME, U.USER_IDENTITY, s-->
+    <!-- 커뮤니티 게시글 리스트 조회 & 좋아요, 조회수 카운트 조회 -->
     <select id="selectAll" resultType="communityVo">
         SELECT (SELECT COUNT(*) FROM COMMUNITY_COMMENT WHERE COMMUNITY_COMMENT.COMMUNITY_NUMBER = C.COMMUNITY_NUMBER) AS COMMENT_CNT,
                (SELECT COUNT(*) FROM COMMUNITY_GOOD WHERE COMMUNITY_GOOD.COMMUNITY_NUMBER = C.COMMUNITY_NUMBER) AS LIKE_CNT
@@ -55,16 +55,15 @@
              ,C.USER_NUMBER, T.CATEGORY_NAME
         FROM COMMUNITY C JOIN WW_USER U
         ON C.USER_NUMBER = U.USER_NUMBER
-        JOIN community_category T
+        JOIN COMMUNITY_CATEGORY T
         ON C.CATEGORY_NUMBER = T.CATEGORY_NUMBER
         <if test="categoryTypeStr != 'all'">
-            and C.CATEGORY_NUMBER = #{categoryNumber}
+            AND C.CATEGORY_NUMBER = #{categoryNumber}
         </if>
---         where U.USER_STATUS != '3'
---         and C.COMMUNITY_STATUS != '0'
         ORDER BY C.COMMUNITY_NUMBER DESC
     </select>
 
+    <!-- 커뮤니티(로그인시) 프로필 조회 -->
     <select id="selectUserProfile" resultType="CommunityProfileVo">
         SELECT MC.CAREER_COMPANY, MC.CAREER_TITLE, P.PFP_SYSTEM_NAME, P.PFP_UUID, MC.CAREER_START_DATE, U.USER_NICKNAME
         FROM WW_USER U
@@ -80,33 +79,41 @@
         ORDER BY MC.CAREER_START_DATE DESC
     </select>
 
-<!--    <select id="selectAll" resultType="communityVo">-->
-<!--        SELECT (SELECT COUNT(*) FROM COMMUNITY_COMMENT WHERE COMMUNITY_COMMENT.COMMUNITY_NUMBER = C.COMMUNITY_NUMBER) AS COMMENT_CNT-->
-<!--        ,C.COMMUNITY_NUMBER, C.COMMUNITY_TITLE, C.COMMUNITY_CONTENT, C.COMMUNITY_DATE, C.COMMUNITY_CNT, C.CATEGORY_NUMBER-->
-<!--        ,C.USER_NUMBER, U.USER_ID-->
-<!--        ,T.CATEGORY_NAME-->
-<!--        FROM COMMUNITY C JOIN WW_USER U-->
-<!--        ON C.USER_NUMBER = U.USER_NUMBER-->
-<!--        JOIN community_category T-->
-<!--        ON C.CATEGORY_NUMBER = T.CATEGORY_NUMBER-->
-<!--        <if test="categoryTypeStr != 'all'">-->
-<!--            WHERE C.CATEGORY_NUMBER = #{categoryNumber}-->
-<!--        </if>-->
-<!--        AND U.USER_STATUS != '3'-->
-<!--        and C.COMMUNITY_STATUS != '0'-->
-<!--        ORDER BY C.COMMUNITY_NUMBER DESC-->
-<!--    </select>-->
+    <!-- 커뮤니티 페이지 무한스크롤 -->
+    <select id="selectScroll" resultType="communityVo">
+        SELECT COMMUNITY_NUMBER, COMMUNITY_TITLE, COMMUNITY_CONTENT, COMMUNITY_DATE, USER_NUMBER, COMMUNITY_CNT, COMMENT_CNT, CATEGORY_NAME, LIKE_CNT
+        FROM(
+                SELECT ROWNUM RN, COMMUNITY_NUMBER, COMMUNITY_TITLE, COMMUNITY_CONTENT, COMMUNITY_DATE, USER_NUMBER,COMMENT_CNT, LIKE_CNT,
+                       COMMUNITY_CNT, CATEGORY_NAME
+                FROM(
+                        SELECT
+                               (SELECT COUNT(*) FROM COMMUNITY_COMMENT WHERE COMMUNITY_COMMENT.COMMUNITY_NUMBER = C.COMMUNITY_NUMBER) AS COMMENT_CNT,
+                               (SELECT COUNT(*) FROM COMMUNITY_GOOD WHERE COMMUNITY_GOOD.COMMUNITY_NUMBER = C.COMMUNITY_NUMBER) AS LIKE_CNT,
+                                C.COMMUNITY_NUMBER, C.COMMUNITY_TITLE, C.COMMUNITY_CONTENT, C.COMMUNITY_DATE, C.COMMUNITY_CNT, C.CATEGORY_NUMBER,
+                                C.USER_NUMBER, T.CATEGORY_NAME
+        FROM COMMUNITY C JOIN WW_USER U
+        ON C.USER_NUMBER = U.USER_NUMBER
+        JOIN COMMUNITY_CATEGORY T
+        ON C.CATEGORY_NUMBER = T.CATEGORY_NUMBER
+        <if test="categoryTypeStr != 'all'">
+            AND C.CATEGORY_NUMBER = #{categoryNumber}
+        </if>
+        WHERE U.USER_STATUS != '3'
+        AND C.COMMUNITY_STATUS != '0'
+        ORDER BY C.COMMUNITY_NUMBER DESC
 
-<!--    SELECT *-->
-<!--    FROM (SELECT USER_NUMBER, USER_NICKNAME-->
-<!--    FROM WW_USER-->
-<!--    WHERE USER_NUMBER = 1) U-->
-<!--    LEFT JOIN USER_PFP P-->
-<!--    ON U.USER_NUMBER = P.USER_NUMBER-->
-<!--    left join MENTOR M-->
-<!--    on U.USER_NUMBER = M.USER_NUMBER-->
-<!--    left join MENTOR_CAREER MC-->
-<!--    on M.MENTOR_NUMBER = MC.MENTOR_NUMBER-->
+                    )
+        <![CDATA[
+                WHERE ROWNUM <= #{page} * #{amount}
+        ]]>
+        )
+        WHERE RN > ( #{page} - 1) * #{amount}
+    </select>
+
+    <!-- 커뮤니티 게시글 전체 카운트 -->
+    <select id="selectTotal" resultType="_int">
+        SELECT COUNT(COMMUNITY_NUMBER) FROM COMMUNITY
+    </select>
 
 </mapper>
 

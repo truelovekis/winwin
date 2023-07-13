@@ -13,4 +13,6 @@ public class CommunityCommentDto {
     private String commentDate;
     private Long userNumber;
     private Long communityNumber;
+    private String udStatus;
+    private int udCnt;
 }
