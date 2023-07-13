@@ -67,8 +67,8 @@ public class AdminService {
     }
 
     // 전체 신고 조회하기
-    public List<AdminVo> findReport() {
-        return adminMapper.selectReport();
+    public List<PoliceVo> findReport(PoliceVo policeVo) {
+        return adminMapper.selectReport(policeVo);
     }
 
     // 검색한 신고 조회하기
@@ -77,8 +77,8 @@ public class AdminService {
     }
 
     // 전체 댓글 신고 조회하기
-    public List<AdminVo> findReportComment(){
-        return adminMapper.selectReportComment();
+    public List<PoliceCommentVo> findReportComment(PoliceCommentVo policeCommentVo){
+        return adminMapper.selectReportComment(policeCommentVo);
     }
 
     // 검색한 댓글 신고 조회하기
@@ -120,11 +120,11 @@ public class AdminService {
     }
 
     // 신고 게시글 상태 변경
-    public void modifyBoardReportStatus(Long policeBoard, String boardStatus){
-        if(policeBoard == null || boardStatus == null){
+    public void modifyBoardReportStatus(Long policeNumber, String boardStatus){
+        if(policeNumber == null || boardStatus == null){
             throw new IllegalArgumentException("신고 게시글 수정 정보 누락");
         }
-        adminMapper.updateBoard(policeBoard, boardStatus);
+        adminMapper.updateBoard(policeNumber, boardStatus);
     }
 
     // 신고 댓글 상태 변경

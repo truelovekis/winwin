@@ -1,6 +1,7 @@
+//글자수 실시간 카운팅
 $('#count_memo').keyup(function (e){
     var content = $(this).val();
-    $('#cnt').html("("+content.length+" / 50)");    //글자수 실시간 카운팅
+    $('#cnt').html("("+content.length+" / 50)");
 
     if (content.length > 50){
         alert("최대 50자까지 입력 가능합니다.");
@@ -9,65 +10,6 @@ $('#count_memo').keyup(function (e){
     }
 });
 
-// 카테고리
-
-// let page = 1;
-// $(window).on('scroll', function(){
-// //    $(window).scrollTop() : 현재 브라우저 스크롤 위치를 반환함
-//     console.log($(window).scrollTop());
-//     //$(document).height() : 문서 전체의 높이를 의미함
-//     console.log(`document : ${$(document).height()}`);
-//     //$(window).height() : 브라우저 화면의 높이를 의미함
-//     console.log(`window : ${$(window).height()}`);
-//
-//     if($(window).scrollTop() == $(document).height() - $(window).height()){
-//         console.log(++page);
-//         // reply.getListPage({boardNumber : boardNumber , page : page}, appendReply, showError);
-//     }
-// });
-
-
-let moreInfo = $(".mento-more-info-box");
-
-moreInfo.click(function () {
-    $(this).find(".mento-more-info").toggleClass("none");
-});
-
-let share = $(".share-button");
-
-share.click(function CopyUrlToClipboard() {
-    var url = 'http://localhost:10000/mentor/list'; // 현재 페이지의 URL 가져오기
-    var tempInput = $("<input>"); // 임시로 input 요소 생성
-    share.append(tempInput);
-    tempInput.val(url); // input 요소의 값에 URL 설정
-    tempInput.select(); // input 요소 내용 선택
-    document.execCommand("copy"); // 복사 명령 실행
-    tempInput.remove(); // 임시 input 요소 제거
-    alert("복사가 완료 되었습니다.");
-});
-
-$(".message-button").on("click", function () {
-    $(".modal-wrap1").removeClass("none");
-    $(".modal-wrap1").css({
-        position: "fixed",
-        left: "50%",
-        top: "50%",
-        transform: "translate(-50%, -50%)",
-    });
-
-    let name = $(this).closest('.item__box').find('.mento-name').text();
-    let number = $(this).closest('.item__box').find('.add-num').val();
-    console.log(number);
-    console.log(name);
-    $('.mentorName').text(name);
-    $('.addNumber').text(number);
-});
-
-$(".modal-wrap1").on("click", function (e) {
-    if ($(e.target).hasClass("modal-wrap1")) {
-        $(".modal-wrap1").addClass("none");
-    }
-});
 
 // 태그 필터
 const selectBoxElements2 = document.querySelectorAll(".select");
@@ -76,7 +18,7 @@ function toggleSelectBox(selectBox) {
     selectBox.classList.toggle("active");
 }
 
-function selectOption(optionElement) {
+function selectOption2(optionElement) {
     const selectBox = optionElement.closest(".select");
     const selectedElement = selectBox.querySelector(".selected-value");
     selectedElement.textContent = optionElement.textContent;
@@ -89,7 +31,7 @@ selectBoxElements2.forEach((selectBoxElement) => {
         const isOptionElement = targetElement.classList.contains("option");
 
         if (isOptionElement) {
-            selectOption(targetElement);
+            selectOption2(targetElement);
         }
 
         toggleSelectBox(selectBoxElement);
@@ -137,10 +79,10 @@ $(".select-tag").on("click", ".tag", function () {
 });
 
 // 나의 관심분야 3가지 카테고리 박스
-let $boxes = $('.select');
+let $boxes2 = $('.select');
 
 //클릭하면 리스트 div 보기,닫기
-$boxes.on('click', function(){
+$boxes2.on('click', function(){
     if($(this).closest('.select').find('.option-box').hasClass('none')){
         $('.option-box').addClass('none');
         $(this).closest('.select').find('.option-box').toggleClass('none');
@@ -157,7 +99,7 @@ $('.select').on('click', '.option', function(){
 //다른 곳 클릭 시 리스트 div 닫기
 $("body").on('click', function(e){
     if(!$(e.target).closest('.select').hasClass('select')){
-        $boxes.each((i, box) => {$(box).find('.option-box').addClass('none');});
+        $boxes2.each((i, box) => {$(box).find('.option-box').addClass('none');});
     }
 });
 
@@ -175,7 +117,7 @@ $(".third-job-box").on("click", ".option", function () {
         }
     }
 
-    let tagHtml = `<div class="tag" value="${val}">@${text}</div>`;
+    let tagHtml = `<div class="tag" data-value="${val}">@${text}</div>`;
     // <input type="hidden" value="${val}" name="subNumber"/>
 
     $(".select-tag").append(tagHtml);
@@ -191,7 +133,7 @@ $(".select-tag").on("click", ".tag", function () {
 // 1차 카테고리
 // let $category = $(".first-option-box");
 // 2차 카테고리
-let $jobBox2 = $(".second-job-box");
+let $jobBox2 = $(document.querySelector('.second-job-box'));
 // 3차 카테고리
 let $depBox2 = $(".third-job-box");
 
@@ -206,7 +148,7 @@ $(".option").on("click", function () {
             data: {mainCode: ss},
             dataType : 'json',
             success: function (result) {
-                makeMiddleCate(result);
+                text = makeMiddleCate(result);
             },
         });
     }
@@ -217,11 +159,11 @@ $(".option").on("click", function () {
             data: {mainCode: ss},
             dataType : 'json',
             success: function (result) {
-                makeMiddleCate(result);
+                text = makeMiddleCate(result);
             },
         });
     }
-    $jobBox2.html(text);
+    $jobBox2.eq(0).html(text);
 });
 
 $(".second-job-box").on("click", ".option", function () {
@@ -261,16 +203,23 @@ function makeMiddleCate(result) {
     return text2;
 }
 
-let check = $("#suggest-profile");
-let height = parseInt($(".myProfile").css("height")) + 25;
+$('.writeOk').on('click', function(){
+    let $tagList = $('.tag')
 
-check.click(function () {
-    $(".toggle-ment").toggleClass("none");
+    let valueList = [];
+    $tagList.each((i, tag) => {
+        valueList.push($(tag).data('value'));
 
-    if ($('p[class="toggle-ment none"]').text().trim() != "올림") {
-        $(".myProfile-box").css("height", height);
-    } else {
-        $(".myProfile-box").css("height", 0);
-    }
-});
+    });
+    console.log(valueList)
 
+    let input = '';
+
+    valueList.forEach(value => {
+       input += `<input type="hidden" value="${value}" name="subList">`;
+    });
+
+    $('.qna-form').append(input);
+
+    $('.qna-form').submit();
+})

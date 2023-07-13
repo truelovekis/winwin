@@ -56,7 +56,7 @@
             <!--  -->
 
             <!-- 회원 정보 검색 및 테이블 -->
-            <form action="/admin/searchReport" method="get">
+            <form action="/admin/report" method="get">
             <div class="search">
                 <span>이름 : </span>
                 <input name="name" type="text" placeholder="이름" class="search-text" style="font-family: NanumSquareAcr;">
@@ -71,7 +71,7 @@
                     <option value="700">문의사항</option>
                 </select>
                 <span>신고사유 : </span>
-                <select name="code" id="reason" style="font-family: NanumSquareAcr;">
+                <select name="categoryNumber" id="reason" style="font-family: NanumSquareAcr;">
                     <option value="">선택</option>
                     <option value="1">욕설/비방글</option>
                     <option value="2">저작권침해</option>
@@ -100,7 +100,8 @@
                         </td>
                         <td class="user-name" align="center">이름</td>
                         <td class="user-id" align="center">아이디</td>
-                        <td class="user-board" align="center">게시판</td>
+<!--                        <td class="user-board" align="center">게시판</td>-->
+                        <td class="board-title" align="center">제목</td>
                         <td class="user-report-date" align="center">신고 일자</td>
                         <td class="report-reason" align="center">신고 사유</td>
                         <td class="user-report-status" align="center">신고 상태</td>
@@ -112,13 +113,14 @@
                     <tbody>
                     <tr class="user-table-category" th:each="admin : ${adminReportList}">
                         <td class="checkbox">
-                            <input type="checkbox" name="" class="check check-box" id="checking" style="font-family: NanumSquareAcr;" th:data-number="${admin.policeBoard}">
+                            <input type="checkbox" name="" class="check check-box" id="checking" style="font-family: NanumSquareAcr;" th:data-number="${admin.policeNumber}">
                         </td>
                         <td class="user-name" align="center" th:text="${admin.userName}"></td>
                         <td class="user-id" align="center" th:text="${admin.userId}"></td>
-                        <td class="user-board" align="center" th:text="${admin.bigName}"></td>
-                        <td class="user-report-date" align="center" th:text="${#strings.substring(admin.policeDate, 0, 10)}"></td>
-                        <td class="report-reason" align="center" th:text="${admin.policeCategoryName}"></td>
+<!--                        <td class="user-board" align="center" th:text="${admin.bigName}"></td>-->
+                        <td class="board-title" align="center" th:text="${admin.title}"></td>
+                        <td class="user-report-date" align="center" th:text="${admin.policeDate}"></td>
+                        <td class="report-reason" align="center" th:text="${admin.categoryName}"></td>
                         <td class="board-public-secret" align="center">
                             <select name="user-report-select" class="user-report-select" style="font-family: NanumSquareAcr;">
                                 <option value="">선택</option>
@@ -127,8 +129,8 @@
                             </select>
                         </td>
                         <td class="report-resulting-success" align="center">
-                            <div th:if="${admin.boardStatus} == 1"  class="blind-button Y" th:text="공개" th:value="${admin.boardStatus}"></div>
-                            <div th:if="${admin.boardStatus} == 0"  class="blind-button N" th:text="비공개"></div>
+                            <div th:if="${admin.status == '1'}"  class="blind-button Y" th:text="공개" th:value="${admin.status}"></div>
+                            <div th:if="${admin.status == '0'} "  class="blind-button N" th:text="비공개"></div>
                         </td>
                     </tr>
                     </tbody>

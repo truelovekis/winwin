@@ -1,3 +1,5 @@
+// mentorProfile.js 수정이요
+
 let moreInfo = $(".mento-more-info-box");
 
 moreInfo.click(function () {
@@ -592,6 +594,7 @@ $('.modal-wrap1').on('click', '.um-btn' , function (){
             console.log("실패");
         }
     })
+
 });
 
 // $('.main-mentor').on('click','.chatting-button', function (){
@@ -627,3 +630,4 @@ $(".input-wrap").on("click", function (e) {
         $('.form-reset')[0].reset();
     }
 });
+

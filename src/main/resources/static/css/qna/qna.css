@@ -193,24 +193,15 @@ body {
 /* 유저 기본 카테고리 질문 요소 */
 .category-qna {
   margin-top: 20px;
+  width: 720px;
 }
 
 .qna-main-content {
-  /* border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin: 20px 0;
-  width: 700px;
-  height: 150px; */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 20px 0;
-  width: 720px;
-  height: 150px;
+  /*height: 150px;*/
   border: 1px solid#ddd;
   border-radius: 5px;
   padding: 10px;
@@ -295,4 +286,39 @@ body {
 
 .bi-hand-thumbs-up-fill{
   display: none;
+}
+
+.user-identity{
+  border: 0.5px solid rgba(128, 128, 128, 0);
+border-radius: 3px;
+font-size: 10px;
+background-color: rgb(234, 234, 234);
+margin: 10px 0px 5px 0px;
+padding: 2px 1px 2px 1px;
+text-align: center;
+}
+
+.hsc{
+  width: 100px;
+}
+
+.qna-title>a{
+  display: flex;
+}
+
+a>h3{
+  margin: -1px 13px;
+  color: black;
+  font-size: 18px;
+}
+
+.pfp-main-btn-css {
+  border-radius: 7px;
+  background-color: #1b5192;
+  color: white;
+  text-decoration: none;
+  padding: 9px 97px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: lighter;
 }

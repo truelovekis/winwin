@@ -2,4 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.like.QnaGoodMapper">
 
+    <!-- 좋아요 눌렀는지 안눌렀는지 -->
+    <select id="findQnaLike" resultType="long">
+        SELECT COUNT(USER_NUMBER)
+        FROM QNA_GOOD
+        WHERE QNA_NUMBER = #{qnaNumber} AND USER_NUMBER = #{userNumber}
+    </select>
+
+    <insert id="qnaLikeUp">
+        INSERT INTO QNA_GOOD (QNA_NUMBER, USER_NUMBER)
+        VALUES (#{qnaNumber}, #{userNumber})
+    </insert>
+
+
+    <delete id="qnaLikeDown">
+        DELETE FROM QNA_GOOD
+        WHERE QNA_NUMBER = #{qnaNumber} and USER_NUMBER = #{userNumber}
+    </delete>
+
+
+    <!--  좋아요 카운트  -->
+    <select id="likeQnaCnt" resultType="int">
+        SELECT COUNT(USER_NUMBER)
+        FROM QNA_GOOD
+        WHERE QNA_NUMBER = #{qnaNumber}
+    </select>
+
+
 </mapper>
