@@ -17,4 +17,5 @@ public class CsVo {
     private String userId;
     private String userNickname;
     private String userBelong;
+    private int csReadCnt;
 }

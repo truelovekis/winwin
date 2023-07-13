@@ -15,8 +15,8 @@
 /* 로그인 했을 때 */
 .community-pfp {
     position: fixed;
-    left: 50px;
-    /*left: 250px;*/
+    /*left: 50px;*/
+    left: 250px;
     /* display: none; */
 }
 
@@ -24,7 +24,7 @@
     display: flex;
     align-items: center;
     width: 250px;
-    height: 80px;
+    height: 90px;
 }
 
 .community-pfp-img {
@@ -113,8 +113,8 @@ community-pfp.main-btn{
 /* 로그인 안했을 때 */
 .community-pfp2 {
     position: fixed;
-    /*left: 250px;*/
-    left: 50px;
+    left: 250px;
+    /*left: 50px;*/
 }
 
 .not-login > a {
@@ -235,6 +235,11 @@ community-pfp.main-btn{
     align-items: center;
 }
 
+.community-btn > span,
+.community-cnt > span{
+    color: gray;
+}
+
 .community-cnt > img {
     width: 17px;
 }
@@ -258,7 +263,6 @@ community-pfp.main-btn{
 span {
     padding: 0 5px;
     font-size: 13px;
-    color: gray;
 }
 
 .community-time {
@@ -341,7 +345,6 @@ span {
 
 span {
     padding: 0 5px;
-    color: gray;
 }
 
 .share-img {

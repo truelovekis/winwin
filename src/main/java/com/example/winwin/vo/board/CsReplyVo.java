@@ -11,7 +11,7 @@ public class CsReplyVo {
    private Long commentNumber;
    private String commentContent;
    private String commentDate;
-   private Long  userNumber;
+   private Long userNumber;
    private Long csNumber;
    private String userId;
 }
