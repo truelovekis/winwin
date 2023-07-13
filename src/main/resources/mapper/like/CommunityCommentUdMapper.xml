@@ -2,4 +2,52 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.like.CommunityCommentUdMapper">
 
+    <!-- 좋아요, 싫어요 눌렀는지 안눌렀는지 -->
+    <select id="udFind" resultType="long">
+        SELECT COUNT(UD_STATUS) AS udCount
+        FROM COMMUNITY_COMMENT_UD
+        WHERE COMMENT_NUMBER = #{commentNumber}
+          AND (UD_STATUS = 'u' OR UD_STATUS = 'd')
+        <choose>
+            <when test="userNumber != null">
+                AND USER_NUMBER = #{userNumber}
+            </when>
+            <otherwise>
+                AND 1=0
+            </otherwise>
+        </choose>
+    </select>
+
+    <!--  좋아요 등록  -->
+    <insert id="goodInsert">
+        INSERT INTO COMMUNITY_COMMENT_UD (USER_NUMBER, COMMENT_NUMBER, UD_STATUS)
+        VALUES (#{userNumber}, #{commentNumber}, #{udStatus})
+    </insert>
+
+    <!--  좋아요 취소  -->
+    <delete id="goodCancle">
+        DELETE FROM COMMUNITY_COMMENT_UD
+        WHERE COMMENT_NUMBER = #{commentNumber} and USER_NUMBER = #{userNumber}
+    </delete>
+
+    <!--  싫어요 등록  -->
+    <insert id="hateInsert">
+        INSERT INTO COMMUNITY_COMMENT_UD (USER_NUMBER, COMMENT_NUMBER, UD_STATUS)
+        VALUES (#{userNumber}, #{commentNumber}, #{udStatus})
+    </insert>
+
+    <!--  싫어요 취소  -->
+    <delete id="hateCancle">
+        DELETE FROM COMMUNITY_COMMENT_UD
+        WHERE COMMENT_NUMBER = #{commentNumber} and USER_NUMBER = #{userNumber}
+    </delete>
+
+    <!--  좋아요 카운트  -->
+    <select id="udCnt" resultType="int">
+        SELECT COUNT(UD_STATUS) AS UD_CNT
+        FROM COMMUNITY_COMMENT_UD
+        JOIN COMMUNITY_COMMENT CC ON COMMUNITY_COMMENT_UD.COMMENT_NUMBER = CC.COMMENT_NUMBER
+        WHERE CC.COMMENT_NUMBER = #{commentNumber} AND UD_STATUS = 'u'
+    </select>
+
 </mapper>

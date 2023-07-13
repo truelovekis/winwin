@@ -246,10 +246,15 @@
   margin: 5px 4px;
 }
 
-span {
+.community-like > span,
+.community-comment > span{
+  color: gray;
+}
+
+.community-cnt2 {
   padding: 0 5px;
   font-size: 13px;
-  color: gray;
+  /*color: gray;*/
 }
 
 .community-time {
@@ -330,7 +335,7 @@ span {
   margin: 5px 5px 5px 0;
 }
 
-span {
+.community-cnt {
   padding: 0 5px;
   color: gray;
 }

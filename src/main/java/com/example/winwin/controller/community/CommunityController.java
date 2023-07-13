@@ -4,13 +4,11 @@ package com.example.winwin.controller.community;
 import com.example.winwin.dto.board.CommunityDto;
 import com.example.winwin.dto.file.CommunityFileDto;
 import com.example.winwin.service.board.CommunityCommentService;
+import com.example.winwin.service.board.CommunityCommentUdService;
 import com.example.winwin.service.board.CommunityGoodService;
 import com.example.winwin.service.board.CommunityService;
 import com.example.winwin.service.file.CommunityFileService;
-import com.example.winwin.vo.board.CommunityCommentVo;
-import com.example.winwin.vo.board.CommunityGoodVo;
-import com.example.winwin.vo.board.CommunityProfileVo;
-import com.example.winwin.vo.board.CommunityVo;
+import com.example.winwin.vo.board.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +33,7 @@ public class CommunityController {
     private final CommunityCommentService communityCommentService;
     private final CommunityFileService communityFileService;
     private final CommunityGoodService communityGoodService;
+    private final CommunityCommentUdService communityCommentUdService;
 
     /**
      * 타임라인 목록
@@ -46,38 +45,7 @@ public class CommunityController {
     @GetMapping("/list/{categoryTypeStr}")
     public String communityMainForm(@PathVariable("categoryTypeStr") String categoryTypeStr ,Model model, HttpServletRequest req){
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
-        CommunityVo paramCommunityVo = new CommunityVo();
-        paramCommunityVo.setCategoryTypeStr(categoryTypeStr);
-        if(!"all".equals(categoryTypeStr)){
-            paramCommunityVo.setCategoryNumber(Long.parseLong(categoryTypeStr));
-        }
-
-        List<CommunityVo> communityVoList = communityService.findAll(paramCommunityVo);
         List<CommunityProfileVo> communityProfileVoList = communityService.registerProfile(userNumber);
-
-        System.out.println("==================================="+communityVoList);
-        if(communityVoList.size() > 0){
-            for (CommunityVo communityVo: communityVoList) {
-
-                // reg_date를 LocalDateTime으로 변환
-                LocalDateTime communityDate = LocalDateTime.parse(communityVo.getCommunityDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-
-                // 현재 시간과의 차이 계산
-                long minutesDiff = ChronoUnit.MINUTES.between(communityDate, LocalDateTime.now());
-                long hoursDiff = ChronoUnit.HOURS.between(communityDate, LocalDateTime.now());
-                long daysDiff = ChronoUnit.DAYS.between(communityDate, LocalDateTime.now());
-
-                // 경과 시간 표시
-                if (minutesDiff < 60) {
-                    communityVo.setCommunityDate(minutesDiff + "분 전");
-                } else if (hoursDiff < 24) {
-                    communityVo.setCommunityDate(hoursDiff + "시간 전");
-                } else if (daysDiff < 365) {
-                    communityVo.setCommunityDate(daysDiff + "일 전");
-                }
-            }
-        }
-        model.addAttribute("communityVoList", communityVoList);
         model.addAttribute("communityProfileVoList", communityProfileVoList);
         return "community/communityMain";
     }
@@ -112,25 +80,30 @@ public class CommunityController {
     public String communityReadForm(Long communityNumber, Model model, HttpServletRequest req){
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
         CommunityVo communityVo = communityService.find(communityNumber);
-        List<CommunityCommentVo> communityCommentVoList = communityCommentService.findList(communityNumber);
+
+        CommunityCommentVo communityCommentVo = new CommunityCommentVo();
+        communityCommentVo.setSessionUserNumber(userNumber);
+        communityCommentVo.setCommunityNumber(communityNumber);
+
+        List<CommunityCommentVo> communityCommentVoList = communityCommentService.findCommentUdList(communityCommentVo);
+
+        System.out.println("=============================="+communityCommentVoList+"====================================");
+
         List<CommunityFileDto> fileList =  communityFileService.findList(communityNumber);
         communityService.upHitCnt(communityNumber);
-        System.out.println("=========================");
-        System.out.println(communityNumber);
-        System.out.println("========================");
         int commentCnt = communityService.commentCnt(communityNumber);
         CommunityGoodVo communityGoodVo = new CommunityGoodVo();
         communityGoodVo.setCommunityNumber(communityNumber);
         communityGoodVo.setUserNumber(userNumber);
-        System.out.println("communityGoodVo"+communityGoodVo);
         Long likeStatus = communityGoodService.findLike(communityGoodVo);
         int likeCnt = communityGoodService.likeCnt(communityGoodVo);
-        System.out.println("likeStatuslikeStatus"+likeStatus);
+
         model.addAttribute("community", communityVo);
         model.addAttribute("commentList", communityCommentVoList);
         model.addAttribute("commentCnt", commentCnt);
         model.addAttribute("likeStatus", likeStatus);
         model.addAttribute("likeCnt", likeCnt);
+
         return "community/communityRead";
     }
 

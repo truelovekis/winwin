@@ -1,5 +1,6 @@
 package com.example.winwin.vo.board;
 
+import com.example.winwin.vo.infinityScroll.Criteria;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -7,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 @NoArgsConstructor
-public class CommunityVo {
+public class CommunityVo extends Criteria{
     private Long communityNumber;
     private String categoryName;  // 추가함
     private String userNickname;  // 추가함
