@@ -8,6 +8,7 @@ import com.example.winwin.service.myPage.MyPageService;
 import com.example.winwin.vo.infinityScroll.Criteria;
 import com.example.winwin.vo.infinityScroll.PageVo;
 import com.example.winwin.vo.myPage.ActiveBoardVo;
+import com.example.winwin.vo.myPage.ActiveCommentVo;
 import com.example.winwin.vo.myPage.ResumeVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
@@ -57,10 +58,9 @@ public class MyPageRestController {
         Criteria criteria = new Criteria();
         criteria.setPage(page);
         criteria.setAmount(5);
-        PageVo pageVo = new PageVo(criteria, myPageService.getUserInfo(userNumber).getBoardCnt());
+        PageVo pageVo = new PageVo(criteria, myPageService.getBoardCnt(userNumber));
         List<ActiveBoardVo> activeBoardVoList = myPageService.getActiveBoardList(userNumber, criteria);
 
-        System.out.println("activeBoardVoList는 "+activeBoardVoList);
         Map<String, Object> myBoard = new HashMap<>();
         myBoard.put("pageVo", pageVo);
         myBoard.put("activeBoardVoList", activeBoardVoList);
@@ -68,5 +68,19 @@ public class MyPageRestController {
         return myBoard;
     }
 
+    @GetMapping("/myComment/{page}")
+    public Map<String, Object> myComment(HttpServletRequest req, @PathVariable("page") int page) {
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+        Criteria criteria = new Criteria();
+        criteria.setPage(page);
+        criteria.setAmount(5);
+        PageVo pageVo = new PageVo(criteria, myPageService.getCommentCnt(userNumber));
+        List<ActiveCommentVo> activeCommentVoList = myPageService.getActiveCommentList(userNumber, criteria);
 
+        Map<String, Object> myBoard = new HashMap<>();
+        myBoard.put("pageVo", pageVo);
+        myBoard.put("activeCommentVoList", activeCommentVoList);
+
+        return myBoard;
+    }
 }
