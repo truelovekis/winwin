@@ -3,6 +3,7 @@ package com.example.winwin.service.board;
 import com.example.winwin.dto.board.StudyDto;
 import com.example.winwin.mapper.board.StudyMapper;
 import com.example.winwin.vo.board.StudyVo;
+import com.example.winwin.vo.infinityScroll.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,7 +58,7 @@ public class StudyService {
         studyMapper.likeDelete(userNumber, studyNumber);
     }
 
-    /* 글쓰기 조회와 삽입*/
+    /* 좋아요 조회와 삽입*/
     public void likeProcess(Long userNumber, Long studyNumber){
         if (userNumber == null || studyNumber == null) {
             throw new IllegalArgumentException("좋아요 번호 누락.");
@@ -125,9 +126,15 @@ public class StudyService {
         return studyMapper.selectOtherList(cateNumber);
     }
 
-    /* 모집중 리스트*/
-     /* @Transactional(readOnly = true)
-  public List<StudyVo> recruitingList(int cateNumber){
-        return studyMapper.recruiting(cateNumber);
-    }*/
+    /* 무한 스크롤 처리*/
+      @Transactional(readOnly = true)
+      public List<StudyVo> getRecruitingProjects(int categoryNumber, Criteria criteria) {
+          return studyMapper.recruiting(categoryNumber, criteria);
+      }
+
+
+      @Transactional(readOnly = true)
+    public int getRecruitingTotal(int categoryNumber){
+          return studyMapper.selectRecruitingTotal(categoryNumber);
+      }
 }

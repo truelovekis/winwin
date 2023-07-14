@@ -62,6 +62,7 @@ h3>span{
 .justTitle{
     display: flex;
     font-size: 10px;
+    margin-top: 15px;
 }
 
 .cnt{

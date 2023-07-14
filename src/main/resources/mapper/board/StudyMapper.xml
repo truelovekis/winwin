@@ -85,23 +85,6 @@
                L.LIKE_CNT,
                DECODE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'), TO_CHAR(S.STUDY_DATE, 'YYYY-MM-DD'), 'T', 'F') AS IS_NEW
         FROM STUDY S JOIN STUDY_PURPOSE_CATEGORY P
-                          ON S.STUDY_STATUS = '1' AND S.CATEGORY_NUMBER = #{cateNumber} AND S.PURPOSE_NUMBER = P.PURPOSE_NUMBER
-                     LEFT JOIN (
-            SELECT STUDY_NUMBER, COUNT(user_number) AS LIKE_CNT FROM STUDY_LIKE
-            GROUP BY study_number
-        ) L
-                               ON S.STUDY_NUMBER = L.STUDY_NUMBER
-        ORDER BY LIKE_CNT ASC
-    </select>
-
-
-    <select id="recruiting" resultType="studyVo">
-        SELECT S.STUDY_NUMBER, STUDY_TITLE, STUDY_SUMMARY_CONTENT,
-               STUDY_STATUS, USER_NUMBER, CATEGORY_NUMBER, S.PURPOSE_NUMBER,
-               P.PURPOSE_NAME,
-               L.LIKE_CNT,
-               DECODE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'), TO_CHAR(S.STUDY_DATE, 'YYYY-MM-DD'), 'T', 'F') AS IS_NEW
-        FROM STUDY S JOIN STUDY_PURPOSE_CATEGORY P
                           ON S.CATEGORY_NUMBER = #{cateNumber} AND S.PURPOSE_NUMBER = P.PURPOSE_NUMBER
                      LEFT JOIN (
             SELECT STUDY_NUMBER, COUNT(user_number) AS LIKE_CNT FROM STUDY_LIKE
@@ -111,6 +94,7 @@
         ORDER BY LIKE_CNT ASC
     </select>
 
+
     <!--프로젝트,모임 다른 게시물 보기-->
     <select id="otherProject" resultType="studyVo">
         SELECT S.STUDY_NUMBER, STUDY_TITLE, STUDY_SUMMARY_CONTENT,
@@ -119,11 +103,10 @@
                L.LIKE_CNT,
                DECODE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'), TO_CHAR(S.STUDY_DATE, 'YYYY-MM-DD'), 'T', 'F') AS IS_NEW
         FROM STUDY S JOIN STUDY_PURPOSE_CATEGORY P
-                          ON S.STUDY_STATUS = '1'
+                          ON S.PURPOSE_NUMBER = P.PURPOSE_NUMBER
                                  <if test="categoryNumber != 0">
                                      AND S.CATEGORY_NUMBER =#{categoryNumber}
                                  </if>
-                                 AND S.PURPOSE_NUMBER = P.PURPOSE_NUMBER
                      LEFT JOIN (
             SELECT STUDY_NUMBER, COUNT(user_number) AS LIKE_CNT FROM STUDY_LIKE
             GROUP BY study_number
@@ -131,6 +114,57 @@
                                ON S.STUDY_NUMBER = L.STUDY_NUMBER
         ORDER BY STUDY_DATE DESC
     </select>
+
+
+
+    <!-- 미팅 무한 스크롤 -->
+    <select id="recruiting" resultType="studyVo">
+       SELECT STUDY_NUMBER, STUDY_TITLE, STUDY_SUMMARY_CONTENT, STUDY_STATUS, USER_NUMBER, CATEGORY_NUMBER, PURPOSE_NUMBER, PURPOSE_NAME, LIKE_CNT, IS_NEW
+        FROM (
+                 SELECT ROWNUM AS RNUM, STUDY_NUMBER, STUDY_TITLE, STUDY_SUMMARY_CONTENT, STUDY_STATUS, USER_NUMBER, CATEGORY_NUMBER, PURPOSE_NUMBER, PURPOSE_NAME, LIKE_CNT, IS_NEW
+                 FROM(
+                         SELECT S.STUDY_NUMBER, STUDY_TITLE, STUDY_SUMMARY_CONTENT,
+                                STUDY_STATUS, USER_NUMBER, CATEGORY_NUMBER, S.PURPOSE_NUMBER,
+                                P.PURPOSE_NAME,
+                                L.LIKE_CNT,
+                                DECODE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'), TO_CHAR(S.STUDY_DATE, 'YYYY-MM-DD'), 'T', 'F') AS IS_NEW
+                         FROM STUDY S JOIN STUDY_PURPOSE_CATEGORY P
+                                           ON S.PURPOSE_NUMBER = P.PURPOSE_NUMBER
+                                               <if test="categoryNumber != 0">
+                                                 AND S.CATEGORY_NUMBER =#{categoryNumber}
+                                             </if>
+                                      LEFT JOIN (
+                             SELECT STUDY_NUMBER, COUNT(user_number) AS LIKE_CNT FROM STUDY_LIKE
+                             GROUP BY study_number
+                         ) L
+                                                ON S.STUDY_NUMBER = L.STUDY_NUMBER
+                         ORDER BY STUDY_DATE DESC
+                     )
+                 <![CDATA[
+                 WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
+                    ]]>
+                 )
+        WHERE RNUM > (#{criteria.page} - 1) * #{criteria.amount}
+    </select>
+
+<!--무한 스크롤 토탈 처리-->
+    <select id="selectRecruitingTotal" resultType="_int">
+        SELECT count(S.STUDY_NUMBER)
+        FROM STUDY S JOIN STUDY_PURPOSE_CATEGORY P
+                          ON S.PURPOSE_NUMBER = P.PURPOSE_NUMBER
+                        <if test="categoryNumber != 0">
+                            AND S.CATEGORY_NUMBER =#{categoryNumber}
+                        </if>
+                     LEFT JOIN (
+            SELECT STUDY_NUMBER, COUNT(user_number) AS LIKE_CNT FROM STUDY_LIKE
+            GROUP BY study_number
+        ) L
+                               ON S.STUDY_NUMBER = L.STUDY_NUMBER
+        ORDER BY STUDY_DATE DESC
+    </select>
+
+    <!-- ... -->
+
 
     <select id="selectOtherList" resultType="studyVo">
         SELECT RNUM, STUDY_NUMBER, STUDY_TITLE, STUDY_SUMMARY_CONTENT, STUDY_ROLE, STUDY_STATUS, STUDY_DATE, CATEGORY_NUMBER, J.PURPOSE_NUMBER,
@@ -140,7 +174,7 @@
             SELECT ROWNUM AS RNUM, STUDY_NUMBER, STUDY_TITLE, STUDY_SUMMARY_CONTENT, STUDY_ROLE, STUDY_STATUS, STUDY_DATE, CATEGORY_NUMBER, PURPOSE_NUMBER,
             NVL((SELECT COUNT(USER_NUMBER) FROM STUDY_LIKE L WHERE S.STUDY_NUMBER = L.STUDY_NUMBER GROUP BY L.STUDY_NUMBER),0) AS LIKE_CNT
             FROM STUDY S
-            WHERE STUDY_STATUS = '1' AND CATEGORY_NUMBER = #{cateNumber}
+            WHERE CATEGORY_NUMBER = #{cateNumber}
             ORDER BY STUDY_DATE DESC
         ) J
         JOIN STUDY_PURPOSE_CATEGORY P
