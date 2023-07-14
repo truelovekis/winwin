@@ -2,6 +2,7 @@ package com.example.winwin.mapper.board;
 
 import com.example.winwin.dto.board.StudyDto;
 import com.example.winwin.vo.board.StudyVo;
+import com.example.winwin.vo.infinityScroll.Criteria;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -45,7 +46,10 @@ public interface StudyMapper {
     /*조회수 처리*/
     public void readCount(Long studyNumber);
 
-/*    *//*모집중 처리*//*
-    public List<StudyVo> recruiting(int cateNumber);*/
+   /*무한 스크롤 처리*/
+   public List<StudyVo> recruiting(@Param("categoryNumber") int categoryNumber, @Param("criteria") Criteria criteria);
 
+   public int selectRecruitingTotal(int categoryNumber);
 }
+
+
