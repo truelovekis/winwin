@@ -36,8 +36,6 @@ public class ChattingController {
         return new RedirectView("/chatting/sendModal");
     }
 
-
-
 }
 
 

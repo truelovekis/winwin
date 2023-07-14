@@ -13,6 +13,7 @@ import com.example.winwin.mapper.myPage.ResumePrMapper;
 import com.example.winwin.mapper.myPage.UserInfoMapper;
 import com.example.winwin.vo.infinityScroll.Criteria;
 import com.example.winwin.vo.myPage.ActiveBoardVo;
+import com.example.winwin.vo.myPage.ActiveCommentVo;
 import com.example.winwin.vo.myPage.MyPageVo;
 import lombok.RequiredArgsConstructor;
 import net.coobird.thumbnailator.Thumbnailator;
@@ -45,7 +46,7 @@ public class MyPageService {
     private String pfpDir;
 
 //활동 내역
-//    내가 커뮤니티에 작성한 글 리스트 보기
+//    내가 작성한 글 리스트 보기
     @Transactional(readOnly = true)
     public List<ActiveBoardVo> getActiveBoardList(Long userNumber, Criteria criteria){
         if(userNumber == null){
@@ -55,6 +56,35 @@ public class MyPageService {
         return activityMapper.selectActiveBoardList(userNumber, criteria);
     }
 
+//    내가 작성한 댓글 리스트 보기
+    @Transactional(readOnly = true)
+    public List<ActiveCommentVo> getActiveCommentList(Long userNumber, Criteria criteria){
+        if(userNumber == null){
+            throw new IllegalArgumentException("로그인이 필요합니다.");
+        }
+
+        return activityMapper.selectActiveCommentList(userNumber, criteria);
+    }
+
+//    내가 작성한 글 개수
+    @Transactional(readOnly = true)
+    public int getBoardCnt(Long userNumber){
+        if(userNumber == null){
+            throw new IllegalArgumentException("로그인이 필요합니다.");
+        }
+
+        return userInfoMapper.selectBoardCnt(userNumber);
+    }
+
+//    내가 작성한 댓글 개수
+    @Transactional(readOnly = true)
+    public int getCommentCnt(Long userNumber){
+        if(userNumber == null){
+            throw new IllegalArgumentException("로그인이 필요합니다.");
+        }
+
+        return userInfoMapper.selectCommentCnt(userNumber);
+    }
 //이력관리
 //    이력서 등록
     public Long registerResume(ResumeDto resumeDto){
@@ -252,6 +282,9 @@ public class MyPageService {
 
 //        전체 경로와 파일이름을 연결한다.
         File uploadFile = new File(uploadPath, sysName);
+
+//        매개변수로 받은 파일을 우리가 만든 경로와 이름으로 저장한다.
+//        file.transferTo(uploadFile);
 
 //        썸네일 크기로 파일을 저장한다.
         if(Files.probeContentType(uploadFile.toPath()).startsWith("image")) {
