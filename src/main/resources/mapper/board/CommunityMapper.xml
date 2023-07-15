@@ -98,10 +98,7 @@
         <if test="categoryTypeStr != 'all'">
             AND C.CATEGORY_NUMBER = #{categoryNumber}
         </if>
-        WHERE U.USER_STATUS != '3'
-        AND C.COMMUNITY_STATUS != '0'
         ORDER BY C.COMMUNITY_NUMBER DESC
-
                     )
         <![CDATA[
                 WHERE ROWNUM <= #{page} * #{amount}

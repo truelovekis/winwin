@@ -91,9 +91,12 @@ public class CommunityFileService {
 
     public void registerAndSaveFiles(List<MultipartFile> files, Long communityNumber) throws IOException{
         for (MultipartFile file : files){
-            CommunityFileDto communityFileDto = saveFile(file);
-            communityFileDto.setCommunityNumber(communityNumber);
-            register(communityFileDto);
+            if(!"".equals(file.getOriginalFilename())){
+                CommunityFileDto communityFileDto = saveFile(file);
+                communityFileDto.setCommunityNumber(communityNumber);
+                register(communityFileDto);
+            }
+
         }
     }
 

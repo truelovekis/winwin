@@ -128,7 +128,7 @@ function showComment(replies) {
                     <input type="hidden" class="comment-num" value="${r.commentNumber}">
                     <div class="profil">
                         <img src="../img/corgi-g5894d3ae3_1920.jpg" height="50px" width="50px">
-                        <div class="Commento"><p>${r.userId}</p></div>
+                        <div class="Commento"><p class="userInfo">${r.userId}</p></div>
                         <div class="dropdown2">
                             <button class="dropbtn2">
                                 <span class="dropbtn_icon2"> <svg data-v-bd9f2bcc="" data-v-3035bc76="" width="24" height="24" fill="black" xmlns="http://www.w3.org/2000/svg" class="c-Applicatio c-icon" style="fill: rgb(148, 155, 160);"><circle data-v-bd9f2bcc="" cx="12" cy="5.5" r="1.5"></circle><circle data-v-bd9f2bcc="" cx="12" cy="12" r="1.5"></circle><circle data-v-bd9f2bcc="" cx="12" cy="18.5" r="1.5"></circle></svg></span>
@@ -137,9 +137,16 @@ function showComment(replies) {
                         if(r.userNumber == loginNumber){
                             text += `
                             <div class="dropdown-content2" >
-                                <a href="#" class="police-btn">신고</a>
+<!--                                <a href="#" class="police-btn">신고</a>-->
                                 <a href="#" class="btn-modify">수정</a>
                                 <a href="#" class="btn-remove">삭제</a>
+                            </div>`;
+                        } else if(r.userNumber != loginNumber){
+                            text += `
+                            <div class="dropdown-content2" >
+                                <a href="#" class="police-btn">신고</a>
+<!--                                <a href="#" class="btn-modify">수정</a>-->
+<!--                                <a href="#" class="btn-remove">삭제</a>-->
                             </div>`;
                         }
                         text +=`
