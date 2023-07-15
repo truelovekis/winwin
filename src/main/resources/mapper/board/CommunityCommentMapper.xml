@@ -51,12 +51,12 @@
         SET COMMENT_CONTENT = #{commentContent}, COMMENT_DATE = SYSDATE
         WHERE COMMENT_NUMBER = #{commentNumber}
     </update>
-
+<!---->
     <delete id="delete">
         DELETE FROM COMMUNITY_COMMENT
         WHERE COMMENT_NUMBER = #{commentNumber}
     </delete>
-
+<!---->
     <delete id="deleteCommunity">
         DELETE FROM COMMUNITY_COMMENT
         WHERE COMMUNITY_NUMBER = #{communityNumber}

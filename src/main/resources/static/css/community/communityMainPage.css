@@ -54,6 +54,10 @@
   margin-top: 2px;
 }
 
+.pfp-main-btn{
+  cursor: pointer;
+}
+
 .community-pfp-main-btn {
   display: flex;
   height: 45px;
@@ -69,6 +73,7 @@
   text-align: center;
   font-size: 13px;
   font-weight: lighter;
+
 }
 
 .pfp-main-btn-css:hover {
@@ -219,6 +224,7 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
+  margin-left: -10px;
 }
 
 .community-btn {
@@ -234,6 +240,10 @@
   width: 13px;
 }
 
+/*.community-comment{*/
+/*  margin-left: 15px;*/
+/*}*/
+
 .community-comment > img {
   width: 15px;
 }
@@ -244,6 +254,8 @@
   display: flex;
   align-items: center;
   margin: 5px 4px;
+  margin-left: 8px;
+
 }
 
 .community-like > span,
@@ -336,7 +348,7 @@
 }
 
 .community-cnt {
-  padding: 0 5px;
+  /*padding: 0 5px;*/
   color: gray;
 }
 
