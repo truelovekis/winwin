@@ -31,7 +31,7 @@ public class CareerContoller {
     @GetMapping("/list")
     public String careerpathForm(Model model, HttpServletRequest req){
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
-        List<CategoryVo> userTagList = careerInfoService.findMentorTag(userNumber);
+        List<CategoryVo> userTagList = careerInfoService.findUserTag(userNumber);
         model.addAttribute("userTagList", userTagList);
 //        List<CareerInfoDto> careerInfoList = careerInfoService.
 
@@ -50,17 +50,13 @@ public class CareerContoller {
 
 //    진로정보 글 작성하기 페이지 단순이동
     @GetMapping("/write")
-    public String careerWrite (HttpServletRequest req){
+    public String careerWrite (HttpServletRequest req, Model model){
         Long mentorNumber = (Long)req.getSession().getAttribute("mentorNumber");
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
 
-//        CareerInfoVo careerInfoVo = careerInfoService.findMentorNumber(mentorNumber);
-
-//        멘토 번호 찾기
-        careerInfoService.findMentorNumber(userNumber);
-        System.out.println(userNumber);
 //        멘토 인증된 태그 찾기
-        careerInfoService.findMentorTag(mentorNumber);
+        CareerInfoVo careerInfoVo = careerInfoService.findMentorTag(userNumber);
+        model.addAttribute("career", careerInfoVo);
 
         return "careerInfo/careerInfoWrite";
     }
@@ -70,11 +66,12 @@ public class CareerContoller {
     public RedirectView careerWrite(CareerInfoDto careerInfoDto, HttpServletRequest req){
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
         Long mentorNumber = (Long)req.getSession().getAttribute("mentorNumber");
-        System.out.println(mentorNumber);
-        careerInfoService.findMentorNumber(userNumber);
-        careerInfoService.findMentorTag(userNumber);
+
         careerInfoDto.setMentorNumber(mentorNumber);
         careerInfoDto.setUserNumber(userNumber);
+
+        careerInfoService.findMentorNumber(userNumber);
+        careerInfoService.findMentorTag(mentorNumber);
 
         careerInfoService.careerInfoRegister(careerInfoDto);
 

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.winwin.mapper.career.CareerInfoLikeMapper">
+
+    <!-- 진로정보 좋아요 -->
+    <insert id="insertCareerInfoLike">
+        insert into CAREERINFO_LIKE(USER_NUMBER, CAREERINFO_NUMBER)
+        values (#{userNumber}, #{careerInfoNumber})
+    </insert>
+    <!--    -->
+
+    <!-- 진로정보 글 좋아요 카운트 -->
+    <select id="selectCareerInfoLikeCount" resultType="long">
+        SELECT COUNT(CAREERINFO_NUMBER)  FROM CAREERINFO_LIKE
+        WHERE CAREERINFO_NUMBER = #{carrerInfoNumber}
+    </select>
+    <!--    -->
+
+    <!-- 유저가 좋아요 한 진로정보 글 찾기 -->
+    <select id="selectUserCareerInfo" resultType="long">
+        SELECT COUNT(CAREERINFO_NUMBER)
+        FROM CAREERINFO_LIKE cl
+        WHERE USER_NUMBER = #{userNumber} AND CAREERINFO_NUMBER = #{careerInfoNumber}
+    </select>
+    <!--    -->
+
+    <!-- 진로정보 글 좋아요 취소 -->
+    <delete id="deleteCareerInfoLike">
+        DELETE FROM HR.CAREERINFO_LIKE
+        WHERE USER_NUMBER = #{userNumber} AND CAREERINFO_NUMBER = #{carrerInfoNumber}
+    </delete>
+
+</mapper>

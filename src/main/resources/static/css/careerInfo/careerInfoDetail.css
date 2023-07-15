@@ -631,3 +631,36 @@
 .hate{
     fill: black;
 }
+
+/* 댓글 수정하기 */
+.comment-form {
+    margin : 50px 0 70px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.modify-content {
+    font-family: NanumSquare;
+    width: 1000px;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    resize: none;
+    box-sizing: border-box;
+}
+
+.modify-content-btn {
+    margin-top: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1b5192;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.modify-content-btn:hover {
+    background-color: #2a6ab5;
+}

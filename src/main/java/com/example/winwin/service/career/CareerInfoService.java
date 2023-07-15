@@ -41,10 +41,20 @@ public class CareerInfoService {
                 });
     }
 
-//    진로정보 멘토 인증태그 찾기
-    public List<CategoryVo> findMentorTag(Long userNumber){
+//    진로정보 관심사 태그 찾기
+    public List<CategoryVo> findUserTag(Long userNumber){
         if (userNumber == null){
             throw new IllegalArgumentException("회원번호가 일치하지 않습니다.");
+        }
+
+        return careerInfoMapper.selectUserTag(userNumber);
+    }
+
+//    진로정보 멘토 인증태그 찾기
+    public CareerInfoVo findMentorTag(Long userNumber){
+        if (userNumber == null) {
+
+            throw new IllegalArgumentException("멘토번호가 일치하지 않습니다.");
         }
 
         return careerInfoMapper.selectMentorTag(userNumber);

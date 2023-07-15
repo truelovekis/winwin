@@ -3,14 +3,63 @@
 <mapper namespace="com.example.winwin.mapper.career.CareerInfoCommentMapper">
 
     <!-- 진로정보 댓글 작성하기 -->
-
+    <insert id="insertCareerComment">
+        insert into CAREERINFO_COMMENT (COMMENT_NUMBER, COMMENT_CONTENT, USER_NUMBER, CAREERINFO_NUMBER)
+        values (SEQ_CI_COMMENT.nextval, #{commentContent}, #{userNumber}, #{careerInfoNumber})
+    </insert>
     <!--    -->
 
-    <!-- 진로정보 댓글 수정하기 -->
+    <!-- 진로정보 댓글 최신순으로 조회하기 및 무한 스크롤 -->
+    <select id="selectCareerCommentList" resultType="careerInfoCommentVo">
+        select comment_number, comment_content, comment_date, user_number, careerinfo_number,
+        user_nickname, pfp_system_name, pfp_upload_path, pfp_uuid
+        from(
+        select ROWNUM RN,
+        comment_number, comment_content, comment_date, user_number, careerinfo_number,
+        user_nickname, pfp_system_name, pfp_upload_path, pfp_uuid
+        from(
+        select cm.comment_number, cm.comment_content, cm.comment_date, cm.user_number, cm.careerinfo_number,
+        wu.user_nickname, pfp_system_name, pfp_upload_path, pfp_uuid
+        from CAREERINFO_COMMENT cm join ww_user wu on cm.user_number = wu.user_number
+        left join user_pfp up on wu.user_number = up.user_number
+        where cm.CAREERINFO_NUMBER = #{careerInfoNumber}
+        order by cm.comment_date desc
+        )
+        <![CDATA[
+        where ROWNUM <= #{criteria.page} * #{criteria.amount}
+        ]]>
+        )
+        where RN > ( #{criteria.page} - 1) * #{criteria.amount}
+    </select>
 
+    <!-- 진로정보 댓글페이지 갯수 구하기 -->
+    <select id="selectTotal" resultType="_int">
+        select count(COMMENT_NUMBER)
+        from CAREERINFO_COMMENT
+        where COMMENT_NUMBER = #{commentNumber}
+    </select>
     <!--    -->
 
-    <!-- 진로정보 댓글 삭제하기 -->
+    <!-- 회원이 등록한 댓글 조회하기 -->
+    <select id="selectUserReply">
+        select comment_number, comment_content, comment_date, cc.user_number, careerinfo_number
+        from ww_user wu join careerinfo_comment cc on  comment_number = #{commentNumber} and wu.user_number = cc.user_number
+    </select>
+    <!--    -->
 
+    <!-- 진로정보 댓글 댓글번호로 수정하기 -->
+    <update id="updateCareerUpdate">
+        update CAREERINFO_COMMENT
+        set COMMENT_CONTENT = #{commentContent}, COMMENT_DATE = SYSDATE
+        where COMMENT_NUMBER = #{commentNumber}
+    </update>
+    <!--    -->
+
+    <!-- 진로정보 댓글 댓글번호로 삭제하기 -->
+    <delete id="deleteCareerComment">
+        delete
+        from CAREERINFO_COMMENT
+        where COMMENT_NUMBER = #{careerInfoNumber}
+    </delete>
     <!--    -->
 </mapper>

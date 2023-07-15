@@ -18,8 +18,11 @@ public interface CareerInfoMapper {
 //    멘토번호 찾기
     Long selectMentorNumber(Long userNumber);
 
+//    유저 인증태그 찾기
+    List<CategoryVo> selectUserTag(Long userNumber);
+
 //    멘토 인증태그 찾기
-    List<CategoryVo> selectMentorTag(Long userNumber);
+    CareerInfoVo selectMentorTag(Long userNumber);
 
 //    진로정보 글 번호로 조회하기
     CareerInfoVo careerInfoSelectNumber(Long careerInfoNumber);
