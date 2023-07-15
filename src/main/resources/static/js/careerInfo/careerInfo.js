@@ -304,7 +304,7 @@ function showInfo(careerInfoList) {
                             <div class="text-box">
                                 <span class="user-name">${career.userNickname}</span>
                                 <br/>
-                                <span class="user-bottom">${career.subName},${career.gradeName}</span>
+                                <span class="user-bottom">${career.subName} ${career.gradeName}</span>
                             </div>
 
                             <div class="content">

@@ -26,11 +26,13 @@
 <header class="header" th:replace="fragment/header :: header"></header>
 <div class="container">
     <section class="sec1">
+        <!-- 멘토 인증태그 가져오기 -->
         <div class="tag-wrap">
-            <span class="tag">@기타</span>
+            <span class="tag" th:text="${career.subName}">@기타</span>
         </div>
+        <!--        -->
         <div class="title" th:text="${career.careerInfoTitle}">
-            <h1>회사생활 성공하는 노하우 10가지⚡</h1>
+            <h1></h1>
         </div>
         <div class="views">
             <p class="view-line">
@@ -41,16 +43,18 @@
           <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
           </svg>
         </span>
-                <span class="view-count" th:text="${career.careerInfoCnt}">100</span>
+                <span class="view-count" th:text="${career.careerInfoCnt}"></span>
             </p>
         </div>
         <div class="status-wrap">
+            <!-- session으로 userNumber 가져와서 프로필 이미지 꽂아주기  -->
             <div class="icon-wrap">
                 <img class="icon-img" th:src="@{/img/careerpathdetail.png}">
             </div>
+            <!--            -->
             <div class="text-wrap">
                 <div><span class="text-id" th:text="${career.userNickname}"></span></div>
-                <div><span class="text-date" th:text="${career.careerInfoDate}">7일전</span></div>
+                <div><span class="text-date" th:text="${#strings.substring(#strings.replace(career.careerInfoDate, '-', '.'), 0, 10)}"></span></div>
             </div>
         </div>
     </section>
@@ -116,12 +120,6 @@
                 <!--        [끝]-->
             </div>
         </div>
-        <div class="bottom-tag-wrap">
-            <span class="tag">@계열1</span>
-            <span class="tag">@계열2</span>
-            <span class="tag">@계열3</span>
-            <span class="tag">@계열4</span>
-        </div>
     </section>
     <section class="sec3">
         <a name="target"></a>
@@ -172,7 +170,7 @@
     <div class="sec5">
         <div class="comment-form">
             <form id="comment-form">
-                <input type="hidden" name="boardNumber" value="">
+                <input type="hidden" class="careerInfo-num" name="boardNumber" th:value="${career.careerInfoNumber}">
                 <div class="form-group">
                     <textarea name="content" id="content" placeholder="댓글 내용을 입력하세요."></textarea>
                 </div>
@@ -180,40 +178,40 @@
             </form>
         </div>
         <div class="reply">
-            <div class="reply-cardbox" data-index="0" style="">
-                <div class="reply-content1">
-                    <div class="profile-wrap">
-                        <div class="profile-icon-wrap">
-                            <img class="profile-icon-img" src="../../static/img/careerpathdetail.png">
-                        </div>
-                        <div class="profile-text-wrap">
-                            <div><span class="profile-text-id">sjlee723</span></div>
-                            <div><span class="profile-text-date">7일전</span></div>
-                        </div>
-                        <div class="reply-time">
-                            <span class="time-text">2023-06-08 23:30:31</span>
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <div class="reply-content2">
-                    <div class="reply-content">
-            <span class="reply-text">
-이런 대현자분께서 이곳에 있다니!!!!!!!!!!!!!!!!!!🩲🩲
-늘 명심하며 회사생활을 잘 해보겠습니다.
-혹시 궁금한점이 있으면 추가로 문의드려도 될까요??
-              </span>
-                    </div>
-                </div>
-                <div class="reply-content3">
-                    <div class="btn-wrap">
-                        <div class="btn-sub-wrap">
-                            <div class="modify-btn">수정</div>
-                            <div class="remove-btn">삭제</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!--            <div class="reply-cardbox" data-index="0" style="">-->
+<!--                <div class="reply-content1">-->
+<!--                    <div class="profile-wrap">-->
+<!--                        <div class="profile-icon-wrap">-->
+<!--                            <img class="profile-icon-img" src="../../static/img/careerpathdetail.png">-->
+<!--                        </div>-->
+<!--                        <div class="profile-text-wrap">-->
+<!--                            <div><span class="profile-text-id">sjlee723</span></div>-->
+<!--                            <div><span class="profile-text-date">7일전</span></div>-->
+<!--                        </div>-->
+<!--                        <div class="reply-time">-->
+<!--                            <span class="time-text">2023-06-08 23:30:31</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <br>-->
+<!--                <div class="reply-content2">-->
+<!--                    <div class="reply-content">-->
+<!--            <span class="reply-text">-->
+<!--                이런 대현자분께서 이곳에 있다니!!!!!!!!!!!!!!!!!!🩲🩲-->
+<!--                늘 명심하며 회사생활을 잘 해보겠습니다.-->
+<!--                혹시 궁금한점이 있으면 추가로 문의드려도 될까요??-->
+<!--              </span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="reply-content3">-->
+<!--                    <div class="btn-wrap">-->
+<!--                        <div class="btn-sub-wrap">-->
+<!--                            <div class="modify-btn">수정</div>-->
+<!--                            <div class="remove-btn">삭제</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </div>
 </div>
@@ -221,6 +219,9 @@
 <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
         crossorigin="anonymous"></script>
 <script th:src="@{/js/fragment/header.js}"></script>
-<script th:src="@{/js/careerInfo/careerInfoDetail.js}"></script>
+<script type="module" th:src="@{/js/careerInfo/careerInfoDetail.js}"></script>
+<script th:inline="javascript">
+    let loginNumber = [[${session.userNumber}]];
+</script>
 </body>
 </html>

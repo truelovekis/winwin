@@ -47,10 +47,12 @@
         set  USER_ID = #{userId},  USER_PASSWORD = #{userPassword}, USER_EMAIL = #{userEmail}, USER_NICKNAME = #{userNickname}, USER_PHONE_NUMBER = #{userPhoneNumber}
         where USER_NUMBER = #{userNumber}
     </update>
+
     <insert id="insertInterestTag">
         insert into SU_BRIDGE (BRIDGE_NUMBER, SUB_NUMBER, USER_NUMBER)
         values (SEQ_BRIDGE.NEXTVAL, #{subNumber}, #{userNumber})
     </insert>
+
     <delete id="deleteInterestTag">
         delete
         from SU_BRIDGE
@@ -62,4 +64,5 @@
         SET USER_STATUS = 0
         WHERE USER_NUMBER = #{userNumber}
     </update>
+
 </mapper>
