@@ -19,7 +19,9 @@ public class QnaCommentController {
     public String commentRegister(@RequestBody QnaCommentDto qnaCommentDto, HttpServletRequest req){
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
         qnaCommentDto.setUserNumber(userNumber);
-        System.out.println(qnaCommentDto);
+
+
+        System.out.println(qnaCommentDto+"============================================");
         qnaCommentService.registerQnaComment(qnaCommentDto);
         return "작성 성공!";
     }

@@ -10,5 +10,5 @@ public interface QnaCommentUdMapper {
     public void qnaGoodCancle(QnaCommentUdVo qnaCommentUdVo);
     public void qnaHateInsert(QnaCommentUdVo qnaCommentUdVo);
     public void qnaHateCancle(QnaCommentUdVo qnaCommentUdVo);
-    public int qnaUdCnt(QnaCommentUdVo qnaCommentUdVo);
+    public int udCnt(QnaCommentUdVo qnaCommentUdVo);
 }

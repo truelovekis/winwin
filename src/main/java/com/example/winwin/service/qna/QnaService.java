@@ -4,6 +4,7 @@ import com.example.winwin.dto.board.QnaDto;
 import com.example.winwin.dto.board.QsBridgeDto;
 import com.example.winwin.mapper.board.QnaMapper;
 import com.example.winwin.vo.board.*;
+import com.example.winwin.vo.infinityScroll.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,7 @@ import java.util.Optional;
 @Transactional
 public class QnaService {
     private final QnaMapper qnaMapper;
+    private final QnaCommentService qnaCommentService;
 
     // 글 등록
     public void registerQna(QnaDto qnaDto){
@@ -35,9 +37,9 @@ public class QnaService {
 
     // 리스트 전체 조회하기
     @Transactional(readOnly = true)
-    public List<QnaVo> findQnaList(){return qnaMapper.selectQna();}
+    public List<QnaVo> findQnaList(Criteria criteria, List<Integer> cateList){return qnaMapper.selectQna(criteria, cateList);}
 
-    // 카테고리 조회하기
+     //카테고리 조회하기
 //    @Transactional(readOnly = true)
 //    public List<QnaVo> findSubList(Long qnaNumber) {
 //        return qnaMapper.selectSub(qnaNumber);
@@ -58,7 +60,7 @@ public class QnaService {
         if (qnaNumber == null){
             throw new IllegalArgumentException("게시물 번호 누락");
         }
-
+        qnaCommentService.removeQna(qnaNumber);
         qnaMapper.deleteQna(qnaNumber);
     }
 
@@ -97,15 +99,30 @@ public class QnaService {
     }
 
     // 댓글 수
-    public int qnaCommentCnt(Long qnaNumber){
+    public int commentCnt(Long qnaNumber){
             if(qnaNumber == null){
             throw new IllegalArgumentException("댓글 번호 누락");
         }
-        return qnaMapper.qnaCommentCnt(qnaNumber);
+        return qnaMapper.commentCnt(qnaNumber);
     }
 
     // 프로필 조회
     public List<QnaProfileVo> registerProfile(Long userNumber){
         return qnaMapper.selectUserProfile(userNumber);
+    }
+
+    //    나눔 페이지 무한스크롤
+    public List<QnaVo> findListPage(QnaVo qnaVo){
+        if(qnaVo == null){
+            throw new IllegalArgumentException("페이지 처리에 필요한 정보가 누락되었습니다.");
+        }
+
+        return qnaMapper.selectQnaScroll(qnaVo);
+    }
+
+    //    나눔 메인페이지 갯수 구하기
+    public int findTotal(){
+
+        return qnaMapper.selectTotal();
     }
 }

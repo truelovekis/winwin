@@ -50,10 +50,10 @@ public class QnaCommentUdService {
     }
 
 
-    public int qnaUdCnt(QnaCommentUdVo qnaCommentUdVo){
+    public int udCnt(QnaCommentUdVo qnaCommentUdVo){
         if (qnaCommentUdVo == null) {
             throw new IllegalArgumentException("좋아요 게시글번호, 회원번호 누락");
         }
-        return qnaCommentUdMapper.qnaUdCnt(qnaCommentUdVo);
+        return qnaCommentUdMapper.udCnt(qnaCommentUdVo);
     }
 }

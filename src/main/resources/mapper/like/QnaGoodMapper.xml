@@ -6,7 +6,16 @@
     <select id="findQnaLike" resultType="long">
         SELECT COUNT(USER_NUMBER)
         FROM QNA_GOOD
-        WHERE QNA_NUMBER = #{qnaNumber} AND USER_NUMBER = #{userNumber}
+        WHERE QNA_NUMBER = #{qnaNumber}
+        <choose>
+            <when test="userNumber != null">
+                AND USER_NUMBER = #{userNumber}
+            </when>
+            <otherwise>
+                AND 1=0
+            </otherwise>
+        </choose>
+
     </select>
 
     <insert id="qnaLikeUp">

@@ -79,7 +79,7 @@ public class StatusController {
     // 신고 게시글 상태 변경
     @PatchMapping("/updateBoard")
     public String modifyBoard(@RequestBody Map<String, List<String>> requestBody){
-        List<String> policeNumberList = requestBody.get("policeBoard");
+        List<String> policeNumberList = requestBody.get("policeNumber");
         List<String> boardStatusList = requestBody.get("boardStatus");
 
         for (int i = 0; i < policeNumberList.size(); i++) {
@@ -94,8 +94,15 @@ public class StatusController {
     // 신고 댓글 상태 변경
     @PatchMapping("/updateCommentReport")
     public String modifyCommentReport(@RequestBody Map<String, List<String>> requestBody){
+        System.out.println(requestBody);
         List<String> policeNumberList = requestBody.get("policeNumber");
         List<String> commentStatusList = requestBody.get("commentStatus");
+        List<String> bigCodeList = requestBody.get("bigCode");
+
+//        if (bigCodeList == '400'){
+//            qnaStatus
+//        }
+
 
         for (int i = 0; i < policeNumberList.size(); i++) {
             Long policeNumber = Long.parseLong(policeNumberList.get(i));
