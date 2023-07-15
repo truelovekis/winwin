@@ -31,9 +31,54 @@
         WHERE CS_NUMBER = #{csNumber}
     </update>
 
+
+
     <delete id="delete">
         DELETE FROM CS
         WHERE CS_NUMBER = #{csNumber}
     </delete>
+
+    <!-- 문의사항 (로그인시) 프로필 조회 -->
+    <select id="selectUserProfile" resultType="CsProfileVo">
+        SELECT MC.CAREER_COMPANY, MC.CAREER_TITLE, P.PFP_SYSTEM_NAME, P.PFP_UUID, MC.CAREER_START_DATE, U.USER_NICKNAME
+        FROM WW_USER U
+        LEFT OUTER JOIN USER_PFP P
+        ON U.USER_NUMBER = P.USER_NUMBER
+        LEFT OUTER JOIN MENTOR M
+        ON U.USER_NUMBER = M.USER_NUMBER
+        LEFT OUTER JOIN MENTOR_CAREER MC
+        ON MC.MENTOR_NUMBER = M.MENTOR_NUMBER
+        <if test="userNumber  != null ">
+            WHERE U.USER_NUMBER = #{userNumber}
+        </if>
+        ORDER BY MC.CAREER_START_DATE DESC
+    </select>
+
+    <!-- 무한 스크롤 -->
+
+    <!-- 커뮤니티 페이지 무한스크롤 -->
+    <select id="selectScroll" resultType="csVo">
+        SELECT CS_NUMBER, CS_TITLE, CS_CONTENT, CS_DATE, USER_NUMBER
+        FROM(
+        SELECT ROWNUM RN, CS_NUMBER, CS_TITLE, CS_CONTENT, CS_DATE, USER_NUMBER
+        FROM(
+        SELECT
+        C.CS_NUMBER, C.CS_TITLE, C.CS_CONTENT, C.CS_DATE, C.USER_NUMBER
+        FROM CS C JOIN WW_USER U
+        ON C.USER_NUMBER = U.USER_NUMBER
+        ORDER BY C.CS_NUMBER DESC
+        )
+        <![CDATA[
+                WHERE ROWNUM <= #{page} * #{amount}
+        ]]>
+        )
+        WHERE RN > ( #{page} - 1) * #{amount}
+    </select>
+
+    <!-- 커뮤니티 게시글 전체 카운트 -->
+    <select id="selectTotal" resultType="_int">
+        SELECT COUNT(CS_NUMBER) FROM CS
+    </select>
+
 
 </mapper>

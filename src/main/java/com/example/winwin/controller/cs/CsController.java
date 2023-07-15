@@ -4,9 +4,7 @@ package com.example.winwin.controller.cs;
 import com.example.winwin.dto.board.CsDto;
 import com.example.winwin.service.cs.CsReplyService;
 import com.example.winwin.service.cs.CsService;
-import com.example.winwin.vo.board.CommunityCommentVo;
-import com.example.winwin.vo.board.CsReplyVo;
-import com.example.winwin.vo.board.CsVo;
+import com.example.winwin.vo.board.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,34 +24,47 @@ public class CsController {
 
     //    CS 메인페이지
     @GetMapping("/main")
-    public String csMain(Model model){
+    public String csMain(Model model, HttpServletRequest req) {
         List<CsVo> csVoList = csService.findAll();
         model.addAttribute("csVoList", csVoList);
+
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+        List<CsProfileVo> csProfileVoList = csService.getProfile(userNumber);
+        model.addAttribute("csProfileVoList", csProfileVoList);
+
         return "cs/csMain";
     }
 
-//    글 작성하기
+    //    글 작성하기
     @GetMapping("/write")
-    public String csWriteForm(HttpServletRequest req){
+    public String csWriteForm(HttpServletRequest req) {
 
         return "cs/csWrite";
     }
 
     @PostMapping("/write")
-    public RedirectView csWrite(CsDto csDto, HttpServletRequest req){
-        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
+    public RedirectView csWrite(CsDto csDto, HttpServletRequest req) {
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
         csDto.setUserNumber(userNumber);
         csService.register(csDto);
 
         return new RedirectView("/cs/main");
     }
 
+    // 유저 프로필
+    @GetMapping("/list/{categoryTypeStr}")
+    public String csMainForm(@PathVariable("categoryTypeStr") String categoryTypeStr, Model model, HttpServletRequest req) {
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+        List<CsProfileVo> csProfileVoList = csService.getProfile(userNumber);
+        model.addAttribute("csProfileVoList", csProfileVoList);
+        return "cs/csMain";
+    }
+
     //    글 상세보기
     @GetMapping("/read")
-    public String csRead(Long csNumber, Model model){
+    public String csRead(Long csNumber, Model model) {
         CsVo csVo = csService.findCs(csNumber);
         List<CsReplyVo> csReplyVoList = csReplyService.findList(csNumber);
-//        List<CommunityCommentVo> communityCommentVoList = communityCommentService.findList(communityNumber);
         model.addAttribute("cs", csVo);
         model.addAttribute("replyList", csReplyVoList);
         return "cs/csRead";
@@ -62,7 +73,7 @@ public class CsController {
 
     /* 수정*/
     @GetMapping("/modify")
-    public String modifyForm(Long csNumber, Model model){
+    public String modifyForm(Long csNumber, Model model) {
         CsVo csVo = csService.findCs(csNumber);
         model.addAttribute("cs", csVo);
         return "cs/csModify";
@@ -80,9 +91,14 @@ public class CsController {
     }
 
     @GetMapping("/remove")
-    public RedirectView remove(Long csNumber, RedirectAttributes redirectAttributes){
+    public RedirectView remove(Long csNumber, RedirectAttributes redirectAttributes) {
         csService.remove(csNumber);
         return new RedirectView("/cs/main");
     }
 
+
+
+
+
 }
+

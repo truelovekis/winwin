@@ -1,6 +1,7 @@
 package com.example.winwin.vo.board;
 
 
+import com.example.winwin.vo.infinityScroll.Criteria;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 @NoArgsConstructor
-public class CsVo {
+public class CsVo extends Criteria {
     private Long csNumber;
     private String csTitle;
     private String csContent;

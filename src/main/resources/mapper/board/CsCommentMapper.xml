@@ -24,8 +24,6 @@
         SET COMMENT_CONTENT = #{commentContent},
             COMMENT_DATE = SYSDATE
         WHERE COMMENT_NUMBER = #{commentNumber}
-
-
     </update>
 
     <delete id="delete">
