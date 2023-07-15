@@ -16,15 +16,65 @@
     </insert>
 
     <select id="selectQna" resultType="qnaVo">
-        SELECT (SELECT COUNT(*) FROM QNA_COMMENT WHERE QNA_comment.qna_NUMBER = q.qna_number) AS QNA_COMMENT_CNT,
-            (SELECT COUNT(*) FROM qna_GOOD WHERE qna_GOOD.qna_NUMBER = q.qna_number) AS QNA_LIKE_CNT
-             ,q.qna_number, q.qna_title, q.qna_content, q.qna_date, q.qna_CNT
-             ,q.USER_NUMBER, SC.sub_NAME, Sc.sub_number, u.user_nickname
-        FROM qna q
-                 JOIN qs_bridge qs on q.qna_number = qs.qna_number
-                 join sub_category sc on qs.sub_number = sc.sub_number
-                 JOIN WW_USER U ON q.USER_NUMBER = U.USER_NUMBER
-        ORDER BY q.qna_number DESC
+        SELECT QNA_NUMBER, QNA_TITLE, QNA_CONTENT, QNA_DATE, QNA_CNT, USER_NUMBER, SUB_NAMES,
+        QNA_LIKE_CNT, COMMENT_CNT
+        FROM (
+            SELECT ROWNUM AS RNUM, QNA_NUMBER, QNA_TITLE, QNA_CONTENT, QNA_DATE, QNA_CNT, USER_NUMBER, SUB_NAMES,
+            QNA_LIKE_CNT, COMMENT_CNT
+            FROM (
+                SELECT Q.QNA_NUMBER, QNA_TITLE, QNA_CONTENT, QNA_DATE, QNA_CNT, USER_NUMBER,
+                SUB_NAMES,
+                (SELECT COUNT(QG.QNA_NUMBER) FROM QNA_GOOD QG WHERE Q.QNA_NUMBER = QG.QNA_NUMBER) AS QNA_LIKE_CNT,
+                (SELECT COUNT(QC.QNA_NUMBER) FROM QNA_COMMENT QC WHERE Q.QNA_NUMBER = QC.QNA_NUMBER) AS COMMENT_CNT
+                FROM QNA Q JOIN (
+                    SELECT QNA_NUMBER, LISTAGG(SC.SUB_NAME, ',') WITHIN GROUP(ORDER BY QB.SUB_NUMBER) AS SUB_NAMES
+                    FROM QS_BRIDGE QB JOIN SUB_CATEGORY SC
+                    ON QB.SUB_NUMBER = SC.SUB_NUMBER
+                    <if test="cateList != null and cateList.size != 0">
+                        WHERE QB.SUB_NUMBER IN
+                        <foreach collection="cateList" open="(" close=")" index="index" separator="," item="cate">
+                            #{cate}
+                        </foreach>
+                    </if>
+                    GROUP BY QNA_NUMBER
+                ) S1
+                ON Q.QNA_NUMBER = S1.QNA_NUMBER
+                ORDER BY Q.QNA_NUMBER DESC
+            )
+            <![CDATA[
+            WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
+            ]]>
+        )
+        WHERE RNUM > (#{criteria.page} - 1) * #{criteria.amount}
+    </select>
+
+
+    <select id="selectQnaScroll" resultType="qnaVo">
+        SELECT QNA_NUMBER, QNA_TITLE, QNA_CONTENT, QNA_DATE, USER_NUMBER, QNA_CNT, COMMENT_CNT, QNA_LIKE_CNT, sc.sub_name
+        from (
+        SELECT ROWNUM RN, QNA_NUMBER, QNA_TITLE, QNA_CONTENT, QNA_DATE, USER_NUMBER,COMMENT_CNT, QNA_LIKE_CNT,sc.sub_name,
+        QNA_CNT
+        FROM(
+                SELECT (SELECT COUNT(*) FROM QNA_COMMENT WHERE QNA_comment.qna_NUMBER = q.qna_number) AS COMMENT_CNT,
+                    (SELECT COUNT(*) FROM qna_GOOD WHERE qna_GOOD.qna_NUMBER = q.qna_number) AS QNA_LIKE_CNT
+                     ,q.qna_number, q.qna_title, q.qna_content, q.qna_date, q.qna_CNT
+                     ,q.USER_NUMBER, SC.sub_NAME, Sc.sub_number, u.user_nickname
+                FROM qna q
+                         JOIN qs_bridge qs on q.qna_number = qs.qna_number
+                         join sub_category sc on qs.sub_number = sc.sub_number
+                         JOIN WW_USER U ON q.USER_NUMBER = U.USER_NUMBER
+                ORDER BY q.qna_number DESC
+
+        )
+        <![CDATA[
+                WHERE ROWNUM <= #{page} * #{amount}
+        ]]>
+        )
+        WHERE RN > ( #{page} - 1) * #{amount}
+    </select>
+
+    <select id="selectTotal" resultType="_int">
+        SELECT COUNT(QNA_NUMBER) FROM QNA
     </select>
 
 <!--  <select id="selectSub" resultType="qsBridgeDto">-->
@@ -75,7 +125,7 @@ where qna_number = #{qnaNumber}
     </update>
 
 <!--  댓글 조회수  -->
-    <select id="qnaCommentCnt">
+    <select id="commentCnt">
         SELECT COUNT(*)
         FROM QNA_COMMENT
         WHERE QNA_NUMBER = #{qnaNumber}

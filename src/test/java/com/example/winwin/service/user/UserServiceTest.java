@@ -13,6 +13,10 @@ import org.mockito.Mock;
 import static org.mockito.Mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @ExtendWith(MockitoExtension.class)
 @Slf4j
 class UserServiceTest {
@@ -72,5 +76,14 @@ class UserServiceTest {
         int checkNum = userService.checkId("aaa");
 
         assertThat(checkNum).isEqualTo(0);
+    }
+
+    @Test
+    void myTest(){
+        String str = "a,b,c";
+//        System.out.println(Arrays.toString(str.split(",")));
+
+        List<String> list = Arrays.stream(str.split(",")).collect(Collectors.toList());
+        System.out.println(list);
     }
 }

@@ -1,6 +1,6 @@
 
 
-$('.remove-btn').on('click', function (){
+$('.qna-remove-btn').on('click', function (){
     let qnaNumber = $('.qna-num').val();
     window.location.href = '/qna/removeQna?qnaNumber=' + qnaNumber;
 
@@ -18,7 +18,7 @@ $('.remove-btn').on('click', function (){
     // f.submit();
 })
 
-$('.modify-btn').on('click', function (){
+$('.qna-modify-btn').on('click', function (){
     let qnaNumber = $('.qna-num').val();
     window.location.href = '/qna/modify?qnaNumber=' + qnaNumber;
 })
@@ -163,7 +163,7 @@ function showComment(replies) {
     let text = '';
 
     replies.forEach(r => {
-        text += `<th:block th:each="comment of commentList">
+        text += `<th:block th:each="qnaComment of commentList">
         <div class="commentAi" data-num="${r.commentNumber}">
          <input type="hidden" class="comment-num" value="${r.commentNumber}">
           <div class="profil">
@@ -177,9 +177,14 @@ function showComment(replies) {
         if(r.userNumber == loginNumber){
             text += `
          <div class="dropdown-content2">
-                <a href="#" class="police-btn">신고</a>
+<!--                <a href="#" class="police-btn">신고</a>-->
                 <a href="#" class="btn-modify">수정</a>
                 <a href="#" class="btn-remove">삭제</a>
+              </div>`;
+        }else if(r.userNumber != loginNumber){
+            text += `
+         <div class="dropdown-content2">
+                <a href="#" class="police-btn">신고</a>
               </div>`;
         }
         text +=`
@@ -357,122 +362,122 @@ function timeForToday(value){
 
 
 // 커뮤니티 게시글 신고하기 페이지 이동
-// let reportModal = document.querySelector(".reportModal");
-// let reportBtn = document.querySelector(".police-btn");
-//
-// reportBtn.addEventListener("click", function (){
-//     reportModal.style.display = "flex";
-//     document.body.style.overflow = "hidden";
-//     $(".report-btn").show();
-//     $(".creport-btn").hide();
-// });
-//
-// reportModal.addEventListener("click", function (e){
-//     if ($(e.target).hasClass("reportModal")){
-//         reportModal.style.display = "none";
-//         document.body.style.overflow = "unset";
-//
-//     }
-// });
-//
-// // 커뮤니티 게시글 신고하기 버튼 클릭 시 컨펌 및 신고처리
-// let $reportButton = $('.report-btn');
-// $reportButton.on("click", function (){
-//     console.log($('.report-list input:checked').val());
-//
-//     let result = confirm("정말 신고하시겠습니까?");
-//
-//
-//     if(result){
-//         reportAjax();
-//     }
-// });
-//
-// // 커뮤니티 게시글 신고하기 처리
-// function reportAjax(){
-//     let qnaNumber = $('.qna-num').val();
-//     let policeCategory = $('.report-list input:checked').val();
-//
-//     $.ajax({
-//         url:'/police/qna',
-//         type: 'post',
-//         data: JSON.stringify({boardNumber:qnaNumber, policeCategory:policeCategory}),
-//         contentType : 'application/json; charset=utf-8',
-//         success : function (){
-//             alert("정상적으로 신고처리 되었습니다.")
-//             location.href = "/qna/qna";
-//         }
-//
-//     })
-// }
-//
+let reportModal = document.querySelector(".reportModal");
+let reportBtn = document.querySelector(".police-btn");
+
+reportBtn.addEventListener("click", function (){
+    reportModal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+    $(".report-btn").show();
+    $(".creport-btn").hide();
+});
+
+reportModal.addEventListener("click", function (e){
+    if ($(e.target).hasClass("reportModal")){
+        reportModal.style.display = "none";
+        document.body.style.overflow = "unset";
+
+    }
+});
+
+// 커뮤니티 게시글 신고하기 버튼 클릭 시 컨펌 및 신고처리
+let $reportButton = $('.report-btn');
+$reportButton.on("click", function (){
+    console.log($('.report-list input:checked').val());
+
+    let result = confirm("정말 신고하시겠습니까?");
+
+
+    if(result){
+        reportAjax();
+    }
+});
+
+// 커뮤니티 게시글 신고하기 처리
+function reportAjax(){
+    let qnaNumber = $('.qna-num').val();
+    let policeCategory = $('.report-list input:checked').val();
+
+    $.ajax({
+        url:'/police/qna',
+        type: 'post',
+        data: JSON.stringify({boardNumber:qnaNumber, policeCategory:policeCategory}),
+        contentType : 'application/json; charset=utf-8',
+        success : function (){
+            alert("정상적으로 신고처리 되었습니다.")
+            location.href = "/qna/list";
+        }
+
+    })
+}
+
 //
 // // 커뮤니티 댓글 신고 =========================================================================
 //
 // // 커뮤니티 댓글 신고하기 페이지 이동
-// let commentReportModal = document.querySelector(".reportModal");
-// let commentReportBtn = document.querySelector(".police-btn");
-//
-// $('#qnaCommentList').on('click', '.police-btn', function (){
-//     $(".report-btn").hide();
-//     $(".creport-btn").show();
-//     $("#reportCommentNumber").val($(this).closest(".commentAi").find(".comment-num").val());
-//     $('.reportModal').css({
-//         display: "flex",
-//         position: "fixed",
-//         left: "50%",
-//         top: "50%",
-//         transform: "translate(-50%, -50%)",
-//     });
-//     $('body').css({
-//         overflow: "hidden",
-//     });
-//     // commentReportModal.style.display = "flex";
-//     // document.body.style.overflow = "hidden";
+let commentReportModal = document.querySelector(".reportModal");
+let commentReportBtn = document.querySelector(".police-btn");
+
+$('#qnaCommentList').on('click', '.police-btn', function (){
+    $(".report-btn").hide();
+    $(".creport-btn").show();
+    $("#reportCommentNumber").val($(this).closest(".commentAi").find(".comment-num").val());
+    $('.reportModal').css({
+        display: "flex",
+        position: "fixed",
+        left: "50%",
+        top: "50%",
+        transform: "translate(-50%, -50%)",
+    });
+    $('body').css({
+        overflow: "hidden",
+    });
+    // commentReportModal.style.display = "flex";
+    // document.body.style.overflow = "hidden";
+});
+// commentReportBtn.addEventListener("click", function (){
+//     commentReportModal.style.display = "flex";
+//     document.body.style.overflow = "hidden";
 // });
-// // commentReportBtn.addEventListener("click", function (){
-// //     commentReportModal.style.display = "flex";
-// //     document.body.style.overflow = "hidden";
-// // });
-//
-// commentReportModal.addEventListener("click", function (e){
-//     if ($(e.target).hasClass("reportModal")){
-//         commentReportModal.style.display = "none";
-//         document.body.style.overflow = "unset";
-//     }
-// });
-//
-// // 커뮤니티 댓글 신고하기 버튼 클릭 시 컨펌 및 신고처리
-// let $commentReportButton = $('.creport-btn');
-// $commentReportButton.on("click", function (){
-//     console.log($('.report-list input:checked').val());
-//
-//     let result = confirm("정말 신고하시겠습니까?");
-//
-//
-//     if(result){
-//         commentReportAjax();
-//     }
-// });
-//
-// // 커뮤니티 댓글 신고하기 처리
-// function commentReportAjax(){
-//     let commentNumber = $('#reportCommentNumber').val();
-//     console.log(commentNumber);
-//     let policeCategory = $('.report-list input:checked').val();
-//
-//     $.ajax({
-//         url:'/police/comment',
-//         type: 'post',
-//         data: JSON.stringify({commentNumber:commentNumber, policeCategory:policeCategory}),
-//         contentType : 'application/json; charset=utf-8',
-//         success : function (){
-//             alert("정상적으로 신고처리 되었습니다.")
-//             location.href = "/qna/qna";
-//         }
-//
-//     })
-// }
+
+commentReportModal.addEventListener("click", function (e){
+    if ($(e.target).hasClass("reportModal")){
+        commentReportModal.style.display = "none";
+        document.body.style.overflow = "unset";
+    }
+});
+
+// 커뮤니티 댓글 신고하기 버튼 클릭 시 컨펌 및 신고처리
+let $commentReportButton = $('.creport-btn');
+$commentReportButton.on("click", function (){
+    console.log($('.report-list input:checked').val());
+
+    let result = confirm("정말 신고하시겠습니까?");
+
+
+    if(result){
+        commentReportAjax();
+    }
+});
+
+// 커뮤니티 댓글 신고하기 처리
+function commentReportAjax(){
+    let commentNumber = $('#reportCommentNumber').val();
+    console.log(commentNumber);
+    let policeCategory = $('.report-list input:checked').val();
+
+    $.ajax({
+        url:'/police/qnaComment',
+        type: 'post',
+        data: JSON.stringify({commentNumber:commentNumber, policeCategory:policeCategory}),
+        contentType : 'application/json; charset=utf-8',
+        success : function (){
+            alert("정상적으로 신고처리 되었습니다.")
+            location.href = "/qna/list";
+        }
+
+    })
+}
 
 
 

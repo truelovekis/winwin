@@ -53,6 +53,6 @@ class QnaMapperTest {
         QnaVo qnaVo = new QnaVo();
         qnaVo.setQnaContent("간호사");
         qnaVo.setQnaTitle("간호사");
-        qnaMapper.selectQna();
+//        qnaMapper.selectQna();
     }
 }

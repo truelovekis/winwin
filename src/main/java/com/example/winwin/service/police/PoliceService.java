@@ -36,6 +36,15 @@ public class PoliceService {
         policeCommentMapper.commentReportInsert(policeCommentDto);
     }
 
+    //    qna 댓글 신고하기
+    public void policeQnaCommentRegister(PoliceCommentDto policeCommentDto){
+        if (policeCommentDto == null){
+            throw new IllegalArgumentException("게시글 번호가 잘못되었습니다.");
+        }
+
+        policeCommentMapper.qnaCommentReportInsert(policeCommentDto);
+    }
+
 
 
 

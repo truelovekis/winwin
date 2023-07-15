@@ -5,12 +5,13 @@
     <!--  검색한 회원 조회  -->
     <select id="getUserInfo" parameterType="adminUserSearchVo" resultType="adminVo">
         SELECT WU.USER_NAME,
+        WU.USER_NUMBER,
         WU.USER_ID,
         MC.MAIN_NAME,
         WU.USER_RRNUMBER,
         WU.USER_PHONE_NUMBER,
         M.MENTOR_STATUS,
-        WU.USER_EMAIL
+        WU.USER_STATUS
         FROM WW_USER WU
         LEFT OUTER JOIN MENTOR M on WU.user_number = M.USER_NUMBER
         LEFT OUTER JOIN SUB_CATEGORY SB on M.SUB_NUMBER = SB.SUB_NUMBER
@@ -336,7 +337,8 @@
         SELECT J1.POLICE_NUMBER, BC.BIG_NAME, COMMENT_NUMBER, PC.CATEGORY_NAME, J1. USER_NUMBER,
         TO_CHAR(COMMENT_DATE,'YYYY-MM-DD') AS COMMENT_DATE,
         CONTENT, STATUS,
-        U.USER_NAME, U.USER_ID
+        U.USER_NAME, U.USER_ID,
+        BC.BIG_CODE
         FROM (
         SELECT POLICE_NUMBER, PM.BIG_CODE, CM.COMMENT_NUMBER, POLICE_CATEGORY, USER_NUMBER, COMMENT_DATE,
         CM.CONTENT, CM.STATUS
