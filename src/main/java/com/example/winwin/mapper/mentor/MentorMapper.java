@@ -69,4 +69,6 @@ public interface MentorMapper {
 
 //    멘토 신청
     public void addMentor(MentorVo mentorVo);
+
+    public MentorVo mentorpfp(Long mentorNumber);
 }

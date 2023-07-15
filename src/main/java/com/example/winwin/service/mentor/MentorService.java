@@ -221,5 +221,10 @@ public class MentorService {
         mentorMapper.addMentor(mentorVo);
     }
 
+//    멘토 프로필
+    public MentorVo findPfp(Long mentorNumber){
+
+        return mentorMapper.mentorpfp(mentorNumber);
+    }
 
 }

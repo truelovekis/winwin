@@ -273,10 +273,12 @@ textarea::placeholder {
     border: 1px solid #ddd;
     padding: 7px 7px;
     border-radius: 3px;
+    color: black;
 }
 
 .endDate {
     border: 1px solid #ddd;
     padding: 7px 7px;
     border-radius: 3px;
+    color: black;
 }

@@ -84,3 +84,26 @@ $('.custom-control-label').on('click', function (){
    `;
     $('.endDate').html(text);
 });
+
+//글자수 카운팅
+$('.company').keyup(function (e){
+    var content = $(this).val();
+    $('.cnt').html(content.length);    //글자수 실시간 카운팅
+
+    if (content.length > 50){
+        alert("최대 50자까지 입력 가능합니다.");
+        $(this).val(content.substring(0, 50));
+        $('.cnt').html("50");
+    }
+});
+
+$('.title').keyup(function (e){
+    var content = $(this).val();
+    $('.cnt1').html(content.length);    //글자수 실시간 카운팅
+
+    if (content.length > 50){
+        alert("최대 50자까지 입력 가능합니다.");
+        $(this).val(content.substring(0, 50));
+        $('.cnt1').html("50");
+    }
+});

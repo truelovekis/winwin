@@ -33,6 +33,17 @@ section {
   justify-content: center;
 }
 
+.mento-profile-photo-box2 {
+  width: 70px;
+  height: 70px;
+  border-radius: 70%;
+  overflow: hidden;
+  display: flex;
+  margin-right: 10px;
+  /* 이미지 중앙 맞추기 */
+  justify-content: center;
+}
+
 .mento-profile-photo {
   /* 비율 안깨지게 */
   object-fit: cover;
@@ -307,6 +318,8 @@ input:checked + .slider:before {
 
 .mento-profile {
   padding: 20px 20px 0 20px;
+  overflow: hidden;
+  max-height: 186px;
 }
 
 /* 모달창 */
@@ -353,6 +366,7 @@ input:checked + .slider:before {
   border-radius: 50%;
   background-color: pink;
   overflow: hidden;
+  background-size: cover;
 }
 
 .img-box > img {
