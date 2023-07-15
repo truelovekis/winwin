@@ -2,8 +2,11 @@ package com.example.winwin.service.cs;
 
 import com.example.winwin.dto.board.CsDto;
 import com.example.winwin.mapper.board.CsMapper;
+import com.example.winwin.vo.board.CommunityProfileVo;
+import com.example.winwin.vo.board.CsProfileVo;
 import com.example.winwin.vo.board.CsVo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,6 +58,29 @@ public class CsService {
     @Transactional(readOnly = true)
     public List<CsVo> findAll() {
         return csMapper.selectAll();
+    }
+
+
+// 유저 프로필
+
+    public List<CsProfileVo> getProfile(Long userNumber){
+        return csMapper.selectUserProfile(userNumber);
+    }
+
+
+    //    CS 페이지 무한스크롤
+    public List<CsVo> findListPage(CsVo csVo){
+        if(csVo == null){
+            throw new IllegalArgumentException("페이지 처리에 필요한 정보가 누락되었습니다.");
+        }
+
+        return csMapper.selectScroll(csVo);
+    }
+
+    //    cs 메인페이지 갯수 구하기
+    public int findTotal(){
+
+        return csMapper.selectTotal();
     }
 
 

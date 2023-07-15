@@ -41,6 +41,7 @@
         <!-- CS -->
         <typeAlias type="com.example.winwin.dto.board.CsDto" alias="csDto"/>
         <typeAlias type="com.example.winwin.vo.board.CsVo" alias="csVo"/>
+        <typeAlias type="com.example.winwin.vo.board.CsProfileVo" alias="csProfileVo"/>
         <typeAlias type="com.example.winwin.dto.board.CsCommentDto" alias="csCommentDto"/>
 
         <typeAlias type="com.example.winwin.vo.board.CsReplyVo" alias="CsReplyVo"/>

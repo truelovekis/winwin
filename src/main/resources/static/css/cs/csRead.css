@@ -61,7 +61,7 @@ footer{
 
 .first>.imfor{
     height: 50px;
-    margin: -2px 201px;
+    margin: -2px 210px;
 }
 
 .imfor>p{
@@ -171,7 +171,8 @@ footer{
 /* svg 아이콘 ================================ */
 
 .date{
-    margin: 27px 434px;
+    /*margin: 27px 434px;*/
+    margin: 27px 600px;
     font-size: 13px;
     color: rgb(148, 155, 160);
 }
@@ -300,7 +301,7 @@ footer{
 }
 
 .profil>.Commento{
-    margin: -10px 10px;
+    margin: 10px 10px;
     width: 100px;
     font-weight: bold;
 }
@@ -315,6 +316,7 @@ footer{
 }
 
 .description>p{
+    margin-left: -10px;
     font-size: 12px;
     margin-top: -41px;
 }
