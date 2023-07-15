@@ -17,4 +17,7 @@ public class ChattingVo {
     private String userNickname;
     private String userName;
     private Long userNumber;
+    private String pfpUploadPath;
+    private String pfpSystemName;
+    private String pfpUuid;
 }

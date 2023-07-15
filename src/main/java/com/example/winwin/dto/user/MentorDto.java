@@ -11,5 +11,5 @@ public class MentorDto {
     private Long mentorNumber;
     private String mentorStatus;
     private Long userNumber;
-//    private int subNumber;
+    private int certificationNumber;
 }

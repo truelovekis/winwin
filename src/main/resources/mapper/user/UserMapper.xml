@@ -109,8 +109,36 @@
         <selectKey keyProperty="mentorNumber" order="BEFORE" resultType="Long">
             SELECT SEQ_MENTOR.NEXTVAL FROM DUAL
         </selectKey>
-        INSERT INTO MENTOR (MENTOR_NUMBER, USER_NUMBER)
-        VALUES (#{mentorNumber}, #{userNumber})
+        INSERT INTO MENTOR (MENTOR_NUMBER, USER_NUMBER, SUB_NUMBER)
+        VALUES (#{mentorNumber}, #{userNumber}, #{certificationNumber})
     </insert>
+
+    <!-- 회원가입 시 프로필 테이블 등록-->
+<!--    <insert id="joinPfp">-->
+<!--        <selectKey keyProperty="pfpNumber" order="BEFORE" resultType="Long">-->
+<!--            SELECT SEQ_USERPFP.NEXTVAL FROM DUAL-->
+<!--        </selectKey>-->
+<!--        INSERT INTO USER_PFP (PFP_NUMBER, PFP_UPLOAD_PATH, PFP_SYSTEM_NAME, PFP_UUID, USER_NUMBER)-->
+<!--        VALUES (#{pfpNumber}, #{pfpUploadPath}, #{pfpSystemName}, #{pfpUuid}, #{userNumber})-->
+<!--    </insert>-->
+
+    <!-- 인증 태그 -->
+    <select id="certificationH" resultType="categoryVo">
+        SELECT *
+        FROM MAIN_CATEGORY
+        WHERE MAIN_CODE LIKE '1__'
+    </select>
+
+    <select id="certificationJ" resultType="categoryVo">
+        SELECT *
+        FROM MAIN_CATEGORY
+        WHERE MAIN_CODE LIKE '2__'
+    </select>
+
+    <select id="certificationSub" resultType="categoryVo">
+        SELECT *
+        FROM SUB_CATEGORY sc
+        WHERE main_code = #{mainCode}
+    </select>
 
 </mapper>

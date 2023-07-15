@@ -11,12 +11,16 @@ import reactor.core.publisher.Mono;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 @Service
 public class SmsService {
+    //네이버 클라우드 가입 후 진행
+    //가입 절차, serviceId발급, accessKey발급, secretKey발급 아래 사이트 참고
+    //(https://www.autooffice.io/knowhow/send-sms-via-naver-sens-api )
 
     @Value("${service.id}")
     private String serviceId;
@@ -24,15 +28,17 @@ public class SmsService {
     private String accessKey;
     @Value("${secret.key}")
     private String secretKey;
+
     private String method ="POST";
     private String timeStamp = Long.toString(System.currentTimeMillis());
 
-    private String requestUrl = "/sms/v2/services/" + serviceId + "/messages";
-    private String apiUrl = "https://sens.apigw.ntruss.com" + requestUrl;
+    private String requestUrl;
+    private String apiUrl;
 
+    public Map<String, Object> sendMessage(String phoneNumber){
 
-
-    public String sendMessage(String phoneNumber){
+        requestUrl = "/sms/v2/services/" + serviceId + "/messages";
+        apiUrl = "https://sens.apigw.ntruss.com" + requestUrl;
 
         Map<String, String> message = new HashMap<>();
         message.put("to", phoneNumber);
@@ -41,7 +47,6 @@ public class SmsService {
         messages.add(message);
 
         String authNumber = makeAuthNumber();
-
 
         Map<String, Object> body = new HashMap<>();
         body.put("content", "인증 번호(6자리) : " + authNumber);
@@ -70,13 +75,17 @@ public class SmsService {
                 .retrieve()
                 .bodyToMono(Map.class);
 
-        return authNumber;
+        Map<String, Object> map = new HashMap<>();
+        map.put("resultBody", resultBody);
+        map.put("authNumber", authNumber);
+
+        return map;
     }
 
-//    헤더에 필요한 x-ncp-apigw-signature-v2를 생성하는 메소드
+    //    헤더에 필요한 x-ncp-apigw-signature-v2를 생성하는 메소드
 //    정해진 값을 SHA256과 Base64로 암호화 해야한다. signature 문서를 참고한다.
 //    https://api.ncloud-docs.com/docs/common-ncpapi
-    private String makeSignature() throws NoSuchAlgorithmException, InvalidKeyException {
+    private String makeSignature() throws NoSuchAlgorithmException, InvalidKeyException{
         String message = new StringBuilder()
                 .append(method)
                 .append(" ")
@@ -113,9 +122,8 @@ public class SmsService {
         return encBase64;
     }
 
-
     //    클라이언트에게 인증 메세지를 보내기 위해
-    //    6자리 난수를 생성하는 메소드
+//    6자리 난수를 생성하는 메소드
     private String makeAuthNumber(){
         Random random = new Random();
         String authNumber = "";

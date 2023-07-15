@@ -54,7 +54,13 @@
             <span class="message-list" th:data-ctnum="${chatting.chattingNumber}" ></span>
             <div class="message-box-top">
                 <div class="sender-profile">
-                  <img class="sender-img" th:src="@{/img/profile-basic.png}"/>
+                  <div th:if="${chatting.pfpSystemName == null}" class="sender-img">
+                    <img class="sender-img" th:src="@{/img/profile-basic.png}"/>
+                 </div>
+                  <div th:unless="${chatting.pfpSystemName == null}" class="sender-img"
+                       th:style="${'background-image: url(/profile/' + chatting.pfpUuid + '_' + chatting.pfpSystemName + ')'}">
+                  </div>
+<!--                  <img class="sender-img" th:src="@{/img/profile-basic.png}"/>-->
                   <span class="sender" th:text="${chatting.userNickname}"></span>
                 </div>
                 <button class="send-reply" th:data-unum="${chatting.userNumber}">✉ 답장</button>
