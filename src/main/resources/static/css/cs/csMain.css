@@ -15,9 +15,8 @@
 /* 로그인 했을 때 */
 .community-pfp {
     position: fixed;
-    /*left: 50px;*/
     left: 250px;
-    /* display: none; */
+
 }
 
 .community-user {
@@ -114,7 +113,7 @@ community-pfp.main-btn{
 .community-pfp2 {
     position: fixed;
     left: 250px;
-    /*left: 50px;*/
+
 }
 
 .not-login > a {

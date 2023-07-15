@@ -45,6 +45,18 @@ function fn_remove(csNumber) {
     }
 }
 
+function fn_modify2(replyNumber){
+    if(confirm("정말 수정하시겠습니까?")){
+        location.href = "/cs/modify?csNumber="+csNumber;
+    }
+}
+
+function fn_remove2(replyNumber) {
+    if (confirm("정말 삭제하시겠습니까?")) {
+        location.href = "/cs/remove?csNumber="+csNumber;
+    }
+}
+
 
 
 
@@ -124,11 +136,18 @@ function getView(csNumber, callback, error){
 
 function showComment(replies) {
     console.log(replies);
-    let text = '';
+    console.log("댓글완성")
+    console.log("1111111111111111111111111111111")
+    let text =
+
+
+
+
+    // 댓글 ↑ ....
 
 // ↓ html 코드 가져옴
- replies.forEach(r => {
-     text +=  `<div class="commentAi" data-num="${r.commentNumber}">
+    replies.forEach(r => {
+        text +=  `<div class="commentAi" data-num="${r.commentNumber}">
             <input type="hidden" class="comment-num" value="${r.commentNumber}">
         <div class="profil">
             <img src="../img/corgi-g5894d3ae3_1920.jpg" height="50px" width="50px">
@@ -138,8 +157,8 @@ function showComment(replies) {
                         <span class="dropbtn_icon2"> <svg data-v-bd9f2bcc="" data-v-3035bc76="" width="24" height="24" fill="black" xmlns="http://www.w3.org/2000/svg" class="c-Applicatio c-icon" style="fill: rgb(148, 155, 160);"><circle data-v-bd9f2bcc="" cx="12" cy="5.5" r="1.5"></circle><circle data-v-bd9f2bcc="" cx="12" cy="12" r="1.5"></circle><circle data-v-bd9f2bcc="" cx="12" cy="18.5" r="1.5"></circle></svg></span>
                     </button> `;
 
-                    if(r.userNumber == loginNumber) {
-                        text += `
+        if(r.userNumber == loginNumber) {
+            text += `
                     <div class="dropdown-content2">
                     
                         <a href="#">신고</a>
@@ -148,15 +167,15 @@ function showComment(replies) {
                 
                         
                         </div> `;
-                    }
-                    text +=`
+        }
+        text +=`
                
                 </div>
         </div>
         <div class="description"><p>${r.userId}</p></div>
         <div class="Aicontent">${r.commentContent}</div>`;
-                    if(r.userNumber == loginNumber) {
-                        text += `
+        if(r.userNumber == loginNumber) {
+            text += `
             <div class="answer">
             <div class="answer-box"></div>
             <div class="answer-box-comment"><p>답변이 도움이 되었나요?</p></div>
@@ -182,8 +201,8 @@ function showComment(replies) {
                 </button>비추천
             </div>
         </div> `;
-                    }
-               text +=`         
+        }
+        text +=`         
             <div class="parent">
                 <div class="icon2">
                     <div class="date1">${timeForToday(r.commentDate)}</div>
@@ -191,7 +210,7 @@ function showComment(replies) {
             </div>
         </div>`;
 
-        });
+    });
     console.log("333");
     $('#csCommentList').html(text);
 
@@ -200,37 +219,6 @@ function showComment(replies) {
 function  showError(a, b, c) {
 }
 
-function timeForToday(value){
-    // new Date() 현재 날짜와 시간
-    const today = new Date();
-    const timeValue = new Date(value);
-
-    // console.log(today);
-    // console.log(timeValue);
-
-    // Math.floor()는 소수점을 내림 처리 해준다.
-    // getTime()은 1970년 01/01 을 기준으로 지금까지 몇 ms가 지났는지 알려준다.
-    const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
-
-    console.log(betweenTime);
-
-    if(betweenTime < 1) { return "방금 전"; }
-    if(betweenTime < 60) {
-        return `${betweenTime}분 전`;
-    }
-
-    const betweenTimeHour = Math.floor(betweenTime / 60);
-    if(betweenTimeHour < 24){
-        return `${betweenTimeHour}시간 전`;
-    }
-
-    const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
-    if(betweenTimeDay < 365){
-        return `${betweenTimeDay}일 전`;
-    }
-
-    return `${Math.floor(betweenTimeDay / 365)}년 전`;
-}
 // 댓글 작성 버튼 처리 끝 ↑
 
 
@@ -299,6 +287,7 @@ function reportAjax(){
 
 // 리플 수정 버튼 처리
 $('#csCommentList').on('click', '.btn-modify', function (){
+    console.log("수정버튼 눌렀음")
     let content = $(this).closest('.commentAi').find('.Aicontent');
     console.log(content);
     content.replaceWith(`
@@ -309,6 +298,7 @@ $('#csCommentList').on('click', '.btn-modify', function (){
     `);
     $('.dropdown-content2').addClass('none');
 });
+
 
 // 리플 수정 완료 처리
 const csNumber = $('.cs-num').val();
@@ -330,24 +320,37 @@ $('#csCommentList').on('click', '.modify-content-btn', function (){
 
 
 
-// 댓글 수정하기
-function modify(commentObj, callback, error){
-    console.log("modify 들어옴")
+// 리플 댓글 수정하기
+function modify(commentObj, successCallback, errorCallback) {
+    console.log("modify 들어옴");
     $.ajax({
-        url : `/replies/${commentObj.commentNumber}`,
-        type : 'patch',
-        data : JSON.stringify(commentObj),
-        contentType : 'application/json; charset=utf-8',
-        success : function (result){
-            console.log("modify ajax성공했따");
-            if(callback){
-                callback(result);
+        url: `/replies/${commentObj.commentNumber}`,
+        type: 'patch',
+        data: JSON.stringify(commentObj),
+        contentType: 'application/json; charset=utf-8',
+        success: function (result) {
+            console.log("modify ajax 성공했다");
+            if (successCallback) {
+                successCallback(result);
             }
+            // Reload the page after successful modification
+            location.reload();
         },
-        error : error
+        error: errorCallback
     });
-    console.log("88888888888888888888888")
+    console.log("88888888888888888888888");
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 // 리플 삭제 버튼 처리
@@ -380,9 +383,9 @@ function remove(commentNumber, callback, error){
     console.log("js끝마침");
 }
 
-// 게시판  로그인 했을시 수정 삭제
+// ↓ 아이디가 다르면 삭제 수정 못하게
 
-/* 수정하기 */
+// /* 수정하기 */
 // function fn_modify(csNumber){
 //     console.log("aaaaaaaaaaa")
 //     if(confirm("정말 수정하시겠습니까?")){
@@ -394,5 +397,11 @@ function remove(commentNumber, callback, error){
 //     console.log("bbbbbb")
 //     if(confirm("정말 삭제하시겠습니까?")){
 //         location.href = "/cs/delete?csNumber=" + csNumber;
+//         console.log("다들어왔다!")
+//
 //     }
 // }
+
+
+
+
