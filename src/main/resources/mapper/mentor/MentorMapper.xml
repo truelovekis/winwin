@@ -94,4 +94,14 @@
         VALUES(#{userNumber}, #{mentorNumber})
     </insert>
 
+    <select id="mentorpfp" resultType="mentorVo">
+        SELECT p.USER_NUMBER , p.PFP_UPLOAD_PATH , p.PFP_SYSTEM_NAME , p.PFP_UUID , m.MENTOR_NUMBER
+        FROM (
+                 SELECT wu.USER_NUMBER , up.PFP_UPLOAD_PATH , up.PFP_SYSTEM_NAME , up.PFP_UUID
+                 FROM WW_USER wu LEFT OUTER JOIN USER_PFP up
+                                                 ON wu.USER_NUMBER = up.USER_NUMBER
+             ) p JOIN MENTOR m
+                      ON p.user_number = m.USER_NUMBER AND m.MENTOR_NUMBER = #{mentorNumber}
+    </select>
+
 </mapper>

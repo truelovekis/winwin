@@ -2,6 +2,7 @@ package com.example.winwin.controller.myPage;
 
 import com.example.winwin.dto.chatting.ChattingDto;
 import com.example.winwin.dto.file.ResumeFileDto;
+import com.example.winwin.dto.mentor.MentorVo;
 import com.example.winwin.dto.user.ResumePrDto;
 import com.example.winwin.service.chatting.ChattingService;
 import com.example.winwin.service.myPage.MyPageService;

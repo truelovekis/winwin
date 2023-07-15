@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.winwin.mapper.myPage.UserMentorMapper">
+    <select id="userMentor" resultType="mentorVo">
+        SELECT DISTINCT wu.USER_NUMBER , wu.USER_NAME , wu.USER_BELONG , m.MENTOR_NUMBER , ub.UM_STATUS , up.PFP_UPLOAD_PATH , up.PFP_SYSTEM_NAME , up.PFP_UUID,
+               ROUND(((TO_DATE(CAREER_END_DATE, 'YYYY.mm.DD') - TO_DATE(CAREER_START_DATE, 'YYYY.mm.DD'))/30/12)) career_annual
+        FROM WW_USER wu JOIN MENTOR m
+                             ON wu.USER_NUMBER = m.USER_NUMBER
+                        JOIN MENTOR_CAREER mc
+                             ON m.MENTOR_NUMBER = mc.MENTOR_NUMBER
+                        JOIN UM_BRIDGE ub
+                             ON m.MENTOR_NUMBER = ub.MENTOR_NUMBER AND ub.UM_STATUS = 'Y'
+                        LEFT OUTER JOIN USER_PFP up
+                             ON wu.USER_NUMBER = up.USER_NUMBER
+        WHERE wu.USER_BELONG = mc.CAREER_COMPANY AND ub.USER_NUMBER = #{userNumber}
+    </select>
+
+    <select id="userMentorSkill" resultType="skillVo">
+        SELECT m.MENTOR_NUMBER , ms.SKILL_NAME
+        FROM MENTOR m JOIN MENTOR_SKILL ms
+        ON m.MENTOR_NUMBER = ms.MENTOR_NUMBER AND m.MENTOR_NUMBER = #{mentorNumber}
+    </select>
+
+    <select id="userMentorCareer" resultType="careerVo">
+        SELECT MC.CAREER_COMPANY , MC.CAREER_TITLE , TO_CHAR(TO_DATE(mc.CAREER_END_DATE, 'YYYY.mm.DD'), 'YYYY.mm') CAREER_END_DATE , TO_CHAR(TO_DATE(mc.CAREER_START_DATE, 'YYYY.mm.DD'),'YYYY.mm') CAREER_START_DATE , ROUND(((TO_DATE(mc.CAREER_END_DATE, 'YYYY.mm.DD') - TO_DATE(mc.CAREER_START_DATE, 'YYYY.mm.DD'))/30/12)) career_annual , career_status
+        FROM MENTOR_CAREER mc
+        where MC.MENTOR_NUMBER = #{mentorNumber}
+    </select>
+
+    <select id="likeMentor" resultType="mentorVo">
+        SELECT s.user_number , user_name , user_belong, s.mentor_number , NVL(um_status, '0') um_status , pfp_upload_path, pfp_system_name, pfp_uuid, career_annual, l.like_cnt
+        FROM (
+                 SELECT DISTINCT wu.USER_NUMBER , wu.USER_NAME , wu.USER_BELONG , m.MENTOR_NUMBER , ub.UM_STATUS , up.PFP_UPLOAD_PATH , up.PFP_SYSTEM_NAME , up.PFP_UUID,
+                        ROUND(((TO_DATE(CAREER_END_DATE, 'YYYY.mm.DD') - TO_DATE(CAREER_START_DATE, 'YYYY.mm.DD'))/30/12)) career_annual
+                 FROM WW_USER wu JOIN MENTOR m
+                                      ON wu.USER_NUMBER = m.USER_NUMBER
+                                 JOIN MENTOR_CAREER mc
+                                      ON m.MENTOR_NUMBER = mc.MENTOR_NUMBER
+                                 JOIN MENTOR_LIKE ml
+                                      ON m.MENTOR_NUMBER = ml.MENTOR_NUMBER AND ml.USER_NUMBER = #{userNumber}
+                                 LEFT OUTER JOIN UM_BRIDGE ub
+                                      ON m.MENTOR_NUMBER = ub.MENTOR_NUMBER
+                                 LEFT OUTER JOIN USER_PFP up
+                                                 ON wu.USER_NUMBER = up.USER_NUMBER
+                 WHERE wu.USER_BELONG = mc.CAREER_COMPANY
+             ) s JOIN (
+            SELECT MENTOR_NUMBER, COUNT(ML.USER_NUMBER) LIKE_CNT FROM MENTOR_LIKE ML
+            WHERE USER_NUMBER = #{userNumber}
+            GROUP BY MENTOR_NUMBER
+        ) L
+        ON s.mentor_number = L.mentor_number
+    </select>
+
+    <select id="mentorMentee" resultType="mentorVo">
+        SELECT wu.USER_NUMBER , wu.USER_NAME , ub.USER_NUMBER , ub.MENTOR_NUMBER , wu.USER_GENDER , wu.USER_BELONG  , wu.USER_IDENTITY , up.PFP_UPLOAD_PATH , up.PFP_SYSTEM_NAME , up.PFP_UUID, ub.UM_STATUS
+        FROM WW_USER wu JOIN UM_BRIDGE ub
+             ON wu.USER_NUMBER = ub.USER_NUMBER AND mentor_number = #{mentorNumber}
+        LEFT OUTER JOIN USER_PFP up
+        ON wu.USER_NUMBER = up.USER_NUMBER
+    </select>
+
+    <update id="okMentee">
+        UPDATE UM_BRIDGE
+        SET UM_STATUS= #{umStatus}
+        WHERE MENTOR_NUMBER=#{mentorNumber} AND USER_NUMBER= #{userNumber}
+    </update>
+
+    <delete id="noMentee">
+        DELETE FROM UM_BRIDGE
+        WHERE MENTOR_NUMBER= #{mentorNumber} AND USER_NUMBER=#{userNumber}
+    </delete>
+
+    <select id="loginUser" resultType="string">
+        SELECT USER_POSITION as userPosition
+        FROM WW_USER
+        WHERE USER_NUMBER = #{userNumber}
+    </select>
+</mapper>

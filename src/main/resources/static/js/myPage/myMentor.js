@@ -92,4 +92,83 @@ $likeDown3.on('click', function(){
   $(this).parents('.share-like').find('.bi-hand-thumbs-up-fill').hide();
   $(this).parents('.share-like').find('.bi-hand-thumbs-up').show();
 });
-  
+
+//메세지 보내기
+$('.message-button').on("click" ,function () {
+  let user =  $('.user').val();
+  console.log(user);
+  if(user != ''){
+    $(".modal-wrap1").removeClass("none");
+    $(".modal-wrap1").css({
+      position: "fixed",
+      left: "50%",
+      top: "50%",
+      transform: "translate(-50%, -50%)",
+    });
+  }
+
+  let name = $(this).closest('.item__box').find('.mento-name').text();
+  let number = $(this).closest('.item__box').find('.add-num').val();
+  console.log(number);
+  console.log(name);
+  $('.mentorName').text(name);
+  $('.addNumber').text(number);
+});
+
+/* 쪽지 모달창 */
+$(function () {
+  $(".message-button").click(function () {
+    $(".input-wrap").fadeIn();
+    let userNickname = $(this).closest('.item').find('.mento-name').text();
+    let num = $(this).closest('.item').find('.mentor-num').data('num');
+    console.log(num);
+
+    $('.chattingTo').text(userNickname);
+    $('.chattingTo').data('num', num);
+  });
+});
+
+$(".message-button").on("click", function () {
+  $(".input-wrap").removeClass("none");
+
+  $('body').css('overflow', 'hidden');
+});
+
+$(".input-wrap").on("click", function (e) {
+
+  if ($(e.target).hasClass("input-wrap")) {
+    $(".input-wrap").addClass("none");
+    console.log("엥????????????????????/");
+    $('body').css('overflow', 'auto');
+    console.log("뜨엥????????????????????/");
+
+    $('.form-reset')[0].reset();
+    console.log("뜨엥에?????????????????????/");
+  }
+});
+
+//더보기 클릭
+$('.mento-more-info-box').on('click',function (){
+  console.log("선택 됐다");
+  let $target = $(this).prev('.mento-profile');
+
+  if($target.css('max-height') == 'none'){
+    $target.css('max-height' , "186px")
+  }else {
+    $target.css('max-height' , "none");
+  }
+
+});
+
+//버튼 누를 시 이동처리
+$('.point-mentor').on('click', function (){
+  window.location.href = '/myPage/myMentor';
+});
+
+$('.point-mentee').on('click', function (){
+  window.location.href = '/myPage/myMentee';
+});
+
+$('.like-mentor').on('click', function (){
+  window.location.href = '/myPage/loveMentor';
+});

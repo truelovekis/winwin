@@ -9,6 +9,7 @@
       <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
       <link rel="stylesheet" th:href="@{/css/myPage/myMentee.css}" />
       <link rel="stylesheet" th:href="@{/css/fragment/myPageSide.css}"/>
+      <link rel="stylesheet" th:href="@{/css/chatting/inputModal.css}" />
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
     <style>
       body {
@@ -25,6 +26,9 @@
   </head>
   <body>
     <header class="header"  th:replace="fragment/header :: header"></header>
+    <!--쪽지 모달창-->
+    <div th:replace="chatting/inputModal :: inputModal(nickname='', chattingTo='')"></div>
+    <!--쪽지 모달창 끝-->
     <main>
       <div class="wrap">
         <div class="container">
@@ -32,50 +36,90 @@
           <!-- 마이페이지 메인 -->
           <div class="mypage-main">
             <div class="title"><h2>내 멘토 : 멘티</h2></div>
-            <div class="category">
-              <div class="category-contain">
-                <h4>내 멘토</h4>
+              <div class="category">
+                  <th:block th:if="${user == '멘티'}">
+                      <div class="category-contain point-mentor">
+                          <h4 id="point-page1">내 멘토</h4>
+                      </div>
+                      <div class="category-contain like-mentor">
+                          <h4>관심 멘토</h4>
+                      </div>
+                  </th:block>
+                  <th:block th:if="${user == '멘토+멘티'}">
+                      <div class="category-contain point-mentor">
+                          <h4>내 멘토</h4>
+                      </div>
+                      <div class="category-contain point-mentee">
+                          <h4 id="point-page2">내 멘티</h4>
+                      </div>
+                      <div class="category-contain like-mentor">
+                          <h4>관심 멘토</h4>
+                      </div>
+                  </th:block>
+
+                  <th:block th:if="${user == '멘토'}">
+                      <div class="category-contain point-mentee">
+                          <h4 id="point-page3">내 멘티</h4>
+                      </div>
+                      <div class="category-contain like-mentor">
+                          <h4>관심 멘토</h4>
+                      </div>
+                  </th:block>
+
               </div>
-              <div class="category-contain">
-                <h4 id="point-page">내 멘티</h4>
-              </div>
-              <div class="category-contain">
-                <h4>관심 멘토</h4>
-              </div>
-            </div>
             <div class="my-mentee-content">
-              <!-- 멘티 프로필 -->
-             <div class="mentee-box">
+<!--              &lt;!&ndash; 멘티 프로필 &ndash;&gt;-->
+<!--             <div class="mentee-box">-->
+<!--              <div class="mentee-profile">-->
+<!--                <div class="mentee-img"><img src="" alt=""></div>-->
+<!--                <span class="mentee-name">WinWin</span>-->
+<!--              </div>-->
+<!--              <div class="mentee-age">-->
+<!--                <span>23세</span>-->
+<!--              </div>-->
+<!--              <div class="mentee-gender">-->
+<!--                <span>남자</span>-->
+<!--              </div>-->
+<!--              <div class="mentee-date">-->
+<!--                <span>23일째</span>-->
+<!--              </div>-->
+<!--             </div>-->
+<!--             &lt;!&ndash; 멘티 프로필 끝 &ndash;&gt;-->
+
+            <!-- 멘티 리스트 시작-->
+             <div class="mentee-box" th:each="mentee : ${mentee}">
               <div class="mentee-profile">
-                <div class="mentee-img"><img src="" alt=""></div>
-                <span class="mentee-name">WinWin</span>
+                <input type="hidden" class="mentee-number" th:data-num="${mentee.userNumber}" th:value="${mentee.userNumber}"/>
+                <div class="mentee-img">
+                    <img th:if="${mentee.pfpSystemName == null}" class="img-box" src="/img/profile-basic.png"/>
+                    <img th:unless="${mentee.pfpSystemName == null}" class="img-box"
+                         th:style="${'background-image: url(/profile/' + mentee.pfpUuid + '_' + mentee.pfpSystemName + ')'}"/>
+                </div>
+                <span class="mentee-name" th:text="${mentee.userName}"></span>
               </div>
               <div class="mentee-age">
-                <span>23세</span>
+                <span th:text="${mentee.userBelong}"></span>
               </div>
               <div class="mentee-gender">
-                <span>남자</span>
+                <span th:text="${mentee.userIdentity}"></span>
               </div>
               <div class="mentee-date">
-                <span>23일째</span>
+                  <input type="hidden" class="mentor-num" th:value="${mentee.userNumber}"/>
+                  <input type="hidden" class="add-num" th:value="${mentee.userNumber}"/>
+                  <input type="hidden" class="umStatus" th:value="${mentee.umStatus}"/>
+                  <div class="btn">
+                  <th:block th:if="${mentee.umStatus == 'Y'}">
+                  <button class="message-button">메시지</button>
+                  </th:block>
+                  <th:block th:if="${mentee.umStatus == 'N'}">
+                      <button type="button" class="mentee1">수락</button>
+                      <button type="button" class="mentee2">거절</button>
+                  </th:block>
+                  </div>
               </div>
              </div>
-             <!-- 멘티 프로필 끝 -->
-             <div class="mentee-box">
-              <div class="mentee-profile">
-                <div class="mentee-img"><img src="" alt=""></div>
-                <span class="mentee-name">WinWin</span>
-              </div>
-              <div class="mentee-age">
-                <span>23세</span>
-              </div>
-              <div class="mentee-gender">
-                <span>남자</span>
-              </div>
-              <div class="mentee-date">
-                <span>23일째</span>
-              </div>
-             </div>
+            <!-- 멘티 리스트 끝-->
+
             </div>
           </div>
         </div>
@@ -87,6 +131,7 @@
       integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
       crossorigin="anonymous"
     ></script>
-    <script src="../springProject/myMentor.js"></script>
+    <script th:src="@{/js/myPage/myMentee.js}"></script>
+    <script th:src="@{/js/chatting/inputModal.js}"></script>
   </body>
 </html>

@@ -37,8 +37,10 @@
     <input type="hidden" class="addNumber"/>
     <div class="select-box">
         <div class="profile-box">
-            <div class="mento-profile-photo-box">
-                <img src="https://www.thelec.kr/news/photo/202210/18518_16299_646.jpg" width="100" class="mento-profile-photo"/>
+            <div class="mento-profile-photo-box2">
+<!--                <img th:if="${pfp == null}" class="img-box" src="/img/profile-basic.png"/>-->
+<!--                <img th:unless="${pfp.pfpSystemName == null}" class="img-box"-->
+<!--                     th:style="${'background-image: url(/profile/' + pfp.pfpUuid + '_' + pfp.pfpSystemName + ')'}"/>-->
             </div>
             <span class="mentor-name">[ <span class="mentorName"></span> ] 멘토님</span>
         </div>
@@ -200,9 +202,9 @@
                             <a href="" class="page-move">
                                 <div class="flex">
                                     <div class="mento-profile-photo-box">
-                                        <img th:if="${profile == null}" class="img-box" src="/img/profile-basic.png"/>
-                                        <img th:unless="${profile == null}" class="img-box"
-                                             th:style="${'background-image: url(/profile/' + profile.pfpUuid + '_' + profile.pfpSystemName + ')'}"/>
+                                        <img th:if="${loginMentor.pfpSystemName == null}" class="img-box" src="/img/profile-basic.png"/>
+                                        <img th:unless="${loginMentor.pfpSystemName == null}" class="img-box"
+                                             th:style="${'background-image: url(/profile/' + loginMentor.pfpUuid + '_' + loginMentor.pfpSystemName + ')'}"/>
                                     </div>
                                     <div class="flex text-wrap">
                                         <div class="mento-name"><span th:text="${loginMentor.userName}"></span> </div>
@@ -286,9 +288,9 @@
                             <a th:href="@{/mentor/profile(mentorNumber=${mentorList.mentorNumber})}" class="page-move">
                                 <div class="flex">
                                     <div class="mento-profile-photo-box">
-                                        <img th:if="${profile == null}" class="img-box" src="/img/profile-basic.png"/>
-                                        <img th:unless="${profile == null}" class="img-box"
-                                             th:style="${'background-image: url(/profile/' + profile.pfpUuid + '_' + profile.pfpSystemName + ')'}"/>
+                                        <img th:if="${mentorList.pfpSystemName == null}" class="img-box" src="/img/profile-basic.png"/>
+                                        <img th:unless="${mentorList.pfpSystemName == null}" class="img-box"
+                                             th:style="${'background-image: url(/profile/' + mentorList.pfpUuid + '_' + mentorList.pfpSystemName + ')'}"/>
                                     </div>
                                     <div class="flex text-wrap" >
                                         <div class="mento-name"> <span class="mento-name2" th:text="${mentorList.userName}"></span> </div>
@@ -301,6 +303,7 @@
 
                             <div class="mento-button-box">
                                 <input type="hidden" class="mentor-num" th:value="${mentorList.mentorNumber}"/>
+                                <input type="hidden" class="add-num" th:value="${mentorList.mentorNumber}"/>
                                 <button class="like-button" th:value="${mentorList.likeCnt}">
                                     <div th:if="${mentorList.likeCnt} == 0" class="like-up like0" th:value="${mentorList.likeCnt}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">

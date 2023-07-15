@@ -1,4 +1,34 @@
-// mentorProfile.js 수정이요
+/* 쪽지 모달창 */
+$(function () {
+    $(".chatting-button").click(function () {
+        $(".input-wrap").fadeIn();
+        let userNickname = $(this).closest('.item').find('.mento-name2').text();
+        let num = $(this).closest('.item').find('.mentor-num').data('num');
+        console.log(num);
+
+        $('.chattingTo').text(userNickname);
+        $('.chattingTo').data('num', num);
+    });
+});
+
+$(".chatting-button").on("click", function () {
+    $(".input-wrap").removeClass("none");
+
+    $('body').css('overflow', 'hidden');
+});
+
+$(".input-wrap").on("click", function (e) {
+
+    if ($(e.target).hasClass("input-wrap")) {
+        $(".input-wrap").addClass("none");
+        console.log("엥????????????????????/");
+        $('body').css('overflow', 'auto');
+        console.log("뜨엥????????????????????/");
+
+        $('.form-reset')[0].reset();
+        console.log("뜨엥에?????????????????????/");
+    }
+});
 
 let moreInfo = $(".mento-more-info-box");
 
@@ -18,16 +48,6 @@ share.click(function CopyUrlToClipboard() {
     tempInput.remove(); // 임시 input 요소 제거
     alert("복사가 완료 되었습니다.");
 });
-//
-// $(".main-mentor").on("click",'.message-button' ,function () {
-//     $(".modal-wrap1").removeClass("none");
-//     $(".modal-wrap1").css({
-//         position: "fixed",
-//         left: "50%",
-//         top: "50%",
-//         transform: "translate(-50%, -50%)",
-//     });
-// }
 
 //멘토 신청하기 버튼
 $(".main-mentor").on("click",'.message-button' ,function () {
@@ -50,10 +70,32 @@ $(".main-mentor").on("click",'.message-button' ,function () {
     let name = $(this).closest('.item__box').find('.mento-name').text();
     let number = $(this).closest('.item__box').find('.add-num').val();
     console.log(number);
-    console.log(name);
+    // console.log(name);
     $('.mentorName').text(name);
     $('.addNumber').text(number);
+
+    $.ajax({
+        url : '/mentor/profile2',
+        type : 'get',
+        data : {mentorNumber : number},
+        success : function (r){
+            mentorProfile(r);
+        },
+        error : function (){
+            console.log("실패");
+        }
+    });
 });
+
+//멘토 프로필 불러오기
+function mentorProfile(mentor){
+    let text = '';
+    text += `
+    ${mentor.pfpSystemName == null ? '<img class="img-box" src="/img/profile-basic.png"/>' :
+        '<img class="img-box" src=/profile/' + mentor.pfpUuid + '_' + mentor.pfpSystemName + '>' }
+    `;
+    $('.mento-profile-photo-box2').html(text);
+}
 
 //멘토 신청하기 모달
 $(".modal-wrap1").on("click", function (e) {
@@ -127,6 +169,27 @@ $(".middle-option-box").on("click", ".middle-option", function () {
 
 $(".select-tag").on("click", ".tag", function () {
     $(this).detach();
+
+    let list = [];
+
+    $('.tag').each((i, tag) => {
+       list.push($(tag).data('value'))
+    });
+
+    $.ajax({
+        url : '/mentor/sub',
+        type : 'get',
+        traditional : true,
+        data : {
+            subNumber : list
+        },
+        success : function (result){
+            // $('.main-mentor').html('');
+
+            showMentor(result);
+        }
+    });
+//    ==================================================================================
 });
 
 // 나의 관심분야 3가지 카테고리 박스
@@ -173,8 +236,6 @@ $(".third-job-box").on("click", ".option", function () {
     let list = [];
 
     $(".select-tag").append(tagHtml);
-    console.log($('.tag').data('value'));
-    // console.log($('.add-num').data('add'));
 
     $('.tag').each((i, obj) => {
         let tmp = $(obj).data('value');
@@ -190,7 +251,8 @@ $(".third-job-box").on("click", ".option", function () {
             subNumber : list
         },
         success : function (result){
-            console.log(result);
+            // $('.main-mentor').html('');
+
             showMentor(result);
         }
     });
@@ -202,9 +264,11 @@ $('.select-tag').on('click', '.tag' , function (){
     let tag = $('.tag').data('value');
 
     if(tag == null){
-        window.location.href= '/mentor/list';
+        // window.location.href= '/mentor/list';
+        // showMentor;
         console.log('제발');
     }
+
 });
 
 function showMentor(map){
@@ -410,7 +474,6 @@ $(".second-job-box").on("click", ".option", function () {
 });
 
 // 2, 3차 카테고리 선택 시 항목 띄어주는 함수
-
 function makeMiddleCate(result) {
     let text2 = '';
 
@@ -473,40 +536,8 @@ $(function(){
 });
 
 //좋아요(찜) 처리
-// $(".main-mentor").on("click",'.like-button' ,function (e){
-//     e.preventDefault();
-//     console.log($(this).val());
-//     let btn = $(this).find('.bi-heart');
-//     let btn2 =$(this).find('.bi-heart-fill');
-//     if ($(this).val() == 0){
-//         let mentorNum = $(this).closest('.mento-button-box').find('.mentor-num').val();
-//         let num2 = $('.main-mentor').find('.mentor-num').data('num');
-//         console.log(mentorNum);
-//         $.ajax({
-//             url : '/mentor/like',
-//             type : 'post',
-//             data : {mentorNumber : num2},
-//             success : function (){
-//
-//                 console.log("성공");
-//             },
-//             error : function (){
-//                 console.log("실패");
-//             }
-//         });
-//         btn2.show();
-//         btn.hide();
-//     }
-//
-//     if($(this).val() == 1){
-//         let mentorNum =  $(this).closest('.mento-button-box').find('.mentor-num').val();
-//         let num2 = $('.main-mentor').find('.mentor-num').data('num');
-//         $.ajax({
-//             url : '/mentor/delete',
-//             type : 'delete',
-//             data : {mentorNumber : num2},
-//             success : function (){
 $(".main-mentor").on("click",'.like-button' ,function (e){
+    e.preventDefault();
     let user = $('.user').val();
     if (user == ''){
         alert("로그인 해주세요!");
@@ -515,17 +546,17 @@ $(".main-mentor").on("click",'.like-button' ,function (e){
 
     if(user != ''){
         e.preventDefault();
-        console.log($(this).val());
         let btn = $(this).find('.bi-heart');
         let btn2 =$(this).find('.bi-heart-fill');
         if ($(this).val() == 0){
             let mentorNum = $(this).closest('.mento-button-box').find('.mentor-num').val();
-            let num2 = $('.main-mentor').find('.mentor-num').data('num');
+            let num2 = $(this).closest('.main-mentor').find('.mentor-num').data('num');
+            // console.log(num2);
             console.log(mentorNum);
             $.ajax({
                 url : '/mentor/like',
                 type : 'post',
-                data : {mentorNumber : num2},
+                data : {mentorNumber : mentorNum},
                 success : function (){
                     console.log("성공");
                 },
@@ -538,12 +569,13 @@ $(".main-mentor").on("click",'.like-button' ,function (e){
         }
 
         if($(this).val() == 1){
+            e.preventDefault();
             let mentorNum =  $(this).closest('.mento-button-box').find('.mentor-num').val();
-            let num2 = $('.main-mentor').find('.mentor-num').data('num');
+            let num2 = $(this).closest('.main-mentor').find('.mentor-num').data('num');
             $.ajax({
                 url : '/mentor/delete',
                 type : 'delete',
-                data : {mentorNumber : num2},
+                data : {mentorNumber : mentorNum},
                 success : function (){
 
                     console.log("성공");
@@ -563,7 +595,7 @@ $('.profile-button').on('click', function (e) {
 
     let mentorNumber = $('.mento-button').data('mentornumber');
     let userNumber = $('.mento-button').data('usernumber');
-    console.log(mentorNumber);
+    // console.log(mentorNumber);
 
     if(mentorNumber > -1){
         window.location.href = '/mentor/apply';
@@ -578,14 +610,12 @@ $('.profile-button').on('click', function (e) {
 
 //멘토 신청하기
 $('.modal-wrap1').on('click', '.um-btn' , function (){
-    let num =  $('.addNumber').text();
-    let num2 = $('.main-mentor').find('.mentor-num').data('num');
-    console.log(num);
-    console.log(num2);
+    let number = $(this).closest('.modal-wrap1').find('.addNumber').text();
+    console.log(number);
     $.ajax({
         url : '/mentor/add',
         type : 'post',
-        data : {mentorNumber : num2},
+        data : {mentorNumber : number},
         success : function (){
             console.log("성공");
             alert("신청에 성공하셨습니다.");
@@ -597,37 +627,15 @@ $('.modal-wrap1').on('click', '.um-btn' , function (){
 
 });
 
-// $('.main-mentor').on('click','.chatting-button', function (){
-//     $('.input-wrap').show();
-//
-// });
+$('.main-mentor').on('click', '.mento-more-info-box',function (){
+    console.log("선택 됐다");
+    let $target = $(this).prev('.mento-profile');
 
-/* 쪽지 모달창 */
-$(function () {
-    $(".chatting-button").click(function () {
-        $(".input-wrap").fadeIn();
-        let userNickname = $(this).closest('.item').find('.mento-name2').text();
-        let num = $(this).closest('.item').find('.mentor-num').data('num');
-        console.log(num);
-
-        $('.chattingTo').text(userNickname);
-        $('.chattingTo').data('num', num);
-    });
-});
-
-$(".chatting-button").on("click", function () {
-    $(".input-wrap").removeClass("none");
-
-    $('body').css('overflow', 'hidden');
-});
-
-$(".input-wrap").on("click", function (e) {
-
-    if ($(e.target).hasClass("input-wrap")) {
-        $(".input-wrap").addClass("none");
-        $('body').css('overflow', 'auto');
-
-        $('.form-reset')[0].reset();
+    if($target.css('max-height') == 'none'){
+        $target.css('max-height' , "186px")
+    }else {
+        $target.css('max-height' , "none");
     }
+
 });
 
