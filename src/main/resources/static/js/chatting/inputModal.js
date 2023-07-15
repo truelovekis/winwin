@@ -35,6 +35,7 @@ $('.input-container').on('click','.send-btn', function (){
             alert("전송이 완료되었습니다.");
             $('#inputMessage').val('');
             $('.input-wrap').addClass('none');
+            $('body').css('overflow', 'auto');
             $('.form-reset')[0].reset();
         }
     })

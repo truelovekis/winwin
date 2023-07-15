@@ -9,6 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
     <link rel="stylesheet" th:href="@{/css/myPage/myMentor.css}" />
     <link rel="stylesheet" th:href="@{/css/fragment/myPageSide.css}"/>
+    <link rel="stylesheet" th:href="@{/css/chatting/inputModal.css}" />
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
     <style>
       body {
@@ -24,8 +25,13 @@
     </style>
   </head>
   <body>
+  <input type="hidden" th:value="${session.userNumber}" class="user">
     <header class="header"  th:replace="fragment/header :: header"></header>
+    <!--쪽지 모달창-->
+    <div th:replace="chatting/inputModal :: inputModal(nickname='', chattingTo='')"></div>
+    <!--쪽지 모달창 끝-->
     <main>
+      <input type="hidden" th:value="${user}">
       <div class="wrap">
         <div class="container">
           <div th:replace="fragment/myPageSide :: myPageSide"></div>
@@ -33,102 +39,120 @@
           <div class="mypage-main">
             <div class="title"><h2>내 멘토 : 멘티</h2></div>
             <div class="category">
-              <div class="category-contain">
-                <h4 id="point-page">내 멘토</h4>
+              <th:block th:if="${user == '멘티'}">
+              <div class="category-contain point-mentor">
+                <h4 id="point-page1">내 멘토</h4>
               </div>
-              <div class="category-contain">
+                <div class="category-contain like-mentor">
+                  <h4>관심 멘토</h4>
+                </div>
+              </th:block>
+              <th:block th:if="${user == '멘토+멘티'}">
+                <div class="category-contain point-mentor">
+                  <h4 id="point-page2">내 멘토</h4>
+                </div>
+              <div class="category-contain point-mentee">
                 <h4>내 멘티</h4>
               </div>
-              <div class="category-contain">
-                <h4>관심 멘토</h4>
-              </div>
+                <div class="category-contain like-mentor">
+                  <h4>관심 멘토</h4>
+                </div>
+              </th:block>
+
+              <th:block th:if="${user == '멘토'}">
+                <div class="category-contain point-mentee">
+                  <h4 id="point-page3">내 멘티</h4>
+                </div>
+                <div class="category-contain like-mentor">
+                  <h4>관심 멘토</h4>
+                </div>
+              </th:block>
+
             </div>
             <div class="my-mentor-content">
               <!-- 멘토 프로필 -->
-              <article class="item">
+              <article class="item" th:each="mentor :${mentor}">
                 <section class="mento-profile">
                   <div class="item__box">
+                    <input type="hidden" class="mentor-num" th:data-num="${mentor.mentorNumber}" th:value="${mentor.mentorNumber}"/>
                     <a href="" class="page-move">
                       <div class="flex">
                         <div class="mento-profile-photo-box">
-                          <img
-                            src="https://www.thelec.kr/news/photo/202210/18518_16299_646.jpg"
-                            width="100"
-                            class="mento-profile-photo"
-                          />
+                          <img th:if="${mentor.pfpSystemName == null}" class="img-box" src="/img/profile-basic.png"/>
+                          <img th:unless="${mentor.pfpSystemName == null}" class="img-box"
+                               th:style="${'background-image: url(/profile/' + mentor.pfpUuid + '_' + mentor.pfpSystemName + ')'}"/>
                         </div>
-        
                         <div class="flex text-wrap">
-                          <div class="mento-name">이재용</div>
-                          <div class="mento-career">백엔드 개발자&nbsp; · &nbsp;2년차</div>
+                          <div class="mento-name"><span th:text="${mentor.userName}"/></div>
+                          <div class="mento-career"><span th:text="${mentor.userBelong}"/>&nbsp; · &nbsp;<span th:text="${mentor.careerAnnual}"/>년차</div>
                         </div>
                       </div>
                     </a>
                     
                     <div>
+                      <input type="hidden" class="mentor-num" th:value="${mentor.mentorNumber}"/>
+                      <input type="hidden" class="add-num" th:value="${mentor.mentorNumber}"/>
                       <button class="message-button">메시지</button>
                     </div>
                   </div>
                   <div class="skill-tags">
                     <!--            스킬 나열 -->
-                    <div class="skill">Java</div>
-                    <div class="skill">커뮤니케이션</div>
-                    <div class="skill">글쓰기</div>
+                    <div class="skill" th:each="skill : ${mentor.skill}">
+                      <span class="skill2" th:text="${skill.skillName}"/>
+                    </div>
+<!--                    <div class="skill">커뮤니케이션</div>-->
+<!--                    <div class="skill">글쓰기</div>-->
                     <!--            /스킬 나열 -->
                   </div>
-      
+
                   <!-- 경력 -->
-                  <div class="career">
+                  <div class="career" th:each="career : ${mentor.career}">
                     <div class="career-icon">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-buildings"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022ZM6 8.694 1 10.36V15h5V8.694ZM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15Z"
-                        />
-                        <path
-                          d="M2 11h1v1H2v-1Zm2 0h1v1H4v-1Zm-2 2h1v1H2v-1Zm2 0h1v1H4v-1Zm4-4h1v1H8V9Zm2 0h1v1h-1V9Zm-2 2h1v1H8v-1Zm2 0h1v1h-1v-1Zm2-2h1v1h-1V9Zm0 2h1v1h-1v-1ZM8 7h1v1H8V7Zm2 0h1v1h-1V7Zm2 0h1v1h-1V7ZM8 5h1v1H8V5Zm2 0h1v1h-1V5Zm2 0h1v1h-1V5Zm0-2h1v1h-1V3Z"
-                        />
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-buildings" viewBox="0 0 16 16">
+                        <path d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022ZM6 8.694 1 10.36V15h5V8.694ZM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15Z"/>
+                        <path d="M2 11h1v1H2v-1Zm2 0h1v1H4v-1Zm-2 2h1v1H2v-1Zm2 0h1v1H4v-1Zm4-4h1v1H8V9Zm2 0h1v1h-1V9Zm-2 2h1v1H8v-1Zm2 0h1v1h-1v-1Zm2-2h1v1h-1V9Zm0 2h1v1h-1v-1ZM8 7h1v1H8V7Zm2 0h1v1h-1V7Zm2 0h1v1h-1V7ZM8 5h1v1H8V5Zm2 0h1v1h-1V5Zm2 0h1v1h-1V5Zm0-2h1v1h-1V3Z"/>
                       </svg>
                     </div>
+
                     <div>
-                      <span class="point">백엔드 개발</span>
-                      <span class="date">─ 2021.02 ~ 2023.02</span>
-                      <span class="date">&nbsp; · &nbsp;2년차</span>
-                      <span class="content">어떤 업무를 했는지 어쩌구...</span>
+                      <span class="point" th:text="${career.careerCompany}" /> <span class="point" th:text="${career.careerTitle}"/>
+                      <span class="date"> <span th:text="${career.careerStartDate}"/> -
+                  <span th:if="${career.careerStatus} == 'N'">
+                  <span th:text="${career.careerEndDate}"/>
+                  </span>
+                  <span th:if="${career.careerStatus} =='Y'">
+                    <span>재직 중</span>
+                  </span>
+                  </span>
+                      <span class="date">&nbsp; · <span class="date" th:text="${career.careerAnnual}"/>년차</span>
                     </div>
                   </div>
                   <!-- /경력 -->
-                  <div class="career">
-                    <div class="career-icon">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-buildings"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022ZM6 8.694 1 10.36V15h5V8.694ZM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15Z"
-                        />
-                        <path
-                          d="M2 11h1v1H2v-1Zm2 0h1v1H4v-1Zm-2 2h1v1H2v-1Zm2 0h1v1H4v-1Zm4-4h1v1H8V9Zm2 0h1v1h-1V9Zm-2 2h1v1H8v-1Zm2 0h1v1h-1v-1Zm2-2h1v1h-1V9Zm0 2h1v1h-1v-1ZM8 7h1v1H8V7Zm2 0h1v1h-1V7Zm2 0h1v1h-1V7ZM8 5h1v1H8V5Zm2 0h1v1h-1V5Zm2 0h1v1h-1V5Zm0-2h1v1h-1V3Z"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <span class="point">기업경영</span>
-                      <span class="date">─ 2021.02 ~ 2023.02</span>
-                      <span class="date">&nbsp; · &nbsp;2년차</span>
-                      <span class="content">어떤 업무를 했는지 어쩌구...</span>
-                    </div>
-                  </div>
+<!--                  <div class="career">-->
+<!--                    <div class="career-icon">-->
+<!--                      <svg-->
+<!--                        xmlns="http://www.w3.org/2000/svg"-->
+<!--                        width="16"-->
+<!--                        height="16"-->
+<!--                        fill="currentColor"-->
+<!--                        class="bi bi-buildings"-->
+<!--                        viewBox="0 0 16 16"-->
+<!--                      >-->
+<!--                        <path-->
+<!--                          d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022ZM6 8.694 1 10.36V15h5V8.694ZM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15Z"-->
+<!--                        />-->
+<!--                        <path-->
+<!--                          d="M2 11h1v1H2v-1Zm2 0h1v1H4v-1Zm-2 2h1v1H2v-1Zm2 0h1v1H4v-1Zm4-4h1v1H8V9Zm2 0h1v1h-1V9Zm-2 2h1v1H8v-1Zm2 0h1v1h-1v-1Zm2-2h1v1h-1V9Zm0 2h1v1h-1v-1ZM8 7h1v1H8V7Zm2 0h1v1h-1V7Zm2 0h1v1h-1V7ZM8 5h1v1H8V5Zm2 0h1v1h-1V5Zm2 0h1v1h-1V5Zm0-2h1v1h-1V3Z"-->
+<!--                        />-->
+<!--                      </svg>-->
+<!--                    </div>-->
+<!--                    <div>-->
+<!--                      <span class="point">기업경영</span>-->
+<!--                      <span class="date">─ 2021.02 ~ 2023.02</span>-->
+<!--                      <span class="date">&nbsp; · &nbsp;2년차</span>-->
+<!--                      <span class="content">어떤 업무를 했는지 어쩌구...</span>-->
+<!--                    </div>-->
+<!--                  </div>-->
                 </section>
                 <div class="mento-more-info-box">
                   <div class="mento-more-info">
@@ -179,6 +203,7 @@
           </div>
         </div>
       </div>
+
     </main>
     <footer class="footer"  th:replace="fragment/footer :: footer"></footer>
     <script
@@ -188,5 +213,6 @@
     ></script>
     <script th:src="@{/js/fragment/header.js}" ></script>
     <script th:src="@{/js/myPage/myMentor.js}" ></script>
+    <script th:src="@{/js/chatting/inputModal.js}"></script>
   </body>
 </html>

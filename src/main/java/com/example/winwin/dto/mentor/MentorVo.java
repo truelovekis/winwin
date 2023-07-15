@@ -32,4 +32,8 @@ public class MentorVo {
     private Long subNumber;
     private String subName;
     private String umStatus;
+    private String careerStartDate;
+    private String careerEndDate;
+    private String userIdentity;
+    private String userPosition;
 }

@@ -39,9 +39,9 @@
   <div class="Expro" >
     <div class="rr">
       <div class="mento-profile-photo-box">
-        <img th:if="${profile == null}" class="img-box" src="/img/profile-basic.png"/>
-        <img th:unless="${profile == null}" class="img-box"
-             th:style="${'background-image: url(/profile/' + profile.pfpUuid + '_' + profile.pfpSystemName + ')'}"/>
+        <img th:if="${mentor.pfpSystemName == null}" class="img-box" src="/img/profile-basic.png"/>
+        <img th:unless="${mentor.pfpSystemName == null}" class="img-box"
+             th:style="${'background-image: url(/profile/' + mentor.pfpUuid + '_' + mentor.pfpSystemName + ')'}"/>
       </div>
       <div class="drow">
         <div class="nickname"><span th:text="${mentor.userName}"></span> </div>
@@ -59,7 +59,7 @@
     <div th:if="${mentor2} == null" class="add">아직 경력이 없어요</div>
     <div th:if="${mentor2} != null" class="add">
       <div class="add-box" th:each="mentor2 : ${mentor2}">
-      <span th:text="${mentor2.careerCompany}"></span> | <span th:text="${mentor2.careerTitle}"></span><br/>
+      <span class="careerCompany" th:text="${mentor2.careerCompany}"></span> | <span th:text="${mentor2.careerTitle}" class="career-title"></span> · <span class="career-title" th:text="${mentor2.careerStartDate}"/> - <span class="career-title" th:text="${mentor2.careerEndDate}"/> <br/>
       </div>
     </div>
 

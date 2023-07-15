@@ -119,7 +119,17 @@ hr {
   padding: 0px 10px;
 }
 
-#point-page {
+#point-page1 {
+  border-bottom: 3px solid #000;
+  color: #000;
+}
+
+#point-page2 {
+  border-bottom: 3px solid #000;
+  color: #000;
+}
+
+#point-page3 {
   border-bottom: 3px solid #000;
   color: #000;
 }
@@ -291,6 +301,8 @@ hr {
 
 .mento-profile {
   padding: 20px 20px 0 20px;
+  overflow: hidden;
+  max-height: 186px;
 }
 
 /* 내 프로필 올려두기 토글 스위치 */
@@ -380,8 +392,8 @@ input:checked + .slider:before {
 }
 
 .mento-profile-photo-box {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   overflow: hidden;
   display: flex;
@@ -404,4 +416,13 @@ input:checked + .slider:before {
   display: block;
   text-decoration: none;
   color: #000;
+}
+
+.img-box {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: pink;
+  overflow: hidden;
+  background-size: cover;
 }

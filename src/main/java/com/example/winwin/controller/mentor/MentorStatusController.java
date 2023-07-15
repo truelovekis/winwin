@@ -5,6 +5,7 @@ import com.example.winwin.dto.mentor.LikeDto;
 import com.example.winwin.dto.mentor.MentorVo;
 import com.example.winwin.dto.mentor.SkillVo;
 import com.example.winwin.service.mentor.MentorService;
+import com.example.winwin.service.myPage.UserMentorService;
 import com.sun.jdi.connect.spi.TransportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ import java.util.List;
 @RequestMapping("/mentor/*")
 public class MentorStatusController {
     private final MentorService mentorService;
+    private final UserMentorService userMentorService;
 
     @PatchMapping("/list")
     public void mentorModify(String mentorStatus, HttpServletRequest req, RedirectAttributes redirectAttributes){
@@ -76,6 +78,30 @@ public class MentorStatusController {
     public List<CareerVo> careerList(Long mentorNumber){
         List<CareerVo> careerVo = mentorService.findCareerList(mentorNumber);
         return careerVo;
+    }
+
+    @GetMapping("/profile2")
+    public MentorVo findProfile(Long mentorNumber){
+        MentorVo mentorVo = new MentorVo();
+        mentorVo.setMentorNumber(mentorNumber);
+        return mentorService.findPfp(mentorNumber);
+    }
+
+    //    멘티 수락하기
+    @PatchMapping("/okmentee")
+    public void okum(MentorVo mentorVo, HttpServletRequest req){
+        Long mentorNumber = (Long) req.getSession().getAttribute("mentorNumber");
+        mentorVo.setMentorNumber(mentorNumber);
+        userMentorService.okMentee(mentorVo);
+    }
+
+//    멘티 거절하기
+    @DeleteMapping("/nomentee")
+    public List<MentorVo> noum(MentorVo mentorVo, HttpServletRequest req){
+        Long mentorNumber = (Long) req.getSession().getAttribute("mentorNumber");
+        mentorVo.setMentorNumber(mentorNumber);
+        userMentorService.noMentee(mentorVo);
+        return userMentorService.findMentee(mentorNumber);
     }
 
 

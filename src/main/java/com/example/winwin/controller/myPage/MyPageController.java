@@ -1,12 +1,14 @@
 package com.example.winwin.controller.myPage;
 
 import com.example.winwin.dto.file.ResumeFileDto;
+import com.example.winwin.dto.mentor.MentorVo;
 import com.example.winwin.dto.user.ResumeDto;
 import com.example.winwin.dto.user.ResumePrDto;
 import com.example.winwin.dto.user.UserDto;
 import com.example.winwin.dto.user.UserPfpDto;
 import com.example.winwin.service.chatting.ChattingService;
 import com.example.winwin.service.myPage.MyPageService;
+import com.example.winwin.service.myPage.UserMentorService;
 import com.example.winwin.vo.myPage.ActiveBoardVo;
 import com.example.winwin.vo.myPage.ChattingVo;
 import com.example.winwin.vo.myPage.MyPageVo;
@@ -23,6 +25,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.ws.Service;
 import java.io.IOException;
 import java.util.List;
 
@@ -32,6 +35,7 @@ import java.util.List;
 public class MyPageController {
     private final MyPageService myPageService;
     private final ChattingService chattingService;
+    private final UserMentorService userMentorService;
 
     @GetMapping("/activityComment")
     public String activityComment(){
@@ -74,17 +78,42 @@ public class MyPageController {
     }
 
     @GetMapping("/loveMentor")
-    public String loveMentor(){
+    public String loveMentor(Model model , HttpServletRequest req){
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+        List<MentorVo> mentor= userMentorService.likeMentor(userNumber);
+        model.addAttribute("like" , mentor);
+
+        String user = userMentorService.findLogin(userNumber);
+        model.addAttribute("user", user);
+        System.out.println(user);
+
         return "myPage/loveMentor";
     }
 
     @GetMapping("/myMentor")
-    public String myMentor(){
+    public String myMentor(Model model , HttpServletRequest req){
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+        List<MentorVo> mentorList = userMentorService.findMentor(userNumber);
+
+        String user = userMentorService.findLogin(userNumber);
+        model.addAttribute("user", user);
+        System.out.println(user);
+
+        model.addAttribute("mentor" , mentorList);
         return "myPage/myMentor";
     }
 
     @GetMapping("/myMentee")
-    public String myMentee(){
+    public String myMentee(Model model , HttpServletRequest req ){
+        Long mentorNumber = (Long) req.getSession().getAttribute("mentorNumber");
+        List<MentorVo> mentorList = userMentorService.findMentee(mentorNumber);
+
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+        String user = userMentorService.findLogin(userNumber);
+        model.addAttribute("user", user);
+        System.out.println(user);
+
+        model.addAttribute("mentee", mentorList);
         return "myPage/myMentee";
     }
 

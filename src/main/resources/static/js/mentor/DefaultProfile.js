@@ -275,13 +275,15 @@ $('.changeView').on('click', '.review-btn', function (){
     $('#review-content').val('');
 });
 
-$('.messageBox').on('click', function (){
+$('.messageBox').on('click', function (e){
     if($('.userNumber').val() == '' ){
         alert("로그인 해주세요");
+        $('.login-move').trigger('click');
     }
 
     if($('.umstatus').val() == 'N'){
         alert("멘토:멘티 관계가 아닙니다.");
+        e.stopPropagation();
     }
 
     if($('.userNumber').val() != null || $('.umstatus').val() == 'Y'){

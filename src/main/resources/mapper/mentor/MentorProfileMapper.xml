@@ -2,15 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.mentor.MentorMapper">
     <select id="mentor" resultType="mentorVo">
-        SELECT MENTOR_NUMBER , wu.USER_NUMBER , USER_NAME, user_belong, mentor_status
-        FROM MENTOR m JOIN WW_USER wu
-        ON m.USER_NUMBER = wu.USER_NUMBER AND m.MENTOR_NUMBER  = #{mentorNumber}
+        SELECT MENTOR_NUMBER , J1.USER_NUMBER , USER_NAME, user_belong, mentor_status, up.PFP_UPLOAD_PATH , up.PFP_SYSTEM_NAME , up.PFP_UUID
+        FROM (
+                 SELECT MENTOR_NUMBER , wu.USER_NUMBER , USER_NAME, user_belong, mentor_status
+                 FROM MENTOR m JOIN WW_USER wu
+                                    ON m.USER_NUMBER = wu.USER_NUMBER AND m.MENTOR_NUMBER  = #{mentorNumber}
+             )J1 LEFT OUTER JOIN USER_PFP up
+                                 ON J1.user_number = up.USER_NUMBER
     </select>
 
     <select id="mentor2" resultType="mentorVo">
-        SELECT m.MENTOR_NUMBER , m.USER_NUMBER , mc.CAREER_COMPANY , mc.CAREER_TITLE
+        SELECT m.MENTOR_NUMBER , m.USER_NUMBER , mc.CAREER_COMPANY , mc.CAREER_TITLE , TO_CHAR(TO_DATE(mc.CAREER_START_DATE, 'YYYY.mm.DD'), 'YYYY.mm') CAREER_START_DATE , TO_CHAR(TO_DATE(mc.CAREER_END_DATE, 'YYYY.mm.DD'), 'YYYY.mm') career_end_date
         FROM MENTOR m JOIN MENTOR_CAREER mc
-        ON m.MENTOR_NUMBER = mc.MENTOR_NUMBER AND m.MENTOR_NUMBER = #{mentorNumber}
+        ON m.MENTOR_NUMBER = mc.MENTOR_NUMBER AND m.MENTOR_NUMBER =  #{mentorNumber}
     </select>
 
     <insert id="mentorPr">

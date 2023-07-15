@@ -33,6 +33,7 @@
     background-color: pink;
     overflow: hidden;
     margin-right: 10px;
+    background-size: cover;
 }
 
 .main-img > img {

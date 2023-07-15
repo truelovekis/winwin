@@ -43,6 +43,7 @@ public class MentorController {
         List<CareerVo> career = mentorService.profileCareer(mentorNumber==null?0:mentorNumber);
         model.addAttribute("career" , career);
 
+
         return "mentor/mentorProfile";
     }
 

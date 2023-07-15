@@ -56,9 +56,9 @@
 <!--          <input type="file" name="pp" id="file" class="none" />-->
           <!-- /프로필 사진 수정 -->
           <div class="round">
-              <img th:if="${profile == null}" class="img-box" src="/img/profile-basic.png"/>
-              <img th:unless="${profile == null}" class="img-box"
-                   th:style="${'background-image: url(/profile/' + profile.pfpUuid + '_' + profile.pfpSystemName + ')'}"/>
+              <img th:if="${mentor.pfpSystemName == null}" class="img-box" src="/img/profile-basic.png"/>
+              <img th:unless="${mentor.pfpSystemName == null}" class="img-box"
+                   th:style="${'background-image: url(/profile/' + mentor.pfpUuid + '_' + mentor.pfpSystemName + ')'}"/>
           </div>
 <!--          <div class="tw-rounded-full tw-bg-white tw-absolute tw-bottom-2 tw-right-0">-->
 <!--            <svg-->

@@ -119,7 +119,17 @@ hr {
   padding: 0px 10px;
 }
 
-#point-page {
+#point-page1 {
+  border-bottom: 3px solid #000;
+  color: #000;
+}
+
+#point-page2 {
+  border-bottom: 3px solid #000;
+  color: #000;
+}
+
+#point-page3 {
   border-bottom: 3px solid #000;
   color: #000;
 }
@@ -290,4 +300,57 @@ input:checked + .slider:before {
   display: block;
   text-decoration: none;
   color: #000;
+}
+
+.img-box {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: pink;
+  overflow: hidden;
+  background-size: cover;
+}
+
+/*메세지 버튼*/
+.message-button {
+  background: #e3f3ff;
+  color: #46699d;
+  border: none;
+  padding: 7px 10px;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.message-button:hover {
+  background-color: #d7e4f8;
+}
+
+.btn {
+  display: flex;
+  justify-content: space-around;
+  width: 90%;
+}
+
+.mentee1 {
+  background: #e3f3ff;
+  color: #46699d;
+  border: none;
+  padding: 7px 10px;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.mentee2 {
+  background: #ffdce3;
+  color: red;
+  border: none;
+  padding: 7px 10px;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
 }
