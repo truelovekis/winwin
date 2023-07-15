@@ -18,18 +18,39 @@
     <!--    -->
 
     <!-- 유저 태그 및 멘토 인증태그 찾기 -->
-    <select id="selectMentorTag" resultType="categoryVo">
+    <select id="selectUserTag" resultType="categoryVo">
         select sub_name, sb.sub_number
         from sub_category sc join su_bridge sb on sc.sub_number = sb.sub_number
         where user_number = #{userNumber}
+    </select>
+
+    <!-- 멘토 인증태그 찾기 -->
+    <select id="selectMentorTag" resultType="careerInfoVo">
+        SELECT MENTOR_NUMBER , USER_NUMBER , M.SUB_NUMBER,
+               SC.SUB_NAME
+        FROM MENTOR m JOIN SUB_CATEGORY sc
+                           ON M.SUB_NUMBER  = SC.SUB_NUMBER
+        WHERE M.USER_NUMBER = #{userNumber}
     </select>
     <!--    -->
 
     <!-- 진로정보 글 번호로 조회하기 -->
     <select id="careerInfoSelectNumber" resultType="careerInfoVo">
-        select CAREERINFO_NUMBER, CAREERINFO_TITLE, CAREERINFO_CONTENT, CAREERINFO_CNT, CAREERINFO_STATUS, CAREERINFO_DATE
-        from CAREERINFO CI join WW_USER WU
-                                on CAREERINFO_NUMBER = #{careerInfoNumber} and CI.USER_NUMBER = WU.USER_NUMBER
+        SELECT C.CAREERINFO_NUMBER , C.CAREERINFO_TITLE , C.CAREERINFO_CONTENT , C.CAREERINFO_DATE , C.CAREERINFO_STATUS , C.CAREERINFO_CNT ,
+               C.USER_NUMBER , C.MENTOR_NUMBER ,
+               SC.SUB_NAME ,
+               WU.USER_NICKNAME ,
+               (SELECT COUNT(USER_NUMBER) FROM CAREERINFO_LIKE cl WHERE C.CAREERINFO_NUMBER = CL.CAREERINFO_NUMBER) AS LIKE_CNT ,
+               (SELECT COUNT(USER_NUMBER) FROM CAREERINFO_LIKE cl WHERE CL.USER_NUMBER = #{userNumber} AND CL.CAREERINFO_NUMBER = #{careerInfoNumber} ) AS IS_LIKE ,
+               UP.PFP_UPLOAD_PATH , UP.PFP_SYSTEM_NAME , UP.PFP_UUID
+        FROM CAREERINFO c JOIN MENTOR m
+                               ON C.CAREERINFO_NUMBER = #{careerInfoNumber} AND C.MENTOR_NUMBER = M.MENTOR_NUMBER
+                          LEFT OUTER JOIN SUB_CATEGORY sc
+                               ON M.SUB_NUMBER = SC.SUB_NUMBER
+                          LEFT OUTER JOIN WW_USER wu
+                               ON C.USER_NUMBER = WU.USER_NUMBER
+                          LEFT OUTER JOIN USER_PFP up
+                               ON C.USER_NUMBER = UP.USER_NUMBER
     </select>
     <!--    -->
 

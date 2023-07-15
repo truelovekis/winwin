@@ -55,6 +55,7 @@
         <typeAlias type="com.example.winwin.dto.careerInfo.CareerInfoDto" alias="careerInfoDto"/>
         <typeAlias type="com.example.winwin.dto.careerInfo.CareerInfoLikeDto" alias="careerInfoLikeDto"/>
         <typeAlias type="com.example.winwin.dto.careerInfo.CareerInfoCommentDto" alias="careerInfoCommentDto"/>
+        <typeAlias type="com.example.winwin.dto.careerInfo.CareerInfoCommentVo" alias="careerInfoCommentVo"/>
         <!--  -->
 
         <!-- 신고 Dto -->

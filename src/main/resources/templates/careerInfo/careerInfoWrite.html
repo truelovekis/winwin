@@ -46,9 +46,7 @@
     </div>
     <div class="write-main-box">
       <div class="write-category">
-        <span class="project-sub-text1">수학과<button type="button" class="close">✖️</button></span>
-        <span class="project-sub-text1">간호조리사<button type="button" class="close">✖️</button></span>
-        <span class="project-sub-text1">요리사<button type="button" class="close">✖️</button></span>
+        <span class="project-sub-text1" th:text="${career.subName}"><button type="button" class="close">✖️</button></span>
       </div>
       <div class="write-title content-a">
         <input type="text" placeholder="제목을 입력하세요" name="careerInfoTitle" id="count_memo" minlength = "10" maxlength="100" style="font-family:NanumSquareLight;"/>
