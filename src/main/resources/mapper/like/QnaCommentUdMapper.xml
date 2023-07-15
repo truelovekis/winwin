@@ -40,7 +40,7 @@
     </delete>
 
     <!--  좋아요 카운트  -->
-    <select id="qnaUdCnt" resultType="int">
+    <select id="udCnt" resultType="int">
         SELECT COUNT(UD_STATUS) AS UD_CNT
         FROM QNA_COMMENT_UD
                  JOIN QNA_COMMENT CC ON QNA_COMMENT_UD.COMMENT_NUMBER = CC.COMMENT_NUMBER

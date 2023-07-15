@@ -6,5 +6,10 @@
         INSERT INTO POLICE_COMMENT (POLICE_NUMBER, BIG_CODE, COMMENT_NUMBER, POLICE_CATEGORY, USER_NUMBER)
         VALUES (SEQ_POLICE_COMMENT.NEXTVAL, #{bigCode}, #{commentNumber}, #{policeCategory}, #{userNumber})
     </insert>
+
+    <insert id="qnaCommentReportInsert">
+        INSERT INTO POLICE_COMMENT (POLICE_NUMBER, BIG_CODE, COMMENT_NUMBER, POLICE_CATEGORY, USER_NUMBER)
+        VALUES (SEQ_POLICE_COMMENT.NEXTVAL, #{bigCode}, #{commentNumber}, #{policeCategory}, #{userNumber})
+    </insert>
     <!--    -->
 </mapper>

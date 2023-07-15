@@ -8,4 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface PoliceCommentMapper {
     //    커뮤니티 댓글 신고하기
     void commentReportInsert(PoliceCommentDto policeCommentDto);
+    // qna 댓글 신고하기
+    void qnaCommentReportInsert(PoliceCommentDto policeCommentDto);
 }

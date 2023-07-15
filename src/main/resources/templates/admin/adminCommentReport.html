@@ -113,7 +113,7 @@
                     <tbody>
                     <tr class="user-table-category" th:each="admin : ${adminCommentReportList}">
                         <td class="checkbox">
-                            <input type="checkbox" name="" class="check check-box" id="checking" style="font-family: NanumSquareAcr;" th:data-number="${admin.policeNumber}">
+                            <input type="checkbox" name="" class="check check-box" id="checking" style="font-family: NanumSquareAcr;" th:data-number="${admin.policeNumber}" th:data-code="${admin.bigCode}">
                         </td>
                         <td class="user-name" align="center" th:text="${admin.userName}"></td>
                         <td class="user-id" align="center" th:text="${admin.userId}"></td>

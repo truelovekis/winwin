@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.board.QnaCommentMapper">
     <insert id="insertQnaComment">
-        <selectKey keyProperty="qnaNumber" order="BEFORE" resultType="long">
+        <selectKey keyProperty="commentNumber" order="BEFORE" resultType="long">
             select SEQ_QNA_COMMENT.NEXTVAL from dual
         </selectKey>
-        INSERT INTO QNA_COMMENT (COMMENT_NUMBER, COMMENT_CONTENT, QNA_NUMBER, USER_NUMBER)
-        VALUES (#{commentNumber}, #{commentContent}, #{qnaNumber}, #{userNumber})
+        INSERT INTO QNA_COMMENT (COMMENT_NUMBER, COMMENT_CONTENT, QNA_NUMBER, USER_NUMBER, COMMENT_DATE)
+        VALUES (#{commentNumber}, #{commentContent}, #{qnaNumber}, #{userNumber}, sysdate)
     </insert>
 
     <select id="selectQnaCommentList" resultType="qnaCommentVo">
@@ -50,10 +50,12 @@
         WHERE COMMENT_NUMBER = #{commentNumber}
     </update>
 
+<!--  댓글 삭제  -->
     <delete id="delete">
         DELETE FROM QNA_COMMENT
         WHERE COMMENT_NUMBER = #{commentNumber}
     </delete>
+
 
     <delete id="deleteQna">
         DELETE FROM QNA_COMMENT

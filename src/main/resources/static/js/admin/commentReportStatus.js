@@ -10,10 +10,12 @@ function changeStatus() {
     let $checkedBox = $('.check-box:checked');
     let policeNumber = [];
     let commentStatus = [];
+    let bigCode = [];
 
     for(let i=0; i<$checkedBox.length; i++){
         policeNumber.push( $checkedBox.eq(i).data('number'));
         commentStatus.push($checkedBox.closest('.user-table-category').find('.user-report-select').val());
+        bigCode.push($checkedBox.eq(i).data('code'));
     }
 
 
@@ -35,7 +37,7 @@ function changeStatus() {
         url: "/status/updateCommentReport",
         contentType: "application/json; charset=utf-8",
         traditional : true,
-        data: JSON.stringify({policeNumber: policeNumber, commentStatus: commentStatus}),
+        data: JSON.stringify({policeNumber: policeNumber, commentStatus: commentStatus, bigCode : bigCode}),
         success: function() {
             alert("변경 성공");
         },

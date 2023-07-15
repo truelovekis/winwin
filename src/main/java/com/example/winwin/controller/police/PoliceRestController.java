@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/police")
+@RequestMapping("/police/*")
 public class PoliceRestController {
 
     private final PoliceService policeService;
@@ -75,5 +75,32 @@ public class PoliceRestController {
         System.out.println("==============================");
         System.out.println(policeCommentDto);
     }
+
+    @PostMapping("/qna")
+    public void qnaReport(@RequestBody PoliceBoardDto policeBoardDto, HttpServletRequest req) {
+//        로그인 세션 처리
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+//      ------------------------------------
+        policeBoardDto.setBigCode("300");
+        policeBoardDto.setUserNumber(userNumber);
+        policeService.policeBoardRegister(policeBoardDto);
+
+
+    }
+
+    @PostMapping("/qnaComment")
+    public void qnaCommentReport(@RequestBody PoliceCommentDto policeCommentDto, HttpServletRequest req) {
+//        로그인 세션 처리
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+//      ------------------------------------
+        policeCommentDto.setBigCode("300");
+        policeCommentDto.setUserNumber(userNumber);
+        System.out.println("==============================");
+        System.out.println(policeCommentDto);
+        policeService.policeQnaCommentRegister(policeCommentDto);
+        System.out.println("==============================");
+        System.out.println(policeCommentDto);
+    }
+
 
 }
