@@ -19,8 +19,7 @@ $("#inputMessage").keyup(function (e) {
 
 
 // 쪽지 보내기
-// 쪽지 보내기
-$('.send-btn').on('click', function (){
+$('.input-container').on('click','.send-btn', function (){
 
     let num = $('.chattingTo').data('num');
 
@@ -34,10 +33,12 @@ $('.send-btn').on('click', function (){
         contentType : "application/json; charset=utf-8",
         success: function (){
             alert("전송이 완료되었습니다.");
+            $('#inputMessage').val('');
             $('.input-wrap').addClass('none');
             $('.form-reset')[0].reset();
         }
     })
+
 });
 
 

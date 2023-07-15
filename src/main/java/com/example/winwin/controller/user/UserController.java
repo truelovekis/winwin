@@ -1,7 +1,9 @@
 package com.example.winwin.controller.user;
 
 import com.example.winwin.dto.user.UserDto;
+import com.example.winwin.dto.user.UserPfpDto;
 import com.example.winwin.service.mentor.LoginService;
+import com.example.winwin.service.myPage.MyPageService;
 import com.example.winwin.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,11 +22,15 @@ public class UserController {
 
     private final UserService userService;
     private final LoginService loginService;
+    private final MyPageService myPageService;
 
     @GetMapping
     public String loginModal(){
         return "user/loginModal";
     }
+
+//    @GetMapping("/certification")
+//    public String certification(){return "user/certification";}
 
     /* 로그인 */
     @PostMapping("/login")
@@ -38,6 +44,7 @@ public class UserController {
             session.setAttribute("userWing", userDto.getUserWing());
             session.setAttribute("userStatus", userDto.getUserStatus());
             session.setAttribute("userNickname", userDto.getUserNickname());
+
 
             Long mentorNumber = loginService.findMentorNumber(userId, userPassword);
             session.setAttribute("mentorNumber", mentorNumber);

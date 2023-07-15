@@ -3,6 +3,7 @@ package com.example.winwin.service.user;
 import com.example.winwin.dto.mentor.CategoryVo;
 import com.example.winwin.dto.user.MentorDto;
 import com.example.winwin.dto.user.UserDto;
+import com.example.winwin.dto.user.UserPfpDto;
 import com.example.winwin.mapper.user.UserMapper;
 import com.example.winwin.vo.user.CategoryBridgeVo;
 import lombok.RequiredArgsConstructor;
@@ -102,5 +103,37 @@ public class UserService {
         userMapper.joinMentor(mentorDto);
     }
 
+    public void joinPfp(UserPfpDto userPfpDto){
+        userMapper.joinPfp(userPfpDto);
+    }
+
+    // 인증 태그 카테고리
+    public List<CategoryVo> certificationH(){
+        List<CategoryVo> categoryH = userMapper.certificationH();
+
+        for (int i=0; i<categoryH.size(); i++){
+            categoryH.get(i).getMainCode();
+            categoryH.get(i).getMainName();
+        }
+
+        return categoryH;
+    }
+
+    public List<CategoryVo> certificationJ(){
+        List<CategoryVo> categoryJ = userMapper.certificationJ();
+
+        for(int i=0; i<categoryJ.size(); i++){
+            categoryJ.get(i).getSubNumber();
+            categoryJ.get(i).getSubName();
+        }
+
+        return categoryJ;
+    }
+
+    public List<CategoryVo> certificationSub(String mainCode){
+        List<CategoryVo> subCategory = userMapper.certificationSub(mainCode);
+        System.out.println(subCategory);
+        return subCategory;
+    }
 
 }

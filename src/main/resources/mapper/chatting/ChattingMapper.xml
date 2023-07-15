@@ -12,40 +12,118 @@
     </insert>
 
     <!-- 마이페이지에 쪽지 데이터 꽂기 (받은 메세지)-->
-    <select id="chattingSelect" resultType="chattingVo">
-        SELECT CHATTING_NUMBER, CHATTING_CONTENT, CHATTING_DATE, CHATTING_TO, CHATTING_FROM,
-            WW_USER.USER_NICKNAME, WW_USER.USER_NUMBER
-        FROM CHATTING JOIN WW_USER
-        ON CHATTING.CHATTING_FROM = WW_USER.USER_NUMBER
-        WHERE CHATTING_TO = #{userNumber}
-        ORDER BY CHATTING_NUMBER DESC
-    </select>
+<!--    <select id="chattingSelect" resultType="chattingVo">-->
+<!--        SELECT CHATTING_NUMBER, CHATTING_CONTENT, CHATTING_DATE, CHATTING_TO, CHATTING_FROM,-->
+<!--               WW_USER.USER_NICKNAME, WW_USER.USER_NUMBER, USER_PFP.PFP_SYSTEM_NAME,-->
+<!--               USER_PFP.PFP_UUID, USER_PFP.PFP_UPLOAD_PATH-->
+<!--        FROM CHATTING JOIN WW_USER-->
+<!--        ON CHATTING.CHATTING_FROM = WW_USER.USER_NUMBER-->
+<!--        LEFT JOIN USER_PFP-->
+<!--        ON USER_PFP.USER_NUMBER = WW_USER.USER_NUMBER-->
+<!--        WHERE CHATTING_TO = #{userNumber}-->
+<!--        ORDER BY CHATTING_NUMBER DESC-->
+<!--    </select>-->
 
     <!-- 마이페이지에 쪽지 데이터 꽂기 (보낸 메세지)-->
-    <select id="chattingSelectFrom" resultType="chattingVo">
-        SELECT CHATTING_NUMBER, CHATTING_CONTENT, CHATTING_DATE, CHATTING_TO, CHATTING_FROM,
-               WW_USER.USER_NICKNAME, WW_USER.USER_NUMBER
-        FROM CHATTING JOIN WW_USER
-                           ON CHATTING.CHATTING_TO = WW_USER.USER_NUMBER
-        WHERE CHATTING_FROM = #{userNumber}
-        ORDER BY CHATTING_NUMBER DESC
-    </select>
+<!--    <select id="chattingSelectFrom" resultType="chattingVo">-->
+<!--        SELECT CHATTING_NUMBER, CHATTING_CONTENT, CHATTING_DATE, CHATTING_TO, CHATTING_FROM,-->
+<!--               WW_USER.USER_NICKNAME, WW_USER.USER_NUMBER, USER_PFP.PFP_SYSTEM_NAME,-->
+<!--               USER_PFP.PFP_UUID, USER_PFP.PFP_UPLOAD_PATH-->
+<!--        FROM CHATTING JOIN WW_USER-->
+<!--        ON CHATTING.CHATTING_TO = WW_USER.USER_NUMBER-->
+<!--        LEFT JOIN USER_PFP-->
+<!--        ON USER_PFP.USER_NUMBER = WW_USER.USER_NUMBER-->
+<!--        WHERE CHATTING_FROM = #{userNumber}-->
+<!--        ORDER BY CHATTING_NUMBER DESC-->
+<!--    </select>-->
 
     <!-- 쪽지 모달창에 데이터 꽂기 -->
     <select id="chattingSelectModal" resultType="chattingVo">
-        SELECT CHATTING_CONTENT, CHATTING_DATE, CHATTING_TO, WW_USER.USER_NICKNAME, WW_USER.USER_NAME
+        SELECT CHATTING_CONTENT, CHATTING_DATE, CHATTING_TO, WW_USER.USER_NICKNAME, WW_USER.USER_NAME,
+               WW_USER.USER_NUMBER, USER_PFP.PFP_SYSTEM_NAME,
+               USER_PFP.PFP_UUID, USER_PFP.PFP_UPLOAD_PATH
         FROM CHATTING JOIN WW_USER
         ON CHATTING.CHATTING_FROM = WW_USER.USER_NUMBER
-        WHERE CHATTING_NUMBER = #{chattingNumber}
+        LEFT JOIN USER_PFP
+        ON USER_PFP.USER_NUMBER = WW_USER.USER_NUMBER
+        WHERE CHATTING_NUMBER = #{userNumber}
     </select>
 
     <!-- 쪽지 모달창에 데이터 꽂기 (보낸 쪽지) -->
     <select id="chattingSendModal" resultType="chattingVo">
-        SELECT CHATTING_CONTENT, CHATTING_DATE, CHATTING_TO, WW_USER.USER_NICKNAME, WW_USER.USER_NAME
+        SELECT CHATTING_CONTENT, CHATTING_DATE, CHATTING_TO, WW_USER.USER_NICKNAME, WW_USER.USER_NAME,
+               WW_USER.USER_NUMBER, USER_PFP.PFP_SYSTEM_NAME,
+               USER_PFP.PFP_UUID, USER_PFP.PFP_UPLOAD_PATH
         FROM CHATTING JOIN WW_USER
         ON CHATTING.CHATTING_TO = WW_USER.USER_NUMBER
-        WHERE CHATTING_NUMBER = #{chattingNumber}
+        LEFT JOIN USER_PFP
+        ON USER_PFP.USER_NUMBER = WW_USER.USER_NUMBER
+        WHERE CHATTING_NUMBER = #{userNumber}
     </select>
 
+    <!-- 무한 스크롤 (받은 쪽지) -->
+    <select id="chattingSelect">
+        SELECT CHATTING_NUMBER, CHATTING_CONTENT, CHATTING_DATE, CHATTING_TO, CHATTING_FROM,
+        USER_NICKNAME, USER_NUMBER, PFP_SYSTEM_NAME,
+        PFP_UUID, PFP_UPLOAD_PATH
+        FROM(
+        select ROWNUM RN, CHATTING_NUMBER, CHATTING_CONTENT, CHATTING_DATE, CHATTING_TO, CHATTING_FROM,
+        USER_NICKNAME, USER_NUMBER, PFP_SYSTEM_NAME,
+        PFP_UUID, PFP_UPLOAD_PATH
+        from(
+        SELECT CHATTING_NUMBER, CHATTING_CONTENT, CHATTING_DATE, CHATTING_TO, CHATTING_FROM,
+        U.USER_NICKNAME USER_NICKNAME, U.USER_NUMBER USER_NUMBER, P.PFP_SYSTEM_NAME PFP_SYSTEM_NAME,
+        P.PFP_UUID PFP_UUID, P.PFP_UPLOAD_PATH PFP_UPLOAD_PATH
+        FROM CHATTING JOIN WW_USER U
+        ON CHATTING.CHATTING_FROM = U.USER_NUMBER
+        LEFT JOIN USER_PFP P
+        ON P.USER_NUMBER = U.USER_NUMBER
+        WHERE CHATTING_TO = #{userNumber}
+        ORDER BY CHATTING_NUMBER DESC
+        )
+        <![CDATA[
+        WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
+        ]]>
+        )
+        WHERE RN > ( #{criteria.page} - 1) * #{criteria.amount}
+    </select>
 
+    <!-- 무한 스크롤 (보낸 쪽지) -->
+    <select id="chattingSelectFrom">
+        SELECT CHATTING_NUMBER, CHATTING_CONTENT, CHATTING_DATE, CHATTING_TO, CHATTING_FROM,
+               USER_NICKNAME, USER_NUMBER, PFP_SYSTEM_NAME,
+               PFP_UUID, PFP_UPLOAD_PATH
+        FROM(
+                select ROWNUM RN, CHATTING_NUMBER, CHATTING_CONTENT, CHATTING_DATE, CHATTING_TO, CHATTING_FROM,
+                       USER_NICKNAME, USER_NUMBER, PFP_SYSTEM_NAME,
+                       PFP_UUID, PFP_UPLOAD_PATH
+                from(
+                        SELECT CHATTING_NUMBER, CHATTING_CONTENT, CHATTING_DATE, CHATTING_TO, CHATTING_FROM,
+                               U.USER_NICKNAME USER_NICKNAME, U.USER_NUMBER USER_NUMBER, P.PFP_SYSTEM_NAME PFP_SYSTEM_NAME,
+                               P.PFP_UUID PFP_UUID, P.PFP_UPLOAD_PATH PFP_UPLOAD_PATH
+                        FROM CHATTING JOIN WW_USER U
+                                           ON CHATTING.CHATTING_TO = U.USER_NUMBER
+                                      LEFT JOIN USER_PFP P
+                                                ON P.USER_NUMBER = U.USER_NUMBER
+                        WHERE CHATTING_FROM = #{userNumber}
+                        ORDER BY CHATTING_NUMBER DESC
+                    )
+        <![CDATA[
+                WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
+        ]]>
+        )
+        WHERE RN > ( #{criteria.page} - 1) * #{criteria.amount}
+    </select>
+
+    <select id="chattingReceiveAll" resultType="int">
+        SELECT COUNT(CHATTING_FROM)
+        FROM CHATTING
+        WHERE CHATTING_TO = #{userNumber}
+    </select>
+
+    <select id="chattingSendAll" resultType="int">
+        SELECT COUNT(CHATTING_TO)
+        FROM CHATTING
+        WHERE CHATTING_FROM = #{userNumber}
+    </select>
 </mapper>

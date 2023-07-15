@@ -1,7 +1,9 @@
 package com.example.winwin.controller;
 
+import com.example.winwin.dto.mentor.CategoryVo;
 import com.example.winwin.dto.user.MentorDto;
 import com.example.winwin.dto.user.UserDto;
+import com.example.winwin.dto.user.UserPfpDto;
 import com.example.winwin.service.board.StudyService;
 import com.example.winwin.service.user.UserService;
 import com.example.winwin.vo.board.StudyVo;
@@ -31,16 +33,15 @@ public class MainController {
 //    };
 
     @PostMapping("/main")
-    public RedirectView header(UserDto userDto, @RequestParam("subNumber") List<Integer> subNumbers){
-        System.out.println(userDto);
-        System.out.println(subNumbers);
+    public RedirectView header(UserDto userDto, @RequestParam("subNumber") List<Integer> subNumbers, @RequestParam("certificationNumber") int certificationNumber){
         userService.userRegister(userDto);
+
+//        UserPfpDto userPfpDto = new UserPfpDto();
+//        userService.joinPfp(userPfpDto);
 
         CategoryBridgeVo categoryBridgeVo = new CategoryBridgeVo();
         categoryBridgeVo.setUserNumber(userDto.getUserNumber());
 
-//        MentorDto mentorDto = new MentorDto();
-//        mentorDto.setUserNumber(userDto.getUserNumber());
 
         for(int i : subNumbers){
             categoryBridgeVo.setSubNumber(i);
@@ -51,14 +52,12 @@ public class MainController {
         if(userDto.getUserPosition().equals("mentor") || userDto.getUserPosition().equals("mentorMentee")){
             MentorDto mentorDto = new MentorDto();
             mentorDto.setUserNumber(userDto.getUserNumber());
+            mentorDto.setCertificationNumber(certificationNumber);
 
             userService.joinMentor(mentorDto);
-
-//            for(int i : subNumbers){
-//                mentorDto.setSubNumber(i);
-//                userService.joinMentor(mentorDto);
-//            }
         }
+
+
 
 
         return new RedirectView("/main/main");

@@ -2,6 +2,7 @@ package com.example.winwin.service.chatting;
 
 import com.example.winwin.dto.chatting.ChattingDto;
 import com.example.winwin.mapper.chatting.ChattingMapper;
+import com.example.winwin.vo.infinityScroll.Criteria;
 import com.example.winwin.vo.myPage.ChattingVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,18 +24,18 @@ public class ChattingService {
     }
 
     // 쪽지 조회하기 (받은 쪽지)
-    public List<ChattingVo> chattingSelect(Long userNumber){
+    public List<ChattingVo> chattingSelect(Long userNumber, Criteria criteria){
         if(userNumber == null){throw new IllegalArgumentException("존재하지 않는 회원");}
 
-        return Optional.ofNullable(chattingMapper.chattingSelect(userNumber))
+        return Optional.ofNullable(chattingMapper.chattingSelect(userNumber, criteria))
                 .orElseThrow(()->{throw new IllegalArgumentException("존재하지 않는 회원 번호");});
     }
 
     // 쪽지 조회하기 (보낸 쪽지)
-    public List<ChattingVo> chattingSelectFrom(Long userNumber){
+    public List<ChattingVo> chattingSelectFrom(Long userNumber, Criteria criteria){
         if(userNumber == null){throw new IllegalArgumentException("존재하지 않는 회원");}
 
-        return Optional.ofNullable(chattingMapper.chattingSelectFrom(userNumber))
+        return Optional.ofNullable(chattingMapper.chattingSelectFrom(userNumber, criteria))
                 .orElseThrow(()->{throw new IllegalArgumentException("존재하지 않는 회원 번호");});
     }
     
@@ -59,5 +60,17 @@ public class ChattingService {
         if(chattingNumber == null){throw new IllegalArgumentException("존재하지 않는 쪽지");}
 
         return chattingMapper.selectChattingName(chattingNumber);
+    }
+
+    // 받은 쪽지 총 갯수
+    public int chattingReceiveAll(Long userNumber){
+        if(userNumber == null){throw new IllegalArgumentException("?????????");}
+        return chattingMapper.chattingReceiveAll(userNumber);
+    }
+
+    // 보낸 쪽지 총 갯수
+    public int chattingSendAll(Long userNumber){
+        if(userNumber == null){throw new IllegalArgumentException("?????????");}
+        return chattingMapper.chattingSendAll(userNumber);
     }
 }

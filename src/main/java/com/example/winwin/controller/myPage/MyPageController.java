@@ -255,10 +255,12 @@ public class MyPageController {
     // 받은 메세지 조회
     @GetMapping("/receiveMessage")
     public String chattingSelect(Model model, HttpServletRequest req){
-        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
-        List<ChattingVo> chattingVoList = chattingService.chattingSelect(userNumber);
-
-        model.addAttribute("chattingList", chattingVoList);
+//        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+//        List<ChattingVo> chattingVoList = chattingService.chattingSelect(userNumber);
+//
+//        model.addAttribute("chattingList", chattingVoList);
+//
+//        System.out.println(chattingVoList);
 
         return "myPage/receiveMessage";
     }
@@ -266,10 +268,10 @@ public class MyPageController {
     // 보낸 메세지 조회
     @GetMapping("/sendMessage")
     public String chattingSelectFrom(Model model, HttpServletRequest req){
-        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
-        List<ChattingVo> chattingVoList2 = chattingService.chattingSelectFrom(userNumber);
-
-        model.addAttribute("chattingList", chattingVoList2);
+//        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+//        List<ChattingVo> chattingVoList2 = chattingService.chattingSelectFrom(userNumber);
+//
+//        model.addAttribute("chattingList", chattingVoList2);
         return "myPage/sendMessage";
     }
 
