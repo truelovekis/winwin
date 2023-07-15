@@ -43,9 +43,12 @@
             </div>
             <span class="title-name">휴대전화 인증</span>
             <input type="text" maxlength="11" class="self-input self-certified-input" id="userPhoneNumber" name="userPhoneNumber" placeholder="하이픈(-)은 빼고 입력해 주세요." required/>
-            <button class="self-certified" id="sms-check">인증 요청</button>
-            <input type="text" maxlength="6" class="self-input self-certified-input" id="userVerification" placeholder="인증 번호 입력" required/>
-            <button class="self-certified-check">확인</button>
+            <button type="button" class="self-certified" id="sms-check">인증 요청</button>
+            <span class="self-timer-wrap">
+              <input type="text" maxlength="6" class="self-input self-certified-input" id="userVerification" placeholder="인증 번호 입력" required/>
+              <span class="self-timer"></span>
+            </span>
+            <button type="button" class="self-certified-check" id="self-check-number">확인</button>
               <span type="button" id="user-phone-msg"  class="self-msg"></span>
           </div>
           <button class="self-next"><span>다음</span></button>

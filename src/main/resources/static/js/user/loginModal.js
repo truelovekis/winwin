@@ -146,9 +146,9 @@ $('.modal-next').on('click', function(){
             $('#com-check-msg').html("회사명을 입력해 주세요.");
             return;
         }
-        $next = $('.sign-box');
-        $('.modal-next').addClass('none');
-        $('.home-btn').removeClass('none');
+        $next = $('.certification-box');
+        // $('.modal-next').addClass('none');
+        // $('.home-btn').removeClass('none');
     }
 
     if ($current.hasClass('mentor-goal-2-box')){
@@ -158,8 +158,15 @@ $('.modal-next').on('click', function(){
             return;
         }
 
-        $next = $('.sign-box');
+        $next = $('.certification-box');
         console.log("마지막 페이지");
+        // $('.modal-next').addClass('none');
+        // $('.home-btn').removeClass('none');
+    }
+
+    if ($current.hasClass('certification-box')){
+        $next = $('.sign-box');
+
         $('.modal-next').addClass('none');
         $('.home-btn').removeClass('none');
     }
@@ -406,6 +413,12 @@ $('.home-btn').on('click', function (){
     hiddenField.setAttribute("value", $('.goal-mm-value').val());
     form.appendChild(hiddenField);
 
+    hiddenField = document.createElement("input");
+    hiddenField.setAttribute("type", "hidden");
+    hiddenField.setAttribute("name", "certificationNumber");
+    hiddenField.setAttribute("value", $('.certi-input').val());
+    form.appendChild(hiddenField);
+
 
 
 
@@ -478,18 +491,18 @@ $('#userNickname').on('blur', function() {
 
 
 // SMS 인증
-$('#sms-check').on('click', function() {
-    $.ajax({
-        url: '/users/v1/send',
-        type: 'post',
-        data : JSON.stringify({phoneNumber : $('#userPhoneNumber').val()}),
-        contentType : "application/json; charset=utf-8",
-        success : function(result) {
-            console.log('통신 성공!');
-            $('#user-phone-msg').text('인증번호 전송 완료');
-        }
-    });
-});
+// $('#sms-check').on('click', function() {
+//     $.ajax({
+//         url: '/users/v1/send',
+//         type: 'post',
+//         data : JSON.stringify({phoneNumber : $('#userPhoneNumber').val()}),
+//         contentType : "application/json; charset=utf-8",
+//         success : function(result) {
+//             console.log('통신 성공!');
+//             $('#user-phone-msg').text('인증번호 전송 완료');
+//         }
+//     });
+// });
 
 
 
@@ -742,6 +755,7 @@ $(".job-third-job-box").on("click", ".job-option", function () {
     $(".job-select-tag").append(tagHtml);
 });
 
+// 태그 눌렀을 때 삭제
 $(".job-select-tag").on("click", ".job-tag", function () {
     $(this).detach();
 });
@@ -977,8 +991,174 @@ $(".bi-trash2").on("click", function () {
 
 });
 
+// ========================================
+// 인증 태그 js
+
+// 셀렉트 박스 클릭 이벤트
+$('.certi-select').on('click', function (){
+    let $optionBox = $(this).find('.certi-option__box');
+    if($optionBox.css('display') == 'none'){
+        $optionBox.show();
+    }else{
+        $optionBox.hide();
+    }
+});
+
+// 옵션 클릭 이벤트
+$('.certi-option__box').on('click', '.certi-option', function (){
+    let $selectedValue = $(this).closest('.certi-select').find('.certi-selected-value');
+    $selectedValue.text($(this).text());
+
+    let $ul = $(this).closest('ul');
+
+    if($ul.hasClass('certi-first-option-box')){
+        if($(this).val() == 1){
+            getCertificationJ();
+        }else {
+            getCertificationH();
+        }
+    }else if($ul.hasClass('certi-second-job-box')){
+        getCertificationSub($(this).val());
+    }else if($ul.hasClass('certi-third-job-box')){
+
+        if($('.certi-tag').length > 0){
+            return;
+        }
+
+        let subName = $(this).text();
+        let value = $(this).val();
+        console.log(value);
+        $('.certi-select-tag').append(`
+                                <div class="certi-tag">@${subName}
+                                 <input type="hidden" class="certi-input" name="certificationNumber" value="${value}"/>
+                             </div>`);
+    }
 
 
+});
+
+$(".certi-select-tag").on("click", ".certi-tag", function () {
+    $(this).detach();
+});
+
+function makeCertiOptionList(result){
+    let htmlTags = '';
+
+    result.forEach(obj => {
+        htmlTags += `<li class="certi-option" value="${obj.mainCode}">${obj.mainName ? obj.mainName : obj.subName}</li>`;
+    });
+
+    return htmlTags
+}
+
+function makeCertiSubOptionList(result){
+    let htmlTags = '';
+
+    result.forEach(obj => {
+        htmlTags += `<li class="certi-option" value="${obj.subNumber}">${obj.mainName ? obj.mainName : obj.subName}</li>`;
+    });
+
+    return htmlTags
+}
+
+function getCertificationSub(mainCode){
+    $.ajax({
+        url: '/users/certificationSub',
+        type: 'get',
+        data: {mainCode: mainCode},
+        dataType: 'json',
+        success: function (result) {
+            console.log(result)
+            $('.certi-third-job-box').html(makeCertiSubOptionList(result));
+        }
+    });
+}
+
+function getCertificationH(){
+    $.ajax({
+        url: "/users/certificationH",
+        type: "get",
+        dataType : 'json',
+        success: function (result) {
+            console.log(result);
+            $('.certi-second-job-box').html(makeCertiOptionList(result));
+        },
+    });
+}
+
+function getCertificationJ(){
+    $.ajax({
+        url: "/users/certificationJ",
+        type: "get",
+        dataType : 'json',
+        success: function (result) {
+            console.log(result);
+           $('.certi-second-job-box').html(makeCertiOptionList(result));
+        },
+    });
+}
+
+
+
+
+
+// ========================================
+// SMS 인증
+
+let timeout = null;
+
+$('#sms-check').on('click', function (){
+    let phoneNumber = $('#userPhoneNumber').val();
+
+    console.log(phoneNumber);
+
+    $.ajax({
+        url: "/userSms/v1/send",
+        type: "post",
+        data: JSON.stringify({phoneNumber : phoneNumber}),
+        contentType: "application/json; charset=utf-8",
+        success: function (result){
+            console.log(result)
+
+            let time = 180;
+            let min = '';
+            let sec = '';
+
+            timeout = setInterval(function (){
+                min = parseInt(time / 60);
+                sec = time % 60;
+                $('.self-timer').text(`${min}분 ${sec}초`);
+
+                time--;
+
+                if(time < 0){
+                    clearInterval(timeout);
+                    $('.self-timer').text('시간초과');
+                }
+            }, 1000);
+
+        }
+    })
+});
+
+$('#self-check-number').on('click', function (){
+    let inputNumber= $('#userVerification').val();
+
+    $.ajax({
+        url : '/userSms/v1/check',
+        type : 'post',
+        data : {authNumber : inputNumber},
+        success : function (result){
+            if(result){
+                $('#user-phone-msg').text("인증이 완료되었습니다.");
+                clearInterval(timeout);
+                $('.self-timer').text('');
+            }else{
+                $('#user-phone-msg').text("인증번호가 올바르지 않습니다.");
+            }
+        }
+    });
+})
 
 
 

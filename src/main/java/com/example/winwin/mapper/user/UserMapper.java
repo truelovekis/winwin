@@ -2,6 +2,7 @@ package com.example.winwin.mapper.user;
 
 import com.example.winwin.dto.mentor.CategoryVo;
 import com.example.winwin.dto.user.MentorDto;
+import com.example.winwin.dto.user.UserPfpDto;
 import com.example.winwin.vo.user.CategoryBridgeVo;
 import com.example.winwin.dto.user.UserDto;
 import org.apache.ibatis.annotations.Mapper;
@@ -41,5 +42,12 @@ public interface UserMapper {
     // 멘토로 가입 시
     public void joinMentor(MentorDto mentorDto);
 
+    // 회원 가입 시 프로필에 회원 번호 올리기
+    public void joinPfp(UserPfpDto userPfpDto);
+
+    // 인증 태그 카테고리
+    public List<CategoryVo> certificationH();
+    public List<CategoryVo> certificationJ();
+    public List<CategoryVo> certificationSub(String mainCode);
 }
 
