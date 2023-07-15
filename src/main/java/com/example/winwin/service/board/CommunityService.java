@@ -85,7 +85,7 @@ public class CommunityService {
         return communityMapper.selectUserProfile(userNumber);
     }
 
-    //    나눔 페이지 무한스크롤
+    //    커뮤니티 페이지 무한스크롤
     public List<CommunityVo> findListPage(CommunityVo communityVo){
         if(communityVo == null){
             throw new IllegalArgumentException("페이지 처리에 필요한 정보가 누락되었습니다.");
@@ -94,7 +94,7 @@ public class CommunityService {
         return communityMapper.selectScroll(communityVo);
     }
 
-    //    나눔 메인페이지 갯수 구하기
+    //    커뮤니티 메인페이지 갯수 구하기
     public int findTotal(){
 
         return communityMapper.selectTotal();

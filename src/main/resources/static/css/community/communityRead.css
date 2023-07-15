@@ -297,7 +297,7 @@ footer{
 
 .readCount-num{
     color: rgb(148, 155, 160);
-    margin: 27px 5px;
+    margin: 27px 3px;
     font-size: 13px;
 }
 
@@ -312,7 +312,8 @@ footer{
     background-color: white;
     border: none;
     width: 10px;
-    margin: 23px 18px;
+    margin: 23px 17px;
+    margin-left: 20px;
     cursor: pointer;
 }
 
@@ -332,8 +333,8 @@ footer{
 
 .like{
     display: flex;
-    margin-top: -11px;
-    margin-left: 20px;
+    margin-top: -10px;
+    margin-left: 13px;
 }
 
 .like-btn{
@@ -351,13 +352,13 @@ footer{
 /* svg 아이콘 ================================ */
 
 .date{
-    margin: 27px 440px;
+    margin: 27px 455px;
     font-size: 13px;
     color: rgb(148, 155, 160);
 }
 
 .date1{
-    margin-left: 540px;
+    margin-left: 555px;
     font-size: 13px;
     color: rgb(148, 155, 160);
     line-height: 5.5;
@@ -589,6 +590,7 @@ footer{
     color: #1b5192;
     background-color: #e8f1fc;
     cursor: pointer;
+    margin-bottom: 4px;
 }
 
 .parent{
@@ -904,4 +906,8 @@ input[type="checkbox"] {
 
 .report-list > span {
     font-weight: 500;
+}
+
+.userInfo{
+    margin-top: 20px;
 }
