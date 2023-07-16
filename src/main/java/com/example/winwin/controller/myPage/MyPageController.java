@@ -88,6 +88,25 @@ public class MyPageController {
         return "myPage/myMentee";
     }
 
+    @GetMapping("/activityCommunity")
+    public String cativityCommunity(){
+        return "myPage/activityCommunity";
+    }
+
+    @GetMapping("/activityCommunityReply")
+    public String cativityCommunityReply(){
+        return "myPage/activityCommunityReply";
+    }
+
+    @GetMapping("/activityQna")
+    public String cativityQna(){ return "myPage/activityQna"; }
+
+    @GetMapping("/activityQnaReply")
+    public String cativityQnaReply(){ return "myPage/activityQnaReply"; }
+
+    @GetMapping("/activityCs")
+    public String cativityCs(){ return "myPage/activityCs"; }
+
 //    @GetMapping("/receiveMessage")
 //    public String receiveMessage(){
 //        return "myPage/receiveMessage";

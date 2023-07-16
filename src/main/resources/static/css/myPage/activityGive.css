@@ -94,7 +94,7 @@
   }
   
   .sub-category {
-    margin: 15px 15px 15px 110px;
+    margin: 15px 15px 15px 363px;
   }
   
   .sub-category > span {
@@ -156,10 +156,7 @@
     text-decoration: none;
     color: #000;
   }
-  
-  /* =============================== */
-  /* 내 프로젝트 글들 */
-  
+
   /* =============================== */
   /* 작성 글이 없을 때 */
   .community-main-box {
@@ -198,104 +195,108 @@
     background-color: #c4dcf6;
   }
 
-  /* 나눔 글 */
-  .share-main-box {
-    padding: 10px 0 10px 0;
-  }
+  /*======================================================*/
+  /* 나눔 글들 */
 
-  .hide{
-    display: none;
-  }
-  
-  .share-box {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 700px;
-    height: 150px;
-    border: 1px solid#ddd;
-    border-radius: 5px;
-    padding: 20px;
-    cursor: pointer;
-  }
-  
-  .share-sub-content {
-    display: flex;
-    height: 150px;
-    flex-direction: column;
-  }
-  
-  .share-sub-title {
-    width: 500px;
-    height: 130px;
-  }
-  
-  .share-title {
-    font-size: 17px;
-    font-weight: bold;
-    margin: 15px 0px;
-  }
-  
-  .share-content {
-    height: 40px;
-    font-size: 13px;
-    font-weight: lighter;
-    color: gray;
-    margin: 5px 0px 5px 0px;
-    line-height: 20px;
-  }
-  
-  .share-sub-box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .share-btn {
-    display: flex;
-  }
-  
-  .share-sub-box img {
-    width: 15px;
-  }
-  
-  .share-like > img {
-    width: 20px;
-  }
-  
-  .share-comment > img {
-    width: 20px;
-  }
-  
-  .share-like,
-  .share-comment {
-    display: flex;
-    align-items: center;
-    margin: 5px 5px 5px 0;
-  }
-  
-  span {
-    padding: 0 5px;
-    color: gray;
-  }
-  
-  .share-img {
-    border-radius: 3px;
-  }
-  
-  .share-img > img {
-    width: 150px;
-    height: 150px;
-    border-radius: 5px;
-  }
-  
-  .share-cnt {
-    display: flex;
-    align-items: center;
-  }
-  
-  .share-cnt img {
-    width: 20px;
-    height: 20px;
-  }
-  /* 나눔 글 끝*/
+.give-box{
+  display: flex;
+  width: 650px;
+  /* height: 150px; */
+  border: 1px solid#ddd;
+  border-radius: 5px;
+  padding: 15px 15px 15px 20px;
+  cursor: pointer;
+}
+
+.give-img-box{
+  width: 130px;
+  height: 130px;
+  margin-left: 10px;
+}
+
+.give-img-box>img{
+  width: 130px;
+}
+
+.give-wrap{
+  padding: 15px 5px 0px 5px;
+}
+
+.give-title-box{
+  font-size: 17px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+
+}
+
+.give-title{
+  text-overflow: ellipsis;
+  /* line-height: 1.5; */
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.give-status{
+  display: block;
+  width: 30px;
+}
+
+.give-status-box{
+  display: flex;
+}
+
+.give-content{
+  font-size: 13px;
+  font-weight: lighter;
+  color: gray;
+  margin: 15px 0px;
+  line-height: 1.5;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.give-bottom{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.give-count{
+  color: rgb(148, 155, 160);
+  font-size: 13px;
+  margin-left: 3px;
+  display: block;
+}
+
+.give-icon{
+  display: flex;
+  align-items: center;
+}
+
+.give-date{
+  font-size: 13px;
+  color: rgb(148, 155, 160);
+  display: block;
+}
+
+.give-click{
+  display: block;
+}
+
+.give-container{
+  padding: 10px 0px;
+}
+
+
+
+
+
+
+
+
