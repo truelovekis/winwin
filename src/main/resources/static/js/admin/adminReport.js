@@ -30,11 +30,11 @@ $(document).ready(function () {
 
         if (selectValue === "2") {
             blindButton.text("신고회원").css({
-                "background-color": "rgb(255, 214 ,156)",
+                "background-color": "rgb(255 214 156 / 57%)",
             color: "rgb(254, 143, 0)",
             });
             successButton.text("신고회원").css({
-                "background-color": "rgb(255, 214 ,156)",
+                "background-color": "rgb(255 214 156 / 57%)",
                 color: "rgb(254, 143, 0)",
             });
         // } else if (selectValue === "2") {

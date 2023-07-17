@@ -110,17 +110,20 @@
                     </thead>
 
 
-                    <tbody>
+                    <tbody class="userBody">
                     <tr class="user-table-category" th:each="admin : ${adminCommentReportList}">
+                        <input type="hidden" th:value="${admin.commentNumber}" class="commentNumber1"/>
                         <td class="checkbox">
-                            <input type="checkbox" name="" class="check check-box" id="checking" style="font-family: NanumSquareAcr;" th:data-number="${admin.policeNumber}" th:data-code="${admin.bigCode}">
+                            <input type="checkbox" name="" class="check check-box" id="checking" style="font-family: NanumSquareAcr;" th:data-number="${admin.commentNumber}" th:data-code="${admin.bigCode}">
                         </td>
+
                         <td class="user-name" align="center" th:text="${admin.userName}"></td>
                         <td class="user-id" align="center" th:text="${admin.userId}"></td>
                         <td class="user-board" align="center" th:text="${admin.bigName}"></td>
                         <td class="user-content" align="center" th:text="${admin.content}"></td>
                         <td class="user-report-date" align="center" th:text="${admin.commentDate}"></td>
                         <td class="report-reason" align="center" th:text="${admin.categoryName}"></td>
+                        <input type="hidden" th:value="${admin.status}" class="status1"/>
                         <td class="board-public-secret" align="center">
                             <select name="user-report-select" class="user-report-select" style="font-family: NanumSquareAcr;">
                                 <option value="">선택</option>
@@ -129,8 +132,8 @@
                             </select>
                         </td>
                         <td class="report-resulting-success" align="center">
-                            <div th:if="${admin.status} == '1'"  class="blind-button Y" th:text="공개"></div>
-                            <div th:if="${admin.status} == '0'"  class="blind-button N" th:text="비공개"></div>
+                            <div th:if="${admin.status == '1'}"  class="blind-button Y" th:text="공개"></div>
+                            <div th:if="${admin.status == '0'}"  class="blind-button N" th:text="비공개"></div>
                         </td>
                     </tr>
                     </tbody>

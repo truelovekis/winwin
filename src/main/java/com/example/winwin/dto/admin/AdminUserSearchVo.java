@@ -11,6 +11,6 @@ public class AdminUserSearchVo {
     private String id;
     private String identity;
     private String mainCode;
-    private String mentor;
+    private String position;
 
 }

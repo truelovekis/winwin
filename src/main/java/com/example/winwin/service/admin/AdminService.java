@@ -16,6 +16,7 @@ import java.util.List;
 public class AdminService {
     private final AdminMapper adminMapper;
 
+
     // 전체 회원 조회
     public List<AdminVo> findTest(AdminVo adminVo) {
         return adminMapper.selectTest(adminVo);
@@ -128,11 +129,17 @@ public class AdminService {
     }
 
     // 신고 댓글 상태 변경
-    public void modifyCommentReportStatus(Long policeNumber, String commentStatus){
-        if(policeNumber == null || commentStatus == null){
-            throw new IllegalArgumentException("신고 댓글 수정 정보 누락");
+    public void modifyCommentReportStatus(List<PoliceVo> policeVoList){
+        String bigCode = null;
+
+        for(int i=0; i<policeVoList.size(); i++){
+            bigCode = policeVoList.get(i).getBigCode();
+            if(bigCode.equals("400")){
+                adminMapper.updateCommunityReport(policeVoList.get(i));
+            }else if(bigCode.equals("300")){
+
+            }
         }
-        adminMapper.updateCommentReport(policeNumber, commentStatus);
     }
 
 

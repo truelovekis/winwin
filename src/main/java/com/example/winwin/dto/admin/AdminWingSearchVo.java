@@ -11,5 +11,5 @@ public class AdminWingSearchVo {
     private String name;
     private String id;
     private String date;
-    private String mentor;
+    private String position;
 }

@@ -208,6 +208,15 @@
     border: none;
 }
 
+.user-content td{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 283px;
+    table-layout: fixed;
+
+}
+
 thead {
     align-items: center;
 }
@@ -220,14 +229,18 @@ tbody tr {
 td {
     border: none;
     border-bottom: 1px solid rgba(115, 114, 114, 0.24);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px;
 }
 
 thead tr {
     height: 40px;
 }
 
-tr:last-child td {
-    /* border-bottom: none; */
+tbody > tr:last-child td {
+     border-bottom: none;
 }
 
 .user-report-select {
@@ -250,8 +263,8 @@ tr:last-child td {
 }
 
 .N {
-    background-color: rgb(220 255 226);
-    color: #587c60;
+    background-color: rgb(255, 237, 237);
+    color: red;
     border: none;
     border-radius: 5px;
     padding: 7px 5px;
@@ -269,7 +282,7 @@ tr:last-child td {
     border-radius: 5px;
     height: 400px;
     overflow: scroll;
-    padding-left: 10px;
+    padding-left: 6px;
 }
 
 /* 스크롤바 가로 사이즈 */
