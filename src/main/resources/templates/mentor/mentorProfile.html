@@ -283,10 +283,11 @@
         <!-- 멘토 프로필 -->
         <th:block th:unless="${mentorList == null or #lists.isEmpty(mentorList)}">
             <div class="main-mentor">
-                <article class="item" th:each="mentorList : ${mentorList}" th:if="${mentorList.mentorNumber} != ${session.mentorNumber}" th:id="'id-'+ ${mentorList.mentorNumber}">
+                <article class="item" th:each="mentorList : ${mentorList}" th:if="${mentorList.mentorNumber} != ${session.mentorNumber}" th:id="'id-'+ ${mentorList.userNumber}">
                     <section class="mento-profile">
                         <div class="item__box">
-                            <input type="hidden" class="mentor-num" th:data-num="${mentorList.mentorNumber}" th:value="${mentorList.mentorNumber}"/>
+                            <input type="hidden" class="mentor-num" th:data-num="${mentorList.userNumber}" th:value="${mentorList.mentorNumber}"/>
+<!--                            <input type="hidden" class="user-num" th:data-num2="${mentorList.userNumber}" th:value="${metnorList.userNumber}"/>-->
 <!--                            <input type="hidden" class="mentor-num" th:data-num2="${mentorList.mentorNumber}" th:value="${mentorList.mentorNumber}"/>-->
                             <a th:href="@{/mentor/profile(mentorNumber=${mentorList.mentorNumber})}" class="page-move">
                                 <div class="flex">
@@ -400,6 +401,6 @@
 <script th:src="@{/js/user/loginModal.js}"></script>
 <script th:src="@{/js/fragment/header.js}" ></script>
 <script th:src="@{/js/mentor/mentorProfile.js}"></script>
-<script th:src="@{/js/chatting/inputModal.js}"></script>
+<script th:src="@{/js/mentor/chatting.js}"></script>
 </body>
 </html>

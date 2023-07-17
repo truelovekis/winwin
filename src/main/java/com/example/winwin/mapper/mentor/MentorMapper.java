@@ -40,7 +40,7 @@ public interface MentorMapper {
     public int careerInfoLike(Long mentorNumber);
 
 //  멘토 리뷰
-    public List<ReviewVo> reviewList(Long mentorNumber);
+    public List<ReviewVo> reviewList(Long mentorNumber, Long userNumber);
 
 
 //    프로필 등록

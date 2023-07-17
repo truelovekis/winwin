@@ -28,7 +28,7 @@ public class ChattingRestController {
     private final UserService userService;
 
     /* 쪽지 보내기 */
-    @PostMapping("/inputModal/{shareNumber}")
+    @PostMapping("/inputModal")
     public void sendChatting(@RequestBody ChattingDto chattingDto, HttpServletRequest req){
         Long chattingFrom = (Long)req.getSession().getAttribute("userNumber");
         chattingDto.setChattingFrom(chattingFrom);

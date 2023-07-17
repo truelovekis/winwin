@@ -31,6 +31,8 @@
 <div th:replace="chatting/inputModal :: inputModal(nickname='', chattingTo='')"></div>
 <!--쪽지 모달창 끝-->
 <input type="hidden" class="userNumber" th:value="${session.userNumber}"/>
+<input type="hidden" class="mentorNumber" th:value="${profile2.userNumber}"/>
+<input type="hidden" class="mentornumber" th:data-num="${profile2.userNumber}" th:value="${profile2.userNumber}">
 <div class="mentorProfile">
 <div class="background">
   <div class="startpage">
@@ -40,7 +42,7 @@
       <img th:unless="${profile2.pfpSystemName == null}" class="main-img"
            th:style="${'background-image: url(/profile/' + profile2.pfpUuid + '_' + profile2.pfpSystemName + ')'}"/>
         <div class="name-box">
-          <input type="hidden" class="mentornumber" th:data-num="${profile2.mentorNumber}" th:value="${profile2.mentorNumber}">
+
           <h1 class="name-text" th:text="${profile2.userName}"></h1>
           <p class="text-base" th:text="${profile2.userBelong}"></p>
         </div>
@@ -168,7 +170,8 @@
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script th:src="@{/js/user/loginModal.js}"></script>
 <script th:src="@{/js/fragment/header.js}" ></script>
+<script th:src="@{/js/mentor/chatting.js}"></script>
 <script type="module" th:src="@{/js/mentor/DefaultProfile.js}"></script>
-<script th:src="@{/js/chatting/inputModal.js}"></script>
+<!--<script th:src="@{/js/chatting/inputModal.js}"></script>-->
 </body>
 </html>
