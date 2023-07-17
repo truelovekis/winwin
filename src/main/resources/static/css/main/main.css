@@ -708,7 +708,7 @@ h4 {
 }
 
 .login-page-move {
-  width: 190px;
+  /*width: 190px;*/
   margin-top: 8px;
   display: flex;
   justify-content: space-between;
@@ -731,13 +731,15 @@ h4 {
 .login-kakao {
   width: 240px;
   height: 35px;
-  background-color: #fee500;
+  background-color: #1b5192;
   border: none;
   border-radius: 5px;
   margin-top: 25px;
   margin-bottom: 10px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  color: white;
   cursor: pointer;
 }
 

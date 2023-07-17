@@ -123,22 +123,35 @@
 <!--    </insert>-->
 
     <!-- 인증 태그 -->
-    <select id="certificationH" resultType="categoryVo">
+    <select id="certificationH" resultType="userCategoryVo">
         SELECT *
         FROM MAIN_CATEGORY
         WHERE MAIN_CODE LIKE '1__'
     </select>
 
-    <select id="certificationJ" resultType="categoryVo">
+    <select id="certificationJ" resultType="userCategoryVo">
         SELECT *
         FROM MAIN_CATEGORY
         WHERE MAIN_CODE LIKE '2__'
     </select>
 
-    <select id="certificationSub" resultType="categoryVo">
+    <select id="certificationSub" resultType="userCategoryVo">
         SELECT *
         FROM SUB_CATEGORY sc
         WHERE main_code = #{mainCode}
     </select>
 
+    <!-- 아이디 찾기 -->
+    <select id="findId" resultType="String">
+        SELECT USER_ID
+        FROM WW_USER
+        WHERE USER_NAME = #{userName} AND USER_PHONE_NUMBER = #{userPhoneNumber}
+    </select>
+
+    <!-- 비밀번호 찾기 -->
+    <select id="findPw" resultType="String">
+        SELECT USER_PASSWORD
+        FROM WW_USER
+        WHERE USER_ID = #{userId} AND USER_PHONE_NUMBER = #{userPhoneNumber}
+    </select>
 </mapper>

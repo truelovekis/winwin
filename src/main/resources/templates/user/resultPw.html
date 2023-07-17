@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ResultPw</title>
+  <link rel="stylesheet" th:href="@{/css/user/resultPw.css}" />
+  <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+  <style>
+      body {
+          font-family: "NanumSquareLight";
+          font-family: "NanumSquare";
+          font-family: "NanumSquareBold";
+          font-family: "NanumSquareExtraBold";
+          font-family: "NanumSquareAcb";
+          font-family: "NanumSquareAceb";
+          font-family: "NanumSquareAcl";
+          font-family: "NanumSquareAcr";
+      }
+  </style>
+</head>
+<body>
+<main>
+  <div class="result-pw-container">
+    <div class="result-pw-wrap">
+      <div class="result-pw-box none" th:fragment="resultPw">
+        <div class="result-pw-icon">
+          <img class="result-pw-img" th:src="@{/img/result-icon.png}"/>
+        </div>
+        <div class="result-pw-info-box">
+          <div class="result-pw-info-start">
+            <span class="result-pw-info">고객님의 비밀번호는</span>
+          </div>
+          <div class="result-pw-info-end">
+            <span class="result-info-pw">[</span>
+            <span id="result-pw">asdx1295</span>
+            <span class="result-info-pw">]</span>
+            <span class="result-pw-info">입니다.</span>
+          </div>
+        </div>
+      </div>
+      <button class="result-id-next"><a href="/winwin/html/user/message.html" rel="modal:open">다음</a></button>
+    </div>
+  </div>
+</main>
+<script
+        src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+        crossorigin="anonymous"
+></script>
+</body>
+</html>
