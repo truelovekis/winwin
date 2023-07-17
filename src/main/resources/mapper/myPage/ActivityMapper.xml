@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.myPage.ActivityMapper">
+<!--    게시글-->
     <select id="selectActiveBoardList" resultType="activeBoardVo">
         SELECT BIG_CATEGORY, BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, BOARD_DATE, BOARD_CNT, BOARD_COMMENT, BOARD_LIKE, BOARD_GOOD
         FROM(
-                SELECT ROWNUM RN, BIG_CATEGORY, BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, BOARD_DATE, BOARD_CNT, BOARD_COMMENT, BOARD_LIKE, BOARD_GOOD
+                SELECT ROWNUM RN, BIG_CATEGORY, BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, TO_CHAR(BOARD_DATE, 'yyyy-mm-dd') BOARD_DATE, BOARD_CNT, BOARD_COMMENT, BOARD_LIKE, BOARD_GOOD
                 FROM(
                         SELECT 200 BIG_CATEGORY, C.CAREERINFO_NUMBER BOARD_NUMBER,
                                CAREERINFO_TITLE BOARD_TITLE, DBMS_LOB.SUBSTR(CAREERINFO_CONTENT, 100, 1) BOARD_CONTENT,
-                               TO_CHAR(CAREERINFO_DATE, 'yyyy-mm-dd') BOARD_DATE, CAREERINFO_CNT BOARD_CNT,
+                               CAREERINFO_DATE BOARD_DATE, CAREERINFO_CNT BOARD_CNT,
                                (SELECT count(user_number) from CAREERINFO_COMMENT CC WHERE CC.CAREERINFO_NUMBER = C.CAREERINFO_NUMBER) BOARD_COMMENT,
                                (SELECT count(user_number) from CAREERINFO_LIKE CL WHERE CL.CAREERINFO_NUMBER = C.CAREERINFO_NUMBER) BOARD_LIKE,
                                -1 BOARD_GOOD
@@ -17,7 +18,7 @@
                         UNION ALL
                         SELECT 300 BIG_CATEGORY, Q.QNA_NUMBER BOARD_NUMBER,
                                QNA_TITLE BOARD_TITLE, QNA_CONTENT BOARD_CONTENT,
-                               TO_CHAR(QNA_DATE, 'yyyy-mm-dd') BOARD_DATE, QNA_CNT BOARD_CNT,
+                               QNA_DATE BOARD_DATE, QNA_CNT BOARD_CNT,
                                (SELECT count(user_number) from QNA_COMMENT QC WHERE QC.QNA_NUMBER = Q.QNA_NUMBER) BOARD_COMMENT,
                                -1 BOARD_LIKE,
                                (SELECT count(user_number) from QNA_GOOD QG WHERE QG.QNA_NUMBER = Q.QNA_NUMBER) BOARD_GOOD
@@ -26,7 +27,7 @@
                         UNION ALL
                         SELECT 400 BIG_CATEGORY, C.COMMUNITY_NUMBER BOARD_NUMBER,
                                COMMUNITY_TITLE BOARD_TITLE, COMMUNITY_CONTENT BOARD_CONTENT,
-                               TO_CHAR(COMMUNITY_DATE, 'yyyy-mm-dd') BOARD_DATE, COMMUNITY_CNT BOARD_CNT,
+                               COMMUNITY_DATE BOARD_DATE, COMMUNITY_CNT BOARD_CNT,
                                (SELECT count(user_number) from COMMUNITY_COMMENT CC WHERE CC.COMMUNITY_NUMBER = C.COMMUNITY_NUMBER) BOARD_COMMENT,
                                -1 BOARD_LIKE,
                                (SELECT count(user_number) from COMMUNITY_GOOD CG WHERE CG.COMMUNITY_NUMBER = C.COMMUNITY_NUMBER) BOARD_GOOD
@@ -35,7 +36,7 @@
                         UNION ALL
                         SELECT 500 BIG_CATEGORY, S.STUDY_NUMBER BOARD_NUMBER,
                                STUDY_TITLE BOARD_TITLE, STUDY_CONTENT BOARD_CONTENT,
-                               TO_CHAR(STUDY_DATE, 'yyyy-mm-dd') BOARD_DATE, STUDY_READ_CNT BOARD_CNT,
+                               STUDY_DATE BOARD_DATE, STUDY_READ_CNT BOARD_CNT,
                                (SELECT count(user_number) from STUDY_COMMENT SC WHERE SC.STUDY_NUMBER = S.STUDY_NUMBER) BOARD_COMMENT,
                                (SELECT count(user_number) from STUDY_LIKE SL WHERE SL.STUDY_NUMBER = S.STUDY_NUMBER) BOARD_LIKE,
                                -1 BOARD_GOOD
@@ -44,7 +45,7 @@
                         UNION ALL
                         SELECT 600 BIG_CATEGORY, SHARE_NUMBER BOARD_NUMBER,
                                SHARE_TITLE BOARD_TITLE, SHARE_CONTENT BOARD_CONTENT,
-                               TO_CHAR(SHARE_DATE, 'yyyy-mm-dd') BOARD_DATE, SHARE_READ_CNT BOARD_CNT,
+                               SHARE_DATE BOARD_DATE, SHARE_READ_CNT BOARD_CNT,
                                -1 BOARD_COMMENT,
                                -1 BOARD_LIKE,
                                -1 BOARD_GOOD
@@ -53,7 +54,7 @@
                         UNION ALL
                         SELECT 700 BIG_CATEGORY, C.CS_NUMBER BOARD_NUMBER,
                                CS_TITLE BOARD_TITLE, CS_CONTENT BOARD_CONTENT,
-                               TO_CHAR(CS_DATE, 'yyyy-mm-dd') BOARD_DATE, -1 BOARD_CNT,
+                               CS_DATE BOARD_DATE, -1 BOARD_CNT,
                                (SELECT count(user_number) from CS_COMMENT CC WHERE CC.CS_NUMBER = C.CS_NUMBER) BOARD_COMMENT,
                                -1 BOARD_LIKE,
                                -1 BOARD_GOOD
@@ -67,14 +68,123 @@
                 )
         WHERE RN > (#{criteria.page} - 1) * #{criteria.amount}
     </select>
-    <select id="selectActiveCommentList" resultType="activeCommentVo">
-        SELECT BIG_CATEGORY, BOARD_NUMBER, BOARD_TITLE, COMMENT_CONTENT, COMMENT_DATE, COMMENT_UPDOWN
+    <select id="selectActiveQnaBoardList" resultType="activeBoardVo">
+        SELECT BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, BOARD_DATE, BOARD_CNT, BOARD_COMMENT, BOARD_LIKE, BOARD_GOOD
         FROM(
-                SELECT ROWNUM RN, BIG_CATEGORY, BOARD_NUMBER, BOARD_TITLE, COMMENT_CONTENT, COMMENT_DATE, COMMENT_UPDOWN
+                SELECT ROWNUM RN, BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, TO_CHAR(BOARD_DATE, 'yyyy-mm-dd') BOARD_DATE, BOARD_CNT, BOARD_COMMENT, BOARD_LIKE, BOARD_GOOD
+                FROM(
+                        SELECT Q.QNA_NUMBER BOARD_NUMBER,
+                               QNA_TITLE BOARD_TITLE, QNA_CONTENT BOARD_CONTENT,
+                               QNA_DATE BOARD_DATE, QNA_CNT BOARD_CNT,
+                               (SELECT count(user_number) from QNA_COMMENT QC WHERE QC.QNA_NUMBER = Q.QNA_NUMBER) BOARD_COMMENT,
+                               -1 BOARD_LIKE,
+                               (SELECT count(user_number) from QNA_GOOD QG WHERE QG.QNA_NUMBER = Q.QNA_NUMBER) BOARD_GOOD
+                        FROM QNA Q
+                        WHERE USER_NUMBER = #{userNumber}
+                        ORDER BY BOARD_DATE DESC
+                    )
+                <![CDATA[
+                WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
+                ]]>
+                )
+        WHERE RN > (#{criteria.page} - 1) * #{criteria.amount}
+    </select>
+    <select id="selectActiveCommunityBoardList" resultType="activeBoardVo">
+        SELECT BIG_CATEGORY, BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, BOARD_DATE, BOARD_CNT, BOARD_COMMENT, BOARD_LIKE, BOARD_GOOD
+        FROM(
+                SELECT ROWNUM RN, BIG_CATEGORY, BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, TO_CHAR(BOARD_DATE, 'yyyy-mm-dd') BOARD_DATE, BOARD_CNT, BOARD_COMMENT, BOARD_LIKE, BOARD_GOOD
+                FROM(
+                        SELECT 400 BIG_CATEGORY, C.COMMUNITY_NUMBER BOARD_NUMBER,
+                               COMMUNITY_TITLE BOARD_TITLE, COMMUNITY_CONTENT BOARD_CONTENT,
+                               COMMUNITY_DATE BOARD_DATE, COMMUNITY_CNT BOARD_CNT,
+                               (SELECT count(user_number) from COMMUNITY_COMMENT CC WHERE CC.COMMUNITY_NUMBER = C.COMMUNITY_NUMBER) BOARD_COMMENT,
+                               -1 BOARD_LIKE,
+                               (SELECT count(user_number) from COMMUNITY_GOOD CG WHERE CG.COMMUNITY_NUMBER = C.COMMUNITY_NUMBER) BOARD_GOOD
+                        FROM COMMUNITY C
+                        WHERE USER_NUMBER = #{userNumber}
+                        ORDER BY BOARD_DATE DESC
+                    )
+                <![CDATA[
+                WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
+                ]]>
+                )
+        WHERE RN > (#{criteria.page} - 1) * #{criteria.amount}
+    </select>
+    <select id="selectActiveMeetingBoardList" resultType="activeBoardVo">
+        SELECT BIG_CATEGORY, BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, BOARD_DATE, BOARD_CNT, BOARD_COMMENT, BOARD_LIKE, BOARD_GOOD
+        FROM(
+                SELECT ROWNUM RN, BIG_CATEGORY, BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, TO_CHAR(BOARD_DATE, 'yyyy-mm-dd') BOARD_DATE, BOARD_CNT, BOARD_COMMENT, BOARD_LIKE, BOARD_GOOD
+                FROM(
+                        SELECT 500 BIG_CATEGORY, S.STUDY_NUMBER BOARD_NUMBER,
+                               STUDY_TITLE BOARD_TITLE, STUDY_CONTENT BOARD_CONTENT,
+                               STUDY_DATE BOARD_DATE, STUDY_READ_CNT BOARD_CNT,
+                               (SELECT count(user_number) from STUDY_COMMENT SC WHERE SC.STUDY_NUMBER = S.STUDY_NUMBER) BOARD_COMMENT,
+                               (SELECT count(user_number) from STUDY_LIKE SL WHERE SL.STUDY_NUMBER = S.STUDY_NUMBER) BOARD_LIKE,
+                               CATEGORY_NUMBER BOARD_GOOD
+                        FROM STUDY S
+                        WHERE USER_NUMBER = #{userNumber}
+                        ORDER BY BOARD_DATE DESC
+                    )
+                <![CDATA[
+                WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
+                ]]>
+                )
+        WHERE RN > (#{criteria.page} - 1) * #{criteria.amount}
+    </select>
+    <select id="selectActiveShareBoardList" resultType="activeBoardVo">
+        SELECT BIG_CATEGORY, BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, BOARD_DATE, BOARD_CNT, BOARD_COMMENT, BOARD_LIKE, BOARD_GOOD
+        FROM(
+                SELECT ROWNUM RN, BIG_CATEGORY, BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, TO_CHAR(BOARD_DATE, 'yyyy-mm-dd') BOARD_DATE, BOARD_CNT, BOARD_COMMENT, BOARD_LIKE, BOARD_GOOD
+                FROM(
+                        SELECT 600 BIG_CATEGORY, SHARE_NUMBER BOARD_NUMBER,
+                               SHARE_TITLE BOARD_TITLE, SHARE_CONTENT BOARD_CONTENT,
+                               SHARE_DATE BOARD_DATE, SHARE_READ_CNT BOARD_CNT,
+                               -1 BOARD_COMMENT,
+                               -1 BOARD_LIKE,
+                               -1 BOARD_GOOD
+                        FROM SHARE_FREE
+                             LEFT JOIN (FILE_UPLOAD_PATH, FILE_UUID, FILE_SYSTEM_NAME, SHARE_NUMBER
+                                 FROM share_file)
+                        WHERE USER_NUMBER = #{userNumber}
+                        ORDER BY BOARD_DATE DESC
+                    )
+                <![CDATA[
+                WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
+                ]]>
+                )
+        WHERE RN > (#{criteria.page} - 1) * #{criteria.amount}
+    </select>
+    <select id="selectActiveCsBoardList" resultType="activeBoardVo">
+        SELECT BIG_CATEGORY, BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, BOARD_DATE, BOARD_CNT, BOARD_COMMENT, BOARD_LIKE, BOARD_GOOD
+        FROM(
+                SELECT ROWNUM RN, BIG_CATEGORY, BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, TO_CHAR(BOARD_DATE, 'yyyy-mm-dd') BOARD_DATE, BOARD_CNT, BOARD_COMMENT, BOARD_LIKE, BOARD_GOOD
+                FROM(
+                        SELECT 700 BIG_CATEGORY, C.CS_NUMBER BOARD_NUMBER,
+                               CS_TITLE BOARD_TITLE, CS_CONTENT BOARD_CONTENT,
+                               CS_DATE BOARD_DATE, -1 BOARD_CNT,
+                               (SELECT count(user_number) from CS_COMMENT CC WHERE CC.CS_NUMBER = C.CS_NUMBER) BOARD_COMMENT,
+                               -1 BOARD_LIKE,
+                               -1 BOARD_GOOD
+                        FROM CS C
+                        WHERE USER_NUMBER = #{userNumber}
+                        ORDER BY BOARD_DATE DESC
+                    )
+                <![CDATA[
+                WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
+                ]]>
+                )
+        WHERE RN > (#{criteria.page} - 1) * #{criteria.amount}
+    </select>
+
+<!--    댓글-->
+    <select id="selectActiveCommentList" resultType="activeCommentVo">
+        SELECT BIG_CATEGORY, BOARD_NUMBER, BOARD_TITLE, COMMENT_CONTENT, COMMENT_DATE, COMMENT_UP, COMMENT_DOWN
+        FROM(
+                SELECT ROWNUM RN, BIG_CATEGORY, BOARD_NUMBER, BOARD_TITLE, COMMENT_CONTENT, TO_CHAR(COMMENT_DATE, 'yyyy-mm-dd') COMMENT_DATE, COMMENT_UP, COMMENT_DOWN
                 FROM(
                         SELECT 200 BIG_CATEGORY, C.CAREERINFO_NUMBER BOARD_NUMBER,
                                CAREERINFO_TITLE BOARD_TITLE, CC.COMMENT_CONTENT COMMENT_CONTENT,
-                               TO_CHAR(CC.COMMENT_DATE, 'yyyy-mm-dd') COMMENT_DATE, 'N' COMMENT_UPDOWN
+                               CC.COMMENT_DATE COMMENT_DATE, -1 COMMENT_UP, -1 COMMENT_DOWN
                         FROM CAREERINFO C
                                  JOIN CAREERINFO_COMMENT CC
                                       ON C.CAREERINFO_NUMBER = CC.CAREERINFO_NUMBER
@@ -82,27 +192,27 @@
                         UNION ALL
                         SELECT 300 BIG_CATEGORY, Q.QNA_NUMBER BOARD_NUMBER,
                                Q.QNA_TITLE BOARD_TITLE, QC.COMMENT_CONTENT COMMENT_CONTENT,
-                               TO_CHAR(QC.COMMENT_DATE, 'yyyy-mm-dd') COMMENT_DATE, U.UD_STATUS COMMENT_UPDOWN
+                               QC.COMMENT_DATE COMMENT_DATE,
+                               (SELECT COUNT(*) FROM QNA_COMMENT_UD UD WHERE QC.COMMENT_NUMBER = UD.COMMENT_NUMBER AND UD.UD_STATUS = 'u') COMMENT_UP,
+                               (SELECT COUNT(*) FROM QNA_COMMENT_UD UD WHERE QC.COMMENT_NUMBER = UD.COMMENT_NUMBER AND UD.UD_STATUS = 'd') COMMENT_DOWN
                         FROM QNA Q
                                  JOIN QNA_COMMENT QC
                                       ON Q.QNA_NUMBER = QC.QNA_NUMBER
-                                 JOIN QNA_COMMENT_UD U
-                                      ON QC.COMMENT_NUMBER = U.COMMENT_NUMBER
                         WHERE QC.USER_NUMBER = #{userNumber}
                         UNION ALL
                         SELECT 400 BIG_CATEGORY, C.COMMUNITY_NUMBER BOARD_NUMBER,
                                C.COMMUNITY_TITLE BOARD_TITLE, CC.COMMENT_CONTENT COMMENT_CONTENT,
-                               TO_CHAR(CC.COMMENT_DATE, 'yyyy-mm-dd') COMMENT_DATE, U.UD_STATUS COMMENT_UPDOWN
+                               CC.COMMENT_DATE COMMENT_DATE,
+                               (SELECT COUNT(*) FROM COMMUNITY_COMMENT_UD UD WHERE CC.COMMENT_NUMBER = UD.COMMENT_NUMBER AND UD.UD_STATUS = 'u') COMMENT_UP,
+                               (SELECT COUNT(*) FROM COMMUNITY_COMMENT_UD UD WHERE CC.COMMENT_NUMBER = UD.COMMENT_NUMBER AND UD.UD_STATUS = 'd') COMMENT_DOWN
                         FROM COMMUNITY C
                                  JOIN COMMUNITY_COMMENT CC
                                       ON C.USER_NUMBER = CC.USER_NUMBER
-                                 JOIN COMMUNITY_COMMENT_UD U
-                                      ON CC.COMMENT_NUMBER = U.COMMENT_NUMBER
                         WHERE CC.USER_NUMBER = #{userNumber}
                         UNION ALL
                         SELECT 500 BIG_CATEGORY, S.STUDY_NUMBER BOARD_NUMBER,
                                S.STUDY_TITLE BOARD_TITLE, SC.COMMENT_CONTENT COMMENT_CONTENT,
-                               TO_CHAR(SC.COMMENT_DATE, 'yyyy-mm-dd') COMMENT_DATE, 'N' COMMENT_UPDOWN
+                               SC.COMMENT_DATE COMMENT_DATE, -1 COMMENT_UP, -1 COMMENT_DOWN
                         FROM STUDY S
                                  JOIN STUDY_COMMENT SC
                                       ON S.STUDY_NUMBER = SC.STUDY_NUMBER
@@ -114,5 +224,63 @@
                 ]]>
                 )
         WHERE RN > (#{criteria.page} - 1) * #{criteria.amount}
+    </select>
+    <select id="selectActiveQnaCommentList" resultType="activeCommentVo">
+        SELECT BIG_CATEGORY, BOARD_NUMBER, BOARD_TITLE, COMMENT_CONTENT, COMMENT_DATE, COMMENT_UP, COMMENT_DOWN
+        FROM(
+                SELECT ROWNUM RN, BIG_CATEGORY, BOARD_NUMBER, BOARD_TITLE, COMMENT_CONTENT, TO_CHAR(COMMENT_DATE, 'yyyy-mm-dd') COMMENT_DATE, COMMENT_UP, COMMENT_DOWN
+                FROM(
+                        SELECT 300 BIG_CATEGORY, Q.QNA_NUMBER BOARD_NUMBER,
+                               Q.QNA_TITLE BOARD_TITLE, QC.COMMENT_CONTENT COMMENT_CONTENT,
+                               QC.COMMENT_DATE COMMENT_DATE,
+                               (SELECT COUNT(*) FROM QNA_COMMENT_UD UD WHERE QC.COMMENT_NUMBER = UD.COMMENT_NUMBER AND UD.UD_STATUS = 'u') COMMENT_UP,
+                               (SELECT COUNT(*) FROM QNA_COMMENT_UD UD WHERE QC.COMMENT_NUMBER = UD.COMMENT_NUMBER AND UD.UD_STATUS = 'd') COMMENT_DOWN
+                        FROM QNA Q
+                                 JOIN QNA_COMMENT QC
+                                      ON Q.QNA_NUMBER = QC.QNA_NUMBER
+                        WHERE QC.USER_NUMBER = #{userNumber}
+                    )
+                <![CDATA[
+                WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
+                ]]>
+                )
+        WHERE RN > (#{criteria.page} - 1) * #{criteria.amount}
+    </select>
+    <select id="selectActiveCommunityCommentList" resultType="activeCommentVo">
+        SELECT BIG_CATEGORY, BOARD_NUMBER, BOARD_TITLE, COMMENT_CONTENT, COMMENT_DATE, COMMENT_UPDOWN
+        FROM(
+                        SELECT 400 BIG_CATEGORY, C.COMMUNITY_NUMBER BOARD_NUMBER,
+                               C.COMMUNITY_TITLE BOARD_TITLE, CC.COMMENT_CONTENT COMMENT_CONTENT,
+                               CC.COMMENT_DATE COMMENT_DATE, U.UD_STATUS COMMENT_UPDOWN
+                        FROM COMMUNITY C
+                                 JOIN COMMUNITY_COMMENT CC
+                                      ON C.USER_NUMBER = CC.USER_NUMBER
+                                 JOIN COMMUNITY_COMMENT_UD U
+                                      ON CC.COMMENT_NUMBER = U.COMMENT_NUMBER
+                        WHERE CC.USER_NUMBER = #{userNumber}
+                        ORDER BY COMMENT_DATE DESC
+                    )
+                <![CDATA[
+                WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
+                ]]>
+                )
+        WHERE RN > (#{criteria.page} - 1) * #{criteria.amount}
+    </select>
+
+<!--    글 개수 세기-->
+    <select id="selectTotalQna">
+        select count(USER_NUMBER) from QNA where USER_NUMBER = #{userNumber}
+    </select>
+    <select id="selectTotalCommunity">
+        select count(USER_NUMBER) from Community where USER_NUMBER = #{userNumber}
+    </select>
+    <select id="selectTotalMeeting">
+        select count(USER_NUMBER) from STUDY where USER_NUMBER = #{userNumber}
+    </select>
+    <select id="selectTotalShare">
+        select count(USER_NUMBER) from SHARE_FREE where USER_NUMBER = #{userNumber}
+    </select>
+    <select id="selectTotalCs">
+        select count(USER_NUMBER) from CS where USER_NUMBER = #{userNumber}
     </select>
 </mapper>
