@@ -248,6 +248,7 @@ label {
     border: 1px solid #cbd5e1;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    resize: none;
 }
 
 .mento-profile-photo-box {

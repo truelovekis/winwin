@@ -90,7 +90,7 @@
         </label>
 <!--        <p class="writer-cnt"><span class="cnt">0</span>/20</p>-->
       </div>
-      <input type="text" class="name-box" th:value="${mentor.userName}" name="name" maxlength="20" />
+      <input type="text" class="name-box" th:value="${mentor.userName}" name="name" maxlength="20" style="font-family: 'NanumSquareAcr';"/>
     </div>
     <div class="main-mp4">
       <div class="job">
@@ -105,6 +105,7 @@
               th:value="${mentor.userBelong}"
               name="title"
               maxlength="40"
+              style="font-family: 'NanumSquareAcr';"
       />
     </div>
 
@@ -116,13 +117,14 @@
         </label>
         <p class="writer-cnt"><span class="cnt3">0</span>/150</p>
       </div>
-      <input
+      <textarea
               type="text"
               class="short-box"
-              placeholder="나를 소개해주세요."
+              th:text="${mentor.mentorPr}"
               name="mentorPr"
               maxlength="150"
-      />
+              style="font-family: 'NanumSquareAcr';"
+      ></textarea>
     </div>
   </div>
 </div>

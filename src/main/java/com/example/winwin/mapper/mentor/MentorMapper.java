@@ -71,4 +71,12 @@ public interface MentorMapper {
     public void addMentor(MentorVo mentorVo);
 
     public MentorVo mentorpfp(Long mentorNumber);
+
+//    멘토 프로필
+    public void mentorPrU(MentorVo mentorVo);
+    public int mentorPrCount(Long mentorNumber);
+    public int mentorCnt(Long mentorNumber);
+    public int skillCnt(Long mentorNumber);
+
+    public MentorVo mentor3(Long mentorNumber);
 }

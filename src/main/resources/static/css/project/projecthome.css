@@ -238,6 +238,7 @@ strong{
 .topten-banner > a> h4{
     text-align: right;
     padding-right: 40px;
+    color: black;
 }
 
 .topten-body{
@@ -267,6 +268,7 @@ strong{
     margin-right: 20px;
     margin-left: 25px;
     box-sizing: border-box;
+    cursor: pointer;
 }
 
 .topten-cardbox:hover {

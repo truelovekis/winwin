@@ -44,11 +44,11 @@ $(".career").on("click", function () {
 $(".board").on("click", function () {
     $('.pro-bottom').hide();
     $(".changeView2").hide();
-    makeInfo();
     $(".li-bottom").css("width", "0");
     $(this).find(".li-bottom").css("width", "100%");
     $(".li-btn").css("color", "#cbd5e1");
     $(this).find("button").css("color", "black");
+    makeInfo();
 });
 
 function makePro() {

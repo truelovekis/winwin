@@ -36,4 +36,5 @@ public class MentorVo {
     private String careerEndDate;
     private String userIdentity;
     private String userPosition;
+    private int cnt;
 }

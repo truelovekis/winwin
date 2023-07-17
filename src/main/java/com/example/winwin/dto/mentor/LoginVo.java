@@ -13,4 +13,5 @@ public class LoginVo {
     private String userId;
     private String userPassword;
     private String mentorStatus;
+    private String userPosition;
 }

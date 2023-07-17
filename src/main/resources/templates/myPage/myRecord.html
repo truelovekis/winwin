@@ -33,6 +33,7 @@
     <div class="container">
         <div th:replace="fragment/myPageSide :: myPageSide"></div>
             <div class="main">
+                <div class="title1"><h2>내 기록</h2></div>
                 <input type="hidden" class="userNumber" th:value="${session.userNumber}"/>
                 <!-- 새로운 다이어리 작성 버튼 -->
                 <div class="plus-btn"><button class="plusBtn" type="button"><img th:src="@{/img/plus-icon-21722.png}"></button></div>

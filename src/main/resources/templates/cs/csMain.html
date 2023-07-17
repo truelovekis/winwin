@@ -37,15 +37,18 @@
                     <label for="file" class="user-file">
                         <img th:src="@{/img/profile-basic.png}" class="plusimg"/>
                     </label>
-                    <img th:src="@{/img/profile-basic.png}" class="userpfp"/>
+                    <img th:if="${userPfp.pfpSystemName == null}" class="userpfp" src="/img/profile-basic.png"/>
+                    <img th:unless="${userPfp.pfpSystemName == null}" class="userpfp"
+                         th:style="${'background-image: url(/profile/' + userPfp.pfpUuid + '_' + userPfp.pfpSystemName + ')'}"/>
+<!--                    <img th:src="@{/img/profile-basic.png}" class="userpfp"/>-->
                     <input type="file" id="file"/>
                 </div>
                 <div>
-                    <div class="community-user-name" th:text="${csProfileVoList.get(0).userNickname}">김아무개</div>
+                    <div class="community-user-name" th:text="${userPfp.userName}">김아무개</div>
 <!--                    <div class="community-user-name">김아무개</div>-->
-                    <div class="community-pfp-belong" th:text="${csProfileVoList.get(0).careerCompany}">시스게이트</div>
+                    <div class="community-pfp-belong" th:text="${userPfp.userPosition}">시스게이트</div>
 <!--                    <div class="community-pfp-belong">시스게이트</div>-->
-                    <div class="community-pfp-department" th:text="${csProfileVoList.get(0).careerTitle}">DB 유지보수 관리</div>
+                    <div class="community-pfp-department" th:text="${userPfp.gradeName}">DB 유지보수 관리</div>
 <!--                    <div class="community-pfp-department">DB 유지보수 관리</div>-->
                 </div>
             </div>

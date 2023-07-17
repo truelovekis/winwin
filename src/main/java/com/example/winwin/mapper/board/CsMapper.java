@@ -26,4 +26,6 @@ public interface CsMapper {
     List<CsVo> selectScroll(CsVo csVo);
 //    메인페이지 갯수 구하기
     int selectTotal();
+
+    public CsProfileVo userLogin(Long userNumber);
 }

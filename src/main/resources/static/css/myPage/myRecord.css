@@ -13,7 +13,10 @@
 }
 
 .main{
-    width: 1050px;
+    /*width: 1050px;*/
+    width: 700px;
+    height: 1000px;
+    padding: 30px 0px;
 }
 
 /* 플러스 버튼 + 서머노트 */

@@ -2,10 +2,17 @@ const dislikeBtn = document.querySelector('.heart-click');
 const likeBtn = document.querySelector('.bi-heart-fill');
 
 dislikeBtn.onclick = function () {
-    confirm("아이디를 로그인 하셨나요?" +
-        " 안하셨으면 좋아요 수가 안올라가요😂")// 빈하트 클릭했을 때
-    dislikeBtn.classList.add('hide');  // 빈하트에 .hide 적용
-    likeBtn.classList.remove('hide');   // 빨간하트에 적용되어 있던 .hide 삭제
+    let user = $('.user').val();
+    if (user != ''){
+        dislikeBtn.classList.add('hide');  // 빈하트에 .hide 적용
+        likeBtn.classList.remove('hide');   // 빨간하트에 적용되어 있던 .hide 삭제
+    }
+
+    if(user == ''){
+        confirm("아이디를 로그인 하셨나요?" +
+            " 안하셨으면 좋아요 수가 안올라가요😂")// 빈하트 클릭했을 때
+    }
+
 }
 likeBtn.onclick = function(){
     confirm("좋아요를 취소 할까요?😢")
@@ -160,9 +167,23 @@ $(function(){
     );
 });
 
+$('.chat-box').on('click', function (){
+    let user = $('.user').val();
+    let link = $('.link').val();
 
+    if(user == ''){
+        alert("로그인 하세요.");
+        $('.login-move').trigger('click');
+    }
 
+    if(user != ''){
+        window.location.href = link;
+    }
+})
 
+$('.next-button').on('click', function (){
+   window.location.href = '/meeting/home';
+});
 
 
 

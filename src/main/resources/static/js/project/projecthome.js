@@ -2,11 +2,24 @@
 let searchButton = document.querySelector(".search-button");
 let projectmodal = document.querySelector(".projectmodal-wrap");
 
+$('.search-button').on('click', function (){
+    let user = $('.userNumber').val();
 
-searchButton.addEventListener("click", function () {
-    projectmodal.style.display = "flex";
-    document.body.style.overflow = "hidden"; //모달창 스크롤 막기
+    if(user == ''){
+        alert('로그인 해주세요.');
+        $('.login-move').trigger('click');
+    }
+
+    if(user != ''){
+        projectmodal.style.display = "flex";
+        document.body.style.overflow = "hidden"; //모달창 스크롤 막기
+    }
+
 });
+// searchButton.addEventListener("click", function () {
+//     projectmodal.style.display = "flex";
+//     document.body.style.overflow = "hidden"; //모달창 스크롤 막기
+// });
 
 projectmodal.addEventListener("click", function (e) {
     if($(e.target).hasClass("projectmodal-wrap")){
@@ -140,7 +153,11 @@ $('.nav-span3').on('mouseout', function(){
     $('.nav-span3').css("font-weight","500")
 });
 
-
+//박스 누르면 진입 하기
+$('.topten-cardbox').on('click', function (){
+    let titleNumber = $(this).closest('.topten-area').find('.projectTitle').val();
+   window.location.href = '/project/read?studyNumber=' + titleNumber;
+});
 
 
 
