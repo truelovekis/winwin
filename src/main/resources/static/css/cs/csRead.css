@@ -48,7 +48,7 @@ footer{
 }
 
 .Profil>.id{
-    margin: 23px 20px;
+    margin: 17px 20px;
 }
 
 .id>p{
@@ -173,6 +173,13 @@ footer{
 .date{
     /*margin: 27px 434px;*/
     margin: 27px 600px;
+    font-size: 13px;
+    color: rgb(148, 155, 160);
+}
+
+.date-board{
+    /*margin: 27px 434px;*/
+    margin: 27px 515px;
     font-size: 13px;
     color: rgb(148, 155, 160);
 }

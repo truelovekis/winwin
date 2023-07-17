@@ -25,10 +25,17 @@ public class CsController {
     //    CS 메인페이지
     @GetMapping("/main")
     public String csMain(Model model, HttpServletRequest req) {
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
         List<CsVo> csVoList = csService.findAll();
         model.addAttribute("csVoList", csVoList);
 
-        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+        // ↓ 유저프로필
+
+        CsProfileVo csProfileVo = csService.findUser(userNumber == null? 0 : userNumber);
+        model.addAttribute("userPfp" , csProfileVo);
+
+        // ↑ 유저프로필
+
         List<CsProfileVo> csProfileVoList = csService.getProfile(userNumber);
         model.addAttribute("csProfileVoList", csProfileVoList);
 
@@ -68,7 +75,12 @@ public class CsController {
     public String csRead(Long csNumber, Model model) {
         CsVo csVo = csService.findCs(csNumber);
         List<CsReplyVo> csReplyVoList = csReplyService.findList(csNumber);
+        csService.upHitCnt(csNumber);
+        int commentCnt = csService.commentCnt(csNumber);
+
         model.addAttribute("cs", csVo);
+        model.addAttribute("commentCnt", commentCnt);
+        System.out.println("===================================!!!!"+csVo);
         model.addAttribute("replyList", csReplyVoList);
         return "cs/csRead";
 

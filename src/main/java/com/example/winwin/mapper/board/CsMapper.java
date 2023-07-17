@@ -27,5 +27,10 @@ public interface CsMapper {
 //    메인페이지 갯수 구하기
     int selectTotal();
 
+//    조회수 증가
+    public int upHit(Long csNumber);
+//    댓글수조회
+    public int commentCnt(Long csNumber);
+//   유저 프로필
     public CsProfileVo userLogin(Long userNumber);
 }

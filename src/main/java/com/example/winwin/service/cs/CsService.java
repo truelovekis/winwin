@@ -77,6 +77,29 @@ public class CsService {
         return csMapper.selectScroll(csVo);
     }
 
+//    조회수 증가
+
+    public int upHitCnt(Long csNumber) {
+        if(csNumber == null){
+            throw new IllegalArgumentException("게시물 번호 누락");
+        }
+        return csMapper.upHit(csNumber);
+    }
+
+//    댓글수 증가
+public int commentCnt(Long csNumber){
+    if(csNumber == null){
+        throw new IllegalArgumentException("댓글 번호 누락");
+    }
+    return csMapper.commentCnt(csNumber);
+}
+
+// 유저 프로필
+public CsProfileVo findUser(Long userNumber){
+    return csMapper.userLogin(userNumber);
+}
+
+
     //    cs 메인페이지 갯수 구하기
     public int findTotal(){
 
