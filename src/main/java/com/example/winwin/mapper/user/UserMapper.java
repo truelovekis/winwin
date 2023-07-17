@@ -49,5 +49,8 @@ public interface UserMapper {
     public List<CategoryVo> certificationH();
     public List<CategoryVo> certificationJ();
     public List<CategoryVo> certificationSub(String mainCode);
+
+    // 회원 보유 윙 수정
+    public void updateUserWing(@Param("wingAmount")int wingAmount, @Param("userNumber") Long userNumber);
 }
 

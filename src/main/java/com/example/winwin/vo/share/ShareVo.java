@@ -18,7 +18,16 @@ public class ShareVo {
     private Long userNumber;
     private String userId;
     private String userNickname;
+    private String pfpSystemName;
+    private String pfpUploadPath;
+    private String pfpUuid;
+    private String careerCompany;
+    private String careerTitle;
+    private String careerStartDate;
+    private String gradeName;
+    private String userPosition;
     private String fileSystemName;
     private String fileUploadPath;
     private String fileUuid;
+
 }

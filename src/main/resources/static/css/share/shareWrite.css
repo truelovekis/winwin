@@ -79,6 +79,8 @@ h2{
 
 .write-content {
   margin: 7px 0 0 5px;
+  display: flex;
+  flex-direction: column;
 }
 
 .write-content > textarea {
@@ -97,7 +99,7 @@ h2{
 .text-cnt {
   color: gray;
   font-size: 13px;
-  margin: 2px 0 0 5px;
+  margin: 8px 0 0 5px;
 }
 /* 글자수 끝 */
 
@@ -116,6 +118,7 @@ h2{
   background-color: #1b5192;
   color : white;
   padding: 5px 10px;
+  cursor: pointer;
 }
 
 .write-btn:hover {
@@ -140,7 +143,7 @@ h2{
 /* 파일 선택 */
 .file-main-img {
   display: flex;
-  margin-top: 20px;
+  margin-top: 15px;
   align-items: center;
 }
 

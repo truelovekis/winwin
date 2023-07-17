@@ -24,9 +24,11 @@
              , S.USER_NUMBER
              , WU.USER_NICKNAME
              , WU.USER_ID
+             , g.GRADE_NAME
         FROM SHARE_FREE S
                  JOIN WW_USER WU
                       ON SHARE_NUMBER = #{shareNumber} AND S.USER_NUMBER = WU.USER_NUMBER
+                join GRADE G ON WU.USER_GRADE = G.GRADE_NUMBER
     </select>
     <!--    -->
 
@@ -126,4 +128,36 @@
         select COUNT(share_number) from share_free
     </select>
     <!--    -->
+    
+    <!-- 로그인 시 유저 프로필 가져오기 -->
+    <select id="selectUserProfile" resultType="shareVo">
+        SELECT MC.CAREER_COMPANY, MC.CAREER_TITLE, P.PFP_SYSTEM_NAME, P.PFP_UUID, MC.CAREER_START_DATE, U.USER_NICKNAME
+        FROM WW_USER U
+        LEFT OUTER JOIN USER_PFP P
+        ON U.USER_NUMBER = P.USER_NUMBER
+        LEFT OUTER JOIN MENTOR M
+        ON U.USER_NUMBER = M.USER_NUMBER
+        LEFT OUTER JOIN MENTOR_CAREER MC
+        ON MC.MENTOR_NUMBER = M.MENTOR_NUMBER
+        <if test="userNumber  != null ">
+            WHERE U.USER_NUMBER = #{userNumber}
+        </if>
+        ORDER BY MC.CAREER_START_DATE DESC
+    </select>
+
+    <select id="userLogin" resultType="shareVo">
+        SELECT wu.USER_NUMBER , wu.USER_NAME , wu.USER_POSITION , g.GRADE_NAME , up.PFP_UPLOAD_PATH , up.PFP_SYSTEM_NAME , up.PFP_UUID
+        FROM WW_USER wu LEFT OUTER JOIN USER_PFP up
+                                        ON wu.USER_NUMBER = up.USER_NUMBER
+                        left outer JOIN GRADE g ON wu.USER_GRADE = g.GRADE_NUMBER
+        WHERE wu.USER_NUMBER = #{userNumber}
+    </select>
+
+
+    <!-- 거래가 되면 마감처리 -->
+    <update id="updateShareStatus">
+        UPDATE SHARE_FREE
+        SET SHARE_STATUS = 0
+        WHERE SHARE_NUMBER = #{shareNumber}
+    </update>
 </mapper>

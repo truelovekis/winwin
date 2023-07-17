@@ -56,3 +56,17 @@ $fileInput.on('change', function(){
     });
 
 });
+
+// 나눔 작성페이지 글 작성시 글자수 카운팅
+$('#content-box').keyup(function (e){
+    let content = $(this).val();
+    console.log(content);
+
+    $('.text-cnt').html("("+content.length+" /500)");
+
+    if (content.length > 500){
+        alert("최대 500자까지 입력 가능합니다.");
+        $(this).val(content.substring(0, 500));
+        $('.text-cnt').html("(500 / 500)");
+    }
+})
