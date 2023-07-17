@@ -2,6 +2,7 @@ package com.example.winwin.controller.community;
 
 
 import com.example.winwin.service.board.CommunityService;
+import com.example.winwin.vo.board.CommunityProfileVo;
 import com.example.winwin.vo.board.CommunityVo;
 import com.example.winwin.vo.infinityScroll.Criteria;
 import com.example.winwin.vo.infinityScroll.PageVo;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -27,7 +29,9 @@ public class CommunityRestController {
     //  나눔 글 무한 스크롤
     @GetMapping("/list/{categoryTypeStr}/{page}")
     public Map<String, Object> communityListPage(@PathVariable("page") int page,
-                 @PathVariable("categoryTypeStr") String categoryTypeStr){
+                                                 @PathVariable("categoryTypeStr") String categoryTypeStr){
+//        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
+//        List<CommunityProfileVo> communityProfileVoList = communityService.registerProfile(userNumber);
         Criteria criteria = new Criteria();
         CommunityVo paramCommunityVo = new CommunityVo();
         paramCommunityVo.setCategoryTypeStr(categoryTypeStr);
@@ -68,6 +72,7 @@ public class CommunityRestController {
         communityMap.put("pageVo", pageVo);
         communityMap.put("categoryTypeStr", categoryTypeStr);
         communityMap.put("communityList", communityVoList);
+//        communityMap.put("communityProfileVoList", communityProfileVoList);
 
         return communityMap;
     }

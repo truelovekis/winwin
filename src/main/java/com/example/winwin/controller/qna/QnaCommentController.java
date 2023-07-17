@@ -26,13 +26,15 @@ public class QnaCommentController {
         return "작성 성공!";
     }
 
-    @GetMapping("/list{qnaNumber}")
+    @GetMapping("/list/{qnaNumber}")
     public List<QnaCommentVo> getCommentList(HttpServletRequest req,
                                              @PathVariable("qnaNumber") Long qnaNumber){
         Long sessionUserNumber = (Long)req.getSession().getAttribute("userNumber");
         QnaCommentVo qnaCommentVo = new QnaCommentVo();
         qnaCommentVo.setSessionUserNumber(sessionUserNumber);
         qnaCommentVo.setQnaNumber(qnaNumber);
+
+        System.out.println(qnaCommentService.findQnaCommentUdList(qnaCommentVo));
 
         return qnaCommentService.findQnaCommentUdList(qnaCommentVo);
     }

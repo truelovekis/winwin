@@ -43,7 +43,7 @@ footer{
 }
 
 .Profil>.id{
-    margin: 23px 20px;
+    margin: 15px 20px;
 }
 
 .id>p{
@@ -668,4 +668,7 @@ input[type="checkbox"] {
     font-weight: 500;
 }
 
-/**/
+/*프로필 등급 css*/
+.gradeName-text{
+    font-size: 13px;
+}

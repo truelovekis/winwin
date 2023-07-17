@@ -20,8 +20,9 @@ public interface QnaMapper {
 
     //리스트 조회
     public List<QnaVo> selectQna(@Param("criteria") Criteria criteria, @Param("cateList") List<Integer> cateList);
-//    카테고리 조회
-//    public List<QnaVo> selectSub(Long qnaNumber);
+
+    //    카테고리 조회
+    //    public List<QnaVo> selectSub(Long qnaNumber);
 
     // 조회
     public QnaVo selectQnaByQnaNumber(Long qnaNumber);
@@ -32,13 +33,14 @@ public interface QnaMapper {
 
     // 수정
     public void updateQna(QnaVo qnaVo);
+
     // 태그 수정
     public void updateQs(QsBridgeDto qsBridgeDto);
 
     // 조회수
     public int upQna(Long qnaNumber);
 
-   // 댓글 수
+    // 댓글 수
     public int commentCnt(Long qnaNumber);
 
     // 프로필

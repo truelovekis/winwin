@@ -25,7 +25,7 @@ public interface CommunityMapper {
 //    댓글수조회
     public int commentCnt(Long communityNumber);
 //    프로필조회
-    public List<CommunityProfileVo> selectUserProfile(Long userNumber);
+    public CommunityProfileVo selectUserProfile(Long userNumber);
 //    페이지 무한스크롤
     List<CommunityVo> selectScroll(CommunityVo communityVo);
 //    메인페이지 갯수 구하기
