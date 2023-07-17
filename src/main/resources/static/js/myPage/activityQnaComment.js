@@ -13,7 +13,7 @@ $(window).on('scroll', function () {
 
 function getListPage(pageInfo, appendList, error) {
   $.ajax({
-    url: `/myPages/myComment/${pageInfo.page}`,
+    url: `/myPages/myQnaComment/${pageInfo.page}`,
     type: 'get',
     dataType: 'json',
     success: function (result) {
@@ -25,32 +25,6 @@ function getListPage(pageInfo, appendList, error) {
   });
 }
 
-function getObj(bigCategory){
-    let obj = {};
-
-    if (bigCategory == 200){
-        obj.url=`/career/detail?careerInfoNumber`;
-        obj.text='진로정보';
-    }else if(bigCategory == 300){
-        obj.url=`/qna/read?qnaNumber`;
-        obj.text='QnA';
-    }else if(bigCategory == 400){
-        obj.url=`/community/read?communityNumber`;
-        obj.text='커뮤니티';
-    }else if(bigCategory == 500){
-        obj.url=`/project/read?studyNumber`;
-        obj.text='모임';
-    }else if(bigCategory == 600){
-        obj.url=`/share/read?shareNumber`;
-        obj.text='나눔';
-    }else if(bigCategory == 700){
-        obj.url=`/cs/read?csNumber`;
-        obj.text='문의사항';
-    }
-
-    return obj;
-}
-
 function appendList(map) {
   let text = '';
 
@@ -59,7 +33,7 @@ function appendList(map) {
           <a class="commu-move" href="/qna/read?qnaNumber=${comment.boardNumber}">
             <div class="reply-box">
               <div class="commu-reply-top">
-                <span class="commu-tag">고등학생 고민</span>
+                <span class="commu-tag">Q&A</span>
                 <span class="commu-title">${comment.boardTitle}</span>
               </div>
               <span class="commu-content">${comment.commentContent}</span>
@@ -78,7 +52,7 @@ function appendList(map) {
                     <span class="commu-no-good">${comment.commentDown}</span>
                   </div>
               </div>
-                <span class="commu-date">${comment.boardDate}</span>
+                <span class="commu-date">${comment.commentDate}</span>
               </div>
             </div>
           </a>

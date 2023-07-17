@@ -207,7 +207,7 @@
                                (SELECT COUNT(*) FROM COMMUNITY_COMMENT_UD UD WHERE CC.COMMENT_NUMBER = UD.COMMENT_NUMBER AND UD.UD_STATUS = 'd') COMMENT_DOWN
                         FROM COMMUNITY C
                                  JOIN COMMUNITY_COMMENT CC
-                                      ON C.USER_NUMBER = CC.USER_NUMBER
+                                      ON C.COMMUNITY_NUMBER = CC.COMMUNITY_NUMBER
                         WHERE CC.USER_NUMBER = #{userNumber}
                         UNION ALL
                         SELECT 500 BIG_CATEGORY, S.STUDY_NUMBER BOARD_NUMBER,
@@ -239,6 +239,7 @@
                                  JOIN QNA_COMMENT QC
                                       ON Q.QNA_NUMBER = QC.QNA_NUMBER
                         WHERE QC.USER_NUMBER = #{userNumber}
+                        ORDER BY COMMENT_DATE DESC
                     )
                 <![CDATA[
                 WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
@@ -282,5 +283,11 @@
     </select>
     <select id="selectTotalCs">
         select count(USER_NUMBER) from CS where USER_NUMBER = #{userNumber}
+    </select>
+    <select id="selectTotalQnaComment">
+        select count(USER_NUMBER) from QNA_COMMENT where USER_NUMBER = #{userNumber}
+    </select>
+    <select id="selectTotalCommunityComment">
+        select count(USER_NUMBER) from COMMUNITY_COMMENT where USER_NUMBER = #{userNumber}
     </select>
 </mapper>

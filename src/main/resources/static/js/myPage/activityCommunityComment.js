@@ -13,7 +13,7 @@ $(window).on('scroll', function () {
 
 function getListPage(pageInfo, appendList, error) {
   $.ajax({
-    url: `/myPages/myComment/${pageInfo.page}`,
+    url: `/myPages/myCommunityComment/${pageInfo.page}`,
     type: 'get',
     dataType: 'json',
     success: function (result) {
