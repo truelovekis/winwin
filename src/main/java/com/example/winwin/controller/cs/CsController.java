@@ -39,9 +39,6 @@ public class CsController {
         List<CsProfileVo> csProfileVoList = csService.getProfile(userNumber);
         model.addAttribute("csProfileVoList", csProfileVoList);
 
-        CsProfileVo csProfileVo = csService.findUser(userNumber == null? 0 : userNumber);
-        model.addAttribute("userPfp" , csProfileVo);
-
         return "cs/csMain";
     }
 

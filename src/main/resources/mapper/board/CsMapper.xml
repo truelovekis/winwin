@@ -40,7 +40,7 @@
     </delete>
 
     <!-- 문의사항 (로그인시) 프로필 조회 -->
-    <select id="selectUserProfile" resultType="CsProfileVo">
+    <select id="selectUserProfile" resultType="csProfileVo">
         SELECT MC.CAREER_COMPANY, MC.CAREER_TITLE, P.PFP_SYSTEM_NAME, P.PFP_UUID, MC.CAREER_START_DATE, U.USER_NICKNAME
         FROM WW_USER U
         LEFT OUTER JOIN USER_PFP P
@@ -103,18 +103,5 @@
         FROM CS_COMMENT
         WHERE CS_NUMBER = #{csNumber}
     </select>
-
-
-
- <!-- 유저 로그인 프로필 -->
-    <select id="userLogin" resultType="csProfileVo">
-        SELECT wu.USER_NUMBER , wu.USER_NAME , wu.USER_POSITION , g.GRADE_NAME , up.PFP_UPLOAD_PATH , up.PFP_SYSTEM_NAME , up.PFP_UUID
-        FROM WW_USER wu LEFT OUTER JOIN USER_PFP up
-                                        ON wu.USER_NUMBER = up.USER_NUMBER
-                        left outer JOIN GRADE g ON wu.USER_GRADE = g.GRADE_NUMBER
-        WHERE wu.USER_NUMBER = #{userNumber}
-    </select>
-
-
 
 </mapper>
