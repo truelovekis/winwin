@@ -215,10 +215,13 @@
 
                     <div class="profil-box2">
                         <div class="box1">
-                            <a th:href="${studyVo.studyOpenlink}">
+                            <a >
+                                <input type="hidden" class="link" th:href="${studyVo.studyOpenlink}" th:value="${studyVo.studyOpenlink}"/>
+                                <input type="hidden" class="user" th:value="${session.userNumber}"/>
                                 <input type="button" value="오픈채팅하기" class="chat-box">
                             </a>
                         </div>
+
                         <div class="box2">
                             <button type="button" class="Like" th:data-number="${studyVo.studyNumber}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="12"
@@ -236,6 +239,7 @@
                                 </svg>
                                 <span>좋아요</span></button>
                         </div>
+
                     </div>
 
                 </div>
@@ -245,7 +249,7 @@
         <div class="last-big-box">
             <div class="last-box">
                 <div class="lastTitle">
-                    <h3>모집중인 다른 프로젝트</h3>
+                    <h3>모집중인 다른 스터디/모임</h3>
 
                     <div class="viewAll">
                         <button type="button" class="next-button">

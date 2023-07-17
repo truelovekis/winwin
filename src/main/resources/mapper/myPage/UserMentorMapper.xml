@@ -71,7 +71,7 @@
     </delete>
 
     <select id="loginUser" resultType="string">
-        SELECT USER_POSITION as userPosition
+        SELECT USER_POSITION
         FROM WW_USER
         WHERE USER_NUMBER = #{userNumber}
     </select>

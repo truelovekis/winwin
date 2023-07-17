@@ -173,6 +173,13 @@ public class MentorService {
         return mentorMapper.mentor2(mentorNumber);
     }
 
+    public MentorVo findMentor3(Long mentorNumber){
+        if (mentorNumber == null) {
+            throw new IllegalArgumentException("멘토 번호 누락!");
+        }
+        return mentorMapper.mentor3(mentorNumber);
+    }
+
 //    멘토 리뷰 등록하기
     public void reviewRegister(ReviewVo reviewVo){
         if (reviewVo == null) {
@@ -225,6 +232,23 @@ public class MentorService {
     public MentorVo findPfp(Long mentorNumber){
 
         return mentorMapper.mentorpfp(mentorNumber);
+    }
+
+//    멘토 프로필 업데이트
+    public void findMentorPrU(MentorVo mentorVo){
+        mentorMapper.mentorPrU(mentorVo);
+    }
+
+    public int findMentorPrCnt(Long mentorNumber){
+        return mentorMapper.mentorPrCount(mentorNumber);
+    }
+
+    public int findCnt(Long mentorNumber){
+        return mentorMapper.mentorCnt(mentorNumber);
+    }
+
+    public int skillCnt(Long mentorNumber){
+        return mentorMapper.skillCnt(mentorNumber);
     }
 
 }

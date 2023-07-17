@@ -66,6 +66,9 @@ public class MentorController {
         List<CategoryVo> categoryList = mentorService.findCategoryList();
         model.addAttribute("categoryList", categoryList);
 
+        MentorVo mentor3 = mentorService.findMentor3(mentorNumber);
+        model.addAttribute("mentor3", mentor3);
+
         return "mentor/DefaultProfile";
     }
 
@@ -74,8 +77,11 @@ public class MentorController {
     public String apply(Model model, HttpServletRequest req){
 
         Long mentorNumber = (Long) req.getSession().getAttribute("mentorNumber");
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+
         MentorVo mentor = mentorService.findMentor(mentorNumber);
         List<MentorVo> mentor2 = mentorService.findMentor2(mentorNumber);
+
         List<CareerVo> careerList = mentorService.findCareerList(mentorNumber);
         model.addAttribute("careerList", careerList);
 
@@ -84,36 +90,51 @@ public class MentorController {
 
         model.addAttribute("mentor", mentor);
         model.addAttribute("mentor2" , mentor2);
+
+
+        int mentorCnt = mentorService.findCnt(mentorNumber);
+        model.addAttribute("cnt" , mentorCnt);
+
+        int skillCnt = mentorService.skillCnt(mentorNumber);
+        model.addAttribute("skillCnt" , skillCnt);
         return "mentor/Apply";
     }
 
     @PostMapping("/apply")
-    public RedirectView apply(MentorVo mentorVo, HttpServletRequest req, RedirectAttributes redirectAttributes){
-
+    public RedirectView apply(HttpServletRequest req, MentorVo mentorVo){
+        Long mentorNumber = (Long) req.getSession().getAttribute("mentorNumber");
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
 
         return new RedirectView("/mentor/apply");
     }
 
     //    멘토 프로필 등록하기 기본 페이지 처리
     @GetMapping("/self")
-    public String self(Model model,HttpServletRequest req){
+    public String self(Model model,HttpServletRequest req, MentorVo mentorVo){
         Long mentorNumber = (Long) req.getSession().getAttribute("mentorNumber");
         MentorVo mentor = mentorService.findMentor(mentorNumber);
 
         Long userNumber = (Long) req.getSession().getAttribute("userNumber");
-        mentor.setUserNumber(userNumber);
+
+        int prCnt = mentorService.findMentorPrCnt(mentorNumber);
+        if (prCnt == 0){
+            mentorVo.setMentorNumber(mentorNumber);
+            mentorVo.setUserNumber(userNumber);
+            mentorVo.setMentorPr(null);
+            mentorService.mentorPrRegister(mentorVo);
+        }
 
         model.addAttribute("mentor", mentor);
         return "mentor/Introduceyourself";
     }
 
     @PostMapping("/self")
-    public RedirectView self(MentorVo mentorVo, HttpServletRequest req, RedirectAttributes redirectAttributes){
+    public RedirectView self(MentorVo mentorVo, HttpServletRequest req, Model model ,RedirectAttributes redirectAttributes){
         Long mentorNumber = (Long) req.getSession().getAttribute("mentorNumber");
         Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+
         mentorVo.setMentorNumber(mentorNumber);
-        mentorVo.setUserNumber(userNumber);
-        mentorService.mentorPrRegister(mentorVo);
+        mentorService.findMentorPrU(mentorVo);
 
         return new RedirectView("/mentor/apply");
     }

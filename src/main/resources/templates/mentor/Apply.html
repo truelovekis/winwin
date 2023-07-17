@@ -56,8 +56,8 @@
     <a th:href="@{/mentor/career}" class="pp">추가</a>
   </div>
   <br />
-    <div th:if="${mentor2} == null" class="add">아직 경력이 없어요</div>
-    <div th:if="${mentor2} != null" class="add">
+    <div th:if="${cnt == 0}" class="add">아직 경력이 없어요</div>
+    <div th:unless="${cnt == 0}" class="add">
       <div class="add-box" th:each="mentor2 : ${mentor2}">
       <span class="careerCompany" th:text="${mentor2.careerCompany}"></span> | <span th:text="${mentor2.careerTitle}" class="career-title"></span> · <span class="career-title" th:text="${mentor2.careerStartDate}"/> - <span class="career-title" th:text="${mentor2.careerEndDate}"/> <br/>
       </div>
@@ -70,20 +70,20 @@
     <a th:href="@{/mentor/skill}" class="pp">편집</a>
   </div>
   <br />
-  <div class="skill" th:if="${skill} != null">
+  <div class="skill" th:if="${skillCnt} != 0">
     <div class="skill1" th:each="skill : ${skill}">
       <span th:text="${skill.skillName}"></span>
     </div>
   <!--  <div class="skill1">Spring</div>-->
   <!--  <div class="skill1">MySQL</div>-->
   </div>
-  <div class="skill" th:if="${skill} == null">
+  <div class="skill" th:unless="${skillCnt} != 0">
       <div>
         <span>스킬을 추가해주세요</span>
       </div>
     </div>
     <div class="apply-btn">
-        <button type="button" class="apply">신청하기</button>
+        <button type="button" class="apply">등록하기</button>
     </div>
   </div>
  </div>

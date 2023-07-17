@@ -83,6 +83,9 @@ public class CsService {
         return csMapper.selectTotal();
     }
 
+    public CsProfileVo findUser(Long userNumber){
+        return csMapper.userLogin(userNumber);
+    }
 
 }
 
