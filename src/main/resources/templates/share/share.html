@@ -31,48 +31,45 @@
 <div class="wrap">
     <div class="community">
         <!-- 회원 프로필&질문하기 버튼 / 로그인 했을 때 -->
-        <div class="community-pfp" th:unless="${session.userNumber}">
+        <div class="community-pfp" th:unless="${session.userNumber == null}">
             <div class="community-user">
                 <div class="community-pfp-img">
-                    <label class="user-file">
-                        <img src="../../img/plus.png" class="plusimg"/>
-                    </label>
-                    <img src="../../img/userpfp.jpg" class="userpfp"/>
+                    <img th:if="${profile.pfpSystemName == null}" class="main-img" src="/img/profile-basic.png"/>
+                    <div th:unless="${profile.pfpSystemName == null}" class="plusimg"
+                         th:style="${'background-image: url(/profile/' + profile.pfpUuid + '_' + profile.pfpSystemName + ')'}"></div>
                 </div>
                 <div>
-                    <div class="community-user-name">김아무개</div>
-                    <div class="community-pfp-belong">시스게이트</div>
-                    <div class="community-pfp-department">DB 유지보수 관리</div>
+                    <div class="community-user-name" th:text="${session.userNickname}"></div>
+                    <div class="community-pfp-belong" th:text="${profile.userPosition}"></div>
+                    <div class="community-pfp-department" th:text="${profile.gradeName}"></div>
                 </div>
             </div>
             <div class="community-pfp-main-btn">
-                <a href="" th:data-user-number="${session.userNumber}" class="pfp-main-btn">작성하기</a>
+                <a th:href="@{/share/write}" class="pfp-main-btn-css" th:data-usernumber="${session.userNumber}">작성하기</a>
             </div>
             <div class="community-pfp-sub-btn">
             <!-- 병합하고 마이페이지에 있는 이력서, 자소서 이동 -->
-                <button type="button" class="pfp-sub-btn">이력서</button>
-                <button type="button" class="pfp-sub-btn">자소서</button>
+                <button type="button" class="pfp-sub-btn" th:data-usernumber="${session.userNumber}">이력서</button>
+                <button type="button" class="pfp-sub-btn" th:data-usernumber="${session.userNumber}">자소서</button>
             </div>
         </div>
         <!-- 회원 프로필&질문하기 버튼 끝 -->
 
         <!-- 회원 프로필&질문하기 버튼 / 로그인 안했을 때 -->
-        <div class="community-pfp" th:if="${session.userNumber}">
+        <div class="community-pfp" th:if="${session.userNumber == null}">
             <div class="community-user">
                 <div class="community-pfp-img">
-                    <label class="user-file">
-                        <img src="../../img/plus.png" class="plusimg"/>
-                    </label>
-                    <img src="../../img/userpfp.jpg" class="userpfp"/>
+                    <img src="../../img/profile-basic.png" class="userpfp"/>
                 </div>
                 <div>
-                    <div class="community-user-name">김아무개</div>
-                    <div class="community-pfp-belong">시스게이트</div>
-                    <div class="community-pfp-department">DB 유지보수 관리</div>
+                    <div class="not-login">
+                        <a><span class="pfp-main-btn">로그인</span>이 필요합니다.</a>
+                    </div>
+                    <div class="not-login-comment">나의 고민을 공유해보아요 :)</div>
                 </div>
             </div>
             <div class="community-pfp-main-btn">
-                <a href="" th:data-userNumber="${session.userNumber}" th:value="${session.userNumber}" class="pfp-main-btn">작성하기</a>
+                <a class="pfp-main-btn-css pfp-main-btn">작성하기</a>
             </div>
             <div class="community-pfp-sub-btn">
                 <!-- 병합하고 마이페이지에 있는 이력서, 자소서 이동 -->
@@ -83,7 +80,9 @@
         <!-- 회원 프로필&질문하기 버튼 끝 -->
 
         <!-- 나눔 게시글 리스트 -->
+
         <!-- share.js 참고!  -->
+
         <!--        -->
 
         <!-- 시작! -->

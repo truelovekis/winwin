@@ -1,7 +1,10 @@
 package com.example.winwin.controller.chatting;
 
 import com.example.winwin.dto.chatting.ChattingDto;
+import com.example.winwin.dto.user.UserDto;
 import com.example.winwin.service.chatting.ChattingService;
+import com.example.winwin.service.share.ShareService;
+import com.example.winwin.service.user.UserService;
 import com.example.winwin.vo.infinityScroll.Criteria;
 import com.example.winwin.vo.infinityScroll.PageVo;
 import com.example.winwin.vo.myPage.ActiveBoardVo;
@@ -21,15 +24,35 @@ import java.util.Map;
 @RequestMapping("/chattings/*")
 public class ChattingRestController {
     private final ChattingService chattingService;
+    private final ShareService shareService;
+    private final UserService userService;
 
     /* 쪽지 보내기 */
-    @PostMapping("/inputModal")
+    @PostMapping("/inputModal/{shareNumber}")
     public void sendChatting(@RequestBody ChattingDto chattingDto, HttpServletRequest req){
         Long chattingFrom = (Long)req.getSession().getAttribute("userNumber");
         chattingDto.setChattingFrom(chattingFrom);
 
         System.out.println(chattingDto);
         chattingService.sendChatting(chattingDto);
+    }
+
+    /* 나눔 쪽지 보내기 */
+    @PostMapping("/shareModal/{shareNumber}/{wingAmount}")
+    public void sendShareChatting(@RequestBody ChattingDto chattingDto, HttpServletRequest req,
+                                  @PathVariable(value = "shareNumber", required = false) Long shareNumber, @PathVariable("wingAmount") int wingAmount){
+        Long chattingFrom = (Long)req.getSession().getAttribute("userNumber");
+        chattingDto.setChattingFrom(chattingFrom);
+
+        System.out.println("===============================");
+        System.out.println(chattingDto);
+        System.out.println(wingAmount);
+        System.out.println("===============================");
+        chattingService.sendChatting(chattingDto);
+        shareService.modifyShareStatus(shareNumber);
+        shareService.wingTrade(wingAmount,chattingDto.getChattingFrom(),chattingDto.getChattingTo());
+        UserDto userDto = userService.findUserInfo(chattingFrom);
+        req.getSession().setAttribute("userWing", userDto.getUserWing());
     }
 
     /* 쪽지 확인 (받은 쪽지) */

@@ -24,7 +24,6 @@ public class CareerInfoRestController {
     @GetMapping("/list/{page}")
     public Map<String, Object> findCareerInfoList(@RequestParam(value = "tagList", required = false) List<Integer> tagList, HttpServletRequest req,
                                                  @PathVariable("page") int page){
-        System.out.println("===============" + "진로정보 레컨 진입!!");
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
         Criteria criteria = new Criteria(page, 9);
         PageVo pageVo = new PageVo(criteria, careerInfoService.findCareerTotal());

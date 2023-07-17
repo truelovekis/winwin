@@ -98,9 +98,12 @@
                 <div class="Profil">
                     <div class="profile-box">
                         <div class="profile-img-box">
-                            <img th:src="@{/img/profile-basic.png}"/>
+                            <img th:if="${profile.pfpSystemName == null}" class="main-img" src="/img/profile-basic.png"/>
+                            <div th:unless="${profile.pfpSystemName == null}" class="plusimg"
+                                 th:style="${'background-image: url(/profile/' + profile.pfpUuid + '_' + profile.pfpSystemName + ')'}"></div>
+
                         </div>
-                        <div class="id"><p th:text="${share.userNickname}"></p></div>
+                        <div class="id"><p th:text="${share.userNickname}"></p><p class="imfor" th:text="Lv.+${share.gradeName}"></p></div>
                     </div>
                     <div class="dropdown">
                         <button class="dropbtn">
@@ -113,22 +116,27 @@
                                                                                                  r="1.5"></circle><circle
                                     data-v-bd9f2bcc="" cx="12" cy="18.5" r="1.5"></circle></svg></span>
                         </button>
-                        <div class="dropdown-content">
-                            <!-- <th:block th:if="${session.userNumber == board.userNumber}">-->
-                            <a class="police-btn">신고</a>
+                        <div class="dropdown-content" th:if="${session.userNumber == share.userNumber}">
+<!--                            <a class="police-btn">신고</a>-->
                             <a th:onclick="'fn_modify('+ ${share.shareNumber} +');'">수정</a>
                             <a th:onclick="'fn_remove('+ ${share.shareNumber} +');'">삭제</a>
                             <input type="hidden" class="share-num" th:value="${share.shareNumber}">
-                            <!--  </th:block>-->
+                        </div>
+                        <div class="dropdown-content" th:unless="${session.userNumber == share.userNumber}">
+                                                        <a class="police-btn">신고</a>
+<!--                            <a th:onclick="'fn_modify('+ ${share.shareNumber} +');'">수정</a>-->
+<!--                            <a th:onclick="'fn_remove('+ ${share.shareNumber} +');'">삭제</a>-->
+                            <input type="hidden" class="share-num" th:value="${share.shareNumber}">
                         </div>
                     </div>
                 </div>
-                <div class="imfor"><p>삼성전자</p></div>
+
                 <div class="question">
                     <span class="Q">T.</span>
                     <span class="title" th:text="${share.shareTitle}"></span>
                 </div>
                 <div class="content"><p th:text="${share.shareContent}"></p></div>
+                    <div class="content-img"></div>
 
                 <div class="icon">
                     <!-- 조회 수  -->
@@ -166,5 +174,8 @@
 <script th:src="@{/js/user/loginModal.js}"></script>
 <script th:src="@{/js/police/reportModal.js}"></script>
 <script th:src="@{/js/chatting/inputModal.js}"></script>
+<script th:inline="javascript">
+    let loginNumber = [[${session.userNumber}]];
+</script>
 </body>
 </html>

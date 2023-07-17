@@ -4,6 +4,7 @@ import com.example.winwin.dto.careerInfo.CareerInfoCommentDto;
 import com.example.winwin.dto.careerInfo.CareerInfoCommentVo;
 import com.example.winwin.dto.mentor.CareerInfoVo;
 import com.example.winwin.service.career.CareerInfoCommentService;
+import com.example.winwin.service.career.CareerInfoLikeService;
 import com.example.winwin.vo.infinityScroll.Criteria;
 import com.example.winwin.vo.infinityScroll.PageVo;
 import lombok.RequiredArgsConstructor;

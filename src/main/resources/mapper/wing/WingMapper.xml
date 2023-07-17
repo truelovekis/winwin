@@ -4,4 +4,9 @@
     <select id="getTime" resultType="string">
         SELECT SYSDATE FROM DUAL
     </select>
+
+    <insert id="insertWingLog">
+        INSERT INTO WING(wing_number, wing_earn_amount, user_number)
+        VALUES (SEQ_WING.nextval, #{wingAmount}, #{userNumber})
+    </insert>
 </mapper>

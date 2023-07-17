@@ -31,5 +31,9 @@ for (let i = 0; i < closes.length; i++) {
 //     tagBtn.remove();
 // });
 
+// 뒤로가기 버튼 클릭시 진로정보 메인페이지 이동
+$('.k').on('click', function (){
+    window.location.href = "/career/list";
+})
 
 

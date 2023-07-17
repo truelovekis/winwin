@@ -5,6 +5,7 @@ import com.example.winwin.dto.share.ShareDto;
 import com.example.winwin.dto.user.UserDto;
 import com.example.winwin.service.file.ShareFileService;
 import com.example.winwin.service.share.ShareService;
+import com.example.winwin.vo.board.CsProfileVo;
 import com.example.winwin.vo.share.ShareVo;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
@@ -36,16 +37,21 @@ public class ShareController {
 
 //    나눔 페이지 단순 이동
     @GetMapping("/list")
-    public String shareList(Model model){
+    public String shareList(ShareVo shareVo, Model model, HttpServletRequest req){
+        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
+
+        if (userNumber == null) {
+            userNumber = 0L;
+        }
 
         List<ShareVo> shareVoList = shareService.shareFindAll();
-
         model.addAttribute("shareList", shareVoList);
+
+        ShareVo share = shareService.findLogin(userNumber);
+        model.addAttribute("profile" , share);
 
         return "share/share";
     }
-
-
 
 //    나눔 글 작성 페이지 단순 이동
     @GetMapping("/write")
@@ -88,6 +94,9 @@ public class ShareController {
         shareService.shareReadUpdate(shareNumber);
         ShareVo shareVo = shareService.findShare(shareNumber);
         model.addAttribute("share", shareVo);
+
+        ShareVo share = shareService.findLogin(shareVo.getUserNumber());
+        model.addAttribute("profile" , share);
 
         return "share/shareRead";
     }

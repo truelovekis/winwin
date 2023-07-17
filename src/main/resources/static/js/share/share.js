@@ -15,11 +15,10 @@ $likeDown.on('click', function () {
 
 // 작성하기 session없을 때 모달창 띄어주고, 있으면 작성페이지 이동
 // 제이쿼리 트리거 -> 이벤트 발생 시켜주는 함수
-
-$('.pfp-main-btn').on('click', function (e) {
+$('.pfp-main-btn-css').on('click', function (e) {
     e.preventDefault();
 
-    let userNumber = $('.pfp-main-btn').data('usernumber');
+    let userNumber = $('.pfp-main-btn-css').data('usernumber');
     console.log(userNumber);
 
     if (userNumber) {
@@ -65,11 +64,11 @@ function appendList(map) {
 
     map.shareList.forEach(share => {
         text += `
-           <div class="share-main-box"">
+          <div class="share-main-box"">
+           <a class="share-title-path" ${share.shareStatus == 1 ? 'href="/share/read?shareNumber=' + share.shareNumber : 'href="javascript:void(0)" onclick="alert(\'마감된 글입니다.\')"' } ">
             <div class="share-box">
                 <div class="share-sub-content">
                     <div class="share-sub-title">
-                        <a class="share-title-path" href="/share/read?shareNumber=${share.shareNumber}">
                             <div class="share-title">
                                 <span>
                                     ${share.shareStatus == '1' ? '<span class="N">나눔 중</span>'
@@ -79,7 +78,6 @@ function appendList(map) {
                                 |
                                 <span>${share.shareTitle}</span>
                             </div>
-                        </a>
                         <div class="share-content">${share.shareContent}</div>
                     </div>
                     <div class="share-sub-box">
@@ -99,13 +97,13 @@ function appendList(map) {
                 <div class="share-sub-img">
                     <div class="share-img">
                         ${share.fileSystemName == null ?
-
-                        '<img src="/img/default-camera.png">' :
+                        '<img src="/img/defualt_camera.jpg">' :
                         '<img src=/upload/' + share.fileUploadPath + '/th_' + share.fileUuid + '_' + share.fileSystemName +'>'
                         }
                     </div>
                 </div>
             </div>
+          </a>
         </div>
         `;
 
@@ -151,3 +149,33 @@ function timeForToday(value){
 
     return `${Math.floor(betweenTimeDay / 365)}년 전`;
 }
+
+// 이력서 버튼 클릭시 마이페이지 이력서 페이지로 이동
+$('.pfp-sub-btn').on('click', function (e) {
+    e.preventDefault();
+
+    let userNumber = $('.pfp-sub-btn').data('usernumber');
+    console.log(userNumber);
+
+    if (userNumber) {
+        window.location.href = '/myPage/resume';
+    } else {
+        alert("로그인이 필요합니다.")
+        $('.login-move').trigger('click');
+    }
+});
+
+// 자소서 버튼 클릭시 마이페이지 자소서 페이지로 이동
+$('.pfp-sub-btn').on('click', function (e) {
+    e.preventDefault();
+
+    let userNumber = $('.pfp-sub-btn').data('usernumber');
+    console.log(userNumber);
+
+    if (userNumber) {
+        window.location.href = '/myPage/resumePr';
+    } else {
+        alert("로그인이 필요합니다.")
+        $('.login-move').trigger('click');
+    }
+});

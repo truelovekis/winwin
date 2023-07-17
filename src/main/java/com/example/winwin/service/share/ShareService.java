@@ -2,7 +2,10 @@ package com.example.winwin.service.share;
 
 import com.example.winwin.dto.share.ShareDto;
 import com.example.winwin.mapper.share.ShareMapper;
+import com.example.winwin.mapper.user.UserMapper;
+import com.example.winwin.mapper.wing.WingMapper;
 import com.example.winwin.service.file.ShareFileService;
+import com.example.winwin.vo.board.CsProfileVo;
 import com.example.winwin.vo.infinityScroll.Criteria;
 import com.example.winwin.vo.share.ShareVo;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +24,8 @@ public class ShareService {
 
     private final ShareMapper shareMapper;
     private final ShareFileService shareFileService;
+    private final UserMapper userMapper;
+    private final WingMapper wingMapper;
 
 //    나눔 글 등록하기
     public void shareRegister(ShareDto shareDto){
@@ -90,5 +95,38 @@ public class ShareService {
     public int findTotal(){
 
         return shareMapper.selectTotal();
+    }
+
+//    로그인 시 유저 프로필 가져오기
+    public ShareVo findUserProfile(Long userNumber){
+        if (userNumber == null){
+            throw new IllegalArgumentException("회원번호가 일치하지 않습니다.");
+        }
+
+        return Optional.ofNullable(shareMapper.selectUserProfile(userNumber))
+                .orElseThrow(() -> {
+                    throw new IllegalArgumentException("존재하지 않는 회원입니다.");
+                });
+    }
+
+    //    나눔 상태 변경 (나눔 완료)
+    public void modifyShareStatus(Long shareNumber){
+        shareMapper.updateShareStatus(shareNumber);
+    }
+
+    // 윙 거래 서비스
+    public void wingTrade(int wingAmount, Long fromUserNumber, Long toUserNumber){
+//        userMapper.updateUserWing();
+//        wingMapper.insertWingLog();
+
+        userMapper.updateUserWing(-wingAmount, fromUserNumber);
+        wingMapper.insertWingLog(-wingAmount, fromUserNumber);
+
+        userMapper.updateUserWing(wingAmount, toUserNumber);
+        wingMapper.insertWingLog(wingAmount, toUserNumber);
+    }
+
+    public ShareVo findLogin(Long userNumber){
+        return shareMapper.userLogin(userNumber);
     }
 }

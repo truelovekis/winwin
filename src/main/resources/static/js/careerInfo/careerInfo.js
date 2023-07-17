@@ -297,9 +297,9 @@ function showInfo(careerInfoList) {
                         <div class="profile">
                             <div class="pf">
                                 ${career.pfpSystemname == null ?
-            '<img src="/img/default-camera.png" width="50px" height="50px" border-radius="70%">' :
+            '<img src="/img/profile-basic.png" width="50px" height="50px" border-radius="70%">' :
             '<img src="/profile/' + career.pfpUploadPath + career.pfpUuid + '_' + career.pfpSystemname + '>'
-        }
+            }
                             </div>
                             <div class="text-box">
                                 <span class="user-name">${career.userNickname}</span>

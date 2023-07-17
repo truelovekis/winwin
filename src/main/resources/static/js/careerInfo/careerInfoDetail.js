@@ -199,19 +199,29 @@ $('.reply').on('click', '.modify-content-btn', function (){
 
 //====================================================================
 
+let likeStatus = $('.btn-img').data('num');
+
+// 좋아요 버튼 클릭시 하트 색상 변경
 $(".like-btn").on("click", function () {
-    $(this).find(".bi-heart").toggleClass("none");
-    $(this).find(".bi-heart-fill").toggleClass("none");
+    careerInfoLike(boardNumber);
 
-    $(".hate-btn").find(".bi-heart").removeClass("none");
-    $('.hate-btn').find(".bi-heart-fill").addClass("none");
 });
 
-$(".hate-btn").on("click", function () {
-    $(this).find(".bi-heart").toggleClass("none");
-    $(this).find(".bi-heart-fill").toggleClass("none");
+function careerInfoLike(careerInfoNumber){
+    $.ajax({
+       type : 'post',
+        url :'/careerInfoLike/likeBtn',
+        data : {
+            careerInfoNumber : careerInfoNumber
+        },
+        success : function (result){
+            let likeNumber = parseInt($('.like-number').text());
+            $('.like-number').text(likeNumber + parseInt(result));
+            $(".like-btn").find(".bi-heart").toggleClass("none");
+            $(".like-btn").find(".bi-heart-fill").toggleClass("none");
+        }
+    });
+}
 
-    $(".like-btn").find(".bi-heart").removeClass("none");
-    $(".like-btn").find(".bi-heart-fill").addClass("none");
-});
+
 

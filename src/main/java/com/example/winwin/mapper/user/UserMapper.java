@@ -56,5 +56,8 @@ public interface UserMapper {
 
     // 비밀번호 찾기
     public String findPw(UserDto userDto);
+
+    // 회원 보유 윙 수정
+    public void updateUserWing(@Param("wingAmount")int wingAmount, @Param("userNumber") Long userNumber);
 }
 
