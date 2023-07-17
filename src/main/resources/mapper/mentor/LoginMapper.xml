@@ -2,16 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.mentor.LoginMapper">
     <select id="loginMentor" resultType="Long">
-        SELECT NVL(mentor_number, -1) mentor_number , mentor_status
+        SELECT NVL(mentor_number, -1) mentor_number , mentor_status, user_position
         FROM WW_USER w LEFT OUTER JOIN MENTOR m
         ON w.USER_NUMBER = m.USER_NUMBER
         WHERE USER_ID = #{userId} AND USER_PASSWORD = #{userPassword}
     </select>
 
-    <select id="loginUser" resultType="string">
-        SELECT USER_POSITION
-        FROM WW_USER wu
-        WHERE user_number = #{userNumber}
+    <select id="loginUser" resultType="mentorVo">
+        SELECT user_number , user_position
+        FROM WW_USER w
+        WHERE USER_ID = #{userId} AND USER_PASSWORD = #{userPassword}
     </select>
 
 </mapper>

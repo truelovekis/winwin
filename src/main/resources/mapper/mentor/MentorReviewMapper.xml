@@ -8,7 +8,7 @@
                  FROM MENTOR_REVIEW mr JOIN WW_USER wu
                  ON mr.USER_NUMBER = wu.USER_NUMBER and mentor_number = #{mentorNumber}
              )J left JOIN UM_BRIDGE ub
-        ON J.user_number = ub.USER_NUMBER AND ub.UM_STATUS = 'Y'
+        ON J.user_number = ub.USER_NUMBER AND ub.UM_STATUS = 'Y' AND UB.MENTOR_NUMBER = #{mentorNumber} AND UB.USER_NUMBER = #{userNumber}
     </select>
 
 </mapper>

@@ -15,9 +15,9 @@ public class ReviewController {
     private final MentorService mentorService;
 
     @GetMapping("/list")
-    public List<ReviewVo> reviewList(Long mentorNumber){
-
-        return mentorService.findReviewList(mentorNumber);
+    public List<ReviewVo> reviewList(Long mentorNumber ,HttpServletRequest req){
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+        return mentorService.findReviewList(mentorNumber, userNumber==null?0:userNumber);
     }
 
 

@@ -80,11 +80,11 @@ public class MentorService {
     }
 
     @Transactional(readOnly = true)
-    public List<ReviewVo> findReviewList(Long mentorNumber){
+    public List<ReviewVo> findReviewList(Long mentorNumber, Long userNumber){
         if (mentorNumber == null) {
             throw new IllegalArgumentException("리뷰 번호 누락!");
         }
-        return mentorMapper.reviewList(mentorNumber);
+        return mentorMapper.reviewList(mentorNumber, userNumber);
     }
 
 //    멘토 프로필 상세 보기(스킬)

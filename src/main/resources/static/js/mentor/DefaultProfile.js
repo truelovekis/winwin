@@ -1,5 +1,51 @@
 import * as review from '../mentor/module/review.js';
 
+$('.messageBox').on('click' , function (e){
+    if($('.userNumber').val() == '' ){
+        alert("로그인 해주세요");
+        $('.login-move').trigger('click');
+    }
+
+    if($('.umstatus').val() == 'N' || $('.umstatus').val() == null){
+        alert("멘토:멘티 관계가 아닙니다.");
+        // e.stopPropagation();
+    }
+
+    if($('.userNumber').val() != null || $('.umstatus').val() == 'Y'){
+        $(function () {
+            $(".messageBox").click(function () {
+                $(".input-wrap").fadeIn();
+                let userNickname = $('.name-text').text();
+                let num = $('.mentornumber').data('num');
+                console.log("--------------------")
+                console.log(userNickname);
+                console.log(num);
+                console.log("---------------------")
+
+                $('.chattingTo').text(userNickname);
+                $('.chattingTo').data('num', num);
+            });
+        });
+
+    }
+
+    $(".messageBox").on("click", function () {
+        $(".input-wrap").removeClass("none");
+
+        $('body').css('overflow', 'hidden');
+    });
+
+    $(".input-wrap").on("click", function (e) {
+
+        if ($(e.target).hasClass("input-wrap")) {
+            $(".input-wrap").addClass("none");
+            $('body').css('overflow', 'auto');
+
+            $('.form-reset')[0].reset();
+        }
+    });
+});
+
 /* 건드리지 마시오 */
 $("#star").click(function () {
     var animation_end = "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
@@ -32,13 +78,14 @@ $(".pro").on("click", function () {
 
 $(".career").on("click", function () {
     $('.pro-bottom').hide();
-    $(".changeView").html(makeReview());
+    $(".changeView").html(makeReview(), showReview());
     $(".changeView2").hide();
+    // $('.review-writer').html(showReview);
     $(".li-bottom").css("width", "0");
     $(this).find(".li-bottom").css("width", "100%");
     $(".li-btn").css("color", "#cbd5e1");
     $(this).find("button").css("color", "black");
-    showReview();
+    // showReview();
 });
 
 $(".board").on("click", function () {
@@ -240,7 +287,7 @@ function showReview() {
                     <td><p class="reviewstar">${r.reviewStar}</p></td>
                     <td><p class="reviewstar">${r.userNickName}</p></td>
                 </div>
-        `;
+                `;
             });
             $('.review-writer').html(text);
         },
@@ -271,51 +318,14 @@ $('.changeView').on('click', '.review-btn', function (){
         reviewStar : star,
         mentorNumber : mentorNumber
     }
-    review.register(reviewObj, showReview, showError());
+    review.register(reviewObj, showReview(), showError());
     $('#review-content').val('');
 });
 
-$('.messageBox').on('click', function (e){
-    if($('.userNumber').val() == '' ){
-        alert("로그인 해주세요");
-        $('.login-move').trigger('click');
-    }
 
-    if($('.umstatus').val() == 'N'){
-        alert("멘토:멘티 관계가 아닙니다.");
-        e.stopPropagation();
-    }
 
-    if($('.userNumber').val() != null || $('.umstatus').val() == 'Y'){
-        $(function () {
-            $(".messageBox").click(function () {
-                $(".input-wrap").fadeIn();
-                let userNickname = $('.name-text').text();
-                let num = $('.mentornumber').data('num');
-                console.log(num);
 
-                $('.chattingTo').text(userNickname);
-                $('.chattingTo').data('num', num);
-            });
-        });
 
-        $(".messageBox").on("click", function () {
-            $(".input-wrap").removeClass("none");
-
-            $('body').css('overflow', 'hidden');
-        });
-
-        $(".input-wrap").on("click", function (e) {
-
-            if ($(e.target).hasClass("input-wrap")) {
-                $(".input-wrap").addClass("none");
-                $('body').css('overflow', 'auto');
-
-                $('.form-reset')[0].reset();
-            }
-        });
-    }
-})
 
 
 

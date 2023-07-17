@@ -1,9 +1,11 @@
 package com.example.winwin.controller.mentor;
 
+import com.example.winwin.dto.chatting.ChattingDto;
 import com.example.winwin.dto.mentor.CareerVo;
 import com.example.winwin.dto.mentor.LikeDto;
 import com.example.winwin.dto.mentor.MentorVo;
 import com.example.winwin.dto.mentor.SkillVo;
+import com.example.winwin.service.chatting.ChattingService;
 import com.example.winwin.service.mentor.MentorService;
 import com.example.winwin.service.myPage.UserMentorService;
 import com.sun.jdi.connect.spi.TransportService;
@@ -21,6 +23,7 @@ import java.util.List;
 public class MentorStatusController {
     private final MentorService mentorService;
     private final UserMentorService userMentorService;
+    private final ChattingService chattingService;
 
     @PatchMapping("/list")
     public void mentorModify(String mentorStatus, HttpServletRequest req, RedirectAttributes redirectAttributes){
@@ -104,5 +107,12 @@ public class MentorStatusController {
         return userMentorService.findMentee(mentorNumber);
     }
 
+    @PostMapping("/inputModal")
+    public void sendChatting(@RequestBody ChattingDto chattingDto, HttpServletRequest req){
+        Long chattingFrom = (Long)req.getSession().getAttribute("userNumber");
+        chattingDto.setChattingFrom(chattingFrom);
 
+        System.out.println(chattingDto);
+        chattingService.sendChatting(chattingDto);
+    }
 }

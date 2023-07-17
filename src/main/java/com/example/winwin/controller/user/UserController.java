@@ -1,6 +1,7 @@
 package com.example.winwin.controller.user;
 
 import com.example.winwin.dto.mentor.LoginVo;
+import com.example.winwin.dto.mentor.MentorVo;
 import com.example.winwin.dto.user.UserDto;
 import com.example.winwin.dto.user.UserPfpDto;
 import com.example.winwin.service.mentor.LoginService;
@@ -41,20 +42,18 @@ public class UserController {
         try {
             Long userNumber = userService.findUserNumber(userId, userPassword);
             UserDto userDto = userService.findUserInfo(userNumber);
+            MentorVo mentorVo = loginService.findUser(userId, userPassword);
             HttpSession session = req.getSession();
             session.setAttribute("userNumber", userNumber);
             session.setAttribute("userName", userDto.getUserName());
             session.setAttribute("userWing", userDto.getUserWing());
             session.setAttribute("userStatus", userDto.getUserStatus());
             session.setAttribute("userNickname", userDto.getUserNickname());
-            session.setAttribute("userPosition", userDto.getUserPosition());
+//            session.setAttribute("userPosition", userDto.getUserPosition());
+            session.setAttribute("userPosition", mentorVo.getUserPosition());
 
             Long mentorNumber = loginService.findMentorNumber(userId, userPassword);
             session.setAttribute("mentorNumber", mentorNumber);
-
-            String loginVo = loginService.findUser(userNumber);
-            session.setAttribute("user" , loginVo);
-            System.out.println(loginVo);
 
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
