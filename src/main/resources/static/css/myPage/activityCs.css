@@ -3,6 +3,10 @@
     padding: 0px;
 }
 
+a{
+    color: black;
+}
+
 .wrap {
     display: flex;
     justify-content: center;

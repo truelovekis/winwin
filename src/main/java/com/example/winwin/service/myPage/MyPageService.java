@@ -56,6 +56,51 @@ public class MyPageService {
         return activityMapper.selectActiveBoardList(userNumber, criteria);
     }
 
+    @Transactional(readOnly = true)
+    public List<ActiveBoardVo> getActiveQnaBoardList(Long userNumber, Criteria criteria){
+        if(userNumber == null){
+            throw new IllegalArgumentException("로그인이 필요합니다.");
+        }
+
+        return activityMapper.selectActiveQnaBoardList(userNumber, criteria);
+    }
+
+    @Transactional(readOnly = true)
+    public List<ActiveBoardVo> getActiveCommunityBoardList(Long userNumber, Criteria criteria){
+        if(userNumber == null){
+            throw new IllegalArgumentException("로그인이 필요합니다.");
+        }
+
+        return activityMapper.selectActiveCommunityBoardList(userNumber, criteria);
+    }
+
+    @Transactional(readOnly = true)
+    public List<ActiveBoardVo> getActiveMeetingBoardList(Long userNumber, Criteria criteria){
+        if(userNumber == null){
+            throw new IllegalArgumentException("로그인이 필요합니다.");
+        }
+
+        return activityMapper.selectActiveMeetingBoardList(userNumber, criteria);
+    }
+
+    @Transactional(readOnly = true)
+    public List<ActiveBoardVo> getActiveShareBoardList(Long userNumber, Criteria criteria){
+        if(userNumber == null){
+            throw new IllegalArgumentException("로그인이 필요합니다.");
+        }
+
+        return activityMapper.selectActiveShareBoardList(userNumber, criteria);
+    }
+
+    @Transactional(readOnly = true)
+    public List<ActiveBoardVo> getActiveCsBoardList(Long userNumber, Criteria criteria){
+        if(userNumber == null){
+            throw new IllegalArgumentException("로그인이 필요합니다.");
+        }
+
+        return activityMapper.selectActiveCsBoardList(userNumber, criteria);
+    }
+
 //    내가 작성한 댓글 리스트 보기
     @Transactional(readOnly = true)
     public List<ActiveCommentVo> getActiveCommentList(Long userNumber, Criteria criteria){
@@ -74,6 +119,51 @@ public class MyPageService {
         }
 
         return userInfoMapper.selectBoardCnt(userNumber);
+    }
+
+    @Transactional(readOnly = true)
+    public int getTotalQna(Long userNumber){
+        if(userNumber == null){
+            throw new IllegalArgumentException("로그인이 필요합니다.");
+        }
+
+        return activityMapper.selectTotalQna(userNumber);
+    }
+
+    @Transactional(readOnly = true)
+    public int getTotalCommunity(Long userNumber){
+        if(userNumber == null){
+            throw new IllegalArgumentException("로그인이 필요합니다.");
+        }
+
+        return activityMapper.selectTotalCommunity(userNumber);
+    }
+
+    @Transactional(readOnly = true)
+    public int getTotalMeeting(Long userNumber){
+        if(userNumber == null){
+            throw new IllegalArgumentException("로그인이 필요합니다.");
+        }
+
+        return activityMapper.selectTotalMeeting(userNumber);
+    }
+
+    @Transactional(readOnly = true)
+    public int getTotalShare(Long userNumber){
+        if(userNumber == null){
+            throw new IllegalArgumentException("로그인이 필요합니다.");
+        }
+
+        return activityMapper.selectTotalShare(userNumber);
+    }
+
+    @Transactional(readOnly = true)
+    public int getTotalCs(Long userNumber){
+        if(userNumber == null){
+            throw new IllegalArgumentException("로그인이 필요합니다.");
+        }
+
+        return activityMapper.selectTotalCs(userNumber);
     }
 
 //    내가 작성한 댓글 개수
