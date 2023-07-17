@@ -80,18 +80,17 @@ public class StatusController {
     }
 
     // 신고 게시글 상태 변경
-    @PatchMapping("/updateBoard")
-    public String modifyBoard(@RequestBody Map<String, List<String>> requestBody){
-        List<String> policeNumberList = requestBody.get("policeNumber");
-        List<String> boardStatusList = requestBody.get("boardStatus");
-
-        for (int i = 0; i < policeNumberList.size(); i++) {
-            Long policeBoard = Long.parseLong(policeNumberList.get(i));
-            String boardStatus = boardStatusList.get(i);
-            adminService.modifyBoardReportStatus(policeBoard, boardStatus);
-        }
-        return "변경성공";
-    }
+//    @PatchMapping("/updateBoard")
+//    public void modifyBoard(@RequestBody List<PoliceVo> policeVoList){
+////        System.out.println(policeVoList);
+////        adminService.modifyBoardReportStatus(policeVoList);
+////        for (int i = 0; i < policeNumberList.size(); i++) {
+////            Long policeBoard = Long.parseLong(policeNumberList.get(i));
+////            String boardStatus = boardStatusList.get(i);
+////            adminService.modifyBoardReportStatus(policeBoard, boardStatus);
+////        }
+////        return "변경성공";
+//    }
 
     // 신고 댓글 상태 변경
     @PatchMapping("/updateCommentReport")

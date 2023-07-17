@@ -121,11 +121,20 @@ public class AdminService {
     }
 
     // 신고 게시글 상태 변경
-    public void modifyBoardReportStatus(Long policeNumber, String boardStatus){
-        if(policeNumber == null || boardStatus == null){
-            throw new IllegalArgumentException("신고 게시글 수정 정보 누락");
+    public void modifyBoardReportStatus(List<PoliceVo> policeVoList){
+//        if(postNumber == null || boardStatus == null){
+//            throw new IllegalArgumentException("신고 게시글 수정 정보 누락");
+//        }
+        String bigCode = null;
+        for(int i=0; i<policeVoList.size(); i++){
+            bigCode = policeVoList.get(i).getBigCode();
+            if(bigCode.equals("400")){
+                adminMapper.updateBoard(policeVoList.get(i));
+            }else if(bigCode.equals("300")){
+
+            }
         }
-        adminMapper.updateBoard(policeNumber, boardStatus);
+
     }
 
     // 신고 댓글 상태 변경
@@ -137,7 +146,7 @@ public class AdminService {
             if(bigCode.equals("400")){
                 adminMapper.updateCommunityReport(policeVoList.get(i));
             }else if(bigCode.equals("300")){
-
+                adminMapper.updateQnaCommentReport(policeVoList.get(i));
             }
         }
     }
