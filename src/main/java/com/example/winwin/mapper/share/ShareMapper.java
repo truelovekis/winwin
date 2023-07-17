@@ -1,6 +1,7 @@
 package com.example.winwin.mapper.share;
 
 import com.example.winwin.dto.share.ShareDto;
+import com.example.winwin.vo.board.CsProfileVo;
 import com.example.winwin.vo.infinityScroll.Criteria;
 import com.example.winwin.vo.share.ShareVo;
 import lombok.Data;
@@ -37,4 +38,12 @@ public interface ShareMapper {
 
 //    나눔 메인페이지 갯수 구하기
     int selectTotal();
+
+//    로그인 시 유저 프로필 가져오기
+    ShareVo selectUserProfile(Long userNumber);
+
+//    나눔 상태 변경 (나눔 완료)
+    void updateShareStatus(Long shareNumber);
+
+    public ShareVo userLogin(Long userNumber);
 }

@@ -75,7 +75,7 @@ function displayAjax(){
             });
             // console.log(shareNumber)
             // console.log(files);
-            $('.img-box').html(text);
+            $('.content-img').html(text);
         }
     });
 }
@@ -83,7 +83,7 @@ function displayAjax(){
 // 수정 페이지 이동
 
 function fn_modify(shareNumber){
-    if(confirm("정말 수정하시겠습니까?")){
+    if(confirm("정말 수정하시겠습니까?")) {
         location.href = "/share/modify?shareNumber="+shareNumber;
     }
 }

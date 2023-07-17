@@ -1,3 +1,5 @@
+
+/*------------------------------------*/
 * {
   margin: 0;
   padding: 0;
@@ -15,7 +17,6 @@
 .community-pfp {
   position: fixed;
   left: 250px;
-  top: 200px;
   /* display: none; */
 }
 
@@ -55,13 +56,17 @@
   margin-top: 2px;
 }
 
+.pfp-main-btn{
+  cursor: pointer;
+}
+
 .community-pfp-main-btn {
   display: flex;
   height: 45px;
   align-items: center;
 }
 
-.pfp-main-btn {
+.pfp-main-btn-css {
   border-radius: 7px;
   background-color: #1b5192;
   color: white;
@@ -70,9 +75,10 @@
   text-align: center;
   font-size: 13px;
   font-weight: lighter;
+
 }
 
-.pfp-main-btn:hover {
+.pfp-main-btn-css:hover {
   background-color: #153f71;
   color: white;
 }
@@ -140,30 +146,143 @@
 }
 
 .plusimg {
-  display: none;
   position: absolute;
 }
 
-.community-pfp-img:hover .plusimg {
-  display: inline;
-  filter: opacity(0.5) drop-shadow(0 0 0 white);
+.plusimg{
+  width: 70px;
+  height: 70px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  border-radius: 50px;
+  background-size: cover;
 }
+
 /* 이미지 버튼 눌렀을 때 끝! */
 
 /* 메인 div */
 .community {
-  /* display: flex;
-  justify-content: space-around;
-  margin-top: 50px; 마진 없애도 됨 */
   display: flex;
-  justify-content: space-around;
-  margin-top: 50px;
   flex-direction: column;
+  justify-content: space-around;
+  margin-top: 50px; /* 마진 없애도 됨 */
 }
 /* 메인 div 끝 */
 
+/* 직장인/대학생/고등학생 고민 */
+.community-main-box {
+  padding: 10px 0 10px 0;
+}
 
-/* 친목 */
+.community-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 700px;
+  height: 170px;
+  border: 1px solid#ddd;
+  border-radius: 5px;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.user-identity {
+  border: 0.5px solid rgba(128, 128, 128, 0);
+  border-radius: 3px;
+  font-size: 10px;
+  background-color: rgb(234, 234, 234);
+  margin: 10px 0px 5px 0px;
+  padding: 2px 1px 2px 1px;
+  text-align: center;
+}
+
+.hsc {
+  width: 45px;
+}
+
+.cs {
+  width: 35px;
+}
+
+.ow {
+  width: 35px;
+}
+
+.community-title {
+  font-size: 17px;
+  font-weight: bold;
+  margin: 15px 0px;
+}
+
+.community-sub-content {
+  margin-top: 5px;
+}
+
+.community-content {
+  font-size: 13px;
+  font-weight: lighter;
+  color: gray;
+  margin: 20px 0px;
+  line-height: 20px;
+}
+
+.community-sub-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  margin-left: -10px;
+}
+
+.community-btn {
+  display: flex;
+  align-items: center;
+}
+
+.community-cnt > img {
+  width: 17px;
+}
+
+.community-like > img {
+  width: 13px;
+}
+
+/*.community-comment{*/
+/*  margin-left: 15px;*/
+/*}*/
+
+.community-comment > img {
+  width: 15px;
+}
+
+.community-like,
+.community-comment,
+.community-cnt {
+  display: flex;
+  align-items: center;
+  margin: 5px 4px;
+  margin-left: 8px;
+
+}
+
+.community-like > span,
+.community-comment > span{
+  color: gray;
+}
+
+.community-cnt2 {
+  padding: 0 5px;
+  font-size: 13px;
+  /*color: gray;*/
+}
+
+.community-time {
+  font-size: 13px;
+  color: gray;
+}
+/* 직장인/대학생/고등학생 고민 끝 */
+
+/* 친목&나눔 */
 .share-main-box {
   padding: 10px 0 10px 0;
 }
@@ -178,18 +297,6 @@
   border-radius: 5px;
   padding: 20px;
   cursor: pointer;
-}
-
-.share-title{
-  color: black;
-}
-
-a{
-  text-decoration: black;
-}
-
-a:visited{
-  text-decoration: black;
 }
 
 .share-sub-content {
@@ -216,11 +323,6 @@ a:visited{
   color: gray;
   margin: 5px 0px 5px 0px;
   line-height: 20px;
-  text-overflow: ellipsis; /* 위에 설정한 100px 보다 길면 말줄임표처럼 표시합니다. */
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden; /* 내용이 길면 감춤니다 */
 }
 
 .share-sub-box {
@@ -242,7 +344,7 @@ a:visited{
 }
 
 .share-comment > img {
-  width: 20px;
+  width: 15px;
 }
 
 .share-like,
@@ -252,8 +354,8 @@ a:visited{
   margin: 5px 5px 5px 0;
 }
 
-.share-cnt > span{
-  padding: 0 5px;
+.community-cnt {
+  /*padding: 0 5px;*/
   color: gray;
 }
 
@@ -266,18 +368,17 @@ a:visited{
   height: 150px;
   border-radius: 5px;
 }
+/* 친목&나눔 끝 */
 
-.share-cnt {
-  display: flex;
-  align-items: center;
+/* 나눔 전체 박스 주소이동 css */
+.bi-hand-thumbs-up-fill{
+  display: none;
 }
 
-.share-cnt img {
-  width: 20px;
-  height: 20px;
+.share-title-path{
+  text-decoration : none;
+  color: black;
 }
-
-/* 친목 끝 */
 
 /* 나눔 상태 */
 .N {
@@ -298,6 +399,24 @@ a:visited{
   color : gray;
 }
 
-.share-time {
+/* 나눔 글 등록시 시간 폰트 사이즈*/
+.share-time{
   font-size: 13px;
+  color: gray;
+}
+
+/* 조회수 css 수정*/
+.share-cnt > span{
+  padding: 0 5px;
+  color: gray;
+}
+
+.share-cnt {
+  display: flex;
+  align-items: center;
+}
+
+.share-cnt img {
+  width: 20px;
+  height: 20px;
 }

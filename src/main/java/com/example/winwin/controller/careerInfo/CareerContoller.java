@@ -1,8 +1,10 @@
 package com.example.winwin.controller.careerInfo;
 
 import com.example.winwin.dto.careerInfo.CareerInfoDto;
+import com.example.winwin.dto.careerInfo.CareerInfoLikeDto;
 import com.example.winwin.dto.mentor.CareerInfoVo;
 import com.example.winwin.dto.mentor.CategoryVo;
+import com.example.winwin.service.career.CareerInfoLikeService;
 import com.example.winwin.service.career.CareerInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,7 @@ import java.util.List;
 public class CareerContoller {
 
     private final CareerInfoService careerInfoService;
+    private final CareerInfoLikeService careerInfoLikeService;
 
 //    보류
 //    세션으로 userNumber가져와서 페이지 진입할 때, 태그에 대한 리스트 뿌려줘
@@ -31,16 +34,34 @@ public class CareerContoller {
     @GetMapping("/list")
     public String careerpathForm(Model model, HttpServletRequest req){
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
+
+        if (userNumber == null) {
+            userNumber = 0L;
+        }
+
         List<CategoryVo> userTagList = careerInfoService.findUserTag(userNumber);
+
         model.addAttribute("userTagList", userTagList);
-//        List<CareerInfoDto> careerInfoList = careerInfoService.
 
         return "careerInfo/careerInfo";
     }
 
 //    진로정보 페이지 상세페이지 단순이동
     @GetMapping("/detail")
-    public String careerDetail(Long careerInfoNumber, Model model){
+    public String careerDetail(Long careerInfoNumber, CareerInfoLikeDto careerInfoLikeDto, Model model, HttpServletRequest req){
+        Long careerInfoLikeCnt = careerInfoLikeService.careerInfoLikeCnt(careerInfoNumber);
+        model.addAttribute("careerInfoLikeCnt", careerInfoLikeCnt);
+
+        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
+        int careerInfoUserStatus = 0;
+        if(userNumber != null){
+            careerInfoLikeDto.setUserNumber(userNumber);
+            careerInfoUserStatus = careerInfoLikeService.findCareerInfoUser(careerInfoLikeDto);
+        }
+            model.addAttribute("userLike", careerInfoUserStatus);
+
+
+
         careerInfoService.careerInfoReadUpdate(careerInfoNumber);
         CareerInfoVo careerInfoVo = careerInfoService.findCareerInfo(careerInfoNumber);
         model.addAttribute("career", careerInfoVo);

@@ -154,4 +154,11 @@
         FROM WW_USER
         WHERE USER_ID = #{userId} AND USER_PHONE_NUMBER = #{userPhoneNumber}
     </select>
+
+<!--    회원 보유 윙 수정-->
+    <update id="updateUserWing">
+        UPDATE WW_USER
+        SET USER_WING = USER_WING + #{wingAmount}
+        WHERE USER_NUMBER = #{userNumber}
+    </update>
 </mapper>

@@ -12,22 +12,22 @@
     <!-- 진로정보 글 좋아요 카운트 -->
     <select id="selectCareerInfoLikeCount" resultType="long">
         SELECT COUNT(CAREERINFO_NUMBER)  FROM CAREERINFO_LIKE
-        WHERE CAREERINFO_NUMBER = #{carrerInfoNumber}
+        WHERE CAREERINFO_NUMBER = #{careerInfoNumber}
     </select>
     <!--    -->
 
     <!-- 유저가 좋아요 한 진로정보 글 찾기 -->
-    <select id="selectUserCareerInfo" resultType="long">
+    <select id="selectUserCareerInfo" resultType="_int">
         SELECT COUNT(CAREERINFO_NUMBER)
-        FROM CAREERINFO_LIKE cl
+        FROM CAREERINFO_LIKE
         WHERE USER_NUMBER = #{userNumber} AND CAREERINFO_NUMBER = #{careerInfoNumber}
     </select>
     <!--    -->
 
     <!-- 진로정보 글 좋아요 취소 -->
     <delete id="deleteCareerInfoLike">
-        DELETE FROM HR.CAREERINFO_LIKE
-        WHERE USER_NUMBER = #{userNumber} AND CAREERINFO_NUMBER = #{carrerInfoNumber}
+        DELETE FROM CAREERINFO_LIKE
+        WHERE USER_NUMBER = #{userNumber} AND CAREERINFO_NUMBER = #{careerInfoNumber}
     </delete>
 
 </mapper>
