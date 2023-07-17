@@ -5,6 +5,7 @@ import com.example.winwin.dto.user.MentorDto;
 import com.example.winwin.dto.user.UserPfpDto;
 import com.example.winwin.vo.user.CategoryBridgeVo;
 import com.example.winwin.dto.user.UserDto;
+import com.example.winwin.vo.user.UserCategoryVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -46,8 +47,14 @@ public interface UserMapper {
     public void joinPfp(UserPfpDto userPfpDto);
 
     // 인증 태그 카테고리
-    public List<CategoryVo> certificationH();
-    public List<CategoryVo> certificationJ();
-    public List<CategoryVo> certificationSub(String mainCode);
+    public List<UserCategoryVo> certificationH();
+    public List<UserCategoryVo> certificationJ();
+    public List<UserCategoryVo> certificationSub(String mainCode);
+
+    // 아이디 찾기
+    public String findId(UserDto userDto);
+
+    // 비밀번호 찾기
+    public String findPw(UserDto userDto);
 }
 

@@ -33,18 +33,17 @@
           <div class="mypage-main">
             <div class="title"><h2>진로 정보</h2></div>
             <div class="category">
-              <div class="category-contain">
-                <h4>내 글</h4>
-              </div>
-              <div class="category-contain">
-                <h4>내 댓글</h4>
-              </div>
+              <a th:href="@{/myPage/careerInfo}">
+                <div class="category-contain">
+                  <h4>내 글</h4>
+                </div>
+              </a>
               <div class="category-contain">
                 <h4 id="point-page">관심 글</h4>
               </div>
             </div>
             <!-- 내용 메인페이지 -->
-            <div class="my-mentor-content">
+            <div class="career-info-content">
               <!-- 작성한 글이 없을 때 -->
               <!-- <div class="community-main-box">
                 <span>앗! 아직 작성한 글이 없습니다. <br/>
@@ -55,53 +54,46 @@
                 <button>진로정보 입장하기</button>
               </div> -->
               <!-- 여기서부터 작성 시작 -->
-              <div class="card-box">
-                <div class="inner-card-box">
-                  <div class="title">
-                    <h1> 간호사가 알려주는<br> 희망부서 선택법!</h1>
-                    <br/>
-                  </div>
-                    <div class="msg">
-                      병원에 처음 입사하게 되면 희망 부서를 정해야 한다는 거, 간호학과라면 다들 알고 계시죠? 소문만 무성한 응급실부터
-                    </div>
-                    <div class="profile-like-wrap">
-                      <div class="profile">
-      
-                        <div class="pf">
-                          <img class="tw-aspect-square tw-object-cover tw-rounded-full tw-w-12 tw-h-12 tw-rounded-full tw-bg-white tw-border tw-border-solid tw-border-slate-200 tw-object-cover tw-flex-none" th:src="@{https://publy.imgix.net/user-uploaded/383030/2022.08/17d42cb41014db84702e0d738abfd9b59f0e987a3f1ebe8e0aaa7dadd7d9aaa1.jpeg?w=200&amp;h=200&amp;auto=format&amp;fm=jpeg}" alt="성원님의 프로필 사진" title="성원님의 프로필 사진"/>
-                        </div>
-                        <div class="text-box" >
-                          <span class="user-name">가나다라마</span>
-                          <br/>
-                          <span class="user-bottom">간호사 대학병원 · 4년차</span>
-                        </div>
-                      </div>
-                      <div class="content">
-                          <div class="sec1">
-                            <div class="my-info-like">
-                              <svg aria-label="좋아요" class="x1lliihq x1n2onr6" color="rgb(142, 142, 142)" fill="rgb(142, 142, 142)" height="24" role="img" viewBox="0 0 24 24" width="24">
-                                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-                              </svg>
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" style="fill: rgb(233, 37, 37);" class="bi bi-heart-fill" viewBox="0 0 24 24">
-                                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                              </svg>
-                            </div>
-                            <div class="number1">0</div>
-                          </div>
-                          <div class="sec2">
-                            <div class="my-info-cnt">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" color="rgb(142, 142, 142)" fill="rgb(142, 142, 142)" class="bi bi-eye" viewBox="0 0 16 16">
-                              <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
-                              <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
-                              </svg>
-                            </div>
-                              <div class="number2">0</div>
-                          </div>
-                      </div>
-                    </div>
-                </div>
 
-              </div>
+              <a class="career-click">
+                <div class="career-box">
+                  <div class="career-info">
+                    <div class="career-top">
+                      <span class="career-tag">금융어쩌고저쩌고</span>
+                      <span class="career-title">안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용</span>
+                    </div>
+                    <span class="career-content">안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용</span>
+                  </div>
+                  <div class="career-bottom">
+                    <div class="career-user-profile-box">
+                      <div class="career-profile-img">
+                        <img th:src="@{/img/profile-basic.png}"/>
+                      </div>
+                      <div class="career-user-info">
+                        <span class="career-user-name">뚜디뚜</span>
+                        <span class="career-user-tag">유저정보?</span>
+                      </div>
+                    </div>
+                    <div class="career-icon">
+                      <div class="select-count-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="rgb(148, 155, 160)" class="bi bi-eye" viewBox="0 0 16 16">
+                          <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                          <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                        </svg>
+                        <span class="select-count">12</span>
+                      </div>
+                      <div class="career-like-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="red" class="bi bi-heart" viewBox="0 0 16 16">
+                          <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                        </svg>
+                        <span class="like-count">12</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+
             </div>
           </div>
         </div>
