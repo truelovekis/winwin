@@ -7,6 +7,7 @@ import com.example.winwin.service.mentor.LoginService;
 import com.example.winwin.service.myPage.MyPageService;
 import com.example.winwin.service.user.UserService;
 import com.example.winwin.vo.myPage.ChattingVo;
+import com.example.winwin.vo.user.UserCategoryVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,10 @@ public class UserRestController {
             Long userNumber = userService.findUserNumber(userDto.getUserId(), userDto.getUserPassword());
             UserDto userInfo = userService.findUserInfo(userNumber);
             Long mentorNumber = loginService.findMentorNumber(userDto.getUserId(), userDto.getUserPassword());
-            UserPfpDto userPfpDto = myPageService.getProfile(userNumber);
+
+            if(userInfo.getUserStatus().equals("3")){
+                return 3;
+            }
 
             System.out.println(userNumber);
             System.out.println(userInfo.getUserName());
@@ -43,7 +47,6 @@ public class UserRestController {
             req.getSession().setAttribute("userStatus", userInfo.getUserStatus());
             req.getSession().setAttribute("userNickname", userInfo.getUserNickname());
             req.getSession().setAttribute("mentorNumber", mentorNumber);
-
 
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
@@ -107,17 +110,17 @@ public class UserRestController {
 
 //    인증 태그 카테고리
     @GetMapping("/certificationJ")
-    public List<CategoryVo> certificationJ(){
+    public List<UserCategoryVo> certificationJ(){
         return userService.certificationJ();
     }
 
     @GetMapping("/certificationH")
-    public List<CategoryVo> certificationH(){
+    public List<UserCategoryVo> certificationH(){
         return userService.certificationH();
     }
 
     @GetMapping("/certificationSub")
-    public List<CategoryVo> certificationSub(String mainCode){
+    public List<UserCategoryVo> certificationSub(String mainCode){
         return userService.certificationSub(mainCode);
     }
 }

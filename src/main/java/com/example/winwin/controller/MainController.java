@@ -33,7 +33,7 @@ public class MainController {
 //    };
 
     @PostMapping("/main")
-    public RedirectView header(UserDto userDto, @RequestParam("subNumber") List<Integer> subNumbers, @RequestParam("certificationNumber") int certificationNumber){
+    public RedirectView header(UserDto userDto, @RequestParam("subNumber") List<Integer> subNumbers,  Integer certificationNumber){
         userService.userRegister(userDto);
 
 //        UserPfpDto userPfpDto = new UserPfpDto();
@@ -52,11 +52,10 @@ public class MainController {
         if(userDto.getUserPosition().equals("mentor") || userDto.getUserPosition().equals("mentorMentee")){
             MentorDto mentorDto = new MentorDto();
             mentorDto.setUserNumber(userDto.getUserNumber());
-            mentorDto.setCertificationNumber(certificationNumber);
+            mentorDto.setCertificationNumber(certificationNumber.intValue());
 
             userService.joinMentor(mentorDto);
         }
-
 
 
 

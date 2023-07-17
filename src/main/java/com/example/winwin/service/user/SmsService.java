@@ -1,5 +1,8 @@
 package com.example.winwin.service.user;
 
+import com.example.winwin.dto.user.UserDto;
+import com.example.winwin.mapper.user.UserMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -10,6 +13,7 @@ import reactor.core.publisher.Mono;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
@@ -17,7 +21,11 @@ import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 @Service
+@RequiredArgsConstructor
 public class SmsService {
+
+    private final UserMapper userMapper;
+
     //네이버 클라우드 가입 후 진행
     //가입 절차, serviceId발급, accessKey발급, secretKey발급 아래 사이트 참고
     //(https://www.autooffice.io/knowhow/send-sms-via-naver-sens-api )
@@ -47,6 +55,7 @@ public class SmsService {
         messages.add(message);
 
         String authNumber = makeAuthNumber();
+//        String userId = findID(userDto);
 
         Map<String, Object> body = new HashMap<>();
         body.put("content", "인증 번호(6자리) : " + authNumber);
@@ -78,6 +87,7 @@ public class SmsService {
         Map<String, Object> map = new HashMap<>();
         map.put("resultBody", resultBody);
         map.put("authNumber", authNumber);
+//        map.put("userId", userId);
 
         return map;
     }
@@ -134,4 +144,22 @@ public class SmsService {
 
         return authNumber;
     }
+
+//    아이디 찾기
+    public String findID(UserDto userDto){
+
+        String findUserId = userMapper.findId(userDto);
+
+        return findUserId;
+    }
+
+    //    비밀번호 찾기
+    public String findPw(UserDto userDto){
+
+        String findUserPw = userMapper.findPw(userDto);
+
+        return findUserPw;
+    }
+
+
 }

@@ -34,10 +34,8 @@ let numberPattern = /^[0-9]+$/;
 
 // 모달창 이동처리
 $('.modal-next').on('click', function(){
-    console.log('next!!');
 
     if($current.hasClass('login-box')){
-        console.log('로그인 처리');
 
         return;
     }
@@ -48,10 +46,32 @@ $('.modal-next').on('click', function(){
 
     }
 
-    if($current.hasClass('find-id-box') || $current.hasClass('find-pw-box')){
-        $next = $('.message-box');
+    if($current.hasClass('find-id-box')){
         $('.modal-next').addClass('none');
-        $('.home-btn').removeClass('none');
+        $('.home-btn').addClass('none');
+        $('.home-btn-2').removeClass('none');
+        $next = $('.result-id-box');
+    }
+
+    if($current.hasClass('find-pw-box')){
+        $('.modal-next').addClass('none');
+        $('.home-btn').addClass('none');
+        $('.home-btn-2').removeClass('none');
+        $next = $('.result-pw-box');
+    }
+
+    if($current.hasClass('result-id-box')){
+        // $next = $('.result-id-box');
+        $('.modal-next').addClass('none');
+        $('.home-btn').addClass('none');
+        $('.home-btn-2').removeClass('none');
+    }
+
+    if($current.hasClass('result-pw-box')){
+        // $next = $('.result-id-box');
+        $('.modal-next').addClass('none');
+        $('.home-btn').addClass('none');
+        $('.home-btn-2').removeClass('none');
     }
 
     if($current.hasClass('agreement-box')){
@@ -205,7 +225,7 @@ function changeModal($currentParam, $nextParam){
 // 아이디 찾기
 $('.find-id-link').on('click', function(e){
     e.preventDefault();
-    console.log('click');
+    // console.log('click');
     $next = $('.find-id-box');
     changeModal($current, $next);
     $('.login-end').addClass('none');
@@ -215,7 +235,7 @@ $('.find-id-link').on('click', function(e){
 // 비밀번호 찾기
 $('.find-pw-link').on('click', function(e){
     e.preventDefault();
-    console.log('click');
+    // console.log('click');
     $next = $('.find-pw-box');
     changeModal($current, $next);
     $('.login-end').addClass('none');
@@ -223,7 +243,7 @@ $('.find-pw-link').on('click', function(e){
 })
 
 // 회원가입 (첫 페이지 : 약관 동의)
-$('.join-link').on('click', function(e){
+$('.login-kakao').on('click', function(e){
     e.preventDefault();
     console.log('click');
     $next = $('.agreement-box');
@@ -274,6 +294,8 @@ $('.login-end').on('click', function (){
 
             if(result == 0){
                 alert("잘못된 회원 정보입니다.");
+            }else if(result == 3){
+                alert("영구정지 처리된 회원입니다.");
             }else{
                 let tmp = window.location.href;
                 window.location.href = tmp;
@@ -413,22 +435,18 @@ $('.home-btn').on('click', function (){
     hiddenField.setAttribute("value", $('.goal-mm-value').val());
     form.appendChild(hiddenField);
 
-    hiddenField = document.createElement("input");
-    hiddenField.setAttribute("type", "hidden");
-    hiddenField.setAttribute("name", "certificationNumber");
-    hiddenField.setAttribute("value", $('.certi-input').val());
-    form.appendChild(hiddenField);
-
-
+    if($('#certi-input').val()){
+        hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "certificationNumber");
+        hiddenField.setAttribute("value", $('#certi-input').val());
+        form.appendChild(hiddenField);
+    }
 
 
     document.body.appendChild(form);
     form.submit();
 });
-
-
-
-
 
 
 
@@ -1030,7 +1048,7 @@ $('.certi-option__box').on('click', '.certi-option', function (){
         console.log(value);
         $('.certi-select-tag').append(`
                                 <div class="certi-tag">@${subName}
-                                 <input type="hidden" class="certi-input" name="certificationNumber" value="${value}"/>
+                                 <input type="hidden" class="certi-input" id="certi-input" name="certificationNumber" value="${value}"/>
                              </div>`);
     }
 
@@ -1160,6 +1178,128 @@ $('#self-check-number').on('click', function (){
     });
 })
 
+/*================================================================*/
+/* 아이디 찾기 */
+
+$('#find-id-certi-btn').on('click', function (){
+
+    let userName = $('#find-id-user-name').val();
+    let phoneNumber = $('#find-id-phone-number').val();
+
+    $.ajax({
+        url: "/userSms/v1/send",
+        type: "post",
+        data: JSON.stringify({phoneNumber : phoneNumber}),
+        contentType: "application/json; charset=utf-8",
+        success: function (result){
+            console.log(result)
+
+            let time = 180;
+            let min = '';
+            let sec = '';
+
+            timeout = setInterval(function (){
+                min = parseInt(time / 60);
+                sec = time % 60;
+                $('.find-id-timer').text(`${min}분 ${sec}초`);
+
+                time--;
+
+                if(time < 0){
+                    clearInterval(timeout);
+                    $('.find-id-timer').text('시간초과');
+                }
+            }, 1000);
+
+        }
+    })
+
+});
+
+$('#find-id-check').on('click', function (){
+    let inputNumber= $('#find-certi-number').val();
+    let userName = $('#find-id-user-name').val();
+    let phoneNumber = $('#find-id-phone-number').val();
+
+    $.ajax({
+        url : '/userSms/v1/findId',
+        type : 'post',
+        data : {authNumber : inputNumber, userName : userName, phoneNumber : phoneNumber},
+        success : function (result){
+            if(result){
+                $('#find-msg').text("인증이 완료되었습니다.");
+                clearInterval(timeout);
+                $('.find-id-timer').text('');
+            }else{
+                $('#find-msg').text("인증번호가 올바르지 않습니다.");
+            }
+
+                $('#result-id').text(result);
+        }
+    });
+});
+
+
+/*================================================================*/
+/* 아이디 찾기 */
+
+$('#pind-pw-certi').on('click', function (){
+
+    let userId = $('#find-pw-id').val();
+    let phoneNumber = $('#find-pw-phone-number').val();
+
+    $.ajax({
+        url: "/userSms/v1/send",
+        type: "post",
+        data: JSON.stringify({phoneNumber : phoneNumber}),
+        contentType: "application/json; charset=utf-8",
+        success: function (result){
+            console.log(result)
+
+            let time = 180;
+            let min = '';
+            let sec = '';
+
+            timeout = setInterval(function (){
+                min = parseInt(time / 60);
+                sec = time % 60;
+                $('#find-pw-timer').text(`${min}분 ${sec}초`);
+
+                time--;
+
+                if(time < 0){
+                    clearInterval(timeout);
+                    $('#find-pw-timer').text('시간초과');
+                }
+            }, 1000);
+
+        }
+    })
+
+});
+
+$('#find-pw-check').on('click', function (){
+    let inputNumber= $('#find-certi-number').val();
+    let userId = $('#find-pw-id').val();
+    let phoneNumber = $('#find-pw-phone-number').val();
+
+    $.ajax({
+        url : '/userSms/v1/findPw',
+        type : 'post',
+        data : {authNumber : inputNumber, userId : userId, phoneNumber : phoneNumber},
+        success : function (result){
+            if(result){
+                $('#find-pw-msg').text("인증이 완료되었습니다.");
+                clearInterval(timeout);
+                $('#find-pw-timer').text('');
+            }else {
+                $('#find-pw-msg').text("인증번호가 올바르지 않습니다.");
+            }
+
+            $('#result-pw').text(result);
+        }
+    });
+});
 
 
 

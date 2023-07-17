@@ -62,6 +62,11 @@ public class UserController {
         return new RedirectView("/main/main");
     }
 
+    @GetMapping("/resultId")
+    public String resultId(){return "user/resultId";}
+
+    @GetMapping("/resultPw")
+    public String resultPw(){return "user/resultPw";}
 
 
 }

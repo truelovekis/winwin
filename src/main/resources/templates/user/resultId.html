@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ResultId</title>
+  <link rel="stylesheet" th:href="@{/css/user/resultId.css}" />
+  <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+  <style>
+      body {
+          font-family: "NanumSquareLight";
+          font-family: "NanumSquare";
+          font-family: "NanumSquareBold";
+          font-family: "NanumSquareExtraBold";
+          font-family: "NanumSquareAcb";
+          font-family: "NanumSquareAceb";
+          font-family: "NanumSquareAcl";
+          font-family: "NanumSquareAcr";
+      }
+  </style>
+</head>
+<body>
+<main>
+  <div class="result-id-container">
+    <div class="result-id-wrap">
+      <div class="result-id-box none" th:fragment="resultId">
+        <div class="result-icon">
+          <img class="result-img" th:src="@{/img/result-icon.png}"/>
+        </div>
+        <div class="result-info-box">
+          <div class="result-info-start">
+            <span class="result-info">고객님의 아이디는</span>
+          </div>
+          <div class="result-info-end">
+            <span class="result-info-id">[</span>
+            <span id="result-id"></span>
+            <span class="result-info-id">]</span>
+            <span class="result-info">입니다.</span>
+          </div>
+        </div>
+      </div>
+      <button class="result-id-next"><a href="/winwin/html/user/message.html" rel="modal:open">다음</a></button>
+    </div>
+  </div>
+</main>
+<script
+        src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+        crossorigin="anonymous"
+></script>
+</body>
+</html>

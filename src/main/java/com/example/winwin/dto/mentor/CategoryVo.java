@@ -12,6 +12,6 @@ public class CategoryVo {
     private Long mainNumber;
     private String mainName;
     private String subName;
-    private Long subNumber;
-    private Long certificationNumber;
+    private int subNumber;
+    private int certificationNumber;
 }

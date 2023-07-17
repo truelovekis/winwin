@@ -6,6 +6,7 @@ import com.example.winwin.dto.user.UserDto;
 import com.example.winwin.dto.user.UserPfpDto;
 import com.example.winwin.mapper.user.UserMapper;
 import com.example.winwin.vo.user.CategoryBridgeVo;
+import com.example.winwin.vo.user.UserCategoryVo;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,8 +109,8 @@ public class UserService {
     }
 
     // 인증 태그 카테고리
-    public List<CategoryVo> certificationH(){
-        List<CategoryVo> categoryH = userMapper.certificationH();
+    public List<UserCategoryVo> certificationH(){
+        List<UserCategoryVo> categoryH = userMapper.certificationH();
 
         for (int i=0; i<categoryH.size(); i++){
             categoryH.get(i).getMainCode();
@@ -119,8 +120,8 @@ public class UserService {
         return categoryH;
     }
 
-    public List<CategoryVo> certificationJ(){
-        List<CategoryVo> categoryJ = userMapper.certificationJ();
+    public List<UserCategoryVo> certificationJ(){
+        List<UserCategoryVo> categoryJ = userMapper.certificationJ();
 
         for(int i=0; i<categoryJ.size(); i++){
             categoryJ.get(i).getSubNumber();
@@ -130,8 +131,8 @@ public class UserService {
         return categoryJ;
     }
 
-    public List<CategoryVo> certificationSub(String mainCode){
-        List<CategoryVo> subCategory = userMapper.certificationSub(mainCode);
+    public List<UserCategoryVo> certificationSub(String mainCode){
+        List<UserCategoryVo> subCategory = userMapper.certificationSub(mainCode);
         System.out.println(subCategory);
         return subCategory;
     }
