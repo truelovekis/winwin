@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.board.CsCommentMapper">
 
+<!--  댓글 작성(관리자만 가능)  -->
     <insert id="insert">
         <selectKey keyProperty="commentNumber" order="BEFORE" resultType="long">
             SELECT SEQ_CS_COMMENT.NEXTVAL FROM DUAL

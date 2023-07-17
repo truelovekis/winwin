@@ -36,6 +36,20 @@ function fn_read(csNumber){
 //     return `${Math.floor(betweenTimeDay / 365)}년 전`;
 // }
 
+function updateTime() {
+    const timeValueElements = document.getElementsByClassName("elapsed-time");
+    const currentTime = new Date();
+
+    for (let i = 0; i < timeValueElements.length; i++) {
+        const timeValue = new Date(timeValueElements[i].textContent);
+        const formattedTime = timeForToday(timeValue, currentTime);
+        timeValueElements[i].textContent = formattedTime;
+    }
+}
+
+// 1분마다 updateTime 함수를 호출하여 시간 업데이트
+setInterval(updateTime, 60000); // 60000ms = 1분
+
 
 
 
@@ -103,15 +117,15 @@ function getListPage(pageInfo, appendList, error) {
 function appendList(map) {
     let text = '';
 
-    map.csList.forEach(csVoList => {
+    map.csVoList.forEach(csVo => {
         text += `
         <!-- 게시글 리스트 -->
         <!-- 시작! -->
         <div class="community-main-box">
             <div class="community-box">
-                <div class="community-sub-content" onclick="fn_read(${csVoList.csNumber});">
-                    <div class="community-title">${csVoList.csTitle}</div>
-                    <div class="community-content">${csVoList.csContent}</div>
+                <div class="community-sub-content" onclick="fn_read(${csVo.csNumber});">
+                    <div class="community-title">${csVo.csTitle}</div>
+                    <div class="community-content">${csVo.csContent}</div>
                 </div>
                 <div class="community-sub-box">
                     <div class="community-btn">
@@ -121,7 +135,7 @@ function appendList(map) {
                                 <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
                                 <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
                             </svg>
-                            <span>${csVoList.csReadCnt}</span>
+                            <span>${csVo.csReadCnt}</span>
                         </div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                              class="bi bi-chat-dots" viewBox="0 0 16 16">
