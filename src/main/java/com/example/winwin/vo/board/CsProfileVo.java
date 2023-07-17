@@ -13,4 +13,8 @@ public class CsProfileVo extends CsVo{
     private String pfpSystemName;
     private String pfpUuid;
     private String careerStartDate;
+    private String gradeName;
+    private String userPosition;
+    private Long userNumber;
+    private String userName;
 }

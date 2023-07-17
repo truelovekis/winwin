@@ -54,6 +54,14 @@
         ORDER BY MC.CAREER_START_DATE DESC
     </select>
 
+    <select id="userLogin" resultType="csProfileVo">
+        SELECT wu.USER_NUMBER , wu.USER_NAME , wu.USER_POSITION , g.GRADE_NAME , up.PFP_UPLOAD_PATH , up.PFP_SYSTEM_NAME , up.PFP_UUID
+        FROM WW_USER wu LEFT OUTER JOIN USER_PFP up
+                                        ON wu.USER_NUMBER = up.USER_NUMBER
+                        left outer JOIN GRADE g ON wu.USER_GRADE = g.GRADE_NUMBER
+        WHERE wu.USER_NUMBER = #{userNumber}
+    </select>
+
     <!-- 무한 스크롤 -->
 
     <!-- 커뮤니티 페이지 무한스크롤 -->

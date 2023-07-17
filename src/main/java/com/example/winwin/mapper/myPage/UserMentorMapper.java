@@ -22,4 +22,5 @@ public interface UserMentorMapper {
     void noMentee(MentorVo mentorVo);
 
     String loginUser(Long userNumber);
+
 }

@@ -65,8 +65,8 @@
     </update>
 
     <select id="loginMentor" resultType="mentorVo">
-        SELECT M1.user_number , M1.mentor_number , M1.user_name , M1.PFP_UPLOAD_PATH , M1.PFP_SYSTEM_NAME , M1.PFP_UUID ,mc.CAREER_COMPANY , TO_CHAR(TO_DATE(mc.CAREER_END_DATE, 'YYYY.mm.DD'), 'YYYY.mm') CAREER_END_DATE , TO_CHAR(TO_DATE(mc.CAREER_START_DATE, 'YYYY.mm.DD'), 'YYYY.mm') CAREER_START_DATE, ROUND((TO_DATE(CAREER_END_DATE ) - TO_DATE(CAREER_START_DATE))/30/12) AS career_annual
-             , M1.MENTOR_STATUS
+        SELECT M1.user_number , M1.mentor_number , M1.user_name , M1.PFP_UPLOAD_PATH , M1.PFP_SYSTEM_NAME , M1.PFP_UUID ,mc.CAREER_COMPANY , TO_CHAR(TO_DATE(mc.CAREER_END_DATE, 'YYYY.mm.DD'), 'YYYY.mm') CAREER_END_DATE , TO_CHAR(TO_DATE(mc.CAREER_START_DATE, 'YYYY.mm.DD'), 'YYYY.mm') CAREER_START_DATE, ROUND((TO_DATE(CAREER_END_DATE ) - TO_DATE(CAREER_START_DATE))/30/12) AS career_annual,
+               M1.USER_BELONG , M1.MENTOR_STATUS
         FROM (
                  SELECT J1.user_number, J1.mentor_number, J1.user_name, J1.user_belong  , UP.PFP_UPLOAD_PATH , UP.PFP_SYSTEM_NAME , UP.PFP_UUID, J1.mentor_status
                  FROM (

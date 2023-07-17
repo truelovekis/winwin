@@ -199,7 +199,7 @@
                 <article class="item myProfile">
                     <section class="mento-profile">
                         <div class="item__box">
-                            <a href="" class="page-move">
+                                <a th:href="@{/mentor/profile(mentorNumber=${session.mentorNumber})}" class="login-user">
                                 <div class="flex">
                                     <div class="mento-profile-photo-box">
                                         <img th:if="${loginMentor.pfpSystemName == null}" class="img-box" src="/img/profile-basic.png"/>
@@ -207,9 +207,12 @@
                                              th:style="${'background-image: url(/profile/' + loginMentor.pfpUuid + '_' + loginMentor.pfpSystemName + ')'}"/>
                                     </div>
                                     <div class="flex text-wrap">
-                                        <div class="mento-name"><span th:text="${loginMentor.userName}"></span> </div>
+                                        <div class="mento-name">
+<!--                                            <span th:text="${loginMentor.userName}"></span>-->
+                                            <span th:text="${loginMentor.userName}"></span>
+                                        </div>
                                         <div class="mento-career">
-                                            <span th:text="${loginMentor.careerCompany}"></span> · <span th:text="${loginMentor.careerAnnual}"/> 년차
+                                            <span th:text="${loginMentor.userBelong}"></span> · <span th:text="${loginMentor.careerAnnual}"/>년차
                                         </div>
                                     </div>
                                 </div>

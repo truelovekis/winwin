@@ -1,9 +1,11 @@
 package com.example.winwin.controller.user;
 
+import com.example.winwin.dto.mentor.LoginVo;
 import com.example.winwin.dto.user.UserDto;
 import com.example.winwin.dto.user.UserPfpDto;
 import com.example.winwin.service.mentor.LoginService;
 import com.example.winwin.service.myPage.MyPageService;
+import com.example.winwin.service.myPage.UserMentorService;
 import com.example.winwin.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,7 @@ public class UserController {
     private final UserService userService;
     private final LoginService loginService;
     private final MyPageService myPageService;
+    private final UserMentorService userMentorService;
 
     @GetMapping
     public String loginModal(){
@@ -44,10 +47,15 @@ public class UserController {
             session.setAttribute("userWing", userDto.getUserWing());
             session.setAttribute("userStatus", userDto.getUserStatus());
             session.setAttribute("userNickname", userDto.getUserNickname());
-
+            session.setAttribute("userPosition", userDto.getUserPosition());
 
             Long mentorNumber = loginService.findMentorNumber(userId, userPassword);
             session.setAttribute("mentorNumber", mentorNumber);
+
+            String loginVo = loginService.findUser(userNumber);
+            session.setAttribute("user" , loginVo);
+            System.out.println(loginVo);
+
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
             return new RedirectView("/user/login");

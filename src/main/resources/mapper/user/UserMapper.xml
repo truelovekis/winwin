@@ -52,7 +52,7 @@
 
     <!--회원번호로 이름, 윙 갯수, 상태 조회-->
     <select id="findUserInfo" resultType="userDto">
-        SELECT USER_NICKNAME, USER_WING, USER_STATUS
+        SELECT USER_NICKNAME, USER_WING, USER_STATUS , USER_POSITION
         FROM WW_USER
         WHERE USER_NUMBER = #{userNumber}
     </select>

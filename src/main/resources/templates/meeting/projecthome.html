@@ -31,6 +31,7 @@
         <div class="search-imgbox">
             <img class="img" th:src="@{/img/search.PNG}" alt="search-img"/>
         </div>
+        <input type="hidden" class="userNumber" th:value="${session.userNumber}"/>
         <div class="search-textbox">
             <br/>
             <br/>
@@ -75,6 +76,7 @@
             <div class="topten-area">
                 <!--          ========================== -->
                 <div class="topten-cardbox" th:each="project : ${projectList}">
+                    <input type="hidden" class="projectTitle" th:value="${project.studyNumber}"/>
                     <div class="topten-content1">
                         <span class="topten-sub-text1">사이드 프로젝트</span>
                         <br/>

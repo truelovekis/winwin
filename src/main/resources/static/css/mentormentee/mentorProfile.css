@@ -690,3 +690,10 @@ ul {
 .career2 {
   display: flex;
 }
+
+.login-user {
+  cursor: pointer;
+  display: block;
+  text-decoration: none;
+  color: #000;
+}

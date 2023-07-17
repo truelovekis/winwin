@@ -2,13 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.mentor.MentorMapper">
     <select id="mentor" resultType="mentorVo">
-        SELECT MENTOR_NUMBER , J1.USER_NUMBER , USER_NAME, user_belong, mentor_status, up.PFP_UPLOAD_PATH , up.PFP_SYSTEM_NAME , up.PFP_UUID
+        SELECT J1.MENTOR_NUMBER , J1.USER_NUMBER , USER_NAME, user_belong, mentor_status, up.PFP_UPLOAD_PATH , up.PFP_SYSTEM_NAME , up.PFP_UUID, mp.MENTOR_PR
         FROM (
                  SELECT MENTOR_NUMBER , wu.USER_NUMBER , USER_NAME, user_belong, mentor_status
                  FROM MENTOR m JOIN WW_USER wu
                                     ON m.USER_NUMBER = wu.USER_NUMBER AND m.MENTOR_NUMBER  = #{mentorNumber}
              )J1 LEFT OUTER JOIN USER_PFP up
-                                 ON J1.user_number = up.USER_NUMBER
+                 ON J1.user_number = up.USER_NUMBER
+                 left outer JOIN MENTOR_PROFILE mp
+                      ON J1.MENTOR_NUMBER = mp.MENTOR_NUMBER
     </select>
 
     <select id="mentor2" resultType="mentorVo">
@@ -17,10 +19,28 @@
         ON m.MENTOR_NUMBER = mc.MENTOR_NUMBER AND m.MENTOR_NUMBER =  #{mentorNumber}
     </select>
 
+    <select id="mentor3" resultType="mentorVo">
+        SELECT NVL(sum(ROUND(((TO_DATE(CAREER_END_DATE, 'YYYY.mm.DD') - TO_DATE(CAREER_START_DATE, 'YYYY.mm.DD'))/30/12))), 0) career_annual
+        FROM MENTOR m JOIN MENTOR_CAREER mc
+        ON m.MENTOR_NUMBER = mc.MENTOR_NUMBER AND m.MENTOR_NUMBER = #{mentorNumber}
+    </select>
+
+    <select id="mentorCnt" resultType="int">
+        SELECT COUNT(*) cnt
+        FROM MENTOR_CAREER mc
+        WHERE MENTOR_NUMBER = #{mentorNumber}
+    </select>
+
     <insert id="mentorPr">
         INSERT INTO MENTOR_PROFILE(MP_NUMBER, USER_NUMBER, MENTOR_NUMBER, MENTOR_PR)
-        VALUES(SEQ_MP.NEXTVAL, #{userNumber}, #{mentorNumber}, #{mentorPr})
+        VALUES(SEQ_MP.NEXTVAL, #{userNumber}, #{mentorNumber} , null)
     </insert>
+
+    <update id="mentorPrU">
+        UPDATE MENTOR_PROFILE
+        SET MENTOR_PR = #{mentorPr}
+        WHERE MENTOR_NUMBER = #{mentorNumber}
+    </update>
 
     <insert id="skillInsert">
         INSERT INTO MENTOR_SKILL(SKILL_NUMBER, SKILL_NAME, MENTOR_NUMBER)
@@ -47,7 +67,7 @@
                                                       ON m.USER_NUMBER = w.USER_NUMBER  AND MENTOR_NUMBER = #{mentorNumber}
                                )U LEFT OUTER JOIN USER_PFP up
                                                   ON U.user_number = UP.USER_NUMBER
-                      ) P JOIN MENTOR_PROFILE mp
+                      ) P LEFT OUTER JOIN MENTOR_PROFILE mp
                                ON P.mentor_number  = mp.MENTOR_NUMBER
              )M1 LEFT OUTER JOIN UM_BRIDGE ub
              ON m1.mentor_number = ub.MENTOR_NUMBER AND ub.USER_NUMBER = #{userNumber}
@@ -55,6 +75,12 @@
 
     <select id="profileSkill" resultType="skillVo">
         SELECT skill_name
+        FROM MENTOR_SKILL ms
+        WHERE MENTOR_NUMBER = #{mentorNumber}
+    </select>
+
+    <select id="skillCnt" resultType="int">
+        SELECT count(skill_number) cnt
         FROM MENTOR_SKILL ms
         WHERE MENTOR_NUMBER = #{mentorNumber}
     </select>
@@ -98,4 +124,9 @@
         VALUES(SEQ_REVIEW.NEXTVAL, #{reviewContent}, #{reviewStar}/2, #{userNumber}, #{mentorNumber})
     </insert>
 
+    <select id="mentorPrCount" resultType="int">
+        SELECT COUNT(*) MENTOR_PR
+        FROM MENTOR_PROFILE mp
+        WHERE MENTOR_NUMBER = #{mentorNumber}
+    </select>
 </mapper>

@@ -8,4 +8,10 @@
         WHERE USER_ID = #{userId} AND USER_PASSWORD = #{userPassword}
     </select>
 
+    <select id="loginUser" resultType="string">
+        SELECT USER_POSITION
+        FROM WW_USER wu
+        WHERE user_number = #{userNumber}
+    </select>
+
 </mapper>
