@@ -118,23 +118,23 @@ public class MyPageController {
     }
 
     @GetMapping("/activityCommunity")
-    public String cativityCommunity(){
+    public String activityCommunity(){
         return "myPage/activityCommunity";
     }
 
     @GetMapping("/activityCommunityReply")
-    public String cativityCommunityReply(){
+    public String activityCommunityReply(){
         return "myPage/activityCommunityReply";
     }
 
     @GetMapping("/activityQna")
-    public String cativityQna(){ return "myPage/activityQna"; }
+    public String activityQna(){ return "myPage/activityQna"; }
 
     @GetMapping("/activityQnaReply")
-    public String cativityQnaReply(){ return "myPage/activityQnaReply"; }
+    public String activityQnaReply(){ return "myPage/activityQnaReply"; }
 
     @GetMapping("/activityCs")
-    public String cativityCs(){ return "myPage/activityCs"; }
+    public String activityCs(){ return "myPage/activityCs"; }
 
 //    @GetMapping("/receiveMessage")
 //    public String receiveMessage(){

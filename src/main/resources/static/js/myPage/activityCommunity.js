@@ -13,7 +13,7 @@ $(window).on('scroll', function () {
 
 function getListPage(pageInfo, appendList, error) {
   $.ajax({
-    url: `/myPages/myBoard/${pageInfo.page}`,
+    url: `/myPages/myCommunity/${pageInfo.page}`,
     type: 'get',
     dataType: 'json',
     success: function (result) {
@@ -25,43 +25,15 @@ function getListPage(pageInfo, appendList, error) {
   });
 }
 
-function getObj(bigCategory){
-    let obj = {};
-
-    if (bigCategory == 200){
-        obj.url=`/career/detail?careerInfoNumber`;
-        obj.text='진로정보';
-    }else if(bigCategory == 300){
-        obj.url=`/qna/read?qnaNumber`;
-        obj.text='QnA';
-    }else if(bigCategory == 400){
-        obj.url=`/community/read?communityNumber`;
-        obj.text='커뮤니티';
-    }else if(bigCategory == 500){
-        obj.url=`/project/read?studyNumber`;
-        obj.text='모임';
-    }else if(bigCategory == 600){
-        obj.url=`/share/read?shareNumber`;
-        obj.text='나눔';
-    }else if(bigCategory == 700){
-        obj.url=`/cs/read?csNumber`;
-        obj.text='문의사항';
-    }
-
-    return obj;
-}
-
 function appendList(map) {
   let text = '';
 
   map.activeBoardVoList.forEach(board => {
-      let obj = getObj(board.bigCategory);
-
     text += `
-                <a class="community-main-box" href="${obj.url}=${board.boardNumber}">
+                <a class="community-main-box" href="/community/read?communityNumber=${board.boardNumber}">
                   <div class="community-box">
                     <div class="community-sub-content">
-                      <span class="user-identity">${obj.text}</span>
+                      <span class="user-identity">커뮤니티</span>
                       <div class="community-title">${board.boardTitle}</div>
                       <div class="community-content">${board.boardContent}</div>
                     </div>

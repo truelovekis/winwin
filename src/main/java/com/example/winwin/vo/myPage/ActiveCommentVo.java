@@ -13,5 +13,6 @@ public class ActiveCommentVo {
     private String boardTitle;
     private String commentContent;
     private String commentDate;
-    private String commentUpDown;
+    private int commentUp;
+    private int commentDown;
 }
