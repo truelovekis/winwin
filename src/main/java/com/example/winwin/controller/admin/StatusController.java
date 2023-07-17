@@ -1,6 +1,9 @@
 package com.example.winwin.controller.admin;
 
+import com.example.winwin.dto.admin.AdminCareerSearchVo;
+import com.example.winwin.dto.admin.AdminVo;
 import com.example.winwin.dto.admin.MainCategoryVo;
+import com.example.winwin.dto.admin.PoliceVo;
 import com.example.winwin.dto.mentor.CategoryVo;
 import com.example.winwin.service.admin.AdminService;
 import lombok.RequiredArgsConstructor;
@@ -90,27 +93,14 @@ public class StatusController {
         return "변경성공";
     }
 
-
     // 신고 댓글 상태 변경
     @PatchMapping("/updateCommentReport")
-    public String modifyCommentReport(@RequestBody Map<String, List<String>> requestBody){
-        System.out.println(requestBody);
-        List<String> policeNumberList = requestBody.get("policeNumber");
-        List<String> commentStatusList = requestBody.get("commentStatus");
-        List<String> bigCodeList = requestBody.get("bigCode");
+    public void modifyCommentReport2(@RequestBody List<PoliceVo> policeVoList){
+        System.out.println(policeVoList);
 
-//        if (bigCodeList == '400'){
-//            qnaStatus
-//        }
-
-
-        for (int i = 0; i < policeNumberList.size(); i++) {
-            Long policeNumber = Long.parseLong(policeNumberList.get(i));
-            String commentStatus = commentStatusList.get(i);
-            adminService.modifyCommentReportStatus(policeNumber, commentStatus);
-        }
-        return "변경성공";
+        adminService.modifyCommentReportStatus(policeVoList);
     }
+
 
     // 직무, 학과 데이터 가져오기
     @GetMapping("/cateJob")
@@ -123,5 +113,11 @@ public class StatusController {
     public List<MainCategoryVo> findCateDep(){
         return adminService.findCategoryH();
     }
+
+//    @GetMapping("/list")
+//    public List<AdminVo> findCategoryList(AdminVo adminVo , AdminCareerSearchVo adminCareerSearchVo){
+//
+//        return adminService.findSearchCareer(adminCareerSearchVo);
+//    }
 
 }

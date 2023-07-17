@@ -1,51 +1,89 @@
 // 댓글신고 상태 변경
 $(document).ready(function() {
     $("#changeStatusBtn").on("click", function() {
-        changeStatus();
+        changeStatus2();
     });
 });
 
-
-function changeStatus() {
+function changeStatus2() {
     let $checkedBox = $('.check-box:checked');
-    let policeNumber = [];
-    let commentStatus = [];
+    let policeVo = {};
+    let policeVoArr = [];
+
+    let commentNumber = [];
+    let status = [];
     let bigCode = [];
 
     for(let i=0; i<$checkedBox.length; i++){
-        policeNumber.push( $checkedBox.eq(i).data('number'));
-        commentStatus.push($checkedBox.closest('.user-table-category').find('.user-report-select').val());
-        bigCode.push($checkedBox.eq(i).data('code'));
+        policeVo.commentNumber= $checkedBox.eq(i).data('number');
+        policeVo.status = $checkedBox.eq(i).closest('.user-table-category').find('.user-report-select').val();
+        policeVo.bigCode = $checkedBox.eq(i).data('code');
+
+        policeVoArr.push({...policeVo});
     }
 
+    console.log(policeVoArr)
 
-    console.log(policeNumber)
-    console.log('=============================')
-    console.log(commentStatus)
+
+    // console.log(commentNumber)
+    // console.log('=============================')
+    // console.log(status)
     // var communityNumber = document.getElementById("communityNumber").value;
     // var currentStatus = document.getElementById("currentStatus").value; // 현재 상태 값을 가져옵니다.
 
-    if (policeNumber === "") {
-        alert("게시글 번호를 입력해주세요.");
-        return false;
-    }
+    // if (commentNumber == "") {
+    //     alert("게시글 번호를 입력해주세요.");
+    //     return false;
+    // }
 
     // var newStatus = currentStatus == "1" ? "0" : "1";
-
+    // let status = $('.status1').val() == '1' ? '0' : '1';
+    // let commentNumber1 = $('.commentNumber1').val();
+    // console.log(commentNumber);
     $.ajax({
         type: "PATCH",
         url: "/status/updateCommentReport",
         contentType: "application/json; charset=utf-8",
-        traditional : true,
-        data: JSON.stringify({policeNumber: policeNumber, commentStatus: commentStatus, bigCode : bigCode}),
+        data: JSON.stringify(policeVoArr),
         success: function() {
-            alert("변경 성공");
+            // console.log(commentNumber);
+            // alert("변경 성공");
+            // $('.status1').val(status);
+            // console.log(status);
         },
         error: function() {
             alert("변경 실패");
         }
     });
 }
+
+
+
+
+// $('#changeStatusBtn').on('click', function (){
+//     let status = $('.status1').val() == '1' ? '0' : '1';
+//     let commentNumber1 = $('.commentNumber1').val();
+//     let code = $('#checking').data('code');
+//     console.log("--------------------")
+//     console.log(commentNumber1);
+//     console.log("--------------------")
+//     $.ajax({
+//         type: "PATCH",
+//         url: "/status/updateCommentReport",
+//         contentType: "application/json; charset=utf-8",
+//         traditional : true,
+//         data: JSON.stringify({commentNumber: commentNumber1, status: status, bigCode : code}),
+//         success: function() {
+//             console.log(commentNumber1);
+//             alert("변경 성공");
+//             $('.status1').val(status);
+//             console.log(status);
+//         },
+//         error: function() {
+//             alert("변경 실패");
+//         }
+//     });
+// })
 
 
 // 체크박스 선택시 색깔 변경
@@ -108,12 +146,12 @@ $(document).ready(function () {
             //     });
         } else if (selectValue === "0") {
             blindButton.text("비공개").css({
-                "background-color": "rgb(220 255 226)",
-                color: "#587c60",
+                "background-color": "rgb(255, 237, 237)",
+                color: "red",
             });
             successButton.text("비공개").css({
-                "background-color": "rgb(220 255 226)",
-                color: "#587c60",
+                "background-color": "rgb(255, 237, 237)",
+                color: "red",
             });
         }
     }

@@ -11,23 +11,24 @@
         WU.USER_RRNUMBER,
         WU.USER_PHONE_NUMBER,
         M.MENTOR_STATUS,
+        wu.user_position,
         WU.USER_STATUS
         FROM WW_USER WU
         LEFT OUTER JOIN MENTOR M on WU.user_number = M.USER_NUMBER
         LEFT OUTER JOIN SUB_CATEGORY SB on M.SUB_NUMBER = SB.SUB_NUMBER
         LEFT OUTER JOIN MAIN_CATEGORY MC on SB.MAIN_CODE = MC.MAIN_CODE
         <trim prefix="WHERE" prefixOverrides="AND">
-            <if test="id != null">
+            <if test="id != null and id != ''">
                 AND USER_ID LIKE '%' || #{id} || '%'
             </if>
-            <if test="identity != null">
+            <if test="identity != null and identity != ''">
                 AND USER_IDENTITY LIKE '%' || #{identity} || '%'
             </if>
-            <if test="mainCode != null">
+            <if test="mainCode != null and mainCode != ''">
                 AND SB.MAIN_CODE LIKE '%' || #{mainCode} || '%'
             </if>
-            <if test="mentor != null">
-                AND MENTOR_STATUS LIKE '%' || #{mentor} || '%'
+            <if test="position != null and position != ''">
+                AND USER_POSITION LIKE '%' || #{position} || '%'
             </if>
         </trim>
     </select>
@@ -41,6 +42,7 @@
                WU.USER_RRNUMBER,
                WU.USER_PHONE_NUMBER,
                M.MENTOR_STATUS,
+               wu.user_position,
                WU.USER_STATUS
         FROM WW_USER WU
                  LEFT OUTER JOIN MENTOR M on WU.user_number = M.USER_NUMBER
@@ -98,7 +100,8 @@
                WU.USER_ID,
                WU.USER_WING,
                W.WING_EARN_DATE,
-               M.MENTOR_STATUS
+               M.MENTOR_STATUS,
+               wu.user_position
         FROM WW_USER WU
                  LEFT OUTER JOIN WING W on WU.user_number = W.USER_NUMBER
                  LEFT OUTER JOIN MENTOR M on W.user_number = M.USER_NUMBER
@@ -111,7 +114,8 @@
         WU.USER_ID,
         WU.USER_WING,
         W.WING_EARN_DATE,
-        MENTOR_STATUS
+        MENTOR_STATUS,
+        wu.user_position
         FROM WW_USER WU
         LEFT OUTER JOIN WING W on WU.user_number = W.USER_NUMBER
         LEFT OUTER JOIN MENTOR M ON WU.USER_NUMBER = M.USER_NUMBER
@@ -125,8 +129,8 @@
             <if test="date != null and date != ''">
                 AND TRUNC(W.WING_EARN_DATE) = TO_DATE(#{date}, 'YYYY-MM-DD') <!-- DB형식이 SYSDATE일 경우 -->
             </if>
-            <if test="mentor != null and mentor != ''">
-                AND MENTOR_STATUS LIKE '%' || #{mentor} || '%'
+            <if test="position != null and position != ''">
+                AND wu.USER_POSITION LIKE '%' || #{position} || '%'
             </if>
         </trim>
     </select>
@@ -135,6 +139,7 @@
     <!--  전제 진로 정보 조회  -->
     <select id="selectCareer" resultType="adminVo">
         SELECT c2.CAREERINFO_NUMBER,
+               MC.MAIN_CODE,
                MAIN_NAME,
                CAREERINFO_TITLE,
                USER_NAME,
@@ -150,6 +155,7 @@
     <!--  검색한 진로 정보 조회  -->
     <select id="selectSearchCareer" parameterType="adminCareerSearchVo" resultType="adminVo">
         SELECT c2.CAREERINFO_NUMBER,
+        MC.MAIN_CODE,
         MAIN_NAME,
         CAREERINFO_TITLE,
         USER_NAME,
@@ -164,8 +170,8 @@
             <if test="name != null and name != ''">
                 AND WU.USER_NAME LIKE '%' || #{name} || '%'
             </if>
-            <if test="code != null and code != ''">
-                AND MC.MAIN_CODE LIKE '%' || #{code} || '%'
+            <if test="mainCode != null and mainCode != ''">
+                AND MC.MAIN_CODE LIKE '%' || #{mainCode} || '%'
             </if>
             <if test="date != null and date != ''">
                 AND TRUNC(C2.CAREERINFO_DATE) = TO_DATE(#{date}, 'YYYY-MM-DD') <!-- DB형식이 SYSDATE일 경우 -->
@@ -237,7 +243,7 @@
                         Q.TITLE, Q.STATUS
                  FROM POLICE_BOARD PB
                           JOIN (
-                     SELECT QNA_NUMBER, QNA_TITLE AS TITLE, '0' AS STATUS, 300 AS BIG_CODE
+                     SELECT QNA_NUMBER, QNA_TITLE AS TITLE, QNA_STATUS AS STATUS, 300 AS BIG_CODE
                      FROM QNA
                  ) Q
                                ON PB.BIG_CODE = Q.BIG_CODE AND PB.BOARD_NUMBER = Q.QNA_NUMBER
@@ -255,7 +261,7 @@
                         S.TITLE, S.STATUS
                  FROM POLICE_BOARD PB
                           JOIN (
-                     SELECT STUDY_NUMBER, STUDY_TITLE AS TITLE, '0' AS STATUS, 500 AS BIG_CODE
+                     SELECT STUDY_NUMBER, STUDY_TITLE AS TITLE, STUDY_STATUS AS STATUS, 500 AS BIG_CODE
                      FROM STUDY
                  ) S
                                ON PB.BIG_CODE = S.BIG_CODE AND PB.BOARD_NUMBER = S.STUDY_NUMBER
@@ -264,7 +270,7 @@
                         SH.TITLE, SH.STATUS
                  FROM POLICE_BOARD PB
                           JOIN (
-                     SELECT SHARE_NUMBER, SHARE_TITLE AS TITLE, '0' AS STATUS, 600 AS BIG_CODE
+                     SELECT SHARE_NUMBER, SHARE_TITLE AS TITLE, SHARE_STATUS AS STATUS, 600 AS BIG_CODE
                      FROM SHARE_FREE
                  ) SH
                                ON PB.BIG_CODE = SH.BIG_CODE AND PB.BOARD_NUMBER = SH.SHARE_NUMBER
@@ -290,34 +296,34 @@
     </select>
 
     <!-- 검색한 게시글 신고 조회-->
-    <select id="selectSearchReport" parameterType="adminReportSearchVo" resultType="adminVo">
-        SELECT WU.USER_NUMBER,
-        pb.police_number as police_number,
-        WU.USER_NAME,
-        USER_ID,
-        big_name,
-        to_char(Pb.police_date, 'yyyy-mm-dd') as police_date,
-        PC.CATEGORY_NAME as category_name,
-        PB.BOARD_STATUS as status
-        FROM WW_USER WU
-        LEFT OUTER JOIN police_board pb on WU.user_number = pb.user_number
-        left outer join big_category bc on pb.big_code = bc.big_code
-        LEFT OUTER JOIN POLICE_CATEGORY PC ON PB.police_category = PC.category_number
-        <trim prefix="WHERE" prefixOverrides="AND">
-            <if test="name != null and name != ''">
-                AND WU.USER_NAME LIKE '%' || #{name} || '%'
-            </if>
-            <if test="bigCode != null and bigCode != ''">
-                AND bc.BIG_CODE LIKE '%' || #{bigCode} || '%'
-            </if>
-            <if test="code != null and code != ''">
-                AND PC.CATEGORY_NUMBER LIKE '%' || #{code} || '%'
-            </if>
-            <if test="status != null and status != ''">
-                AND BOARD_STATUS LIKE '%' || #{status} || '%'
-            </if>
-        </trim>
-    </select>
+<!--    <select id="selectSearchReport" parameterType="adminReportSearchVo" resultType="adminVo">-->
+<!--        SELECT WU.USER_NUMBER,-->
+<!--        pb.police_number as police_number,-->
+<!--        WU.USER_NAME,-->
+<!--        USER_ID,-->
+<!--        big_name,-->
+<!--        to_char(Pb.police_date, 'yyyy-mm-dd') as police_date,-->
+<!--        PC.CATEGORY_NAME as category_name,-->
+<!--        PB.BOARD_STATUS as status-->
+<!--        FROM WW_USER WU-->
+<!--        LEFT OUTER JOIN police_board pb on WU.user_number = pb.user_number-->
+<!--        left outer join big_category bc on pb.big_code = bc.big_code-->
+<!--        LEFT OUTER JOIN POLICE_CATEGORY PC ON PB.police_category = PC.category_number-->
+<!--        <trim prefix="WHERE" prefixOverrides="AND">-->
+<!--            <if test="name != null and name != ''">-->
+<!--                AND WU.USER_NAME LIKE '%' || #{name} || '%'-->
+<!--            </if>-->
+<!--            <if test="bigCode != null and bigCode != ''">-->
+<!--                AND bc.BIG_CODE LIKE '%' || #{bigCode} || '%'-->
+<!--            </if>-->
+<!--            <if test="code != null and code != ''">-->
+<!--                AND PC.CATEGORY_NUMBER LIKE '%' || #{code} || '%'-->
+<!--            </if>-->
+<!--            <if test="status != null and status != ''">-->
+<!--                AND BOARD_STATUS LIKE '%' || #{status} || '%'-->
+<!--            </if>-->
+<!--        </trim>-->
+<!--    </select>-->
 
 <!--  전체 댓글 신고 조회   -->
     <select id="selectReportComment" resultType="policeCommentVo">
@@ -462,13 +468,17 @@
         where police_number = #{policeNumber}
     </update>
 
-<!-- 신고 댓글 상태 변경  -->
-         <update id="updateCommentReport">
-             update police_comment
-            set comment_status = #{commentStatus}
-            where police_number = #{policeNumber}
+<!-- 신고 댓글(커뮤니티) 상태 변경  -->
+         <update id="updateCommunityReport">
+             update community_comment
+            set community_comment_status = #{status}
+            where comment_number = #{commentNumber}
          </update>
 
+<!--  신고 댓글(QnA) 상태 변경  -->
+<!--  <update id="updateQnaCommentReport">-->
+<!--       -->
+<!--  </update>-->
 
 
 <!--  게시글 신고 상태 변경  -->

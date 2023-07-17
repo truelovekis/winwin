@@ -273,8 +273,8 @@ thead tr {
 }
 
 .N {
-    background-color: rgb(220 255 226);
-    color: #587c60;
+    background-color: rgb(255, 237, 237);
+    color: red;
     border: none;
     border-radius: 5px;
     padding: 7px 5px;
@@ -468,3 +468,7 @@ input {
 /*    background-color: #007aff;*/
 /*    border-radius: 5px;*/
 /*}*/
+
+tbody > tr:last-child td {
+    border-bottom: none;
+}

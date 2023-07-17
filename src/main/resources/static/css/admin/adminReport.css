@@ -220,6 +220,10 @@ tbody tr {
 td {
     border: none;
     border-bottom: 1px solid rgba(115, 114, 114, 0.24);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px;
 }
 
 thead tr {
@@ -250,8 +254,8 @@ tr:last-child td {
 }
 
 .N {
-    background-color: rgb(220 255 226);
-    color: #587c60;
+    background-color: rgb(255, 237, 237);
+    color: red;
     border: none;
     border-radius: 5px;
     padding: 7px 5px;
@@ -340,4 +344,8 @@ tr:last-child td {
 /* input font 적용 */
 input {
     font-family: "NanumSquare";
+}
+
+tbody > tr:last-child td {
+    border-bottom: none;
 }

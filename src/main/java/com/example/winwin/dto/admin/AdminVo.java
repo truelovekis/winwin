@@ -46,5 +46,7 @@ public class AdminVo {
     private Long policeNumber;
     private String boardStatus;
     private Long policeBoard;
+    private String userPosition;
+    private String status;
 
 }

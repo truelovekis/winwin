@@ -80,10 +80,10 @@
             <option value="" style="font-family: NanumSquareAcr;" class="hide2" selected> -- </option>
           </select>
           <span>멘토/멘티 : </span>
-          <select name="mentor" id="mandm" class="search-text2" style="font-family: NanumSquareAcr;">
+          <select name="position" id="mandm" class="search-text2" style="font-family: NanumSquareAcr;">
             <option value="" style="font-family: NanumSquareAcr;">선택</option>
-            <option value="1" style="font-family: NanumSquareAcr;">멘토</option>
-            <option value="0" style="font-family: NanumSquareAcr;">멘티</option>
+            <option value="멘토" style="font-family: NanumSquareAcr;">멘토</option>
+            <option value="멘티" style="font-family: NanumSquareAcr;">멘티</option>
           </select>
           <button type="text" class="search-btn" style="font-family: NanumSquareAcr;">검색</button>
         </div>
@@ -118,8 +118,8 @@
             <td class="user-register-date" align="center"th:text="${admin.userRrnumber}"></td>
             <td class="user-phonenumber" align="center" th:text="${admin.userPhonenumber}"></td>
             <td class="user-mento-menti" align="center">
-              <button th:if="${admin.mentorStatus} == 1" type="button" class="mento-button Y" style="font-family: NanumSquareAcr;" th:text="멘토"></button>
-              <button th:if="${admin.mentorStatus} == 0" type="button" class="mento-button N" style="font-family: NanumSquareAcr;" th:text="멘티"></button>
+              <button th:if="${admin.userPosition == '멘토'}" type="button" class="mento-button Y" style="font-family: NanumSquareAcr;" th:text="멘토"></button>
+              <button th:if="${admin.userPosition == '멘티'}" type="button" class="mento-button N" style="font-family: NanumSquareAcr;" th:text="멘티"></button>
             </td>
 <!--            <td class="user-email" align="center" th:text="${admin.userEmail}"></td>-->
             <td class="board-public-secret" align="center">

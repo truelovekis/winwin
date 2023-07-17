@@ -25,6 +25,7 @@ public class PoliceCommentVo {
     private String status;
     private String categoryNumber;
     private String bigCode;
+    private String communityCommentStatus;
 
 
 }
