@@ -33,7 +33,7 @@ function getObj(bigCategory){
         obj.text='진로정보';
     }else if(bigCategory == 300){
         obj.url=`/qna/read?qnaNumber`;
-        obj.text='QnA';
+        obj.text='Q&A';
     }else if(bigCategory == 400){
         obj.url=`/community/read?communityNumber`;
         obj.text='커뮤니티';

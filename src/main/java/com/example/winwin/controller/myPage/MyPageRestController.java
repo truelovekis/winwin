@@ -163,7 +163,7 @@ public class MyPageRestController {
         Long userNumber = (Long) req.getSession().getAttribute("userNumber");
         Criteria criteria = new Criteria();
         criteria.setPage(page);
-        criteria.setAmount(5);
+        criteria.setAmount(4);
         PageVo pageVo = new PageVo(criteria, myPageService.getCommentCnt(userNumber));
         List<ActiveCommentVo> activeCommentVoList = myPageService.getActiveCommentList(userNumber, criteria);
 
@@ -173,4 +173,40 @@ public class MyPageRestController {
 
         return myBoard;
     }
+
+    //    내 QnA 작성 댓글 전체보기
+    @GetMapping("/myQnaComment/{page}")
+    public Map<String, Object> myQnaComment(HttpServletRequest req, @PathVariable("page") int page) {
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+        Criteria criteria = new Criteria();
+        criteria.setPage(page);
+        criteria.setAmount(4);
+        PageVo pageVo = new PageVo(criteria, myPageService.getTotalQnaComment(userNumber));
+        List<ActiveCommentVo> activeCommentVoList = myPageService.getActiveQnaCommentList(userNumber, criteria);
+
+        Map<String, Object> myBoard = new HashMap<>();
+        myBoard.put("pageVo", pageVo);
+        myBoard.put("activeCommentVoList", activeCommentVoList);
+        System.out.println("activeCommentVoListactiveCommentVoList : "+activeCommentVoList);
+        return myBoard;
+    }
+
+    //    내 커뮤니티 작성 댓글 전체보기
+    @GetMapping("/myCommunityComment/{page}")
+    public Map<String, Object> myCommunityComment(HttpServletRequest req, @PathVariable("page") int page) {
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+        Criteria criteria = new Criteria();
+        criteria.setPage(page);
+        criteria.setAmount(4);
+        PageVo pageVo = new PageVo(criteria, myPageService.getTotalCommunityComment(userNumber));
+        List<ActiveCommentVo> activeCommentVoList = myPageService.getActiveCommunityCommentList(userNumber, criteria);
+
+        Map<String, Object> myBoard = new HashMap<>();
+        myBoard.put("pageVo", pageVo);
+        myBoard.put("activeCommentVoList", activeCommentVoList);
+
+        return myBoard;
+    }
+
+
 }
