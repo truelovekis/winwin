@@ -42,6 +42,9 @@ public class QnaController {
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
         QnaVo qnaVo = qnaService.findQna(qnaNumber);
 
+        List<QnaProfileVo> qnaProfileVoList = qnaService.registerProfile(userNumber);
+        System.out.println(qnaProfileVoList+"======================!!!!!!!!!!!!!");
+
 //        Long sessionUserNumber = (Long)req.getSession().getAttribute("userNumber");
         QnaCommentVo qnaCommentVo = new QnaCommentVo();
         qnaCommentVo.setSessionUserNumber(userNumber);
@@ -74,6 +77,7 @@ public class QnaController {
         model.addAttribute("qnaLikeCnt", qnaLikeCnt);
         model.addAttribute("commentCnt", commentCnt);
         model.addAttribute("commentList", qnaCommentVoList);
+        model.addAttribute("qnaProfile", qnaProfileVoList);
         System.out.println("4444444444");
         System.out.println(qnaVo+"==============");
 
@@ -120,6 +124,7 @@ public class QnaController {
 //        }
 
         List<QnaProfileVo> qnaProfileVoList = qnaService.registerProfile(userNumber);
+        System.out.println(qnaProfileVoList+"======================!!!!!!!!!!!!!");
 
 //        System.out.println("==================================="+qnaList);
 //        if(qnaList.size() > 0){
@@ -145,7 +150,7 @@ public class QnaController {
 //        }
 
 //        model.addAttribute("qnaList", qnaList);
-        model.addAttribute("qnaProfile", qnaProfileVoList);
+          model.addAttribute("qnaProfile", qnaProfileVoList);
 //        model.addAttribute("subLists", subLists);
         return "/qna/qna";
     }

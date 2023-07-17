@@ -110,7 +110,7 @@ a {
     align-items: center;
     margin-top: 25px;
     position: relative;
-    left: 28%;
+    /*left: 28%;*/
 }
 
 .header-nav-r > a {
@@ -225,6 +225,8 @@ footer{
     margin-right: -13px;
     border-radius: 70%;
     overflow: hidden;
+    height:50px;
+    width:50px;
 }
 
 .Profil>.id{
@@ -512,7 +514,7 @@ footer{
 
 .description>p{
     font-size: 12px;
-    margin-top: -41px;
+    margin-top: -65px;
 }
 
 .Aicontent{
@@ -635,15 +637,27 @@ footer{
 
 .img-box{
     flex-direction: column-reverse;
-    margin: 30px 176px;
+    /*margin: 30px 176px;*/
     margin-bottom: 24px;
     border-radius: 3.5px;
-    width: 1000px;
+    width: 50px;
+    height: 50px;
+
+
+}
+
+.file-box{
+    flex-direction: column-reverse;
+    /*margin: 30px 176px;*/
+    margin-bottom: 24px;
+    border-radius: 3.5px;
+    height: 100%;
+
 }
 
 .img-box img{
     border-radius: 3.5px;
-    margin-left: 22px;
+    margin-left: 200px;
 }
 
 .dropdown{
@@ -910,4 +924,16 @@ input[type="checkbox"] {
 
 .userInfo{
     margin-top: 20px;
+}
+
+/*====프로필 이미지======*/
+.userpfp{
+    width: 50px;
+    height: 50px;
+}
+
+
+/*========gradeName  폰트 사이즈 조정=============*/
+.gradeName-text{
+    font-size: 13px;
 }

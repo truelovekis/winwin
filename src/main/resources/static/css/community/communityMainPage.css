@@ -3,6 +3,10 @@
   padding: 0;
 }
 
+a{
+  color: black;
+}
+
 .wrap {
   display: flex;
   justify-content: end;
@@ -205,6 +209,12 @@
   font-size: 17px;
   font-weight: bold;
   margin: 15px 0px;
+  text-overflow: ellipsis;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .community-sub-content {
@@ -217,6 +227,12 @@
   color: gray;
   margin: 20px 0px;
   line-height: 20px;
+  text-overflow: ellipsis;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .community-sub-box {

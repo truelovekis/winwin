@@ -29,4 +29,6 @@ public class CommunityVo extends Criteria{
     private String categoryTypeStr;
     private String userStatus; // 추가함
     private String communityStatus; // 추가함
+    private String gradeName; // 추가함
+    private String userPosition; // 추가함
 }

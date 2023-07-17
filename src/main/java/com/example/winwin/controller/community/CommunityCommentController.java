@@ -32,7 +32,7 @@ public class CommunityCommentController {
         CommunityCommentVo communityCommentVo = new CommunityCommentVo();
         communityCommentVo.setSessionUserNumber(sessionUserNumber);
         communityCommentVo.setCommunityNumber(communityNumber);
-
+        System.out.println("!@#$%^&*()"+communityCommentService.findCommentUdList(communityCommentVo));
         return communityCommentService.findCommentUdList(communityCommentVo);
     }
 
