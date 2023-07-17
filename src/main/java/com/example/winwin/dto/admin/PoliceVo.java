@@ -20,4 +20,6 @@ public class PoliceVo {
     private String status;
     private String categoryNumber;
     private String bigCode;
+    private Long commentNumber;
+
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 public class AdminCareerSearchVo {
     private String name;
-    private String code;
+    private String mainCode;
     private String date;
     private String status;
 }

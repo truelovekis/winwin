@@ -62,10 +62,10 @@
           <span>획득일 : </span>
           <input name="date" class="datepicker">
           <span>멘토/멘티 : </span>
-          <select name="mentor" id="public-secret" class="search-text2" style="font-family: NanumSquareAcr;">
+          <select name="position" id="public-secret" class="search-text2" style="font-family: NanumSquareAcr;">
             <option value="" style="font-family: NanumSquareAcr;">선택</option>
-            <option value="1" style="font-family: NanumSquareAcr;">멘토</option>
-            <option value="0" style="font-family: NanumSquareAcr;">멘티</option>
+            <option value="멘토" style="font-family: NanumSquareAcr;">멘토</option>
+            <option value="멘티" style="font-family: NanumSquareAcr;">멘티</option>
           </select>
           <button type="text" class="search-btn" style="font-family: NanumSquareAcr;">검색</button>
         </div>
@@ -96,8 +96,8 @@
             <td class="point-cnt" align="center" th:text="${admin.userWing}"></td>
             <td class="user-register-date" align="center" th:text="${#strings.substring(admin.wingEarnDate, 0, 10)}"></td>
             <td class="user-status" align="center">
-              <div th:if="${admin.mentorStatus} == 1" class="mento-button Y" th:text="멘토"></div>
-              <div th:if="${admin.mentorStatus} == 0" class="mento-button N" th:text="멘티"></div>
+              <div th:if="${admin.userPosition == '멘토'}" class="mento-button Y" th:text="멘토"></div>
+              <div th:if="${admin.userPosition == '멘티'}" class="mento-button N" th:text="멘티"></div>
             </td>
           </tr>
           </tbody>

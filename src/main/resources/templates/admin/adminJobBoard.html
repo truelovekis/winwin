@@ -43,7 +43,7 @@
                     <div class="small-category-kind">
                         <div class="small-category1">
                             <a th:href="@{/admin/board}" class="small-category-a">
-                                <h4>커뮤니티 정보</h4>
+                                <h4>커뮤니티</h4>
                             </a>
                         </div>
                         <div class="small-category2">
@@ -68,12 +68,12 @@
                     <input name="name" type="text" placeholder="작성자" class="search-text"
                            style="font-family: NanumSquareAcr;">
                     <span>직무/학과 : </span>
-                    <select  class="search-text2 maincode" style="font-family: NanumSquareAcr;">
+                    <select class="search-text2 maincode" style="font-family: NanumSquareAcr;">
                         <option value="0" selected="selected" class="select-all" style="font-family: NanumSquareAcr;">
                             전체
                         </option>
-                        <option value="1" class="option select-job" style="font-family: NanumSquareAcr;">직무</option>
-                        <option value="2" class="option select-dep" style="font-family: NanumSquareAcr;">학과</option>
+                        <option value="1" name="mainCode" class="option select-job" style="font-family: NanumSquareAcr;">직무</option>
+                        <option value="2" name="mainCode" class="option select-dep" style="font-family: NanumSquareAcr;">학과</option>
                     </select>
                     <span>작성일 : </span>
                     <input name="date" class="datepicker" style="font-family: NanumSquareAcr;">
@@ -89,16 +89,17 @@
             <!--  -->
 
             <!-- 직무/학과별 분류 -->
+<!--            <div class="list-name">-->
 
-            <div class="job-list none">
-                <ul name="code" class="job-category">
+            <div class="job-list none list1">
+                <ul name="mainCode" class="job-category">
 
                 </ul>
             </div>
 
 
-            <div class="dep-list none">
-                <ul name="code" class="dep-category">
+            <div class="dep-list none list1">
+                <ul class="dep-category">
 
                     <!--          <li class="dep-big-cateogry">-->
                     <!--            <input type="checkbox" name="dep-checked06" class="dep-chk" id="dep-checked06">-->
@@ -110,6 +111,9 @@
                     <!--          </li>-->
                 </ul>
             </div>
+<!--            </div>-->
+
+                <input type="hidden" name="mainCode" id="main-code">
             </form>
             <!--  -->
 
@@ -136,7 +140,8 @@
                             <input type="checkbox" name="" class="check check-box" id="checking"
                                    th:data-number="${admin.careerInfoNumber}">
                         </td>
-                        <td class="board-category" align="center" th:text="${admin.mainName}"></td>
+                        <input type="hidden" th:data-codenum="${admin.mainCode}" class="codeNumber">
+                        <td class="board-category" th:data-code="${admin.mainCode}" align="center" th:text="${admin.mainName}"></td>
                         <td class="board-name" align="center" th:text="${admin.careerInfoTitle}"></td>
                         <td class="board-writer" align="center" th:text="${admin.userName}"></td>
                         <td class="board-writer-date" align="center"

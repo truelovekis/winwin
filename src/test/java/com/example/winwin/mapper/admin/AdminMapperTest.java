@@ -31,10 +31,10 @@ class AdminMapperTest {
     @DisplayName("검색한 회원 조회")
     void getUserInfo() {
         AdminUserSearchVo adminUserSearchVo = new AdminUserSearchVo();
-        adminUserSearchVo.setMainCode("104");
-        adminUserSearchVo.setIdentity("U");
+        adminUserSearchVo.setMainCode("101");
+        adminUserSearchVo.setIdentity("W");
 //        adminUserSearchVo.setMentor("1");
-        adminUserSearchVo.setId("e");
+//        adminUserSearchVo.setId("e");
 
         List<AdminVo> list = adminMapper.getUserInfo(adminUserSearchVo);
 
@@ -114,10 +114,10 @@ class AdminMapperTest {
     @DisplayName("검색한 진로정보 조회")
     void selectSearchCareer(){
         AdminCareerSearchVo adminCareerSearchVo = new AdminCareerSearchVo();
-        adminCareerSearchVo.setName("김에스더");
-        adminCareerSearchVo.setCode("104");
-       adminCareerSearchVo.setDate("2023-06-25");
-       adminCareerSearchVo.setStatus("1");
+        adminCareerSearchVo.setName("김회원");
+        adminCareerSearchVo.setMainCode("101");
+//       adminCareerSearchVo.setDate("2023-06-25");
+//       adminCareerSearchVo.setStatus("1");
 
         List<AdminVo> list = adminMapper.selectSearchCareer(adminCareerSearchVo);
 
