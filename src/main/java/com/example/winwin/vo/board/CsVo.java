@@ -18,5 +18,7 @@ public class CsVo extends Criteria {
     private String userId;
     private String userNickname;
     private String userBelong;
-    private int csReadCnt;
+    private int likeCnt; // 좋아요 추가함
+    private int csReadCnt; // 조회수 추가함
+    private int commentCnt; // 댓글수 추가함
 }

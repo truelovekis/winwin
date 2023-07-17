@@ -23,7 +23,7 @@ import java.util.Map;
 public class CsRestController {
     private final CsService csService;
 
-    //  나눔 글 무한 스크롤
+    //  문의사항 글 무한 스크롤
     @GetMapping("/list/{page}")
     public Map<String, Object> csListPage(@PathVariable("page") int page){
         Criteria criteria = new Criteria();
@@ -33,9 +33,6 @@ public class CsRestController {
         PageVo pageVo = new PageVo(criteria, csService.findTotal());
 
         List<CsVo> csVoList = csService.findListPage(paramCsVo);
-
-        System.out.println("========================"+csVoList+"==========================");
-
 
         if(csVoList.size() > 0){
             for (CsVo csVo: csVoList) {
@@ -60,7 +57,7 @@ public class CsRestController {
         }
         Map<String, Object> csMap = new HashMap<>();
         csMap.put("pageVo", pageVo);
-        csMap.put("csList", csVoList);
+        csMap.put("csVoList", csVoList);
 
         return csMap;
     }
