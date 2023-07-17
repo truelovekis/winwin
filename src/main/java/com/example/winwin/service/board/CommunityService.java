@@ -2,6 +2,8 @@ package com.example.winwin.service.board;
 
 import com.example.winwin.dto.board.CommunityDto;
 import com.example.winwin.mapper.board.CommunityMapper;
+import com.example.winwin.mapper.like.CommunityCommentUdMapper;
+import com.example.winwin.mapper.like.CommunityGoodMapper;
 import com.example.winwin.service.file.CommunityFileService;
 import com.example.winwin.vo.board.CommunityVo;
 import com.example.winwin.vo.board.CommunityProfileVo;
@@ -22,6 +24,8 @@ public class CommunityService {
     private final CommunityMapper communityMapper;
     private final CommunityFileService communityFileService;
     private final CommunityCommentService communityCommentService;
+    private final CommunityCommentUdMapper communityCommentUdMapper;
+    private final CommunityGoodMapper communityGoodMapper;
 
     public void register(CommunityDto communityDto){
         if (communityDto == null) {
@@ -34,6 +38,8 @@ public class CommunityService {
         if (communityNumber == null){
             throw new IllegalArgumentException("게시물 번호 누락");
         }
+        communityCommentUdMapper.deleteForCommunity(communityNumber);
+        communityGoodMapper.deleteForCommunity(communityNumber);
         communityFileService.remove(communityNumber);
         communityCommentService.deleteCommunity(communityNumber);
         communityMapper.delete(communityNumber);
@@ -81,7 +87,7 @@ public class CommunityService {
     }
 
 
-    public List<CommunityProfileVo> registerProfile(Long userNumber){
+    public CommunityProfileVo selectUserProfile(Long userNumber){
         return communityMapper.selectUserProfile(userNumber);
     }
 

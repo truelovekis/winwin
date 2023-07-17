@@ -63,9 +63,10 @@
         ORDER BY C.COMMUNITY_NUMBER DESC
     </select>
 
+
     <!-- 커뮤니티(로그인시) 프로필 조회 -->
     <select id="selectUserProfile" resultType="CommunityProfileVo">
-        SELECT MC.CAREER_COMPANY, MC.CAREER_TITLE, P.PFP_SYSTEM_NAME, P.PFP_UUID, MC.CAREER_START_DATE, U.USER_NICKNAME
+        SELECT MC.CAREER_COMPANY, MC.CAREER_TITLE, P.PFP_SYSTEM_NAME, P.PFP_UUID, MC.CAREER_START_DATE, U.USER_NICKNAME, G.GRADE_NAME, U.USER_POSITION
         FROM WW_USER U
                  LEFT OUTER JOIN USER_PFP P
                                  ON U.USER_NUMBER = P.USER_NUMBER
@@ -73,7 +74,9 @@
                                  ON U.USER_NUMBER = M.USER_NUMBER
                  LEFT OUTER JOIN MENTOR_CAREER MC
                                  ON MC.MENTOR_NUMBER = M.MENTOR_NUMBER
-        <if test="userNumber  != null ">
+                 LEFT OUTER JOIN GRADE G
+                                 ON U.USER_GRADE = G.GRADE_NUMBER
+        <if test="userNumber != null ">
             WHERE U.USER_NUMBER = #{userNumber}
         </if>
         ORDER BY MC.CAREER_START_DATE DESC
