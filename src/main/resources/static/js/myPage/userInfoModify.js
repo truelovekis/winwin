@@ -65,117 +65,76 @@ $(".select-tag").on("click", ".tag", function () {
 // 1차 카테고리
 let $category = $(".first-option-box");
 // 2차 카테고리
-let $jobBox = $(".second-job-box");
+let $jobBox2 = $(".second-job-box");
 // 3차 카테고리
-let $depBox = $(".third-job-box");
+let $depBox2 = $(".third-job-box");
 
 $(".option").on("click", function () {
     let text = "";
-    $jobBox.html(text);
+    $jobBox2.html(text);
+    let ss = $(this).val();
     // 직무일때
     if ($(this).val() == "1") {
-        // 백엔드 작업시 비동기 통신 사용해서 꽂기
-        // $.ajax({
-        //   url: "....",
-        //   type: "get",
-        //   data: { cateNumber: 1 },
-        //   success: function (result) {
-        //     text = makeMiddleCate(result);
-        //   },
-        // });
-
-        let obj = [
-            { number: 1, name: "서비스업" },
-            { number: 2, name: "의료/제약" },
-            { number: 3, name: "제조/화학" },
-            { number: 4, name: "판매/유통" },
-            { number: 5, name: "IT/웹/통신" },
-        ];
-        text = makeMiddleCate(obj);
+        $.ajax({
+            url: "/category/categoryJ",
+            type: "get",
+            data: {mainCode: ss},
+            dataType: 'json',
+            success: function (result) {
+                makeMiddleCate(result);
+            },
+        });
     }
 
     // 학과일때
-    if ($(this).val() == "2") {
-        // 백엔드 작업시 비동기 통신 사용해서 꽂기
-        // $.ajax({
-        //   url: "....",
-        //   type: "get",
-        //   data: { cateNumber: 1 },
-        //   success: function (result) {
-        //     text = makeMiddleCate(result);
-        //   },
-        // });
-
-        let obj = [
-            { number: 11, name: "사회" },
-            { number: 12, name: "자연과학" },
-            { number: 13, name: "의약" },
-            { number: 14, name: "교육" },
-        ];
-        text = makeMiddleCate(obj);
+    if($(this).val() == "2"){
+        $.ajax({
+            url: "/category/categoryH",
+            type: "get",
+            data: {mainCode: ss},
+            dataType : 'json',
+            success: function (result) {
+                makeMiddleCate(result);
+            },
+        });
     }
-
-    $jobBox.html(text);
+    $jobBox2.html(text);
 });
 
 $(".second-job-box").on("click", ".option", function () {
     let text = "";
-
-
-
-    if ($(this).val() == "1") {
-        let obj = [{ number: 1, name: "서비스업1" }];
-        text = makeSmallCate(obj);
-    } else if ($(this).val() == "2") {
-        let obj = [{ number: 2, name: "의료/제약1" }];
-        text = makeSmallCate(obj);
-    } else if ($(this).val() == "3") {
-        let obj = [{ number: 3, name: "제조/화학1" }];
-        text = makeSmallCate(obj);
-    } else if ($(this).val() == "4") {
-        let obj = [{ number: 4, name: "판매/유통1" }];
-        text = makeSmallCate(obj);
-    } else if ($(this).val() == "5") {
-        let obj = [{ number: 5, name: "IT/웹/통신1" }];
-        text = makeSmallCate(obj);
-    } else if ($(this).val() == "11") {
-        let obj = [{ number: 11, name: "사회1" }];
-        text = makeSmallCate(obj);
-    } else if ($(this).val() == "12") {
-        let obj = [{ number: 12, name: "자연과학1" }];
-        text = makeSmallCate(obj);
-    } else if ($(this).val() == "13") {
-        let obj = [{ number: 13, name: "의약1" }];
-        text = makeSmallCate(obj);
-    } else if ($(this).val() == "14") {
-        let obj = [{ number: 14, name: "교육1" }];
-        text = makeSmallCate(obj);
-    }
-
-    $depBox.html(text);
+    $depBox2.html(text)
+    let ss = $(this).val();
+    $.ajax({
+        url : '/category/subCategory',
+        type : 'get',
+        data : { mainCode : ss },
+        dataType : 'json',
+        success : function (result) {
+            let text2 = '';
+            result.forEach(r => {
+                text2 +=`
+                    <li class="option" value="${r.subNumber}">${r.subName}</li>
+                    `;
+            });
+            $('.third-job-box').html(text2);
+        }
+    });
+    $depBox2.html(text);
 });
 
 // 2, 3차 카테고리 선택 시 항목 띄어주는 함수
 
-function makeMiddleCate(obj) {
-    let list = obj;
-    let text = "";
+function makeMiddleCate(result) {
+    let text2 = '';
 
-    list.forEach((cate) => {
-        text += `<li class="option" value="${cate.number}">${cate.name}</li>`;
+    result.forEach(r => {
+        text2 += `
+        <li class="option" value="${r.mainCode}">${r.mainName}</li>
+        `;
     });
+    $('.second-job-box').html(text2);
 
-    return text;
-}
-
-function makeSmallCate(obj) {
-    let list = obj;
-    let text = "";
-
-    list.forEach((cate) => {
-        text += `<li class="option" value="${cate.number}">${cate.name}</li>`;
-    });
-
-    return text;
+    return text2;
 }
 

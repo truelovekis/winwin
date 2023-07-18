@@ -15,11 +15,13 @@ public interface ActivityMapper {
 
 //    qna
     public int selectTotalQna(Long userNumber);
+    public int selectTotalQnaComment(Long userNumber);
     public List<ActiveBoardVo> selectActiveQnaBoardList(Long userNumber, Criteria criteria);
     public List<ActiveCommentVo> selectActiveQnaCommentList(Long userNumber, Criteria criteria);
 
 //    커뮤니티
     public int selectTotalCommunity(Long userNumber);
+    public int selectTotalCommunityComment(Long userNumber);
     public List<ActiveBoardVo> selectActiveCommunityBoardList(Long userNumber, Criteria criteria);
     public List<ActiveCommentVo> selectActiveCommunityCommentList(Long userNumber, Criteria criteria);
 

@@ -121,6 +121,24 @@ public class MyPageService {
         return activityMapper.selectActiveCommentList(userNumber, criteria);
     }
 
+    @Transactional(readOnly = true)
+    public List<ActiveCommentVo> getActiveQnaCommentList(Long userNumber, Criteria criteria){
+        if(userNumber == null){
+            throw new IllegalArgumentException("로그인이 필요합니다.");
+        }
+
+        return activityMapper.selectActiveQnaCommentList(userNumber, criteria);
+    }
+
+    @Transactional(readOnly = true)
+    public List<ActiveCommentVo> getActiveCommunityCommentList(Long userNumber, Criteria criteria){
+        if(userNumber == null){
+            throw new IllegalArgumentException("로그인이 필요합니다.");
+        }
+
+        return activityMapper.selectActiveCommunityCommentList(userNumber, criteria);
+    }
+
 //    내가 작성한 글 개수
     @Transactional(readOnly = true)
     public int getBoardCnt(Long userNumber){
@@ -188,6 +206,24 @@ public class MyPageService {
 //    내가 작성한 댓글 개수
     @Transactional(readOnly = true)
     public int getCommentCnt(Long userNumber){
+        if(userNumber == null){
+            throw new IllegalArgumentException("로그인이 필요합니다.");
+        }
+
+        return userInfoMapper.selectCommentCnt(userNumber);
+    }
+
+    @Transactional(readOnly = true)
+    public int getTotalQnaComment(Long userNumber){
+        if(userNumber == null){
+            throw new IllegalArgumentException("로그인이 필요합니다.");
+        }
+
+        return userInfoMapper.selectCommentCnt(userNumber);
+    }
+
+    @Transactional(readOnly = true)
+    public int getTotalCommunityComment(Long userNumber){
         if(userNumber == null){
             throw new IllegalArgumentException("로그인이 필요합니다.");
         }

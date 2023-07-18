@@ -132,20 +132,27 @@
         WHERE RN > (#{criteria.page} - 1) * #{criteria.amount}
     </select>
     <select id="selectActiveShareBoardList" resultType="activeBoardVo">
-        SELECT BIG_CATEGORY, BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, BOARD_DATE, BOARD_CNT, BOARD_COMMENT, BOARD_LIKE, BOARD_GOOD
+        SELECT BIG_CATEGORY, BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, BOARD_DATE, BOARD_CNT, BOARD_STATUS, BOARD_UPLOAD_PATH, BOARD_UUID, BOARD_SYSTEM_NAME
         FROM(
-                SELECT ROWNUM RN, BIG_CATEGORY, BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, TO_CHAR(BOARD_DATE, 'yyyy-mm-dd') BOARD_DATE, BOARD_CNT, BOARD_COMMENT, BOARD_LIKE, BOARD_GOOD
+                SELECT ROWNUM RN, BIG_CATEGORY, BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, TO_CHAR(BOARD_DATE, 'yyyy-mm-dd') BOARD_DATE,
+                       BOARD_CNT, BOARD_STATUS, FILE_UPLOAD_PATH BOARD_UPLOAD_PATH, FILE_UUID BOARD_UUID, FILE_SYSTEM_NAME BOARD_SYSTEM_NAME
                 FROM(
-                        SELECT 600 BIG_CATEGORY, SHARE_NUMBER BOARD_NUMBER,
+                        SELECT 600 BIG_CATEGORY, S.SHARE_NUMBER BOARD_NUMBER,
                                SHARE_TITLE BOARD_TITLE, SHARE_CONTENT BOARD_CONTENT,
-                               SHARE_DATE BOARD_DATE, SHARE_READ_CNT BOARD_CNT,
-                               -1 BOARD_COMMENT,
-                               -1 BOARD_LIKE,
-                               -1 BOARD_GOOD
-                        FROM SHARE_FREE
-                             LEFT JOIN (FILE_UPLOAD_PATH, FILE_UUID, FILE_SYSTEM_NAME, SHARE_NUMBER
-                                 FROM share_file)
-                        WHERE USER_NUMBER = #{userNumber}
+                               SHARE_DATE BOARD_DATE, SHARE_READ_CNT BOARD_CNT, SHARE_STATUS BOARD_STATUS,
+                               FILE_UPLOAD_PATH, FILE_UUID, FILE_SYSTEM_NAME
+                        FROM SHARE_FREE S
+                                 LEFT JOIN (
+                                                    SELECT FILE_UPLOAD_PATH, FILE_UUID, FILE_SYSTEM_NAME, SHARE_NUMBER, RK
+                                                    FROM (
+                                                             SELECT FILE_UPLOAD_PATH, FILE_UUID, FILE_SYSTEM_NAME, SHARE_NUMBER,
+                                                                    RANK() over (PARTITION BY SHARE_NUMBER ORDER BY FILE_NUMBER) RK
+                                                             FROM share_file
+                                                            )
+                                                    WHERE RK = 1
+                                                ) J
+                                           ON S.SHARE_NUMBER = J.share_number
+                        WHERE S.USER_NUMBER = #{userNumber}
                         ORDER BY BOARD_DATE DESC
                     )
                 <![CDATA[
@@ -207,7 +214,7 @@
                                (SELECT COUNT(*) FROM COMMUNITY_COMMENT_UD UD WHERE CC.COMMENT_NUMBER = UD.COMMENT_NUMBER AND UD.UD_STATUS = 'd') COMMENT_DOWN
                         FROM COMMUNITY C
                                  JOIN COMMUNITY_COMMENT CC
-                                      ON C.USER_NUMBER = CC.USER_NUMBER
+                                      ON C.COMMUNITY_NUMBER = CC.COMMUNITY_NUMBER
                         WHERE CC.USER_NUMBER = #{userNumber}
                         UNION ALL
                         SELECT 500 BIG_CATEGORY, S.STUDY_NUMBER BOARD_NUMBER,
@@ -239,6 +246,7 @@
                                  JOIN QNA_COMMENT QC
                                       ON Q.QNA_NUMBER = QC.QNA_NUMBER
                         WHERE QC.USER_NUMBER = #{userNumber}
+                        ORDER BY COMMENT_DATE DESC
                     )
                 <![CDATA[
                 WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
@@ -247,18 +255,20 @@
         WHERE RN > (#{criteria.page} - 1) * #{criteria.amount}
     </select>
     <select id="selectActiveCommunityCommentList" resultType="activeCommentVo">
-        SELECT BIG_CATEGORY, BOARD_NUMBER, BOARD_TITLE, COMMENT_CONTENT, COMMENT_DATE, COMMENT_UPDOWN
+        SELECT BIG_CATEGORY, BOARD_NUMBER, BOARD_TITLE, COMMENT_CONTENT, COMMENT_DATE, COMMENT_UP, COMMENT_DOWN
         FROM(
-                        SELECT 400 BIG_CATEGORY, C.COMMUNITY_NUMBER BOARD_NUMBER,
-                               C.COMMUNITY_TITLE BOARD_TITLE, CC.COMMENT_CONTENT COMMENT_CONTENT,
-                               CC.COMMENT_DATE COMMENT_DATE, U.UD_STATUS COMMENT_UPDOWN
-                        FROM COMMUNITY C
-                                 JOIN COMMUNITY_COMMENT CC
-                                      ON C.USER_NUMBER = CC.USER_NUMBER
-                                 JOIN COMMUNITY_COMMENT_UD U
-                                      ON CC.COMMENT_NUMBER = U.COMMENT_NUMBER
-                        WHERE CC.USER_NUMBER = #{userNumber}
-                        ORDER BY COMMENT_DATE DESC
+                SELECT ROWNUM RN, BIG_CATEGORY, BOARD_NUMBER, BOARD_TITLE, COMMENT_CONTENT, TO_CHAR(COMMENT_DATE, 'yyyy-mm-dd') COMMENT_DATE, COMMENT_UP, COMMENT_DOWN
+                FROM(
+                    SELECT 400 BIG_CATEGORY, C.COMMUNITY_NUMBER BOARD_NUMBER,
+                           C.COMMUNITY_TITLE BOARD_TITLE, CC.COMMENT_CONTENT COMMENT_CONTENT,
+                           CC.COMMENT_DATE COMMENT_DATE,
+                           (SELECT COUNT(*) FROM COMMUNITY_COMMENT_UD UD WHERE CC.COMMENT_NUMBER = UD.COMMENT_NUMBER AND UD.UD_STATUS = 'u') COMMENT_UP,
+                           (SELECT COUNT(*) FROM COMMUNITY_COMMENT_UD UD WHERE CC.COMMENT_NUMBER = UD.COMMENT_NUMBER AND UD.UD_STATUS = 'd') COMMENT_DOWN
+                    FROM COMMUNITY C
+                             JOIN COMMUNITY_COMMENT CC
+                                  ON C.COMMUNITY_NUMBER = CC.COMMUNITY_NUMBER
+                    WHERE CC.USER_NUMBER = #{userNumber}
+                    ORDER BY COMMENT_DATE DESC
                     )
                 <![CDATA[
                 WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
@@ -283,13 +293,18 @@
     <select id="selectTotalCs">
         select count(USER_NUMBER) from CS where USER_NUMBER = #{userNumber}
     </select>
+    <select id="selectTotalQnaComment">
+        select count(USER_NUMBER) from QNA_COMMENT where USER_NUMBER = #{userNumber}
+    </select>
+    <select id="selectTotalCommunityComment">
+        select count(USER_NUMBER) from COMMUNITY_COMMENT where USER_NUMBER = #{userNumber}
+    </select>
+    
     <!-- 진로정보 페이지 갯수 구하기 -->
     <select id="selectTotalCareer">
         select COUNT(careerinfo_number) from CAREERINFO where USER_NUMBER = #{userNumber}
     </select>
     <!--    -->
-
-
     <!-- 마이페이지 진로정보 내 글 조회하기 -->
     <select id="selectCareerInfoBoardList" resultType="activeBoardVo">
         SELECT BIG_CATEGORY, mentor_number, user_number, sub_number,
@@ -362,5 +377,4 @@
         WHERE careerinfo_status = 1
     </select>
     <!--    -->
-
 </mapper>

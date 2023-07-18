@@ -119,6 +119,8 @@ hr {
 .mypage-main {
     width: 700px;
     padding: 30px 0px;
+    margin-left: 250px;
+    min-height: 450px;
 }
 
 .category {
@@ -211,7 +213,6 @@ button:hover {
     border-radius: 5px;
     border: 1px solid #ddd;
      padding: 15px 15px 15px 20px;
-    margin-bottom: 15px;
 }
 
 .reply-content {

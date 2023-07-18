@@ -26,10 +26,11 @@ public class ActiveBoardVo {
     private String userName;
     private String userNickname;
     private Long mentorNumber;
-    private String boardSystemname;
+    private String boardSystemName;
     private String boardUploadPath;
     private String boardUuid;
     private int subNumber;
     private String subName;
     private String gradeName;
+    private String boardStatus;
 }

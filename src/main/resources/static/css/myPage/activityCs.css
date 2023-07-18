@@ -98,7 +98,7 @@ hr {
 }
 
 .sub-category {
-    margin: 15px 15px 15px 448px;
+    margin: 15px 15px 15px 421px;
 }
 
 .sub-category > span {
@@ -123,6 +123,8 @@ hr {
 .mypage-main {
     width: 700px;
     padding: 30px 0px;
+    margin-left: 250px;
+    min-height: 450px;
 }
 
 .category {

@@ -37,7 +37,9 @@ function appendList(map) {
                               <div class="give-wrap">
                                 <div class="give-title-box">
                                   <div class="give-status-box">
-                                    <span class="give-status">마감</span>
+                                    <span class="give-status" style="color:${board.boardStatus == '1' ? 'green' : 'gray'}">
+                                    ${board.boardStatus == '1' ? '나눔 중' : '마감'}
+                                    </span>
                                     <span>&nbsp;|&nbsp;</span>
                                   </div>
                                   <span class="give-title">${board.boardTitle}</span>
@@ -55,10 +57,12 @@ function appendList(map) {
                                 </div>
                               </div>
                               <div class="give-img-box">
-                                <img th:src="@{/img/profile-basic.png}"/>
+                              ${  board.boardUuid == null ?
+                                    `<img src="/img/defualt_camera.jpg">` : `<img src="${'/upload/' + board.boardUploadPath + '/th_' + board.boardUuid + '_' + board.boardSystemName}">`
+                                }
                               </div>
                             </div>
-                          </div>
+                          </div>    
                         </a>
                    </div>
         `;
