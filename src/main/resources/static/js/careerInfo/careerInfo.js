@@ -270,10 +270,9 @@ function showInfo(careerInfoList) {
     console.log(careerInfoList);
     console.log('==========================================')
     if (careerInfoList.length == 0) {
-        // $('.main2').html('');
         return;
     }
-    // console.log('in!!')
+
     let text = ``;
     let flag = 0;
 
@@ -283,57 +282,47 @@ function showInfo(careerInfoList) {
         }
         console.log(career);
         text += `
-        <div class="card-box">
-                <div class="inner-card-box">
-                    <div class="title">
-                        <a class="careerInfo-title-path" href="/career/detail?careerInfoNumber=${career.careerInfoNumber}">
-                            <h1 class="card-box-title">${career.careerInfoTitle}</h1>
-                        </a>
+               <a class="career-click" href="/career/detail?careerInfoNumber=${career.careerInfoNumber}">
+                <div class="career-box">
+                  <div class="career-info">
+                    <div class="career-top">
+                      <span class="career-tag">${career.subName}</span>
+                      <span class="career-title">${career.careerInfoTitle}</span>
                     </div>
-                    <div class="msg">
-                        ${career.careerInfoContent}
+                    <span class="career-content">${career.careerInfoContent}</span>
+                  </div>
+                  <div class="career-bottom">
+                  <div class="career-bottom-wrap">
+                    <div class="career-user-profile-box">
+                      <div class="career-profile-img">
+                        ${career.pfpSystemname == null ?
+                        '<img src="/img/profile-basic.png"/>' :
+                        '<img src=/profile/' + career.pfpUuid + '_' + career.pfpSystemname +'>'}
+                      </div>
+                      <div class="career-user-info">
+                        <span class="career-user-name">${career.userNickname}</span>
+                        <span class="career-user-tag">${career.gradeName}</span>
+                      </div>
                     </div>
-                    <div class="profile-like-wrap">
-                        <div class="profile">
-                            <div class="pf">
-                                ${career.pfpSystemname == null ?
-            '<img src="/img/profile-basic.png" width="50px" height="50px" border-radius="70%">' :
-            '<img src="/profile/' + career.pfpUploadPath + career.pfpUuid + '_' + career.pfpSystemname + '>'
-            }
-                            </div>
-                            <div class="text-box">
-                                <span class="user-name">${career.userNickname}</span>
-                                <br/>
-                                <span class="user-bottom">${career.subName} ${career.gradeName}</span>
-                            </div>
-
-                            <div class="content">
-                                <div class="sec1">
-                                    <div>
-                                        <svg aria-label="좋아요" class="x1lliihq x1n2onr6" color="rgb(142, 142, 142)"
-                                             fill="rgb(142, 142, 142)" height="24" role="img" viewBox="0 0 24 24"
-                                             width="24">
-                                            <path d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"></path>
-                                        </svg>
-                                    </div>
-                                    <div class="number1">${career.careerInfoLike}</div>
-                                </div>
-                                <div class="sec2">
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                             fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
-                                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
-                                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
-                                        </svg>
-                                    </div>
-                                    <div class="number2">${career.careerInfoCnt}</div>
-                                </div>
-                            </div>
-                        </div>
-
+                    <div class="career-icon">
+                      <div class="select-count-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="rgb(148, 155, 160)" class="bi bi-eye" viewBox="0 0 16 16">
+                          <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                          <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                        </svg>
+                        <span class="select-count">${career.careerInfoCnt}</span>
+                      </div>
+                      <div class="career-like-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="rgb(148, 155, 160)" class="bi bi-heart" viewBox="0 0 16 16">
+                          <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                        </svg>
+                        <span class="like-count">${career.likeCnt}</span>
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </div>
+                </div>
+              </a>
         `;
 
         flag++;
@@ -346,6 +335,7 @@ function showInfo(careerInfoList) {
     if (flag % 3 != 0) {
         text += `</section>`;
     }
+
     $('.main2').append(text);
 }
 
@@ -389,8 +379,24 @@ function careerShowError(a, b, c) {
 }
 
 // 진로정보 글 작성하기 페이지 이동
-$('.write-btn').on('click', function () {
-    location.href = "/career/write";
+// $('.write-btn').on('click', function () {
+//     window.location.href = "/career/write";
+// });
+
+$('.write-btn').on('click', function (e) {
+    e.preventDefault();
+
+    let userNumber = $('.write-btn').data('num');
+    let mentorNumber = $('.write-btn').data('mentornum');
+
+    if(mentorNumber > -1){
+        window.location.href = "/career/write";
+    }else if(userNumber == null){
+        alert("로그인이 필요합니다.");
+        $('.login-move').trigger('click');
+    }else if(mentorNumber == -1){
+        alert('멘토가 아닙니다.');
+    }
 });
 
 

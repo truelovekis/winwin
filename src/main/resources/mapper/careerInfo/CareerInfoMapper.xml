@@ -60,7 +60,7 @@
         USER_NICKNAME, PFP_UPLOAD_PATH, PFP_SYSTEM_NAME, PFP_UUID,
         sub_name, grade_name, careerinfo_number, careerinfo_title, careerinfo_content, careerinfo_cnt,
         NVL(LIKE_CNT, 0) AS LIKE_CNT
-        from(
+        from (
         select ROWNUM RN, mentor_number, user_number, sub_number,
         USER_NICKNAME, PFP_UPLOAD_PATH, PFP_SYSTEM_NAME, PFP_UUID,
         sub_name, grade_name, careerinfo_number, careerinfo_title, careerinfo_content, careerinfo_cnt,
@@ -71,7 +71,7 @@
         PFP_UPLOAD_PATH, PFP_SYSTEM_NAME, PFP_UUID,
         SC.sub_name,
         G.grade_name,
-        CI.careerinfo_title, CI.careerinfo_content, CI.careerinfo_cnt, CI.CAREERINFO_NUMBER  CAREERINFO_NUMBER,
+        CI.careerinfo_title, CI.careerinfo_content, CI.careerinfo_cnt, CI.CAREERINFO_NUMBER,
         NVL(J1.LIKE_CNT, 0) LIKE_CNT
         FROM (
         SELECT mentor_number, user_number, sub_number
@@ -82,7 +82,7 @@
                 #{tagNumber}
             </foreach>
         </if>
-        )S1
+        ) S1
         JOIN WW_USER U
         ON S1.user_number = U.USER_NUMBER
         LEFT JOIN USER_PFP UP
@@ -99,13 +99,13 @@
         GROUP BY careerinfo_number
         ) J1
         ON J1.careerinfo_number = CI.careerinfo_number
-        ORDER BY LIKE_CNT
+        ORDER BY CI.CAREERINFO_DATE DESC
         )
         <![CDATA[
         where ROWNUM <= #{criteria.page} * #{criteria.amount}
         ]]>
         )
-         WHERE RN >( #{criteria.page} - 1) * #{criteria.amount}
+        WHERE RN > (#{criteria.page} - 1) * #{criteria.amount}
     </select>
     <!--    -->
 

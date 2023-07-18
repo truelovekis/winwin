@@ -73,7 +73,7 @@ function appendList(map) {
                                 <span>
                                     ${share.shareStatus == '1' ? '<span class="N">나눔 중</span>'
                                     : '<span class="E">마감</span>'
-                                        } 
+                                        }
                                 </span>
                                 |
                                 <span>${share.shareTitle}</span>
@@ -151,31 +151,32 @@ function timeForToday(value){
 }
 
 // 이력서 버튼 클릭시 마이페이지 이력서 페이지로 이동
-$('.pfp-sub-btn').on('click', function (e) {
+$('.pfp-sub-btn').off('click').on('click', function (e) {
     e.preventDefault();
 
-    let userNumber = $('.pfp-sub-btn').data('usernumber');
+    let userNumber = $(this).data('usernumber');
     console.log(userNumber);
 
     if (userNumber) {
         window.location.href = '/myPage/resume';
     } else {
-        alert("로그인이 필요합니다.")
+        alert("로그인이 필요합니다.");
         $('.login-move').trigger('click');
     }
 });
 
 // 자소서 버튼 클릭시 마이페이지 자소서 페이지로 이동
-$('.pfp-sub-btn').on('click', function (e) {
+$('.pfp-sub-btn').off('click').on('click', function (e) {
     e.preventDefault();
 
-    let userNumber = $('.pfp-sub-btn').data('usernumber');
+    let userNumber = $(this).data('usernumber');
     console.log(userNumber);
 
     if (userNumber) {
         window.location.href = '/myPage/resumePr';
     } else {
-        alert("로그인이 필요합니다.")
+        alert("로그인이 필요합니다.");
         $('.login-move').trigger('click');
     }
 });
+

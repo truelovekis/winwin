@@ -1,6 +1,7 @@
 package com.example.winwin.controller.careerInfo;
 
 import com.example.winwin.dto.mentor.CareerInfoVo;
+import com.example.winwin.service.career.CareerInfoLikeService;
 import com.example.winwin.service.career.CareerInfoService;
 import com.example.winwin.vo.infinityScroll.Criteria;
 import com.example.winwin.vo.infinityScroll.PageVo;
@@ -19,6 +20,7 @@ import java.util.Map;
 public class CareerInfoRestController {
 
     private final CareerInfoService careerInfoService;
+    private final CareerInfoLikeService careerInfoLikeService;
 
 //    진로정보 글 전체 좋아요순 및 카테고리 별 조회하기
     @GetMapping("/list/{page}")
@@ -28,6 +30,7 @@ public class CareerInfoRestController {
         Criteria criteria = new Criteria(page, 9);
         PageVo pageVo = new PageVo(criteria, careerInfoService.findCareerTotal());
         List<CareerInfoVo> careerInfoList = careerInfoService.findCareerInfoList(tagList, criteria);
+//        careerInfoLikeService.removeCareerInfoLike();
 
 //        VO, 커리어 리스트 둘 다 담아서 put
         Map<String, Object> carrerMap = new HashMap<>();

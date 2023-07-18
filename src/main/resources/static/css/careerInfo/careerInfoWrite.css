@@ -1,8 +1,7 @@
-body {
-    width: 1050px;
-    margin: auto;
+*{
+    padding: 0px;
+    margin: 0px;
 }
-
 
 /* 커뮤니티 서브 헤더 */
 .community-sub-header > hr {
@@ -271,7 +270,6 @@ h2{
     font-weight: bold;
     display: flex;
     align-items: center;
-    margin-left: 5px;
 }
 
 .close{
