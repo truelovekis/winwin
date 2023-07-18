@@ -17,7 +17,7 @@
 .community-pfp {
   position: fixed;
   left: 250px;
-  /* display: none; */
+  top: 170px;
 }
 
 .community-user {

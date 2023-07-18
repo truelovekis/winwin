@@ -187,7 +187,7 @@ public class MyPageRestController {
         Map<String, Object> myBoard = new HashMap<>();
         myBoard.put("pageVo", pageVo);
         myBoard.put("activeCommentVoList", activeCommentVoList);
-        System.out.println("activeCommentVoListactiveCommentVoList : "+activeCommentVoList);
+
         return myBoard;
     }
 

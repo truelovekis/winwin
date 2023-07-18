@@ -21,4 +21,8 @@ public class ActiveBoardVo {
     private int boardComment;
     private int boardLike;
     private int boardGood;
+    private String boardUuid;
+    private String boardUploadPath;
+    private String boardSystemName;
+    private String boardStatus;
 }
