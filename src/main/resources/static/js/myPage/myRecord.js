@@ -1,5 +1,3 @@
-
-
 // 다이어리 작성하기
 let $plus = $('.plusBtn');
 let $Diary = $('.diary');
@@ -67,14 +65,10 @@ $editCancle.on('click', function(){
     $(this).parents('.my-diary').find('.diary2').hide();
 });
 
-
 $('.btn-fullscreen').remove();
 $('.btn-codeview').remove();
 
-
-// $('.note-form-label').text('파일 첨부하기');
-// $('.note-image-url').text('링크 첨부하기');
-
+//다이어리 리스트 띄우기
 function diaryList(result) {
      let text = '';
     result.forEach(r => {
@@ -114,6 +108,7 @@ function diaryList(result) {
             $('.diary-list').html(text);
 }
 
+//다이어리 등록하기
 $('.submit').on('click' , function (){
     let title = $('.title').val();
     let content = $('.summernote').val();

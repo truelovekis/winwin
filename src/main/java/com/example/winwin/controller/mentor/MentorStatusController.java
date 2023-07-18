@@ -95,6 +95,7 @@ public class MentorStatusController {
     public void okum(MentorVo mentorVo, HttpServletRequest req){
         Long mentorNumber = (Long) req.getSession().getAttribute("mentorNumber");
         mentorVo.setMentorNumber(mentorNumber);
+
         userMentorService.okMentee(mentorVo);
     }
 
