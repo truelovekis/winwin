@@ -62,8 +62,17 @@ public interface AdminMapper{
     // 회원 상태 변경
     public void updateUser(Long userNumber, String userStatus);
 
-    // 게시글 신고 상태 변경
+    // 게시글(커뮤니티) 신고 상태 변경
     public void updateBoard(PoliceVo policeVo);
+
+    // 게시글(나눔) 신고 상태 변경
+    public void updateReportShare(PoliceVo policeVo);
+
+    // 게시글(Qna) 신고 상태 변경
+    public void updateReportQna(PoliceVo policeVo);
+
+    // 게시글(모임) 신고 상태 변경
+    public void updateReportStudy(PoliceVo policeVo);
 
     // 댓글(커뮤니티) 신고 상태 변경
     public void updateCommunityReport(PoliceVo policeVo);

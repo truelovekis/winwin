@@ -101,6 +101,8 @@
             <p th:text="${qna.userBelong}"</p>
           </div>
           <div class="dropdown">
+            <input type="hidden" class="user-num" name="userNumber" th:value="${qna.userNumber}"/>
+            <input type="hidden" th:value="${session.userNumber}"/>
             <button class="dropbtn">
               <span class="dropbtn_icon"> <svg data-v-bd9f2bcc="" data-v-3035bc76="" width="24" height="24" fill="black" xmlns="http://www.w3.org/2000/svg" class="c-Applicatio c-icon" style="fill: rgb(148, 155, 160);"><circle data-v-bd9f2bcc="" cx="12" cy="5.5" r="1.5"></circle><circle data-v-bd9f2bcc="" cx="12" cy="12" r="1.5"></circle><circle data-v-bd9f2bcc="" cx="12" cy="18.5" r="1.5"></circle></svg></span>
             </button>
@@ -115,14 +117,13 @@
 <!--            <input type="hidden" class="user-num" th:value="${qna.userNumber}">-->
 
             <div class="dropdown-content" th:if="${session.userNumber == qna.userNumber}">
-              <!--                <a href="#" class="police-btn">신고</a>-->
+
               <a href="#" class="qna-modify-btn">수정</a>
               <a href="#" class="qna-remove-btn">삭제</a>
             </div>
             <div class="dropdown-content" th:if="${session.userNumber != qna.userNumber}">
               <a href="#" class="police-btn">신고</a>
-              <!--                <a href="#" class="modify-btn">수정</a>-->
-              <!--                <a href="#" class="remove-btn">삭제</a>-->
+
             </div>
 
 <!--            <th:block  th:if="${session.userNumber == qna.userNumber}">-->
@@ -141,8 +142,7 @@
 <!--            </div>-->
 <!--            </th:block>-->
             <input type="hidden" class="qna-num" th:value="${qna.qnaNumber}">
-            <input type="hidden" class="user-num" name="userNumber" th:value="${qna.userNumber}"/>
-            <input type="hidden" th:value="${session.userNumber}"/>
+
 
           </div>
         </div>

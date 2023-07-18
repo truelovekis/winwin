@@ -38,6 +38,10 @@ public class PoliceRestController {
     //    모임 글 신고하기
     @PostMapping("/study")
     public void studyReport(@RequestBody PoliceBoardDto policeBoardDto, HttpServletRequest req) {
+
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+        policeBoardDto.setUserNumber(userNumber);
+
         policeBoardDto.setBigCode("500");
         policeService.policeBoardRegister(policeBoardDto);
     }

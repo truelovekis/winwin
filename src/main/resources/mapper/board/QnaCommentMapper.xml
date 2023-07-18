@@ -26,14 +26,14 @@
                             ON QNA_NUMBER = #{qnaNumber} AND U.USER_NUMBER = Q.USER_NUMBER
                        LEFT OUTER JOIN QNA_COMMENT_UD CCU
                                        ON Q.COMMENT_NUMBER = CCU.COMMENT_NUMBER
-        <choose>
-            <when test="sessionUserNumber != null">
-                AND CCU.USER_NUMBER = #{sessionUserNumber}
-            </when>
-            <otherwise>
-                AND 1=0
-            </otherwise>
-        </choose>
+<!--        <choose>-->
+<!--            <when test="sessionUserNumber != null">-->
+<!--                AND CCU.USER_NUMBER = #{sessionUserNumber}-->
+<!--            </when>-->
+<!--            <otherwise>-->
+<!--                AND 1=0-->
+<!--            </otherwise>-->
+<!--        </choose>-->
         ORDER BY Q.COMMENT_NUMBER DESC
     </select>
 
