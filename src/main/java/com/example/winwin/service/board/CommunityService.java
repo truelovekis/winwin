@@ -72,6 +72,7 @@ public class CommunityService {
         return communityMapper.commentCnt(communityNumber);
     }
 
+
     @Transactional(readOnly = true)
     public CommunityVo find(Long communityNumber){
         if(communityNumber == null){
@@ -87,6 +88,7 @@ public class CommunityService {
     }
 
 
+    //    커뮤니티 프로필 조회
     public CommunityProfileVo selectUserProfile(Long userNumber){
         return communityMapper.selectUserProfile(userNumber);
     }

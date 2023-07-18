@@ -18,4 +18,6 @@ public class QnaCommentVo {
     private String udStatus;
     private int udCnt;
     private Long sessionUserNumber;
+    private String pfpSystemName;
+    private String pfpUuid;
 }

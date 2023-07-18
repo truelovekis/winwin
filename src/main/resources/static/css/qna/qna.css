@@ -536,3 +536,9 @@ ul {
   flex-wrap: wrap;
   margin-left: 15px;
 }
+
+.img-box{
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}

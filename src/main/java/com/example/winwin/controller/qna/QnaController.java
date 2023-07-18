@@ -40,27 +40,20 @@ public class QnaController {
     public String qnaRead(Long qnaNumber, Model model, HttpServletRequest req){
 
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
+
         QnaVo qnaVo = qnaService.findQna(qnaNumber);
 
-//        Long sessionUserNumber = (Long)req.getSession().getAttribute("userNumber");
+
         QnaCommentVo qnaCommentVo = new QnaCommentVo();
         qnaCommentVo.setSessionUserNumber(userNumber);
         qnaCommentVo.setQnaNumber(qnaNumber);
-        System.out.println("111111111");
+
+        QnaProfileVo selectUserProfile = qnaService.selectUserProfile(qnaVo.getUserNumber());
+        model.addAttribute("qnaProfile", selectUserProfile);
+
         List<QnaCommentVo> qnaCommentVoList = qnaCommentService.findQnaCommentUdList(qnaCommentVo);
+
         qnaService.upQnaCnt(qnaNumber);
-        qnaVo.setUserNumber(userNumber);
-
-        System.out.println("222222222");
-        qnaVo.setQnaNumber(qnaNumber);
-
-
-        System.out.println("=========================");
-        System.out.println(qnaNumber);
-        System.out.println("========================");
-        System.out.println(qnaVo + "==========================");
-
-
 
         int commentCnt = qnaService.commentCnt(qnaNumber);
         QnaGoodDto qnaGoodDto = new QnaGoodDto();
@@ -68,14 +61,13 @@ public class QnaController {
         qnaGoodDto.setUserNumber(userNumber);
         Long likeStatus = qnaGoodService.findQnaLike(qnaGoodDto);
         int qnaLikeCnt = qnaGoodService.likeQnaCnt(qnaGoodDto);
-        System.out.println("333333333");
+
         model.addAttribute("qna", qnaVo);
         model.addAttribute("likeStatus", likeStatus);
         model.addAttribute("qnaLikeCnt", qnaLikeCnt);
         model.addAttribute("commentCnt", commentCnt);
         model.addAttribute("commentList", qnaCommentVoList);
-        System.out.println("4444444444");
-        System.out.println(qnaVo+"==============");
+
 
         return "/qna/qnaRead";
     }
@@ -110,43 +102,14 @@ public class QnaController {
     public String qnaList(Model model, HttpServletRequest req) {
 //        List<QnaVo> qnaList = qnaService.findQnaList();
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
-        // 카테고리 리스트
-//        Map<Long, List<QnaVo>> subLists = new HashMap<>();
-//
-//        for (QnaVo qna : qnaList) {
-//            Long qnaNumber = qna.getQnaNumber();
-//            List<QnaVo> subList = qnaService.findSubList(qnaNumber);
-//            subLists.put(qnaNumber, subList);
-//        }
 
-        List<QnaProfileVo> qnaProfileVoList = qnaService.registerProfile(userNumber);
 
-//        System.out.println("==================================="+qnaList);
-//        if(qnaList.size() > 0){
-//            for (QnaVo qnaVo: qnaList) {
-//
-//                // reg_date를 LocalDateTime으로 변환
-//                LocalDateTime qnaDate = LocalDateTime.parse(qnaVo.getQnaDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-//
-//                // 현재 시간과의 차이 계산
-//                long minutesDiff = ChronoUnit.MINUTES.between(qnaDate, LocalDateTime.now());
-//                long hoursDiff = ChronoUnit.HOURS.between(qnaDate, LocalDateTime.now());
-//                long daysDiff = ChronoUnit.DAYS.between(qnaDate, LocalDateTime.now());
-//
-//                // 경과 시간 표시
-//                if (minutesDiff < 60) {
-//                    qnaVo.setQnaDate(minutesDiff + "분 전");
-//                } else if (hoursDiff < 24) {
-//                    qnaVo.setQnaDate(hoursDiff + "시간 전");
-//                } else if (daysDiff < 365) {
-//                    qnaVo.setQnaDate(daysDiff + "일 전");
-//                }
-//            }
-//        }
+        if(userNumber != null){
+            QnaProfileVo selectUserProfile = qnaService.selectUserProfile(userNumber);
+            model.addAttribute("qnaProfile", selectUserProfile);
+        }
 
-//        model.addAttribute("qnaList", qnaList);
-        model.addAttribute("qnaProfile", qnaProfileVoList);
-//        model.addAttribute("subLists", subLists);
+
         return "/qna/qna";
     }
 
@@ -169,9 +132,19 @@ public class QnaController {
     }
 
     @PostMapping("/modify")
-    public RedirectView modify(QnaVo qnaVo, QsBridgeDto qsBridgeDto, RedirectAttributes redirectAttributes){
-        qnaService.modifyQs(qsBridgeDto);
-        qnaService.modifyQna(qnaVo);
+    public RedirectView modify(QnaVo qnaVo, QnaDto qnaDto, QsBridgeDto qsBridgeDto, Long qnaNumber, @RequestParam("subList") List<Long> subList, RedirectAttributes redirectAttributes){
+            qnaService.removeQs(qnaNumber);
+//            qnaService.removeQna(qnaNumber);
+            qnaService.registerQs(qsBridgeDto);
+//            qnaService.registerQna(qnaDto);
+                qnaService.modifyQna(qnaVo);
+
+        for(Long subNum : subList){
+            qsBridgeDto.setQnaNumber(qnaNumber);
+            qsBridgeDto.setSubNumber(subNum);
+            qnaService.registerQs(qsBridgeDto);
+//            qnaService.registerQna(qnaDto);
+        }
 
         redirectAttributes.addAttribute("qnaNumber", qnaVo.getQnaNumber());
         return new RedirectView("/qna/read");
