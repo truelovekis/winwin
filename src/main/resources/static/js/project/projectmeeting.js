@@ -198,7 +198,8 @@ function makeList(list){
                     </div>
                     <br/>
                     <div class="project-content2">
-                        <span class="project-sub-text4">${obj.studySummaryContent}</span>
+                        <span class="project-sub-text4">
+ <a href="${'/project/read?studyNumber=' + obj.studyNumber}" style="color: black;}">${obj.studySummaryContent}</span>
                     </div>
                     <br/>
                     <div class="project-content3">
@@ -214,3 +215,9 @@ function makeList(list){
 
     $('.project').append(tagList);
 }
+
+//박스 누르면 진입 하기
+$('.topten-cardbox').on('click', function (){
+    let titleNumber = $(this).closest('.topten-area').find('.projectTitle').val();
+    window.location.href = '/project/read?studyNumber=' + titleNumber;
+});

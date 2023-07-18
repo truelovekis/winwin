@@ -140,22 +140,16 @@ footer{
 .icon{
     display: flex;
     justify-content: space-between;
-    /*margin: 0 185px;*/
     margin: 20px 0px;
 }
 
 .read-count{
     display: flex;
-
-    /*height: 17px;*/
 }
 
 .readCount-btn{
     background-color: white;
     border: none;
-    /*width: 10px;*/
-    /*margin: 23px 10px;*/
-    cursor: pointer;
     display: flex;
     align-items: center;
 }

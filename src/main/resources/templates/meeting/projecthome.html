@@ -68,7 +68,7 @@
             </svg>
         </div>
         <div class="topten-banner">
-            <a href="/meeting/meeting"><h4>모두 보기 ></h4></a>
+            <a th:href="@{/meeting/meeting?categoryNumber=1}"><h4>모두 보기 ></h4></a>
         </div>
     </section>
     <div style="width: 1050px; overflow: hidden;">
@@ -134,13 +134,14 @@
             </svg>
         </div>
         <div class="study-banner">
-            <a href="/meeting/meeting"><h4>모두 보기 ></h4></a>
+            <a th:href="@{/meeting/meeting?categoryNumber=2}"><h4>모두 보기 ></h4></a>
         </div>
     </section>
     <div style="width: 1050px; overflow: hidden;">
         <section class="study-body">
             <div class="study-area">
                 <div class="study-cardbox" th:each="study : ${studyList}">
+                    <input type="hidden" class="studyTitle" th:value="${study.studyNumber}"/>
                     <div class="study-content1">
                         <span class="study-sub-text1">스터디 / 모임</span>
                         <br>
@@ -155,7 +156,7 @@
                                    th:href="${'/project/read?studyNumber=' + study.studyNumber}" style="color: black;
 }"></a>
                             </div>
-                            <div class="new-text">&nbsp;NEW</div>
+                            <div class="new-text" th:if="${study.isNew == 'T'}">&nbsp;NEW</div>
                         </div>
                     </div>
                     <br>
