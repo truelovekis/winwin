@@ -11,31 +11,35 @@
 
     <select id="selectQnaCommentList" resultType="qnaCommentVo">
         SELECT COMMENT_NUMBER, COMMENT_CONTENT, COMMENT_DATE, QNA_NUMBER, Q.USER_NUMBER,
-               USER_ID, USER_BELONG
+               USER_ID, USER_BELONG, P.PFP_SYSTEM_NAME, P.PFP_UUID
         FROM WW_USER U JOIN QNA_COMMENT Q
                             ON QNA_NUMBER = #{qnaNumber} AND U.USER_NUMBER = Q.USER_NUMBER
+        LEFT OUTER JOIN USER_PFP P
+        ON U.USER_NUMBER = P.USER_NUMBER
         ORDER BY COMMENT_NUMBER DESC
     </select>
 
     <select id="findQnaCommentUdList" resultType="qnaCommentVo">
         SELECT Q.COMMENT_NUMBER, Q.COMMENT_CONTENT, Q.COMMENT_DATE, Q.QNA_NUMBER, Q.USER_NUMBER,
-               U.USER_ID, U.USER_BELONG,
+               U.USER_ID, U.USER_BELONG, P.PFP_SYSTEM_NAME, P.PFP_UUID,
                NVL(CCU.UD_STATUS,'x') AS UD_STATUS
                 ,(SELECT COUNT(UD_STATUS) FROM QNA_COMMENT_UD WHERE QNA_COMMENT_UD.COMMENT_NUMBER = Q.COMMENT_NUMBER AND CCU.UD_STATUS = 'u') AS UD_CNT
         FROM WW_USER U JOIN QNA_COMMENT Q
                             ON QNA_NUMBER = #{qnaNumber} AND U.USER_NUMBER = Q.USER_NUMBER
                        LEFT OUTER JOIN QNA_COMMENT_UD CCU
                                        ON Q.COMMENT_NUMBER = CCU.COMMENT_NUMBER
-        <choose>
+                       LEFT OUTER JOIN USER_PFP P
+                       ON Q.USER_NUMBER = P.USER_NUMBER
+        ORDER BY Q.COMMENT_NUMBER DESC
+    </select>
+<!--        <choose>
             <when test="sessionUserNumber != null">
                 AND CCU.USER_NUMBER = #{sessionUserNumber}
             </when>
             <otherwise>
                 AND 1=0
             </otherwise>
-        </choose>
-        ORDER BY Q.COMMENT_NUMBER DESC
-    </select>
+        </choose>-->
 
     <select id="selectQna" resultType="qnaCommentVo">
         SELECT COMMENT_NUMBER, COMMENT_CONTENT, COMMENT_DATE, QNA_NUMBER, Q.USER_NUMBER,

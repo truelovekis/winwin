@@ -520,3 +520,10 @@ ul {
   display: flex;
   flex-wrap: wrap;
 }
+
+.img-box{
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}

@@ -28,7 +28,6 @@ public class QnaPageController {
         QnaVo qnaPageVo = new QnaVo();
         List<QnaVo> qnaVoList = qnaService.findListPage(qnaPageVo);
 
-
         qnaPageVo.setPage(page);
         PageVo pageVo = new PageVo(criteria, qnaService.findTotal());
 

@@ -49,29 +49,51 @@
     </select>
 
 
-    <select id="selectQnaScroll" resultType="qnaVo">
-        SELECT QNA_NUMBER, QNA_TITLE, QNA_CONTENT, QNA_DATE, USER_NUMBER, QNA_CNT, COMMENT_CNT, QNA_LIKE_CNT, sc.sub_name
-        from (
-        SELECT ROWNUM RN, QNA_NUMBER, QNA_TITLE, QNA_CONTENT, QNA_DATE, USER_NUMBER,COMMENT_CNT, QNA_LIKE_CNT,sc.sub_name,
-        QNA_CNT
-        FROM(
-                SELECT (SELECT COUNT(*) FROM QNA_COMMENT WHERE QNA_comment.qna_NUMBER = q.qna_number) AS COMMENT_CNT,
-                    (SELECT COUNT(*) FROM qna_GOOD WHERE qna_GOOD.qna_NUMBER = q.qna_number) AS QNA_LIKE_CNT
-                     ,q.qna_number, q.qna_title, q.qna_content, q.qna_date, q.qna_CNT
-                     ,q.USER_NUMBER, SC.sub_NAME, Sc.sub_number, u.user_nickname
-                FROM qna q
-                         JOIN qs_bridge qs on q.qna_number = qs.qna_number
-                         join sub_category sc on qs.sub_number = sc.sub_number
-                         JOIN WW_USER U ON q.USER_NUMBER = U.USER_NUMBER
-                ORDER BY q.qna_number DESC
+<!--    <select id="selectQnaScroll" resultType="qnaVo">-->
+<!--        SELECT QNA_NUMBER, QNA_TITLE, QNA_CONTENT, QNA_DATE, USER_NUMBER, QNA_CNT, COMMENT_CNT, QNA_LIKE_CNT, sc.sub_name-->
+<!--        FROM (-->
+<!--        SELECT ROWNUM RN, QNA_NUMBER, QNA_TITLE, QNA_CONTENT, QNA_DATE, USER_NUMBER,COMMENT_CNT, QNA_LIKE_CNT, sc.sub_name, QNA_CNT-->
+<!--        FROM(-->
+<!--                SELECT (SELECT COUNT(*) FROM QNA_COMMENT WHERE QNA_comment.qna_NUMBER = q.qna_number) AS COMMENT_CNT,-->
+<!--                    (SELECT COUNT(*) FROM qna_GOOD WHERE qna_GOOD.qna_NUMBER = q.qna_number) AS QNA_LIKE_CNT-->
+<!--                     ,q.qna_number, q.qna_title, q.qna_content, q.qna_date, q.qna_CNT-->
+<!--                     ,q.USER_NUMBER, sc.sub_NAME, sc.sub_number, u.user_nickname-->
+<!--                FROM qna q-->
+<!--                         JOIN qs_bridge qs ON q.qna_number = qs.qna_number-->
+<!--                         JOIN sub_category sc ON qs.sub_number = sc.sub_number-->
+<!--                         JOIN WW_USER U ON q.USER_NUMBER = U.USER_NUMBER-->
+<!--                ORDER BY q.qna_number DESC-->
+<!--        )-->
+<!--        <![CDATA[-->
+<!--                WHERE ROWNUM <= #{page} * #{amount}-->
+<!--        ]]>-->
+<!--        )-->
+<!--        WHERE RN > ( #{page} - 1) * #{amount}-->
+<!--    </select>-->
 
-        )
-        <![CDATA[
-                WHERE ROWNUM <= #{page} * #{amount}
-        ]]>
-        )
-        WHERE RN > ( #{page} - 1) * #{amount}
-    </select>
+<!--    <select id="selectQnaScroll" resultType="qnaVo">-->
+<!--        SELECT QNA_NUMBER, QNA_TITLE, QNA_CONTENT, QNA_DATE, USER_NUMBER, QNA_CNT, COMMENT_CNT, QNA_LIKE_CNT, sc.sub_name-->
+<!--        from (-->
+<!--        SELECT ROWNUM RN, QNA_NUMBER, QNA_TITLE, QNA_CONTENT, QNA_DATE, USER_NUMBER,COMMENT_CNT, QNA_LIKE_CNT,sc.sub_name,-->
+<!--        QNA_CNT-->
+<!--        FROM(-->
+<!--        SELECT (SELECT COUNT(*) FROM QNA_COMMENT WHERE QNA_comment.qna_NUMBER = q.qna_number) AS COMMENT_CNT,-->
+<!--        (SELECT COUNT(*) FROM qna_GOOD WHERE qna_GOOD.qna_NUMBER = q.qna_number) AS QNA_LIKE_CNT-->
+<!--        ,q.qna_number, q.qna_title, q.qna_content, q.qna_date, q.qna_CNT-->
+<!--        ,q.USER_NUMBER, SC.sub_NAME, Sc.sub_number, u.user_nickname-->
+<!--        FROM qna q-->
+<!--        JOIN qs_bridge qs on q.qna_number = qs.qna_number-->
+<!--        join sub_category sc on qs.sub_number = sc.sub_number-->
+<!--        JOIN WW_USER U ON q.USER_NUMBER = U.USER_NUMBER-->
+<!--        ORDER BY q.qna_number DESC-->
+<!--        )-->
+<!--        <![CDATA[-->
+<!--                    WHERE ROWNUM <= #{page} * #{amount}-->
+<!--            ]]>-->
+<!--        )-->
+<!--        WHERE RN > ( #{page} - 1) * #{amount}-->
+<!--    </select>-->
+
 
     <select id="selectTotal" resultType="_int">
         SELECT COUNT(QNA_NUMBER) FROM QNA
@@ -88,12 +110,13 @@
 
 <!-- QNA 상세페이지-->
     <select id="selectQnaByQnaNumber" resultType="qnaVo">
-        SELECT qna_number, QNA_TITLE, QNA_CNT, QNA_CONTENT, USER_NICKNAME, USER_BELONG, TO_CHAR(QNA_DATE, 'YYYY-MM-DD') AS QNA_DATE
+        SELECT qna_number, QNA_TITLE, QNA_CNT, QNA_CONTENT, USER_NICKNAME, GRADE_NAME, USER_BELONG, Q.USER_NUMBER, TO_CHAR(QNA_DATE, 'YYYY-MM-DD') AS QNA_DATE
         FROM QNA Q
                  JOIN WW_USER WU on Q.qna_number = #{qnaNumber} AND Q.USER_NUMBER = WU.USER_NUMBER
+                JOIN GRADE G on WU.USER_GRADE = G.GRADE_NUMBER
     </select>
 
-<!--  게시글 삭제  -->
+<!--  게시글 태그 삭제&입력(수정)  -->
     <delete id="deleteQna">
         DELETE FROM qna
         WHERE QNA_NUMBER = #{qnaNumber}
@@ -103,6 +126,8 @@
         WHERE QNA_NUMBER = #{qnaNumber}
     </delete>
 
+
+
 <!--  게시글 수정  -->
     <update id="updateQna">
         update qna
@@ -111,11 +136,11 @@ where qna_number = #{qnaNumber}
     </update>
 
 <!--  태그 수정  -->
-    <update id="updateQs">
-    update qs_bridge
-    set sub_number = #{subNumber}
-    where qna_number = #{qnaNumber}
-    </update>
+<!--    <update id="updateQs">-->
+<!--    update qs_bridge-->
+<!--    set sub_number = #{subNumber}-->
+<!--    where qna_number = #{qnaNumber}-->
+<!--    </update>-->
 
 <!--  조회수  -->
     <update id="upQna">
@@ -133,20 +158,17 @@ where qna_number = #{qnaNumber}
 
     <!-- qna(로그인시) 프로필 조회 -->
     <select id="selectUserProfile" resultType="QnaProfileVo">
-        SELECT MC.CAREER_COMPANY, MC.CAREER_TITLE, P.PFP_SYSTEM_NAME, P.PFP_UUID, MC.CAREER_START_DATE, U.USER_NICKNAME, G.GRADE_NAME, U.USER_POSITION
+        SELECT P.PFP_SYSTEM_NAME, P.PFP_UUID, U.USER_NICKNAME, G.GRADE_NAME, U.USER_POSITION
         FROM WW_USER U
         LEFT OUTER JOIN USER_PFP P
         ON U.USER_NUMBER = P.USER_NUMBER
         LEFT OUTER JOIN MENTOR M
         ON U.USER_NUMBER = M.USER_NUMBER
-        LEFT OUTER JOIN MENTOR_CAREER MC
-        ON MC.MENTOR_NUMBER = M.MENTOR_NUMBER
         LEFT OUTER JOIN GRADE G
         ON U.USER_GRADE = G.GRADE_NUMBER
         <if test="userNumber  != null ">
             WHERE U.USER_NUMBER = #{userNumber}
         </if>
-        ORDER BY MC.CAREER_START_DATE DESC
     </select>
 
 </mapper>

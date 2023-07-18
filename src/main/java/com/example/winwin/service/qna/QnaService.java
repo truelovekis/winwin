@@ -83,12 +83,12 @@ public class QnaService {
     }
 
     // 태그 수정
-    public void modifyQs(QsBridgeDto qsBridgeDto){
-        if( qsBridgeDto == null){
-            throw new IllegalArgumentException("게시물 수정 정보 누락");
-        }
-        qnaMapper.updateQs(qsBridgeDto);
-    }
+//    public void modifyQs(QsBridgeDto qsBridgeDto){
+//        if(qsBridgeDto == null){
+//            throw new IllegalArgumentException("게시물 수정 정보 누락");
+//        }
+//        qnaMapper.updateQs(qsBridgeDto);
+//    }
 
     // 조회수
     public int upQnaCnt(Long qnaNumber) {
@@ -107,7 +107,10 @@ public class QnaService {
     }
 
     // 프로필 조회
-    public List<QnaProfileVo> registerProfile(Long userNumber){
+//    public List<QnaProfileVo> registerProfile(Long userNumber){
+//        return qnaMapper.selectUserProfile(userNumber);
+//    }
+    public QnaProfileVo selectUserProfile(Long userNumber){
         return qnaMapper.selectUserProfile(userNumber);
     }
 
