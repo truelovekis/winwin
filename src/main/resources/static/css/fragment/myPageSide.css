@@ -2,6 +2,7 @@
 .myPageSide{
     margin-right: 50px;
     width: 200px;
+    position: fixed;
 }
 
 .side-container {

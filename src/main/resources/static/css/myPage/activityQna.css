@@ -123,6 +123,8 @@ hr {
 .mypage-main {
     width: 700px;
     padding: 30px 0px;
+    margin-left: 250px;
+    min-height: 450px;
 }
 
 .category {
