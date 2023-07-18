@@ -516,7 +516,7 @@
             where USER_NUMBER = #{userNumber}
         </update>
 
-    신고 게시글(커뮤니티) 상태 변경
+<!--    신고 게시글(커뮤니티) 상태 변경-->
     <update id="updateBoard">
     update community
     set community_status = #{status}
