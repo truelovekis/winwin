@@ -11,9 +11,11 @@
 
     <select id="select" resultType="csVo">
         SELECT CS_NUMBER, CS_CONTENT, CS_TITLE, CS_DATE, C.USER_NUMBER, C.CS_READ_CNT, U.USER_ID,
-               U.USER_NICKNAME, U.USER_BELONG
+               U.USER_NICKNAME, U.USER_BELONG , up.pfp_system_name, up.pfp_uuid
         FROM CS C JOIN WW_USER U
                        ON  C.USER_NUMBER = U.USER_NUMBER
+                  left outer join user_pfp up
+                  on u.user_number = up.USER_NUMBER
         WHERE C.CS_NUMBER = #{csNumber}
     </select>
 
@@ -55,6 +57,9 @@
         ORDER BY MC.CAREER_START_DATE DESC
     </select>
 
+
+    <!-- Main 프로필 -->
+
     <select id="userLogin" resultType="csProfileVo">
         SELECT wu.USER_NUMBER , wu.USER_NAME , wu.USER_POSITION , g.GRADE_NAME , up.PFP_UPLOAD_PATH , up.PFP_SYSTEM_NAME , up.PFP_UUID
         FROM WW_USER wu LEFT OUTER JOIN USER_PFP up
@@ -63,7 +68,7 @@
         WHERE wu.USER_NUMBER = #{userNumber}
     </select>
 
-    <!-- 무한 스크롤 -->
+
 
     <!-- 문의사항 페이지 무한스크롤 -->
     <select id="selectScroll" resultType="csVo">

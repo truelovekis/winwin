@@ -93,25 +93,20 @@
         <div class="first1">
             <div class="first">
                 <div class="Profil">
-                    <!--                    <img src="../img/corgi-g5894d3ae3_1920.jpg" height="40px" width="40px">-->
+                    <img th:if="${cs.pfpSystemName == null}" class="img-box" th:src="@{/img/profile-basic.png}" height="40px" width="40px"/>
+                    <img th:unless="${cs.pfpSystemName == null}" class="img-box"
+                         th:style="${'background-image: url(/profile/' + cs.pfpUuId + '_' + cs.pfpSystemName + ')'}"/>
+                    <!-- -->
+                    <input type="hidden" th:value="${cs.userNumber}"/>
 
-                    <img th:src="@{/img/profile-basic.png}" class="plusimg" height="40px" width="40px"/>
-
-                    <div class="id">
-                        <p th:text="${cs.userNickname}"></p>
-                        <p th:text="${cs.userBelong}"></p>
-                    </div>
-
-
-
+                    <!-- -->
+                    <div class="id"><p th:text="${cs.userNickname}"></p></div>
                     <div class="dropdown">
                         <button class="dropbtn">
                             <span class="dropbtn_icon"> <svg data-v-bd9f2bcc="" data-v-3035bc76="" width="24" height="24" fill="black" xmlns="http://www.w3.org/2000/svg" class="c-Applicatio c-icon" style="fill: rgb(148, 155, 160);"><circle data-v-bd9f2bcc="" cx="12" cy="5.5" r="1.5"></circle><circle data-v-bd9f2bcc="" cx="12" cy="12" r="1.5"></circle><circle data-v-bd9f2bcc="" cx="12" cy="18.5" r="1.5"></circle></svg></span>
                         </button>
 
-
                         <!-- ↓ 아이디가 다르면 삭제 수정 못하게 -->
-
                         <div class="dropdown-content">
                             <a class="police-btn">신고</a>
                             <a th:onclick="'fn_modify('+${cs.csNumber} +');'"
@@ -181,8 +176,6 @@
                             <input type="hidden" class="comment-num" th:value="${reply.commentNumber}">
                             <div class="profil">
                                 <img th:src="@{/img/profile-basic.png}" class="plusimg" height="40px" width="40px"/>
-                                <!--                                <img th:src="@{/img/profile-basic.png}" class="plusimg" height="40px" width="40px"/>-->
-                                <!--                                <img src="../img/corgi-g5894d3ae3_1920.jpg" height="40px" width="40px">-->
                                 <div class="Commento"><p th:text="${reply.userId}"></p></div>
                                 <div class="dropdown2">
                                     <button class="dropbtn2">

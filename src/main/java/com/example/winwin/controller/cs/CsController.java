@@ -75,6 +75,7 @@ public class CsController {
         csService.upHitCnt(csNumber);
         int commentCnt = csService.commentCnt(csNumber);
 
+
         model.addAttribute("cs", csVo);
         model.addAttribute("commentCnt", commentCnt);
         System.out.println("===================================!!!!"+csVo);

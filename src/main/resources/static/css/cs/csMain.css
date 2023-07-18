@@ -139,7 +139,7 @@ community-pfp.main-btn{
     color: rgb(66, 66, 66);
     font-weight: bold;
     padding-bottom: 1px;
-    border-bottom: 2px solid rgb(66, 66, 66);
+    /*border-bottom: 2px solid rgb(66, 66, 66);*/
 }
 
 .not-login-comment {
@@ -218,12 +218,20 @@ community-pfp.main-btn{
 
 .ow {
     width: 35px;
+
+
 }
 
 .community-title {
     font-size: 17px;
     font-weight: bold;
     margin: 15px 0px;
+    text-overflow: ellipsis;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .community-sub-content {
@@ -235,7 +243,12 @@ community-pfp.main-btn{
     font-weight: lighter;
     color: gray;
     margin: 20px 0px;
-    line-height: 20px;
+    text-overflow: ellipsis;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .community-sub-box {

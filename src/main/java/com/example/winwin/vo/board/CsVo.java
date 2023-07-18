@@ -21,6 +21,6 @@ public class CsVo extends Criteria {
     private int likeCnt; // 좋아요 추가함
     private int csReadCnt; // 조회수 추가함
     private int commentCnt; // 댓글수 추가함
-
-
+    private String pfpSystemName;
+    private String pfpUuId;
 }
