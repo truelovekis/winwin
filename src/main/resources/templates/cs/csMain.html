@@ -43,9 +43,7 @@
                     <img th:unless="${userPfp.pfpSystemName == null}" class="userpfp"
                          th:style="${'background-image: url(/profile/' + userPfp.pfpUuid + '_' + userPfp.pfpSystemName + ')'}"/>
 
-<!--                    <img th:src="@{/img/profile-basic.png}" class="userpfp"/>-->
 
-                    <!--                    <img th:src="@{/img/profile-basic.png}" class="userpfp"/>-->
 
                     <input type="file" id="file"/>
                 </div>
