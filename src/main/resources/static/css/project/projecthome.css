@@ -386,6 +386,7 @@ strong{
 .study-banner > a> h4{
     text-align: right;
     padding-right: 40px;
+    color: black;
 }
 
 .study-body{
@@ -412,7 +413,7 @@ strong{
     padding: 20px;
     border-radius: 5px;
     border: 1px solid #ddd;
-
+    cursor: pointer;
     margin-right: 20px;
     margin-left: 25px;
     box-sizing: border-box;
