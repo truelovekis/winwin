@@ -76,6 +76,7 @@ $(".input-wrap").on("click", function (e) {
     }
 });
 
+//멘티 수락&거절
 $('.my-mentee-content').on('click', '.mentee1' ,function (){
     let userNumber = $(this).closest('.mentee-date').find('.mentor-num').val();
     let user = $(this).closest('.mentee-date').data('num');
@@ -123,6 +124,7 @@ $('.my-mentee-content').on('click', '.mentee2',function (){
     })
 });
 
+//멘티 리스트
 function menteeList(result){
     let text = '';
 

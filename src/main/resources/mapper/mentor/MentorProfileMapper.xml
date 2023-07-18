@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.mentor.MentorMapper">
+    <!--등록된 멘토 프로필 보기-->
     <select id="mentor" resultType="mentorVo">
         SELECT J1.MENTOR_NUMBER , J1.USER_NUMBER , USER_NAME, user_belong, mentor_status, up.PFP_UPLOAD_PATH , up.PFP_SYSTEM_NAME , up.PFP_UUID, mp.MENTOR_PR
         FROM (
@@ -13,46 +14,54 @@
                       ON J1.MENTOR_NUMBER = mp.MENTOR_NUMBER
     </select>
 
+    <!--등록된 멘토의 경력 리스트-->
     <select id="mentor2" resultType="mentorVo">
         SELECT m.MENTOR_NUMBER , m.USER_NUMBER , mc.CAREER_COMPANY , mc.CAREER_TITLE , TO_CHAR(TO_DATE(mc.CAREER_START_DATE, 'YYYY.mm.DD'), 'YYYY.mm') CAREER_START_DATE , TO_CHAR(TO_DATE(mc.CAREER_END_DATE, 'YYYY.mm.DD'), 'YYYY.mm') career_end_date
         FROM MENTOR m JOIN MENTOR_CAREER mc
         ON m.MENTOR_NUMBER = mc.MENTOR_NUMBER AND m.MENTOR_NUMBER =  #{mentorNumber}
     </select>
 
+    <!--총 경력 계산-->
     <select id="mentor3" resultType="mentorVo">
         SELECT NVL(sum(ROUND(((TO_DATE(CAREER_END_DATE, 'YYYY.mm.DD') - TO_DATE(CAREER_START_DATE, 'YYYY.mm.DD'))/30/12))), 0) career_annual
         FROM MENTOR m JOIN MENTOR_CAREER mc
         ON m.MENTOR_NUMBER = mc.MENTOR_NUMBER AND m.MENTOR_NUMBER = #{mentorNumber}
     </select>
 
+    <!--총 경력 계산2-->
     <select id="mentorCnt" resultType="int">
         SELECT COUNT(*) cnt
         FROM MENTOR_CAREER mc
         WHERE MENTOR_NUMBER = #{mentorNumber}
     </select>
 
+    <!--멘토 프로필 자기소개 테이블 등록하기-->
     <insert id="mentorPr">
         INSERT INTO MENTOR_PROFILE(MP_NUMBER, USER_NUMBER, MENTOR_NUMBER, MENTOR_PR)
         VALUES(SEQ_MP.NEXTVAL, #{userNumber}, #{mentorNumber} , null)
     </insert>
 
+    <!--멘토 프로필 자기소개 업데이트 하기-->
     <update id="mentorPrU">
         UPDATE MENTOR_PROFILE
         SET MENTOR_PR = #{mentorPr}
         WHERE MENTOR_NUMBER = #{mentorNumber}
     </update>
 
+    <!--멘토 프로필 등록하기-스킬-->
     <insert id="skillInsert">
         INSERT INTO MENTOR_SKILL(SKILL_NUMBER, SKILL_NAME, MENTOR_NUMBER)
         VALUES(SEQ_SKILL.NEXTVAL, #{skillName}, #{mentorNumber})
     </insert>
 
+    <!--멘토 프로필 등록하기-경력-->
     <insert id="careerInsert">
         INSERT INTO MENTOR_CAREER
         (CAREER_NUMBER, CAREER_COMPANY, CAREER_TITLE, MENTOR_NUMBER, CAREER_LINK ,CAREER_STATUS, CAREER_START_DATE, CAREER_END_DATE)
         VALUES(SEQ_MENTOR_CAREER.NEXTVAL, #{careerCompany}, #{careerTitle}, #{mentorNumber}, #{careerLink} , #{careerStatus}, #{careerStartDate}, #{careerEndDate})
     </insert>
 
+    <!--멘토 기본 프로필-->
     <select id="mentorProfile" resultType="mentorVo">
         SELECT m1.USER_NAME , m1.USER_BELONG , m1.MENTOR_NUMBER, m1.user_number , m1.PFP_UPLOAD_PATH , m1.PFP_SYSTEM_NAME , m1.PFP_UUID ,
                m1.MENTOR_PR , NVL(ub.UM_STATUS, '0') UM_STATUS
@@ -73,24 +82,28 @@
              ON m1.mentor_number = ub.MENTOR_NUMBER AND ub.USER_NUMBER = #{userNumber}
     </select>
 
+    <!--멘토 프로필 스킬 리스트-->
     <select id="profileSkill" resultType="skillVo">
         SELECT skill_name
         FROM MENTOR_SKILL ms
         WHERE MENTOR_NUMBER = #{mentorNumber}
     </select>
 
+    <!--멘토 프로필 스킬 갯수-->
     <select id="skillCnt" resultType="int">
         SELECT count(skill_number) cnt
         FROM MENTOR_SKILL ms
         WHERE MENTOR_NUMBER = #{mentorNumber}
     </select>
 
+    <!--멘토 프로필 경력-->
     <select id="profileCareer" resultType="careerVo">
         SELECT mc.CAREER_COMPANY , mc.CAREER_TITLE , TO_CHAR(TO_DATE(mc.CAREER_END_DATE, 'YYYY.mm.DD'), 'YYYY.mm') CAREER_END_DATE , TO_CHAR(TO_DATE(mc.CAREER_START_DATE, 'YYYY.mm.DD'),'YYYY.mm') CAREER_START_DATE , CAREER_STATUS, ROUND(((TO_DATE(mc.CAREER_END_DATE, 'YYYY.mm.DD') - TO_DATE(mc.CAREER_START_DATE, 'YYYY.mm.DD'))/30/12)) career_annual
         FROM MENTOR_CAREER mc JOIN MENTOR m
         ON mc.MENTOR_NUMBER = m.MENTOR_NUMBER  AND m.MENTOR_NUMBER = #{mentorNumber}
     </select>
 
+    <!--멘토 프로필 경력 리스트-->
     <select id="careerList" resultType="careerInfoVo">
         SELECT CAREERINFO_NUMBER , CAREERINFO_TITLE , DBMS_LOB.SUBSTR(CAREERINFO_CONTENT, 3000, 1) AS CAREERINFO_CONTENT  , wu.USER_NAME , J1.CAREERINFO_CNT , wu.user_belong
         FROM (
@@ -102,28 +115,33 @@
         ON J1. user_number = wu.USER_NUMBER
     </select>
 
+    <!--멘토 프로필-진로정보 좋아요-->
     <select id="careerInfoLike" resultType="_int">
         SELECT COUNT(CL.USER_NUMBER) CAREERINFO_LIKE
         FROM CAREERINFO c JOIN CAREERINFO_LIKE cl
         ON C.CAREERINFO_NUMBER = CL.CAREERINFO_NUMBER AND C.CAREERINFO_NUMBER = #{careerInfoNumber}
     </select>
 
+    <!--멘토 프로필 리뷰 평점-->
     <select id="mentorAvg" resultType="mentorVo">
         SELECT NVL(ROUND(AVG(REVIEW_STAR), 1), 0) review_avg
         FROM MENTOR_REVIEW mr
         WHERE MENTOR_NUMBER = #{mentorNumber}
     </select>
 
+    <!--멘토 프로필 등록-스킬 삭제-->
     <delete id="skillDelete">
         DELETE FROM MENTOR_SKILL
         WHERE MENTOR_NUMBER = #{mentorNumber}
     </delete>
 
+    <!--멘토 프로필 리뷰 등록하기-->
     <insert id="reviewInsert">
         INSERT INTO MENTOR_REVIEW(REVIEW_NUMBER, REVIEW_CONTENT, REVIEW_STAR, USER_NUMBER, MENTOR_NUMBER)
         VALUES(SEQ_REVIEW.NEXTVAL, #{reviewContent}, #{reviewStar}/2, #{userNumber}, #{mentorNumber})
     </insert>
 
+    <!--멘토 프로필 자기소개 갯수-->
     <select id="mentorPrCount" resultType="int">
         SELECT COUNT(*) MENTOR_PR
         FROM MENTOR_PROFILE mp
