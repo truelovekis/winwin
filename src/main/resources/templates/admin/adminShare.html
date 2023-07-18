@@ -114,12 +114,12 @@
               <select name="public-secret-select" class="public-secret-select" style="font-family: NanumSquareAcr;">
                 <option value="">선택</option>
                 <option value="1">공개</option>
-                <option value="2">비공개</option>
+                <option value="0">비공개</option>
               </select>
             </td>
             <td class="board-status" align="center">
               <div th:if="${admin.shareStatus} == 1" class="public-button public-secret-button Y" th:text="공개"></div>
-              <div th:if="${admin.shareStatus} == 2" class="public-button public-secret-button N" th:text="비공개"></div>
+              <div th:if="${admin.shareStatus} == 0" class="public-button public-secret-button N" th:text="비공개"></div>
 
             </td>
           </tr>

@@ -121,17 +121,21 @@ public class AdminService {
     }
 
     // 신고 게시글 상태 변경
-    public void modifyBoardReportStatus(List<PoliceVo> policeVoList){
+    public void modifyBoardReportStatus(List<PoliceVo> policeVoList) {
 //        if(postNumber == null || boardStatus == null){
 //            throw new IllegalArgumentException("신고 게시글 수정 정보 누락");
 //        }
         String bigCode = null;
-        for(int i=0; i<policeVoList.size(); i++){
+        for (int i = 0; i < policeVoList.size(); i++) {
             bigCode = policeVoList.get(i).getBigCode();
-            if(bigCode.equals("400")){
+            if (bigCode.equals("400")) {
                 adminMapper.updateBoard(policeVoList.get(i));
-            }else if(bigCode.equals("300")){
-
+            } else if (bigCode.equals("600")) {
+                adminMapper.updateReportShare(policeVoList.get(i));
+            } else if (bigCode.equals("300")) {
+                adminMapper.updateReportQna(policeVoList.get(i));
+            } else if(bigCode.equals("500")){
+                adminMapper.updateReportStudy(policeVoList.get(i));
             }
         }
 
