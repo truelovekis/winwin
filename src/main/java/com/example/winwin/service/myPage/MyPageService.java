@@ -101,6 +101,16 @@ public class MyPageService {
         return activityMapper.selectActiveCsBoardList(userNumber, criteria);
     }
 
+//    진로정보 내 글 리스트 보기
+    @Transactional(readOnly = true)
+    public List<ActiveBoardVo> getActiveCareerInfoBoardList(Long userNumber, Criteria criteria){
+        if (userNumber == null){
+            throw new IllegalArgumentException("로그인이 필요합니다.");
+        }
+
+        return activityMapper.selectCareerInfoBoardList(userNumber, criteria);
+    }
+
 //    내가 작성한 댓글 리스트 보기
     @Transactional(readOnly = true)
     public List<ActiveCommentVo> getActiveCommentList(Long userNumber, Criteria criteria){
@@ -164,6 +174,15 @@ public class MyPageService {
         }
 
         return activityMapper.selectTotalCs(userNumber);
+    }
+
+    @Transactional(readOnly = true)
+    public int getTotalCareerInfo(Long userNumber){
+        if (userNumber == null){
+            throw new IllegalArgumentException("로그인이 필요합니다.");
+        }
+
+        return activityMapper.selectTotalCareer(userNumber);
     }
 
 //    내가 작성한 댓글 개수

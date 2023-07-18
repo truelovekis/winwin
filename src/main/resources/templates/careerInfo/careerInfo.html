@@ -113,7 +113,7 @@
                     <!-- /2차 카테고리 직무 선택시 3차 소분류 -->
                 </div>
                 <!-- /3차 카테고리 -->
-                <button type="button" class="write-btn" th:data-mentor-num>작성하기</button>
+                <button type="button" class="write-btn" th:data-num="${session.userNumber}" th:data-mentornum="${session.mentorNumber}">작성하기</button>
             </div>
         </main>
 
@@ -130,5 +130,8 @@
 <script th:src="@{/js/user/loginModal.js}"></script>
 <script th:src="@{/js/fragment/header.js}"></script>
 <script th:src="@{/js/careerInfo/careerInfo.js}"></script>
+<script th:inline="javascript">
+    let loginNumber = [[${session.userNumber}]];
+</script>
 </body>
 </html>

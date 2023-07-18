@@ -16,7 +16,7 @@ public class CareerInfoVo {
     private String careerInfoDate;
     private String careerInfoStatus;
     private Long careerInfoCnt;
-    private int careerInfoLike;
+    private int likeCnt;
     private Long mentorNumber;
     private Long userNumber;
     private String userName;

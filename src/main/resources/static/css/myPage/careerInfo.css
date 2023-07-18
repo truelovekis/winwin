@@ -169,6 +169,12 @@ hr {
 .career-info-content{
   margin-top: 25px;
   display: flex;
+  flex-direction: column;
+}
+
+.career-info-box{
+  display: flex;
+  margin-bottom: 25px;
 }
 
 .career-box{
@@ -180,6 +186,7 @@ hr {
 
 .career-info{
   padding: 20px 20px 10px 20px;
+  height: 150px;
 }
 
 .career-tag{
@@ -237,6 +244,7 @@ hr {
 
 .career-profile-img > img{
   width: 35px;
+  border-radius: 50%;
 }
 
 .career-user-info{
@@ -256,7 +264,7 @@ hr {
 
 .career-icon{
   display: flex;
-  align-items: flex-end;
+  /*align-items: flex-end;*/
 }
 
 .select-count-box{
@@ -281,6 +289,8 @@ hr {
   display: block;
   cursor: pointer;
   margin-right: 10px;
+  color: black;
+  text-decoration: none;
 }
 
 

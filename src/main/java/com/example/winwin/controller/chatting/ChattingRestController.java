@@ -28,9 +28,9 @@ public class ChattingRestController {
     private final UserService userService;
 
     /* 쪽지 보내기 */
-    @PostMapping("/inputModal/{shareNumber}")
-    public void sendChatting(@RequestBody ChattingDto chattingDto, HttpServletRequest req){
-        Long chattingFrom = (Long)req.getSession().getAttribute("userNumber");
+    @PostMapping("/inputModal")
+    public void sendChatting(@RequestBody ChattingDto chattingDto, HttpServletRequest req) {
+        Long chattingFrom = (Long) req.getSession().getAttribute("userNumber");
         chattingDto.setChattingFrom(chattingFrom);
 
         System.out.println(chattingDto);
@@ -40,8 +40,8 @@ public class ChattingRestController {
     /* 나눔 쪽지 보내기 */
     @PostMapping("/shareModal/{shareNumber}/{wingAmount}")
     public void sendShareChatting(@RequestBody ChattingDto chattingDto, HttpServletRequest req,
-                                  @PathVariable(value = "shareNumber", required = false) Long shareNumber, @PathVariable("wingAmount") int wingAmount){
-        Long chattingFrom = (Long)req.getSession().getAttribute("userNumber");
+                                  @PathVariable(value = "shareNumber", required = false) Long shareNumber, @PathVariable("wingAmount") int wingAmount) {
+        Long chattingFrom = (Long) req.getSession().getAttribute("userNumber");
         chattingDto.setChattingFrom(chattingFrom);
 
         System.out.println("===============================");
@@ -50,15 +50,15 @@ public class ChattingRestController {
         System.out.println("===============================");
         chattingService.sendChatting(chattingDto);
         shareService.modifyShareStatus(shareNumber);
-        shareService.wingTrade(wingAmount,chattingDto.getChattingFrom(),chattingDto.getChattingTo());
+        shareService.wingTrade(wingAmount, chattingDto.getChattingFrom(), chattingDto.getChattingTo());
         UserDto userDto = userService.findUserInfo(chattingFrom);
         req.getSession().setAttribute("userWing", userDto.getUserWing());
     }
 
     /* 쪽지 확인 (받은 쪽지) */
     @GetMapping("/sendModal")
-    public ChattingVo chattingSelectModel(Long chattingNumber){
-        if(chattingNumber==null){
+    public ChattingVo chattingSelectModel(Long chattingNumber) {
+        if (chattingNumber == null) {
             return null;
         }
         ChattingVo chattingVo = chattingService.chattingSelectModal(chattingNumber);
@@ -68,8 +68,8 @@ public class ChattingRestController {
 
     /* 쪽지 확인 (보낸 쪽지) */
     @GetMapping("/sendModal2")
-    public ChattingVo chattingSendModel(Long chattingNumber){
-        if(chattingNumber==null){
+    public ChattingVo chattingSendModel(Long chattingNumber) {
+        if (chattingNumber == null) {
             return null;
         }
         ChattingVo chattingVo = chattingService.chattingSendModal(chattingNumber);
@@ -79,7 +79,7 @@ public class ChattingRestController {
 
     // 받은 메세지 조회
     @GetMapping("/receiveMessage/{page}")
-    public Map<String, Object> chattingSelect(HttpServletRequest req, @PathVariable("page") int page){
+    public Map<String, Object> chattingSelect(HttpServletRequest req, @PathVariable("page") int page) {
         Long userNumber = (Long) req.getSession().getAttribute("userNumber");
 
         Criteria criteria = new Criteria();
@@ -97,7 +97,7 @@ public class ChattingRestController {
 
     // 보낸 메세지 조회
     @GetMapping("/sendMessage/{page}")
-    public Map<String, Object> chattingSelectFrom(HttpServletRequest req, @PathVariable("page") int page){
+    public Map<String, Object> chattingSelectFrom(HttpServletRequest req, @PathVariable("page") int page) {
         System.out.println("11111111111111111");
         Long userNumber = (Long) req.getSession().getAttribute("userNumber");
         System.out.println("22222222222222222222222");
