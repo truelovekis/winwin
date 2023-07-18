@@ -49,29 +49,29 @@
     </select>
 
 
-    <select id="selectQnaScroll" resultType="qnaVo">
-        SELECT QNA_NUMBER, QNA_TITLE, QNA_CONTENT, QNA_DATE, USER_NUMBER, QNA_CNT, COMMENT_CNT, QNA_LIKE_CNT, sc.sub_name
-        from (
-        SELECT ROWNUM RN, QNA_NUMBER, QNA_TITLE, QNA_CONTENT, QNA_DATE, USER_NUMBER,COMMENT_CNT, QNA_LIKE_CNT,sc.sub_name,
-        QNA_CNT
-        FROM(
-                SELECT (SELECT COUNT(*) FROM QNA_COMMENT WHERE QNA_comment.qna_NUMBER = q.qna_number) AS COMMENT_CNT,
-                    (SELECT COUNT(*) FROM qna_GOOD WHERE qna_GOOD.qna_NUMBER = q.qna_number) AS QNA_LIKE_CNT
-                     ,q.qna_number, q.qna_title, q.qna_content, q.qna_date, q.qna_CNT
-                     ,q.USER_NUMBER, SC.sub_NAME, Sc.sub_number, u.user_nickname
-                FROM qna q
-                         JOIN qs_bridge qs on q.qna_number = qs.qna_number
-                         join sub_category sc on qs.sub_number = sc.sub_number
-                         JOIN WW_USER U ON q.USER_NUMBER = U.USER_NUMBER
-                ORDER BY q.qna_number DESC
+<!--    <select id="selectQnaScroll" resultType="qnaVo">-->
+<!--        SELECT QNA_NUMBER, QNA_TITLE, QNA_CONTENT, QNA_DATE, USER_NUMBER, QNA_CNT, COMMENT_CNT, QNA_LIKE_CNT, sc.sub_name-->
+<!--        from (-->
+<!--        SELECT ROWNUM RN, QNA_NUMBER, QNA_TITLE, QNA_CONTENT, QNA_DATE, USER_NUMBER,COMMENT_CNT, QNA_LIKE_CNT,sc.sub_name,-->
+<!--        QNA_CNT-->
+<!--        FROM(-->
+<!--                SELECT (SELECT COUNT(*) FROM QNA_COMMENT WHERE QNA_comment.qna_NUMBER = q.qna_number) AS COMMENT_CNT,-->
+<!--                    (SELECT COUNT(*) FROM qna_GOOD WHERE qna_GOOD.qna_NUMBER = q.qna_number) AS QNA_LIKE_CNT-->
+<!--                     ,q.qna_number, q.qna_title, q.qna_content, q.qna_date, q.qna_CNT-->
+<!--                     ,q.USER_NUMBER, SC.sub_NAME, Sc.sub_number, u.user_nickname-->
+<!--                FROM qna q-->
+<!--                         JOIN qs_bridge qs on q.qna_number = qs.qna_number-->
+<!--                         join sub_category sc on qs.sub_number = sc.sub_number-->
+<!--                         JOIN WW_USER U ON q.USER_NUMBER = U.USER_NUMBER-->
+<!--                ORDER BY q.qna_number DESC-->
 
-        )
-        <![CDATA[
-                WHERE ROWNUM <= #{page} * #{amount}
-        ]]>
-        )
-        WHERE RN > ( #{page} - 1) * #{amount}
-    </select>
+<!--        )-->
+<!--        <![CDATA[-->
+<!--                WHERE ROWNUM <= #{page} * #{amount}-->
+<!--        ]]>-->
+<!--        )-->
+<!--        WHERE RN > ( #{page} - 1) * #{amount}-->
+<!--    </select>-->
 
     <select id="selectTotal" resultType="_int">
         SELECT COUNT(QNA_NUMBER) FROM QNA
@@ -105,9 +105,9 @@
 
 <!--  게시글 수정  -->
     <update id="updateQna">
-        update qna
-set qna_title = #{qnaTitle}, qna_content = #{qnaContent}, qna_date = sysdate
-where qna_number = #{qnaNumber}
+    update qna
+    set qna_title = #{qnaTitle}, qna_content = #{qnaContent}, qna_date = sysdate
+    where qna_number = #{qnaNumber}
     </update>
 
 <!--  태그 수정  -->
