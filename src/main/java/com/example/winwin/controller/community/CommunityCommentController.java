@@ -24,7 +24,7 @@ public class CommunityCommentController {
         return "작성 성공!";
     }
 
-    @GetMapping("/list{communityNumber}")
+    @GetMapping("/list/{communityNumber}")
     public List<CommunityCommentVo> getCommentList(HttpServletRequest req,
             @PathVariable("communityNumber") Long communityNumber){
         Long sessionUserNumber = (Long)req.getSession().getAttribute("userNumber");

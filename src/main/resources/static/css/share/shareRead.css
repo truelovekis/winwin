@@ -576,3 +576,13 @@ footer{
     border-radius: 50px;
     background-size: cover;
 }
+
+.content-img{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.content-img > img{
+    border-radius: 10px;
+
+}

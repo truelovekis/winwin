@@ -58,11 +58,7 @@ header{
     margin-top: 35px;
 }
 
-span{
-    font-size: 13px;
-    color: #c5c4c4;
-    margin-left: 5px;
-}
+
 
 .textarea{
     width: 550px;
@@ -78,7 +74,7 @@ span{
 
 .second{
     width: 300px;
-    margin: 20px 30px;
+    margin: 0px 30px;
 }
 
 .one{
@@ -155,6 +151,18 @@ ul> .first-title-sub{
     /*flex-direction: column;*/
     /*justify-content: space-between;*/
     margin: auto;
+}
+
+.main1>span{
+    font-size: 13px;
+    color: #c5c4c4;
+    margin-left: 5px;
+}
+
+#cnt{
+    font-size: 13px;
+    color: #c5c4c4;
+    margin-left: 5px;
 }
 
 .careerpath-title {

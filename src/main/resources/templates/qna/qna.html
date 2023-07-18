@@ -146,17 +146,17 @@
         <div class="community-user">
           <div class="community-pfp-img">
             <label for="file" class="user-file">
-              <img th:if="${qnaProfile.get(0) == null}" src="../../img/profile-basic.png" class="userpfp"/>
-              <img th:unless="${qnaProfile.get(0) == null}" class="img-box"
-                   th:style="${'background-image: url(/profile/' + qnaProfile.get(0).pfpUuid + '_' + qnaProfile.get(0).pfpSystemName + ')'}"/>
+              <img th:if="${qnaProfile == null}" src="../../img/profile-basic.png" class="userpfp"/>
+              <img th:unless="${qnaProfile == null}" class="img-box"
+                   th:style="${'background-image: url(/profile/' + qnaProfile.pfpUuid + '_' + qnaProfile.pfpSystemName + ')'}"/>
             </label>
             <img src="../../img/profile-basic.png" class="userpfp" />
             <input type="file" id="file" />
           </div>
           <div>
-            <div class="community-user-name"  th:text="${qnaProfile.get(0).userNickname}"></div>
-            <div class="community-pfp-belong" th:text="${qnaProfile.get(0).userPosition}" ></div>
-            <div class="community-pfp-department" th:text="${qnaProfile.get(0).gradeName}"></div>
+            <div class="community-user-name"  th:text="${qnaProfile.userNickname}"></div>
+            <div class="community-pfp-belong" th:text="${qnaProfile.userPosition}" ></div>
+            <div class="community-pfp-department" th:text="${qnaProfile.gradeName}"></div>
           </div>
         </div>
         <div class="community-pfp-main-btn">

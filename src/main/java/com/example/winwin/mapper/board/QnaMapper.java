@@ -35,7 +35,7 @@ public interface QnaMapper {
     public void updateQna(QnaVo qnaVo);
 
     // 태그 수정
-    public void updateQs(QsBridgeDto qsBridgeDto);
+//    public void updateQs(QsBridgeDto qsBridgeDto);
 
     // 조회수
     public int upQna(Long qnaNumber);
@@ -44,7 +44,8 @@ public interface QnaMapper {
     public int commentCnt(Long qnaNumber);
 
     // 프로필
-    public List<QnaProfileVo> selectUserProfile(Long userNumber);
+//    public List<QnaProfileVo> selectUserProfile(Long userNumber);
+    public QnaProfileVo selectUserProfile(Long userNumber);
 
     //    페이지 무한스크롤
     List<QnaVo> selectQnaScroll(QnaVo qnaVo);
