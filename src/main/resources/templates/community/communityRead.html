@@ -93,8 +93,14 @@
         <div class="first1">
             <div class="first">
                 <div class="Profil">
-                    <img src="@{}" height="40px" width="40px">
-                    <div class="id"> <p th:text="${community.userNickname}"></p></div>
+<!--                    <img src="@{}" height="40px" width="40px">-->
+                    <img  th:if="${communityProfileVo == null}" src="../../img/profile-basic.png" class="userpfp" height="40px" width="40px"/>
+                    <img th:unless="${communityProfileVo == null}" class="img-box" height="40px" width="40px"
+                         th:style="${'background-image: url(/profile/' + communityProfileVo.pfpUuid + '_' + communityProfileVo.pfpSystemName + ')'}"/>
+                    <div class="id">
+                        <p th:text="${community.userNickname}"></p>
+                        Lv.<span class="gradeName-text" th:text="${communityProfileVo.gradeName}"></span>
+                    </div>
                     <div class="dropdown">
                         <button class="dropbtn">
                             <span class="dropbtn_icon"> <svg data-v-bd9f2bcc="" data-v-3035bc76="" width="24" height="24" fill="black" xmlns="http://www.w3.org/2000/svg" class="c-Applicatio c-icon" style="fill: rgb(148, 155, 160);"><circle data-v-bd9f2bcc="" cx="12" cy="5.5" r="1.5"></circle><circle data-v-bd9f2bcc="" cx="12" cy="12" r="1.5"></circle><circle data-v-bd9f2bcc="" cx="12" cy="18.5" r="1.5"></circle></svg></span>
@@ -113,14 +119,13 @@
                         <input type="hidden" class="user-num" name="userNumber" th:value="${community.userNumber}"/>
                     </div>
                 </div>
-                <div class="imfor"> <p th:text="${community.userBelong}"></p></div>
+                <div class="imfor"></div>
                 <div class="question">
                     <div class="Q">T.</div>
                     <div class="title"><p th:text="${community.communityTitle}"></p></div>
                 </div>
                 <div class="content"><p th:text="${community.communityContent}"></p></div>
-                <div class="img-box">
-                </div>
+                <div class="img-box file-box"></div>
 <!--               게시판 추천, 비추천 작업할 부분                  -->
                 <div class="answer">
                     <div class="answer-box"></div>
@@ -203,7 +208,9 @@
                         <div class="commentAi" th:data-num="${comment.commentNumber}">
                             <input type="hidden" class="comment-num" th:value="${comment.commentNumber}">
                             <div class="profil">
-                                <img src="../img/corgi-g5894d3ae3_1920.jpg" height="50px" width="50px">
+                                <img  th:if="${comment.pfpUuid == null}" src="../../img/profile-basic.png" class="userpfp" height="50px" width="50px"/>
+                                <img th:unless="${comment.pfpUuid == null}" class="img-box"
+                                     th:style="${'background-image: url(/profile/' + comment.pfpUuid + '_' + comment.pfpSystemName + ')'}"/>
                                 <div class="Commento"><p class="userInfo" th:text="${comment.userId}"></p></div>
                                 <div class="dropdown2">
                                     <button class="dropbtn2">
@@ -221,9 +228,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="description"><p th:text="${comment.userBelong}">OpenAi</p></div>
+                            <div class="description"><p th:text="${comment.userBelong}"></p></div>
                             <div class="Aicontent" th:text="${comment.commentContent}"></div>
-                            <div class="answer" th:if="${session.userNumber != comment.userNumber}" >
+                            <div class="answer" th:if="${session.userNumber != comment.userNumber}">
                                 <div class="answer-box"></div>
                                 <div class="answer-box-comment"><p>답변이 도움이 되었나요?</p></div>
                                 <div class="comment-goodorbad">

@@ -1,6 +1,7 @@
 package com.example.winwin.service.mentor;
 
 import com.example.winwin.dto.mentor.LoginVo;
+import com.example.winwin.dto.mentor.MentorVo;
 import com.example.winwin.mapper.mentor.LoginMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,10 +23,10 @@ public class LoginService {
         });
     }
 
-    public String findUser(Long userNumber){
-        if (userNumber == null) {
+    public MentorVo findUser(String userId, String userPassword){
+        if (userId == null) {
             throw new IllegalArgumentException("정보 누락");
         }
-        return loginMapper.loginUser(userNumber);
+        return loginMapper.loginUser(userId, userPassword);
     }
 }

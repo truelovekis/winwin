@@ -268,7 +268,7 @@
         WHERE RN > (#{criteria.page} - 1) * #{criteria.amount}
     </select>
 
-<!--    글 개수 세기-->
+<!-- 글 개수 세기-->
     <select id="selectTotalQna">
         select count(USER_NUMBER) from QNA where USER_NUMBER = #{userNumber}
     </select>
@@ -290,4 +290,82 @@
     <select id="selectTotalCommunityComment">
         select count(USER_NUMBER) from COMMUNITY_COMMENT where USER_NUMBER = #{userNumber}
     </select>
+    
+    <!-- 진로정보 페이지 갯수 구하기 -->
+    <select id="selectTotalCareer">
+        select COUNT(careerinfo_number) from CAREERINFO where USER_NUMBER = #{userNumber}
+    </select>
+    <!--    -->
+    <!-- 마이페이지 진로정보 내 글 조회하기 -->
+    <select id="selectCareerInfoBoardList" resultType="activeBoardVo">
+        SELECT BIG_CATEGORY, mentor_number, user_number, sub_number,
+        USER_NICKNAME, PFP_UPLOAD_PATH as boardUploadPath, PFP_SYSTEM_NAME as boardSystemname, PFP_UUID as boardUuid,
+        sub_name, grade_name, BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, BOARD_CNT,
+        NVL(BOARD_LIKE, 0) AS BOARD_LIKE
+        FROM (
+        SELECT ROWNUM RN, 200 BIG_CATEGORY, mentor_number, user_number, sub_number,
+        USER_NICKNAME, PFP_UPLOAD_PATH, PFP_SYSTEM_NAME, PFP_UUID,
+        sub_name, grade_name, careerinfo_number BOARD_NUMBER, careerinfo_title BOARD_TITLE, careerinfo_content BOARD_CONTENT, careerinfo_cnt BOARD_CNT,
+        NVL(BOARD_LIKE, 0) AS BOARD_LIKE
+        FROM (
+        SELECT S1.mentor_number, S1.user_number, S1.sub_number,
+        U.USER_NICKNAME,
+        PFP_UPLOAD_PATH, PFP_SYSTEM_NAME, PFP_UUID,
+        SC.sub_name,
+        G.grade_name,
+        CI.careerinfo_title, CI.careerinfo_content, CI.careerinfo_cnt, CI.CAREERINFO_NUMBER,
+        NVL(J1.LIKE_CNT, 0) BOARD_LIKE
+        FROM (
+        SELECT mentor_number, user_number, sub_number
+        FROM MENTOR M
+        WHERE SUB_NUMBER IN (SELECT SUB_NUMBER FROM SUB_CATEGORY)
+        ) S1
+        JOIN WW_USER U
+        ON S1.user_number = U.USER_NUMBER
+        LEFT JOIN USER_PFP UP
+        ON S1.user_number = UP.USER_NUMBER
+        JOIN SUB_CATEGORY SC
+        ON S1.sub_number = SC.SUB_NUMBER
+        JOIN GRADE G
+        ON U.USER_GRADE = G.GRADE_NUMBER
+        JOIN CAREERINFO CI
+        ON S1.user_number = CI.USER_NUMBER
+        LEFT JOIN (
+        SELECT careerinfo_number, COUNT(user_number) LIKE_CNT
+        FROM CAREERINFO_LIKE
+        GROUP BY careerinfo_number
+        ) J1
+        ON J1.careerinfo_number = CI.careerinfo_number
+        WHERE S1.user_number = #{userNumber}
+        ORDER BY CI.CAREERINFO_DATE DESC
+        )
+        <![CDATA[
+        WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
+        ]]>
+        )
+        WHERE RN > (#{criteria.page} - 1) * #{criteria.amount}
+    </select>
+    <!--    -->
+
+    <!-- 진로정보 관심 글(좋아요)조회하기 -->
+    <select id="selectCareerInfoBoardLikeList" resultType="activeBoardVo">
+        SELECT C.careerinfo_number, careerinfo_title, careerinfo_content, careerinfo_cnt, C.user_number, careerinfo_status,
+               WU.user_nickname, WU.user_grade,
+               UP.pfp_uuid, UP.pfp_upload_path, UP.pfp_system_name,
+               SC.sub_name,
+               (SELECT COUNT(USER_NUMBER) FROM CAREERINFO_LIKE CL WHERE L.careerinfo_number = CL.careerinfo_number GROUP BY C.careerinfo_number) LIKE_CNT
+        FROM CAREERINFO C JOIN (
+            SELECT careerinfo_number, COUNT(user_number)
+            FROM CAREERINFO_LIKE
+            WHERE USER_NUMBER = #{userNumber}
+            GROUP BY careerinfo_number
+        ) L
+                               ON C.CAREERINFO_NUMBER = L.careerinfo_number
+                          JOIN WW_USER WU ON C.USER_NUMBER = WU.USER_NUMBER
+                          LEFT JOIN USER_PFP UP on C.user_number = UP.USER_NUMBER
+                          JOIN MENTOR M on C.user_number = M.USER_NUMBER
+                          JOIN SUB_CATEGORY SC ON M.SUB_NUMBER = SC.SUB_NUMBER
+        WHERE careerinfo_status = 1
+    </select>
+    <!--    -->
 </mapper>

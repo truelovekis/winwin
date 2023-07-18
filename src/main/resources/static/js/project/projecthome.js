@@ -153,13 +153,18 @@ $('.nav-span3').on('mouseout', function(){
     $('.nav-span3').css("font-weight","500")
 });
 
-//박스 누르면 진입 하기
+//프로젝트 박스 누르면 진입 하기
 $('.topten-cardbox').on('click', function (){
     let titleNumber = $(this).closest('.topten-area').find('.projectTitle').val();
    window.location.href = '/project/read?studyNumber=' + titleNumber;
 });
 
 
+//모임 박스 누르면 진입 하기
+$('.study-cardbox').on('click', function (){
+    let titleNumber2 = $(this).closest('.study-area').find('.studyTitle').val();
+    window.location.href = '/project/read?studyNumber=' + titleNumber2;
+});
 
 
 

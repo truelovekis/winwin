@@ -1,6 +1,7 @@
 package com.example.winwin.controller.user;
 
 import com.example.winwin.dto.mentor.CategoryVo;
+import com.example.winwin.dto.mentor.MentorVo;
 import com.example.winwin.dto.user.UserDto;
 import com.example.winwin.dto.user.UserPfpDto;
 import com.example.winwin.service.mentor.LoginService;
@@ -31,6 +32,7 @@ public class UserRestController {
             Long userNumber = userService.findUserNumber(userDto.getUserId(), userDto.getUserPassword());
             UserDto userInfo = userService.findUserInfo(userNumber);
             Long mentorNumber = loginService.findMentorNumber(userDto.getUserId(), userDto.getUserPassword());
+            MentorVo mentorVo = loginService.findUser(userDto.getUserId(), userDto.getUserPassword());
 
             if(userInfo.getUserStatus().equals("3")){
                 return 3;
@@ -47,6 +49,7 @@ public class UserRestController {
             req.getSession().setAttribute("userStatus", userInfo.getUserStatus());
             req.getSession().setAttribute("userNickname", userInfo.getUserNickname());
             req.getSession().setAttribute("mentorNumber", mentorNumber);
+            req.getSession().setAttribute("userPosition" , mentorVo.getUserPosition());
 
         } catch (IllegalArgumentException e) {
             e.printStackTrace();

@@ -30,6 +30,8 @@ public class QnaVo extends Criteria {
     private String userId;
     private String subNames;
     private List<String> subNameList;
+    private String gradeName; // 프로필 추가
+    private String userPosition; // 프로필 추가
 
     public void makeSubList(){
         this.subNameList = Arrays.stream(subNames.split(",")).collect(Collectors.toList());

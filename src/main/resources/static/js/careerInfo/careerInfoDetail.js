@@ -32,7 +32,9 @@ function appendComment(map) {
                 <div class="reply-content1">
                     <div class="profile-wrap">
                         <div class="profile-icon-wrap">
-                            <img class="profile-icon-img" src="../../static/img/careerpathdetail.png">
+                        ${c.pfpSystemName == null ?
+                            '<img class="profile-icon-img" src="/img/profile-basic.png"/>' :
+                            '<img class="profile-icon-img" src=/profile/' + c.pfpUuid + '_' + c.pfpSystemName +'>'}
                         </div>
                         <div class="profile-text-wrap">
                             <div><span class="profile-text-id">${c.userNickname}</span></div>
@@ -121,6 +123,13 @@ function showError(a, b, c) {
 
 // 진로정보 댓글 작성하기
 $('.submit-btn').on('click', function () {
+
+    if (loginNumber == null){
+        alert("로그인 후 이용바랍니다.");
+        $('.login-move').trigger('click');
+        return;
+    }
+
     let content = $('#content').val();
     let boardNumber = $('.careerInfo-num').val();
     comment.register({commentContent: content, careerInfoNumber: boardNumber});
@@ -222,6 +231,5 @@ function careerInfoLike(careerInfoNumber){
         }
     });
 }
-
 
 

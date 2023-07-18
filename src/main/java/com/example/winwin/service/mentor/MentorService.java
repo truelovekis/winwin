@@ -61,6 +61,28 @@ public class MentorService {
         return skill;
     }
 
+    //    멘토 프로필 등록하기 - 기본 프로필
+    public MentorVo findMentor(Long mentorNumber) {
+        if (mentorNumber == null) {
+            throw new IllegalArgumentException("멘토 번호 누락!");
+        }
+        return mentorMapper.mentor(mentorNumber);
+    }
+
+    public List<MentorVo> findMentor2(Long mentorNumber){
+        if (mentorNumber == null) {
+            throw new IllegalArgumentException("멘토 번호 누락!");
+        }
+        return mentorMapper.mentor2(mentorNumber);
+    }
+
+    public MentorVo findMentor3(Long mentorNumber){
+        if (mentorNumber == null) {
+            throw new IllegalArgumentException("멘토 번호 누락!");
+        }
+        return mentorMapper.mentor3(mentorNumber);
+    }
+
 //    멘토 프로필 상세 보기
     @Transactional(readOnly = true)
     public MentorVo findProfile(Long mentorNumber, Long userNumber){
@@ -69,6 +91,7 @@ public class MentorService {
         }
         return mentorMapper.mentorProfile(mentorNumber, userNumber);
     }
+
 
 //멘토 프로필 상세 보기(리뷰 페이지)
     @Transactional(readOnly = true)
@@ -79,12 +102,20 @@ public class MentorService {
         return mentorMapper.mentorAvg(mentorNumber);
     }
 
+    //    멘토 리뷰 등록하기
+    public void reviewRegister(ReviewVo reviewVo){
+        if (reviewVo == null) {
+            throw new IllegalArgumentException("리뷰 정보 누락!");
+        }
+        mentorMapper.reviewInsert(reviewVo);
+    }
+
     @Transactional(readOnly = true)
-    public List<ReviewVo> findReviewList(Long mentorNumber){
+    public List<ReviewVo> findReviewList(Long mentorNumber, Long userNumber){
         if (mentorNumber == null) {
             throw new IllegalArgumentException("리뷰 번호 누락!");
         }
-        return mentorMapper.reviewList(mentorNumber);
+        return mentorMapper.reviewList(mentorNumber, userNumber);
     }
 
 //    멘토 프로필 상세 보기(스킬)
@@ -94,6 +125,22 @@ public class MentorService {
             throw new IllegalArgumentException("멘토 번호 누락!");
         }
         return mentorMapper.profileSkill(mentorNumber);
+    }
+
+//    멘토 프로필 등록하기 - 스킬
+    public void skillRemoveAndRegister(Long mentorNumber , List<String> skillList){
+        if (mentorNumber == null) {
+            throw new IllegalArgumentException("멘토 번호 누락!");
+        }
+        mentorMapper.skillDelete(mentorNumber);
+//        mentorMapper.skillDelete(6L);
+        SkillVo skillVo = new SkillVo();
+        skillVo.setMentorNumber(mentorNumber);
+//        skillVo.setMentorNumber(6L);
+        for (int i=0; i<skillList.size(); i++){
+            skillVo.setSkillName(skillList.get(i));
+            mentorMapper.skillInsert(skillVo);
+        }
     }
 
 //    멘토 프로필 상세보기(경력)
@@ -126,14 +173,6 @@ public class MentorService {
         return mentorMapper.categoryList();
     }
 
-//    멘토 프로필 등록하기 - 기본 프로필
-    public MentorVo findMentor(Long mentorNumber) {
-        if (mentorNumber == null) {
-            throw new IllegalArgumentException("멘토 번호 누락!");
-        }
-        return mentorMapper.mentor(mentorNumber);
-    }
-
     //    멘토 프로필 등록
     public void mentorPrRegister(MentorVo mentorVo){
         if (mentorVo == null) {
@@ -142,21 +181,6 @@ public class MentorService {
         mentorMapper.mentorPr(mentorVo);
     }
 
-//    멘토 프로필 등록하기 - 스킬
-    public void skillRemoveAndRegister(Long mentorNumber , List<String> skillList){
-        if (mentorNumber == null) {
-            throw new IllegalArgumentException("멘토 번호 누락!");
-        }
-        mentorMapper.skillDelete(mentorNumber);
-//        mentorMapper.skillDelete(6L);
-        SkillVo skillVo = new SkillVo();
-        skillVo.setMentorNumber(mentorNumber);
-//        skillVo.setMentorNumber(6L);
-        for (int i=0; i<skillList.size(); i++){
-            skillVo.setSkillName(skillList.get(i));
-            mentorMapper.skillInsert(skillVo);
-        }
-    }
 
 //    멘토 프로필 등록하기 - 경력
     public void careerRegister(Long mentorNumber, CareerVo careerVo){
@@ -164,28 +188,6 @@ public class MentorService {
             throw new IllegalArgumentException("멘토 번호 누락!");
         }
         mentorMapper.careerInsert(careerVo);
-    }
-
-    public List<MentorVo> findMentor2(Long mentorNumber){
-        if (mentorNumber == null) {
-            throw new IllegalArgumentException("멘토 번호 누락!");
-        }
-        return mentorMapper.mentor2(mentorNumber);
-    }
-
-    public MentorVo findMentor3(Long mentorNumber){
-        if (mentorNumber == null) {
-            throw new IllegalArgumentException("멘토 번호 누락!");
-        }
-        return mentorMapper.mentor3(mentorNumber);
-    }
-
-//    멘토 리뷰 등록하기
-    public void reviewRegister(ReviewVo reviewVo){
-        if (reviewVo == null) {
-            throw new IllegalArgumentException("리뷰 정보 누락!");
-        }
-        mentorMapper.reviewInsert(reviewVo);
     }
 
 //    멘토 프로필 상태 변경

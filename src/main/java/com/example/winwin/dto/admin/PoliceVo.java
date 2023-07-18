@@ -21,5 +21,6 @@ public class PoliceVo {
     private String categoryNumber;
     private String bigCode;
     private Long commentNumber;
+    private Long postNumber;
 
 }

@@ -1,5 +1,4 @@
 //글자수 실시간 카운팅
-
 $('#count_memo').keyup(function (e){
     var content = $(this).val();
     $('#cnt').html("("+content.length+" /25)");
@@ -12,7 +11,6 @@ $('#count_memo').keyup(function (e){
 });
 
 //태그 삭제
-
 const closes = document.getElementsByClassName("close");
 
 const myFunction = function(event) {

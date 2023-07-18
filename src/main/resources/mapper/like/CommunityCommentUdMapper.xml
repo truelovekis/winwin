@@ -50,4 +50,12 @@
         WHERE CC.COMMENT_NUMBER = #{commentNumber} AND UD_STATUS = 'u'
     </select>
 
+<!--    ud 삭제 (커뮤니티 게시글 삭제에서 사용)-->
+    <delete id="deleteForCommunity">
+        DELETE FROM COMMUNITY_COMMENT_UD
+        WHERE COMMENT_NUMBER IN (SELECT COMMENT_NUMBER
+                                 FROM COMMUNITY_COMMENT
+                                 WHERE COMMUNITY_NUMBER = #{communityNumber})
+    </delete>
+
 </mapper>

@@ -1,4 +1,54 @@
 import * as review from '../mentor/module/review.js';
+const mentorNumber = $('.mentor-num').val();
+
+//쪽지 모달창
+$('.messageBox').on('click' , function (e){
+    console.log($('.umstatus').val);
+    if($('.userNumber').val() == ''){
+        alert("로그인 해주세요!");
+        $('.login-move').trigger('click');
+    }
+
+    if($('.userNumber').val() != '' && ($('.umstatus').val() == 'N' || $('.umstatus').val() == '0')){
+        alert("멘토:멘티 관계가 아닙니다.");
+        // e.stopPropagation();
+    }
+
+    if($('.userNumber').val() != null || $('.umstatus').val() == 'Y'){
+        $(function () {
+            $(".messageBox").click(function () {
+                $(".input-wrap").fadeIn();
+                let userNickname = $('.name-text').text();
+                let num = $('.mentornumber').data('num');
+                console.log("--------------------")
+                console.log(userNickname);
+                console.log(num);
+                console.log("---------------------")
+
+                $('.chattingTo').text(userNickname);
+                $('.chattingTo').data('num', num);
+            });
+        });
+
+    }
+
+    $(".messageBox").on("click", function () {
+        $(".input-wrap").removeClass("none");
+
+        $('body').css('overflow', 'hidden');
+    });
+
+    $(".input-wrap").on("click", function (e) {
+
+        if ($(e.target).hasClass("input-wrap")) {
+            $(".input-wrap").addClass("none");
+            $('body').css('overflow', 'auto');
+
+            $('.form-reset')[0].reset();
+        }
+    });
+});
+//쪽지 모달창 끝
 
 /* 건드리지 마시오 */
 $("#star").click(function () {
@@ -17,6 +67,7 @@ $("#star").click(function () {
 });
 /* 건드리지 마시오 */
 
+//멘토 프로필 뷰
 $(".changeView").html(makePro());
 
 $(".pro").on("click", function () {
@@ -32,13 +83,14 @@ $(".pro").on("click", function () {
 
 $(".career").on("click", function () {
     $('.pro-bottom').hide();
-    $(".changeView").html(makeReview());
+    $(".changeView").html(makeReview(), showReview());
     $(".changeView2").hide();
+    // $('.review-writer').html(showReview);
     $(".li-bottom").css("width", "0");
     $(this).find(".li-bottom").css("width", "100%");
     $(".li-btn").css("color", "#cbd5e1");
     $(this).find("button").css("color", "black");
-    showReview();
+    // showReview();
 });
 
 $(".board").on("click", function () {
@@ -51,70 +103,15 @@ $(".board").on("click", function () {
     makeInfo();
 });
 
+
+//멘토 경력 뷰
 function makePro() {
     let text = '';
-    // text +=
-    //     `
-    // <div class="changeView2">
-    //     <div class="grid-flex">
-    //         <div class="col-start">
-    //             <div class="page-flex">
-    //                 <div class="skill-page" aria-label="스킬">
-    //                     <div class="skill-flex">
-    //                         <p class="font-bold">스킬</p>
-    //                     </div>
-    //                     <div class="board-flex">`;
-    //
-    //                 map.forEach(skill => {
-    //                     text +=
-    //                         `<div class="boarder">
-    //                         <h3 class="reader"> ${skill.skillName}</h3>
-    //                         </div>`;
-    //                 });
-    //
-    //              text +=
-    //                         `
-    //                     </div>
-    //                 </div>
-    //                 <hr color="#CBD5E1"/>
-    //                 <div class="Career-page" aria-label="경력">
-    //                     <div class="Carrer-page">
-    //                         <p class="font-bold">경력 ・ 12년차</p>
-    //                     </div>
-    //                     <div class="BT-form">`;
-    //
-    //              map.forEach(career =>{
-    //                  text += `
-    //                  <div class="CR-flex">
-    //                             <div class="Career-img">
-    //                   <span>
-    //                     <img src="./img/./kakao.webp" alt="" style="width: 24px"/>
-    //                   </span>
-    //                             </div>
-    //                             <div class="kakao-flex">
-    //                                 <a href="" target="_blank" rel="noreferrer">
-    //                     <span style="color: black">
-    //                       <span class="font-bold" style="color: black"/>
-    //                       <span class="font-bold">${career.careerCompany}</span> <span class="careertitle">${career.careerTitle}</span>
-    //                     </span>
-    //                                 </a>
-    //                                 <p className="font-base"><span>${career.careerStartDate}</span> ~ <span>${career.careerEndDate}</span></p>
-    //                             </div>
-    //                         </div>
-    //                  `;
-    //              })
-    //                         text +=
-    //                             `
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     </div>
-    // </div> `;
     return text;
 }
 
 
+//멘토 리뷰 뷰
 function makeInfo() {
     let mentorNumber= $('.mentor-num').val();
 
@@ -142,11 +139,9 @@ function makeInfo() {
                              <div class="pf">
                              ${c.pfpSystemName == null ? '<img class="img-box2" src="/img/profile-basic.png"/>' :
                                 '<img class="img-box2" src=/profile/' + c.pfpUuid + '_' + c.pfpSystemName + '>' }
-<!--                                 <img class="info-img" src=""></lmg></img>-->
                              </div>
                              <div class="info-text-box">
                                <span class="info-user-name">${c.userName}</span>
-<!--                               <br/>-->
                                <span class="user-bottom">${c.userBelong} · 4년차</span>
                                <div class="info-content">
                                  <div class="sec1">
@@ -185,6 +180,7 @@ $('.changeView').on('input', '.rating input' ,(e)=>{
     star.style.width = `${e.target.value * 10}%`;
 })
 
+//멘토 리뷰 - 멘토:멘티 관계일 때 리뷰 등록하는 요소 띄우기
 function makeReview() {
     let text = '';
     let status = $('.umstatus').val();
@@ -218,6 +214,7 @@ function makeReview() {
     return text;
 }
 
+//등록된 리뷰 리스트
 function showReview() {
     let mentorNumber = $('.mentor-num').val();
     console.log(mentorNumber)
@@ -240,7 +237,7 @@ function showReview() {
                     <td><p class="reviewstar">${r.reviewStar}</p></td>
                     <td><p class="reviewstar">${r.userNickName}</p></td>
                 </div>
-        `;
+                `;
             });
             $('.review-writer').html(text);
         },
@@ -249,8 +246,6 @@ function showReview() {
         }
     });
 }
-
-const mentorNumber = $('.mentor-num').val();
 
 function showError(a, b, c){
     console.error(c);
@@ -271,52 +266,6 @@ $('.changeView').on('click', '.review-btn', function (){
         reviewStar : star,
         mentorNumber : mentorNumber
     }
-    review.register(reviewObj, showReview, showError());
+    review.register(reviewObj, showReview(), showError());
     $('#review-content').val('');
 });
-
-$('.messageBox').on('click', function (e){
-    if($('.userNumber').val() == '' ){
-        alert("로그인 해주세요");
-        $('.login-move').trigger('click');
-    }
-
-    if($('.umstatus').val() == 'N'){
-        alert("멘토:멘티 관계가 아닙니다.");
-        e.stopPropagation();
-    }
-
-    if($('.userNumber').val() != null || $('.umstatus').val() == 'Y'){
-        $(function () {
-            $(".messageBox").click(function () {
-                $(".input-wrap").fadeIn();
-                let userNickname = $('.name-text').text();
-                let num = $('.mentornumber').data('num');
-                console.log(num);
-
-                $('.chattingTo').text(userNickname);
-                $('.chattingTo').data('num', num);
-            });
-        });
-
-        $(".messageBox").on("click", function () {
-            $(".input-wrap").removeClass("none");
-
-            $('body').css('overflow', 'hidden');
-        });
-
-        $(".input-wrap").on("click", function (e) {
-
-            if ($(e.target).hasClass("input-wrap")) {
-                $(".input-wrap").addClass("none");
-                $('body').css('overflow', 'auto');
-
-                $('.form-reset')[0].reset();
-            }
-        });
-    }
-})
-
-
-
-

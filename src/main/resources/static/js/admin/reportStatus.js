@@ -1,32 +1,37 @@
 // 신고게시글 상태 변경
 $(document).ready(function() {
     $("#changeStatusBtn").on("click", function() {
-        changeStatus();
+        changeStatus3();
     });
 });
 
 
-function changeStatus() {
+function changeStatus3() {
     let $checkedBox = $('.check-box:checked');
-    let policeNumber = [];
-    let boardStatus = [];
+    let policeVo = {};
+    let policeVoArr = [];
+
+    let postNumber = [];
+    let status = [];
+    let bigCode = [];
 
     for(let i=0; i<$checkedBox.length; i++){
-        policeNumber.push( $checkedBox.eq(i).data('number'));
-        boardStatus.push($checkedBox.closest('.user-table-category').find('.user-report-select').val());
+        policeVo.postNumber= $checkedBox.eq(i).data('number');
+        policeVo.status = $checkedBox.eq(i).closest('.user-table-category').find('.user-report-select').val();
+        policeVo.bigCode = $checkedBox.eq(i).data('code');
+
+        policeVoArr.push({...policeVo});
     }
 
 
-    console.log(policeNumber)
-    console.log('=============================')
-    console.log(boardStatus)
+    console.log(policeVoArr)
     // var communityNumber = document.getElementById("communityNumber").value;
     // var currentStatus = document.getElementById("currentStatus").value; // 현재 상태 값을 가져옵니다.
 
-    if (policeNumber == "") {
-        alert("게시글 번호를 입력해주세요.");
-        return false;
-    }
+    // if (policeNumber == "") {
+    //     alert("게시글 번호를 입력해주세요.");
+    //     return false;
+    // }
 
     // var newStatus = currentStatus == "1" ? "0" : "1";
 
@@ -35,7 +40,7 @@ function changeStatus() {
         url: "/status/updateBoard",
         contentType: "application/json; charset=utf-8",
         traditional : true,
-        data: JSON.stringify({policeNumber: policeNumber, boardStatus: boardStatus}),
+        data: JSON.stringify(policeVoArr),
         success: function() {
             alert("변경 성공");
         },

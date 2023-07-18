@@ -45,8 +45,10 @@ public class CommunityController {
     @GetMapping("/list/{categoryTypeStr}")
     public String communityMainForm(@PathVariable("categoryTypeStr") String categoryTypeStr ,Model model, HttpServletRequest req){
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
-        List<CommunityProfileVo> communityProfileVoList = communityService.registerProfile(userNumber);
-        model.addAttribute("communityProfileVoList", communityProfileVoList);
+        if(userNumber != null){
+            CommunityProfileVo communityProfileVo = communityService.selectUserProfile(userNumber);
+            model.addAttribute("communityProfileVo", communityProfileVo);
+        }
         return "community/communityMain";
     }
 
@@ -85,9 +87,10 @@ public class CommunityController {
         communityCommentVo.setSessionUserNumber(userNumber);
         communityCommentVo.setCommunityNumber(communityNumber);
 
-        List<CommunityCommentVo> communityCommentVoList = communityCommentService.findCommentUdList(communityCommentVo);
+        CommunityProfileVo communityProfileVo = communityService.selectUserProfile(communityVo.getUserNumber());
+        model.addAttribute("communityProfileVo", communityProfileVo);
 
-        System.out.println("=============================="+communityCommentVoList+"====================================");
+        List<CommunityCommentVo> communityCommentVoList = communityCommentService.findCommentUdList(communityCommentVo);
 
         List<CommunityFileDto> fileList =  communityFileService.findList(communityNumber);
         communityService.upHitCnt(communityNumber);

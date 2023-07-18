@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.PushBuilder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -149,6 +150,23 @@ public class MyPageRestController {
         criteria.setAmount(4);
         PageVo pageVo = new PageVo(criteria, myPageService.getTotalCs(userNumber));
         List<ActiveBoardVo> activeBoardVoList = myPageService.getActiveCsBoardList(userNumber, criteria);
+
+        Map<String, Object> myBoard = new HashMap<>();
+        myBoard.put("pageVo", pageVo);
+        myBoard.put("activeBoardVoList", activeBoardVoList);
+
+        return myBoard;
+    }
+
+//    내 진로정보 글 전체보기
+    @GetMapping("/myCareerInfo/{page}")
+    public Map<String, Object> myCareerInfo(HttpServletRequest req, @PathVariable("page") int page){
+        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
+        Criteria criteria = new Criteria();
+        criteria.setPage(page);
+        criteria.setAmount(9);
+        PageVo pageVo = new PageVo(criteria, myPageService.getTotalCareerInfo(userNumber));
+        List<ActiveBoardVo> activeBoardVoList = myPageService.getActiveCareerInfoBoardList(userNumber, criteria);
 
         Map<String, Object> myBoard = new HashMap<>();
         myBoard.put("pageVo", pageVo);

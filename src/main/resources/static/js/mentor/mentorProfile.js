@@ -30,12 +30,14 @@ $(".input-wrap").on("click", function (e) {
     }
 });
 
+
 let moreInfo = $(".mento-more-info-box");
 
 moreInfo.click(function () {
     $(this).find(".mento-more-info").toggleClass("none");
 });
 
+//링크 공유하기 버튼
 let share = $(".share-button");
 
 share.click(function CopyUrlToClipboard() {
@@ -52,12 +54,17 @@ share.click(function CopyUrlToClipboard() {
 //멘토 신청하기 버튼
 $(".main-mentor").on("click",'.message-button' ,function () {
     let user =  $('.user').val();
+    // let status = $(this).
     console.log(user);
+    console.log($('.loginstatus').val());
     if(user == ''){
-        alert("로그인 해주세요");
+        alert("로그인 해주세요!");
         $('.login-move').trigger('click');
     }
-    if(user != ''){
+    if($('.loginstatus').val() == '멘토'){
+        alert("멘토이신 경우 신청이 불가능합니다.");
+    }
+    if(user != '' && $('.loginstatus').val() == '멘토+멘티' || $('.loginstatus').val() == '멘티'){
         $(".modal-wrap1").removeClass("none");
         $(".modal-wrap1").css({
             position: "fixed",
@@ -68,7 +75,7 @@ $(".main-mentor").on("click",'.message-button' ,function () {
     }
 
     let name = $(this).closest('.item__box').find('.mento-name').text();
-    let number = $(this).closest('.item__box').find('.add-num').val();
+    let number = $(this).closest('.item__box').find('.add-num').data('add');
     console.log(number);
     // console.log(name);
     $('.mentorName').text(name);
@@ -85,6 +92,7 @@ $(".main-mentor").on("click",'.message-button' ,function () {
             console.log("실패");
         }
     });
+
 });
 
 //멘토 프로필 불러오기
@@ -167,6 +175,7 @@ $(".middle-option-box").on("click", ".middle-option", function () {
     $(".select-tag").append(tagHtml);
 });
 
+//태그 눌렀을 때 지워주기+리스트 다시 띄우기
 $(".select-tag").on("click", ".tag", function () {
     $(this).detach();
 
@@ -259,17 +268,17 @@ $(".third-job-box").on("click", ".option", function () {
 });
 
 
-$('.select-tag').on('click', '.tag' , function (){
-    console.log($('.tag').data('value'));
-    let tag = $('.tag').data('value');
-
-    if(tag == null){
-        // window.location.href= '/mentor/list';
-        // showMentor;
-        console.log('제발');
-    }
-
-});
+// $('.select-tag').on('click', '.tag' , function (){
+//     console.log($('.tag').data('value'));
+//     let tag = $('.tag').data('value');
+//
+//     if(tag == null){
+//         // window.location.href= '/mentor/list';
+//         // showMentor;
+//         console.log('제발');
+//     }
+//
+// });
 
 function showMentor(map){
     let text = '';
@@ -327,9 +336,25 @@ function showMentor(map){
         }
 
         text+=`                
-                </button>
+                </button>`;
+
+        if(mentor.umStatus == '0'){
+            text += `
                 <button class="message-button">신청하기</button>
-              </div>
+            `;
+        }
+        if(mentor.umStatus == 'Y'){
+            text += `
+                <button class="chatting-button">쪽지 보내기</button>
+            `
+        }
+        if(mentor.umStatus == 'N'){
+            text +=`
+            <button class="d-button">대기중</button>
+            `;
+        }
+
+              text += `</div>
             </div>
             <div class="skill-tags">
               <!--            스킬 나열 -->
@@ -407,10 +432,10 @@ function showMentor(map){
     $('.main-mentor').html(text);
 }
 
-
-$(".select-tag").on("click", ".tag", function () {
-    $(this).detach();
-});
+//태그 선택시 지워주기
+// $(".select-tag").on("click", ".tag", function () {
+//     $(this).detach();
+// });
 
 
 // 1, 2, 3차 카테고리 별 항목 띄우기
@@ -487,6 +512,7 @@ function makeMiddleCate(result) {
     return text2;
 }
 
+//-----------------------------------------------------------
 let check = $("#suggest-profile");
 let height = parseInt($(".myProfile").css("height")) + 25;
 
@@ -499,6 +525,7 @@ check.click(function () {
         $(".myProfile-box").css("height", 0);
     }
 });
+//-----------------------------------------------------------
 
 //멘토 프로필 업데이트
 $('#suggest-profile').on("click", function (){
@@ -543,8 +570,10 @@ $(".main-mentor").on("click",'.like-button' ,function (e){
         alert("로그인 해주세요!");
         $('.login-move').trigger('click')
     }
-
-    if(user != ''){
+    if($('.loginstatus').val() == '멘토'){
+        alert("멘토이신 경우 관심 멘토 등록이 불가합니다.");
+    }
+    if(user != '' && $('.loginstatus').val() == '멘토+멘티' || $('.loginstatus').val() == '멘티'){
         e.preventDefault();
         let btn = $(this).find('.bi-heart');
         let btn2 =$(this).find('.bi-heart-fill');
@@ -590,12 +619,12 @@ $(".main-mentor").on("click",'.like-button' ,function (e){
     }
 });
 
+//멘토 프로필 등록하기
 $('.profile-button').on('click', function (e) {
     e.preventDefault();
 
     let mentorNumber = $('.mento-button').data('mentornumber');
     let userNumber = $('.mento-button').data('usernumber');
-    // console.log(mentorNumber);
 
     if(mentorNumber > -1){
         window.location.href = '/mentor/apply';
@@ -619,14 +648,17 @@ $('.modal-wrap1').on('click', '.um-btn' , function (){
         success : function (){
             console.log("성공");
             alert("신청에 성공하셨습니다.");
+            $(".modal-wrap1").addClass("none");
+            // showMentor();
         },
         error : function (){
             console.log("실패");
         }
-    })
+    });
 
 });
 
+//멘토 프로필 더보기+닫기 버튼
 $('.main-mentor').on('click', '.mento-more-info-box',function (){
     console.log("선택 됐다");
     let $target = $(this).prev('.mento-profile');
@@ -638,4 +670,24 @@ $('.main-mentor').on('click', '.mento-more-info-box',function (){
     }
 
 });
+
+//내 프로필 더보기+닫기 버튼
+$('.mento-more-info-box2').on('click', function (){
+    console.log("선택 됐다");
+    let $target = $(this).prev('.mento-profile');
+    let myprofile = $('.myProfile-box');
+
+    if($target.css('max-height') == 'none'){
+        $target.css('max-height' , "186px")
+    }else {
+        $target.css('max-height' , "none");
+        // myprofile.css('margin-bottom' , "10px");
+        myprofile.css('height' , 'auto');
+    }
+});
+
+//내프로필 쪽지함 버튼
+$('.my-message').on('click', function (){
+    window.location.href = '/myPage/receiveMessage';
+})
 

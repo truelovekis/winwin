@@ -224,60 +224,115 @@
 
     <!--  전체 게시글 신고 조회  -->
     <select id="selectReport" resultType="policeVo">
-        SELECT POLICE_NUMBER, BC.BIG_NAME, BOARD_NUMBER, PC.CATEGORY_NAME, J1. USER_NUMBER,
-               TO_CHAR(POLICE_DATE,'YYYY-MM-DD') AS POLICE_DATE,
-               TITLE, STATUS,
-               U.USER_NAME, U.USER_ID
-        FROM (
-                 SELECT POLICE_NUMBER, PB.BIG_CODE, BOARD_NUMBER, POLICE_CATEGORY, USER_NUMBER, POLICE_DATE,
-                        C.TITLE, C.STATUS
-                 FROM POLICE_BOARD PB
-                          JOIN (
-                     SELECT COMMUNITY_NUMBER, COMMUNITY_TITLE AS TITLE, COMMUNITY_STATUS AS STATUS, 400 AS BIG_CODE
-                     FROM COMMUNITY
-                 ) C
-                               ON PB.BIG_CODE = C.BIG_CODE AND PB.BOARD_NUMBER = C.COMMUNITY_NUMBER
+--         SELECT POLICE_NUMBER, BC.BIG_NAME, BOARD_NUMBER, PC.CATEGORY_NAME, J1. USER_NUMBER,
+--                TO_CHAR(POLICE_DATE,'YYYY-MM-DD') AS POLICE_DATE,
+--                TITLE, STATUS,
+--                U.USER_NAME, U.USER_ID
+--         FROM (
+--                  SELECT POLICE_NUMBER, PB.BIG_CODE, BOARD_NUMBER, POLICE_CATEGORY, USER_NUMBER, POLICE_DATE,
+--                         C.TITLE, C.STATUS
+--                  FROM POLICE_BOARD PB
+--                           JOIN (
+--                      SELECT COMMUNITY_NUMBER, COMMUNITY_TITLE AS TITLE, COMMUNITY_STATUS AS STATUS, 400 AS BIG_CODE
+--                      FROM COMMUNITY
+--                  ) C
+--                                ON PB.BIG_CODE = C.BIG_CODE AND PB.BOARD_NUMBER = C.COMMUNITY_NUMBER
+--
+--                  UNION ALL
+--                  SELECT POLICE_NUMBER, PB.BIG_CODE, BOARD_NUMBER, POLICE_CATEGORY, USER_NUMBER, POLICE_DATE,
+--                         Q.TITLE, Q.STATUS
+--                  FROM POLICE_BOARD PB
+--                           JOIN (
+--                      SELECT QNA_NUMBER, QNA_TITLE AS TITLE, QNA_STATUS AS STATUS, 300 AS BIG_CODE
+--                      FROM QNA
+--                  ) Q
+--                                ON PB.BIG_CODE = Q.BIG_CODE AND PB.BOARD_NUMBER = Q.QNA_NUMBER
+--                  UNION ALL
+--                  SELECT POLICE_NUMBER, PB.BIG_CODE, BOARD_NUMBER, POLICE_CATEGORY, USER_NUMBER, POLICE_DATE,
+--                         CI.TITLE, CI.STATUS
+--                  FROM POLICE_BOARD PB
+--                           JOIN (
+--                      SELECT CAREERINFO_NUMBER, CAREERINFO_TITLE AS TITLE, '0' AS STATUS, 200 AS BIG_CODE
+--                      FROM CAREERINFO
+--                  ) CI
+--                                ON PB.BIG_CODE = CI.BIG_CODE AND PB.BOARD_NUMBER = CI.CAREERINFO_NUMBER
+--                  UNION ALL
+--                  SELECT POLICE_NUMBER, PB.BIG_CODE, BOARD_NUMBER, POLICE_CATEGORY, USER_NUMBER, POLICE_DATE,
+--                         S.TITLE, S.STATUS
+--                  FROM POLICE_BOARD PB
+--                           JOIN (
+--                      SELECT STUDY_NUMBER, STUDY_TITLE AS TITLE, STUDY_STATUS AS STATUS, 500 AS BIG_CODE
+--                      FROM STUDY
+--                  ) S
+--                                ON PB.BIG_CODE = S.BIG_CODE AND PB.BOARD_NUMBER = S.STUDY_NUMBER
+--                  UNION ALL
+--                  SELECT POLICE_NUMBER, PB.BIG_CODE, BOARD_NUMBER, POLICE_CATEGORY, USER_NUMBER, POLICE_DATE,
+--                         SH.TITLE, SH.STATUS
+--                  FROM POLICE_BOARD PB
+--                           JOIN (
+--                      SELECT SHARE_NUMBER, SHARE_TITLE AS TITLE, SHARE_STATUS AS STATUS, 600 AS BIG_CODE
+--                      FROM SHARE_FREE
+--                  ) SH
+--                                ON PB.BIG_CODE = SH.BIG_CODE AND PB.BOARD_NUMBER = SH.SHARE_NUMBER
+--              )J1
+--                  JOIN BIG_CATEGORY BC ON J1.BIG_CODE = BC.BIG_CODE
+--                  JOIN POLICE_CATEGORY PC ON J1.POLICE_CATEGORY = PC.CATEGORY_NUMBER
+--                  JOIN WW_USER U ON J1.USER_NUMBER = U.USER_NUMBER
 
-                 UNION ALL
-                 SELECT POLICE_NUMBER, PB.BIG_CODE, BOARD_NUMBER, POLICE_CATEGORY, USER_NUMBER, POLICE_DATE,
-                        Q.TITLE, Q.STATUS
-                 FROM POLICE_BOARD PB
-                          JOIN (
-                     SELECT QNA_NUMBER, QNA_TITLE AS TITLE, QNA_STATUS AS STATUS, 300 AS BIG_CODE
-                     FROM QNA
-                 ) Q
-                               ON PB.BIG_CODE = Q.BIG_CODE AND PB.BOARD_NUMBER = Q.QNA_NUMBER
-                 UNION ALL
-                 SELECT POLICE_NUMBER, PB.BIG_CODE, BOARD_NUMBER, POLICE_CATEGORY, USER_NUMBER, POLICE_DATE,
-                        CI.TITLE, CI.STATUS
-                 FROM POLICE_BOARD PB
-                          JOIN (
-                     SELECT CAREERINFO_NUMBER, CAREERINFO_TITLE AS TITLE, '0' AS STATUS, 200 AS BIG_CODE
-                     FROM CAREERINFO
-                 ) CI
-                               ON PB.BIG_CODE = CI.BIG_CODE AND PB.BOARD_NUMBER = CI.CAREERINFO_NUMBER
-                 UNION ALL
-                 SELECT POLICE_NUMBER, PB.BIG_CODE, BOARD_NUMBER, POLICE_CATEGORY, USER_NUMBER, POLICE_DATE,
-                        S.TITLE, S.STATUS
-                 FROM POLICE_BOARD PB
-                          JOIN (
-                     SELECT STUDY_NUMBER, STUDY_TITLE AS TITLE, STUDY_STATUS AS STATUS, 500 AS BIG_CODE
-                     FROM STUDY
-                 ) S
-                               ON PB.BIG_CODE = S.BIG_CODE AND PB.BOARD_NUMBER = S.STUDY_NUMBER
-                 UNION ALL
-                 SELECT POLICE_NUMBER, PB.BIG_CODE, BOARD_NUMBER, POLICE_CATEGORY, USER_NUMBER, POLICE_DATE,
-                        SH.TITLE, SH.STATUS
-                 FROM POLICE_BOARD PB
-                          JOIN (
-                     SELECT SHARE_NUMBER, SHARE_TITLE AS TITLE, SHARE_STATUS AS STATUS, 600 AS BIG_CODE
-                     FROM SHARE_FREE
-                 ) SH
-                               ON PB.BIG_CODE = SH.BIG_CODE AND PB.BOARD_NUMBER = SH.SHARE_NUMBER
-             )J1
-                 JOIN BIG_CATEGORY BC ON J1.BIG_CODE = BC.BIG_CODE
-                 JOIN POLICE_CATEGORY PC ON J1.POLICE_CATEGORY = PC.CATEGORY_NUMBER
-                 JOIN WW_USER U ON J1.USER_NUMBER = U.USER_NUMBER
+        SELECT POLICE_NUMBER, BC.BIG_NAME, BC.BIG_CODE, BOARD_NUMBER, PC.CATEGORY_NAME, J1. USER_NUMBER,
+        TO_CHAR(POLICE_DATE,'YYYY-MM-DD') AS POLICE_DATE,
+        TITLE, STATUS, POST_NUMBER,
+        U.USER_NAME, U.USER_ID
+        FROM (
+        SELECT POLICE_NUMBER, PB.BIG_CODE, BOARD_NUMBER, POLICE_CATEGORY, USER_NUMBER, POLICE_DATE,
+        C.TITLE, C.STATUS, C.POST_NUMBER
+        FROM POLICE_BOARD PB
+        JOIN (
+        SELECT COMMUNITY_NUMBER AS POST_NUMBER, COMMUNITY_TITLE AS TITLE, COMMUNITY_STATUS AS STATUS, 400 AS BIG_CODE
+        FROM COMMUNITY
+        ) C
+        ON PB.BIG_CODE = C.BIG_CODE AND PB.BOARD_NUMBER = C.POST_NUMBER
+
+        UNION ALL
+        SELECT POLICE_NUMBER, PB.BIG_CODE, BOARD_NUMBER, POLICE_CATEGORY, USER_NUMBER, POLICE_DATE,
+        Q.TITLE, Q.STATUS, Q.POST_NUMBER
+        FROM POLICE_BOARD PB
+        JOIN (
+        SELECT QNA_NUMBER AS POST_NUMBER, QNA_TITLE AS TITLE, QNA_STATUS AS STATUS, 300 AS BIG_CODE
+        FROM QNA
+        ) Q
+        ON PB.BIG_CODE = Q.BIG_CODE AND PB.BOARD_NUMBER = Q.POST_NUMBER
+        UNION ALL
+        SELECT POLICE_NUMBER, PB.BIG_CODE, BOARD_NUMBER, POLICE_CATEGORY, USER_NUMBER, POLICE_DATE,
+        CI.TITLE, CI.STATUS, CI.POST_NUMBER
+        FROM POLICE_BOARD PB
+        JOIN (
+        SELECT CAREERINFO_NUMBER AS POST_NUMBER, CAREERINFO_TITLE AS TITLE, '0' AS STATUS, 200 AS BIG_CODE
+        FROM CAREERINFO
+        ) CI
+        ON PB.BIG_CODE = CI.BIG_CODE AND PB.BOARD_NUMBER = CI.POST_NUMBER
+        UNION ALL
+        SELECT POLICE_NUMBER, PB.BIG_CODE, BOARD_NUMBER, POLICE_CATEGORY, USER_NUMBER, POLICE_DATE,
+        S.TITLE, S.STATUS, S.POST_NUMBER
+        FROM POLICE_BOARD PB
+        JOIN (
+        SELECT STUDY_NUMBER AS POST_NUMBER, STUDY_TITLE AS TITLE, STUDY_STATUS AS STATUS, 500 AS BIG_CODE
+        FROM STUDY
+        ) S
+        ON PB.BIG_CODE = S.BIG_CODE AND PB.BOARD_NUMBER = S.POST_NUMBER
+        UNION ALL
+        SELECT POLICE_NUMBER, PB.BIG_CODE, BOARD_NUMBER, POLICE_CATEGORY, USER_NUMBER, POLICE_DATE,
+        SH.TITLE, SH.STATUS, SH.POST_NUMBER
+        FROM POLICE_BOARD PB
+        JOIN (
+        SELECT SHARE_NUMBER AS POST_NUMBER, SHARE_TITLE AS TITLE, SHARE_STATUS AS STATUS, 600 AS BIG_CODE
+        FROM SHARE_FREE
+        ) SH
+        ON PB.BIG_CODE = SH.BIG_CODE AND PB.BOARD_NUMBER = SH.POST_NUMBER
+        )J1
+        JOIN BIG_CATEGORY BC ON J1.BIG_CODE = BC.BIG_CODE
+        JOIN POLICE_CATEGORY PC ON J1.POLICE_CATEGORY = PC.CATEGORY_NUMBER
+        JOIN WW_USER U ON J1.USER_NUMBER = U.USER_NUMBER
         <trim prefix="WHERE" prefixOverrides="AND">
             <if test="userName != null and userName != ''">
                 AND USER_NAME LIKE '%' || #{userName} || '%'
@@ -461,11 +516,11 @@
             where USER_NUMBER = #{userNumber}
         </update>
 
-<!-- 신고 게시글 상태 변경  -->
+<!--    신고 게시글(커뮤니티) 상태 변경-->
     <update id="updateBoard">
-        update police_board
-        set board_status = #{boardStatus}
-        where police_number = #{policeNumber}
+    update community
+    set community_status = #{status}
+    where community_number = #{postNumber}
     </update>
 
 <!-- 신고 댓글(커뮤니티) 상태 변경  -->
@@ -476,9 +531,11 @@
          </update>
 
 <!--  신고 댓글(QnA) 상태 변경  -->
-<!--  <update id="updateQnaCommentReport">-->
-<!--       -->
-<!--  </update>-->
+    <update id="updateQnaCommentReport">
+        update qna_comment
+        set qna_comment_status = #{status}
+        where comment_number = #{commentNumber}
+    </update>
 
 
 <!--  게시글 신고 상태 변경  -->

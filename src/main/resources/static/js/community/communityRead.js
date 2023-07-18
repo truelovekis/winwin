@@ -51,6 +51,7 @@ $('.commentBtn').on('click', function(){
     let content = $('.comment1').val().trim();
     console.log(content);
     if(content == ''){
+        alert("로그인이 필요한 서비스 입니다.")
         return;
     }
 
@@ -123,11 +124,26 @@ function showComment(replies) {
     let text = '';
 
     replies.forEach(r => {
-        text += `<th:block th:each="comment of commentList">
-                  <div class="commentAi"  data-num="${r.commentNumber}">
+        text += ` <div class="commentAi"  data-num="${r.commentNumber}">
                     <input type="hidden" class="comment-num" value="${r.commentNumber}">
                     <div class="profil">
-                        <img src="../img/corgi-g5894d3ae3_1920.jpg" height="50px" width="50px">
+                `;
+        if(r.pfpUuid == null || r.pfpUuid == ""){
+            text += `<img src="../../img/profile-basic.png" class="userpfp"/>`;
+        }else{
+            text += `<img class="img-box" style="background-image: url(/profile/${r.pfpUuid}_${r.pfpSystemName})"/>`;
+           // text += `<img class="img-box" style="background-image: url('/profile/${r.pfpUuid}_${r.pfpSystemName}')"/>`;
+
+        }
+        //
+        // if (communityProfileVoList[0] == null) {
+        //     text += '<img src="../../img/profile-basic.png" class="userpfp" height="50px" width="50px"/>';
+        // } else {
+        //     text += '<img class="img-box" style="background-image: url(/profile/' + communityProfileVoList[0].pfpUuid + '_' + communityProfileVoList[0].pfpSystemName + ')"/>';
+        // }
+
+
+        text += ` 
                         <div class="Commento"><p class="userInfo">${r.userId}</p></div>
                         <div class="dropdown2">
                             <button class="dropbtn2">
@@ -349,7 +365,6 @@ reportModal.addEventListener("click", function (e){
     }
 });
 
-
 // ==============================================
 // 커뮤니티 게시글 신고하기 버튼 클릭 시 컨펌 및 신고처리
 // ==============================================
@@ -457,9 +472,14 @@ function commentReportAjax(){
 }
 
 
-//================
+//=================
 // 게시글 좋아요 영역
 // ================
+let $goodBtn = $('.good');
+$goodBtn.on('click', function(){
+    $(this).closest('.good').find('.bi-hand-thumbs-up-fill').toggleClass('hide');
+    $(this).closest('.good').find('.bi-hand-thumbs-up').toggleClass('hide');
+});
 
 let likeval = $('.good').data('num'); // 좋아요 상태
 // let userNumber = $('#user-num').val();
@@ -491,12 +511,50 @@ $('.good').click(function() {
                 } else if (likeval == 0) {
                     alert('취소 성공');
                 }
-                $(this).closest('.good').find('.bi-hand-thumbs-up-fill').toggleClass('hide');
-                $(this).closest('.good').find('.bi-hand-thumbs-up').toggleClass('hide');
+                // $(this).closest('.good').find('.bi-hand-thumbs-up-fill').toggleClass('hide');
+                // $(this).closest('.good').find('.bi-hand-thumbs-up').toggleClass('hide');
             }
         });
     }
 });
+
+// let likeval = $('.good').data('num'); // 좋아요 상태
+//
+// $('.good').click(function() {
+//     if (session_check()) {
+//         if (likeval == 0) {
+//             likeval = 1; // 좋아요 추가
+//         } else if (likeval == 1) {
+//             likeval = 0; // 좋아요 취소
+//         }
+//
+//         console.log('===================' + likeval + '==================================');
+//
+//         // 나머지 게시글 좋아요 AJAX 요청 코드
+//         $.ajax({
+//             type: likeval == 1 ? 'post' : 'delete',
+//             url: likeval == 1 ? '/likes/likeUp' : '/likes/unlike',
+//             contentType: 'application/json',
+//             data: JSON.stringify({
+//                 "communityNumber": communityNumber,
+//                 "userNumber": loginNumber
+//             }),
+//             success: function(data) {
+//                 $('.good').data('num', likeval);
+//                 console.log($('.good').data('num'));
+//                 if (likeval == 1) {
+//                     alert('성공!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+//                 } else if (likeval == 0) {
+//                     alert('취소 성공');
+//                 }
+//                 $(this).find('.bi-hand-thumbs-up-fill').toggleClass('hide');
+//                 $(this).find('.bi-hand-thumbs-up').toggleClass('hide');
+//             }.bind(this) // bind() 함수를 사용하여 클릭한 버튼을 콜백 함수 내에서 참조할 수 있도록 설정합니다.
+//         });
+//     }
+// });
+
+
 
 //==========================
 // 댓글 좋아요, 싫어요 구현 영역

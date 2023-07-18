@@ -63,10 +63,13 @@ public interface AdminMapper{
     public void updateUser(Long userNumber, String userStatus);
 
     // 게시글 신고 상태 변경
-    public void updateBoard(Long policeNumber, String boardStatus);
+    public void updateBoard(PoliceVo policeVo);
 
-    // 댓글 신고 상태 변경
+    // 댓글(커뮤니티) 신고 상태 변경
     public void updateCommunityReport(PoliceVo policeVo);
+
+    // 댓글(qna) 상태 변경
+    public void updateQnaCommentReport(PoliceVo policeVo);
 
     // 게시글 진로정보 mainCategory 정보 가져오기
     public List<MainCategoryVo> getCateJob();

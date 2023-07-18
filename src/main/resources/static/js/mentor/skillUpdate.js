@@ -79,8 +79,3 @@ let $back = $('.back-button');
 $back.on('click', function (){
     window.location.href = '/mentor/apply';
 });
-
-// $('.success-btn').on('click', function (){
-//     $('.skill-box').submit();
-//     window.location.href = '/mentor/skill';
-// });

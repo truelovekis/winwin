@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.mentor.MentorMapper">
+    <!--멘토 리스트 메인 페이지-->
     <select id="mentorList" resultType="mentorVo">
         SELECT S.MENTOR_NUMBER, MENTOR_STATUS, USER_NUMBER, USER_NAME, USER_BELONG,
                PFP_SYSTEM_NAME, PFP_UPLOAD_PATH, PFP_UUID,
@@ -40,30 +41,35 @@
         ORDER BY mc.CAREER_NUMBER desc
     </select>
 
+    <!--멘토 커리어 리스트-->
     <select id="mentorCareer" resultType="careerVo">
         SELECT MC.CAREER_COMPANY , MC.CAREER_TITLE , TO_CHAR(TO_DATE(mc.CAREER_END_DATE, 'YYYY.mm.DD'), 'YYYY.mm') CAREER_END_DATE , TO_CHAR(TO_DATE(mc.CAREER_START_DATE, 'YYYY.mm.DD'),'YYYY.mm') CAREER_START_DATE , ROUND(((TO_DATE(mc.CAREER_END_DATE, 'YYYY.mm.DD') - TO_DATE(mc.CAREER_START_DATE, 'YYYY.mm.DD'))/30/12)) career_annual , career_status
         FROM MENTOR_CAREER mc
         where MC.MENTOR_NUMBER = #{mentorNumber}
     </select>
 
+    <!--멘토 스킬 리스트-->
     <select id="mentorSkill" resultType="skillVo">
         SELECT m.MENTOR_NUMBER , ms.SKILL_NAME
         FROM MENTOR m JOIN MENTOR_SKILL ms
         ON m.MENTOR_NUMBER = ms.MENTOR_NUMBER AND m.MENTOR_NUMBER = #{mentorNumber}
     </select>
 
+    <!--카테고리 리스트-->
     <select id="categoryList" resultType="categoryVo">
         SELECT mc.MAIN_CODE , mc.MAIN_NAME , sc.SUB_NAME
         FROM MAIN_CATEGORY mc JOIN SUB_CATEGORY sc
         ON mc.MAIN_CODE  = sc.MAIN_CODE
     </select>
 
+    <!--멘토 프로필 등록하기 업데이트-->
     <update id="mentorUpdate">
         UPDATE MENTOR
         SET MENTOR_STATUS = #{mentorStatus}
         WHERE MENTOR_NUMBER = #{mentorNumber}
     </update>
 
+    <!--로그인한 멘토의 프로필-->
     <select id="loginMentor" resultType="mentorVo">
         SELECT M1.user_number , M1.mentor_number , M1.user_name , M1.PFP_UPLOAD_PATH , M1.PFP_SYSTEM_NAME , M1.PFP_UUID ,mc.CAREER_COMPANY , TO_CHAR(TO_DATE(mc.CAREER_END_DATE, 'YYYY.mm.DD'), 'YYYY.mm') CAREER_END_DATE , TO_CHAR(TO_DATE(mc.CAREER_START_DATE, 'YYYY.mm.DD'), 'YYYY.mm') CAREER_START_DATE, ROUND((TO_DATE(CAREER_END_DATE ) - TO_DATE(CAREER_START_DATE))/30/12) AS career_annual,
                M1.USER_BELONG , M1.MENTOR_STATUS
@@ -79,21 +85,25 @@
         ON M1.mentor_number = mc.MENTOR_NUMBER AND M1.user_belong = mc.CAREER_COMPANY
     </select>
 
+    <!--멘토 프로필 좋아요 추가하기-->
     <insert id="mentorLike">
         INSERT INTO MENTOR_LIKE(MENTOR_NUMBER, USER_NUMBER)
         VALUES(#{mentorNumber}, #{userNumber})
     </insert>
 
+    <!--멘토 프로필 좋아요 삭제하기-->
     <delete id="likeDelete">
         DELETE FROM MENTOR_LIKE
         WHERE MENTOR_NUMBER= #{mentorNumber} AND USER_NUMBER= #{userNumber}
     </delete>
 
+    <!--멘토:멘티 신청하기-->
     <insert id="addMentor">
         INSERT INTO UM_BRIDGE(USER_NUMBER, MENTOR_NUMBER)
         VALUES(#{userNumber}, #{mentorNumber})
     </insert>
 
+    <!--멘토 프로필 사진 불러오기-->
     <select id="mentorpfp" resultType="mentorVo">
         SELECT p.USER_NUMBER , p.PFP_UPLOAD_PATH , p.PFP_SYSTEM_NAME , p.PFP_UUID , m.MENTOR_NUMBER
         FROM (
