@@ -21,4 +21,15 @@ public class ActiveBoardVo {
     private int boardComment;
     private int boardLike;
     private int boardGood;
+//  마이페이지 진로정보 추가사항
+    private Long userNumber;
+    private String userName;
+    private String userNickname;
+    private Long mentorNumber;
+    private String boardSystemname;
+    private String boardUploadPath;
+    private String boardUuid;
+    private int subNumber;
+    private String subName;
+    private String gradeName;
 }

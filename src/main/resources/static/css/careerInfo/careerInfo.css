@@ -76,7 +76,8 @@
 
 
 .card-wrap{
-    width: 1050px;
+    /*width: 1050px;*/
+    width: 1000px;
     margin: auto;
     display: flex;
     background-color: #fff;
@@ -694,3 +695,135 @@ ul {
     color: black;
 }
 
+/* 진로정보 카드박스 수정사항 */
+/* 진로정보 박스 */
+
+.career-info-content{
+    margin-top: 25px;
+    display: flex;
+}
+
+.career-box{
+    width: 320px;
+    height: 320px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.career-info{
+    padding: 20px 20px 10px 20px;
+    height: 200px;
+}
+
+.career-tag{
+    background-color: rgb(242, 242, 242);
+    border-radius: 2px;
+    font-size: 10px;
+    padding: 3px;
+    color: #5e5e5e;
+    font-weight: 600;
+    padding: 3px 10px;
+}
+
+.career-title{
+    font-size: 17px;
+    font-weight: 700;
+    margin-top: 10px;
+    color: #000000;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.career-content{
+    font-size: 13px;
+    font-weight: lighter;
+    color: gray;
+    margin: 15px 0px;
+    text-overflow: ellipsis;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.career-bottom{
+    display: flex;
+    padding: 25px 20px;
+    border-top: 1px solid #ddd;
+    align-content: center;
+    flex-direction: column;
+}
+
+.career-bottom-wrap{
+    display: flex;
+    justify-content: space-between;
+}
+
+.career-user-profile-box{
+    display: flex;
+    align-items: center;
+}
+
+.career-profile-img{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.career-profile-img > img{
+    width: 35px;
+    border-radius: 50%;
+}
+
+.career-user-info{
+    margin-left: 10px;
+}
+
+.career-user-name{
+    font-size: 15px;
+    font-weight: 700;
+    display: block;
+}
+
+.career-user-tag{
+    font-size: 13px;
+    color: #5e5e5e;
+}
+
+.career-icon{
+    display: flex;
+    align-items: flex-end;
+}
+
+.select-count-box{
+    display: flex;
+    align-items: center;
+}
+
+.career-like-box{
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+}
+
+.select-count,
+.like-count{
+    color: rgb(148, 155, 160);
+    font-size: 13px;
+    margin-left: 3px;
+}
+
+.career-click{
+    display: block;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.career-click{
+    color: black;
+}
