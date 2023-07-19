@@ -1,4 +1,4 @@
-// 마이페이지 진로정보 내 글 무한 스크롤 페이징
+// 진로정보 관심 글(좋아요) 무한스크롤 페이징
 let page = 1;
 
 getListPage({page : page}, appendList, showError);
@@ -13,7 +13,7 @@ $(window).on('scroll', function (){
 function getListPage(pageInfo, appendList, error){
     // console.log("aaaaaaa");
     $.ajax({
-        url : `/myPages/myCareerInfo/${pageInfo.page}`,
+        url : `/myPages/myCareerInfoLike/${pageInfo.page}`,
         type : 'get',
         dataType : 'json',
         success : function (result){
@@ -49,8 +49,8 @@ function appendList(map){
                     <div class="career-user-profile-box">
                       <div class="career-profile-img">
                         ${board.boardSystemName == null ?
-                            '<img src="/img/profile-basic.png"/>' :
-                            '<img src=/profile/' + board.boardUuid + '_' + board.boardSystemName +'>'}
+            '<img src="/img/profile-basic.png"/>' :
+            '<img src=/profile/' + board.boardUuid + '_' + board.boardSystemName +'>'}
                       </div>
                       <div class="career-user-info">
                         <span class="career-user-name">${board.userNickname}</span>
@@ -93,6 +93,3 @@ function appendList(map){
 function showError(a, b, c){
     console.log(c);
 }
-
-
-

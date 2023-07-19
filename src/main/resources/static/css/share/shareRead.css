@@ -475,6 +475,7 @@ footer{
     cursor : pointer;
     font-size : 12px;
 }
+
 .dropdown-content{
     display : none;
     position : absolute;

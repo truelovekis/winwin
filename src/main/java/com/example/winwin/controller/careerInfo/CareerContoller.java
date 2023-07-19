@@ -102,7 +102,14 @@ public class CareerContoller {
 
 //    진로정보 글 수정하기 단순이동
     @GetMapping("/modify")
-    public String careerModify(Long careerInfoNumber, Model model){
+    public String careerModify(Long careerInfoNumber, Model model, HttpServletRequest req){
+        Long mentorNumber = (Long)req.getSession().getAttribute("mentorNumber");
+        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
+
+//        멘토 인증된 태그 찾기
+        CareerInfoVo careerInfoVoTag = careerInfoService.findMentorTag(userNumber);
+        model.addAttribute("careerTag", careerInfoVoTag);
+
         CareerInfoVo careerInfoVo = careerInfoService.findCareerInfo(careerInfoNumber);
         model.addAttribute("career", careerInfoVo);
 

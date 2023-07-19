@@ -33,41 +33,60 @@
         <!--        -->
         <!-- 유저 프로필 -->
         <div class="status-wrap">
-            <div class="icon-wrap">
-                <img th:if="${career.pfpSystemname == null}" class="icon-img" th:src="@{/img/profile-basic.png}">
-                <img th:unless="${career.pfpSystemname == null}" class="icon-img" th:style="${'background-image: url(/profile/' + career.pfpUuid + '_' + career.pfpSystemname + ')'}">
+            <div class="profile-box">
+                <div class="icon-wrap">
+                    <img th:if="${career.pfpSystemname == null}" class="icon-img" th:src="@{/img/profile-basic.png}">
+                    <img th:unless="${career.pfpSystemname == null}" class="icon-img"
+                         th:style="${'background-image: url(/profile/' + career.pfpUuid + '_' + career.pfpSystemname + ')'}">
+                </div>
+                <div class="text-wrap">
+                    <div><span class="text-id" th:text="${career.userNickname}"></span></div>
+                    <div><span class="text-date"
+                               th:text="${#strings.substring(#strings.replace(career.careerInfoDate, '-', '.'), 0, 10)}"></span>
+                    </div>
+                </div>
             </div>
-            <div class="text-wrap">
-                <div><span class="text-id" th:text="${career.userNickname}"></span></div>
-                <div><span class="text-date" th:text="${#strings.substring(#strings.replace(career.careerInfoDate, '-', '.'), 0, 10)}"></span></div>
+            <div class="dropdown">
+                <button class="dropbtn">
+                                <span class="dropbtn_icon"> <svg data-v-bd9f2bcc="" data-v-3035bc76="" width="24"
+                                                                 height="24" fill="black"
+                                                                 xmlns="http://www.w3.org/2000/svg"
+                                                                 class="c-Applicatio c-icon"
+                                                                 style="fill: rgb(148, 155, 160);"><circle
+                                        data-v-bd9f2bcc="" cx="12" cy="5.5" r="1.5"></circle><circle data-v-bd9f2bcc=""
+                                                                                                     cx="12" cy="12"
+                                                                                                     r="1.5"></circle><circle
+                                        data-v-bd9f2bcc="" cx="12" cy="18.5" r="1.5"></circle></svg></span>
+                </button>
+                <div class="dropdown-content">
+                    <a class="police-btn">신고</a>
+                    <a th:onclick="'fn_modify('+ ${career.careerInfoNumber} +');'">수정</a>
+                    <a>삭제</a>
+                    <input type="hidden" th:value="${career.careerInfoNumber}">
+                </div>
             </div>
         </div>
-        <!--        -->
         <p class="view-line">
-        <span class="view">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye"
-               viewBox="0 0 16 16">
-          <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
-          <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
-          </svg>
-        </span>
+            <span class="view">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye"
+                 viewBox="0 0 16 16">
+            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+            </svg>
+    </span>
             <span class="view-count" th:text="${career.careerInfoCnt}"></span>
         </p>
         <div class="title" th:text="${career.careerInfoTitle}">
             <h1></h1>
         </div>
-        <div class="views">
-
-        </div>
     </section>
-
-        <div class="content-wrap">
-            <div class="content" th:utext="${career.careerInfoContent}"></div>
-        </div>
+    <div class="content-wrap">
+        <div class="content" th:utext="${career.careerInfoContent}"></div>
+    </div>
     <section class="sec3">
         <a name="target"></a>
         <div class="like-hate-wrap">
-        <!--  유저가 이 글을 좋아요 했는지, 체크 careerInfoUserCnt-->
+            <!--  유저가 이 글을 좋아요 했는지, 체크 careerInfoUserCnt-->
             <div class="like-btn">
                 <div class="inner-wrap">
                     <div class="btn-img" th:data-num="${userLike}">
@@ -136,40 +155,7 @@
             </form>
         </div>
         <div class="reply">
-<!--            <div class="reply-cardbox" data-index="0" style="">-->
-<!--                <div class="reply-content1">-->
-<!--                    <div class="profile-wrap">-->
-<!--                        <div class="profile-icon-wrap">-->
-<!--                            <img class="profile-icon-img" src="../../static/img/careerpathdetail.png">-->
-<!--                        </div>-->
-<!--                        <div class="profile-text-wrap">-->
-<!--                            <div><span class="profile-text-id">sjlee723</span></div>-->
-<!--                            <div><span class="profile-text-date">7일전</span></div>-->
-<!--                        </div>-->
-<!--                        <div class="reply-time">-->
-<!--                            <span class="time-text">2023-06-08 23:30:31</span>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <br>-->
-<!--                <div class="reply-content2">-->
-<!--                    <div class="reply-content">-->
-<!--            <span class="reply-text">-->
-<!--                이런 대현자분께서 이곳에 있다니!!!!!!!!!!!!!!!!!!🩲🩲-->
-<!--                늘 명심하며 회사생활을 잘 해보겠습니다.-->
-<!--                혹시 궁금한점이 있으면 추가로 문의드려도 될까요??-->
-<!--              </span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="reply-content3">-->
-<!--                    <div class="btn-wrap">-->
-<!--                        <div class="btn-sub-wrap">-->
-<!--                            <div class="modify-btn">수정</div>-->
-<!--                            <div class="remove-btn">삭제</div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
+            <!-- careerInfoDetail.js 댓글 작성코드 참고! -->
         </div>
     </div>
 </div>

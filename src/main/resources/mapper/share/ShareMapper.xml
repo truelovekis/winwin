@@ -62,7 +62,7 @@
             WHERE RK = 1
         ) J
                            ON S.SHARE_NUMBER = J.share_number
-        ORDER BY S.share_number DESC
+        ORDER BY S.share_date DESC
     </select>
     <!--    -->
 
@@ -91,7 +91,7 @@
     </delete>
     <!--    -->
 
-    <!-- 나눔 페이지 무한스크롤 -->
+    <!-- 나눔 페이지 최신순 무한스크롤 -->
     <select id="selectScroll" resultType="shareVo">
         SELECT share_number, SHARE_TITLE, SHARE_CONTENT, SHARE_STATUS, SHARE_DATE, USER_NUMBER, SHARE_READ_CNT,
         USER_ID, file_system_name, file_uuid, file_upload_path, USER_STATUS
@@ -113,7 +113,7 @@
         WHERE RK = 1
         ) J
         ON S.SHARE_NUMBER = J.share_number
-        ORDER BY S.share_number DESC
+        ORDER BY S.share_date DESC
         )
         <![CDATA[
         where ROWNUM <= #{page} * #{amount}

@@ -15,6 +15,18 @@ $likeDown.on('click', function () {
 
 // 작성하기 session없을 때 모달창 띄어주고, 있으면 작성페이지 이동
 // 제이쿼리 트리거 -> 이벤트 발생 시켜주는 함수
+$('.pfp-main-btn').on('click', function (e){
+    e.preventDefault();
+
+    let userNumber = $('.pfp-main-btn').data('data');
+    if (userNumber){
+        window.location.href = '/share/list';
+    }else{
+        // alert("로그인이 필요합니다.");
+        $('.login-move').trigger('click');
+    }
+});
+
 $('.pfp-main-btn-css').on('click', function (e) {
     e.preventDefault();
 
