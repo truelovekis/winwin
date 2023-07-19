@@ -255,6 +255,10 @@ tbody tr {
 td {
     border: none;
     border-bottom: 1px solid rgba(115, 114, 114, 0.24);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px;
 }
 
 thead tr {

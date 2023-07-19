@@ -228,9 +228,9 @@ function appendList(map) {
         <div class="tag-list-wrap">
         `
 
-         for(let i=0; i<qnaVoList.subNameList.length; i++){
-             text +=  `<div  class="user-identity hsc">${qnaVoList.subNameList[i]}</div>`;
-         }
+        for(let i=0; i<qnaVoList.subNameList.length; i++){
+            text +=  `<div  class="user-identity hsc">${qnaVoList.subNameList[i]}</div>`;
+        }
 
         text += `
             </div>

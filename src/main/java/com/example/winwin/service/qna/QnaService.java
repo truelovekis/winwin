@@ -39,7 +39,7 @@ public class QnaService {
     @Transactional(readOnly = true)
     public List<QnaVo> findQnaList(Criteria criteria, List<Integer> cateList){return qnaMapper.selectQna(criteria, cateList);}
 
-     //카테고리 조회하기
+    //카테고리 조회하기
 //    @Transactional(readOnly = true)
 //    public List<QnaVo> findSubList(Long qnaNumber) {
 //        return qnaMapper.selectSub(qnaNumber);
@@ -74,12 +74,12 @@ public class QnaService {
     }
 
     // 게시글 수정
-    public void modifyQna(QnaVo qnaVo){
-        if( qnaVo == null){
+    public void modifyQna(QnaDto qnaDto){
+        if( qnaDto == null){
 
             throw new IllegalArgumentException("게시물 수정 정보 누락");
         }
-        qnaMapper.updateQna(qnaVo);
+        qnaMapper.updateQna(qnaDto);
     }
 
     // 태그 수정
@@ -100,7 +100,7 @@ public class QnaService {
 
     // 댓글 수
     public int commentCnt(Long qnaNumber){
-            if(qnaNumber == null){
+        if(qnaNumber == null){
             throw new IllegalArgumentException("댓글 번호 누락");
         }
         return qnaMapper.commentCnt(qnaNumber);

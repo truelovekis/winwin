@@ -132,21 +132,19 @@ public class QnaController {
     }
 
     @PostMapping("/modify")
-    public RedirectView modify(QnaVo qnaVo, QnaDto qnaDto, QsBridgeDto qsBridgeDto, Long qnaNumber, @RequestParam("subList") List<Long> subList, RedirectAttributes redirectAttributes){
-            qnaService.removeQs(qnaNumber);
-//            qnaService.removeQna(qnaNumber);
-            qnaService.registerQs(qsBridgeDto);
-//            qnaService.registerQna(qnaDto);
-                qnaService.modifyQna(qnaVo);
-
+    public RedirectView modify(QnaDto qnaDto, Long qnaNumber, @RequestParam("subList") List<Long> subList, RedirectAttributes redirectAttributes){
+        qnaService.removeQs(qnaNumber);
+//        qnaService.registerQs(qsBridgeDto);
+        qnaService.modifyQna(qnaDto);
+        QsBridgeDto qsBridgeDto = new QsBridgeDto();
         for(Long subNum : subList){
-            qsBridgeDto.setQnaNumber(qnaNumber);
+            qsBridgeDto.setQnaNumber(qnaDto.getQnaNumber());
             qsBridgeDto.setSubNumber(subNum);
             qnaService.registerQs(qsBridgeDto);
 //            qnaService.registerQna(qnaDto);
         }
 
-        redirectAttributes.addAttribute("qnaNumber", qnaVo.getQnaNumber());
+        redirectAttributes.addAttribute("qnaNumber", qnaDto.getQnaNumber());
         return new RedirectView("/qna/read");
     }
 
