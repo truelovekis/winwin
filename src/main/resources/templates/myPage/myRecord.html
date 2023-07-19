@@ -34,8 +34,15 @@
         <div th:replace="fragment/myPageSide :: myPageSide"></div>
             <div class="main">
                 <div class="title1"><h2>내 기록</h2></div>
-                <input type="hidden" class="userNumber" th:value="${session.userNumber}"/>
+                <div class="category">
+                  <div class="category-contain">
+                    <h4 id="point-page">내 글</h4>
+                  </div>
+                </div>
+
+      <input type="hidden" class="userNumber" th:value="${session.userNumber}"/>
                 <!-- 새로운 다이어리 작성 버튼 -->
+              <div class="diary-container">
                 <div class="plus-btn"><button class="plusBtn" type="button"><img th:src="@{/img/plus-icon-21722.png}"></button></div>
 
                 <!-- 버튼 눌렀을 때 나타나는 요소 -->
@@ -176,8 +183,9 @@
 <!--                    </div>-->
                     <!-- 저장된 다이어리 리스트 끝 -->
                 </div>
+                </div>
+              </div>
 
-            </div>
             </div>
     </div>
 </div>

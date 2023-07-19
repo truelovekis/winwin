@@ -167,21 +167,15 @@ $('.modal-next').on('click', function(){
             return;
         }
         $next = $('.certification-box');
-        // $('.modal-next').addClass('none');
-        // $('.home-btn').removeClass('none');
     }
 
     if ($current.hasClass('mentor-goal-2-box')){
 
-        if($('.userBelong').val() == ''){
+        if($('.userBelong2').val() == ''){
             $('#un-check-msg').html("학교명을 입력해 주세요.");
             return;
         }
-
         $next = $('.certification-box');
-        console.log("마지막 페이지");
-        // $('.modal-next').addClass('none');
-        // $('.home-btn').removeClass('none');
     }
 
     if ($current.hasClass('certification-box')){
@@ -314,40 +308,6 @@ $('.login-end').on('click', function (){
     }
 });
 
-// $('.login-end').on('click', function (){
-//     console.log('login!!!');
-//
-//     $.ajax({
-//         url : '/mentors/mentor',
-//         type : 'post',
-//         data : JSON.stringify({userId : $('#login-id').val() , userPassword: $('#login-password').val()}),
-//         contentType : "application/json; charset=utf-8",
-//         async : false,
-//         success: function (result2){
-//             $(".modal-container").addClass("none");
-//             $('body').css('overflow', 'auto');
-//             modalSetUp();
-//
-//             if(result2 == 0){
-//                 console.log("없는 멘토 회원")
-//             }else{
-//                 let tmp = window.location.href;
-//                 window.location.href = tmp;
-//             }
-//         }
-//     })
-//     function modalSetUp(){
-//         $('.modal-wrap>div').addClass('none');
-//         $('.modal-wrap>button').addClass('none');
-//         $('.login-box').removeClass('none');
-//         $('.login-end').removeClass('none');
-//         $('.login-box').removeClass('disappear');
-//         $current = $('.login-box');
-//         $next = null;
-//         $('.form-reset')[0].reset();
-//     }
-// });
-
 
 // 회원가입 처리
 $('.home-btn').on('click', function (){
@@ -416,6 +376,12 @@ $('.home-btn').on('click', function (){
     hiddenField.setAttribute("type", "hidden");
     hiddenField.setAttribute("name", "userBelong");
     hiddenField.setAttribute("value", $('.userBelong').val());
+    form.appendChild(hiddenField);
+
+    hiddenField = document.createElement("input");
+    hiddenField.setAttribute("type", "hidden");
+    hiddenField.setAttribute("name", "userBelong");
+    hiddenField.setAttribute("value", $('.userBelong2').val());
     form.appendChild(hiddenField);
 
 
@@ -508,22 +474,6 @@ $('#userNickname').on('blur', function() {
 });
 
 
-// SMS 인증
-// $('#sms-check').on('click', function() {
-//     $.ajax({
-//         url: '/users/v1/send',
-//         type: 'post',
-//         data : JSON.stringify({phoneNumber : $('#userPhoneNumber').val()}),
-//         contentType : "application/json; charset=utf-8",
-//         success : function(result) {
-//             console.log('통신 성공!');
-//             $('#user-phone-msg').text('인증번호 전송 완료');
-//         }
-//     });
-// });
-
-
-
 
 // 비밀번호 조건
 $("#join-pw-input").on("blur", function () {
@@ -608,14 +558,6 @@ $('#userVerification').on('blur', function (){
     }
 });
 
-// 관심분야 태그 필수 선택 (최소 1개)
-// $('.job-select-tag').on('blur', function (){
-//     if($('.job-tag').val() == null){
-//         $('.job-dep-text').html("최소 1개 이상의 태그를 선택해 주세요.");
-//     }else{
-//         $('.job-dep-text').html('');
-//     }
-// });
 
 
 // ========================================
