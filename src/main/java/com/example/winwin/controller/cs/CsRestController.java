@@ -1,3 +1,4 @@
+
 package com.example.winwin.controller.cs;
 
 import com.example.winwin.service.cs.CsService;
@@ -28,13 +29,10 @@ public class CsRestController {
     public Map<String, Object> csListPage(@PathVariable("page") int page){
         Criteria criteria = new Criteria();
         CsVo paramCsVo = new CsVo();
-
         paramCsVo.setPage(page);
         PageVo pageVo = new PageVo(criteria, csService.findTotal());
 
         List<CsVo> csVoList = csService.findListPage(paramCsVo);
-        System.out.println("csVoList : --"+csVoList);
-
 
         if(csVoList.size() > 0){
             for (CsVo csVo: csVoList) {
@@ -60,7 +58,6 @@ public class CsRestController {
         Map<String, Object> csMap = new HashMap<>();
         csMap.put("pageVo", pageVo);
         csMap.put("csVoList", csVoList);
-
 
         return csMap;
     }

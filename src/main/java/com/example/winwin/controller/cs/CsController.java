@@ -73,7 +73,7 @@ public class CsController {
         CsVo csVo = csService.findCs(csNumber);
         List<CsReplyVo> csReplyVoList = csReplyService.findList(csNumber);
         csService.upHitCnt(csNumber);
-        int commentCnt = csService.commentCnt(csNumber);
+        Long commentCnt = csService.commentCnt(csNumber);
 
 
         model.addAttribute("cs", csVo);

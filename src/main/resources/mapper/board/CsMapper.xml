@@ -10,40 +10,61 @@
     </insert>
 
     <select id="select" resultType="csVo">
-        SELECT CS_NUMBER, CS_CONTENT, CS_TITLE, CS_DATE, C.USER_NUMBER, C.CS_READ_CNT, U.USER_ID,
-               U.USER_NICKNAME, U.USER_BELONG , up.pfp_system_name, up.pfp_uuid
-        FROM CS C JOIN WW_USER U
-                       ON  C.USER_NUMBER = U.USER_NUMBER
-                  left outer join user_pfp up
-                  on u.user_number = up.USER_NUMBER
+        SELECT CS_NUMBER,
+               CS_CONTENT,
+               CS_TITLE,
+               CS_DATE,
+               C.USER_NUMBER,
+               C.CS_READ_CNT,
+               U.USER_ID,
+               U.USER_NICKNAME,
+               U.USER_BELONG,
+               g.grade_name,
+               up.pfp_system_name,
+               up.pfp_uuid
+        FROM CS C
+                 JOIN WW_USER U
+                      ON C.USER_NUMBER = U.USER_NUMBER
+                 join grade g on g.grade_number = u.user_grade
+                 left outer join user_pfp up
+                                 on u.user_number = up.USER_NUMBER
         WHERE C.CS_NUMBER = #{csNumber}
     </select>
 
     <select id="selectAll" resultType="csVo">
         SELECT (SELECT COUNT(*) FROM CS_COMMENT WHERE CS_COMMENT.CS_NUMBER = C.CS_NUMBER) AS COMMENT_CNT,
-               CS_NUMBER, CS_CONTENT, CS_TITLE, CS_DATE, C.USER_NUMBER, C.CS_READ_CNT, U.USER_ID
-        FROM CS C JOIN WW_USER U
-                       ON  C.USER_NUMBER = U.USER_NUMBER
+               CS_NUMBER,
+               CS_CONTENT,
+               CS_TITLE,
+               CS_DATE,
+               C.USER_NUMBER,
+               C.CS_READ_CNT,
+               U.USER_ID
+        FROM CS C
+                 JOIN WW_USER U
+                      ON C.USER_NUMBER = U.USER_NUMBER
         ORDER BY C.CS_NUMBER DESC
     </select>
 
     <!-- 게시글 수정 -->
     <update id="update">
         UPDATE CS
-        SET CS_TITLE = #{csTitle}, CS_CONTENT = #{csContent}
+        SET CS_TITLE   = #{csTitle},
+            CS_CONTENT = #{csContent}
         WHERE CS_NUMBER = #{csNumber}
     </update>
 
 
-
     <delete id="delete">
-        DELETE FROM CS
+        DELETE
+        FROM CS
         WHERE CS_NUMBER = #{csNumber}
     </delete>
 
     <!-- 문의사항 (로그인시) 프로필 조회 -->
     <select id="selectUserProfile" resultType="csProfileVo">
-        SELECT MC.CAREER_COMPANY, MC.CAREER_TITLE, P.PFP_SYSTEM_NAME, P.PFP_UUID, MC.CAREER_START_DATE, U.USER_NICKNAME
+        SELECT MC.CAREER_COMPANY, MC.CAREER_TITLE, P.PFP_SYSTEM_NAME, P.PFP_UUID, MC.CAREER_START_DATE, U.USER_NICKNAME,
+        U.USER_POSITION
         FROM WW_USER U
         LEFT OUTER JOIN USER_PFP P
         ON U.USER_NUMBER = P.USER_NUMBER
@@ -61,50 +82,70 @@
     <!-- Main 프로필 -->
 
     <select id="userLogin" resultType="csProfileVo">
-        SELECT wu.USER_NUMBER , wu.USER_NAME , wu.USER_POSITION , g.GRADE_NAME , up.PFP_UPLOAD_PATH , up.PFP_SYSTEM_NAME , up.PFP_UUID
-        FROM WW_USER wu LEFT OUTER JOIN USER_PFP up
-                                        ON wu.USER_NUMBER = up.USER_NUMBER
-                        left outer JOIN GRADE g ON wu.USER_GRADE = g.GRADE_NUMBER
+        SELECT wu.USER_NUMBER,
+               wu.USER_NAME,
+               wu.USER_POSITION,
+               g.GRADE_NAME,
+               up.PFP_UPLOAD_PATH,
+               up.PFP_SYSTEM_NAME,
+               up.PFP_UUID
+        FROM WW_USER wu
+                 LEFT OUTER JOIN USER_PFP up
+                                 ON wu.USER_NUMBER = up.USER_NUMBER
+                 left outer JOIN GRADE g ON wu.USER_GRADE = g.GRADE_NUMBER
         WHERE wu.USER_NUMBER = #{userNumber}
     </select>
 
 
-
     <!-- 문의사항 페이지 무한스크롤 -->
     <select id="selectScroll" resultType="csVo">
-        SELECT CS_NUMBER, CS_TITLE, CS_CONTENT, CS_DATE, USER_NUMBER, CS_READ_CNT
-        FROM(
-        SELECT ROWNUM RN, CS_NUMBER, CS_TITLE, CS_CONTENT, CS_DATE, USER_NUMBER, CS_READ_CNT
-        FROM(
-        SELECT
-        C.CS_NUMBER, C.CS_TITLE, C.CS_CONTENT, C.CS_DATE, C.USER_NUMBER, CS_READ_CNT
-        FROM CS C JOIN WW_USER U
-        ON C.USER_NUMBER = U.USER_NUMBER
-        ORDER BY C.CS_NUMBER DESC
-        )
+        SELECT (SELECT COUNT(comment_number) COMMENT_CNT
+                FROM CS_COMMENT cc
+                where cc.cs_number = c1.cs_number) COMMENT_CNT,
+               CS_NUMBER,
+               CS_TITLE,
+               CS_CONTENT,
+               CS_DATE,
+               USER_NUMBER,
+               CS_READ_CNT
+        FROM (
+                 SELECT ROWNUM RN, CS_NUMBER, CS_TITLE, CS_CONTENT, CS_DATE, USER_NUMBER, CS_READ_CNT
+                 FROM (
+                          SELECT C.CS_NUMBER,
+                                 C.CS_TITLE,
+                                 C.CS_CONTENT,
+                                 C.CS_DATE,
+                                 C.USER_NUMBER,
+                                 CS_READ_CNT
+                          FROM CS C
+                                   JOIN WW_USER U
+                                        ON C.USER_NUMBER = U.USER_NUMBER
+                          ORDER BY C.CS_DATE DESC
+                      )
         <![CDATA[
-                WHERE ROWNUM <= #{page} * #{amount}
+                 WHERE ROWNUM <= #{page} * #{amount}
         ]]>
-        )
-        WHERE RN > ( #{page} - 1) * #{amount}
+        ) c1
+        WHERE RN > (#{page} - 1) * #{amount}
     </select>
 
     <!-- 커뮤니티 게시글 전체 카운트 -->
     <select id="selectTotal" resultType="_int">
-        SELECT COUNT(CS_NUMBER) FROM CS
+        SELECT COUNT(CS_NUMBER)
+        FROM CS
     </select>
 
 
     <!-- 문의사항 게시글 조회수 누적 & 카운트 -->
     <update id="upHit">
         UPDATE CS
-        SET CS_READ_CNT = CS_READ_CNT+1
+        SET CS_READ_CNT = CS_READ_CNT + 1
         WHERE CS_NUMBER = #{csNumber}
     </update>
 
     <!-- 문의사항 댓글 카운트 -->
-    <select id="commentCnt">
-        SELECT COUNT(*)
+    <select id="commentCnt" resultType="long">
+        SELECT COUNT(comment_number) COMMENT_CNT
         FROM CS_COMMENT
         WHERE CS_NUMBER = #{csNumber}
     </select>
