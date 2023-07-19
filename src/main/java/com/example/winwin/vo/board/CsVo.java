@@ -15,12 +15,14 @@ public class CsVo extends Criteria {
     private String csContent;
     private String csDate;
     private Long userNumber;
+    private String gradeName;
     private String userId;
     private String userNickname;
     private String userBelong;
+    private String userPosition;
     private int likeCnt; // 좋아요 추가함
     private int csReadCnt; // 조회수 추가함
     private int commentCnt; // 댓글수 추가함
-    private String pfpSystemName;
-    private String pfpUuId;
+    private String pfpSystemName; // 프로필 추가함
+    private String pfpUuId;         // 프로필 추가함
 }
