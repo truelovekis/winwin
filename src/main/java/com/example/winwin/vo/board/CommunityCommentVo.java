@@ -18,5 +18,7 @@ public class CommunityCommentVo {
     private Long sessionUserNumber;
     private String pfpSystemName;
     private String pfpUuid;
+    private String userNickname;
+    private String gradeName;
 
 }

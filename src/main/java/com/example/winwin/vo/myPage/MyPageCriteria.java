@@ -12,6 +12,6 @@ public class MyPageCriteria {
     private int amount;
 
     public MyPageCriteria(){
-        this(1, 10);
+        this(1, 9);
     }
 }

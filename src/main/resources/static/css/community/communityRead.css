@@ -230,11 +230,12 @@ footer{
 }
 
 .Profil>.id{
-    margin: 23px 20px;
+    margin: 17px 20px;
 }
 
 .id>p{
-    font-size: 13px;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 .first{
@@ -360,7 +361,7 @@ footer{
 }
 
 .date1{
-    margin-left: 555px;
+    margin-left: 560px;
     font-size: 13px;
     color: rgb(148, 155, 160);
     line-height: 5.5;
@@ -498,9 +499,8 @@ footer{
 }
 
 .profil>.Commento{
-    margin: -10px 10px;
+    margin: -14px 10px;
     width: 100px;
-    font-weight: bold;
 }
 
 .c-Application{
@@ -519,6 +519,8 @@ footer{
 
 .Aicontent{
     margin: 40px 25px;
+    /*margin-top: -20px;*/
+    margin-left: 30px;
     font-size: 15px;
     line-height: 20px;
 }
@@ -932,6 +934,8 @@ input[type="checkbox"] {
 
 .userInfo{
     margin-top: 20px;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 /*====프로필 이미지======*/
@@ -943,5 +947,10 @@ input[type="checkbox"] {
 
 /*========gradeName  폰트 사이즈 조정=============*/
 .gradeName-text{
+    font-size: 13px;
+}
+
+/* 프로필 폰트 수정*/
+.pfp-text{
     font-size: 13px;
 }

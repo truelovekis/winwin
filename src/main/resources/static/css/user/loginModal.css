@@ -1405,7 +1405,7 @@
 }
 
 /*=======================================*/
-.userBelong{
+.userBelong2{
     width: 255px;
     height: 30px;
     border: 1px solid #ddd;
@@ -1415,7 +1415,7 @@
     padding-left: 5px;
 }
 
-.userBelong::placeholder{
+.userBelong2::placeholder{
     font-size: 12px;
 }
 

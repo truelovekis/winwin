@@ -39,6 +39,7 @@
                     GROUP BY QNA_NUMBER
                 ) S1
                 ON Q.QNA_NUMBER = S1.QNA_NUMBER
+                WHERE Q.QNA_STATUS != '0'
                 ORDER BY Q.QNA_NUMBER DESC
             )
             <![CDATA[
@@ -55,24 +56,37 @@
         SELECT COUNT(QNA_NUMBER) FROM QNA
     </select>
 
-<!--  <select id="selectSub" resultType="qsBridgeDto">-->
-<!--      SELECT-->
-<!--          SC.sub_NAME, Sc.sub_number-->
-<!--      FROM qna q-->
-<!--               JOIN qs_bridge qs on q.qna_number = qs.qna_number-->
-<!--               join sub_category sc on qs.sub_number = sc.sub_number-->
-<!--      ORDER BY q.qna_number DESC-->
-<!--  </select>-->
+    <!--  <select id="selectSub" resultType="qsBridgeDto">-->
+    <!--      SELECT-->
+    <!--          SC.sub_NAME, Sc.sub_number-->
+    <!--      FROM qna q-->
+    <!--               JOIN qs_bridge qs on q.qna_number = qs.qna_number-->
+    <!--               join sub_category sc on qs.sub_number = sc.sub_number-->
+    <!--      ORDER BY q.qna_number DESC-->
+    <!--  </select>-->
 
-<!-- QNA 상세페이지-->
+    <!-- QNA 상세페이지-->
     <select id="selectQnaByQnaNumber" resultType="qnaVo">
         SELECT qna_number, QNA_TITLE, QNA_CNT, QNA_CONTENT, USER_NICKNAME, GRADE_NAME, USER_BELONG, Q.USER_NUMBER, TO_CHAR(QNA_DATE, 'YYYY-MM-DD') AS QNA_DATE
         FROM QNA Q
                  JOIN WW_USER WU on Q.qna_number = #{qnaNumber} AND Q.USER_NUMBER = WU.USER_NUMBER
-                JOIN GRADE G on WU.USER_GRADE = G.GRADE_NUMBER
+                 JOIN GRADE G on WU.USER_GRADE = G.GRADE_NUMBER
     </select>
 
-<!--  게시글 태그 삭제&입력(수정)  -->
+<!--  게시글 포함된 태그를 가진 멘토  -->
+<!--    <select id="mentorCnt" resultType="qnaVo">-->
+<!--    select count(m.mentor_number) as cnt-->
+<!--    from qna q-->
+<!--    join qs_bridge qb on q.qna_number = qb.qna_number and q.QNA_NUMBER = #{qnaNumber}-->
+<!--    <if test=" subNumber !">-->
+<!--        <foreach collection="subList" index="index" items="subNumber" -->
+<!--    and qb.sub_number=43-->
+<!--    </if>-->
+<!--    join mentor m-->
+<!--    on m.sub_number = qb.SUB_NUMBER and m.mentor_number= #{mentorNumber}-->
+<!--    </select>-->
+
+    <!--  게시글 태그 삭제&입력(수정)  -->
     <delete id="deleteQna">
         DELETE FROM qna
         WHERE QNA_NUMBER = #{qnaNumber}
@@ -84,32 +98,42 @@
 
 
 
-<!--  게시글 수정  -->
+    <!--  게시글 수정  -->
     <update id="updateQna">
-    update qna
-    set qna_title = #{qnaTitle}, qna_content = #{qnaContent}, qna_date = sysdate
-    where qna_number = #{qnaNumber}
+        update qna
+        set qna_title = #{qnaTitle}, qna_content = #{qnaContent}, qna_date = sysdate
+        where qna_number = #{qnaNumber}
     </update>
 
-<!--  태그 수정  -->
-<!--    <update id="updateQs">-->
-<!--    update qs_bridge-->
-<!--    set sub_number = #{subNumber}-->
-<!--    where qna_number = #{qnaNumber}-->
-<!--    </update>-->
+    <!--  태그 수정  -->
+    <!--    <update id="updateQs">-->
+    <!--    update qs_bridge-->
+    <!--    set sub_number = #{subNumber}-->
+    <!--    where qna_number = #{qnaNumber}-->
+    <!--    </update>-->
 
-<!--  조회수  -->
+    <!--  조회수  -->
     <update id="upQna">
         UPDATE QNA
         SET QNA_CNT = QNA_CNT+1
         WHERE QNA_NUMBER = #{qnaNumber}
     </update>
 
-<!--  댓글 조회수  -->
+    <!--  댓글 조회수  -->
     <select id="commentCnt">
         SELECT COUNT(*)
         FROM QNA_COMMENT
         WHERE QNA_NUMBER = #{qnaNumber}
+    </select>
+
+    <select id="commentAuth">
+        SELECT COUNT(*) FROM MENTOR MT
+        WHERE USER_NUMBER = #{userNumber}
+          AND SUB_NUMBER IN
+              (
+                  SELECT QB.SUB_NUMBER
+                  FROM QS_BRIDGE QB
+                  WHERE QB.QNA_NUMBER = #{qnaNumber})
     </select>
 
     <!-- qna(로그인시) 프로필 조회 -->

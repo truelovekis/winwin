@@ -148,6 +148,7 @@
                                 <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
                             </svg>
                         <div class="readCount-num"><p class="read-count" th:text="${share.shareReadCnt}"></p></div>
+                        <input type="hidden" class="sessionUser" th:value="${session.userWing}"/>
                         </div>
                     </div>
                     <div class="date"
@@ -155,7 +156,7 @@
                 </div>
                     <div class="share-bottom">
                         <div class="share-wing-box">
-                            <span class="share-wing-count" th:text="${share.shareWing}"></span>
+                            <span class="share-wing-count" th:text="${share.shareWing}" th:data-wing="${share.shareWing}"></span>
                             <img th:src="@{/img/wing-icon.png}" class="share-wing-img"/>
                         </div>
                     </div>

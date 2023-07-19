@@ -3,6 +3,8 @@ package com.example.winwin.service.qna;
 import com.example.winwin.dto.board.QnaDto;
 import com.example.winwin.dto.board.QsBridgeDto;
 import com.example.winwin.mapper.board.QnaMapper;
+import com.example.winwin.mapper.like.QnaCommentUdMapper;
+import com.example.winwin.mapper.like.QnaGoodMapper;
 import com.example.winwin.vo.board.*;
 import com.example.winwin.vo.infinityScroll.Criteria;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,8 @@ import java.util.Optional;
 public class QnaService {
     private final QnaMapper qnaMapper;
     private final QnaCommentService qnaCommentService;
+    private final QnaGoodMapper qnaGoodMapper;
+    private final QnaCommentUdMapper qnaCommentUdMapper;
 
     // 글 등록
     public void registerQna(QnaDto qnaDto){
@@ -39,7 +43,7 @@ public class QnaService {
     @Transactional(readOnly = true)
     public List<QnaVo> findQnaList(Criteria criteria, List<Integer> cateList){return qnaMapper.selectQna(criteria, cateList);}
 
-     //카테고리 조회하기
+    //카테고리 조회하기
 //    @Transactional(readOnly = true)
 //    public List<QnaVo> findSubList(Long qnaNumber) {
 //        return qnaMapper.selectSub(qnaNumber);
@@ -60,6 +64,8 @@ public class QnaService {
         if (qnaNumber == null){
             throw new IllegalArgumentException("게시물 번호 누락");
         }
+        qnaCommentUdMapper.deleteForQna(qnaNumber);
+        qnaGoodMapper.deleteForQna(qnaNumber);
         qnaCommentService.removeQna(qnaNumber);
         qnaMapper.deleteQna(qnaNumber);
     }
@@ -74,12 +80,12 @@ public class QnaService {
     }
 
     // 게시글 수정
-    public void modifyQna(QnaVo qnaVo){
-        if( qnaVo == null){
+    public void modifyQna(QnaDto qnaDto){
+        if( qnaDto == null){
 
             throw new IllegalArgumentException("게시물 수정 정보 누락");
         }
-        qnaMapper.updateQna(qnaVo);
+        qnaMapper.updateQna(qnaDto);
     }
 
     // 태그 수정
@@ -100,10 +106,17 @@ public class QnaService {
 
     // 댓글 수
     public int commentCnt(Long qnaNumber){
-            if(qnaNumber == null){
+        if(qnaNumber == null){
             throw new IllegalArgumentException("댓글 번호 누락");
         }
         return qnaMapper.commentCnt(qnaNumber);
+    }
+    // 댓글 수
+    public int commentAuth(QnaVo qnaVo){
+            if(qnaVo == null){
+            throw new IllegalArgumentException("정보 누락");
+        }
+        return qnaMapper.commentAuth(qnaVo);
     }
 
     // 프로필 조회

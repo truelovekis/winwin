@@ -49,7 +49,8 @@ footer{
 }
 
 .id>p{
-    font-size: 13px;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 .first{
@@ -95,7 +96,8 @@ footer{
 /* svg 아이콘 ================================ */
 .icon{
     display: flex;
-    margin: 0 180px;
+    /*margin: 0 180px;*/
+    margin-left: 190px;
     height: 40px;
 }
 
@@ -149,8 +151,16 @@ footer{
 
 .like{
     display: flex;
-    margin-top: -11px;
-    margin-left: 11px;
+    margin-top: -10px;
+    margin-left: 10px;
+    /*margin-top: -40px;*/
+    /*margin-left: 20px;*/
+}
+
+.comment-like{
+    display: flex;
+    margin-top: -40px;
+    margin-left: 20px;
 }
 
 .like-btn{
@@ -168,14 +178,14 @@ footer{
 /* svg 아이콘 ================================ */
 
 .date{
-    margin-left: 477px;
+    margin-left: 460px;
     margin-top: 27px;
     font-size: 13px;
     color: rgb(148, 155, 160);
 }
 
 .date1{
-    margin-left: 560px;
+    margin-left: 555px;
     font-size: 13px;
     color: rgb(148, 155, 160);
 }
@@ -301,7 +311,7 @@ footer{
 .profil>.Commento{
     margin: 10px 10px;
     width: 100px;
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 
 .c-Application{
@@ -322,6 +332,7 @@ footer{
     margin: 40px 25px;
     font-size: 15px;
     line-height: 20px;
+    margin-left: 30px;
 }
 
 .answer-box{
@@ -340,22 +351,43 @@ footer{
     align-items: center;
 }
 
+.no-reply{
+    width: 650px;
+    margin: auto;
+    color: #1b5192;
+    border-radius: 3.5px;
+    background-color: #e8f1fc;
+    height: 60px;
+    display: flex;
+    font-size: 14px;
+    align-items: center;
+}
+
+.reply-text{
+    margin: 0 auto;
+    font-size: 15px;
+}
+
 .icon2{
     display: flex;
     margin: 40px 0;
 }
 
 .comment-goodorbad{
-    margin-left: 372px;
+    margin-left: 325px;
     display: flex;
     margin-bottom: -9px;
 }
 
 .goodorbad{
-    margin-left: 435px;
+    margin-left: 380px;
     display: flex;
     margin-bottom: -9px;
 
+}
+
+.answer-box-comment{
+    width: 200px;
 }
 
 .good-btn{
@@ -391,7 +423,7 @@ footer{
 }
 
 .parent{
-    height: 60px;
+    height: 40px;
 }
 
 .newComment{
@@ -724,4 +756,14 @@ input[type="checkbox"] {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+}
+
+/* 프로필 등급 폰트수정*/
+.pfp-text{
+    font-size: 13px;
+}
+
+.pfp-nickname{
+    font-size: 16px;
+    font-weight: 600;
 }

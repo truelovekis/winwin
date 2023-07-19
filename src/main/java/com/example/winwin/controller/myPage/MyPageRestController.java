@@ -175,6 +175,23 @@ public class MyPageRestController {
         return myBoard;
     }
 
+//    로정보 관심 글(좋아요) 리스트보기
+    @GetMapping("/myCareerInfoLike/{page}")
+    public Map<String, Object> myCareerInfoLike(HttpServletRequest req, @PathVariable("page") int page) {
+        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
+        Criteria criteria = new Criteria();
+        criteria.setPage(page);
+        criteria.setAmount(9);
+        PageVo pageVo = new PageVo(criteria, myPageService.getTotalCareerInfoLike(userNumber));
+        List<ActiveBoardVo> activeBoardVoList = myPageService.getActiveCareerInfoLikeBoardList(userNumber, criteria);
+
+        Map<String, Object> myBoard = new HashMap<>();
+        myBoard.put("pageVo", pageVo);
+        myBoard.put("activeBoardVoList", activeBoardVoList);
+
+        return myBoard;
+    }
+
 //    내 작성 댓글 전체보기
     @GetMapping("/myComment/{page}")
     public Map<String, Object> myComment(HttpServletRequest req, @PathVariable("page") int page) {

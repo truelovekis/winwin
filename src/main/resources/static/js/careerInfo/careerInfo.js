@@ -277,6 +277,9 @@ function showInfo(careerInfoList) {
     let flag = 0;
 
     careerInfoList.forEach(career => {
+        let regex = new RegExp('(<img([^>]+)>)', 'gi');
+
+
         if (flag % 3 == 0) {
             text += `<section class="card-wrap">`;
         }
@@ -289,7 +292,7 @@ function showInfo(careerInfoList) {
                       <span class="career-tag">${career.subName}</span>
                       <span class="career-title">${career.careerInfoTitle}</span>
                     </div>
-                    <span class="career-content">${career.careerInfoContent}</span>
+                    <span class="career-content">${regex.test(career.careerInfoContent) ? career.careerInfoContent.match(regex)[0] : career.careerInfoContent}</span>
                   </div>
                   <div class="career-bottom">
                   <div class="career-bottom-wrap">

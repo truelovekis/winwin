@@ -10,6 +10,7 @@
         SELECT DIARY_NUMBER , DIARY_TITLE , DIARY_CONTENT , DIARY_DATE
         FROM DIARY d
         WHERE USER_NUMBER = #{userNumber}
+        order by DIARY_DATE DESC
     </select>
 
     <update id="diaryUpdate">
@@ -26,6 +27,7 @@
         SELECT rownum rn , DIARY_NUMBER , DIARY_TITLE , DIARY_CONTENT , DIARY_DATE
         FROM DIARY d
         WHERE USER_NUMBER = #{userNumber}
+        order by DIARY_DATE DESC
         )
             <![CDATA[
             WHERE ROWNUM  <= #{criteria.page} * #{criteria.amount}

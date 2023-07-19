@@ -31,6 +31,7 @@
                 AND USER_POSITION LIKE '%' || #{position} || '%'
             </if>
         </trim>
+        and user_status != 'a'
     </select>
 
     <!--  전체 회원 조회  -->
@@ -102,23 +103,23 @@
                W.WING_EARN_DATE,
                M.MENTOR_STATUS,
                wu.user_position
-        FROM WW_USER WU
-                 LEFT OUTER JOIN WING W on WU.user_number = W.USER_NUMBER
+        FROM wing W
+                 LEFT OUTER JOIN ww_user WU on WU.user_number = W.USER_NUMBER
                  LEFT OUTER JOIN MENTOR M on W.user_number = M.USER_NUMBER
+        where user_status != 'a'
     </select>
 
     <!--  검색한 윙 조회  -->
     <select id="selectSearchWing" parameterType="adminWingSearchVo" resultType="adminVo">
-        SELECT
-        WU.USER_NAME,
+        SELECT WU.USER_NAME,
         WU.USER_ID,
         WU.USER_WING,
         W.WING_EARN_DATE,
-        MENTOR_STATUS,
+        M.MENTOR_STATUS,
         wu.user_position
-        FROM WW_USER WU
-        LEFT OUTER JOIN WING W on WU.user_number = W.USER_NUMBER
-        LEFT OUTER JOIN MENTOR M ON WU.USER_NUMBER = M.USER_NUMBER
+        FROM wing W
+        LEFT OUTER JOIN ww_user WU on WU.user_number = W.USER_NUMBER
+        LEFT OUTER JOIN MENTOR M on W.user_number = M.USER_NUMBER
         <trim prefix="WHERE" prefixOverrides="AND">
             <if test="name != null and name != ''">
                 AND WU.USER_NAME LIKE '%' || #{name} || '%'
@@ -133,6 +134,7 @@
                 AND wu.USER_POSITION LIKE '%' || #{position} || '%'
             </if>
         </trim>
+        and user_status != 'a'
     </select>
 
 

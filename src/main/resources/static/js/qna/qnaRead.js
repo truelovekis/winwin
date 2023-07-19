@@ -95,11 +95,13 @@ $('.good-btn').click(function() {
 
 $('.commentBtn').on('click', function(){
     let content = $('.comment1').val().trim();
+    let cnt = $('.').val();
     console.log(content);
     if(content == ''){
         alert("로그인이 필요한 서비스 입니다.")
         return;
     }
+
 
     let commentObj = {
         commentContent : content,
@@ -179,7 +181,7 @@ function showComment(replies) {
         }else{
             text += `<img class="img-box" style="background-image: url(/profile/${r.pfpUuid}_${r.pfpSystemName})"/>`;
         }
-            text += `    
+        text += `    
             <div class="Commento"><p>${r.userId}</p></div>
             <div class="dropdown2">
               <button class="dropbtn2">
@@ -498,53 +500,53 @@ $commentBadBtn.removeClass('selected');
 
 $commentGoodBtn.on('click', function(){
     if(session_check()){
-    const $button = $(this);
-    const isAlreadySelected = $button.hasClass('selected');
-    const $comment = $button.closest('.commentAi');
-    const commentNumber = $comment.data('num');
+        const $button = $(this);
+        const isAlreadySelected = $button.hasClass('selected');
+        const $comment = $button.closest('.commentAi');
+        const commentNumber = $comment.data('num');
 
-    if (isAlreadySelected) {
-        // 이미 선택된 버튼을 클릭한 경우, 선택 해제
-        $button.removeClass('selected');
-        $button.find('.bi-hand-thumbs-up-fill').addClass('hide');
-        $button.find('.bi-hand-thumbs-up').removeClass('hide');
-        fn_comment_good('x', commentNumber); // 좋아요 취소
-    } else {
-        $commentGoodBtn.removeClass('selected');
-        $commentBadBtn.removeClass('selected');
-        $button.addClass('selected');
-        $button.find('.bi-hand-thumbs-up-fill').removeClass('hide');
-        $button.find('.bi-hand-thumbs-up').addClass('hide');
-        $button.closest('.comment-good').siblings('.comment-bad').find('.bi-hand-thumbs-down-fill').addClass('hide');
-        $button.closest('.comment-good').siblings('.comment-bad').find('.bi-hand-thumbs-down').removeClass('hide');
-        fn_comment_good('u', commentNumber); // 좋아요 추가
-    }
+        if (isAlreadySelected) {
+            // 이미 선택된 버튼을 클릭한 경우, 선택 해제
+            $button.removeClass('selected');
+            $button.find('.bi-hand-thumbs-up-fill').addClass('hide');
+            $button.find('.bi-hand-thumbs-up').removeClass('hide');
+            fn_comment_good('x', commentNumber); // 좋아요 취소
+        } else {
+            $commentGoodBtn.removeClass('selected');
+            $commentBadBtn.removeClass('selected');
+            $button.addClass('selected');
+            $button.find('.bi-hand-thumbs-up-fill').removeClass('hide');
+            $button.find('.bi-hand-thumbs-up').addClass('hide');
+            $button.closest('.comment-good').siblings('.comment-bad').find('.bi-hand-thumbs-down-fill').addClass('hide');
+            $button.closest('.comment-good').siblings('.comment-bad').find('.bi-hand-thumbs-down').removeClass('hide');
+            fn_comment_good('u', commentNumber); // 좋아요 추가
+        }
     }
 });
 
 $commentBadBtn.on('click', function(){
     if(session_check()){
-    const $button = $(this);
-    const isAlreadySelected = $button.hasClass('selected');
-    const $comment = $button.closest('.commentAi');
-    const commentNumber = $comment.data('num');
+        const $button = $(this);
+        const isAlreadySelected = $button.hasClass('selected');
+        const $comment = $button.closest('.commentAi');
+        const commentNumber = $comment.data('num');
 
-    if (isAlreadySelected) {
-        // 이미 선택된 버튼을 클릭한 경우, 선택 해제
-        $button.removeClass('selected');
-        $button.find('.bi-hand-thumbs-down-fill').addClass('hide');
-        $button.find('.bi-hand-thumbs-down').removeClass('hide');
-        fn_comment_bad('x', commentNumber); // 싫어요 취소
-    } else {
-        $commentGoodBtn.removeClass('selected');
-        $commentBadBtn.removeClass('selected');
-        $button.addClass('selected');
-        $button.find('.bi-hand-thumbs-down-fill').removeClass('hide');
-        $button.find('.bi-hand-thumbs-down').addClass('hide');
-        $button.closest('.comment-bad').siblings('.comment-good').find('.bi-hand-thumbs-up-fill').addClass('hide');
-        $button.closest('.comment-bad').siblings('.comment-good').find('.bi-hand-thumbs-up').removeClass('hide');
-        fn_comment_bad('d', commentNumber); // 싫어요 추가
-    }
+        if (isAlreadySelected) {
+            // 이미 선택된 버튼을 클릭한 경우, 선택 해제
+            $button.removeClass('selected');
+            $button.find('.bi-hand-thumbs-down-fill').addClass('hide');
+            $button.find('.bi-hand-thumbs-down').removeClass('hide');
+            fn_comment_bad('x', commentNumber); // 싫어요 취소
+        } else {
+            $commentGoodBtn.removeClass('selected');
+            $commentBadBtn.removeClass('selected');
+            $button.addClass('selected');
+            $button.find('.bi-hand-thumbs-down-fill').removeClass('hide');
+            $button.find('.bi-hand-thumbs-down').addClass('hide');
+            $button.closest('.comment-bad').siblings('.comment-good').find('.bi-hand-thumbs-up-fill').addClass('hide');
+            $button.closest('.comment-bad').siblings('.comment-good').find('.bi-hand-thumbs-up').removeClass('hide');
+            fn_comment_bad('d', commentNumber); // 싫어요 추가
+        }
     }
 });
 
@@ -595,5 +597,4 @@ function session_check(){
     }
     return true;
 }
-
 

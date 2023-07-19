@@ -206,6 +206,12 @@ function makeMiddleCate(result) {
 $('.writeOk').on('click', function(){
     let $tagList = $('.tag')
 
+    if($tagList.length == 0){
+        alert("카테고리를 선택 후 작성해주세요");
+        return false;
+    }
+
+
     let valueList = [];
     $tagList.each((i, tag) => {
         valueList.push($(tag).data('value'));
@@ -216,10 +222,11 @@ $('.writeOk').on('click', function(){
     let input = '';
 
     valueList.forEach(value => {
-       input += `<input type="hidden" value="${value}" name="subList">`;
+        input += `<input type="hidden" value="${value}" name="subList">`;
     });
 
     $('.qna-form').append(input);
+
 
     $('.qna-form').submit();
 })

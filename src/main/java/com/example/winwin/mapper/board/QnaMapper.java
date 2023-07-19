@@ -32,7 +32,7 @@ public interface QnaMapper {
     public void deleteQs(Long qnaNumber);
 
     // 수정
-    public void updateQna(QnaVo qnaVo);
+    public void updateQna(QnaDto qnaDto);
 
     // 태그 수정
 //    public void updateQs(QsBridgeDto qsBridgeDto);
@@ -42,6 +42,7 @@ public interface QnaMapper {
 
     // 댓글 수
     public int commentCnt(Long qnaNumber);
+    public int commentAuth(QnaVo qnaVo);
 
     // 프로필
 //    public List<QnaProfileVo> selectUserProfile(Long userNumber);

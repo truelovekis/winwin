@@ -35,27 +35,14 @@
 <body>
 <header class="header" th:replace="fragment/header :: header"></header>
 <form th:action="@{/career/write}" method="post" id="community-write">
-  <input type="hidden" th:value="${session.mentorNumber}"/>
-  <div class="write-main">
-    <div class="main-title">
-      <div class="sub1">
-        <h2>진로 정보</h2>
-        <img src="../img/k.png" class="k">
-      </div>
-      <span class="sub-title">나의 <span class="sub-title2">진로정보</span>를 나눠봐요 :)</span>
-    </div>
-    <div class="write-main-box">
-      <div class="write-category">
-        <span class="project-sub-text1" th:text="${career.subName}"><button type="button" class="close">✖️</button></span>
-      </div>
-      <div class="write-title content-a">
-        <input type="text" placeholder="제목을 입력하세요" name="careerInfoTitle" id="count_memo" minlength = "10" maxlength="100" style="font-family:NanumSquareLight;"/>
-        <div class="count"><span id="cnt">(0 / 25)</span></div>
-      </div>
-      <div class="write-content content-a">
-        <div style="width: 100%; margin: auto;">
-          <textarea id="summernote" name="careerInfoContent" th:text="${career.careerInfoContent}"></textarea>
-
+    <input type="hidden" th:value="${session.mentorNumber}"/>
+    <div class="write-main">
+        <div class="main-title">
+            <div class="sub1">
+                <h2>진로 정보</h2>
+                <img src="../img/k.png" class="k">
+            </div>
+            <span class="sub-title">나의 <span class="sub-title2">진로정보</span>를 나눠봐요 :)</span>
         </div>
         <div class="write-main-box">
             <div class="write-category">
@@ -63,38 +50,16 @@
                                                                                     class="close">✖️</button></span>
             </div>
             <div class="write-title content-a">
-                <input type="text" placeholder="제목을 입력하세요" name="careerInfoTitle" id="count_memo"
-                       maxlength="100" style="font-family:NanumSquareLight;"/>
+                <input type="text" placeholder="제목을 입력하세요" name="careerInfoTitle" id="count_memo" maxlength="10" style="font-family:NanumSquareLight;"/>
                 <div class="count"><span id="cnt">(0 / 25)</span></div>
             </div>
             <div class="write-content content-a">
                 <div style="width: 100%; margin: auto;">
-                    <textarea id="summernote" name="careerInfoContent"
-                              thu:text="${career.careerInfoContent}"></textarea>
+                    <textarea id="summernote" name="careerInfoContent" th:text="${career.careerInfoContent}"></textarea>
                 </div>
-
+                <button type="submit" class="write-btn">작성하기</button>
             </div>
-
-            <div class="file-main-img">
-                <div class="file-img">
-                    <!-- <label for="file" class="input-file-btn">
-                      <img src="../img/camera.png">
-                      이미지<br>
-                      업로드<br>
-                      (<span class="file-cnt">0</span>/4)
-                    </label>
-                    <input type="file" id="file" multiple /> -->
-                </div>
-                <!-- 파일 리스트 -->
-                <ul class="file-list">
-
-                </ul>
-                <!-- 파일 리스트 끝 -->
-            </div>
-
-
         </div>
-        <button type="submit" class="write-btn">작성하기</button>
     </div>
 </form>
 

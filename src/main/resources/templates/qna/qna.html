@@ -146,7 +146,7 @@
         <div class="community-user">
           <div class="community-pfp-img">
             <label for="file" class="user-file">
-              <img th:if="${qnaProfile == null}" src="../../img/profile-basic.png" class="userpfp"/>
+              <img th:if="${qnaProfile == null}" th:src="@{/img/profile-basic.png}" class="userpfp"/>
               <img th:unless="${qnaProfile == null}" class="img-box"
                    th:style="${'background-image: url(/profile/' + qnaProfile.pfpUuid + '_' + qnaProfile.pfpSystemName + ')'}"/>
             </label>
@@ -174,7 +174,7 @@
       <div class="community-pfp2" th:if="${session.userNumber == null}">
         <div class="community-user">
           <div class="community-pfp-img">
-            <img src="../../img/profile-basic.png" />
+            <img th:src="@{/img/profile-basic.png}" />
           </div>
           <div>
             <div class="not-login">

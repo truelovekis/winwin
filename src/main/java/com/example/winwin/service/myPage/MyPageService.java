@@ -111,6 +111,16 @@ public class MyPageService {
         return activityMapper.selectCareerInfoBoardList(userNumber, criteria);
     }
 
+//    진로정보 관심 글(좋아요) 리스트보기
+    @Transactional(readOnly = true)
+    public List<ActiveBoardVo> getActiveCareerInfoLikeBoardList(Long userNumber, Criteria criteria){
+        if (userNumber == null){
+            throw new IllegalArgumentException("로그인이 필요합니다.");
+        }
+
+        return activityMapper.selectCareerInfoBoardLikeList(userNumber, criteria);
+    }
+
 //    내가 작성한 댓글 리스트 보기
     @Transactional(readOnly = true)
     public List<ActiveCommentVo> getActiveCommentList(Long userNumber, Criteria criteria){
@@ -194,6 +204,7 @@ public class MyPageService {
         return activityMapper.selectTotalCs(userNumber);
     }
 
+//    진로정보 내글 페이지 카운팅
     @Transactional(readOnly = true)
     public int getTotalCareerInfo(Long userNumber){
         if (userNumber == null){
@@ -201,6 +212,16 @@ public class MyPageService {
         }
 
         return activityMapper.selectTotalCareer(userNumber);
+    }
+
+//    진로정보 관심 글(좋아요) 페이지 카운팅
+    @Transactional(readOnly = true)
+    public int getTotalCareerInfoLike(Long userNumber){
+        if (userNumber == null){
+            throw new IllegalArgumentException("로그인이 필요합니다.");
+        }
+
+        return activityMapper.selectTotalCareerInfoBoardLike(userNumber);
     }
 
 //    내가 작성한 댓글 개수
