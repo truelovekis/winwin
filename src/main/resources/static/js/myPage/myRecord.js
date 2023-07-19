@@ -1,5 +1,5 @@
 // 다이어리 작성하기
-let $plus = $('.plusBtn');
+let $plus = $('.plus-btn');
 let $Diary = $('.diary');
 let $cancleBtn = $('.cancle');
 

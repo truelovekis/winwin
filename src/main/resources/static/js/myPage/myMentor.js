@@ -153,7 +153,7 @@ $('.mento-more-info-box').on('click',function (){
   let $target = $(this).prev('.mento-profile');
 
   if($target.css('max-height') == 'none'){
-    $target.css('max-height' , "186px")
+    $target.css('max-height' , "170px")
   }else {
     $target.css('max-height' , "none");
   }
