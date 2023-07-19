@@ -40,4 +40,7 @@ public interface ActivityMapper {
 //    진로정보
     public int selectTotalCareer(Long userNumber);
     public List<ActiveBoardVo> selectCareerInfoBoardList(Long userNumber, Criteria criteria);
+    public List<ActiveBoardVo> selectCareerInfoBoardLikeList(Long userNumber, Criteria criteria);
+    public int selectTotalCareerInfoBoardLike(Long userNumber);
+
 }
