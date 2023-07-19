@@ -216,7 +216,7 @@ $('.writeOk').on('click', function(){
     let input = '';
 
     valueList.forEach(value => {
-       input += `<input type="hidden" value="${value}" name="subList">`;
+        input += `<input type="hidden" value="${value}" name="subList">`;
     });
 
     $('.qna-form').append(input);

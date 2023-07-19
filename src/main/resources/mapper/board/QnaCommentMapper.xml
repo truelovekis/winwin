@@ -14,8 +14,8 @@
                USER_ID, USER_BELONG, P.PFP_SYSTEM_NAME, P.PFP_UUID
         FROM WW_USER U JOIN QNA_COMMENT Q
                             ON QNA_NUMBER = #{qnaNumber} AND U.USER_NUMBER = Q.USER_NUMBER
-        LEFT OUTER JOIN USER_PFP P
-        ON U.USER_NUMBER = P.USER_NUMBER
+                       LEFT OUTER JOIN USER_PFP P
+                                       ON U.USER_NUMBER = P.USER_NUMBER
         ORDER BY COMMENT_NUMBER DESC
     </select>
 
@@ -29,7 +29,7 @@
                        LEFT OUTER JOIN QNA_COMMENT_UD CCU
                                        ON Q.COMMENT_NUMBER = CCU.COMMENT_NUMBER
                        LEFT OUTER JOIN USER_PFP P
-                       ON Q.USER_NUMBER = P.USER_NUMBER
+                                       ON Q.USER_NUMBER = P.USER_NUMBER
         ORDER BY Q.COMMENT_NUMBER DESC
     </select>
 
@@ -47,7 +47,7 @@
         WHERE COMMENT_NUMBER = #{commentNumber}
     </update>
 
-<!--  댓글 삭제  -->
+    <!--  댓글 삭제  -->
     <delete id="delete">
         DELETE FROM QNA_COMMENT
         WHERE COMMENT_NUMBER = #{commentNumber}
