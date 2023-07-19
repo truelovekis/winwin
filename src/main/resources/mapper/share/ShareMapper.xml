@@ -114,12 +114,8 @@
         WHERE RK = 1
         ) J
         ON S.SHARE_NUMBER = J.share_number
-<<<<<<< HEAD
         WHERE S.SHARE_STATUS != '0'
-        ORDER BY S.share_number DESC
-=======
         ORDER BY S.share_date DESC
->>>>>>> winwin/work01
         )
         <![CDATA[
         where ROWNUM <= #{page} * #{amount}
