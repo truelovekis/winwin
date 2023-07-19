@@ -27,4 +27,6 @@ public class StudyVo {
     private Long studyReadCnt;
     private int likeCnt;
     private String isNew;
+    private String pfpSystemName;
+    private String pfpUuId;
 }
