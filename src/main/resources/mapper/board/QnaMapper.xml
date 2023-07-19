@@ -19,29 +19,30 @@
         SELECT QNA_NUMBER, QNA_TITLE, QNA_CONTENT, QNA_DATE, QNA_CNT, USER_NUMBER, SUB_NAMES,
         QNA_LIKE_CNT, COMMENT_CNT
         FROM (
-        SELECT ROWNUM AS RNUM, QNA_NUMBER, QNA_TITLE, QNA_CONTENT, QNA_DATE, QNA_CNT, USER_NUMBER, SUB_NAMES,
-        QNA_LIKE_CNT, COMMENT_CNT
-        FROM (
-        SELECT Q.QNA_NUMBER, QNA_TITLE, QNA_CONTENT, QNA_DATE, QNA_CNT, USER_NUMBER,
-        SUB_NAMES,
-        (SELECT COUNT(QG.QNA_NUMBER) FROM QNA_GOOD QG WHERE Q.QNA_NUMBER = QG.QNA_NUMBER) AS QNA_LIKE_CNT,
-        (SELECT COUNT(QC.QNA_NUMBER) FROM QNA_COMMENT QC WHERE Q.QNA_NUMBER = QC.QNA_NUMBER) AS COMMENT_CNT
-        FROM QNA Q JOIN (
-        SELECT QNA_NUMBER, LISTAGG(SC.SUB_NAME, ',') WITHIN GROUP(ORDER BY QB.SUB_NUMBER) AS SUB_NAMES
-        FROM QS_BRIDGE QB JOIN SUB_CATEGORY SC
-        ON QB.SUB_NUMBER = SC.SUB_NUMBER
-        <if test="cateList != null and cateList.size != 0">
-            WHERE QB.SUB_NUMBER IN
-            <foreach collection="cateList" open="(" close=")" index="index" separator="," item="cate">
-                #{cate}
-            </foreach>
-        </if>
-        GROUP BY QNA_NUMBER
-        ) S1
-        ON Q.QNA_NUMBER = S1.QNA_NUMBER
-        ORDER BY Q.QNA_NUMBER DESC
-        )
-        <![CDATA[
+            SELECT ROWNUM AS RNUM, QNA_NUMBER, QNA_TITLE, QNA_CONTENT, QNA_DATE, QNA_CNT, USER_NUMBER, SUB_NAMES,
+            QNA_LIKE_CNT, COMMENT_CNT
+            FROM (
+                SELECT Q.QNA_NUMBER, QNA_TITLE, QNA_CONTENT, QNA_DATE, QNA_CNT, USER_NUMBER,
+                SUB_NAMES,
+                (SELECT COUNT(QG.QNA_NUMBER) FROM QNA_GOOD QG WHERE Q.QNA_NUMBER = QG.QNA_NUMBER) AS QNA_LIKE_CNT,
+                (SELECT COUNT(QC.QNA_NUMBER) FROM QNA_COMMENT QC WHERE Q.QNA_NUMBER = QC.QNA_NUMBER) AS COMMENT_CNT
+                FROM QNA Q JOIN (
+                    SELECT QNA_NUMBER, LISTAGG(SC.SUB_NAME, ',') WITHIN GROUP(ORDER BY QB.SUB_NUMBER) AS SUB_NAMES
+                    FROM QS_BRIDGE QB JOIN SUB_CATEGORY SC
+                    ON QB.SUB_NUMBER = SC.SUB_NUMBER
+                    <if test="cateList != null and cateList.size != 0">
+                        WHERE QB.SUB_NUMBER IN
+                        <foreach collection="cateList" open="(" close=")" index="index" separator="," item="cate">
+                            #{cate}
+                        </foreach>
+                    </if>
+                    GROUP BY QNA_NUMBER
+                ) S1
+                ON Q.QNA_NUMBER = S1.QNA_NUMBER
+                WHERE Q.QNA_STATUS != '0'
+                ORDER BY Q.QNA_NUMBER DESC
+            )
+            <![CDATA[
             WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
             ]]>
         )
@@ -123,6 +124,16 @@
         SELECT COUNT(*)
         FROM QNA_COMMENT
         WHERE QNA_NUMBER = #{qnaNumber}
+    </select>
+
+    <select id="commentAuth">
+        SELECT COUNT(*) FROM MENTOR MT
+        WHERE USER_NUMBER = #{userNumber}
+          AND SUB_NUMBER IN
+              (
+                  SELECT QB.SUB_NUMBER
+                  FROM QS_BRIDGE QB
+                  WHERE QB.QNA_NUMBER = #{qnaNumber})
     </select>
 
     <!-- qna(로그인시) 프로필 조회 -->

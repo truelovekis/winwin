@@ -343,6 +343,12 @@ a>h3{
   color: black;
   font-size: 18px;
 }
+.qna-title-h3{
+  margin: -1px 13px;
+  color: black;
+  font-size: 18px;
+  display: inline;
+}
 
 .pfp-main-btn-css {
   border-radius: 7px;

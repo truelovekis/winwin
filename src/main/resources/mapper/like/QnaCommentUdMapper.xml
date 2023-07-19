@@ -47,4 +47,12 @@
         WHERE CC.COMMENT_NUMBER = #{commentNumber} AND UD_STATUS = 'u'
     </select>
 
+    <!--    ud 삭제 (Q&A 게시글 삭제에서 사용)-->
+    <delete id="deleteForQna">
+        DELETE FROM QNA_COMMENT_UD
+        WHERE COMMENT_NUMBER IN (SELECT COMMENT_NUMBER
+                                 FROM QNA_COMMENT
+                                 WHERE QNA_NUMBER = #{qnaNumber})
+    </delete>
+
 </mapper>

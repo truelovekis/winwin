@@ -197,6 +197,7 @@
         <div class="second1">
             <div class="second">
                 <div class="empty-box"></div>
+
                 <div class="comment">
                     <textarea class="comment1" style="font-family:NanumSquareLight;" placeholder="답변을 남기고 채택을 받아보세요."></textarea>
                     <button type="button" class="commentBtn" style="font-family:NanumSquareLight;">답변 등록</button>
@@ -208,10 +209,13 @@
                         <div class="commentAi" th:data-num="${comment.commentNumber}">
                             <input type="hidden" class="comment-num" th:value="${comment.commentNumber}">
                             <div class="profil">
-                                <img  th:if="${comment.pfpUuid == null}" src="../../img/profile-basic.png" class="userpfp" height="50px" width="50px"/>
+                                <img  th:if="${comment.pfpUuid == null}" th:src="@{/img/profile-basic.png}" class="userpfp" height="50px" width="50px"/>
                                 <img th:unless="${comment.pfpUuid == null}" class="img-box"
                                      th:style="${'background-image: url(/profile/' + comment.pfpUuid + '_' + comment.pfpSystemName + ')'}"/>
-                                <div class="Commento"><p class="userInfo" th:text="${comment.userId}"></p></div>
+                                <div class="Commento">
+                                    <p class="userInfo" th:text="${comment.userNickname}"></p>
+                                    Lv.<span class="pfp-text" th:text="${comment.gradeName}"></span>
+                                </div>
                                 <div class="dropdown2">
                                     <button class="dropbtn2">
                                         <span class="dropbtn_icon2"> <svg data-v-bd9f2bcc="" data-v-3035bc76="" width="24" height="24" fill="black" xmlns="http://www.w3.org/2000/svg" class="c-Applicatio c-icon" style="fill: rgb(148, 155, 160);"><circle data-v-bd9f2bcc="" cx="12" cy="5.5" r="1.5"></circle><circle data-v-bd9f2bcc="" cx="12" cy="12" r="1.5"></circle><circle data-v-bd9f2bcc="" cx="12" cy="18.5" r="1.5"></circle></svg></span>
@@ -228,7 +232,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="description"><p th:text="${comment.userBelong}"></p></div>
+                            <div class="description"></div>
                             <div class="Aicontent" th:text="${comment.commentContent}"></div>
                             <div class="answer" th:if="${session.userNumber != comment.userNumber}">
                                 <div class="answer-box"></div>
