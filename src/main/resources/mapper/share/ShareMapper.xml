@@ -62,6 +62,7 @@
             WHERE RK = 1
         ) J
                            ON S.SHARE_NUMBER = J.share_number
+        WHERE S.SHARE_STATUS != '0'
         ORDER BY S.share_number DESC
     </select>
     <!--    -->
@@ -113,6 +114,7 @@
         WHERE RK = 1
         ) J
         ON S.SHARE_NUMBER = J.share_number
+        WHERE S.SHARE_STATUS != '0'
         ORDER BY S.share_number DESC
         )
         <![CDATA[

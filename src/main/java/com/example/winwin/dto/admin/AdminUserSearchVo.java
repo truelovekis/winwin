@@ -12,5 +12,6 @@ public class AdminUserSearchVo {
     private String identity;
     private String mainCode;
     private String position;
+    private String userStatus;
 
 }

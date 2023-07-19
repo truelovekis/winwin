@@ -32,7 +32,7 @@ public interface QnaMapper {
     public void deleteQs(Long qnaNumber);
 
     // 수정
-    public void updateQna(QnaVo qnaVo);
+    public void updateQna(QnaDto qnaDto);
 
     // 태그 수정
 //    public void updateQs(QsBridgeDto qsBridgeDto);

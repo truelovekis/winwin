@@ -70,11 +70,15 @@ function appendList(map) {
                 <div class="share-sub-content">
                     <div class="share-sub-title">
                             <div class="share-title">
-                                <span>
-                                    ${share.shareStatus == '1' ? '<span class="N">나눔 중</span>'
-                                    : '<span class="E">마감</span>'
-                                        }
-                                </span>
+                                <span>`;
+        if(share.shareStatus == '1'){
+            text += `<span class="N">나눔 중</span>`;
+        }
+        if(share.shareStatus == '2'){
+            text += `<span class="E">마감</span>`;
+        }
+
+        text += `</span>
                                 |
                                 <span>${share.shareTitle}</span>
                             </div>
