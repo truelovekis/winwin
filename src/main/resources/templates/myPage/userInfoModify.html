@@ -59,7 +59,7 @@
                       <span th:text="${userInfo.mentorTag[0]}"></span></span>
                     <div class="name">
                       <span id="user-name" th:text="${userInfo.userVo.userName}">이름</span>
-                      <span class="mentor-grade">Lv.<span class="mentor-grade2" th:text="' '+${userInfo.userVo.gradeName}"/></span>
+                      <span class="mentor-grade" th:data-num="${userInfo.userVo.userWing}">Lv.<span class="mentor-grade2" th:text="' '+${userInfo.userVo.gradeName}"/></span>
                     </div>
                   </div>
                 </div>

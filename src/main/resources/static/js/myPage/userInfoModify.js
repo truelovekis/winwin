@@ -138,6 +138,15 @@ function makeMiddleCate(result) {
     return text2;
 }
 
+//내 글, 내 댓글 클릭 시 활동내역으로 이동
+$('.write').on('click', '.number', function(){
+    window.location.href="/myPage/activityDetail";
+});
+
+$('.comment').on('click', '.number', function(){
+    window.location.href="/myPage/activityComment";
+});
+
 //등급 클릭 시 등급정보 모달창 띄워주기
 $('.mentor-grade').on('click', function(){
     $('.grade-modal-wrap').removeClass('none');
@@ -147,6 +156,24 @@ $('.mentor-grade').on('click', function(){
         top: "50%",
         transform: "translate(-50%, -50%)",
     });
+
+    let wing = $('.mentor-grade').data('num');
+    let level = Math.floor(wing / 1000 + 1);
+    let percent = (wing % 1000) / 10;
+
+    if(level == 1){
+        $('.now-level').text('Lv.' + level + ' 깃털');
+    }else if(level == 2){
+        $('.now-level').text('Lv.' + level + ' 날개');
+    }else if(level == 3){
+        $('.now-level').text('Lv.' + level + ' 천사날개');
+    }else if(level == 4){
+        $('.now-level').text('Lv.' + level + ' 수호천사');
+    }else if(level >= 5){
+        $('.now-level').text('Lv.' + level + ' 대천사');
+    }
+    $('.next-level').text('다음 등급까지 ' + percent + '% 남음');
+    $('.experience-bar').val(percent);
 });
 
 $('.confirm-btn').on('click', function(){
@@ -154,7 +181,7 @@ $('.confirm-btn').on('click', function(){
 });
 
 $('.grade-modal-wrap').on('click', function (e) {
-    if (!$(e.target).hasClass("grade-box")) {
+    if ($(e.target).hasClass("grade-modal-wrap")) {
         $('.grade-modal-wrap').addClass("none");
     }
 });
