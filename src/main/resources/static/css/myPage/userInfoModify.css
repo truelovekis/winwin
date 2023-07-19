@@ -230,6 +230,7 @@ hr {
 .write > span,
 .comment > span {
   display: block;
+  text-align: center;
 }
 
 .number {

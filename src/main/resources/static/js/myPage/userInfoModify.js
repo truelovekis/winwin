@@ -152,3 +152,9 @@ $('.mentor-grade').on('click', function(){
 $('.confirm-btn').on('click', function(){
     $('.grade-modal-wrap').addClass('none');
 });
+
+$('.grade-modal-wrap').on('click', function (e) {
+    if (!$(e.target).hasClass("grade-box")) {
+        $('.grade-modal-wrap').addClass("none");
+    }
+});
