@@ -37,5 +37,11 @@
         WHERE QNA_NUMBER = #{qnaNumber}
     </select>
 
+    <!--    Q&A 좋아요 삭제 (Q&A 게시글 삭제에서 사용)-->
+    <delete id="deleteForQna">
+        DELETE FROM QNA_GOOD
+        WHERE QNA_NUMBER = #{qnaNumber}
+    </delete>
+
 
 </mapper>
