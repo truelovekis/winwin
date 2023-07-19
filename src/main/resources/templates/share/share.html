@@ -40,7 +40,7 @@
                 <div>
                     <div class="community-user-name" th:text="${session.userNickname}"></div>
                     <div class="community-pfp-belong" th:text="${profile.userPosition}"></div>
-                    <div class="community-pfp-department" th:text="${profile.gradeName}"></div>
+                    <div class="community-pfp-department" th:text="'Lv.' + ${profile.gradeName}"></div>
                 </div>
             </div>
             <div class="community-pfp-main-btn">

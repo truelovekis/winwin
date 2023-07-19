@@ -81,7 +81,6 @@ function displayAjax(){
 }
 
 // 수정 페이지 이동
-
 function fn_modify(shareNumber){
     if(confirm("정말 수정하시겠습니까?")) {
         location.href = "/share/modify?shareNumber="+shareNumber;
@@ -113,16 +112,18 @@ reportModal.addEventListener("click", function (e){
 
 // 신고하기 버튼 클릭 시 컨펌 및 신고처리
 let $reportButton = $('.report-btn');
-$reportButton.on("click", function (){
-    console.log($('.report-list input:checked').val());
-
-    let result = confirm("정말 신고하시겠습니까?");
-
-
-   if(result){
-       reportAjax();
-   }
+$reportButton.on("click", function () {
+    if (loginNumber) {
+        console.log($('.report-list input:checked').val());
+        let result = confirm("정말 신고하시겠습니까?");
+        if (result) {
+            reportAjax();
+        }
+    } else {
+        alert("로그인 후 이용해주세요.");
+    }
 });
+
 
 // 신고하기 처리
 function reportAjax(){
@@ -145,25 +146,40 @@ function reportAjax(){
 /* 쪽지 모달창 */
 $(function () {
     $(".commentBtn").click(function () {
-        $(".input-wrap").fadeIn();
+        let userWing = $('.userWing').val();
+        let shareWing = $('.share-wing-count').data('wing');
+
+        if (loginNumber && (userWing == shareWing)) {
+            $(".input-wrap").fadeIn();
+        }
+        else if(userWing != shareWing) {
+            alert("보유한 윙포인트가 부족합니다.");
+            $(".input-wrap").addClass("none");
+            $('body').css('overflow', 'auto');
+            $('.form-reset')[0].reset();
+        }
+        else {
+            alert("로그인 후 이용해주세요.");
+            $(".input-wrap").addClass("none");
+            $('body').css('overflow', 'auto');
+            $('.form-reset')[0].reset();
+        }
     });
 });
 
 $(".commentBtn").on("click", function () {
     $(".input-wrap").removeClass("none");
-
     $('body').css('overflow', 'hidden');
 });
 
 $(".input-wrap").on("click", function (e) {
-
     if ($(e.target).hasClass("input-wrap")) {
         $(".input-wrap").addClass("none");
         $('body').css('overflow', 'auto');
-
         $('.form-reset')[0].reset();
     }
 });
+
 
 
 

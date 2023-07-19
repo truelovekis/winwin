@@ -232,4 +232,10 @@ function careerInfoLike(careerInfoNumber){
     });
 }
 
+// 수정 페이지 이동
+function fn_modify(careerInfoNumber){
+    if(confirm("정말 수정하시겠습니까?")) {
+        location.href = "/career/modify?careerInfoNumber="+careerInfoNumber;
+    }
+}
 
