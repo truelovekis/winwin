@@ -105,7 +105,7 @@ function diaryList(result) {
                     </div>
             `;
             });
-            $('.diary-list').html(text);
+            $('.diary-list').append(text);
 }
 
 //다이어리 등록하기
@@ -132,17 +132,17 @@ $('.submit').on('click' , function (){
 
 });
 
-$(function (){
-    let userNumber = $('.userNumber').val();
-    $.ajax({
-        url: '/diary/list',
-        type: 'get',
-        data: {userNumber: userNumber},
-        success: function (result) {
-            diaryList(result);
-        }
-    });
-});
+// $(function (){
+//     let userNumber = $('.userNumber').val();
+//     $.ajax({
+//         url: '/diary/list',
+//         type: 'get',
+//         data: {userNumber: userNumber},
+//         success: function (result) {
+//             diaryList(result);
+//         }
+//     });
+// });
 
 $('.diary-sub').on('click','.editBtn' , function (){
     $(this).closest('.list-btn').find('.diary2').show();
@@ -235,14 +235,14 @@ getListPage({page : page}, diaryList, showError);
 
 $(window).on('scroll', function(){
 //    $(window).scrollTop() : 현재 브라우저 스크롤 위치를 반환함
-    console.log($(window).scrollTop());
+    console.log(Math.ceil($(window).scrollTop()));
     //$(document).height() : 문서 전체의 높이를 의미함
     console.log(`document : ${$(document).height()}`);
     //$(window).height() : 브라우저 화면의 높이를 의미함
     console.log(`window : ${$(window).height()}`);
 
-    if($(window).scrollTop() == $(document).height() - $(window).height()){
-        console.log(++page);
+    if(Math.floor($(window).scrollTop()) == $(document).height() - $(window).height()){
+        console.log(++page + '=======================================================');
         getListPage({page : page}, diaryList , showError);
     }
 });
