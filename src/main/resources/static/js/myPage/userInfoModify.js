@@ -138,3 +138,17 @@ function makeMiddleCate(result) {
     return text2;
 }
 
+//등급 클릭 시 등급정보 모달창 띄워주기
+$('.mentor-grade').on('click', function(){
+    $('.grade-modal-wrap').removeClass('none');
+    $('.grade-box').css({
+        position: "fixed",
+        left: "50%",
+        top: "50%",
+        transform: "translate(-50%, -50%)",
+    });
+});
+
+$('.confirm-btn').on('click', function(){
+    $('.grade-modal-wrap').addClass('none');
+});

@@ -10,15 +10,16 @@
     <!-- 본인 프로필 -->
     <div class="profile">
       <div class="profile-wrap">
-        <label for="profile-img-upload">
           <div class="profile-icon">
-            <img class="pfp-icon-image" src="https://cdn.comento.kr/images/illust/illust-photo-upload.svg">
+            <img th:if="${sideBar.userPfpDto == null}" class="pfp-icon-image" src="/img/defualt_camera.jpg">
+            <div th:unless="${sideBar.userPfpDto == null}" class="img-box"
+                 th:style="${'background-image: url(/profile/' + sideBar.userPfpDto.pfpUuid + '_' + sideBar.userPfpDto.pfpSystemName + ')'}">
+            </div>
           </div>
-        </label>
-        <input type="file" id="profile-img-upload" name="profile-upload" />
         <div class="user-info">
-          <span class="user-name" th:text="${session.userName}"></span>
-          <span class="user-email" th:text="${session.userEmail}"></span>
+          <span class="user-name" th:text="${sideBar.userNickname}"></span>
+          <span class="user-email" th:text="${sideBar.userPosition}"></span>
+          <span class="user-email" th:text="${sideBar.gradeName}"></span>
         </div>
       </div>
     </div>

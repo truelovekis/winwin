@@ -9,6 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/fragment/footer.css}"/>
     <link rel="stylesheet" th:href="@{/css/myPage/userInfoModify.css}" />
     <link rel="stylesheet" th:href="@{/css/fragment/myPageSide.css}"/>
+    <link rel="stylesheet" th:href="@{/css/myPage/gradeModal.css}" />
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
     <style>
       body {
@@ -25,6 +26,7 @@
   </head>
   <body>
     <header class="header" th:replace="fragment/header :: header"></header>
+    <article th:replace="myPage/gradeModal::gradeModal"></article>
     <main>
       <div class="wrap">
         <div class="container">
@@ -45,13 +47,10 @@
             <div class="modify-content">
               <div class="top-box">
                 <div class="profile-box">
-                  <label for="img-box" class="profile-label">
                     <div th:if="${profile == null}" class="img-box" style="background-image: url(https://via.placeholder.com/70x70)"></div>
                     <div th:unless="${profile == null}" class="img-box"
                          th:style="${'background-image: url(/profile/' + profile.pfpUuid + '_' + profile.pfpSystemName + ')'}">
                     </div>
-                  </label>
-                  <input class="profile-file" type="file" id="img-box" name="pfpFile">
                   <div class="text-box">
                     <span th:if="${userInfo.mentorTag.size == 0}">Mentee</span>
                     <span th:unless="${userInfo.mentorTag.size == 0}">
@@ -60,7 +59,7 @@
                       <span th:text="${userInfo.mentorTag[0]}"></span></span>
                     <div class="name">
                       <span id="user-name" th:text="${userInfo.userVo.userName}">이름</span>
-                      <span class="mentor-grade">Lv.<span class="mentor-grade2" th:text="${userInfo.userVo.gradeName}"/></span>
+                      <span class="mentor-grade">Lv.<span class="mentor-grade2" th:text="' '+${userInfo.userVo.gradeName}"/></span>
                     </div>
                   </div>
                 </div>
@@ -99,6 +98,7 @@
                 </div>
                 <button type="submit" class="button">수정하기</button>
               </div>
+            </div>
           </form>
               <div class="resume-info">
               <h3>나의 관심분야</h3>
@@ -197,7 +197,7 @@
         </div>
       </div>
     </main>
-    <footer class="footer"  th:replace="fragment/footer :: footer"></footer>
+    <footer class="footer" th:replace="fragment/footer :: footer"></footer>
     <script
       src="https://code.jquery.com/jquery-3.6.3.js"
       integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
@@ -205,5 +205,6 @@
     ></script>
     <script th:src="@{/js/fragment/header.js}" ></script>
     <script th:src="@{/js/myPage/userInfoModify.js}" ></script>
+    <script th:src="@{/js/myPage/gradeModal.js}" ></script>
   </body>
 </html>

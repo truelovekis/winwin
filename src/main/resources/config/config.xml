@@ -89,6 +89,7 @@
         <typeAlias type="com.example.winwin.dto.user.ResumeDto" alias="resumeDto"/>
         <typeAlias type="com.example.winwin.vo.myPage.MyPageVo" alias="myPageVo"/>
         <typeAlias type="com.example.winwin.vo.myPage.ResumeVo" alias="resumeVo"/>
+        <typeAlias type="com.example.winwin.vo.myPage.SideBarVo" alias="sideBarVo"/>
         <typeAlias type="com.example.winwin.vo.myPage.ActiveBoardVo" alias="activeBoardVo"/>
         <typeAlias type="com.example.winwin.vo.myPage.ActiveCommentVo" alias="activeCommentVo"/>
         <typeAlias type="com.example.winwin.vo.myPage.DiaryVo" alias="diaryVo"/>
