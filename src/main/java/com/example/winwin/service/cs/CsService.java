@@ -87,7 +87,7 @@ public class CsService {
     }
 
 //    댓글수 증가
-public int commentCnt(Long csNumber){
+public Long commentCnt(Long csNumber){
     if(csNumber == null){
         throw new IllegalArgumentException("댓글 번호 누락");
     }

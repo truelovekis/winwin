@@ -191,7 +191,7 @@ community-pfp.main-btn{
     flex-direction: column;
     justify-content: center;
     width: 700px;
-    height: 170px;
+    height: 140px;
     border: 1px solid#ddd;
     border-radius: 5px;
     padding: 20px;
@@ -261,6 +261,7 @@ community-pfp.main-btn{
 .community-btn {
     display: flex;
     align-items: center;
+    color: gray;
 }
 
 .community-btn > span,

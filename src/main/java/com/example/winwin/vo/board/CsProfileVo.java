@@ -17,4 +17,5 @@ public class CsProfileVo extends CsVo{
     private String userPosition;
     private Long userNumber;
     private String userName;
+
 }
