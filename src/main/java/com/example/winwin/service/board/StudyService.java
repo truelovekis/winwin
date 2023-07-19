@@ -2,12 +2,15 @@ package com.example.winwin.service.board;
 
 import com.example.winwin.dto.board.StudyDto;
 import com.example.winwin.mapper.board.StudyMapper;
+import com.example.winwin.vo.board.CsProfileVo;
 import com.example.winwin.vo.board.StudyVo;
 import com.example.winwin.vo.infinityScroll.Criteria;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -137,4 +140,10 @@ public class StudyService {
     public int getRecruitingTotal(int categoryNumber){
           return studyMapper.selectRecruitingTotal(categoryNumber);
       }
+
+    // 유저 프로필
+    public StudyVo findUserProfile(Long userNumber){
+        return studyMapper.userProfile(userNumber);
+    }
+
 }
