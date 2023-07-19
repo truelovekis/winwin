@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.winwin.mapper.myPage.UserInfoMapper">
-    <select id="selectProfile" resultType="string">
-
-    </select>
     <select id="selectUserInfo" resultType="userVo">
         select USER_NUMBER, USER_NAME, USER_ID, USER_PASSWORD, USER_EMAIL, USER_NICKNAME, USER_PHONE_NUMBER, USER_WING, GRADE_NAME
         from WW_USER u join GRADE g
@@ -64,5 +61,24 @@
         SET USER_STATUS = 0
         WHERE USER_NUMBER = #{userNumber}
     </update>
+
+    <select id="checkMentor">
+        SELECT COUNT(MENTOR_NUMBER)
+        FROM MENTOR
+        WHERE USER_NUMBER = #{userNumber}
+    </select>
+
+    <select id="selectGradeName">
+        SELECT GRADE_NAME
+        FROM GRADE  G
+            JOIN WW_USER U
+                ON USER_NUMBER = #{userNumber} AND G.GRADE_NUMBER = U.USER_GRADE
+    </select>
+    
+    <select id="selectUserNickname">
+        SELECT USER_NICKNAME
+        FROM WW_USER
+        WHERE USER_NUMBER = #{userNumber}
+    </select>
 
 </mapper>

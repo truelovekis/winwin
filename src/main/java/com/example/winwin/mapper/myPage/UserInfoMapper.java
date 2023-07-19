@@ -27,7 +27,14 @@ public interface UserInfoMapper {
     public void deleteInterestTag(Long userNumber);
 //    관심태그 추가
     public void insertInterestTag(int subNumber, Long userNumber);
+//    멘토 여부
+    public int checkMentor(Long userNumber);
+//    등급명
+    public String selectGradeName(Long userNumber);
+//    닉네임
+    public String selectUserNickname(Long userNumber);
 
 //    회원 탈퇴
     public void deleteUser(Long userNumber);
+
 }

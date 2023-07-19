@@ -136,16 +136,6 @@ public class MyPageController {
     @GetMapping("/activityCs")
     public String activityCs(){ return "myPage/activityCs"; }
 
-//    @GetMapping("/receiveMessage")
-//    public String receiveMessage(){
-//        return "myPage/receiveMessage";
-//    }
-
-//    @GetMapping("/sendMessage")
-//    public String sendMessage(){
-//        return "myPage/sendMessage";
-//    }
-
     @GetMapping("/resume")
     public String resume(HttpServletRequest req, Model model){
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
@@ -189,7 +179,6 @@ public class MyPageController {
                                     @RequestParam("resumeFile") MultipartFile file){
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
         resumeDto.setUserNumber(userNumber);
-        resumeDto.setUserNumber(userNumber);
 
         if( !file.isEmpty() ) {
             try {
@@ -213,7 +202,6 @@ public class MyPageController {
     @PostMapping("/resumePrWrite")
     public RedirectView resumePrWrite(ResumePrDto resumePrDto, HttpServletRequest req){
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
-        resumePrDto.setUserNumber(userNumber);
         resumePrDto.setUserNumber(userNumber);
 
         myPageService.registerPr(resumePrDto);
@@ -244,7 +232,6 @@ public class MyPageController {
         MyPageVo userInfo = myPageService.getUserInfo(userNumber);
         model.addAttribute("userInfo", userInfo);
 
-        UserPfpDto Profile = myPageService.getProfile(userNumber);
         UserPfpDto profile = myPageService.getProfile(userNumber);
         model.addAttribute("profile", profile);
 
@@ -302,24 +289,13 @@ public class MyPageController {
 
     // 받은 메세지 조회
     @GetMapping("/receiveMessage")
-    public String chattingSelect(Model model, HttpServletRequest req){
-//        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
-//        List<ChattingVo> chattingVoList = chattingService.chattingSelect(userNumber);
-//
-//        model.addAttribute("chattingList", chattingVoList);
-//
-//        System.out.println(chattingVoList);
-
+    public String chattingSelect(){
         return "myPage/receiveMessage";
     }
 
     // 보낸 메세지 조회
     @GetMapping("/sendMessage")
-    public String chattingSelectFrom(Model model, HttpServletRequest req){
-//        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
-//        List<ChattingVo> chattingVoList2 = chattingService.chattingSelectFrom(userNumber);
-//
-//        model.addAttribute("chattingList", chattingVoList2);
+    public String chattingSelectFrom(){
         return "myPage/sendMessage";
     }
 

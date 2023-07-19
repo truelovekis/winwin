@@ -206,6 +206,7 @@ hr {
   color: #1b5192;
   font-size: 14px;
   margin-left: 10px;
+  cursor: pointer;
 }
 
 .mentor-grade2 {

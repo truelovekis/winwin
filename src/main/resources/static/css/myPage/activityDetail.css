@@ -211,9 +211,14 @@ hr {
 
 .community-title {
   font-size: 17px;
-  font-weight: bold;
-  /*margin: 15px 0px;*/
+  font-weight: 700;
   margin-top: 10px;
+  color: #000000;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .community-content {
@@ -221,6 +226,11 @@ hr {
   font-weight: lighter;
   color: gray;
   margin: 15px 0px;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .community-sub-box {
