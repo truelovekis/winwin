@@ -15,6 +15,8 @@ import com.example.winwin.vo.infinityScroll.Criteria;
 import com.example.winwin.vo.myPage.ActiveBoardVo;
 import com.example.winwin.vo.myPage.ActiveCommentVo;
 import com.example.winwin.vo.myPage.MyPageVo;
+import com.example.winwin.vo.myPage.SideBarVo;
+import com.example.winwin.vo.user.UserVo;
 import lombok.RequiredArgsConstructor;
 import net.coobird.thumbnailator.Thumbnailator;
 import org.springframework.stereotype.Service;
@@ -44,6 +46,24 @@ public class MyPageService {
 
     @Value("${pfp.dir}")
     private String pfpDir;
+
+//사이드바
+//    멘토/멘티 여부와 등급명과 프로필 사진 가져오기
+    @Transactional(readOnly = true)
+    public SideBarVo getSideBar(Long userNumber){
+        SideBarVo sideBarVo = new SideBarVo();
+
+        //닉네임
+        sideBarVo.setUserNickname(userInfoMapper.selectUserNickname(userNumber));
+        //프사
+        sideBarVo.setUserPfpDto(myPageFile.selectProfile(userNumber));
+        //등급명
+        sideBarVo.setGradeName("Lv. " + userInfoMapper.selectGradeName(userNumber));
+        //멘토멘티여부
+        sideBarVo.setUserPosition(userInfoMapper.checkMentor(userNumber) > 0 ? "멘토" : "멘티");
+
+        return sideBarVo;
+    }
 
 //활동 내역
 //    내가 작성한 글 리스트 보기

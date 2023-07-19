@@ -30,6 +30,7 @@
 
 .profile-wrap {
     display: flex;
+    align-items: center;
     margin: 5px;
 }
 
@@ -46,7 +47,7 @@
     margin-left: 10px;
     margin-top: 3px;
     color: rgb(118, 125, 130);
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .user-email > img {
@@ -90,4 +91,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.img-box{
+    width: 70px;
+    height: 70px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    border-radius: 50px;
+    background-size: cover;
 }

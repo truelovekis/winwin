@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>게시판</title>
-  <link rel="stylesheet" th:href="@{/css/meeting/grademodal.css}" />
+  <link rel="stylesheet" th:href="@{/css/myPage/gradeModal.css}" />
   <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
   <style>
     body {
@@ -20,9 +20,8 @@
   </style>
 </head>
 <body>
-<header class="header" th:replace="fragment/header :: header"></header>
 <!--  모집글 작성하기 모달창 영역  -->
-<article class="modal-wrap">
+<article th:fragment="gradeModal" class="grade-modal-wrap none">
   <div class="grade-box">
     <div class="grade-box-content1">
       <h3>🧚‍♀ 나의 등급 🧚‍♂</h3>
@@ -87,6 +86,6 @@
 </article>
 <footer class="footer" th:replace="fragment/footer :: footer"></footer>
 <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
-<script th:src="@{/js/meeting/grademodal.js}"></script>
+<script th:src="@{/js/myPage/gradeModal.js}"></script>
 </body>
 </html>
