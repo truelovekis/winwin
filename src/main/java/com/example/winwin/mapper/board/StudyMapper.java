@@ -1,6 +1,7 @@
 package com.example.winwin.mapper.board;
 
 import com.example.winwin.dto.board.StudyDto;
+import com.example.winwin.vo.board.CsProfileVo;
 import com.example.winwin.vo.board.StudyVo;
 import com.example.winwin.vo.infinityScroll.Criteria;
 import org.apache.ibatis.annotations.Mapper;
@@ -50,6 +51,10 @@ public interface StudyMapper {
    public List<StudyVo> recruiting(@Param("categoryNumber") int categoryNumber, @Param("criteria") Criteria criteria);
 
    public int selectRecruitingTotal(int categoryNumber);
+
+    //   사진
+    public StudyVo userProfile(Long userNumber);
 }
+
 
 

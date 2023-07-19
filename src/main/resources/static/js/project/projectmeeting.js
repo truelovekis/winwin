@@ -199,7 +199,7 @@ function makeList(list){
                     <br/>
                     <div class="project-content2">
                         <span class="project-sub-text4">
- <a href="${'/project/read?studyNumber=' + obj.studyNumber}" style="color: black;}">${obj.studySummaryContent}</span>
+                        <a href="${'/project/read?studyNumber=' + obj.studyNumber}" style="color: black;}">${obj.studySummaryContent}</span></a>
                     </div>
                     <br/>
                     <div class="project-content3">

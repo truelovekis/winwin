@@ -5,9 +5,14 @@ import com.example.winwin.vo.board.StudyVo;
 import com.example.winwin.vo.infinityScroll.Criteria;
 import com.example.winwin.vo.infinityScroll.PageVo;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +22,9 @@ import java.util.Map;
 @RequestMapping("/likes/*")
 public class projectLikeController {
     private final StudyService studyService;
+
+    @Value("${pfp.dir}")
+    private String pfpDir;
 
     @PostMapping("/{studyNumber}")
     public void likeRegister(@PathVariable("studyNumber") Long studyNumber, HttpServletRequest req) {
@@ -42,5 +50,13 @@ public class projectLikeController {
         scroll.put("StudyVoList", StudyVoList);
 
         return scroll;
+    }
+
+    @GetMapping("/profile/{userNumber}")
+    public byte[] getProfileImage(@PathVariable("userNumber") Long userNumber) throws IOException {
+        StudyVo studyVo = studyService.findUserProfile(userNumber);
+        String path = studyVo.getPfpUuId() + "_" + studyVo.getPfpSystemName();
+
+        return FileCopyUtils.copyToByteArray(new File(pfpDir, path));
     }
 }

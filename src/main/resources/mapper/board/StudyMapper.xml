@@ -187,4 +187,13 @@
         ]]>
     </select>
 
+    <!-- 프로필 사진 -->
+
+    <select id="userProfile" resultType="studyVo">
+        SELECT wu.USER_NUMBER, up.PFP_UPLOAD_PATH , up.PFP_SYSTEM_NAME , up.PFP_UUID
+        FROM WW_USER wu LEFT OUTER JOIN USER_PFP up
+                                        ON wu.USER_NUMBER = up.USER_NUMBER
+                        left outer JOIN GRADE g ON wu.USER_GRADE = g.GRADE_NUMBER
+        WHERE wu.USER_NUMBER = #{userNumber}
+    </select>
 </mapper>
