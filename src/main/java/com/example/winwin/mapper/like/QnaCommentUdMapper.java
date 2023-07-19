@@ -11,4 +11,6 @@ public interface QnaCommentUdMapper {
     public void qnaHateInsert(QnaCommentUdVo qnaCommentUdVo);
     public void qnaHateCancle(QnaCommentUdVo qnaCommentUdVo);
     public int udCnt(QnaCommentUdVo qnaCommentUdVo);
+    //ud 삭제 (Q&A 게시글 삭제에서 사용)
+    public void deleteForQna(Long qnaNumber);
 }

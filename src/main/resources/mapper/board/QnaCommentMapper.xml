@@ -20,7 +20,7 @@
     </select>
 
     <select id="findQnaCommentUdList" resultType="qnaCommentVo">
-        SELECT Q.COMMENT_NUMBER, Q.COMMENT_CONTENT, Q.COMMENT_DATE, Q.QNA_NUMBER, Q.USER_NUMBER,
+        SELECT Q.COMMENT_NUMBER, Q.COMMENT_CONTENT, Q.COMMENT_DATE, Q.QNA_NUMBER, Q.USER_NUMBER, G.GRADE_NAME, U.USER_NICKNAME,
                U.USER_ID, U.USER_BELONG, P.PFP_SYSTEM_NAME, P.PFP_UUID,
                NVL(CCU.UD_STATUS,'x') AS UD_STATUS
                 ,(SELECT COUNT(UD_STATUS) FROM QNA_COMMENT_UD WHERE QNA_COMMENT_UD.COMMENT_NUMBER = Q.COMMENT_NUMBER AND CCU.UD_STATUS = 'u') AS UD_CNT
@@ -30,6 +30,8 @@
                                        ON Q.COMMENT_NUMBER = CCU.COMMENT_NUMBER
                        LEFT OUTER JOIN USER_PFP P
                        ON Q.USER_NUMBER = P.USER_NUMBER
+                       LEFT OUTER JOIN GRADE G
+                       ON U.USER_GRADE = G.GRADE_NUMBER
         ORDER BY Q.COMMENT_NUMBER DESC
     </select>
 

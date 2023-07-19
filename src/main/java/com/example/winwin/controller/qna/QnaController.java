@@ -61,7 +61,13 @@ public class QnaController {
         qnaGoodDto.setUserNumber(userNumber);
         Long likeStatus = qnaGoodService.findQnaLike(qnaGoodDto);
         int qnaLikeCnt = qnaGoodService.likeQnaCnt(qnaGoodDto);
-
+        qnaVo.setQnaNumber(qnaNumber);
+        qnaVo.setUserNumber(userNumber);
+        int commentAuth = 0;
+        if(userNumber != null){
+            commentAuth = qnaService.commentAuth(qnaVo);
+        }
+        model.addAttribute("commentAuth", commentAuth);
         model.addAttribute("qna", qnaVo);
         model.addAttribute("likeStatus", likeStatus);
         model.addAttribute("qnaLikeCnt", qnaLikeCnt);
@@ -134,16 +140,12 @@ public class QnaController {
     @PostMapping("/modify")
     public RedirectView modify(QnaVo qnaVo, QnaDto qnaDto, QsBridgeDto qsBridgeDto, Long qnaNumber, @RequestParam("subList") List<Long> subList, RedirectAttributes redirectAttributes){
             qnaService.removeQs(qnaNumber);
-//            qnaService.removeQna(qnaNumber);
-            qnaService.registerQs(qsBridgeDto);
-//            qnaService.registerQna(qnaDto);
-                qnaService.modifyQna(qnaVo);
+            qnaService.modifyQna(qnaVo);
 
         for(Long subNum : subList){
             qsBridgeDto.setQnaNumber(qnaNumber);
             qsBridgeDto.setSubNumber(subNum);
             qnaService.registerQs(qsBridgeDto);
-//            qnaService.registerQna(qnaDto);
         }
 
         redirectAttributes.addAttribute("qnaNumber", qnaVo.getQnaNumber());

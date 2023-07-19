@@ -35,6 +35,20 @@ public class QnaPageController {
         System.out.println("========================"+qnaVoList+"==========================");
 
 
+        Map<String, Object> qnaMap = new HashMap<>();
+        qnaMap.put("pageVo", pageVo);
+        qnaMap.put("qnaList", qnaVoList);
+
+        return qnaMap;
+    }
+
+    @GetMapping("/list2/{page}")
+    public Map<String, Object> getList(@PathVariable("page") int page, @RequestParam(value = "cateList", required = false) List<Integer> cateList){
+        Criteria criteria = new Criteria();
+        criteria.setPage(page);
+        int total = qnaService.findTotal();
+        PageVo pageVo = new PageVo(criteria, total);
+        List<QnaVo> qnaVoList =qnaService.findQnaList(criteria,cateList);
         if(qnaVoList.size() > 0){
             for (QnaVo qnaVo: qnaVoList) {
 
@@ -56,23 +70,10 @@ public class QnaPageController {
                 }
             }
         }
-        Map<String, Object> qnaMap = new HashMap<>();
-        qnaMap.put("pageVo", pageVo);
-        qnaMap.put("qnaList", qnaVoList);
-
-        return qnaMap;
-    }
-
-    @GetMapping("/list2/{page}")
-    public Map<String, Object> getList(@PathVariable("page") int page, @RequestParam(value = "cateList", required = false) List<Integer> cateList){
-        Criteria criteria = new Criteria();
-        criteria.setPage(page);
-        int total = qnaService.findTotal();
-        PageVo pageVo = new PageVo(criteria, total);
 
 
         Map<String, Object> map = new HashMap<>();
-        map.put("qnaList", qnaService.findQnaList(criteria,cateList));
+        map.put("qnaList", qnaVoList);
         map.put("pageVo", pageVo);
 
         return map;

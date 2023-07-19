@@ -224,7 +224,7 @@ function appendList(map) {
         text += `
       <!-- 게시글 리스트 -->
      
-      <div class="qna-main-content">
+      <div class="qna-main-content" onclick="location.href='/qna/read?qnaNumber=${qnaVoList.qnaNumber}';">
         <div class="tag-list-wrap">
         `
 
@@ -235,8 +235,9 @@ function appendList(map) {
         text += `
             </div>
             <div class="qna-title">
-              <a href="/qna/read?qnaNumber=${qnaVoList.qnaNumber}">
-                <span class="qna-q">Q.</span><h3>${qnaVoList.qnaTitle}</h3></a>
+<!--              <a href="/qna/read?qnaNumber=${qnaVoList.qnaNumber}">-->
+                <span class="qna-q">Q.</span><h3 class="qna-title-h3">${qnaVoList.qnaTitle}</h3>
+<!--                </a>-->
               </div>
             <div class="qna-content">${qnaVoList.qnaContent}</div>
             <div class="user">

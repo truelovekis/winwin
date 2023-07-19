@@ -39,6 +39,7 @@
                     GROUP BY QNA_NUMBER
                 ) S1
                 ON Q.QNA_NUMBER = S1.QNA_NUMBER
+                WHERE Q.QNA_STATUS != '0'
                 ORDER BY Q.QNA_NUMBER DESC
             )
             <![CDATA[
@@ -110,6 +111,16 @@
         SELECT COUNT(*)
         FROM QNA_COMMENT
         WHERE QNA_NUMBER = #{qnaNumber}
+    </select>
+
+    <select id="commentAuth">
+        SELECT COUNT(*) FROM MENTOR MT
+        WHERE USER_NUMBER = #{userNumber}
+          AND SUB_NUMBER IN
+              (
+                  SELECT QB.SUB_NUMBER
+                  FROM QS_BRIDGE QB
+                  WHERE QB.QNA_NUMBER = #{qnaNumber})
     </select>
 
     <!-- qna(로그인시) 프로필 조회 -->
