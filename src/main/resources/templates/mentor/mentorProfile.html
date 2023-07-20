@@ -297,6 +297,8 @@
                                         <img th:if="${mentorList.pfpSystemName == null}" class="img-box" src="/img/profile-basic.png"/>
                                         <img th:unless="${mentorList.pfpSystemName == null}" class="img-box"
                                              th:style="${'background-image: url(/profile/' + mentorList.pfpUuid + '_' + mentorList.pfpSystemName + ')'}"/>
+<!--                                        <img th:unless="${mentorList.pfpSystemName == null}" class="img-box1"-->
+<!--                                             th:src="${'/profile/' + mentorList.pfpUuid + '_' + mentorList.pfpSystemName}"/>-->
                                     </div>
                                     <div class="flex text-wrap" >
                                         <div class="mento-name"> <span class="mento-name2" th:text="${mentorList.userName}"></span> </div>

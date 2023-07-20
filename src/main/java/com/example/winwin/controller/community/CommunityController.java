@@ -49,6 +49,10 @@ public class CommunityController {
             CommunityProfileVo communityProfileVo = communityService.selectUserProfile(userNumber);
             model.addAttribute("communityProfileVo", communityProfileVo);
         }
+         model.addAttribute("categoryTypeStr", categoryTypeStr);
+        System.out.println("------------------------------------");
+        System.out.println(categoryTypeStr);
+        System.out.println("------------------------------------");
         return "community/communityMain";
     }
 

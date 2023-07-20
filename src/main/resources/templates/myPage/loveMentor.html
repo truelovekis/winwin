@@ -10,6 +10,7 @@
     <link rel="stylesheet" th:href="@{/css/myPage/loveMentor.css}" />
     <link rel="stylesheet" th:href="@{/css/fragment/myPageSide.css}"/>
     <link rel="stylesheet" th:href="@{/css/chatting/inputModal.css}" />
+
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
     <style>
       body {
@@ -98,9 +99,11 @@
                     <a href="" class="page-move">
                       <div class="flex">
                         <div class="mento-profile-photo-box">
-                          <img th:if="${mentor.pfpSystemName == null}" class="img-box" src="/img/profile-basic.png"/>
-                          <img th:unless="${mentor.pfpSystemName == null}" class="img-box"
+                          <img th:if="${mentor.pfpSystemName == null}" class="img-box1" src="/img/profile-basic.png"/>
+                          <img th:unless="${mentor.pfpSystemName == null}" class="img-box1"
                                th:style="${'background-image: url(/profile/' + mentor.pfpUuid + '_' + mentor.pfpSystemName + ')'}"/>
+<!--                          <img th:unless="${mentor.pfpSystemName == null}" class="img-box1"-->
+<!--                               th:src="${'/profile/' + mentor.pfpUuid + '_' + mentor.pfpSystemName}"/>-->
                         </div>
 
                         <div class="flex text-wrap">

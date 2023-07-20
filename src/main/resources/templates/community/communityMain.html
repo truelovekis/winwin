@@ -25,31 +25,7 @@
 </head>
 
 <body>
-<!--모달창-->
-<!--모달창-->
-<div class="modal-container none">
-    <form class="form-reset">
-        <div class="modal-wrap">
-            <div th:replace="user/login :: login"></div>
-            <button type="button" class="login-end"><span>로그인</span></button>
-            <div th:replace="user/findId :: findId"></div>
-            <div th:replace="user/findPassword :: findPassword"></div>
-            <div th:replace="user/join :: join"></div>
-            <div th:replace="user/jobDepSelect :: jobDepSelect"></div>
-            <div th:replace="user/agreement :: agreement"></div>
-            <div th:replace="user/goal :: goal"></div>
-            <div th:replace="user/identity :: identity"></div>
-            <div th:replace="user/mentorGoal :: mentorGoal"></div>
-            <div th:replace="user/mentorGoal2 :: mentorGoal2"></div>
-            <div th:replace="user/message :: message"></div>
-            <div th:replace="user/selfCheck :: selfCheck"></div>
-            <div th:replace="user/signUp :: signUp"></div>
-            <button type="button" class="home-btn none"><span>홈으로</span></button>
-            <button type="button" class="modal-next none"><span>다음</span></button>
-        </div>
-    </form>
-</div>
-<!--모달창 끝-->
+
 <header class="header" th:replace="fragment/header :: header"></header>
 <div class="wrap">
     <div class="community">
@@ -58,8 +34,8 @@
             <div class="community-user">
                 <div class="community-pfp-img">
                     <label for="file" class="user-file">
-                        <img  th:if="${communityProfileVo == null}" th:src="@{/img/profile-basic.png}" class="userpfp"/>
-                        <img th:unless="${communityProfileVo == null}" class="img-box"
+                        <img  th:if="${communityProfileVo.pfpUuid == null}" th:src="@{/img/profile-basic.png}" class="userpfp"/>
+                        <img th:unless="${communityProfileVo.pfpUuid == null}" class="img-box"
                             th:style="${'background-image: url(/profile/' + communityProfileVo.pfpUuid + '_' + communityProfileVo.pfpSystemName + ')'}"/>
                     </label>
                     <input type="file" id="file"/>
@@ -74,7 +50,7 @@
                 </div>
             </div>
             <div class="community-pfp-main-btn">
-                <a th:href="@{/community/write}" class="pfp-main-btn-css">질문하기</a>
+                <a th:href="@{/community/write}" class="pfp-main-btn-css">작성하기</a>
             </div>
             <div class="community-pfp-sub-btn">
                 <a th:href="@{/myPage/resume}"><button type="button" class="pfp-sub-btn">이력서</button></a>
@@ -98,7 +74,7 @@
                 </div>
             </div>
             <div class="community-pfp-main-btn">
-                <a class="pfp-main-btn-css pfp-main-btn">질문하기</a>
+                <a class="pfp-main-btn-css pfp-main-btn">작성하기</a>
             </div>
             <div class="community-pfp-sub-btn">
                 <button type="button" class="pfp-sub-btn">이력서</button>
@@ -113,6 +89,11 @@
 
             <!-- 게시글 리스트 -->
             <!-- 시작! -->
+            <span class="big-title" th:if="${categoryTypeStr == '10'}">✍고등학생 게시판✍</span>
+            <span class="big-title" th:if="${categoryTypeStr == '20'}">🧑‍🎓대학생 게시판👩‍🎓</span>
+            <span class="big-title" th:if="${categoryTypeStr == '30'}">💼직장인 게시판💼</span>
+<!--            <span th:if="${communityVoList.categoryName == '직장인'}" class="big-title" th:text="직장인 게시판"></span>-->
+<!--            <span th:if="${communityVoList.categoryName == '대학생'}" class="big-title" th:text="대학생 게시판"></span>-->
             <div class="community-main-box" th:each="communityVoList : ${communityVoList}"
                  th:onclick="'fn_read('+ ${communityVoList.communityNumber} +');'">
                 <div class="community-box">

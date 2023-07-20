@@ -22,4 +22,5 @@ public class QnaCommentVo {
     private String pfpUuid;
     private String userNickname;
     private String gradeName;
+    private String status;
 }

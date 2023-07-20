@@ -42,15 +42,15 @@
                     </label>
                 </div>
                 <div>
-                    <div class="community-user-name" th:text="${userPfp.userName}"></div>
+                    <div class="community-user-name" th:text="${session.userNickname}"></div>
                     <div class="community-pfp-belong" th:text="${userPfp.userPosition}"></div>
-                    <div class="community-pfp-department" th:text="'Lv.' + ${userPfp.gradeName}"></div>
+                    <div class="community-pfp-department" th:text="'Lv. ' + ${userPfp.gradeName}"></div>
                 </div>
 
             </div>
             <div>
                 <div class="community-pfp.main-btn">
-                    <a href="" th:data-userNumber="${session.userNumber}" class="pfp-main-btn">질문하기</a>
+                    <a href="" th:data-userNumber="${session.userNumber}" class="pfp-main-btn">문의하기</a>
                 </div>
             </div>
             <div class="community-pfp-sub-btn">

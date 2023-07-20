@@ -35,11 +35,21 @@ $('.qna-modify-btn').on('click', function (){
 
 //====================================게시글 좋아요 싫어요 버튼 구현 영역
 
+// let $goodBtn = $('.good-btn');
+// $goodBtn.on('click', function(){
+//     $(this).closest('.good-btn').find('.bi-hand-thumbs-up-fill').toggleClass('hide');
+//     $(this).closest('.good-btn').find('.bi-hand-thumbs-up').toggleClass('hide');
+// });
+
 let $goodBtn = $('.good-btn');
 $goodBtn.on('click', function(){
-    $(this).closest('.good-btn').find('.bi-hand-thumbs-up-fill').toggleClass('hide');
-    $(this).closest('.good-btn').find('.bi-hand-thumbs-up').toggleClass('hide');
+    if (loginNumber == null) {
+        $(this).closest('.good-btn').find('.bi-hand-thumbs-up-fill').toggleClass('hide');
+        $(this).closest('.good-btn').find('.bi-hand-thumbs-up').toggleClass('hide');
+    }
 });
+
+
 
 
 // 게시글 좋아요 로직
@@ -50,36 +60,39 @@ console.log('userNumber'+'====================================');
 let qnaNumber = $('.qna-num').val();
 
 $('.good-btn').click(function() {
-    if(likeval == 0) {
-        likeval = 1; // 좋아요 추가
-    } else if(likeval == 1) {
-        likeval = 0; // 좋아요 취소
-    }
-
-    console.log('==================='+likeval+'==================================');
-
-    //  나머지 게시글 좋아요 AJAX 요청 코드
-    $.ajax({
-        type: likeval == 1 ? 'post' : 'delete',
-        url: likeval == 1 ? '/qnaLikes/qnaLikeUp' : '/qnaLikes/qnaLikeDown',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            "qnaNumber" : qnaNumber,
-            "userNumber" : userNumber
-        }),
-        success: function(data) {
-            $('.good-btn').data('num', likeval);
-            console.log($('.good-btn').data('num'));
-            if (likeval == 1) {
-                alert('성공!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-            } else if(likeval == 0){
-                alert('취소 성공');
-            }
-            // $(this).closest('.good-btn').find('.bi-hand-thumbs-up-fill').toggleClass('hide');
-            // $(this).closest('.good-btn').find('.bi-hand-thumbs-up').toggleClass('hide');
+    if(session_check()) {
+        if (likeval == 0) {
+            likeval = 1; // 좋아요 추가
+        } else if (likeval == 1) {
+            likeval = 0; // 좋아요 취소
         }
-    });
+
+        console.log('===================' + likeval + '==================================');
+
+        //  나머지 게시글 좋아요 AJAX 요청 코드
+        $.ajax({
+            type: likeval == 1 ? 'post' : 'delete',
+            url: likeval == 1 ? '/qnaLikes/qnaLikeUp' : '/qnaLikes/qnaLikeDown',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                "qnaNumber": qnaNumber,
+                "userNumber": userNumber
+            }),
+            success: function (data) {
+                $('.good-btn').data('num', likeval);
+                console.log($('.good-btn').data('num'));
+                if (likeval == 1) {
+                    // alert('성공!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+                } else if (likeval == 0) {
+                    // alert('취소 성공');
+                }
+                // $(this).closest('.good-btn').find('.bi-hand-thumbs-up-fill').toggleClass('hide');
+                // $(this).closest('.good-btn').find('.bi-hand-thumbs-up').toggleClass('hide');
+            }
+        });
+    }
 });
+
 
 
 
@@ -98,7 +111,7 @@ $('.commentBtn').on('click', function(){
     // let cnt = $('.').val();
     console.log(content);
     if(content == ''){
-        alert("로그인이 필요한 서비스 입니다.")
+        alert("댓글 내용을 입력해주세요.")
         return;
     }
 
@@ -182,7 +195,10 @@ function showComment(replies) {
             text += `<img class="img-box" style="background-image: url(/profile/${r.pfpUuid}_${r.pfpSystemName})"/>`;
         }
         text += `    
-            <div class="Commento"><p>${r.userId}</p></div>
+            <div class="Commento">
+                <p class="pfp-nickname">${r.userNickname}</p>
+                <span class="pfp-text">Lv.</span><span class="pfp-text">${r.gradeName}</span>
+            </div>
             <div class="dropdown2">
               <button class="dropbtn2">
                 <span class="dropbtn_icon2"> <svg data-v-bd9f2bcc="" data-v-3035bc76="" width="24" height="24" fill="black" xmlns="http://www.w3.org/2000/svg" class="c-Applicatio c-icon" style="fill: rgb(148, 155, 160);"><circle data-v-bd9f2bcc="" cx="12" cy="5.5" r="1.5"></circle><circle data-v-bd9f2bcc="" cx="12" cy="12" r="1.5"></circle><circle data-v-bd9f2bcc="" cx="12" cy="18.5" r="1.5"></circle></svg></span>
@@ -263,7 +279,7 @@ $('#qnaCommentList').on('click', '.btn-modify', function () {
     $content.replaceWith(`
   <div class='modify-box'>
     <textarea class='modify-content'>${$content.text()}</textarea>
-    <button type='button' class='modify-content-btn'>수정완료</button>
+    <button type='button' class='modify-content-btn' style="font-family:NanumSquareLight;">수정완료</button>
   </div>
   `);
     $('.dropdown-content2').addClass('none');
@@ -494,6 +510,7 @@ function commentReportAjax(){
 let $commentGoodBtn = $('.comment-good');
 let $commentBadBtn = $('.comment-bad');
 
+
 // 초기에 선택된 버튼이 없도록 설정
 $commentGoodBtn.removeClass('selected');
 $commentBadBtn.removeClass('selected');
@@ -562,11 +579,12 @@ function fn_comment_good(commentLikeVal, commentNumber) {
             $('.commentAi[data-num="' + commentNumber + '"] .comment-good').data('udstatus', commentLikeVal);
             console.log($('.commentAi[data-num="' + commentNumber + '"] .comment-good').data('udstatus'));
             if (commentLikeVal === 'u') {
-                alert('좋아요 UP 성공!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+                // alert('좋아요 UP 성공!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
             } else if (commentLikeVal === 'x') {
-                alert('좋아요 DOWN 성공!!!!!!!!!!!!!!!!!!!!');
+                // alert('좋아요 DOWN 성공!!!!!!!!!!!!!!!!!!!!');
             }
-        }
+        },
+
     });
 }
 
@@ -582,9 +600,9 @@ function fn_comment_bad(commentBadVal, commentNumber) {
             $('.commentAi[data-num="' + commentNumber + '"] .comment-bad').data('udstatus', commentBadVal);
             console.log($('.commentAi[data-num="' + commentNumber + '"] .comment-bad').data('udstatus'));
             if (commentBadVal === 'd') {
-                alert('싫어요 UP 성공!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+                // alert('싫어요 UP 성공!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
             } else if (commentBadVal === 'x') {
-                alert('싫어요 DOWN 성공!!!!!!!!!!!!!!!!!!!!');
+                // alert('싫어요 DOWN 성공!!!!!!!!!!!!!!!!!!!!');
             }
         }
     });
@@ -592,7 +610,7 @@ function fn_comment_bad(commentBadVal, commentNumber) {
 
 function session_check(){
     if(loginNumber == null){
-        alert("로그인 후 이욯가능합니다.");
+        alert("로그인 후 이용가능합니다.");
         return false;
     }
     return true;

@@ -169,6 +169,7 @@ hr {
 
 .profile-box {
   display: flex;
+  align-items: center;
 }
 
 .profile-box > img {
@@ -184,7 +185,6 @@ hr {
 
 .text-box {
   margin-left: 20px;
-  margin-top: 20px;
   font-size: 16px;
 }
 
@@ -230,11 +230,13 @@ hr {
 .write > span,
 .comment > span {
   display: block;
+  text-align: center;
 }
 
 .number {
   font-size: 16px;
   text-align: center;
+  cursor: pointer;
 }
 
 .gray {

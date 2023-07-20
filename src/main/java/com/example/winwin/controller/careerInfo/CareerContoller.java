@@ -4,6 +4,7 @@ import com.example.winwin.dto.careerInfo.CareerInfoDto;
 import com.example.winwin.dto.careerInfo.CareerInfoLikeDto;
 import com.example.winwin.dto.mentor.CareerInfoVo;
 import com.example.winwin.dto.mentor.CategoryVo;
+import com.example.winwin.service.career.CareerInfoCommentService;
 import com.example.winwin.service.career.CareerInfoLikeService;
 import com.example.winwin.service.career.CareerInfoService;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ public class CareerContoller {
 
     private final CareerInfoService careerInfoService;
     private final CareerInfoLikeService careerInfoLikeService;
+
 
 //    보류
 //    세션으로 userNumber가져와서 페이지 진입할 때, 태그에 대한 리스트 뿌려줘
