@@ -91,8 +91,8 @@
               <div class="mentee-profile">
                 <input type="hidden" class="mentee-number" th:data-num="${mentee.userNumber}" th:value="${mentee.userNumber}"/>
                 <div class="mentee-img">
-                    <img th:if="${mentee.pfpSystemName == null}" class="img-box" src="/img/profile-basic.png"/>
-                    <img th:unless="${mentee.pfpSystemName == null}" class="img-box"
+                    <img th:if="${mentee.pfpSystemName == null}" class="img-box1" src="/img/profile-basic.png"/>
+                    <img th:unless="${mentee.pfpSystemName == null}" class="img-box1"
                          th:style="${'background-image: url(/profile/' + mentee.pfpUuid + '_' + mentee.pfpSystemName + ')'}"/>
                 </div>
                 <span class="mentee-name" th:text="${mentee.userName}"></span>
