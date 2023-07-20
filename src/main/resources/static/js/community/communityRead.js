@@ -474,6 +474,8 @@ $('.good').click(function() {
             likeval = 0; // 좋아요 취소
         }
 
+
+
         console.log('===================' + likeval + '==================================');
 
         //  나머지 게시글 좋아요 AJAX 요청 코드
@@ -489,9 +491,9 @@ $('.good').click(function() {
                 $('.good').data('num', likeval);
                 console.log($('.good').data('num'));
                 if (likeval == 1) {
-                    alert('성공!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+                    // alert('성공!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
                 } else if (likeval == 0) {
-                    alert('취소 성공');
+                    // alert('취소 성공');
                 }
                 // $(this).closest('.good').find('.bi-hand-thumbs-up-fill').toggleClass('hide');
                 // $(this).closest('.good').find('.bi-hand-thumbs-up').toggleClass('hide');
@@ -632,9 +634,9 @@ function fn_comment_bad(commentBadVal, commentNumber) {
             $('.commentAi[data-num="' + commentNumber + '"] .comment-bad').data('udstatus', commentBadVal);
             console.log($('.commentAi[data-num="' + commentNumber + '"] .comment-bad').data('udstatus'));
             if (commentBadVal === 'd') {
-                alert('싫어요 UP 성공!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+                // alert('싫어요 UP 성공!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
             } else if (commentBadVal === 'x') {
-                alert('싫어요 DOWN 성공!!!!!!!!!!!!!!!!!!!!');
+                // alert('싫어요 DOWN 성공!!!!!!!!!!!!!!!!!!!!');
             }
         }
     });
