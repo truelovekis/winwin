@@ -47,10 +47,13 @@
             <div class="modify-content">
               <div class="top-box">
                 <div class="profile-box">
+                  <label for="img-box" class="profile-label">
                     <div th:if="${profile == null}" class="img-box" style="background-image: url(https://via.placeholder.com/70x70)"></div>
                     <div th:unless="${profile == null}" class="img-box"
                          th:style="${'background-image: url(/profile/' + profile.pfpUuid + '_' + profile.pfpSystemName + ')'}">
                     </div>
+                  </label>
+                  <input class="profile-file" type="file" id="img-box" name="pfpFile">
                   <div class="text-box">
                     <span th:if="${userInfo.mentorTag.size == 0}">Mentee</span>
                     <span th:unless="${userInfo.mentorTag.size == 0}">
@@ -59,7 +62,7 @@
                       <span th:text="${userInfo.mentorTag[0]}"></span></span>
                     <div class="name">
                       <span id="user-name" th:text="${userInfo.userVo.userName}">이름</span>
-                      <span class="mentor-grade">Lv.<span class="mentor-grade2" th:text="' '+${userInfo.userVo.gradeName}"/></span>
+                      <span class="mentor-grade" th:data-num="${userInfo.userVo.userWing}">Lv.<span class="mentor-grade2" th:text="' '+${userInfo.userVo.gradeName}"/></span>
                     </div>
                   </div>
                 </div>

@@ -180,6 +180,8 @@ public class MyPageController {
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
         resumeDto.setUserNumber(userNumber);
 
+        myPageService.registerResume(resumeDto);
+
         if( !file.isEmpty() ) {
             try {
                 ResumeFileDto resumeFileDto = myPageService.saveResumeFile(file);

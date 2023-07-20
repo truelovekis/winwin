@@ -26,6 +26,7 @@
   <body>
     <header class="header"  th:replace="fragment/header :: header"></header>
     <main>
+      <input type="hidden" class="login-interceptor" th:value="${session.showLoginModal}"/>
       <input type="hidden" th:value="${session.mentorNumber}"/>
       <input type="hidden" th:value="${session.userNumber}"/>
       <input type="hidden" th:value="${session.userStatus}" class="userStatus"/>
@@ -344,16 +345,17 @@
 <!--        </div>-->
 <!--      </div>-->
     </footer>
+    <script
+            src="https://code.jquery.com/jquery-3.6.3.js"
+            integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+            crossorigin="anonymous"
+    ></script>
+    <script th:src="@{/js/fragment/header.js}" ></script>
+    <!--  모달 js-->
+    <script th:src="@{/js/user/loginModal.js}"></script>
+    <script th:src="@{/js/main/main.js}"></script>
   </body>
-  <script
-    src="https://code.jquery.com/jquery-3.6.3.js"
-    integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
-    crossorigin="anonymous"
-  ></script>
-  <script th:src="@{/js/fragment/header.js}" ></script>
-<!--  모달 js-->
-  <script th:src="@{/js/user/loginModal.js}"></script>
-  <script th:src="@{/js/main/main.js}"></script>
+
 
 
 </html>
