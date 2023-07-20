@@ -78,9 +78,11 @@
                     <a href="" class="page-move">
                       <div class="flex">
                         <div class="mento-profile-photo-box">
-                          <img th:if="${mentor.pfpSystemName == null}" class="img-box" src="/img/profile-basic.png"/>
-                          <img th:unless="${mentor.pfpSystemName == null}" class="img-box"
+                          <img th:if="${mentor.pfpSystemName == null}" class="img-box1" src="/img/profile-basic.png"/>
+                          <img th:unless="${mentor.pfpSystemName == null}" class="img-box1"
                                th:style="${'background-image: url(/profile/' + mentor.pfpUuid + '_' + mentor.pfpSystemName + ')'}"/>
+<!--                          <img th:unless="${mentor.pfpSystemName == null}" class="img-box1"-->
+<!--                               th:src="${'/profile/' + mentor.pfpUuid + '_' + mentor.pfpSystemName}"/>-->
                         </div>
                         <div class="flex text-wrap">
                           <div class="mento-name"><span th:text="${mentor.userName}"/></div>

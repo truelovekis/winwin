@@ -15,7 +15,7 @@
 
     <update id="diaryUpdate">
         UPDATE DIARY
-        SET DIARY_TITLE=#{diaryTitle}, DIARY_CONTENT=#{diaryContent}, DIARY_DATE = SYSDATE
+        SET DIARY_TITLE=#{diaryTitle}, DIARY_CONTENT=#{diaryContent}
         WHERE DIARY_NUMBER= #{diaryNumber}
     </update>
 

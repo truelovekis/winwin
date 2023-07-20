@@ -95,7 +95,7 @@ $('.good-btn').click(function() {
 
 $('.commentBtn').on('click', function(){
     let content = $('.comment1').val().trim();
-    let cnt = $('.').val();
+    // let cnt = $('.').val();
     console.log(content);
     if(content == ''){
         alert("로그인이 필요한 서비스 입니다.")
