@@ -134,7 +134,10 @@ function showComment(replies) {
             text += `<img class="img-box" style="background-image: url(/profile/${r.pfpUuid}_${r.pfpSystemName})"/>`;
         }
         text += ` 
-                        <div class="Commento"><p class="userInfo">${r.userId}</p></div>
+                        <div class="Commento">
+                            <p class="userInfo">${r.userNickname}</p>
+                            <span class="pfp-text">Lv.</span><span class="pfp-text">${r.gradeName}</span>
+                        </div>
                         <div class="dropdown2">
                             <button class="dropbtn2">
                                 <span class="dropbtn_icon2"> <svg data-v-bd9f2bcc="" data-v-3035bc76="" width="24" height="24" fill="black" xmlns="http://www.w3.org/2000/svg" class="c-Applicatio c-icon" style="fill: rgb(148, 155, 160);"><circle data-v-bd9f2bcc="" cx="12" cy="5.5" r="1.5"></circle><circle data-v-bd9f2bcc="" cx="12" cy="12" r="1.5"></circle><circle data-v-bd9f2bcc="" cx="12" cy="18.5" r="1.5"></circle></svg></span>
@@ -155,7 +158,7 @@ function showComment(replies) {
                         text +=`
                         </div>
                     </div>
-                    <div class="description"><p>${r.userBelong}</p></div>
+                    <div class="description"></div>
                     <div class="Aicontent">${r.commentContent}</div>`;
                         if(r.userNumber != loginNumber) {
                             text += `
@@ -457,14 +460,15 @@ function commentReportAjax(){
 //=================
 // 게시글 좋아요 영역
 // ================
+
+let likeval = $('.good').data('num'); // 좋아요 상태
+// let userNumber = $('#user-num').val();
+
 let $goodBtn = $('.good');
 $goodBtn.on('click', function(){
     $(this).closest('.good').find('.bi-hand-thumbs-up-fill').toggleClass('hide');
     $(this).closest('.good').find('.bi-hand-thumbs-up').toggleClass('hide');
 });
-
-let likeval = $('.good').data('num'); // 좋아요 상태
-// let userNumber = $('#user-num').val();
 
 $('.good').click(function() {
     if(session_check()) {
@@ -495,8 +499,9 @@ $('.good').click(function() {
                 } else if (likeval == 0) {
                     // alert('취소 성공');
                 }
-                // $(this).closest('.good').find('.bi-hand-thumbs-up-fill').toggleClass('hide');
-                // $(this).closest('.good').find('.bi-hand-thumbs-up').toggleClass('hide');
+                $(this).closest('.good').find('.bi-hand-thumbs-up-fill').toggleClass('hide');
+                $(this).closest('.good').find('.bi-hand-thumbs-up').toggleClass('hide');
+
             }
         });
     }
@@ -552,17 +557,19 @@ $commentBadBtn.removeClass('selected');
 
 $commentGoodBtn.on('click', function(){
     if(session_check()) {
+
         const $button = $(this);
         const isAlreadySelected = $button.hasClass('selected');
         const $comment = $button.closest('.commentAi');
         const commentNumber = $comment.data('num');
-
+        let obj = $button.closest(".commentAi").find(".likeCnt>p");
         if (isAlreadySelected) {
             // 이미 선택된 버튼을 클릭한 경우, 선택 해제
             $button.removeClass('selected');
             $button.find('.bi-hand-thumbs-up-fill').addClass('hide');
             $button.find('.bi-hand-thumbs-up').removeClass('hide');
             fn_comment_good('x', commentNumber); // 좋아요 취소
+            obj.text(obj.text()*1-1);
         } else {
             $commentGoodBtn.removeClass('selected');
             $commentBadBtn.removeClass('selected');
@@ -572,6 +579,7 @@ $commentGoodBtn.on('click', function(){
             $button.closest('.comment-good').siblings('.comment-bad').find('.bi-hand-thumbs-down-fill').addClass('hide');
             $button.closest('.comment-good').siblings('.comment-bad').find('.bi-hand-thumbs-down').removeClass('hide');
             fn_comment_good('u', commentNumber); // 좋아요 추가
+            obj.text(obj.text()*1+1);
         }
     }
 });
@@ -613,11 +621,11 @@ function fn_comment_good(commentLikeVal, commentNumber) {
         success: function(data) {
             $('.commentAi[data-num="' + commentNumber + '"] .comment-good').data('udstatus', commentLikeVal);
             console.log($('.commentAi[data-num="' + commentNumber + '"] .comment-good').data('udstatus'));
-            if (commentLikeVal === 'u') {
-                alert('좋아요 UP 성공!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-            } else if (commentLikeVal === 'x') {
-                alert('좋아요 DOWN 성공!!!!!!!!!!!!!!!!!!!!');
-            }
+            // if (commentLikeVal === 'u') {
+            //     alert('좋아요 UP 성공!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+            // } else if (commentLikeVal === 'x') {
+            //     alert('좋아요 DOWN 성공!!!!!!!!!!!!!!!!!!!!');
+            // }
         }
     });
 }
@@ -633,11 +641,19 @@ function fn_comment_bad(commentBadVal, commentNumber) {
         success: function(data) {
             $('.commentAi[data-num="' + commentNumber + '"] .comment-bad').data('udstatus', commentBadVal);
             console.log($('.commentAi[data-num="' + commentNumber + '"] .comment-bad').data('udstatus'));
+<<<<<<< HEAD
             if (commentBadVal === 'd') {
                 // alert('싫어요 UP 성공!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
             } else if (commentBadVal === 'x') {
                 // alert('싫어요 DOWN 성공!!!!!!!!!!!!!!!!!!!!');
             }
+=======
+            // if (commentBadVal === 'd') {
+            //     alert('싫어요 UP 성공!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+            // } else if (commentBadVal === 'x') {
+            //     alert('싫어요 DOWN 성공!!!!!!!!!!!!!!!!!!!!');
+            // }
+>>>>>>> work/work10
         }
     });
 }

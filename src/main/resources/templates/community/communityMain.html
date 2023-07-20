@@ -34,8 +34,8 @@
             <div class="community-user">
                 <div class="community-pfp-img">
                     <label for="file" class="user-file">
-                        <img  th:if="${communityProfileVo == null}" th:src="@{/img/profile-basic.png}" class="userpfp"/>
-                        <img th:unless="${communityProfileVo == null}" class="img-box"
+                        <img  th:if="${communityProfileVo.pfpUuid == null}" th:src="@{/img/profile-basic.png}" class="userpfp"/>
+                        <img th:unless="${communityProfileVo.pfpUuid == null}" class="img-box"
                             th:style="${'background-image: url(/profile/' + communityProfileVo.pfpUuid + '_' + communityProfileVo.pfpSystemName + ')'}"/>
                     </label>
                     <input type="file" id="file"/>
@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="community-pfp-main-btn">
-                <a th:href="@{/community/write}" class="pfp-main-btn-css">질문하기</a>
+                <a th:href="@{/community/write}" class="pfp-main-btn-css">작성하기</a>
             </div>
             <div class="community-pfp-sub-btn">
                 <a th:href="@{/myPage/resume}"><button type="button" class="pfp-sub-btn">이력서</button></a>
@@ -74,7 +74,7 @@
                 </div>
             </div>
             <div class="community-pfp-main-btn">
-                <a class="pfp-main-btn-css pfp-main-btn">질문하기</a>
+                <a class="pfp-main-btn-css pfp-main-btn">작성하기</a>
             </div>
             <div class="community-pfp-sub-btn">
                 <button type="button" class="pfp-sub-btn">이력서</button>
