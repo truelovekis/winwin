@@ -87,6 +87,8 @@ $('.modal-next').on('click', function(){
 
     if($current.hasClass('self-box')){
 
+        console.log($('.radioInput').val());
+
         if($('#user-name').val() == '') {
             return;
         }else if(!namePattern.test($('#user-name').val())){
@@ -369,8 +371,9 @@ $('.home-btn').on('click', function (){
     hiddenField = document.createElement("input");
     hiddenField.setAttribute("type", "hidden");
     hiddenField.setAttribute("name", "userIdentity");
-    hiddenField.setAttribute("value", $('.radioInput').val());
+    hiddenField.setAttribute("value", $('.radioInput:checked').val());
     form.appendChild(hiddenField);
+
 
     hiddenField = document.createElement("input");
     hiddenField.setAttribute("type", "hidden");

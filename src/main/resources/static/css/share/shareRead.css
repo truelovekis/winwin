@@ -79,7 +79,7 @@ footer{
 .question{
     /*display: flex;*/
     /*margin-top: -20px;*/
-    margin-top: 15px;
+    margin: 15px 0px;
 }
 
 .Q{
@@ -580,10 +580,12 @@ footer{
 
 .content-img{
     display: flex;
-    justify-content: space-evenly;
+    margin-top: 30px;
 }
 
 .content-img > img{
     border-radius: 10px;
-
+    width: 220px;
+    height: 220px;
+    margin-right: 20px;
 }
