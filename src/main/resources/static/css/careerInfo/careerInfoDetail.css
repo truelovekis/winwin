@@ -420,14 +420,6 @@
     width: 100px;
 }
 
-.modify-btn:hover {
-    background-color: #2a6ab5;
-}
-
-.remove-btn:hover {
-    background-color: #2a6ab5;
-}
-
 .modify-btn{
     border-radius: 6px;
     font-weight: 600;
@@ -444,6 +436,10 @@
     margin-right: 10px;
     cursor: pointer;
     box-sizing: border-box;
+}
+
+.modify-btn:hover {
+    background-color: #2a6ab5;
 }
 
 .remove-btn{
@@ -463,6 +459,10 @@
     margin-right: 10px;
     cursor: pointer;
     box-sizing: border-box;
+}
+
+.remove-btn:hover {
+    background-color: #2a6ab5;
 }
 
 
