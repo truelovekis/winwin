@@ -332,6 +332,10 @@ p>span{
     margin: auto;
     border-radius: 3px;
     height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .profil-box img{
@@ -341,7 +345,13 @@ p>span{
 
 .name{
     font-weight: bold;
-    margin: -10px 100px;
+    white-space: nowrap;
+}
+.nickname-box{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    flex-direction: column;
 }
 
 .department{
