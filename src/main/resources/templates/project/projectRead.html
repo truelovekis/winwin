@@ -210,8 +210,9 @@
                     <div class="profil-box">
 <!--                        <img th:src="@{/img/profile-basic.png}" width="50px" height="50px">-->
                         <img th:src="${'/likes/profile/' + studyVo.userNumber}" width="50px" height="50px" onerror="this.src='/img/profile-basic.png'">
+                        <div class="nickname-box">
                         <div class="name" th:text="${studyVo.userNickname}"></div>
-
+                        </div>
                     </div> <!-- profil-box -->
 
                     <div class="profil-box2">
