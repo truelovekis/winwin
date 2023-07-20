@@ -5,6 +5,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
@@ -13,9 +14,10 @@ public class LoginInterceptor implements HandlerInterceptor {
         Object userNumber = request.getSession().getAttribute("userNumber");
 
         if(userNumber == null){
-            request.setAttribute("checkLogin", false);
+            HttpSession session = request.getSession();
+            session.setAttribute("showLoginModal", true);
+            session.setMaxInactiveInterval(1);
             response.sendRedirect("/main/main");
-//            이전 페이지로 이동 어캐 함?
             return false;
         }
 

@@ -13,16 +13,34 @@ $(".header-li").hover(
     }
 );
 
+
+
+
+
+//마이페이지 로그인 실패 시 모달 창 띄워주기
+function showLoginModal(){
+    console.log('showLoginModal');
+    console.log($('.login-interceptor').val());
+    if($('.login-interceptor').val()){
+        console.log("come on")
+        $(".login-move").trigger('click');
+    }
+};
+
 // 모달창
 $(function () {
-  $(".login-move").click(function () {
+
+$(".login-move").click(function () {
     $(".modal-container").fadeIn();
     // $('.modal-form')[0].reset();
-  });
+});
+
+showLoginModal();
 
   // $(".modal-container").fadeOut();
   //   $(this).reset();
-  //   $('.form-reset')[0].reset();
+  //   $('.form-reset')[0].reset();\
+
 });
 
 // 모달창이 나타났을 때 스크롤 제거
