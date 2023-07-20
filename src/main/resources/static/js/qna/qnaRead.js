@@ -111,7 +111,7 @@ $('.commentBtn').on('click', function(){
     // let cnt = $('.').val();
     console.log(content);
     if(content == ''){
-        alert("로그인이 필요한 서비스 입니다.")
+        alert("댓글 내용을 입력해주세요.")
         return;
     }
 
@@ -195,7 +195,10 @@ function showComment(replies) {
             text += `<img class="img-box" style="background-image: url(/profile/${r.pfpUuid}_${r.pfpSystemName})"/>`;
         }
         text += `    
-            <div class="Commento"><p>${r.userId}</p></div>
+            <div class="Commento">
+                <p class="pfp-nickname">${r.userNickname}</p>
+                <span class="pfp-text">Lv.</span><span class="pfp-text">${r.gradeName}</span>
+            </div>
             <div class="dropdown2">
               <button class="dropbtn2">
                 <span class="dropbtn_icon2"> <svg data-v-bd9f2bcc="" data-v-3035bc76="" width="24" height="24" fill="black" xmlns="http://www.w3.org/2000/svg" class="c-Applicatio c-icon" style="fill: rgb(148, 155, 160);"><circle data-v-bd9f2bcc="" cx="12" cy="5.5" r="1.5"></circle><circle data-v-bd9f2bcc="" cx="12" cy="12" r="1.5"></circle><circle data-v-bd9f2bcc="" cx="12" cy="18.5" r="1.5"></circle></svg></span>
