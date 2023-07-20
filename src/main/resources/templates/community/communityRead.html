@@ -99,7 +99,7 @@
                          th:style="${'background-image: url(/profile/' + communityProfileVo.pfpUuid + '_' + communityProfileVo.pfpSystemName + ')'}"/>
                     <div class="id">
                         <p th:text="${community.userNickname}"></p>
-                        Lv.<span class="gradeName-text" th:text="${communityProfileVo.gradeName}"></span>
+                        <span class="gradeName-text">Lv.</span><span class="gradeName-text" th:text="${communityProfileVo.gradeName}"></span>
                     </div>
                     <div class="dropdown">
                         <button class="dropbtn">
@@ -127,7 +127,7 @@
                 <div class="content"><p th:text="${community.communityContent}"></p></div>
                 <div class="img-box file-box"></div>
 <!--               게시판 추천, 비추천 작업할 부분                  -->
-                <div class="answer">
+                <div class="answer-board">
                     <div class="answer-box"></div>
                     <div class="answer-box-comment"><p>게시글이 도움이 되었나요?</p></div>
                     <div class="goodorbad">
@@ -214,7 +214,7 @@
                                      th:style="${'background-image: url(/profile/' + comment.pfpUuid + '_' + comment.pfpSystemName + ')'}"/>
                                 <div class="Commento">
                                     <p class="userInfo" th:text="${comment.userNickname}"></p>
-                                    Lv.<span class="pfp-text" th:text="${comment.gradeName}"></span>
+                                    <span class="pfp-text">Lv.</span><span class="pfp-text" th:text="${comment.gradeName}"></span>
                                 </div>
                                 <div class="dropdown2">
                                     <button class="dropbtn2">

@@ -51,6 +51,7 @@ footer{
 .id>p{
     font-size: 16px;
     font-weight: 600;
+    margin-bottom: 3px;
 }
 
 .first{
@@ -178,7 +179,7 @@ footer{
 /* svg 아이콘 ================================ */
 
 .date{
-    margin-left: 460px;
+    margin-left: 500px;
     margin-top: 27px;
     font-size: 13px;
     color: rgb(148, 155, 160);
@@ -227,6 +228,8 @@ footer{
     resize: none;
     font-size: 15px;
     padding: 7px;
+    padding: 7px 75px 7px 7px;
+    overflow: hidden;
 }
 
 
@@ -329,7 +332,7 @@ footer{
 }
 
 .Aicontent{
-    margin: 40px 25px;
+    /*margin: 40px 25px;*/
     font-size: 15px;
     line-height: 20px;
     margin-left: 30px;
@@ -370,7 +373,7 @@ footer{
 
 .icon2{
     display: flex;
-    margin: 40px 0;
+    margin: 25px 0;
 }
 
 .comment-goodorbad{
@@ -390,7 +393,7 @@ footer{
     width: 200px;
 }
 
-.good-btn{
+.goodorbad>.good-btn{
     border: none;
     color: #1b5192;
     background-color: #e8f1fc;
@@ -490,6 +493,7 @@ footer{
     text-align: left;
     cursor : pointer;
     font-size : 12px;
+    margin-left: -50px;
 }
 .dropdown-content{
     display : none;
@@ -501,6 +505,7 @@ footer{
     font-weight: bold;
     border-radius: 3.5px;
     border-bottom: 1px solid #ddd;
+    margin-left: -50px;
 }
 
 .dropdown-content a{
@@ -706,6 +711,11 @@ input[type="checkbox"] {
 /*프로필 등급 css*/
 .gradeName-text{
     font-size: 13px;
+    color: #5e5e5e;
+}
+
+pfp-text{
+    color: #5e5e5e;
 }
 
 /*댓글 수정 처리*/
@@ -761,9 +771,11 @@ input[type="checkbox"] {
 /* 프로필 등급 폰트수정*/
 .pfp-text{
     font-size: 13px;
+    color: #5e5e5e;
 }
 
 .pfp-nickname{
     font-size: 16px;
     font-weight: 600;
+    margin-bottom: 3px;
 }
