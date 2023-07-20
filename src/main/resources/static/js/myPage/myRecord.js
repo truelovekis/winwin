@@ -28,7 +28,11 @@ let $diaryTitle = $('.diary-title');
 
 $('.diary-list').on('click', '.diary-title' ,function(){
     $(this).next('.my-diary').find('.diary-content').show();
-    $(this).parents('.diary-main').find('.diary-title').hide();
+    console.log("보여진다")
+    $(this).closest('.diary-main').find('.diary-title').hide();
+    console.log("숨겨진다")
+    $(this).closest('.diary-main').find('.my-diary').show();
+    console.log("보여져라")
 });
 
 $closeBtn.on('click', function(){
@@ -153,7 +157,7 @@ $('.diary-sub').on('click','.editBtn' , function (){
     text += `
             
             <div class="mypageDiary-title"><input type="text" class="title" placeholder="" style="font-family: NanumSquareAcr;" value="${$title.text()}"></div>
-            <textarea class="summernote" name="diaryContent" style="font-family: NanumSquareAcr;">${$content.text()}</textarea>
+            <textarea class="summernote" name="diaryContent" style="font-family: NanumSquareAcr;">${$content.html()}</textarea>
             <div class="btn-box">
                 <div class="cancle-btn"><button type="button" class="edit-cancle" style="font-family: NanumSquareAcr;">취소</button></div>
                 <div class="submit-btn"><button type="submit" class="edit-submit" style="font-family: NanumSquareAcr;">수정 완료</button></div>

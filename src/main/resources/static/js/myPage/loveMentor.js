@@ -143,8 +143,8 @@ $('.message-button').on("click",function () {
 function mentorProfile(mentor){
   let text = '';
   text += `
-    ${mentor.pfpSystemName == null ? '<img class="img-box" src="/img/profile-basic.png"/>' :
-      '<img class="img-box" src=/profile/' + mentor.pfpUuid + '_' + mentor.pfpSystemName + '>' }
+    ${mentor.pfpSystemName == null ? '<img class="img-box1" src="/img/profile-basic.png"/>' :
+      '<img class="img-box1" src=/profile/' + mentor.pfpUuid + '_' + mentor.pfpSystemName + '>' }
     `;
   $('.mento-profile-photo-box2').html(text);
 }
