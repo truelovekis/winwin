@@ -101,7 +101,7 @@
                th:style="${'background-image: url(/profile/' + qnaProfile.pfpUuid + '_' + qnaProfile.pfpSystemName + ')'}"/>
           <div class="id">
             <p th:text="${qna.userNickname}"></p>
-            Lv.<span class="gradeName-text" th:text="${qnaProfile.gradeName}"></span>
+            <span class="gradeName-text">Lv.</span><span class="gradeName-text" th:text="${qnaProfile.gradeName}"></span>
           </div>
           <div class="dropdown">
             <input type="hidden" class="user-num" name="userNumber" th:value="${qna.userNumber}"/>
@@ -222,7 +222,7 @@
                  th:style="${'background-image: url(/profile/' + qnaComment.pfpUuid + '_' + qnaComment.pfpSystemName + ')'}"/>
             <div class="Commento">
               <p class="pfp-nickname" th:text="${qnaComment.userNickname}"></p>
-              Lv.<span class="pfp-text" th:text="${qnaComment.gradeName}"></span>
+              <span class="pfp-text">Lv.</span><span class="pfp-text" th:text="${qnaComment.gradeName}"></span>
             </div>
             <div class="dropdown2">
               <button class="dropbtn2">
