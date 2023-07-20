@@ -290,3 +290,14 @@ h2{
     color: #9d9d9d;
 }
 
+#header-sun{
+    margin-top: 0;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
