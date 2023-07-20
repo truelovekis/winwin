@@ -50,12 +50,12 @@
                                                                                     class="close">✖️</button></span>
             </div>
             <div class="write-title content-a">
-                <input type="text" placeholder="제목을 입력하세요" name="careerInfoTitle" id="count_memo" maxlength="20" style="font-family:NanumSquareLight;"/>
-                <div class="count"><span id="cnt">(0 / 25)</span></div>
+                <input type="text" placeholder="제목을 입력하세요" name="careerInfoTitle" id="count_memo" required maxlength="20" style="font-family:NanumSquareLight;"/>
+                <div class="count"><span id="cnt">(0 / 20)</span></div>
             </div>
             <div class="write-content content-a">
                 <div style="width: 100%; margin: auto;">
-                    <textarea id="summernote" name="careerInfoContent" th:text="${career.careerInfoContent}"></textarea>
+                    <textarea id="summernote" name="careerInfoContent" required th:text="${career.careerInfoContent}"></textarea>
                 </div>
                 <button type="submit" class="write-btn">작성하기</button>
             </div>

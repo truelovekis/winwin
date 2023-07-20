@@ -232,10 +232,64 @@ function careerInfoLike(careerInfoNumber){
     });
 }
 
-// 수정 페이지 이동
-function fn_modify(careerInfoNumber){
-    if(confirm("정말 수정하시겠습니까?")) {
-        location.href = "/career/modify?careerInfoNumber="+careerInfoNumber;
-    }
-}
 
+// 수정 페이지 이동
+$('.dropdown-content').on('click', '.detail-modify-btn', function (){
+    let careerInfoNumber = $('.careerinfo-num').val();
+    alert("정말 수정하시겠습니까?");
+    location.href = "/career/modify?careerInfoNumber=" + careerInfoNumber;
+})
+
+// 진로정보 글 삭제하기
+$('.dropdown-content').on('click', '.detail-remove-btn', function (){
+    let careerInfoNumber = $('.careerinfo-num').val();
+    alert("정말 삭제하시겠습니까?");
+    location.href = "/career/remove?careerInfoNumber=" + careerInfoNumber;
+})
+
+// 진로정보 신고하기 페이지 이동
+let reportModal = document.querySelector(".reportModal");
+let reportBtn = document.querySelector(".detail-police-btn");
+
+reportBtn.addEventListener("click", function (){
+    reportModal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+});
+
+reportModal.addEventListener("click", function (e){
+    if ($(e.target).hasClass("reportModal")){
+        reportModal.style.display = "none";
+        document.body.style.overflow = "unset";
+    }
+});
+
+// 진로정보 신고하기 버튼 클릭 시 컨펌 및 신고처리
+let $reportButton = $('.report-btn');
+$reportButton.on("click", function () {
+    if (loginNumber) {
+        console.log($('.report-list input:checked').val());
+        let result = confirm("정말 신고하시겠습니까?");
+        if (result) {
+            reportAjax();
+        }
+    } else {
+        alert("로그인 후 이용해주세요.");
+    }
+});
+
+// 진로정보 글 신고하기 처리
+function reportAjax(){
+    let careerInfoNumber = $('.careerinfo-num').val();
+    let policeCategory = $('.report-list input:checked').val();
+
+    $.ajax({
+       url : '/police/careerInfo',
+       type : 'post',
+       data : JSON.stringify({boardNumber : careerInfoNumber, policeCategory : policeCategory}),
+       contentType : 'applicatrion/json; charset=utf-8',
+       success : function (){
+           alert("정상적으로 신고처리 되었습니다.");
+           location.href = "/career/list";
+       }
+    });
+}
