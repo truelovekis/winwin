@@ -178,7 +178,7 @@ footer{
 /* svg 아이콘 ================================ */
 
 .date{
-    margin-left: 460px;
+    margin-left: 500px;
     margin-top: 27px;
     font-size: 13px;
     color: rgb(148, 155, 160);
@@ -390,7 +390,7 @@ footer{
     width: 200px;
 }
 
-.good-btn{
+.goodorbad>.good-btn{
     border: none;
     color: #1b5192;
     background-color: #e8f1fc;
@@ -490,6 +490,7 @@ footer{
     text-align: left;
     cursor : pointer;
     font-size : 12px;
+    margin-left: -50px;
 }
 .dropdown-content{
     display : none;
@@ -501,6 +502,7 @@ footer{
     font-weight: bold;
     border-radius: 3.5px;
     border-bottom: 1px solid #ddd;
+    margin-left: -50px;
 }
 
 .dropdown-content a{
