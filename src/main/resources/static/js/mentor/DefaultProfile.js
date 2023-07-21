@@ -124,7 +124,10 @@ function makeInfo() {
             text += `
             <div class="inner-card-box-main">
             `;
+
+
             info.forEach(c => {
+                let regex = new RegExp('(<img([^>]+)>)', 'gi');
                 text += `
                      <div class="inner-card-box">
                        <div class="title">
@@ -132,7 +135,7 @@ function makeInfo() {
                          <br/>
                        </div>
                          <div class="msg">
-                           ${c.careerInfoContent}
+                           <span>${regex.test(c.careerInfoContent) ? c.careerInfoContent.match(regex)[0] : c.careerInfoContent}</span>
                          </div>
                          <div class="profile-like-wrap">
                            <div class="profile">
@@ -146,7 +149,7 @@ function makeInfo() {
                                <div class="info-content">
                                  <div class="sec1">
                                    <div><svg aria-label="좋아요" class="x1lliihq x1n2onr6" color="rgb(142, 142, 142)" fill="rgb(142, 142, 142)" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"></path></svg></div>
-                                  <div class="number1">${c.careerInfoLike}</div>
+                                  <div class="number1">${c.likeCnt}</div>
                                  </div>
                                  <div class="sec2">
                                    <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
