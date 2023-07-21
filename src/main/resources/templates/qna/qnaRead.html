@@ -96,8 +96,8 @@
       <div class="first">
         <div class="Profil">
           <input type="hidden" th:value="${qna.qnaNumber}"/>
-          <img th:if="${qnaProfile == null}" th:src="@{/img/profile-basic.png}" class="userpfp" height="40px" width="40px">
-          <img th:unless="${qnaProfile == null}" class="img-box" height="40px" width="40px"
+          <img th:if="${qnaProfile.pfpUuid == null}" th:src="@{/img/profile-basic.png}" class="userpfp" height="40px" width="40px">
+          <img th:unless="${qnaProfile.pfpUuid == null}" class="img-box" height="40px" width="40px"
                th:style="${'background-image: url(/profile/' + qnaProfile.pfpUuid + '_' + qnaProfile.pfpSystemName + ')'}"/>
           <div class="id">
             <p th:text="${qna.userNickname}"></p>
