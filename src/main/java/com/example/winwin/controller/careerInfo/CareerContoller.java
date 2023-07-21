@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -116,6 +117,14 @@ public class CareerContoller {
         model.addAttribute("career", careerInfoVo);
 
         return "careerInfo/careerInfoModify";
+    }
+
+//    진로정보 글 수정하기
+    @PostMapping("/modify")
+    public RedirectView careerModify(CareerInfoDto careerInfoDto){
+        careerInfoService.careerInfoModify(careerInfoDto);
+
+        return new RedirectView("/career/list");
     }
 
 //    진로정보 글 삭제하기
