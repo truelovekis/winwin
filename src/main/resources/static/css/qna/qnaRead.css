@@ -493,7 +493,7 @@ footer{
     text-align: left;
     cursor : pointer;
     font-size : 12px;
-    margin-left: -50px;
+    /*margin-left: -50px;*/
 }
 .dropdown-content{
     display : none;
