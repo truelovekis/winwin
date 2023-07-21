@@ -107,7 +107,7 @@
     <select id="careerList" resultType="careerInfoVo">
         SELECT J1.CAREERINFO_NUMBER , J1.CAREERINFO_TITLE , J1.CAREERINFO_CONTENT , wu.USER_NAME , J1.CAREERINFO_CNT , wu.user_belong, NVL(L1.careerinfo_number, 0) like_cnt
         FROM (
-                 SELECT CAREERINFO_NUMBER , CAREERINFO_TITLE , DBMS_LOB.SUBSTR(CAREERINFO_CONTENT, 150 ,1) CAREERINFO_CONTENT, m.USER_NUMBER , CAREERINFO_CNT
+                 SELECT CAREERINFO_NUMBER , CAREERINFO_TITLE , CAREERINFO_CONTENT, m.USER_NUMBER , CAREERINFO_CNT
                  FROM CAREERINFO c JOIN MENTOR m
                                         ON c.MENTOR_NUMBER = m.MENTOR_NUMBER
                  WHERE m.MENTOR_NUMBER = #{mentorNumber}

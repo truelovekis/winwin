@@ -631,7 +631,8 @@ article {
 }
 
 .msg {
-    height: 150px;
+    overflow: hidden;
+    height: 170px;
 }
 
 .msg img{
@@ -771,4 +772,14 @@ article {
 
 .mentor {
     height: 500px;
+}
+
+.career-click {
+    text-decoration: none;
+    color : black;
+}
+
+.career-click:hover {
+    text-decoration: none;
+    color : black;
 }

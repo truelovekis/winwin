@@ -125,18 +125,19 @@ function makeInfo() {
             <div class="inner-card-box-main">
             `;
 
-
             info.forEach(c => {
                 let regex = new RegExp('(<img([^>]+)>)', 'gi');
                 text += `
                      <div class="inner-card-box">
+                     <a class="career-click" href="/career/detail?careerInfoNumber=${c.careerInfoNumber}">
                        <div class="title">
                         <h3>${c.careerInfoTitle}</h3>
                          <br/>
                        </div>
                          <div class="msg">
-                           <span>${regex.test(c.careerInfoContent) ? c.careerInfoContent.match(regex)[0] : c.careerInfoContent}</span>
+                           ${regex.test(c.careerInfoContent) ? c.careerInfoContent.match(regex)[0] : c.careerInfoContent}
                          </div>
+                         
                          <div class="profile-like-wrap">
                            <div class="profile">
                              <div class="pf">
@@ -162,6 +163,7 @@ function makeInfo() {
                              </div>
                            </div>
                          </div>
+                         </a>
                      </div>
                 `;
             });
