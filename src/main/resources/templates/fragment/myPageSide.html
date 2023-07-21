@@ -26,15 +26,13 @@
     <!-- 사이드 바 -->
     <div class="side-bar">
       <div class="list">
-        <th:block th:if="${session.userPosition == '멘토'}">
-          <a th:href="@{/myPage/myMentee}" id="point-list-1">내 멘토 : 멘티</a>
-        </th:block>
-        <th:block th:if="${session.userPosition == '멘티'}">
-          <a th:href="@{/myPage/myMentor}" id="point-list-12">내 멘토 : 멘티</a>
-        </th:block>
-        <th:block th:if="${session.userPosition == '멘토+멘티'}">
-          <a th:href="@{/myPage/myMentor}" id="point-list-13">내 멘토 : 멘티</a>
-        </th:block>
+          <a th:href="@{/myPage/myMentor}" id="point-list-1">내 멘토 : 멘티</a>
+<!--        <th:block th:if="${session.userPosition == '멘티'}">-->
+<!--          <a th:href="@{/myPage/myMentor}" id="point-list-12">내 멘토 : 멘티</a>-->
+<!--        </th:block>-->
+<!--        <th:block th:if="${session.userPosition == '멘토+멘티'}">-->
+<!--          <a th:href="@{/myPage/myMentor}" id="point-list-13">내 멘토 : 멘티</a>-->
+<!--        </th:block>-->
 <!--        <a th:href="@{/myPage/myMentor}" id="point-list-1">내 멘토 : 멘티</a>-->
         <a th:href="@{/myPage/myRecord}" id="point-list-2">내 기록</a>
         <a th:href="@{/myPage/receiveMessage}" id="point-list-7">쪽지함</a>
