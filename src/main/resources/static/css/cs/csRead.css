@@ -456,7 +456,8 @@ footer{
 .dropdown{
     position: relative;
     display: inline-block;
-    margin-left: 496px;
+    /*margin-left: 496px;*/
+    margin-left: 527px;
     margin-top: -2px;
 }
 
