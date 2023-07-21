@@ -220,8 +220,16 @@ public class MyPageController {
     @PostMapping("/userDelete")
     public String userDelete(HttpServletRequest req){
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
-        myPageService.withdrawUser(userNumber);
-        myPageService.withdrawUser(userNumber);
+        System.out.println("+++itsme : " + userNumber);
+
+        try {
+            myPageService.withdrawUser(userNumber);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "main/main";
+        }
+
+        req.getSession().invalidate();
 
         return "main/main";
     }
