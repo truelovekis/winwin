@@ -70,5 +70,9 @@ public class CommunityCommentService {
 
         return communityCommentMapper.findCommentUdList(communityCommentVo);
     }
+
+//    public String findudCnt(Long userNumber, Long commentNumber){
+//        return communityCommentMapper.udCnt(userNumber, commentNumber);
+//    }
 }
 

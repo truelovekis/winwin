@@ -25,11 +25,11 @@
         SELECT R.COMMENT_NUMBER, R.COMMENT_CONTENT, R.COMMENT_DATE, R.COMMUNITY_NUMBER, R.USER_NUMBER,
                U.USER_ID, U.USER_BELONG, P.PFP_SYSTEM_NAME, P.PFP_UUID, U.USER_NICKNAME, G.GRADE_NAME,
                NVL(CCU.UD_STATUS,'x') AS UD_STATUS
-             ,(SELECT COUNT(UD_STATUS) FROM COMMUNITY_COMMENT_UD WHERE COMMUNITY_COMMENT_UD.COMMENT_NUMBER = R.COMMENT_NUMBER AND CCU.UD_STATUS = 'u') AS UD_CNT
+             ,(SELECT COUNT(UD_STATUS) FROM COMMUNITY_COMMENT_UD WHERE COMMUNITY_COMMENT_UD.COMMENT_NUMBER = R.COMMENT_NUMBER AND COMMUNITY_COMMENT_UD.UD_STATUS = 'u') AS UD_CNT
         FROM WW_USER U JOIN COMMUNITY_COMMENT R
         ON COMMUNITY_NUMBER = #{communityNumber} AND U.USER_NUMBER = R.USER_NUMBER
         LEFT OUTER JOIN COMMUNITY_COMMENT_UD CCU
-        ON R.COMMENT_NUMBER = CCU.COMMENT_NUMBER
+        ON R.COMMENT_NUMBER = CCU.COMMENT_NUMBER AND U.USER_NUMBER = CCU.USER_NUMBER
         LEFT OUTER JOIN USER_PFP P
         ON R.USER_NUMBER = P.USER_NUMBER
         LEFT OUTER JOIN GRADE G
@@ -37,6 +37,12 @@
         WHERE R.community_comment_status != '0'
         ORDER BY R.COMMENT_NUMBER DESC
     </select>
+
+<!--    <select id="udCnt" resultType="string">-->
+<!--        select ud_status-->
+<!--        from community_comment_ud-->
+<!--        where user_number = #{userNumber} and comment_number = #{commentNumber}-->
+<!--    </select>-->
 <!--        <choose>-->
 <!--            <when test="sessionUserNumber != null">-->
 <!--                AND CCU.USER_NUMBER = #{sessionUserNumber}-->
