@@ -16,6 +16,7 @@
                             ON QNA_NUMBER = #{qnaNumber} AND U.USER_NUMBER = Q.USER_NUMBER
                        LEFT OUTER JOIN USER_PFP P
                                        ON U.USER_NUMBER = P.USER_NUMBER
+        WHERE Q.qna_comment_status != '0'
         ORDER BY COMMENT_NUMBER DESC
     </select>
 
@@ -33,6 +34,7 @@
                        ON Q.USER_NUMBER = P.USER_NUMBER
                        LEFT OUTER JOIN GRADE G
                        ON U.USER_GRADE = G.GRADE_NUMBER
+        WHERE Q.qna_comment_status != '0'
         ORDER BY Q.COMMENT_NUMBER DESC
     </select>
 

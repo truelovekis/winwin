@@ -126,13 +126,13 @@
               <select name="user-report-select" class="user-report-select" style="font-family: NanumSquareAcr;">
                 <option value="">선택</option>
                 <option value="1">일반 회원</option>
-                <option value="2">신고 회원</option>
+<!--                <option value="2">신고 회원</option>-->
                 <option value="3">영구 정지</option>
               </select>
             </td>
             <td class="report-resulting-success" align="center">
               <div th:if="${admin.userStatus} == 1"  class="blind-button Y" th:text="일반회원"></div>
-              <div th:if="${admin.userStatus} == 2"  class="blind-button A" th:text="신고회원"></div>
+<!--              <div th:if="${admin.userStatus} == 2"  class="blind-button A" th:text="신고회원"></div>-->
               <div th:if="${admin.userStatus} == 3"  class="blind-button B" th:text="영구정지"></div>
               <div th:if="${admin.userStatus} == 0"  class="blind-button B" th:text="탈퇴회원"></div>
             </td>
