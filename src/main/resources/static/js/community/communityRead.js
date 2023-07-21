@@ -641,19 +641,12 @@ function fn_comment_bad(commentBadVal, commentNumber) {
         success: function(data) {
             $('.commentAi[data-num="' + commentNumber + '"] .comment-bad').data('udstatus', commentBadVal);
             console.log($('.commentAi[data-num="' + commentNumber + '"] .comment-bad').data('udstatus'));
-<<<<<<< HEAD
             if (commentBadVal === 'd') {
                 // alert('싫어요 UP 성공!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
             } else if (commentBadVal === 'x') {
                 // alert('싫어요 DOWN 성공!!!!!!!!!!!!!!!!!!!!');
             }
-=======
-            // if (commentBadVal === 'd') {
-            //     alert('싫어요 UP 성공!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-            // } else if (commentBadVal === 'x') {
-            //     alert('싫어요 DOWN 성공!!!!!!!!!!!!!!!!!!!!');
-            // }
->>>>>>> work/work10
+
         }
     });
 }
