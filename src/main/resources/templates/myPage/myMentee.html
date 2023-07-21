@@ -37,7 +37,7 @@
           <div class="mypage-main">
             <div class="title"><h2>내 멘토 : 멘티</h2></div>
               <div class="category">
-                  <th:block th:if="${user == '멘티'}">
+                  <th:block th:if="${session.mentorNumber == -1}">
                       <div class="category-contain point-mentor">
                           <h4 id="point-page1">내 멘토</h4>
                       </div>
@@ -45,7 +45,7 @@
                           <h4>관심 멘토</h4>
                       </div>
                   </th:block>
-                  <th:block th:if="${user == '멘토+멘티'}">
+                  <th:block th:if="${session.mentorNumber > -1}">
                       <div class="category-contain point-mentor">
                           <h4>내 멘토</h4>
                       </div>
@@ -56,16 +56,6 @@
                           <h4>관심 멘토</h4>
                       </div>
                   </th:block>
-
-                  <th:block th:if="${user == '멘토'}">
-                      <div class="category-contain point-mentee">
-                          <h4 id="point-page3">내 멘티</h4>
-                      </div>
-                      <!--                <div class="category-contain like-mentor">-->
-                      <!--                  <h4>관심 멘토</h4>-->
-                      <!--                </div>-->
-                  </th:block>
-
               </div>
             <div class="my-mentee-content">
 <!--              &lt;!&ndash; 멘티 프로필 &ndash;&gt;-->
