@@ -204,15 +204,10 @@
 <!--                                        <div class="id-2">-->
 <!--                                            <p th:text="'관리자 ' + ${userStatus}"></p>-->
 <!--                                        </div>-->
-
-
-
-
-                                        <!--                                    <div class="profile-user-id"><p th:text="${session.userId}"></p></div>-->
-    <!--                                    <div class="id-3"><p th:text="'Lv. '+${cs.gradeName}"></p></div>-->
                                     </div>
                                 </div>
-                            <div class="dropdown2">
+                                <input type="hidden" th:value="${session.userStatus}"/>
+                            <div class="dropdown2" th:if="${session.userStatus == 'a'}">
                                 <button class="dropbtn2">
                                     <span class="dropbtn_icon2"> <svg data-v-bd9f2bcc="" data-v-3035bc76=""
                                                                       width="24" height="24" fill="black"
@@ -224,15 +219,20 @@
                                             data-v-bd9f2bcc="" cx="12" cy="18.5" r="1.5"></circle></svg></span>
                                 </button>
                                 <div class="dropdown-content2">
-                                    <a class="police-btn">신고</a>
+<!--                                    <a class="police-btn">신고</a>-->
+<!--                                    <a href="#" class="btn-modify"-->
+<!--                                       onclick="if (confirm('정말로 수정하시겠습니까?')) fn_modify(${reply.csNumber});"-->
+<!--                                       th:if="${session.userNumber} == ${reply.userNumber}">수정</a>-->
+<!--                                    <a href="#" class="btn-remove"-->
+<!--                                       onclick="if (confirm('정말로 삭제하시겠습니까?')) fn_remove(${reply.csNumber});"-->
+<!--                                       th:if="${session.userNumber} == ${reply.userNumber}">삭제</a>-->
                                     <a href="#" class="btn-modify"
                                        onclick="if (confirm('정말로 수정하시겠습니까?')) fn_modify(${reply.csNumber});"
-                                       th:if="${session.userNumber} == ${reply.userNumber}">수정</a>
+                                       th:if="${session.userNumber == reply.userNumber && session.userStatus == 'a'}">수정</a>
                                     <a href="#" class="btn-remove"
                                        onclick="if (confirm('정말로 삭제하시겠습니까?')) fn_remove(${reply.csNumber});"
-                                       th:if="${session.userNumber} == ${reply.userNumber}">삭제</a>
+                                       th:if="${session.userNumber == reply.userNumber && session.userStatus == 'a'}">삭제</a>
                                     <input type="hidden" class="cs-num" th:value="${reply.csNumber}">
-
                                 </div>
                             </div>
                             </div>
