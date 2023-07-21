@@ -29,7 +29,6 @@
 //         }
 //     };
 // }
-
 // 페이지 로드 시 내용 업데이트 함수 호출
 // window.onload = updateContent;
 
@@ -117,7 +116,6 @@ function getList(csNumber, callback, error) {
 }
 
 // 리플 댓글 작성
-/* 위가 맞는 코드*/
 function getView(csNumber, callback, error) {
     $.ajax({
         url: `/replies/list/${csNumber}`,
@@ -134,110 +132,22 @@ function getView(csNumber, callback, error) {
 
 
 function showComment(replies) {
-    console.log(replies);
-    console.log("댓글완성")
-    console.log("1111111111111111111111111111111")
+    // console.log(replies);
+    // console.log("댓글완성")
+    // console.log("1111111111111111111111111111111")
     let text = ``;
 
-    /* 위가 맞는 코드*/
-    /* 댓글 수정 새로고침 테스트*/
-
-    //     function getView(csNumber, callback, error){
-    //         $.ajax({
-    //             url : `/replies/list/${csNumber}`,
-    //             type : 'get',
-    //             dataType : 'json',
-    //             success : function (result){
-    //                 if(callback){
-    //                     callback(result);
-    //                 }
-    //             },
-    //             error : error
-    //         });
-    //     }
-    //
-    // function showComment(replies) {
-    //     console.log(replies);
-    //     console.log("댓글완성");
-    //     console.log("1111111111111111111111111111111");
-    //
-    //
-    //     let commentContainer = document.getElementById("commentContainer");
-    //     commentContainer.innerHTML = "";
-    //
-    //     for (let i = 0; i < replies.length; i++) {
-    //         let replyText = replies[i].text;
-    //         let replyElement = document.createElement("div");
-    //         replyElement.textContent = replyText;
-    //         commentContainer.appendChild(replyElement);
-    //     }
-    // }
-    //
-    // function addReply(csNumber, newReply) {
-    // }
-    //
-    // getView(csNumber, showComment, function(error) {
-    //     console.error("Error fetching replies:", error);
-    // });
-
-
-    /* 댓글 수정 새로고침 테스트*/
-
-// function getView(csNumber, callback, error){
-//     $.ajax({
-//         url : `/replies/list/${csNumber}`,
-//         type : 'get',
-//         dataType : 'json',
-//         success : function (result){
-//             if(callback){
-//                 callback(result);
-//             }
-//         },
-//         error : error
-//     });
-// }
-//
-// function showComment(replies) {
-//     console.log(replies);
-//     console.log("댓글완성");
-//     console.log("1111111111111111111111111111111");
-//
-//
-//     let commentContainer = document.getElementById("commentContainer");
-//     commentContainer.innerHTML = "";
-//
-//     for (let i = 0; i < replies.length; i++) {
-//         let replyText = replies[i].text;
-//         let replyElement = document.createElement("div");
-//         replyElement.textContent = replyText;
-//         commentContainer.appendChild(replyElement);
-//     }
-// }
-//
-// function addComment(csNumber, newComment) {
-//
-// }
-//
-//
-// getView(csNumber, showComment, function(error) {
-//     console.error("Error fetching replies:", error);
-// });
-    /*  gpt */
-
-
-    // 댓글 ↑ ....
-
-// ↓ html 코드 가져옴
+// ↓ inner html 코드를 text변수 빈 문자열에 html코드를 넣어준다.
     replies.forEach(r => {
         text += `<div class="commentAi" data-num="${r.commentNumber}">
             <input type="hidden" class="comment-num" value="${r.commentNumber}">
         <div class="profil">
             <img src="../img/corgi-g5894d3ae3_1920.jpg" height="50px" width="50px">
             <div class="Commento"><p>`;
-                if(r.userStatus == 'a'){
-                    text += `<p>관리자</p>`;
-                    }
-                    text += `</p></div>
+        if (r.userStatus == 'a') {
+            text += `<p>관리자</p>`;
+        }
+        text += `</p></div>
                 <div class="Commento"> 
                     <p>코멘토AI봇</p>
                 </div>
@@ -249,13 +159,9 @@ function showComment(replies) {
         if (r.userNumber == loginNumber) {
             text += `
                     <div class="dropdown-content2">
-                    
-                        <a href="#">신고</a>
                         <a href="#" class="btn-modify">수정</a>
                         <a href="#" class="btn-remove">삭제</a>
-                
-                        
-                        </div> `;
+                    </div> `;
         }
         text += `
                
@@ -280,12 +186,9 @@ function showError(a, b, c) {
 
 }
 
-// 댓글 작성 버튼 처리 끝 ↑
-
-
 // 신고하기  ↓
 
-// 병구가 확인한 질문하기 모달창 처리
+// 병구가 확인한 신고하기 모달창 처리
 $('.police-btn').on('click', function (e) {
     e.preventDefault();
     let userNumber = $('.police-btn').data('userNumber');
@@ -433,27 +336,6 @@ function remove(commentNumber, callback, error) {
     console.log("js끝마침");
     document.location.reload();
 }
-
-/*테스트 */
-
-// ↓ 아이디가 다르면 삭제 수정 못하게
-
-// /* 수정하기 */
-// function fn_modify(csNumber){
-//     console.log("aaaaaaaaaaa")
-//     if(confirm("정말 수정하시겠습니까?")){
-//         location.href = "/cs/modify?CsNumber=" + csNumber;
-//     }
-// }
-// /*삭제 하기*/
-// function fn_remove(csNumber){
-//     console.log("bbbbbb")
-//     if(confirm("정말 삭제하시겠습니까?")){
-//         location.href = "/cs/delete?csNumber=" + csNumber;
-//         console.log("다들어왔다!")
-//
-//     }
-// }
 
 // ===========
 // 경과일자 계산

@@ -37,7 +37,7 @@
                     <label class="user-file">
                         <img th:if="${userPfp.pfpSystemName == null}" class="userpfp" src="/img/profile-basic.png"/>
                         <img th:unless="${userPfp.pfpSystemName == null}" class="userpfp"
-                             th:style="${'background-image: url(/profile/' + userPfp.pfpUuid + '_' + userPfp.pfpSystemName + ')'}"/>
+                             th:style="${'background-image: url(/profile/' + userPfp.pfpUuId + '_' + userPfp.pfpSystemName + ')'}"/>
                         <input type="file" id="file"/>
                     </label>
                 </div>
