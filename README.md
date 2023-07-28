@@ -40,9 +40,7 @@ MEGA BOX를 참고하여 만든 영화 예매 사이트입니다.
 #### 활용 포인트를 통한 회원간의 중고 거래
 #### 게시글 좋아요/추천/조회수/신고 기능 구현
 #### 이력서, 자소서 관리 및 다운로드 기능 구현
-#### 관리자 페이지 <a href="https://github.com/truelovekis/winwin/wiki" >내가 구현한 페이지 - WIKI 이동</a>
-- 영화관 추가(대분류, 소분류)
-- 영화 추가(상영시간 및 상영관 설정)
+#### 관리자 페이지 <a href="https://github.com/truelovekis/winwin/wiki" > WIKI 이동</a>
 #### QnA 페이지 <a href="https://github.com/chaehyuenwoo/SpringBoot-Project-MEGABOX/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(Login)" >내가 구현한 페이지 - WIKI 이동</a>
 
 
