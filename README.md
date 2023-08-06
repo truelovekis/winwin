@@ -42,7 +42,7 @@ MEGA BOX를 참고하여 만든 영화 예매 사이트입니다.
 #### 이력서, 자소서 관리 및 다운로드 기능 구현
 
 
-# 💻내가 구현한 페이지
+## 💻내가 구현한 페이지
 
 #### 관리자 페이지 <a href="https://github.com/truelovekis/winwin/wiki" >코드보기</a>
 #### QnA 페이지 <a href="https://github.com/chaehyuenwoo/SpringBoot-Project-MEGABOX/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(Login)" >코드보기</a>
