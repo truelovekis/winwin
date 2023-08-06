@@ -44,7 +44,7 @@ MEGA BOX를 참고하여 만든 영화 예매 사이트입니다.
 
 ## 💻내가 구현한 페이지
 
-#### 관리자 페이지 <a href="https://github.com/truelovekis/winwin/wiki" >코드보기</a>
+#### 관리자 페이지 <a href="https://github.com/truelovekis/winwin/wiki/%EA%B4%80%EB%A6%AC%EC%9E%90-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%9E%91%EC%84%B1-%EC%BD%94%EB%93%9C(Admin)" >코드보기</a>
 #### QnA 페이지 <a href="https://github.com/chaehyuenwoo/SpringBoot-Project-MEGABOX/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(Login)" >코드보기</a>
 
 
